@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alex Van de Sande</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0d0c;
+    --page-ratio: 0.5921;                       /* the blank leaf scan, 1861 x 3143 */
+    --page-w: min(100vw, 88vh * 0.5921);        /* whole page in view, with air above it */
+    --pitch: 4.008cqw;                          /* one book line, 74.6px of the 1861px scan */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efe9dc url(assets/paper.jpg) center / cover fixed no-repeat;
+    color: var(--ink);
+    font-family: "Libre Caslon Text", "Big Caslon", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #opener { height: 320vh; }
+  .stage { position: sticky; top: 0; height: 100vh; display: grid; place-items: start center; padding-top: 8vh; }
+  .page { position: relative; width: var(--page-w); aspect-ratio: var(--page-ratio); container-type: inline-size; }
+
+  .layer {
+    position: absolute; inset: 0;
+    background-color: var(--ink);
+    -webkit-mask: var(--m) center / 100% 100% no-repeat; mask: var(--m) center / 100% 100% no-repeat;
+    -webkit-mask-mode: luminance; mask-mode: luminance;
+  }
+  .rest    { --m: url(assets/ink_rest_mask.png); opacity: var(--rest, 1); }
+  .passage { --m: url(assets/ink_passage_mask.png); }
+
+  .me {
+    position: absolute; left: 11.5%; width: 81.4%;
+    font-size: 2.9cqw; line-height: var(--pitch);
+    text-align: justify;
+  }
+  .me p { margin: 0; }
+  .me1 { top: 23.8%; opacity: var(--me1, 0); }
+  .me2 { top: calc(23.8% + var(--pitch) * 3); opacity: var(--me2, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    #opener { height: auto; }
+    .stage { position: static; height: auto; }
+    .rest { opacity: 0; }
+    .me1, .me2 { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<section id="opener" aria-label="Page 190 of The Infinite Machine">
+  <div class="stage" id="stage">
+    <div class="page" id="page">
+      <div class="layer rest"></div>
+      <div class="layer passage"></div>
+      <div class="me me1"><p>My name is Alex Van de Sande, and I like to explain things. I can start by explaining myself.</p></div>
+      <div class="me me2"><p>It&rsquo;s sort of a funny story.</p></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const opener = document.getElementById('opener');
+  const stage = document.getElementById('stage');
+  const page = document.getElementById('page');
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a), 0, 1);
+  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const rect = opener.getBoundingClientRect();
+    const p = clamp(-rect.top / (rect.height - stage.offsetHeight), 0, 1);
+    page.style.setProperty('--rest', 1 - ease(seg(p, 0.08, 0.45)));   // the rest of the page fades away
+    page.style.setProperty('--me1', ease(seg(p, 0.50, 0.70)));        // my voice comes in
+    page.style.setProperty('--me2', ease(seg(p, 0.78, 0.95)));
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener('resize', update);
+  update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.DS_Store
+
+# Source material: 809 MB of book scans, video and a PSD, several files over
+# GitHub's 100 MB limit. Kept local.
+References/
+
+# The abandoned ink-mask prototype's rasters: flattened page scans and the
+# luminance masks cut from them. The code that makes them is tracked.
+archive/ink-mask-prototype/source/
+archive/ink-mask-prototype/assets/*.png
+archive/ink-mask-prototype/assets/*.jpg
