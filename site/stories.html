@@ -72,20 +72,24 @@ body{margin:0;background:var(--shelf);color:var(--ink);
 .leaf.turned{transform:rotateY(-178deg)}
 .leaf.lifted{visibility:hidden}
 
-/* the bending sheet: strips chained hinge to hinge */
+/* the bending sheet: flat planes in one 3D scene, each one placed by the script.
+   Nothing here nests 3D inside 3D: WebKit on iPhone flattens a deep chain of
+   preserve-3d and the strips come apart. */
 .curl{position:absolute;top:0;height:100%;z-index:60;transform-style:preserve-3d;pointer-events:none}
-.strip{position:absolute;top:0;height:100%;transform-origin:left center;transform-style:preserve-3d}
-.strip .face,.strip .back{position:absolute;inset:0;overflow:hidden;
+.pl{position:absolute;top:0;left:0;height:100%;transform-origin:0 50%;overflow:hidden;
   backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.strip .face{background:var(--paper)}
-.strip .back{background:var(--paper);transform:rotateY(180deg)}
-.strip .face > .leaf{visibility:visible}
-.strip .sh{position:absolute;inset:0;opacity:0;will-change:opacity}
-.strip .sh.l{background:linear-gradient(90deg,rgb(58,44,18),rgba(58,44,18,0))}
-.strip .sh.r{background:linear-gradient(90deg,rgba(58,44,18,0),rgb(58,44,18))}
-.strip .back::after{content:"";position:absolute;inset:0;background:rgba(58,44,18,.08)}
-.strip .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleX(-1);opacity:.1}
-.strip .ghost .rest span[style*="--b"]{visibility:hidden}
+.pl.face,.pl.back{background:var(--paper)}
+.pl.back::after{content:"";position:absolute;inset:0;background:rgba(58,44,18,.08)}
+/* Which side of a strip shows is decided by the script, not by
+   backface-visibility: Safari lifts anything marked backface-hidden onto a
+   layer of its own, and the plane's own face-hiding stops reaching it. A plane
+   faded out fades everything inside it, lifted or not. */
+.pl .leaf{visibility:inherit}
+.pl .sh{position:absolute;inset:0;opacity:0;will-change:opacity}
+.pl .sh.l{background:linear-gradient(90deg,rgb(58,44,18),rgba(58,44,18,0))}
+.pl .sh.r{background:linear-gradient(90deg,rgba(58,44,18,0),rgb(58,44,18))}
+.pl .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleX(-1);opacity:.1}
+.pl .ghost .rest span[style*="--b"]{visibility:hidden}
 .cast{position:absolute;top:0;height:100%;z-index:59;pointer-events:none;opacity:0;
   transform-origin:left center;will-change:transform,opacity;
   background:linear-gradient(90deg,rgb(58,44,18) 0%,rgba(58,44,18,.55) 52%,rgba(58,44,18,.25) 86%,rgba(58,44,18,0) 100%)}
@@ -559,40 +563,39 @@ function buildPips(n){
 
 /* ===================================================================
    THE BENDING SHEET
-   A leaf is sliced into vertical strips chained edge to edge, each hinged
-   on the one before it. Strips nearer the free edge lead, so the sheet
+   A leaf is sliced into vertical strips, each hinged on the far edge of the
+   one before it. Strips nearer the free edge lead, so the sheet
    bends like paper; shading blends across strip edges. setTurn takes any
    fraction, so the paper sits wherever the finger left it.
    =================================================================== */
-const STRIPS = 10, CURL = .55;
+const STRIPS = 10, CURL = .55, DEPTH = 2600;   // DEPTH is .leaves' perspective
 function buildCurl(lf){
   const W = lf.offsetWidth, H = lf.offsetHeight, sw = W / STRIPS;
-  // the turning page is the one being looked at, so it shows its margin note
   const host = el('div', 'curl');
   host.style.left = lf.offsetLeft + 'px'; host.style.width = W + 'px';
-  let parent = host; const parts = [];
+  // every plane is a direct child of the scene; 0.6px of overlap hides the seams
+  const plane = (cls, ...kids) => { const p = el('div', 'pl ' + cls);
+    p.style.width = (sw + .6) + 'px'; p.append(...kids); host.append(p); return p; };
+  const parts = [];
   for (let k = 0; k < STRIPS; k++){
-    const st = el('div', 'strip');
-    st.style.width = (sw + .6) + 'px'; st.style.left = k ? sw + 'px' : '0px';
-    const face = el('div', 'face');
     const copy = lf.cloneNode(true);
+    // the turning page is the one being looked at, so it shows its margin note
     copy.removeAttribute('id'); copy.classList.remove('turned', 'lifted'); copy.classList.add('front');
     copy.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
     copy.style.cssText = `position:absolute;top:0;left:${-k*sw}px;width:${W}px;height:${H}px;transform:none;z-index:auto`;
-    // each side carries two fixed gradients, dark-left and dark-right; weighting
-    // their opacities blends the shade smoothly from one strip edge to the next
-    const a1 = el('div', 'sh l'), b1 = el('div', 'sh r'); face.append(copy, a1, b1);
-    const back = el('div', 'back');
     // the back of the sheet: the same page's ink showing through, mirrored, very faint
     const ghost = el('div', 'ghost'); ghost.append(copy.cloneNode(true));
-    const a2 = el('div', 'sh l'), b2 = el('div', 'sh r'); back.append(ghost, a2, b2);
-    st.append(face, back); parent.append(st); parent = st;
-    parts.push({ st, a1, b1, a2, b2 });
+    // each side carries two fixed gradients, dark-left and dark-right; weighting
+    // their opacities blends the shade smoothly from one strip edge to the next
+    const a1 = el('div', 'sh l'), b1 = el('div', 'sh r'), a2 = el('div', 'sh l'), b2 = el('div', 'sh r');
+    parts.push({ face: plane('face', copy, a1, b1), back: plane('back', ghost, a2, b2), a1, b1, a2, b2 });
   }
   const cast = el('div', 'cast');              // shadow the sheet throws on the page below
   cast.style.left = host.style.left; cast.style.width = host.style.width;
   lf.parentNode.append(cast, host);
-  lf._curl = { host, cast, parts, W, sw, live: false };
+  // the eye, in the scene's own x: perspective looks from the middle of .leaves
+  lf._curl = { host, cast, parts, W, sw, live: false,
+               eye: lf.parentNode.clientWidth / 2 - lf.offsetLeft };
   park(lf);
 }
 /* Cloning a page into strips is the one expensive step of a turn: every word
@@ -622,19 +625,38 @@ function dropCurl(lf){
 const profile = (e, back) => [...Array(STRIPS)].map((_, k) => { const f = k / (STRIPS - 1);
   return -180 * clamp01(e * (1 + CURL) - CURL * (back ? f : 1 - f)); });
 function drawCurl(lf, e){
-  const { parts, cast, W, sw } = lf._curl, back = lf._dir < 0;
+  const { parts, cast, W, sw, eye } = lf._curl, back = lf._dir < 0;
   const ang = profile(e, back);
   const dk = ang.map(a => Math.abs(Math.sin(a * Math.PI / 180)));
   const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
-  let prev = 0;
+  // Each strip hinges on the far edge of the one before it. rotateY(a) sends a
+  // plane's own x axis to (cos a, -sin a) in x and z, so the hinges are walked
+  // in code and every plane is given its whole position at once.
+  const half = (sw + .6) / 2, rad = Math.PI / 180;
+  let x = 0, z = 0;
   parts.forEach((pt, k) => {
-    pt.st.style.transform = `rotateY(${(ang[k] - prev).toFixed(2)}deg)`; prev = ang[k];
+    const a = ang[k], c = Math.cos(a * rad), sn = Math.sin(a * rad);
+    // A strip's front faces you when its normal, (sin a, cos a) in x and z,
+    // points at the eye. A plane is flat, so its middle decides for all of it.
+    const front = sn * (eye - (x + half * c)) + c * (DEPTH - (z - half * sn)) > 0;
+    if (pt.front !== front){
+      pt.front = front;
+      // opacity, not visibility: a hidden plane is never painted, so the back of
+      // the sheet would be painted for the first time mid-turn, as it swings round
+      pt.face.style.opacity = front ? '' : '0';
+      pt.back.style.opacity = front ? '0' : '';
+    }
+    const at = `translate3d(${x.toFixed(2)}px,0,${z.toFixed(2)}px) rotateY(${a.toFixed(2)}deg)`;
+    const flip = `${at} translateX(${half.toFixed(2)}px) rotateY(180deg) translateX(${(-half).toFixed(2)}px)`;
+    pt.face.style.transform = at;
+    pt.back.style.transform = flip;
     const L = edge(k), R = edge(k + 1);
     pt.a1.style.opacity = (L * .22).toFixed(3); pt.b1.style.opacity = (R * .22).toFixed(3);
     pt.a2.style.opacity = (R * .18).toFixed(3); pt.b2.style.opacity = (L * .18).toFixed(3);
+    x += sw * c; z -= sw * sn;
   });
   // where the free edge sits over the page right now (0 = spine, 1 = open)
-  const reach = Math.max(0, ang.reduce((x, a) => x + sw * Math.cos(a * Math.PI / 180), 0)) / W;
+  const reach = Math.max(0, x) / W;
   cast.style.opacity = (Math.sin(Math.PI * e) * .28).toFixed(3);   // strongest mid-turn
   cast.style.transform = `scaleX(${Math.min(1, reach + .16).toFixed(4)})`;
 }
