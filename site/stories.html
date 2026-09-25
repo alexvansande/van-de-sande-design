@@ -80,9 +80,15 @@ body{margin:0;background:var(--shelf);color:var(--ink);
 .strip .face{background:var(--paper)}
 .strip .back{background:var(--paper);transform:rotateY(180deg)}
 .strip .face > .leaf{visibility:visible}
-.strip .sh{position:absolute;inset:0}
+.strip .sh{position:absolute;inset:0;opacity:0;will-change:opacity}
+.strip .sh.l{background:linear-gradient(90deg,rgb(58,44,18),rgba(58,44,18,0))}
+.strip .sh.r{background:linear-gradient(90deg,rgba(58,44,18,0),rgb(58,44,18))}
+.strip .back::after{content:"";position:absolute;inset:0;background:rgba(58,44,18,.08)}
 .strip .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleX(-1);opacity:.1}
-.cast{position:absolute;top:0;height:100%;z-index:59;pointer-events:none}
+.strip .ghost .rest span[style*="--b"]{visibility:hidden}
+.cast{position:absolute;top:0;height:100%;z-index:59;pointer-events:none;opacity:0;
+  transform-origin:left center;will-change:transform,opacity;
+  background:linear-gradient(90deg,rgb(58,44,18) 0%,rgba(58,44,18,.55) 52%,rgba(58,44,18,.25) 86%,rgba(58,44,18,0) 100%)}
 
 /* ---------- book typography ---------- */
 .text{flex:1;min-height:0;display:flex;flex-direction:column;max-width:34rem}
@@ -93,7 +99,7 @@ body{margin:0;background:var(--shelf);color:var(--ink);
 .body p,.rest p{margin:0;font-size:clamp(1.22rem,1.05rem + .75vw,1.45rem);line-height:1.45;
   text-indent:1.5em;text-align:justify;hyphens:auto}
 .rest{flex:1;min-height:0;overflow:hidden;user-select:none}
-.rest span{filter:blur(var(--b));opacity:var(--o)}
+.rest span[style*="--b"]{color:transparent;text-shadow:0 0 calc(var(--b) * 2) rgba(38,36,32,var(--o))}
 .folio{flex:none;margin-top:1.4rem;font-weight:500;font-size:.95rem}
 .recto .folio{text-align:right}
 .leaf.cryp{font-family:"Crimson Pro",Georgia,serif}
@@ -154,7 +160,7 @@ body{margin:0;background:var(--shelf);color:var(--ink);
 .leaf.front .hand.wait.said{opacity:1}
 .hand .todo{color:var(--ghost);font-weight:500}
 /* my first line sits up in the page, so the hints have the foot to themselves */
-#intro{top:54%;bottom:auto}
+.hand.intro{top:54%;bottom:auto}
 .note{position:absolute;white-space:nowrap;transform:rotate(-2.5deg);transform-origin:left top;
   font-family:"Caveat",cursive;font-weight:500;color:var(--pen);font-size:1.6rem;line-height:1.05;
   opacity:0;transition:opacity .35s ease}
@@ -202,7 +208,7 @@ body.ready .leaf.front .ear{opacity:1}
   .leaf{left:-3rem;width:calc(100% + 6rem);padding-left:3rem;padding-right:3rem}
   .hand{left:auto;right:3rem;bottom:auto;top:34%;width:min(18rem,26vw);text-align:left;
     text-shadow:none}
-  #intro{top:34%}
+  .hand.intro{top:34%}
   .plate{max-width:35rem}
   .cover,.prose{margin-left:0}
 }
@@ -409,7 +415,7 @@ function buildP190(){
     <footer class="folio">190</footer>
   </div>
   <aside class="note" id="note" data-dy="1.6">that&rsquo;s me.</aside>
-  <aside class="hand wait" id="intro">Hi, I&rsquo;m Alex Van de Sande. I like to tell stories with images.</aside>
+  <aside class="hand wait intro" id="intro">Hi, I&rsquo;m Alex Van de Sande. I like to tell stories with images.</aside>
   <svg class="ink" id="ink" aria-hidden="true"></svg>`;
   addWords(lf.querySelector('#real'), NEXT.split(' '),
     i => [0.35 + Math.pow(i/55, 1.5)*2.4, Math.max(.75, 1 - i*.004)]);
@@ -561,6 +567,7 @@ function buildPips(n){
 const STRIPS = 10, CURL = .55;
 function buildCurl(lf){
   const W = lf.offsetWidth, H = lf.offsetHeight, sw = W / STRIPS;
+  // the turning page is the one being looked at, so it shows its margin note
   const host = el('div', 'curl');
   host.style.left = lf.offsetLeft + 'px'; host.style.width = W + 'px';
   let parent = host; const parts = [];
@@ -569,46 +576,82 @@ function buildCurl(lf){
     st.style.width = (sw + .6) + 'px'; st.style.left = k ? sw + 'px' : '0px';
     const face = el('div', 'face');
     const copy = lf.cloneNode(true);
-    copy.removeAttribute('id'); copy.classList.remove('turned', 'lifted');
+    copy.removeAttribute('id'); copy.classList.remove('turned', 'lifted'); copy.classList.add('front');
     copy.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
     copy.style.cssText = `position:absolute;top:0;left:${-k*sw}px;width:${W}px;height:${H}px;transform:none;z-index:auto`;
-    const sh1 = el('div', 'sh'); face.append(copy, sh1);
+    // each side carries two fixed gradients, dark-left and dark-right; weighting
+    // their opacities blends the shade smoothly from one strip edge to the next
+    const a1 = el('div', 'sh l'), b1 = el('div', 'sh r'); face.append(copy, a1, b1);
     const back = el('div', 'back');
     // the back of the sheet: the same page's ink showing through, mirrored, very faint
     const ghost = el('div', 'ghost'); ghost.append(copy.cloneNode(true));
-    const sh2 = el('div', 'sh'); back.append(ghost, sh2);
+    const a2 = el('div', 'sh l'), b2 = el('div', 'sh r'); back.append(ghost, a2, b2);
     st.append(face, back); parent.append(st); parent = st;
-    parts.push({ st, sh1, sh2 });
+    parts.push({ st, a1, b1, a2, b2 });
   }
   const cast = el('div', 'cast');              // shadow the sheet throws on the page below
   cast.style.left = host.style.left; cast.style.width = host.style.width;
-  lf.parentNode.append(cast, host); lf.classList.add('lifted');
-  lf._curl = { host, cast, parts, W, sw };
+  lf.parentNode.append(cast, host);
+  lf._curl = { host, cast, parts, W, sw, live: false };
+  park(lf);
+}
+/* Cloning a page into strips is the one expensive step of a turn: every word
+   is copied twenty times and painted. So it happens while you read, not when
+   your finger lands. A parked curl lies flat beneath all the leaves, hidden
+   by the page on top, already painted; turning just lifts it into place. */
+function park(lf){
+  const c = lf._curl;
+  c.live = false; c.host.style.zIndex = c.cast.style.zIndex = '0';
+  lf.classList.remove('lifted');
+  drawCurl(lf, 0);
+}
+function liven(lf){
+  const c = lf._curl;
+  if (c.live) return;
+  c.live = true; c.host.style.zIndex = c.cast.style.zIndex = '';
+  lf.classList.add('lifted');
 }
 function dropCurl(lf){
   if (!lf._curl) return;
   lf._curl.host.remove(); lf._curl.cast.remove(); lf._curl = null;
   lf.classList.remove('lifted');
 }
+/* Whichever edge you are pulling leads. Turning forward, the free edge lifts
+   first and the paper near the spine follows; pulling a page back, the free
+   edge comes back first and the spine side is the last to unfold. */
+const profile = (e, back) => [...Array(STRIPS)].map((_, k) => { const f = k / (STRIPS - 1);
+  return -180 * clamp01(e * (1 + CURL) - CURL * (back ? f : 1 - f)); });
 function drawCurl(lf, e){
-  const { parts, cast, W, sw } = lf._curl;
-  const ang = parts.map((_, k) =>
-    -180 * clamp01(e * (1 + CURL) - CURL * (1 - k / (STRIPS - 1))));
+  const { parts, cast, W, sw } = lf._curl, back = lf._dir < 0;
+  const ang = profile(e, back);
   const dk = ang.map(a => Math.abs(Math.sin(a * Math.PI / 180)));
   const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
-  const col = a => `rgba(58,44,18,${a.toFixed(3)})`;
   let prev = 0;
   parts.forEach((pt, k) => {
     pt.st.style.transform = `rotateY(${(ang[k] - prev).toFixed(2)}deg)`; prev = ang[k];
     const L = edge(k), R = edge(k + 1);
-    pt.sh1.style.background = `linear-gradient(90deg, ${col(L*.22)}, ${col(R*.22)})`;
-    pt.sh2.style.background = `linear-gradient(90deg, ${col(.08 + R*.18)}, ${col(.08 + L*.18)})`;
+    pt.a1.style.opacity = (L * .22).toFixed(3); pt.b1.style.opacity = (R * .22).toFixed(3);
+    pt.a2.style.opacity = (R * .18).toFixed(3); pt.b2.style.opacity = (L * .18).toFixed(3);
   });
   // where the free edge sits over the page right now (0 = spine, 1 = open)
   const reach = Math.max(0, ang.reduce((x, a) => x + sw * Math.cos(a * Math.PI / 180), 0)) / W;
-  const k = Math.sin(Math.PI * e) * .28;                   // strongest mid-turn
-  const r = (reach * 100).toFixed(1);
-  cast.style.background = `linear-gradient(90deg, ${col(k)} 0%, ${col(k*.55)} ${(reach*60).toFixed(1)}%, ${col(k*.25)} ${r}%, ${col(0)} ${Math.min(100, reach*100 + 16).toFixed(1)}%)`;
+  cast.style.opacity = (Math.sin(Math.PI * e) * .28).toFixed(3);   // strongest mid-turn
+  cast.style.transform = `scaleX(${Math.min(1, reach + .16).toFixed(4)})`;
+}
+/* The paper's free edge stays under your finger. The page axis p is how far
+   the edge has travelled across the page, 0 to 1, so the edge belongs at
+   (1 - p) of the width from the spine. The bend that puts it there is found
+   by inverting the profile: tabulate where the edge lands for each bend,
+   then read the table backwards. Near the spine there is nothing left to
+   drag against, so the last fifth of the travel lets the sheet fall over. */
+const EDGE = [false, true].map(back => [...Array(241)].map((_, i) =>
+  profile(i / 240, back).reduce((x, a) => x + Math.cos(a * Math.PI / 180), 0) / STRIPS));
+function bend(p, back){
+  const t = EDGE[+back], want = 1 - p;
+  let i = 0; while (i < 240 && t[i + 1] > want) i++;
+  const e = i >= 240 ? 1 : (i + clamp01((t[i] - want) / (t[i] - t[i + 1] || 1))) / 240;
+  const fall = clamp01((p - .8) / .2), s = fall * fall * (3 - 2 * fall);
+  return e + (1 - e) * s;
 }
 function setTurn(lf, p, keep){
   p = clamp01(p);
@@ -616,11 +659,13 @@ function setTurn(lf, p, keep){
   if (lf._p === p && lf._keep === keep) return;
   lf._p = p; lf._keep = keep;
   if (!keep && (p <= 0 || p >= 1)){
-    dropCurl(lf); lf.classList.toggle('turned', p >= 1); return;
+    if (lf._curl) park(lf);
+    lf.classList.toggle('turned', p >= 1); return;
   }
   lf.classList.remove('turned');
   if (!lf._curl) buildCurl(lf);
-  drawCurl(lf, p);
+  liven(lf);
+  drawCurl(lf, bend(p, lf._dir < 0));
 }
 
 /* ===================================================================
@@ -644,7 +689,7 @@ const MENU = () => Math.min(shell.clientWidth * .78, 368);
    spring must keep writing to the story it was launched from. */
 const pageAxis = i => ({ key: 'page', story: i,
   get: () => P[i], set: x => { P[i] = x; dirty = i; },
-  lo: () => 0, hi: () => STORIES[i].pages.length - 1, give: .40 });
+  lo: () => 0, hi: () => STORIES[i].pages.length - 1, give: .12 });
 const STORY_AXIS = { key: 'story', get: () => V.py, set: x => { V.py = x; },
   lo: () => 0, hi: () => N - 1, give: .35 };
 const MENU_AXIS = { key: 'menu', get: () => V.mx, set: x => { V.mx = x; },
@@ -676,6 +721,8 @@ function commit(){
   const s0 = clamp(Math.round(V.py), 0, N - 1);
   if (s0 !== si){ si = s0; onStory(); }
 }
+let pend = 0;
+function soon(){ if (!pend) pend = requestAnimationFrame(() => { pend = 0; commit(); }); }
 function commitAll(){ STORIES.forEach((_, i) => paint(i)); dirty = null; commit(); }
 function onStory(){
   tickEls.forEach((b, i) => b.classList.toggle('on', i === si));
@@ -713,6 +760,24 @@ function finish(ax, moved){
   if (ax.key === 'page'){ warmLeaf = null; dirty = ax.story; commit(); }
   if (moved) hints.classList.remove('on');
   idleHide();
+  prepare();
+}
+/* After you land, and once the page has settled, get the page ahead and the
+   page behind ready to bend. Everything else gives its strips back. */
+let prepT = 0;
+function prepare(){
+  if (reduce || !said) return;
+  clearTimeout(prepT);
+  prepT = setTimeout(() => (window.requestIdleCallback || setTimeout)(() => {
+    if (g || w || anims.length){ prepare(); return; }
+    const lv = STORIES[si]._leaves, f = clamp(Math.round(P[si]), 0, lv.length - 1);
+    const want = new Map();
+    if (f < lv.length - 1) want.set(lv[f], 1);        // the page you would turn
+    if (f > 0) want.set(lv[f - 1], -1);               // the page you would pull back
+    STORIES.forEach(s => s._leaves.forEach(lf => {
+      if (lf._curl && !lf._curl.live && !want.has(lf)) dropCurl(lf); }));
+    want.forEach((dir, lf) => { if (!lf._curl){ lf._dir = dir; buildCurl(lf); } });
+  }), 700);
 }
 /* Where it lands: a third of the way over, or a flick fast enough to carry it
    there, commits. Momentum counts, so a short fast flick turns the page and a
@@ -744,7 +809,10 @@ function warmFor(dir){
   const lv = STORIES[si]._leaves, p = P[si];
   const j = dir > 0 ? Math.floor(p + 1e-6) : Math.ceil(p - 1e-6) - 1;
   warmLeaf = lv[j] || null;
-  if (warmLeaf){ dirty = si; commit(); }
+  if (!warmLeaf) return;
+  // only a leaf at rest takes a new direction; one caught mid-fall keeps its shape
+  if (!(warmLeaf._p > 0 && warmLeaf._p < 1)) warmLeaf._dir = dir;
+  dirty = si; commit();
 }
 
 /* ---------- the drag ---------- */
@@ -787,7 +855,7 @@ shell.addEventListener('pointermove', e => {
   ax.set(bounded(ax, raw));
   g.s.push([e.timeStamp, ax.get()]);
   while (g.s.length > 2 && e.timeStamp - g.s[0][0] > 90) g.s.shift();
-  commit();
+  soon();
 });
 function release(e){
   if (!g || (e && e.pointerId !== g.id)) return;
@@ -796,6 +864,7 @@ function release(e){
   if (ax) settle(ax, vel(s), from);
 }
 shell.addEventListener('dragstart', e => e.preventDefault());
+shell.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 shell.addEventListener('pointerup', release);
 shell.addEventListener('pointercancel', release);
 
@@ -827,7 +896,7 @@ shell.addEventListener('wheel', e => {
   ax.set(bounded(ax, w.raw));
   w.s.push([e.timeStamp, ax.get()]);
   while (w.s.length > 2 && e.timeStamp - w.s[0][0] > 90) w.s.shift();
-  commit();
+  soon();
   clearTimeout(wT);
   wT = setTimeout(() => { const q = w; w = null; settle(q.ax, vel(q.s), q.from); }, 90);
 }, { passive: false });
@@ -927,6 +996,7 @@ function showIntro(){
   setTimeout(() => {
     document.body.classList.add('ready');
     if (si === 0 && P[0] < .5) hints.classList.add('on');
+    prepare();
   }, reduce ? 0 : 750);
 }
 const NOTE_HELD = 1600;
@@ -958,6 +1028,7 @@ addEventListener('resize', () => {
     STORIES.forEach(s => s._leaves.forEach(lf => {
       dropCurl(lf); lf._p = undefined; lf._keep = undefined; }));
     commitAll();
+    prepare();
   }, 140);
 });
 
