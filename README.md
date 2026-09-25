@@ -1,27 +1,23 @@
 # Van de Sande Design
 
-Alex Van de Sande's personal site. It opens on page 190 of Camila Russo's
-*The Infinite Machine*, where he appears in the text, and his own writing
-arrives as handwritten notes in the margin. Scrolling turns the leaves;
-text the reader has not reached yet stays blurred.
+Alex Van de Sande's personal site. It is a book of six stories navigated by
+dragging: horizontal moves through the pages of one story, vertical moves
+between stories, and the index lies under the whole site to the left.
 
-The whole site is one self-contained page, `site/index.html`. It pulls in
-nothing but Google Fonts, so it can be opened straight from disk.
+The site is one self-contained page, `site/index.html`. It pulls in nothing
+but Google Fonts, so it can be opened straight from disk.
 
-## The story grid, `site/stories.html`
-
-A second, self-contained page that navigates the same book by dragging
-rather than scrolling. It is built alongside `index.html` so the two can be
-compared; nothing on the live site points at it yet.
+## The six stories
 
 Six stories sit in a column, each a stack of pages:
 
     Van de Sande · The Ethereum story · Bend
     The triangle of everything · Hexagonal earth · Blog
 
-Only the first has real content, the three book pages from `index.html`.
-The rest are scaffolding: a title page and a picture or two, waiting for
-words and images.
+Only the first has real content: page 190 of Camila Russo's *The Infinite
+Machine*, where Alex appears in the text, with his own writing arriving as
+handwritten notes in the margin. The rest are scaffolding: a title page and
+a picture or two, waiting for words and images.
 
 **Which way is which.** Horizontal moves through the pages of one story,
 vertical moves between stories, and the index lies under the whole site to
@@ -39,11 +35,20 @@ handed to a critically damped spring on release. Paper bends wherever the
 finger left it, over-dragging past either end rubber-bands, and a release
 commits only if you passed a third of the way or flicked hard enough to
 carry there. The bending sheet is the same ten-strip hinge used by
-`index.html`, driven by position instead of scroll.
+`scroll.html`, driven by position instead of scroll.
 
 A trackpad works on the same two axes. A plain mouse has only one, so the
 page corner at the bottom right and the arrow keys turn pages; arrows also
 move between stories, and Escape shuts the index.
+
+## The scrolling version, `site/scroll.html`
+
+The first approach, kept so the two can be compared. It opens on the same
+page 190 and reveals the margin notes one page at a time, but the leaves are
+one stack rather than a grid and scrolling turns them; text the reader has
+not reached yet stays blurred. It was the site until the story grid took its
+place, and is self-contained in the same way. Nothing points at it: it is
+reached by its own path, `/scroll.html`.
 
 ## Run it locally
 

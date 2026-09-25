@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alex Van de Sande</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;600&family=Crimson+Pro:ital,wght@0,400;1,400&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1de; --ink:#262420; --ghost:#8c8674; --pen:#2b4d86;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"EB Garamond",Garamond,Georgia,serif;-webkit-font-smoothing:antialiased;
+}
+
+/* ---------- the book: a stack of leaves ---------- */
+.book{position:fixed;inset:0;overflow:hidden;will-change:filter,opacity}
+.leaves{position:relative;width:min(100% - 2.5rem, 54rem);height:100%;margin:0 auto;perspective:2600px}
+.leaf{position:absolute;top:0;left:-1.25rem;width:calc(100% + 2.5rem);height:100%;background:var(--paper);display:flex;flex-direction:column;
+  padding:clamp(2.5rem,7vh,4.5rem) 1.25rem clamp(1.5rem,4vh,2.5rem);
+  transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.leaf.turned{transform:rotateY(-178deg)}
+.leaf.hold{transition:none!important}
+.leaf.lifted{visibility:hidden}
+.curl{position:absolute;top:0;height:100%;z-index:60;transform-style:preserve-3d;pointer-events:none}
+.strip{position:absolute;top:0;height:100%;transform-origin:left center;transform-style:preserve-3d}
+.strip .face,.strip .back{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.strip .face{background:var(--paper)}
+.strip .back{background:var(--paper);transform:rotateY(180deg)}
+.strip .face > .leaf{transition:none;visibility:visible}
+.strip .sh{position:absolute;inset:0}
+.cast{position:absolute;top:0;height:100%;z-index:59;pointer-events:none}
+.strip .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleX(-1);opacity:.1}
+.text{flex:1;min-height:0;display:flex;flex-direction:column;max-width:32rem}
+.running{display:flex;justify-content:space-between;gap:1rem;font-weight:500;font-size:.72rem;letter-spacing:.28em;margin:0 0 2.2rem;flex:none}
+.running span:last-child{letter-spacing:.2em;font-weight:400;color:var(--ghost)}
+.recto .running{justify-content:flex-end}
+.body p,.rest p{margin:0;font-size:clamp(1.22rem,1.05rem + .75vw,1.45rem);line-height:1.45;text-indent:1.5em;text-align:justify;hyphens:auto}
+.rest{flex:1;min-height:0;overflow:hidden;user-select:none}
+.rest span{filter:blur(var(--b));opacity:var(--o)}
+.folio{flex:none;margin-top:1.4rem;font-weight:500;font-size:.95rem}
+.recto .folio{text-align:right}
+.photo{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.photo img{max-width:100%;max-height:100%;object-fit:contain}
+
+.leaf.cryp{font-family:"Crimson Pro",Georgia,serif}
+.cryp .running{display:grid;grid-template-columns:1fr auto 1fr;letter-spacing:0;font-weight:400;font-size:1.02rem;margin-bottom:1.6rem}
+.cryp .running span:nth-child(2){color:var(--ink);letter-spacing:.01em}
+.running .au{margin-left:.9em;color:var(--ghost)}
+.ether .running .au{font-variant:normal;letter-spacing:.02em;font-size:.88em}
+.cryp .running span:last-child{text-align:right;color:var(--ink);letter-spacing:0}
+.cryp .rest p{font-size:clamp(1.2rem,1.05rem + .7vw,1.4rem);line-height:1.42;text-indent:1.3em}
+.cryp .rest{user-select:auto}
+.hl{background:none;color:inherit}
+.leaf.ether{font-family:"Cardo",Georgia,serif}
+.ether .running{justify-content:flex-start;gap:0;letter-spacing:0;font-weight:400;margin-bottom:1.5rem}
+.ether .running span:first-child{width:2.5rem;color:var(--ink);font-size:1rem}
+.ether .running span:last-child{flex:1;text-align:center;color:var(--ink);font-variant:small-caps;letter-spacing:.14em;font-size:1.15rem;padding-right:2.5rem}
+.ether .rest p{font-size:clamp(1.05rem,.95rem + .5vw,1.22rem);line-height:1.38;text-align:left;text-indent:-1.4em;padding-left:1.4em;margin:0 0 .35em;hyphens:none}
+.ether .rest h4{font-weight:700;font-size:1rem;margin:1.1em 0 .55em}
+.note{position:absolute;white-space:nowrap;transform:rotate(-2.5deg);transform-origin:left top;
+  font-family:"Caveat",cursive;font-weight:500;color:var(--pen);font-size:1.6rem;line-height:1.05;opacity:0;transition:opacity .35s ease}
+.note.on{opacity:var(--fade,1)}
+svg.ink{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+svg.ink path{fill:none;stroke:var(--pen);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+svg.ink .arr{opacity:var(--fade,1)}
+
+.links{display:flex;gap:1.6rem;margin-top:1.6rem;font-family:"Caveat",cursive;font-size:1.6rem;transform:rotate(-1.5deg)}
+.links a{color:var(--pen);text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:4px}
+.links a:focus-visible{outline:2px solid var(--pen);outline-offset:3px}
+.cue{position:fixed;left:50%;bottom:calc(1.4rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  font-style:italic;font-size:.9rem;color:var(--ghost);transition:opacity .6s ease;pointer-events:none}
+
+/* ---------- large screens: the right column just scrolls ---------- */
+/* phones: my text scrolls up over the book, which blurs while it passes */
+.flow{position:relative;z-index:2;padding:118svh 1.5rem 55svh;color:var(--pen);font-family:"Caveat",cursive}
+.flow section{margin-bottom:110svh}
+.flow section:last-child{margin-bottom:0}
+.flow p{margin:0 0 .8rem;font-weight:600;font-size:clamp(2.1rem,1.6rem + 2vw,3.1rem);line-height:1.1;transform:rotate(-1.5deg);transform-origin:left;text-shadow:0 0 3px var(--paper),0 0 10px var(--paper),0 0 22px var(--paper)}
+.flow .todo{color:var(--ghost);font-weight:500}
+/* my first line waits: it arrives only once "that's me." has been written */
+.js .flow p.mine{opacity:0;transition:opacity .8s ease}
+.js .flow p.mine.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.js .flow p.mine{transition:none}}
+/* large screens: the right column just scrolls beside the book */
+@media (min-width:56rem){
+  .flow p{text-shadow:none}
+  .leaf{left:-3rem;width:calc(32rem + 6rem);padding-left:3rem;padding-right:3rem}
+  .flow{padding:72vh 0 45vh}
+  .flow section{margin-bottom:65vh}
+  .flow section:last-child{margin-bottom:0}
+  .flow p{margin:0 0 .8rem;font-weight:600;font-size:clamp(1.8rem,1.3rem + 1vw,2.3rem);line-height:1.12;transform:rotate(-1.6deg);transform-origin:left}
+  .flow .todo{color:var(--ghost);font-weight:500}
+  .flow .links{font-size:1.45rem}
+}
+</style>
+</head>
+<body>
+<div class="book" id="book" aria-label="The Infinite Machine by Camila Russo">
+  <div class="leaves" id="leaves">
+    <article class="leaf verso" id="leaf0">
+      <div class="text">
+        <header class="running"><span>THE INFINITE MACHINE</span><span>CAMILA RUSSO</span></header>
+        <div class="body">
+          <p>“Honey, remember that giant pile of money I was talking about last week? The one kept safe by unhackable code?” <span id="w-alex">Alex</span>, still glued to his smartphone screen, said to his <span id="w-wife">wife.</span></p>
+          <p><span id="w-yes">“Yes?”</span></p>
+          <p>“Well, it was hacked.”</p>
+        </div>
+        <div class="rest" id="rest0" aria-hidden="true"><p id="real"></p></div>
+        <footer class="folio">190</footer>
+      </div>
+      <aside class="note" data-dy="1.6">that's me.</aside>
+      <svg class="ink" id="ink" aria-hidden="true"></svg>
+    </article>
+  </div>
+</div>
+
+<!-- my text; each section is paired with a book page (data-page = leaf index) -->
+<main class="flow" id="flow">
+  <section data-page="0">
+    <p class="mine">My name is Alex Van de Sande and I’m a designer. I like to take complicated things and show them in simple ways.</p>
+  </section>
+  <section data-page="1">
+    <p>In 2014 I was invited to work for a 19 year old who was going to pay me in made up money.</p>
+  </section>
+  <section data-page="2">
+    <p>They were building some complicated technology nobody had ever heard of and few understood. Their apps seemed ugly and complicated and the team sounded all sorts of crazy. I loved it.</p>
+    <nav class="links" aria-label="Elsewhere">
+      <a href="https://app.ens.domains/avsa.eth" target="_blank" rel="noopener">avsa.eth</a>
+      <a href="https://github.com/alexvandesande" target="_blank" rel="noopener">github</a>
+    </nav>
+  </section>
+</main>
+<div class="cue" id="cue" aria-hidden="true">scroll</div>
+
+<script>
+(() => {
+  /* Second book: The Cryptopians.
+     "context" is the text around each highlighted passage. Paste it between the
+     backticks; it renders softly out of focus but readable. Left empty, the
+     slot shows unreadable filler instead. */
+  const CRYPTOPIANS = {
+    title: "The Cryptopians", author: "Laura Shin", folio: 79,
+    paras: [
+      { context: `Jeff's team in particular found their boss flexible and easygoing.
+He told them they could work on whatever they wanted, however much they wanted, but if they abused his trust, they would be fired. Jeff was also funny. He played the grumpy guy but was actually a teddy bear. He often teased and screwed around with people, but it was obvious he was joking. He was a boss who didn't want to be a boss. Plus, he was always accessible. He was logged onto Gitter, on a public Go Ethereum channel, all day long, which was nice for his remote team members, such as the black-, curly-haired Péter Szilágyi in Transylvania and `, filler: 38,
+        quote: "Alex van de Sande, aka Avsa, a designer in Rio de Janeiro whose high forehead and disheveled locks gave him a professorial vibe. Everyone felt part of the team." },
+      { context: `Those under Gavin had a different experience. If a few developers came up with an idea, he would sometimes immediately shoot it down. Often he was right, but still, it was frustrating to work with someone who was constantly telling you that you were wrong and, even if maybe you weren't, forcing you to do things his way. He would even berate Vitalik, telling him on Skype, "You said you were going to do x, or
+"This is what's more important," or "This idea is going to be better." Everyone found him at the very least "intense" and, as one person put it, "always expecting everyone to be as productive as him." `, filler: 34,
+        quote: "Once, when Avsa was in Amsterdam from Rio, working with Jeff, the second Gav heard he was there, he immediately asked Alex to take a train to Zug to work with him. The same thing happened on Avsa\u2019s second Amsterdam trip\u2014that time he was called to London." },
+      { context: `As time went on, however, his employees found Gavin became more of an "ideas guy" who made his underlings execute his vision, while claiming credit and never praising them. Still, they found him "brilliant" or thought him "a smart guy, but not the best boss." One worker felt Gav was "justified" to be "very full of himself... because... he's very good at what he does." One supporter compared Gav to Steve Jobs. "Can he rub people the wrong way? Yes... but does that make him a bad person? No." Because he was aloof, Gav's C++ team conversed in a private Skype group, which at least one person felt made the C++ client less approachable than Jeff's Go client, whose Gitter was open to the public.`, filler: 90 }
+    ]
+  };
+  const NEXT = "By that time, most token holders had heard the news. Rather than create their own child DAOs and wait seven days to withdraw their money from the main DAO, like *Titanic* passengers in nightgowns diving into the first lifeboats they could find, they were jumping into whatever child DAO had an approaching deadline.";
+
+  const $ = s => document.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const leaf0 = $('#leaf0'), svg = $('#ink'), book = $('#book'), cue = $('#cue'), flow = $('#flow'), note = $('.note');
+  const wide = () => matchMedia('(min-width:56rem)').matches;
+
+  /* blurred text: real next paragraph ramps soft, then unreadable filler */
+  const L = "etaoinshrdlcumwfgypbvk";
+  const word = () => { let n=2+Math.floor(Math.random()*8), w=""; for(let i=0;i<n;i++) w+=L[Math.floor(Math.random()*L.length)]; return w; };
+  const fillerWords = c => [...Array(c)].map((_,i)=>{let w=word(); if(!i||Math.random()<.07) w=w[0].toUpperCase()+w.slice(1); if(Math.random()<.08) w+=","; return w;});
+  function addWords(el, words, blurAt){
+    words.forEach((w,i) => { const s=document.createElement('span'); const it=w.startsWith('*'); w=w.replace(/\*/g,'');
+      s.textContent=w; if (it) s.style.fontStyle='italic';
+      const [b,o] = blurAt(i); s.style.setProperty('--b', b.toFixed(2)+'px'); s.style.setProperty('--o', o.toFixed(2)); el.append(s,' '); });
+  }
+  addWords($('#real'), NEXT.split(' '), i => [0.35 + Math.pow(i/55,1.5)*2.4, Math.max(.75, 1-i*.004)]);
+  [46,30,62,24,40].forEach(c => { const p=document.createElement('p'); addWords(p, fillerWords(c), i => [Math.min(7, 4.4 + i*.01), .6]); $('#rest0').append(p); });
+
+  /* later leaves */
+  const leaves = [leaf0];
+  {
+    const c = CRYPTOPIANS, lf = document.createElement('article');
+    lf.className = 'leaf recto cryp';
+    lf.setAttribute('aria-label', `${c.title} by ${c.author}, page ${c.folio}`);
+    lf.innerHTML = `<div class="text"><header class="running"><span></span><span>${c.title}<span class="au">${c.author}</span></span><span>${c.folio}</span></header><div class="rest"></div></div>`;
+    const rest = lf.querySelector('.rest');
+    c.paras.forEach((pa, pi) => {
+      const p = document.createElement('p');
+      const real = pa.context.trim().length > 0;
+      const words = real ? pa.context.trim().split(/\s+/) : fillerWords(pa.filler);
+      const n = words.length;
+      if (!real && pi === 0) words[0] = words[0].toLowerCase();
+      const wrap = document.createElement('span');
+      if (!real) wrap.setAttribute('aria-hidden','true');
+      // depth of field: softest right next to a highlight, fading with distance
+      addWords(wrap, words, i => { const d = pa.quote ? n - i : i + 1, t = Math.min(1, d / 70);
+        return real ? [0.9 + t * 1.1, .72 - t * .2] : [3.1 + t * 1.4, .32 - t * .12]; });
+      p.append(wrap, ' ');
+      if (pa.quote){ const hl=document.createElement('mark'); hl.className='hl'; hl.textContent=pa.quote; p.append(hl); }
+      rest.append(p);
+    });
+    $('#leaves').append(lf); leaves.push(lf);
+  }
+  {
+    /* Third book: Out of the Ether, cast of characters. My entry is real (quoted);
+       nearby names and the heading read, their descriptions stay blurred. */
+    const lf = document.createElement('article');
+    lf.className = 'leaf verso ether';
+    lf.setAttribute('aria-label', 'Out of the Ether by Matt Leising, Cast of Characters');
+    lf.innerHTML = `<div class="text"><header class="running"><span>x</span><span>Out of the Ether<span class="au">Matt Leising</span></span></header><div class="rest"></div></div>`;
+    const rest = lf.querySelector('.rest');
+    const blurSpan = (words, b, o=.6) => { const w=document.createElement('span'); w.setAttribute('aria-hidden','true'); addWords(w, words, () => [b, o]); return w; };
+    const entry = (name, n, nameBlur, descBlur) => {
+      const p = document.createElement('p');
+      if (name) p.append(blurSpan(name.split(' ').concat(['\u2013']), descBlur), ' ');
+      else p.append(blurSpan(fillerWords(2).map(w=>w[0].toUpperCase()+w.slice(1)).concat(['\u2013']), 2.6, .26), ' ');
+      const words = typeof n === 'string' ? n.split(' ') : fillerWords(n).map(w=>w.replace(/[.,]$/,''));
+      p.append(typeof n === 'string' ? blurSpan(words, descBlur) : blurSpan(words, 2.6, .26)); rest.append(p);
+    };
+    const heading = (t, b, soft) => { const h=document.createElement('h4'); if (b) h.append(blurSpan(fillerWords(4), 2.6, .26)); else if (soft) h.append(blurSpan(t.split(' '), soft)); else h.textContent=t; rest.append(h); };
+    entry(null, 22, 6, 6);
+    heading(null, 6);
+    [20].forEach(n => entry(null, n, 6, 6));
+    entry('Ming Chan', 'First executive director of the Ethereum Foundation, whipped it into shape to keep it within its means, Vitalik favored her though she rubbed many the wrong way', 0, 1.3);
+    heading('Badass blockchain ninja warriors', 0, 1.1);
+    const me = document.createElement('p');
+    const hl = document.createElement('mark'); hl.className='hl';
+    hl.textContent = 'Alex Van de Sande \u2013 Known as avsa, helped marshal the Robin Hood Group from his apartment in Rio, co-developed the Mist wallet, excellent husband, the one who pushed the button to start the DAO counterattack';
+    me.append(hl); rest.append(me);
+    entry('Griff Green', 'The Mayor of Ethereum circa June 2016, hugger, visionary, driver of the RHG, slock.it\u2019s first employee, wants a sick jump shot but it\u2019s just not happening this time around', 0, 1.3);
+    entry('Fabian Vogelsteller', 'tech whiz who helped the RHG prepare to fight the ether thief, co-developed Mist wallet', 0, 1.3);
+    entry('Lefteris Karapetsas', 'coding guru, replicated DAO attack in a few hours', 0, 1.3);
+    entry(null, 22, 6, 6);
+    $('#leaves').append(lf); leaves.push(lf);
+  }
+  leaves.forEach((lf,i) => lf.style.zIndex = leaves.length - i);
+
+  /* pen */
+  let seed = 7; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+  const rel = el => { const a=el.getBoundingClientRect(), b=leaf0.getBoundingClientRect(); return {x:a.left-b.left, y:a.top-b.top, w:a.width, h:a.height}; };
+  const textRight = () => rel($('#leaf0 .text')).x + $('#leaf0 .text').offsetWidth;
+  const head = (x1,y1,cx,cy) => { const ang=Math.atan2(y1-cy,x1-cx), L=9, sp=.5;
+    return `M${(x1-L*Math.cos(ang-sp)).toFixed(1)} ${(y1-L*Math.sin(ang-sp)).toFixed(1)} L${x1.toFixed(1)} ${y1.toFixed(1)} L${(x1-L*Math.cos(ang+sp)).toFixed(1)} ${(y1-L*Math.sin(ang+sp)).toFixed(1)}`; };
+  const shapes = {
+    circle(){ const r=rel($('#w-alex')); const cx=r.x+r.w/2, cy=r.y+r.h/2, rx=r.w/2+9, ry=r.h/2+4; let d="";
+      for(let i=0;i<=52;i++){ const t=-2.2+i/48*Math.PI*2, j=1+(rnd()-.5)*.06; d+=(i?" L":"M")+(cx+Math.cos(t)*rx*j).toFixed(1)+" "+(cy+Math.sin(t)*ry*j).toFixed(1); } return [d]; },
+    arrow(){ const a=rel($('#w-alex')), n=rel(note);
+      if (!wide()){
+        const w=rel($('#w-wife')), ex=a.x+a.w+14, ey=a.y+a.h+2, x0=n.x-6, y0=n.y+n.h*.45;
+        const x1=Math.min(Math.max(ex, w.x+w.w+18), x0-28), y1=Math.max(ey, w.y+w.h*.35), c2x=x1+18, c2y=y1+18;
+        return [`M${x0} ${y0} C${x0-26} ${y0+2}, ${c2x} ${c2y}, ${x1} ${y1}`, head(x1,y1,c2x,c2y)];
+      }
+      const x0=a.x+a.w+14, y0=a.y+a.h/2, x1=n.x-8, y1=n.y+n.h*.55, c2x=x1-50, c2y=y1+8;
+      return [`M${x0} ${y0} C${x0+40} ${y0+14}, ${c2x} ${c2y}, ${x1} ${y1}`, head(x1,y1,c2x,c2y)];
+    }
+  };
+  const drawn = [];
+  function render(name, animate, dur, delay=0){
+    shapes[name]().forEach((d,i,ds) => { const p=document.createElementNS('http://www.w3.org/2000/svg','path'); p.setAttribute('d',d);
+      if (name==='arrow') p.classList.add('arr'); svg.append(p);
+      if (animate && !reduce){ const len=p.getTotalLength(); p.style.strokeDasharray=len; p.style.strokeDashoffset=len; p.getBoundingClientRect();
+        p.style.transition=`stroke-dashoffset ${dur/ds.length}ms ease-out ${delay + i*dur/ds.length}ms`; p.style.strokeDashoffset=0; } });
+  }
+  function placeNote(){
+    if (!wide()){ const y=rel($('#w-yes')); note.style.left=(textRight()-note.offsetWidth-6)+'px'; note.style.top=(y.y-2)+'px'; return; }
+    const t=rel($('#w-alex')); note.style.left=(textRight()+48)+'px'; note.style.top=(t.y+parseFloat(note.dataset.dy)*16)+'px';
+  }
+  function layoutFlow(){
+    if (!wide()){ flow.style.marginLeft = flow.style.width = ''; return; }
+    const x = leaf0.getBoundingClientRect().left + textRight() + 48, right = $('#leaves').getBoundingClientRect().right;
+    flow.style.marginLeft = x+'px'; flow.style.width = Math.max(240, right - x)+'px';
+  }
+  function layout(){ svg.innerHTML=''; seed=7; placeNote(); layoutFlow(); drawn.forEach(s => render(s,false)); }
+  addEventListener('resize', () => { clearTimeout(layout.t); layout.t=setTimeout(() => { layout(); resetTurns(); update(); }, 120); });
+  document.fonts.ready.then(() => { layout(); update(); idleArm(); });
+
+  let noted = false, notedAt = 0;
+  function showNote(){
+    if (noted) return; noted = true; notedAt = performance.now(); placeNote();
+    drawn.push('circle','arrow');
+    render('circle', true, 450); render('arrow', true, 300, 450);
+    setTimeout(() => note.classList.add('on'), reduce ? 0 : 700);
+    cue.style.opacity = 0;
+  }
+
+  /* My own first line comes second: the reader scrolls a little, "that's me."
+     is written in the margin, and only then does my line fade up. If nobody
+     touches the page for five seconds, both happen on their own. */
+  const NOTE_HELD = 1600;      // the note is written by 1.05s, then it is held a beat
+  let said = false, sayT = null;
+  function showName(){
+    if (said || sayT) return;
+    showNote();
+    sayT = setTimeout(() => {
+      said = true; $('.flow p.mine').classList.add('on'); idleStop();
+    }, reduce ? 0 : Math.max(0, NOTE_HELD - (performance.now() - notedAt)));
+  }
+  // on phones my first line sits below the fold, so bring it into view
+  function bringUp(){
+    const r = flow.querySelector('section p').getBoundingClientRect();
+    if (r.top > innerHeight * .82)
+      scrollTo({top: scrollY + r.top - innerHeight * .55, behavior: reduce ? 'auto' : 'smooth'});
+  }
+  let idleT = null;
+  function idleStop(){ clearTimeout(idleT); idleT = null; }
+  function idleArm(){
+    if (said || sayT) return;
+    clearTimeout(idleT);
+    idleT = setTimeout(() => { showNote(); setTimeout(() => { if (said || sayT) return; bringUp(); showName(); }, reduce ? 0 : NOTE_HELD); }, 5000);
+  }
+  ['wheel','pointerdown','touchstart','keydown','scroll'].forEach(
+    ev => addEventListener(ev, idleArm, {passive:true}));
+
+  /* Turning a page, driven by scroll position (scroll slowly to turn slowly).
+     The leaf is sliced into vertical strips chained edge to edge, each hinged
+     on the one before it. Strips nearer the free edge lead, so the sheet bends
+     like paper; shading blends across strip edges. */
+  const STRIPS = 10, CURL = .55;
+  function buildCurl(lf){
+    const W = lf.offsetWidth, H = lf.offsetHeight, sw = W / STRIPS;
+    const el = document.createElement('div'); el.className = 'curl';
+    el.style.left = lf.offsetLeft + 'px'; el.style.width = W + 'px';
+    let parent = el; const parts = [];
+    for (let k = 0; k < STRIPS; k++){
+      const st = document.createElement('div'); st.className = 'strip';
+      st.style.width = (sw + .6) + 'px'; st.style.left = k ? sw + 'px' : '0px';
+      const face = document.createElement('div'); face.className = 'face';
+      const copy = lf.cloneNode(true); copy.removeAttribute('id'); copy.classList.remove('turned','lifted','hold');
+      copy.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
+      copy.style.cssText = `position:absolute;top:0;left:${-k*sw}px;width:${W}px;height:${H}px;transform:none;z-index:auto`;
+      const sh1 = document.createElement('div'); sh1.className = 'sh'; face.append(copy, sh1);
+      const back = document.createElement('div'); back.className = 'back';
+      // the back of the sheet: the same page's ink showing through, mirrored, very faint
+      const ghost = document.createElement('div'); ghost.className = 'ghost';
+      ghost.append(copy.cloneNode(true));
+      const sh2 = document.createElement('div'); sh2.className = 'sh'; back.append(ghost, sh2);
+      st.append(face, back); parent.append(st); parent = st;
+      parts.push({st, sh1, sh2});
+    }
+    // shadow the lifting sheet casts on the page underneath
+    const cast = document.createElement('div'); cast.className = 'cast';
+    cast.style.left = el.style.left; cast.style.width = el.style.width;
+    lf.parentNode.append(cast, el); lf.classList.add('lifted');
+    lf._curl = {el, cast, parts, W, sw};
+  }
+  function dropCurl(lf){ if (lf._curl){ lf._curl.el.remove(); lf._curl.cast.remove(); lf._curl = null; lf.classList.remove('lifted'); } }
+  function drawCurl(lf, e){
+    const {parts, cast, W, sw} = lf._curl;
+    const ang = parts.map((_, k) => -180 * Math.max(0, Math.min(1, e * (1 + CURL) - CURL * (1 - k / (STRIPS - 1)))));
+    const dk = ang.map(a => Math.abs(Math.sin(a * Math.PI / 180)));
+    const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
+    const col = a => `rgba(58,44,18,${a.toFixed(3)})`;
+    let prev = 0;
+    parts.forEach((pt, k) => {
+      pt.st.style.transform = `rotateY(${(ang[k] - prev).toFixed(2)}deg)`; prev = ang[k];
+      const L = edge(k), R = edge(k + 1);
+      pt.sh1.style.background = `linear-gradient(90deg, ${col(L * .22)}, ${col(R * .22)})`;
+      pt.sh2.style.background = `linear-gradient(90deg, ${col(.08 + R * .18)}, ${col(.08 + L * .18)})`;
+    });
+    // where the free edge sits over the page right now (0 = spine, 1 = open)
+    const reach = Math.max(0, ang.reduce((x, a) => x + sw * Math.cos(a * Math.PI / 180), 0)) / W;
+    const k = Math.sin(Math.PI * e) * .28;                   // strongest mid-turn
+    const r = (reach * 100).toFixed(1);
+    cast.style.background = `linear-gradient(90deg, ${col(k)} 0%, ${col(k * .55)} ${(reach * 60).toFixed(1)}%, ${col(k * .25)} ${r}%, ${col(0)} ${Math.min(100, reach * 100 + 16).toFixed(1)}%)`;
+  }
+  function setTurn(lf, p){
+    p = Math.max(0, Math.min(1, p));
+    if (reduce) p = p > .5 ? 1 : 0;
+    if (lf._p === p) return; lf._p = p;
+    if (p <= 0 || p >= 1){ dropCurl(lf); lf.classList.toggle('turned', p >= 1); return; }
+    lf.classList.remove('turned');
+    if (!lf._curl) buildCurl(lf);
+    drawCurl(lf, p);
+  }
+  function resetTurns(){ leaves.forEach(l => { dropCurl(l); l._p = undefined; }); }
+
+  /* ---- scrolling ----
+     large screens: text in the right column, the book stays sharp and turns
+                    to each section's page as it reaches mid-screen.
+     phones:        text scrolls over the book; the book blurs while text is
+                    on screen and turns to the next page underneath it. */
+  function update(){
+    if (scrollY > 4) showNote();
+    if (scrollY > innerHeight * .07) showName();
+    const first = flow.querySelector('section p').getBoundingClientRect().top, nb = note.getBoundingClientRect().bottom;
+    book.style.setProperty('--fade', Math.max(0, Math.min(1, (first - nb - 30) / 120)).toFixed(3));
+    const secs = [...flow.querySelectorAll('section')];
+    if (wide()){
+      book.style.filter = 'none'; book.style.opacity = 1;
+      // the gap between two paragraphs sets the turn: it starts as the gap
+      // passes 75% of the screen height and finishes by 25%
+      secs.forEach((sc, i) => { if (!i || !leaves[i-1]) return;
+        const mid = (secs[i-1].getBoundingClientRect().bottom + sc.getBoundingClientRect().top) / 2;
+        setTurn(leaves[i-1], (innerHeight * .75 - mid) / (innerHeight * .5)); });
+    } else {
+      let inf = 0;
+      secs.forEach((sc, i) => {
+        const r = sc.getBoundingClientRect(), c = (r.top + r.bottom) / 2;
+        inf = Math.max(inf, Math.max(0, Math.min(1, 1.25 - Math.abs(c - innerHeight/2) / (innerHeight * .55))));
+        if (leaves[i+1]) setTurn(leaves[i], (innerHeight * .38 - c) / (innerHeight * .3));
+      });
+      book.style.filter = inf > .01 ? `blur(${(inf*2.2).toFixed(2)}px)` : 'none';
+      book.style.opacity = (1 - inf*.42).toFixed(3);
+    }
+  }
+  addEventListener('scroll', () => requestAnimationFrame(update), {passive:true});
+  addEventListener('keydown', e => { if (['ArrowDown','PageDown',' ','End'].includes(e.key)) showNote(); });
+})();
+</script>
+</body>
+</html>
