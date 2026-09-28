@@ -5,6 +5,9 @@
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rail — experiment</title>
+<meta name="description" content="Alex Van de Sande: pages and posters you turn by hand. An experiment.">
+<meta name="theme-color" content="#333331">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23333331'/%3E%3Crect x='9' y='6' width='14' height='20' rx='1' fill='%23f4f1e4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Cardo:wght@400;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -14,9 +17,7 @@
   --paper:#f4f1e4;
   --ink:#262420;
   --ghost:#8c8674;
-  --pen:#2b4d86;
   --poster:#ded8d6;        /* the poster's own paper, under the image */
-  --bar:#4a4a47;
   color-scheme:dark;
   box-sizing:border-box;
 }
@@ -372,11 +373,18 @@ function buildCurl(sheet){
 }
 function dropCurl(sheet){
   if (!sheet._curl) return;
+  sheet._sig = null;
   sheet._curl.host.remove(); sheet._curl.cast.remove(); sheet._curl.plate.remove();
   sheet._curl = null; sheet.classList.remove('lifted');
 }
 
 function drawCurl(sheet, e, fade, bm){
+  /* Twenty transforms and forty opacities. render() runs on every frame of a
+     rail slide too, where the sheet in hand is not moving at all, so nothing
+     is rewritten unless something about it actually changed. */
+  const sig = e + '|' + fade + '|' + bm;
+  if (sheet._sig === sig) return;
+  sheet._sig = sig;
   const { parts, cast, plate, H, hs, eye } = sheet._curl;
   const ang = profile(e, bm);
   const dk = ang.map(a => Math.abs(Math.sin(a * RAD)));
@@ -490,38 +498,50 @@ function render(){
 /* Critically damped and quick: 2*sqrt(420) is 41, so it settles without wobble
    but does not labour. A sheet this size has almost no mass. */
 const STIFF = 420, DAMP = 41;
-const AX = {
-  rail: { get: () => hx, set: v => { hx = v; }, lo: () => FIRST, hi: () => LAST, give: .16 },
-  page: { pad: null,
-          get(){ return this.pad ? this.pad.pv : 0; },
-          set(v){ if (this.pad) this.pad.pv = v; },
-          lo: () => 0,
-          hi(){ return this.pad ? this.pad.sheets.length - 1 : 0; },
-          /* a pad with nothing behind its face still gives, so pulling at it
-             curls and springs back rather than feeling dead */
-          get give(){ return this.pad && this.pad.sheets.length > 1 ? .14 : .5; } }
-};
-/* bound at the moment a gesture starts, to whichever pad is in the middle */
-function pageAxis(){ AX.page.pad = padOf(clamp(Math.round(hx), FIRST, LAST)); return AX.page; }
-let anim = null, raf = 0, last = 0;
+const RAIL_AX = { get: () => hx, set: v => { hx = v; }, lo: () => FIRST, hi: () => LAST, give: .16 };
+/* Each pad owns its page axis. One shared axis with a `pad` pointer meant a
+   turn still in the air kept writing to whichever pad you had since slid to. */
+const NO_PAGE = { get: () => 0, set(){}, lo: () => 0, hi: () => 0, give: .5 };
+function pageAxisOf(pad){
+  if (!pad) return NO_PAGE;
+  return pad.ax || (pad.ax = {
+    get: () => pad.pv, set: v => { pad.pv = v; },
+    lo: () => 0, hi: () => pad.sheets.length - 1,
+    /* a pad with nothing behind its face still gives, so pulling at it curls
+       and springs back rather than feeling dead */
+    give: pad.sheets.length > 1 ? .14 : .5
+  });
+}
+function pageAxis(){ return pageAxisOf(padOf(clamp(Math.round(hx), FIRST, LAST))); }
+
+/* One animation per axis, not one in total. A single global meant grabbing the
+   page cancelled a rail slide still in the air and left it stranded between
+   two stations, with nothing to bring it home — which is how the rail ends up
+   somewhere nobody asked for. */
+let anims = [], raf = 0, last = 0;
 function springTo(ax, target, v0){
-  anim = { ax, target: clamp(target, ax.lo(), ax.hi()), v: v0 || 0 };
+  anims = anims.filter(a => a.ax !== ax);
+  anims.push({ ax, target: clamp(target, ax.lo(), ax.hi()), v: v0 || 0 });
   if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
 }
 function tick(now){
   const dt = clamp((now - last) / 1000, .001, .032); last = now;
-  const a = anim;
-  if (!a){ raf = 0; return; }
-  let x = a.ax.get();
-  a.v += (-STIFF * (x - a.target) - DAMP * a.v) * dt;
-  x += a.v * dt;
-  if (Math.abs(x - a.target) < .0006 && Math.abs(a.v) < .02){
-    a.ax.set(a.target); anim = null; raf = 0; render(); return;
-  }
-  a.ax.set(x); render();
-  raf = requestAnimationFrame(tick);
+  anims = anims.filter(a => {
+    let x = a.ax.get();
+    a.v += (-STIFF * (x - a.target) - DAMP * a.v) * dt;
+    x += a.v * dt;
+    if (Math.abs(x - a.target) < .0006 && Math.abs(a.v) < .02){ a.ax.set(a.target); return false; }
+    a.ax.set(x); return true;
+  });
+  render();
+  raf = anims.length ? requestAnimationFrame(tick) : 0;
 }
-function stop(){ anim = null; if (raf){ cancelAnimationFrame(raf); raf = 0; } }
+/* stop one axis, or everything if none is named */
+function stop(ax){
+  anims = ax ? anims.filter(a => a.ax !== ax) : [];
+  if (!anims.length && raf){ cancelAnimationFrame(raf); raf = 0; }
+}
+function flightOf(ax){ return anims.find(a => a.ax === ax); }
 
 /* A quarter of the way over, or a flick that would carry it there. Demanding
    much more is what makes a page feel heavy: you do the work and it sulks back
@@ -588,7 +608,7 @@ function speed(s){
 }
 let g = null;
 stage.addEventListener('pointerdown', e => {
-  wake(); stop();
+  wake();     /* nothing is stopped yet: the axis is not known until you move */
   g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ax: null, base: 0, s: [] };
 });
 stage.addEventListener('pointermove', e => {
@@ -596,7 +616,8 @@ stage.addEventListener('pointermove', e => {
   const dx = e.clientX - g.x0, dy = e.clientY - g.y0;
   if (!g.ax){
     if (Math.abs(dx) < 7 && Math.abs(dy) < 7) return;
-    g.ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : pageAxis();
+    g.ax = Math.abs(dx) > Math.abs(dy) ? RAIL_AX : pageAxis();
+    stop(g.ax);                 /* take over this axis, leave the others flying */
     g.base = g.ax.get();
     g.from = Math.round(g.base);
     try { stage.setPointerCapture(e.pointerId); g.held = true; } catch (_) {}
@@ -606,7 +627,7 @@ stage.addEventListener('pointermove', e => {
   /* the rail follows the hand: pull right and the index comes in from the
      left, push left and the poster comes in from the right. Pull up and the
      page turns. */
-  const raw = g.ax === AX.rail
+  const raw = g.ax === RAIL_AX
     ? g.base - (e.clientX - g.x0) / (W() * .42)
     : g.base - (e.clientY - g.y0) / (H() * .5);
   g.ax.set(bounded(g.ax, raw));
@@ -633,11 +654,11 @@ stage.addEventListener('wheel', e => {
   const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
   const dx = e.deltaX * k, dy = e.deltaY * k;
   if (!w){
-    stop();
-    const ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : pageAxis();
+    const ax = Math.abs(dx) > Math.abs(dy) ? RAIL_AX : pageAxis();
+    stop(ax);
     w = { ax, raw: ax.get(), from: Math.round(ax.get()) };
   }
-  w.raw += w.ax === AX.rail ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .5);
+  w.raw += w.ax === RAIL_AX ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .5);
   w.ax.set(bounded(w.ax, w.raw));
   render();
   clearTimeout(wT);
@@ -650,11 +671,12 @@ addEventListener('keydown', e => {
      presses during one flight would otherwise both resolve to the same stop */
   const go = (ax, d) => {
     e.preventDefault(); wake();
-    const from = anim && anim.ax === ax ? anim.target : Math.round(ax.get());
-    stop(); springTo(ax, from + d, 0);
+    const flight = flightOf(ax);
+    const from = flight ? flight.target : Math.round(ax.get());
+    stop(ax); springTo(ax, from + d, 0);
   };
-  if (e.key === 'ArrowRight') go(AX.rail, 1);
-  else if (e.key === 'ArrowLeft') go(AX.rail, -1);
+  if (e.key === 'ArrowRight') go(RAIL_AX, 1);
+  else if (e.key === 'ArrowLeft') go(RAIL_AX, -1);
   else if (e.key === 'ArrowUp' || e.key === ' ') go(pageAxis(), 1);
   else if (e.key === 'ArrowDown') go(pageAxis(), -1);
 });
