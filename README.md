@@ -1,60 +1,57 @@
 # Van de Sande Design
 
-Alex Van de Sande's personal site. It is a book of five stories navigated
-by dragging: horizontal moves through the pages of one story, vertical
-moves between stories, and the index lies under the whole site to the left.
+Alex Van de Sande's personal site. A rail of A4 sheets floating on a dark
+ground: the index off to the left, then a stack for each thing he has made.
+Sideways moves along the rail, upwards turns the page of whatever is in the
+middle, and the sheet bends while it goes.
 
-It opens on page 190 of Camila Russo's *The Infinite Machine*, where he
-appears in the text, with his own writing arriving as handwritten notes in
-the margin.
+The whole site is one self-contained page, `site/index.html`, plus the
+posters in `site/img`. It pulls in nothing but Google Fonts.
 
-The whole site is one self-contained page, `site/index.html`. It pulls in
-nothing but Google Fonts, so it can be opened straight from disk.
+## What is on the rail
 
-## The stories
+    the index · My ethereum story · Blockchain design work
+    Some experiments with maps · The whole universe in one image
 
-Five stories sit in a column, each a stack of pages:
+**My ethereum story** is three pages from books that mention him — page 190
+of Camila Russo's *The Infinite Machine*, page 79 of Laura Shin's *The
+Cryptopians*, and the cast of characters from Matt Leising's *Out of the
+Ether* — each with the passage about him run over in yellow marker.
 
-    Van de Sande · Bend · The triangle of everything
-    Hexagonal earth · Blog
+**Blockchain design work** holds the Ethereum Frontier and Blockchain App
+Platform release pages. **Some experiments with maps** is the Hexagonal
+Earth series: the Lifezones print, the "Impossible" Map, the Gosper
+topographic. **The whole universe in one image** is the Triangle of
+Everything poster.
 
-Only the first has real content: three pages from books that mention him,
-each with the passage about him run over in yellow marker. The rest are
-scaffolding, a title page and a picture or two, waiting for words and
-images. The Ethereum story is not a separate stack — the first one is it.
+Adding another is two lines: an entry in `PADS` and a `.art` class with its
+image. Everything on the rail is A4, so one step spaces all of it.
 
-**The opening.** The marker goes down on his name on page 190 as soon as
-the page settles. The line that explains it is not a beat you sit through:
-it arrives after seven quiet seconds, or the instant you touch the page,
-whichever comes first.
+## How it moves
 
-**Pages are windows onto real book pages**, so a leaf is a fixed height and
-the text is whatever the book says. When a passage runs long, `fitPages()`
-steps the type down about 3% at a time until it lands rather than letting it
-clip at the foot. On a phone the handwriting lies across the foot of the
-page, so the book text stops short and leaves it clear paper.
+**Nothing is a triggered animation.** Two numbers — where you are along the
+rail, and which page of the pad in the middle — are written directly by the
+drag and handed to a critically damped spring on release. Each axis keeps
+its own flight, so grabbing the page does not strand a slide still in the
+air. Over-dragging past either end rubber-bands, and a release commits only
+if you passed a quarter of the way or flicked hard enough to carry there.
 
-**Which way is which.** Horizontal moves through the pages of one story,
-vertical moves between stories, and the index lies under the whole site to
-the left. Concretely: drag left to turn a page, drag right to go back, and
-drag right again on a story's first page to peel the site off the index.
-Drag up for the next story, down for the previous.
+**The sheet bends** as ten flat planes hinged along their top edges, placed
+by the script in one 3D scene so WebKit does not flatten them. The strips
+nearest the free edge lead, so the paper curls on its way up instead of
+pivoting like a board, and the free edge stays under your finger. Going
+over the far side it fades rather than blinking off.
 
-`FWD_DX` at the top of the script decides the horizontal direction. Setting
-it to `1` reverses reading direction; the index then has to move to the
-right-hand side in the CSS as well, which the comment beside it spells out.
+**Paper is never flat.** The sheet in the middle carries a standing bow. It
+is not there when the page arrives: it lifts after a beat and then keeps a
+slow flap until you touch something. Slide sideways and the bow crosses
+over from the sheet leaving to the one arriving.
 
-**Nothing is a triggered animation.** Three numbers — which page, which
-story, how far the index is uncovered — are written directly by the drag and
-handed to a critically damped spring on release. Paper bends wherever the
-finger left it, over-dragging past either end rubber-bands, and a release
-commits only if you passed a third of the way or flicked hard enough to
-carry there. The sheet bends as ten hinged strips of flat plane, placed by
-the script in one 3D scene so WebKit does not flatten them.
+**There is dead scroll either side of a page at rest**, so a long scroll has
+somewhere to stop rather than tumbling into the next turn.
 
-A trackpad works on the same two axes. A plain mouse has only one, so the
-page corner at the bottom right and the arrow keys turn pages; arrows also
-move between stories, and Escape shuts the index.
+A trackpad works on the same two axes. A plain mouse has one, so the arrow
+keys move along the rail and turn pages.
 
 ## Run it locally
 
@@ -76,9 +73,13 @@ Every push to `main` publishes `site/` to GitHub Pages through
 design was drawn from, 809 MB of it, with several files past GitHub's
 100 MB limit. It stays on Alex's machine.
 
-`archive/scroll-version-index.html` is the previous design: the same page
-190, read by scrolling, with the text ahead of the reader blurred out. It
-was replaced by the drag navigation above.
+`archive/dragged-book.html` is the design this replaced: the same books as
+a single bound book of five stories, dragged horizontally through pages and
+vertically between stories, with an index panel underneath and signposts
+along the foot.
+
+`archive/scroll-version-index.html` is the one before that: page 190 read by
+scrolling, with the text ahead of the reader blurred out.
 
 `archive/ink-mask-prototype/` is a first approach that was dropped: it
 rectified a photograph of page 190 into luminance masks and painted the
