@@ -11,10 +11,12 @@
 <style>
 :root{
   --night:#15120c;          /* the dark the deck sits in */
-  --card:#f2cd49;           /* the page itself */
-  --cink:#1d1810;           /* ink on that page */
+  --card:#f7f1de;           /* the page itself: the same paper as the book */
+  --cink:#262420;           /* ink on that page */
+  --ghost:#8c8674;          /* running head and folio */
+  --pen:#2b4d86;            /* my handwriting */
   --violet:#6d5ae0;         /* what is underneath */
-  --edge:255,246,214;       /* the faint page edges, as rgb parts */
+  --edge:247,241,222;       /* the faint page edges, as rgb parts */
   color-scheme:dark;
   box-sizing:border-box;
 }
@@ -72,21 +74,24 @@ body{margin:0;background:var(--night);color:var(--cink);
 /* ---------- the page that has text on it ---------- */
 .run{display:flex;justify-content:space-between;gap:1rem;flex:none;
   font-size:.62rem;font-weight:500;letter-spacing:.26em;
-  color:rgba(29,24,16,.5);margin:0 0 clamp(1.2rem,3.4vh,2rem)}
+  color:var(--ghost);margin:0 0 clamp(1.2rem,3.4vh,2rem)}
 .body{flex:1;min-height:0}
 .body p{margin:0;font-size:clamp(1.02rem,.92rem + .5vw,1.3rem);line-height:1.46;
   text-indent:1.4em;text-align:justify;hyphens:auto}
 .body p:first-child{text-indent:0}
-.folio{flex:none;font-size:.85rem;font-weight:500;color:rgba(29,24,16,.55)}
+.folio{flex:none;font-size:.85rem;font-weight:500;color:var(--ghost)}
 
-/* my name, marked on a page that is already yellow: the marker has to go
-   darker than the paper instead of brighter */
-.hl{background-color:transparent;color:inherit;
-  background-image:linear-gradient(100deg,
-    rgba(150,104,10,0) .5%, rgba(150,104,10,.34) 2%,
-    rgba(150,104,10,.34) 97%, rgba(150,104,10,0) 99.5%);
-  background-repeat:no-repeat;
-  padding:.04em .16em;margin:0 -.1em;
+/* the same yellow marker as the book: two passes of a wide nib, running dry
+   at both ends, with a darker band where it doubles back */
+.hl{color:inherit;background-color:transparent;
+  background-image:
+    linear-gradient(101deg,
+      rgba(246,206,49,0) .3%, rgba(246,206,49,.78) 1.8%,
+      rgba(246,206,49,.78) 97.4%, rgba(246,206,49,0) 99.5%),
+    linear-gradient(179.4deg,
+      rgba(243,196,26,0) 16%, rgba(243,196,26,.38) 16%,
+      rgba(243,196,26,.38) 86%, rgba(243,196,26,0) 86%);
+  padding:.06em .16em;margin:0 -.12em;
   box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
 /* ---------- a page that is only a title ---------- */
@@ -94,7 +99,7 @@ body{margin:0;background:var(--night);color:var(--cink);
 .card.title h2{margin:0;font-weight:400;line-height:1.02;letter-spacing:-.015em;
   font-size:clamp(2.1rem,1.7rem + 2.4vw,3.2rem)}
 .card.title p{margin:.9rem 0 0;font-family:"Caveat",cursive;font-weight:600;
-  line-height:1.15;color:rgba(29,24,16,.72);
+  line-height:1.15;color:var(--pen);transform:rotate(-1.4deg);transform-origin:left;
   font-size:clamp(1.2rem,1rem + .8vw,1.6rem)}
 
 /* a phone has no room for the running head at full tracking */
