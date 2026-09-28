@@ -15,7 +15,6 @@
   --ink:#262420;
   --ghost:#8c8674;
   --pen:#2b4d86;
-  --fold:#d9cfae;          /* the lifted corner */
   --poster:#e3ef6a;
   --bar:#4a4a47;
   color-scheme:dark;
@@ -62,10 +61,6 @@ body{margin:0;background:var(--dark);color:var(--ink);
   padding:clamp(1.6rem,4.4vh,2.8rem) clamp(1.5rem,3.8vw,2.4rem);
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8), 0 4px 12px -6px rgba(0,0,0,.5)}
 
-/* the corner already lifted off the pile, so the sheet says it can be turned */
-.peel{position:absolute;inset:0;pointer-events:none;z-index:3;
-  transition:opacity .25s ease}
-.peel svg{width:100%;height:100%;display:block}
 
 /* ---------- what is printed ---------- */
 .run{display:flex;justify-content:space-between;gap:1rem;flex:none;
@@ -102,6 +97,8 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .pl .sh.t{background:linear-gradient(180deg,rgb(40,34,18),rgba(40,34,18,0))}
 .pl .sh.b{background:linear-gradient(180deg,rgba(40,34,18,0),rgb(40,34,18))}
 .pl .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleY(-1);opacity:.09}
+.plate{position:absolute;inset:0;z-index:38;pointer-events:none;border-radius:var(--r);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.8), 0 4px 12px -6px rgba(0,0,0,.5)}
 .cast{position:absolute;left:0;right:0;top:0;z-index:39;pointer-events:none;opacity:0;
   transform-origin:50% 0;will-change:transform,opacity;height:100%;
   background:linear-gradient(180deg,rgb(40,34,18) 0%,rgba(40,34,18,.5) 55%,rgba(40,34,18,0) 100%)}
@@ -165,9 +162,6 @@ const stage = $('#stage'), rail = $('#rail'), story = $('#story');
 $('#index').innerHTML = '<b></b><b></b><b></b><b></b>';
 
 /* the corner already lifted, traced once so it sits under the real curl */
-const PEEL = `<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-  <polygon points="9,99.4 88,84.7 100,91" fill="var(--fold)"/></svg>`;
-
 const sheets = PAGES.map((p, i) => {
   const sh = el('div', 'sheet');
   sh.innerHTML =
@@ -175,7 +169,7 @@ const sheets = PAGES.map((p, i) => {
        <header class="run"><span>${p.run[0]}</span><span>${p.run[1]}</span></header>
        <div class="body">${p.body}</div>
        <footer class="folio">${p.folio}</footer>
-     </div>` + (i < PAGES.length - 1 ? `<div class="peel">${PEEL}</div>` : '');
+     </div>`;
   sh.style.zIndex = 20 - i;
   story.append(sh);
   return sh;
@@ -200,12 +194,23 @@ function fitSheets(){
    its way up instead of pivoting like a board.
    =================================================================== */
 const STRIPS = 10, CURL = .55, DEPTH = 2600;
+/* Paper is never flat. The sheet in hand carries a standing bow, strongest at
+   the free edge, so it reads as something you could pick up without anything
+   being drawn on it to say so.
+
+   It also has to be a real bow rather than a flat sheet sitting still. The
+   turn profile clamps every strip above the fold to exactly 0, and a stack of
+   coplanar overlapping planes is a z-fight: the compositor picks a winner per
+   row and the seams show as ruled lines across the paper. Under the bow no two
+   strips ever share a plane. */
+const BOW = 20;
 
 /* how far through the turn each strip is. The free edge is the bottom, so
    the bottom strip leads and the one at the hinge is last to follow. */
 const profile = e => [...Array(STRIPS)].map((_, k) => {
   const f = k / (STRIPS - 1);
-  return 180 * clamp01(e * (1 + CURL) - CURL * (1 - f));
+  const turn = 180 * clamp01(e * (1 + CURL) - CURL * (1 - f));
+  return Math.max(turn, BOW * Math.pow(f, 1.5));   /* the turn overtakes the bow */
 });
 
 /* The free edge stays under the finger. p is how far the bottom edge has
@@ -228,7 +233,10 @@ function buildCurl(sheet){
   const host = el('div', 'curl');
   const plane = (cls, ...kids) => {
     const p = el('div', 'pl ' + cls);
-    p.style.height = (hs + .6) + 'px';
+    /* a wider overlap than the turn strictly needs: at the resting bend the
+       page is almost flat and subpixel seams between strips read as ruled
+       lines across the paper */
+    p.style.height = (hs + 1.6) + 'px';
     p.append(...kids); host.append(p); return p;
   };
   const parts = [];
@@ -242,25 +250,26 @@ function buildCurl(sheet){
           a2 = el('div', 'sh t'), b2 = el('div', 'sh b');
     parts.push({ face: plane('face', copy, a1, b1), back: plane('back', ghost, a2, b2), a1, b1, a2, b2 });
   }
-  const cast = el('div', 'cast');
+  const cast = el('div', 'cast'), plate = el('div', 'plate');
   /* beside the sheet, not inside it: the sheet is hidden while its strips
      stand in for it, and a child would inherit that and never paint */
-  sheet.parentNode.append(cast, host);
-  sheet._curl = { host, cast, parts, H, hs, eye: H / 2 };
+  sheet.parentNode.append(plate, cast, host);
+  sheet._curl = { host, cast, plate, parts, H, hs, eye: H / 2 };
   sheet.classList.add('lifted');
 }
 function dropCurl(sheet){
   if (!sheet._curl) return;
-  sheet._curl.host.remove(); sheet._curl.cast.remove();
+  sheet._curl.host.remove(); sheet._curl.cast.remove(); sheet._curl.plate.remove();
   sheet._curl = null; sheet.classList.remove('lifted');
 }
 
 function drawCurl(sheet, e){
-  const { parts, cast, H, hs, eye } = sheet._curl;
+  const { parts, cast, plate, H, hs, eye } = sheet._curl;
   const ang = profile(e);
   const dk = ang.map(a => Math.abs(Math.sin(a * RAD)));
   const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
-  const half = (hs + .6) / 2;
+  const half = (hs + 1.6) / 2;
+  const shade = clamp01(e / .26);
   let y = 0, z = 0;
   parts.forEach((pt, k) => {
     const a = ang[k], c = Math.cos(a * RAD), sn = Math.sin(a * RAD);
@@ -279,12 +288,17 @@ function drawCurl(sheet, e){
     pt.face.style.transform = at;
     pt.back.style.transform =
       `${at} translateY(${half.toFixed(2)}px) rotateX(180deg) translateY(${(-half).toFixed(2)}px)`;
-    const T = edge(k), B = edge(k + 1);
+    /* barely shade a sheet that is only resting: at a gentle bow the shading
+       is what makes the strips legible as strips */
+    const T = edge(k) * shade, B = edge(k + 1) * shade;
     pt.a1.style.opacity = (T * .2).toFixed(3); pt.b1.style.opacity = (B * .2).toFixed(3);
     pt.a2.style.opacity = (B * .17).toFixed(3); pt.b2.style.opacity = (T * .17).toFixed(3);
     y += hs * c; z += hs * sn;
   });
   const reach = Math.max(0, y) / H;              /* where the free edge sits now */
+  /* the page keeps its own shadow while it is still lying there; once it is
+     properly up, the shadow it throws on the page below takes over */
+  plate.style.opacity = (1 - clamp01(e / .2)).toFixed(3);
   cast.style.opacity = (Math.sin(Math.PI * e) * .3).toFixed(3);
   cast.style.transform = `scaleY(${Math.min(1, reach + .16).toFixed(4)})`;
 }
@@ -320,25 +334,24 @@ function render(){
   $('#index').style.transform = `translate3d(${S.left}px,0,0)`;
   $('#poster').style.transform = `translate3d(${S.right}px,0,0)`;
 
+  /* which sheet is in hand, by index rather than by the sign of a number that
+     rubber-bands past zero — otherwise an over-pull downwards drops the curl
+     and the page snaps flat for a frame */
+  const front = clamp(Math.floor(pv + 1e-9), 0, sheets.length - 1);
   sheets.forEach((sh, j) => {
-    const t = pv - j;
-    if (t >= 1){ dropCurl(sh); sh.classList.add('gone'); return; }
+    if (j < front){ dropCurl(sh); sh.classList.add('gone'); return; }
     sh.classList.remove('gone');
-    if (t <= 0){
-      dropCurl(sh);
-      const peel = sh.querySelector('.peel');
-      if (peel) peel.style.opacity = j === Math.round(pv) ? 1 : 0;
-      return;
-    }
-    const peel = sh.querySelector('.peel');
-    if (peel) peel.style.opacity = 0;
+    if (j > front){ dropCurl(sh); return; }       /* still flat underneath */
+    const t = clamp01(pv - j);
     if (!sh._curl) buildCurl(sh);
     drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t));
   });
 }
 
 /* ---------- the spring that catches what you let go of ---------- */
-const STIFF = 210, DAMP = 29.5;
+/* Critically damped and quick: 2*sqrt(420) is 41, so it settles without wobble
+   but does not labour. A sheet this size has almost no mass. */
+const STIFF = 420, DAMP = 41;
 const AX = {
   rail: { get: () => hx, set: v => { hx = v; }, lo: () => -1, hi: () => 1, give: .16 },
   page: { get: () => pv, set: v => { pv = v; }, lo: () => 0, hi: () => LASTP, give: .14 }
@@ -363,9 +376,18 @@ function tick(now){
 }
 function stop(){ anim = null; if (raf){ cancelAnimationFrame(raf); raf = 0; } }
 
-const COMMIT = .32, CARRY = .2;
-function settle(ax, v){
-  const from = Math.round(ax.get()), proj = ax.get() + v * CARRY;
+/* A quarter of the way over, or a flick that would carry it there. Demanding
+   much more is what makes a page feel heavy: you do the work and it sulks back
+   down. */
+const COMMIT = .24, CARRY = .3;
+/* `from` is where the gesture began, and it has to be carried in. Rounding the
+   live value instead means that once you are past halfway it rounds to the
+   page you are heading for, the test then asks whether you have moved far
+   enough away from THAT, and anything between half and three quarters of a
+   turn gets sent back where it started. That is the whole feeling of the page
+   being heavy: you do the work and it drops. */
+function settle(ax, v, from){
+  const proj = ax.get() + v * CARRY;
   const t = proj > from + COMMIT ? from + 1 : proj < from - COMMIT ? from - 1 : from;
   springTo(ax, t, v);
 }
@@ -395,6 +417,7 @@ stage.addEventListener('pointermove', e => {
     if (Math.abs(dx) < 7 && Math.abs(dy) < 7) return;
     g.ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : AX.page;
     g.base = g.ax.get();
+    g.from = Math.round(g.base);
     try { stage.setPointerCapture(e.pointerId); g.held = true; } catch (_) {}
     g.x0 = e.clientX; g.y0 = e.clientY;
     return;
@@ -403,8 +426,8 @@ stage.addEventListener('pointermove', e => {
      left, push left and the poster comes in from the right. Pull up and the
      page turns. */
   const raw = g.ax === AX.rail
-    ? g.base - (e.clientX - g.x0) / (W() * .5)
-    : g.base - (e.clientY - g.y0) / (H() * .55);
+    ? g.base - (e.clientX - g.x0) / (W() * .42)
+    : g.base - (e.clientY - g.y0) / (H() * .34);
   g.ax.set(bounded(g.ax, raw));
   g.s.push([e.timeStamp, g.ax.get()]);
   while (g.s.length > 2 && e.timeStamp - g.s[0][0] > 90) g.s.shift();
@@ -413,8 +436,8 @@ stage.addEventListener('pointermove', e => {
 function release(e){
   if (!g || (e && e.pointerId !== g.id)) return;
   if (g.held) try { stage.releasePointerCapture(g.id); } catch (_) {}
-  const ax = g.ax, s = g.s; g = null;
-  if (ax && s.length) settle(ax, speed(s));
+  const ax = g.ax, s = g.s, from = g.from; g = null;
+  if (ax && s.length) settle(ax, speed(s), from);
 }
 stage.addEventListener('pointerup', release);
 stage.addEventListener('pointercancel', release);
@@ -428,12 +451,16 @@ stage.addEventListener('wheel', e => {
   e.preventDefault();
   const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
   const dx = e.deltaX * k, dy = e.deltaY * k;
-  if (!w){ stop(); const ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : AX.page; w = { ax, raw: ax.get() }; }
-  w.raw += w.ax === AX.rail ? dx * 2.2 / (W() * .5) : dy * 2.2 / (H() * .55);
+  if (!w){
+    stop();
+    const ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : AX.page;
+    w = { ax, raw: ax.get(), from: Math.round(ax.get()) };
+  }
+  w.raw += w.ax === AX.rail ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .34);
   w.ax.set(bounded(w.ax, w.raw));
   render();
   clearTimeout(wT);
-  wT = setTimeout(() => { const q = w; w = null; settle(q.ax, 0); }, 90);
+  wT = setTimeout(() => { const q = w; w = null; settle(q.ax, 0, q.from); }, 90);
 }, { passive: false });
 
 addEventListener('keydown', e => {
