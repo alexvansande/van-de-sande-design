@@ -204,13 +204,18 @@ const STRIPS = 10, CURL = .55, DEPTH = 2600;
    row and the seams show as ruled lines across the paper. Under the bow no two
    strips ever share a plane. */
 const BOW = 20;
+/* The bow is not there when the page arrives. It lifts after a beat, slowly,
+   and then keeps breathing until you touch something — a sheet settling rather
+   than a diagram of one. */
+const BOW_WAIT = 1000, BOW_RISE = 1600, FLAP = 3200, FLAP_DEPTH = .3;
+let bowMul = 0;
 
 /* how far through the turn each strip is. The free edge is the bottom, so
    the bottom strip leads and the one at the hinge is last to follow. */
-const profile = e => [...Array(STRIPS)].map((_, k) => {
+const profile = (e, bm = 1) => [...Array(STRIPS)].map((_, k) => {
   const f = k / (STRIPS - 1);
   const turn = 180 * clamp01(e * (1 + CURL) - CURL * (1 - f));
-  return Math.max(turn, BOW * Math.pow(f, 1.5));   /* the turn overtakes the bow */
+  return Math.max(turn, BOW * bm * Math.pow(f, 1.5));   /* the turn overtakes the bow */
 });
 
 /* The free edge stays under the finger. p is how far the bottom edge has
@@ -218,8 +223,10 @@ const profile = e => [...Array(STRIPS)].map((_, k) => {
    from the hinge. Tabulate where the edge lands for each bend, then read the
    table backwards. Near the hinge there is nothing left to pull against, so
    the last fifth lets it fall over. */
+/* tabulated against the full bow, so the mapping stays honest once the page
+   has settled; while it is still breathing nothing is being dragged anyway */
 const EDGE = [...Array(241)].map((_, i) =>
-  profile(i / 240).reduce((a, ang) => a + Math.cos(ang * RAD), 0) / STRIPS);
+  profile(i / 240, 1).reduce((a, ang) => a + Math.cos(ang * RAD), 0) / STRIPS);
 function bend(p){
   const want = 1 - p;
   let i = 0; while (i < 240 && EDGE[i + 1] > want) i++;
@@ -263,9 +270,9 @@ function dropCurl(sheet){
   sheet._curl = null; sheet.classList.remove('lifted');
 }
 
-function drawCurl(sheet, e){
+function drawCurl(sheet, e, fade){
   const { parts, cast, plate, H, hs, eye } = sheet._curl;
-  const ang = profile(e);
+  const ang = profile(e, bowMul);
   const dk = ang.map(a => Math.abs(Math.sin(a * RAD)));
   const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
   const half = (hs + 1.6) / 2;
@@ -281,9 +288,12 @@ function drawCurl(sheet, e){
       pt.front = front;
       /* opacity, not visibility: a hidden plane is never painted, so the back
          of the sheet would be painted for the first time mid-turn */
-      pt.face.style.opacity = front ? '' : '0';
-      pt.back.style.opacity = front ? '0' : '';
+      pt.face.style.opacity = front ? fade : '0';
+      pt.back.style.opacity = front ? '0' : fade;
+    } else if (pt.fade !== fade){
+      (pt.front ? pt.face : pt.back).style.opacity = fade;
     }
+    pt.fade = fade;
     const at = `translate3d(0, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateX(${a.toFixed(2)}deg)`;
     pt.face.style.transform = at;
     pt.back.style.transform =
@@ -308,6 +318,11 @@ function drawCurl(sheet, e){
    pv is the page, continuous, and it also decides how far the story has
    zoomed toward you.
    =================================================================== */
+/* Dead axis either side of a page at rest, so a long scroll has somewhere to
+   stop: the turn only happens across the middle of each unit. */
+const DWELL = .34;
+const turnOf = tr => clamp01((tr - DWELL / 2) / (1 - DWELL));
+
 const LASTP = PAGES.length - 1;
 let hx = 0, pv = 0;
 
@@ -317,14 +332,18 @@ const ZOOM = .22;
 /* Measured, never read back out of a custom property: --pw is a calc() of a
    min(), and getComputedStyle hands those back as the unresolved token, so
    parseFloat gives NaN and every transform built from it is silently dropped. */
-function stations(){
+/* Measured once and kept: the breathing loop renders every frame, and reading
+   offsetWidth in there would force a reflow on each of them. */
+let ST = null;
+function measure(){
   const pw = story.offsetWidth;
-  /* measured off the free space beside the page, not off the viewport, so the
-     neighbours always show an edge — on a phone there is barely any room and a
-     proportional gap puts them exactly off screen */
+  /* off the free space beside the page, not off the viewport: on a phone there
+     is barely any room and a proportional gap puts the neighbours exactly off
+     screen */
   const gap = clamp((W() - pw) / 2 * .6, 18, 210);
-  return { left: -(pw + gap), right: pw + gap };
+  ST = { left: -(pw + gap), right: pw + gap };
 }
+function stations(){ if (!ST) measure(); return ST; }
 function render(){
   const S = stations();
   const railX = hx <= 0 ? -hx * -S.left : -hx * S.right;
@@ -342,9 +361,13 @@ function render(){
     if (j < front){ dropCurl(sh); sh.classList.add('gone'); return; }
     sh.classList.remove('gone');
     if (j > front){ dropCurl(sh); return; }       /* still flat underneath */
-    const t = clamp01(pv - j);
+    const t = turnOf(clamp01(pv - j));
     if (!sh._curl) buildCurl(sh);
-    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t));
+    /* The fade goes with the scroll, not with the bend. bend() deliberately
+       rushes the last fifth so the sheet flops over, and a fade keyed to it
+       happened entirely inside that rush — which is the blink. */
+    const fade = (1 - clamp01((t - .6) / .35)).toFixed(3);
+    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade);
   });
 }
 
@@ -379,7 +402,7 @@ function stop(){ anim = null; if (raf){ cancelAnimationFrame(raf); raf = 0; } }
 /* A quarter of the way over, or a flick that would carry it there. Demanding
    much more is what makes a page feel heavy: you do the work and it sulks back
    down. */
-const COMMIT = .24, CARRY = .3;
+const COMMIT = .3, CARRY = .3;
 /* `from` is where the gesture began, and it has to be carried in. Rounding the
    live value instead means that once you are past halfway it rounds to the
    page you are heading for, the test then asks whether you have moved far
@@ -399,6 +422,40 @@ function bounded(ax, x){
   return x;
 }
 
+/* ---------- the sheet settling, before anyone touches it ----------
+   Flat on arrival, then the bow lifts after a beat and keeps a slow flap.
+   The first thing you do stops it, easing the bow out to its resting value
+   rather than snapping. */
+let woken = false, bowT0 = 0, bowRaf = 0, bowLast = 0;
+function bowCurve(age){
+  if (age <= BOW_WAIT) return 0;
+  const a = age - BOW_WAIT;
+  const r = clamp01(a / BOW_RISE), s = r * r * (3 - 2 * r);
+  return s * (1 + Math.sin(a / FLAP * Math.PI * 2) * FLAP_DEPTH * s);
+}
+function bowTick(now){
+  const dt = clamp((now - bowLast) / 1000, .001, .05); bowLast = now;
+  if (woken){
+    bowMul += (1 - bowMul) * (1 - Math.exp(-dt * 7));
+    if (Math.abs(1 - bowMul) < .002){ bowMul = 1; bowRaf = 0; render(); return; }
+  } else {
+    bowMul = bowCurve(now - bowT0);
+  }
+  render();
+  bowRaf = requestAnimationFrame(bowTick);
+}
+function startBreathing(){
+  if (reduce){ bowMul = 1; render(); return; }
+  bowT0 = bowLast = performance.now();
+  if (!bowRaf) bowRaf = requestAnimationFrame(bowTick);
+}
+function wake(){
+  if (woken) return;
+  woken = true;
+  bowLast = performance.now();
+  if (!bowRaf) bowRaf = requestAnimationFrame(bowTick);
+}
+
 /* ---------- hand ---------- */
 function speed(s){
   if (s.length < 2) return 0;
@@ -407,7 +464,7 @@ function speed(s){
 }
 let g = null;
 stage.addEventListener('pointerdown', e => {
-  stop();
+  wake(); stop();
   g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ax: null, base: 0, s: [] };
 });
 stage.addEventListener('pointermove', e => {
@@ -427,7 +484,7 @@ stage.addEventListener('pointermove', e => {
      page turns. */
   const raw = g.ax === AX.rail
     ? g.base - (e.clientX - g.x0) / (W() * .42)
-    : g.base - (e.clientY - g.y0) / (H() * .34);
+    : g.base - (e.clientY - g.y0) / (H() * .5);
   g.ax.set(bounded(g.ax, raw));
   g.s.push([e.timeStamp, g.ax.get()]);
   while (g.s.length > 2 && e.timeStamp - g.s[0][0] > 90) g.s.shift();
@@ -448,7 +505,7 @@ stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
 let wT = 0, w = null;
 stage.addEventListener('wheel', e => {
   if (e.ctrlKey) return;
-  e.preventDefault();
+  e.preventDefault(); wake();
   const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
   const dx = e.deltaX * k, dy = e.deltaY * k;
   if (!w){
@@ -456,7 +513,7 @@ stage.addEventListener('wheel', e => {
     const ax = Math.abs(dx) > Math.abs(dy) ? AX.rail : AX.page;
     w = { ax, raw: ax.get(), from: Math.round(ax.get()) };
   }
-  w.raw += w.ax === AX.rail ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .34);
+  w.raw += w.ax === AX.rail ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .5);
   w.ax.set(bounded(w.ax, w.raw));
   render();
   clearTimeout(wT);
@@ -468,7 +525,7 @@ addEventListener('keydown', e => {
   /* step from where we are heading, not from where we happen to be: two quick
      presses during one flight would otherwise both resolve to the same stop */
   const go = (ax, d) => {
-    e.preventDefault();
+    e.preventDefault(); wake();
     const from = anim && anim.ax === ax ? anim.target : Math.round(ax.get());
     stop(); springTo(ax, from + d, 0);
   };
@@ -481,11 +538,11 @@ addEventListener('keydown', e => {
 let resizeT = 0;
 addEventListener('resize', () => {
   clearTimeout(resizeT);
-  resizeT = setTimeout(() => { sheets.forEach(dropCurl); fitSheets(); render(); }, 140);
+  resizeT = setTimeout(() => { sheets.forEach(dropCurl); measure(); fitSheets(); render(); }, 140);
 });
 
-document.fonts.ready.then(() => { fitSheets(); render(); });
-fitSheets(); render();
+document.fonts.ready.then(() => { measure(); fitSheets(); render(); startBreathing(); });
+measure(); fitSheets(); render();
 })();
 </script>
 </body>
