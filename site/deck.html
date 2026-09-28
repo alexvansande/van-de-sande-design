@@ -71,8 +71,8 @@ body{margin:0;background:var(--night);color:var(--ink);
 .run{display:flex;justify-content:space-between;gap:1rem;flex:none;
   font-size:.6rem;font-weight:500;letter-spacing:.24em;color:var(--ghost);
   margin:0 0 clamp(1rem,3vh,1.7rem)}
-.body{flex:1;min-height:0}
-.body p{margin:0;font-size:clamp(.82rem,.72rem + .42vw,1.06rem);line-height:1.44;
+.body{flex:1;min-height:0;overflow:hidden}
+.body p{margin:0;font-size:calc(clamp(.82rem,.72rem + .42vw,1.06rem) * var(--fit,1));line-height:1.44;
   text-indent:1.4em;text-align:justify;hyphens:auto}
 .body p:first-child{text-indent:0}
 .folio{flex:none;font-size:.8rem;font-weight:500;color:var(--ghost);padding-top:.8rem}
@@ -80,8 +80,8 @@ body{margin:0;background:var(--night);color:var(--ink);
 .cryp .body p{font-family:"Crimson Pro",Georgia,serif;text-indent:1.3em}
 .ether .body{font-family:"Cardo",Georgia,serif}
 .ether .body p{text-align:left;text-indent:-1.3em;padding-left:1.3em;margin:0 0 .3em;
-  hyphens:none;font-size:clamp(.76rem,.68rem + .34vw,.95rem)}
-.ether .body h4{font-weight:700;font-size:.86rem;margin:1em 0 .5em}
+  hyphens:none;font-size:calc(clamp(.76rem,.68rem + .34vw,.95rem) * var(--fit,1))}
+.ether .body h4{font-weight:700;font-size:calc(.86rem * var(--fit,1));margin:1em 0 .5em}
 
 /* the marker, the same two passes as the book */
 .hl{color:inherit;background-color:transparent;
@@ -223,6 +223,24 @@ const cssPx = (name, v) => { stage.style.setProperty(name, v + 'px'); return v; 
    every transform built from it is silently dropped */
 const GAP  = () => cssPx('--gap',  Math.round(clamp(W() * .034, 15, 36)));
 const DROP = () => cssPx('--drop', Math.round(clamp(H() * .014, 7, 16)));
+
+/* A sheet is a fixed size and the text is whatever the book says. When a page
+   runs long, step the type down until it lands — otherwise .face clips it and
+   the clipped line shows in the strip of the sheet below, which is the one bit
+   of paper that is meant to read as blank. */
+function fitSheets(){
+  STORIES.forEach(st => st.sheets.forEach(sh => {
+    const body = sh.querySelector('.body');
+    if (!body) return;
+    const face = sh.querySelector('.face');
+    let f = 1;
+    face.style.setProperty('--fit', f);
+    while (f > .62 && body.scrollHeight > body.clientHeight){
+      f -= .03;
+      face.style.setProperty('--fit', f.toFixed(3));
+    }
+  }));
+}
 
 function render(){
   const gap = GAP(), drop = DROP();
@@ -386,10 +404,13 @@ addEventListener('keydown', e => {
 });
 
 let resizeT = 0;
-addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(render, 120); });
+addEventListener('resize', () => {
+  clearTimeout(resizeT);
+  resizeT = setTimeout(() => { fitSheets(); render(); }, 120);
+});
 
-document.fonts.ready.then(render);
-render();
+document.fonts.ready.then(() => { fitSheets(); render(); });
+fitSheets(); render();
 })();
 </script>
 </body>
