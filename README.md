@@ -1,9 +1,12 @@
 # Van de Sande Design
 
-Alex Van de Sande's personal site. It opens on page 190 of Camila Russo's
-*The Infinite Machine*, where he appears in the text, and his own writing
-arrives as handwritten notes in the margin. You navigate it by dragging the
-book, not by scrolling.
+Alex Van de Sande's personal site. It is a book of five stories navigated
+by dragging: horizontal moves through the pages of one story, vertical
+moves between stories, and the index lies under the whole site to the left.
+
+It opens on page 190 of Camila Russo's *The Infinite Machine*, where he
+appears in the text, with his own writing arriving as handwritten notes in
+the margin.
 
 The whole site is one self-contained page, `site/index.html`. It pulls in
 nothing but Google Fonts, so it can be opened straight from disk.
