@@ -291,7 +291,7 @@ function fitSheets(){
    above, and the strips nearest the free edge lead, so the paper bends on
    its way up instead of pivoting like a board.
    =================================================================== */
-const STRIPS = 10, CURL = .55, DEPTH = 2600;
+const STRIPS = 14, CURL = .55, DEPTH = 2600;
 /* Paper is never flat. The sheet in hand carries a standing bow, strongest at
    the free edge, so it reads as something you could pick up without anything
    being drawn on it to say so.
@@ -329,7 +329,7 @@ function bend(p){
   const want = 1 - p;
   let i = 0; while (i < 240 && EDGE[i + 1] > want) i++;
   const e = i >= 240 ? 1 : (i + clamp01((EDGE[i] - want) / (EDGE[i] - EDGE[i + 1] || 1))) / 240;
-  const fall = clamp01((p - .8) / .2), s = fall * fall * (3 - 2 * fall);
+  const fall = clamp01((p - .72) / .28), s = fall * fall * (3 - 2 * fall);
   return e + (1 - e) * s;
 }
 
@@ -461,11 +461,12 @@ function measure(){
   STEP = pw + gap;             /* every station is A4, so one step fits all */
 }
 function step(){ if (!STEP) measure(); return STEP; }
-/* How much of the bow a pad carries: all of it in the middle, none of it a
-   little over half a step away, smoothly in between. Switching on whichever
-   pad was nearest made the corner snap flat the instant you crossed the
-   midpoint, and snap up on the one arriving. */
-const nearness = d => { const t = clamp01(1 - d / .55); return t * t * (3 - 2 * t); };
+/* How much of the bow a pad carries. It holds full until the sheet is well off
+   centre and only then lets go, rather than easing down from the first pixel:
+   fading it symmetrically took both sheets through flat around the midpoint,
+   which reads as every corner dropping and coming back. Between stations both
+   are near full, which is what paper would do. */
+const nearness = d => { const t = clamp01((.72 - d) / .27); return t * t * (3 - 2 * t); };
 /* Below this the bow is too shallow to hold the strips apart in depth, and ten
    nearly coplanar overlapping planes are a z-fight: the compositor picks a
    winner per row and the seams show as lines ruled across the paper. Fading
@@ -529,9 +530,10 @@ function render(){
 }
 
 /* ---------- the spring that catches what you let go of ---------- */
-/* Critically damped and quick: 2*sqrt(420) is 41, so it settles without wobble
-   but does not labour. A sheet this size has almost no mass. */
-const STIFF = 420, DAMP = 41;
+/* Critically damped, so it never wobbles: 2*sqrt(170) is 26. Slower than it
+   was — paper this size has little mass but it is not weightless, and the turn
+   is the thing you are meant to watch. */
+const STIFF = 170, DAMP = 26;
 const RAIL_AX = { get: () => hx, set: v => { hx = v; }, lo: () => FIRST, hi: () => LAST, give: .16 };
 /* Each pad owns its page axis. One shared axis with a `pad` pointer meant a
    turn still in the air kept writing to whichever pad you had since slid to. */
