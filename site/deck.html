@@ -30,7 +30,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
   --pw:calc(var(--ph) * 0.753);
   --r:clamp(14px, 2vw, 30px);          /* the corner radius on everything */
   touch-action:none;user-select:none;-webkit-user-select:none;
-  -webkit-tap-highlight-color:transparent}
+  -webkit-tap-highlight-color:transparent;
+  /* the type is fitted against the real fonts, so nothing is shown until they
+     are in — otherwise it is set once to fallback metrics and visibly resizes */
+  opacity:0;transition:opacity .35s ease}
+.stage.up{opacity:1}
 
 /* ---------- the rail: index | story | poster ---------- */
 .rail{position:absolute;inset:0;will-change:transform}
@@ -38,13 +42,23 @@ body{margin:0;background:var(--dark);color:var(--ink);
   width:var(--pw);height:var(--ph);
   margin-top:calc(var(--ph) / -2);margin-left:calc(var(--pw) / -2)}
 
-/* the index, mostly off to the left: one bar per story */
-.index{display:flex;flex-direction:column;justify-content:center;
-  gap:clamp(10px,1.6vh,22px);height:var(--ph)}
-.index b{display:block;height:clamp(28px,4.4vh,46px);width:150%;margin-left:-50%;
-  background:var(--bar);border-radius:6px}
+/* the index, mostly off to the left: a sentence you only catch the end of */
+/* only its last few words are ever on screen, and quietly: it is there to say
+   there is something over here, not to compete with the page */
+.index{display:flex;align-items:center;height:var(--ph)}
+/* ranged right so the lines end flush against the screen edge: left-aligned,
+   the couple of visible centimetres were mostly the ragged ends of nothing */
+.index p{margin:0;color:#e6e2d2;opacity:.26;text-align:right;
+  font-size:clamp(1.3rem,1rem + 1.7vw,2.4rem);line-height:1.34}
 
 /* the next thing along, mostly off to the right */
+/* above the page's own shadow, which reaches seventy pixels past its foot and
+   was washing the title out */
+.cap{position:absolute;top:100%;left:0;right:0;text-align:center;z-index:60;
+  /* clear of the paper, which bows toward you and so reaches lower than the
+     flat box it is measured in */
+  margin-top:clamp(1.9rem,5.2vh,3.4rem);color:#e0dccc;opacity:.85;
+  font-size:clamp(.88rem,.78rem + .4vw,1.12rem);letter-spacing:.015em}
 .poster{background:var(--poster);border-radius:var(--r);z-index:1;
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
 
@@ -70,7 +84,10 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .body p{margin:0;font-size:calc(clamp(.84rem,.74rem + .44vw,1.1rem) * var(--fit,1));
   line-height:1.45;text-indent:1.4em;text-align:justify;hyphens:auto}
 .body p:first-child{text-indent:0}
-.folio{flex:none;font-size:.8rem;font-weight:500;color:var(--ghost);padding-top:.8rem}
+.folio{flex:none;margin-top:auto;font-size:.8rem;font-weight:500;color:var(--ghost);padding-top:.8rem}
+/* the opening page carries little text and a lot of paper, so it can afford
+   to be set larger — it matters most on a phone */
+.lead .body p{font-size:calc(clamp(1rem,.88rem + .62vw,1.3rem) * var(--fit,1));line-height:1.5}
 .cryp .body p{font-family:"Crimson Pro",Georgia,serif;text-indent:1.3em}
 .ether .body{font-family:"Cardo",Georgia,serif}
 .ether .body p{text-align:left;text-indent:-1.3em;padding-left:1.3em;margin:0 0 .3em;hyphens:none;
@@ -97,7 +114,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .pl .sh.t{background:linear-gradient(180deg,rgb(40,34,18),rgba(40,34,18,0))}
 .pl .sh.b{background:linear-gradient(180deg,rgba(40,34,18,0),rgb(40,34,18))}
 .pl .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleY(-1);opacity:.09}
+/* paper, not just a shadow: the strips are separate composited layers and the
+   hairline where two of them meet used to let the dark ground through, which
+   is what ruled the page into bands */
 .plate{position:absolute;inset:0;z-index:38;pointer-events:none;border-radius:var(--r);
+  background:var(--paper);
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8), 0 4px 12px -6px rgba(0,0,0,.5)}
 .cast{position:absolute;left:0;right:0;top:0;z-index:39;pointer-events:none;opacity:0;
   transform-origin:50% 0;will-change:transform,opacity;height:100%;
@@ -111,9 +132,15 @@ body{margin:0;background:var(--dark);color:var(--ink);
 <body>
 <main class="stage" id="stage" tabindex="-1" aria-label="Rail">
   <div class="rail" id="rail">
-    <nav class="station index" id="index" aria-hidden="true"></nav>
-    <section class="station story" id="story"></section>
-    <aside class="station poster" id="poster" aria-hidden="true"></aside>
+    <nav class="station index" id="index">
+      <p>I&rsquo;m Alex Van de Sande and I&rsquo;m a Designer. I would love to tell you some stories.</p>
+    </nav>
+    <section class="station story" id="story">
+      <span class="cap">My ethereum story</span>
+    </section>
+    <aside class="station poster" id="poster">
+      <span class="cap">Some experiments with maps</span>
+    </aside>
   </div>
 </main>
 
@@ -134,7 +161,7 @@ body{margin:0;background:var(--dark);color:var(--ink);
    =================================================================== */
 
 const PAGES = [
-  { run: ['THE INFINITE MACHINE', 'CAMILA RUSSO'], folio: '190',
+  { cls: 'lead', run: ['THE INFINITE MACHINE', 'CAMILA RUSSO'], folio: '190',
     body: `<p>&ldquo;Honey, remember that giant pile of money I was talking about last week? The one kept safe by unhackable code?&rdquo; <mark class="hl">Alex</mark>, still glued to his smartphone screen, said to his wife.</p>
            <p>&ldquo;Yes?&rdquo;</p>
            <p>&ldquo;Well, it was hacked.&rdquo;</p>` },
@@ -159,7 +186,6 @@ const RAD = Math.PI / 180;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const stage = $('#stage'), rail = $('#rail'), story = $('#story');
 
-$('#index').innerHTML = '<b></b><b></b><b></b><b></b>';
 
 /* the corner already lifted, traced once so it sits under the real curl */
 const sheets = PAGES.map((p, i) => {
@@ -171,19 +197,45 @@ const sheets = PAGES.map((p, i) => {
        <footer class="folio">${p.folio}</footer>
      </div>`;
   sh.style.zIndex = 20 - i;
-  story.append(sh);
+  story.insertBefore(sh, story.querySelector('.cap'));
   return sh;
 });
+
+/* Where the text has to stop. Cutting at the box edge slices whichever line is
+   crossing it in half; this finds the lowest line that fits whole and stops
+   there. Losing a line is fine, losing the bottom of its letters is not. */
+function clipToLine(body){
+  body.style.maxHeight = '';
+  const avail = body.clientHeight;
+  if (body.scrollHeight <= avail) return;
+  const top = body.getBoundingClientRect().top;
+  const walk = document.createTreeWalker(body, NodeFilter.SHOW_TEXT);
+  const range = document.createRange();
+  let cut = 0;
+  for (let n = walk.nextNode(); n; n = walk.nextNode()){
+    range.selectNodeContents(n);
+    for (const r of range.getClientRects()){
+      const b = r.bottom - top;
+      if (b <= avail + .5 && b > cut) cut = b;
+    }
+  }
+  if (cut > 0) body.style.maxHeight = Math.ceil(cut) + 'px';
+}
 
 /* a long page is stepped down until it lands, rather than clipped at the foot */
 function fitSheets(){
   sheets.forEach(sh => {
     const body = sh.querySelector('.body'), face = sh.querySelector('.face');
     let f = 1;
+    body.style.maxHeight = '';
     face.style.setProperty('--fit', f);
-    while (f > .62 && body.scrollHeight > body.clientHeight){
+    /* barely shrink. A page that runs long loses its last lines rather than
+       being set small enough to swallow them — easier to read, and the cut is
+       taken at a line boundary below. */
+    while (f > .9 && body.scrollHeight > body.clientHeight){
       f -= .03; face.style.setProperty('--fit', f.toFixed(3));
     }
+    clipToLine(body);          /* whatever is still over the edge goes by the line */
   });
 }
 
@@ -249,8 +301,13 @@ function buildCurl(sheet){
   const parts = [];
   for (let k = 0; k < STRIPS; k++){
     const copy = sheet.querySelector('.face').cloneNode(true);
-    copy.style.cssText =
-      `position:absolute;left:0;top:${-k * hs}px;width:${W}px;height:${H}px;transform:none;box-shadow:none`;
+    /* set one by one, never through cssText: that wipes every inline style on
+       the clone, and --fit lives there. The strips are what you actually look
+       at, so losing it meant the page on screen was never the fitted one. */
+    const cs = copy.style;
+    cs.position = 'absolute'; cs.left = '0'; cs.top = (-k * hs) + 'px';
+    cs.width = W + 'px'; cs.height = H + 'px';
+    cs.transform = 'none'; cs.boxShadow = 'none';
     /* the underside: the same ink showing through, mirrored, very faint */
     const ghost = el('div', 'ghost'); ghost.append(copy.cloneNode(true));
     const a1 = el('div', 'sh t'), b1 = el('div', 'sh b'),
@@ -308,7 +365,7 @@ function drawCurl(sheet, e, fade){
   const reach = Math.max(0, y) / H;              /* where the free edge sits now */
   /* the page keeps its own shadow while it is still lying there; once it is
      properly up, the shadow it throws on the page below takes over */
-  plate.style.opacity = (1 - clamp01(e / .2)).toFixed(3);
+  plate.style.opacity = (1 - clamp01(e / .06)).toFixed(3);
   cast.style.opacity = (Math.sin(Math.PI * e) * .3).toFixed(3);
   cast.style.transform = `scaleY(${Math.min(1, reach + .16).toFixed(4)})`;
 }
@@ -340,7 +397,10 @@ function measure(){
   /* off the free space beside the page, not off the viewport: on a phone there
      is barely any room and a proportional gap puts the neighbours exactly off
      screen */
-  const gap = clamp((W() - pw) / 2 * .6, 18, 210);
+  /* a share of the free space beside the page. On a phone that space is only
+     about 45px, so a six-tenths gap left a sliver too narrow to read as
+     anything at all. */
+  const gap = clamp((W() - pw) / 2 * .38, 12, 210);
   ST = { left: -(pw + gap), right: pw + gap };
 }
 function stations(){ if (!ST) measure(); return ST; }
@@ -362,6 +422,10 @@ function render(){
     sh.classList.remove('gone');
     if (j > front){ dropCurl(sh); return; }       /* still flat underneath */
     const t = turnOf(clamp01(pv - j));
+    /* dead flat and untouched: show the real sheet. Ten coplanar overlapping
+       planes is a z-fight, and it ruled the page into bands for the whole
+       second before the bow arrives. */
+    if (t <= 0 && bowMul <= 0){ dropCurl(sh); return; }
     if (!sh._curl) buildCurl(sh);
     /* The fade goes with the scroll, not with the bend. bend() deliberately
        rushes the last fifth so the sheet flops over, and a fade keyed to it
@@ -541,8 +605,16 @@ addEventListener('resize', () => {
   resizeT = setTimeout(() => { sheets.forEach(dropCurl); measure(); fitSheets(); render(); }, 140);
 });
 
-document.fonts.ready.then(() => { measure(); fitSheets(); render(); startBreathing(); });
-measure(); fitSheets(); render();
+let shown = false;
+function reveal(){
+  if (shown) return; shown = true;
+  measure(); fitSheets(); render();
+  stage.classList.add('up');
+  startBreathing();
+}
+document.fonts.ready.then(reveal);
+setTimeout(reveal, 1800);       /* if the fonts never turn up, show it anyway */
+measure(); render();
 })();
 </script>
 </body>
