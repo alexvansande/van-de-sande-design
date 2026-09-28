@@ -52,7 +52,7 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .index{display:flex;align-items:center;height:var(--ph)}
 /* ranged right so the lines end flush against the screen edge: left-aligned,
    the couple of visible centimetres were mostly the ragged ends of nothing */
-.index p{margin:0;color:#e6e2d2;opacity:.26;text-align:right;
+.index p{margin:0;color:#e6e2d2;opacity:.22;text-align:right;
   font-size:clamp(1.3rem,1rem + 1.7vw,2.4rem);line-height:1.34}
 
 /* the next thing along, mostly off to the right */
@@ -86,7 +86,9 @@ body{margin:0;background:var(--dark);color:var(--ink);
    .rail's flat transform-style flattens everything below it. */
 .story,.poster{perspective:2600px;perspective-origin:50% 50%}
 .story{z-index:2}
-.sheet{position:absolute;inset:0;will-change:transform,opacity}
+/* no will-change here: a sheet is never itself animated — the strips standing
+   in for it are — so promoting all nine would be layers held for nothing */
+.sheet{position:absolute;inset:0}
 .sheet.gone{visibility:hidden}
 .sheet.lifted{visibility:hidden}     /* its strips are standing in for it */
 .face{position:absolute;inset:0;background:var(--paper);border-radius:var(--r);
@@ -208,6 +210,8 @@ const clamp01 = x => clamp(x, 0, 1);
 const RAD = Math.PI / 180;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const stage = $('#stage'), rail = $('#rail'), story = $('#story');
+const indexText = $('#index p');
+const IDX_DIM = .22, IDX_LIT = .92;     /* faded in the corner of the eye, lit when it is yours */
 /* the rail, left to right, with where each one sits along it */
 const RAIL = [[$('#index'), -1], [story, 0], [$('#blockchain'), 1],
               [$('#maps'), 2], [$('#triangle'), 3]];
@@ -435,7 +439,9 @@ function drawCurl(sheet, e, fade, bm){
 const DWELL = .34;
 const turnOf = tr => clamp01((tr - DWELL / 2) / (1 - DWELL));
 
-let hx = 0;                    /* where we are along the rail; each pad holds its own page */
+/* Where we are along the rail; each pad holds its own page. It opens on the
+   index: his line first, the book already showing at the edge of it. */
+let hx = FIRST;
 
 const W = () => stage.clientWidth, H = () => stage.clientHeight;
 const ZOOM = .22;
@@ -460,6 +466,13 @@ function step(){ if (!STEP) measure(); return STEP; }
    pad was nearest made the corner snap flat the instant you crossed the
    midpoint, and snap up on the one arriving. */
 const nearness = d => { const t = clamp01(1 - d / .55); return t * t * (3 - 2 * t); };
+/* Below this the bow is too shallow to hold the strips apart in depth, and ten
+   nearly coplanar overlapping planes are a z-fight: the compositor picks a
+   winner per row and the seams show as lines ruled across the paper. Fading
+   the bow out across a slide walks straight through that, so under this the
+   sheet goes back to being one flat element. BOW * .12 is under three degrees
+   at the free edge, so there is nothing to see in the swap. */
+const BOW_MIN = .12;
 
 /* Slide sideways and the one arriving lifts its corner as it comes, which is
    the invitation to read it. */
@@ -475,7 +488,7 @@ function paintPad(pad, bm){
     const t = turnOf(clamp01(pad.pv - j));
     /* dead flat and untouched: show the real sheet. Ten coplanar overlapping
        planes is a z-fight, and it ruled the page into bands. */
-    if (t <= 0 && bm <= 0){ dropCurl(sh); return; }
+    if (t <= 0 && bm < BOW_MIN){ dropCurl(sh); return; }
     if (!sh._curl) buildCurl(sh);
     /* The fade goes with the scroll, not with the bend. bend() deliberately
        rushes the last fifth so the sheet flops over, and a fade keyed to it
@@ -487,14 +500,29 @@ function paintPad(pad, bm){
 
 function render(){
   const sp = step();
-  const mid = padOf(clamp(Math.round(hx), FIRST, LAST));
-  const zoom = 1 + ZOOM * clamp01(mid ? mid.pv : 0);
+  /* How far in we are, blended across the two stations we are between. Taken
+     from whichever pad was nearest, it held the old one's zoom until the
+     midpoint and then snapped — and since the rail's shift is scaled by the
+     zoom, that snap threw the whole rail sideways. Sliding away from a page
+     you had opened now eases back out as you go. */
+  const lo = Math.floor(hx), t = hx - lo;
+  /* how far into a pad you are, as a fraction of it. clamp01(pv) was fully on
+     for any page past the first, so stepping back from the third to the second
+     left you just as zoomed in — every flip back eases it out now. */
+  const depth = p => p ? clamp01(p.pv / Math.max(1, p.sheets.length - 1)) : 0;
+  const zoom = 1 + ZOOM * (depth(padOf(lo)) * (1 - t) + depth(padOf(lo + 1)) * t);
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
      offset 0 where the error is zero — a poster zooming drifts off centre. */
   rail.style.transform =
     `translate3d(${(-hx * sp * zoom).toFixed(1)}px,0,0) scale(${zoom.toFixed(4)})`;
   RAIL.forEach(([el, i]) => { el.style.transform = `translate3d(${(i * sp).toFixed(1)}px,0,0)`; });
+
+  /* his line is a hint while you are elsewhere and a statement when you are on
+     it, so it comes up as it arrives and falls back as you leave */
+  const litT = clamp01(1 - Math.abs(FIRST - hx));
+  const lit = litT * litT * (3 - 2 * litT);
+  indexText.style.opacity = (IDX_DIM + (IDX_LIT - IDX_DIM) * lit).toFixed(3);
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
   PADS.forEach((pad, i) => paintPad(pad, bowMul * nearness(Math.abs(i - hx))));
