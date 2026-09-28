@@ -197,16 +197,28 @@ body.ready .leaf.front .ear{opacity:1}
 .ear:hover .fold,.ear:focus-visible .fold{fill:rgba(38,36,32,.12)}
 .ear:focus-visible{outline:2px solid var(--pen);outline-offset:-2px}
 
-/* ---------- the three hints, in my hand ---------- */
-.hints{position:fixed;z-index:80;left:clamp(1.25rem,5vw,3rem);
-  bottom:calc(clamp(4rem,9vh,5rem) + env(safe-area-inset-bottom,0px));
+/* ---------- the three signposts, along the foot of the page ----------
+   One row: the index off to the left, the other stories below, the rest of
+   this story to the right. Each sits at the edge it points to. */
+.hints{position:fixed;z-index:80;
+  left:clamp(1.25rem,5vw,3rem);right:clamp(1.25rem,5vw,3rem);
+  bottom:calc(clamp(4.6rem,10vh,5.6rem) + env(safe-area-inset-bottom,0px));
+  display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem .9rem;align-items:baseline;
   font-family:"Caveat",cursive;font-weight:600;color:var(--pen);font-size:clamp(1.1rem,1rem + .4vw,1.35rem);
   line-height:1.5;pointer-events:none;opacity:0;transition:opacity .7s ease;
   text-shadow:0 0 4px var(--paper),0 0 9px var(--paper),0 0 16px var(--paper),
     0 0 26px var(--paper),0 0 36px var(--paper)}
 .hints.on{opacity:1}
-.hints div{display:flex;gap:.55rem;align-items:baseline}
+.hints div{display:flex;gap:.5rem;align-items:baseline}
+.hints .l{justify-self:start}
+.hints .c{justify-self:center}
+.hints .r{justify-self:end}
 .hints i{font-style:normal;width:1.1em;text-align:center;font-size:1.15em;line-height:1}
+/* a phone has no room for three across, so they stack, each still at its edge */
+@media (max-width:34rem){
+  .hints{grid-template-columns:1fr;gap:.15rem;font-size:1.05rem}
+  .hints .c{justify-self:center}
+}
 
 /* ---------- where you are ---------- */
 .ticks{position:fixed;z-index:80;right:.7rem;top:50%;transform:translateY(-50%);
@@ -377,7 +389,6 @@ const el = (t, c) => { const e = document.createElement(t); if (c) e.className =
 const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
 const clamp01 = x => clamp(x, 0, 1);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const coarse = matchMedia('(pointer: coarse)').matches;
 const wide = () => matchMedia('(min-width:56rem)').matches;
 const shell = $('#shell'), stack = $('#stack'), shelf = $('#shelf');
 
@@ -962,11 +973,10 @@ function idleHide(){
   idleT = setTimeout(() => { ticks.classList.remove('on'); pips.classList.remove('on'); }, 1400);
 }
 
-const verb = coarse ? 'swipe' : 'drag';
 hints.innerHTML =
-  `<div><i>${FWD_DX < 0 ? '←' : '→'}</i><span>${verb} to keep reading</span></div>` +
-  `<div><i>↑</i><span>${verb} up for another story</span></div>` +
-  `<div><i>${FWD_DX < 0 ? '→' : '←'}</i><span>${verb} back for the index</span></div>`;
+  `<div class="l"><i>←</i><span>see all stories</span></div>` +
+  `<div class="c"><i>↓</i><span>see other stories</span></div>` +
+  `<div class="r"><i>→</i><span>keep reading this story</span></div>`;
 
 let relayoutT = 0;
 addEventListener('resize', () => {
