@@ -4,85 +4,86 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Deck — experiment</title>
+<title>Sheets — experiment</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Crimson+Pro:ital,wght@0,400;1,400&family=Cardo:wght@400;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --night:#15120c;          /* the dark the deck sits in */
-  --card:#f7f1de;           /* the page itself: the same paper as the book */
-  --cink:#262420;           /* ink on that page */
-  --ghost:#8c8674;          /* running head and folio */
-  --pen:#2b4d86;            /* my handwriting */
-  --violet:#6d5ae0;         /* what is underneath */
-  --edge:247,241,222;       /* the faint page edges, as rgb parts */
+  --night:#15120c;          /* the dark the sheets float in */
+  --paper:#f7f1de;
+  --ink:#262420;
+  --ghost:#8c8674;
+  --pen:#2b4d86;
+  --edge:247,241,222;       /* the sheets further out, as rgb parts */
   color-scheme:dark;
   box-sizing:border-box;
 }
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-body{margin:0;background:var(--night);color:var(--cink);
+body{margin:0;background:var(--night);color:var(--ink);
   font-family:"EB Garamond",Garamond,Georgia,serif;-webkit-font-smoothing:antialiased}
 
 /* ---------- the stage ----------
-   --cw/--ch are the page. Everything else is placed off them, so the peeking
-   leaf, the edges further out and the bar below all stay in step at any size. */
+   A4 is 1 to root 2, so the sheet is sized by its height and the width
+   follows. The three candidates keep it inside the window whichever way
+   the window happens to be. */
 .stage{position:fixed;inset:0;overflow:hidden;
-  --cw:min(82vw, 36rem);
-  --ch:min(78vh, 46rem);
-  --gap:22px;              /* how far each leaf sits behind the last; JS owns it */
+  --sh:min(76vh, 44rem, 88vw / 0.7071);
+  --sw:calc(var(--sh) * 0.7071);
+  --gap:26px;               /* sideways step between stories; JS owns it */
+  --drop:11px;              /* downward step between pages of one story */
   touch-action:none;user-select:none;-webkit-user-select:none;
   -webkit-tap-highlight-color:transparent}
 
-/* ---------- what is further to the right ----------
-   The edges of leaves we have not reached. They read as a stack now and become
-   the dividers between items once this is a list. */
+/* the stories past the ones you can still make out */
 .more{position:absolute;top:50%;translate:0 -50%;
-  left:calc(50% + var(--cw)/2 + var(--gap)*4.6);
-  right:0;height:calc(var(--ch) * .86);
+  left:calc(50% + var(--sw)/2 + var(--gap)*4.6);
+  right:0;height:calc(var(--sh) * .86);
   display:flex;gap:var(--gap);pointer-events:none}
 .more b{display:block;width:1px;height:100%;flex:none;
   background:linear-gradient(180deg,
     rgba(var(--edge),0) 0%, rgba(var(--edge),.55) 18%,
     rgba(var(--edge),.55) 82%, rgba(var(--edge),0) 100%)}
 
-/* ---------- what is underneath ----------
-   The top edge of the next thing down, showing above the bottom of the screen. */
-.below{position:absolute;left:50%;translate:-50% 0;
-  bottom:calc(-1 * clamp(26px,4.4vh,40px));
-  width:calc(var(--cw) * .92);height:clamp(58px,9vh,84px);
-  background:var(--violet);border-radius:10px;
-  box-shadow:0 -14px 34px -10px rgba(109,90,224,.55);
-  pointer-events:none}
-.below::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;
-  background:rgba(255,255,255,.28);border-radius:10px 10px 0 0}
-
-/* ---------- the deck ---------- */
+/* ---------- a story: one pad of sheets ---------- */
 .deck{position:absolute;inset:0}
-.card{position:absolute;top:50%;left:50%;
-  width:var(--cw);height:var(--ch);
-  margin-top:calc(var(--ch) / -2);margin-left:calc(var(--cw) / -2);
-  background:var(--card);color:var(--cink);border-radius:3px;
-  padding:clamp(1.6rem,4.2vh,2.6rem) clamp(1.4rem,4vw,2.2rem);
-  display:flex;flex-direction:column;
-  box-shadow:0 26px 60px -28px rgba(0,0,0,.85), 0 3px 10px -4px rgba(0,0,0,.5);
-  transform-origin:50% 50%;will-change:transform,opacity;
-  backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.card.gone{visibility:hidden}
+.story{position:absolute;top:50%;left:50%;
+  width:var(--sw);height:var(--sh);
+  margin-top:calc(var(--sh) / -2);margin-left:calc(var(--sw) / -2);
+  perspective:1800px;perspective-origin:50% 38%;
+  will-change:transform,opacity}
+.story.gone{visibility:hidden}
 
-/* ---------- the page that has text on it ---------- */
+/* ---------- a sheet, hinged along its top edge ---------- */
+.sheet{position:absolute;inset:0;transform-origin:50% 0;
+  transform-style:preserve-3d;will-change:transform,opacity}
+.sheet.gone{visibility:hidden}
+.face,.back{position:absolute;inset:0;border-radius:2px;background:var(--paper);
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  box-shadow:0 26px 60px -28px rgba(0,0,0,.85), 0 3px 10px -4px rgba(0,0,0,.5)}
+.face{display:flex;flex-direction:column;overflow:hidden;
+  padding:clamp(1.5rem,4vh,2.5rem) clamp(1.3rem,3.6vw,2.1rem)}
+/* the underside of a sheet: the same paper, no ink, a little in shadow */
+.back{transform:rotateX(180deg);filter:brightness(.93)}
+
+/* ---------- what is printed on one ---------- */
 .run{display:flex;justify-content:space-between;gap:1rem;flex:none;
-  font-size:.62rem;font-weight:500;letter-spacing:.26em;
-  color:var(--ghost);margin:0 0 clamp(1.2rem,3.4vh,2rem)}
+  font-size:.6rem;font-weight:500;letter-spacing:.24em;color:var(--ghost);
+  margin:0 0 clamp(1rem,3vh,1.7rem)}
 .body{flex:1;min-height:0}
-.body p{margin:0;font-size:clamp(1.02rem,.92rem + .5vw,1.3rem);line-height:1.46;
+.body p{margin:0;font-size:clamp(.82rem,.72rem + .42vw,1.06rem);line-height:1.44;
   text-indent:1.4em;text-align:justify;hyphens:auto}
 .body p:first-child{text-indent:0}
-.folio{flex:none;font-size:.85rem;font-weight:500;color:var(--ghost)}
+.folio{flex:none;font-size:.8rem;font-weight:500;color:var(--ghost);padding-top:.8rem}
 
-/* the same yellow marker as the book: two passes of a wide nib, running dry
-   at both ends, with a darker band where it doubles back */
+.cryp .body p{font-family:"Crimson Pro",Georgia,serif;text-indent:1.3em}
+.ether .body{font-family:"Cardo",Georgia,serif}
+.ether .body p{text-align:left;text-indent:-1.3em;padding-left:1.3em;margin:0 0 .3em;
+  hyphens:none;font-size:clamp(.76rem,.68rem + .34vw,.95rem)}
+.ether .body h4{font-weight:700;font-size:.86rem;margin:1em 0 .5em}
+
+/* the marker, the same two passes as the book */
 .hl{color:inherit;background-color:transparent;
   background-image:
     linear-gradient(101deg,
@@ -94,28 +95,24 @@ body{margin:0;background:var(--night);color:var(--cink);
   padding:.06em .16em;margin:0 -.12em;
   box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
-/* ---------- a page that is only a title ---------- */
-.card.title{justify-content:center}
-.card.title h2{margin:0;font-weight:400;line-height:1.02;letter-spacing:-.015em;
-  font-size:clamp(2.1rem,1.7rem + 2.4vw,3.2rem)}
-.card.title p{margin:.9rem 0 0;font-family:"Caveat",cursive;font-weight:600;
-  line-height:1.15;color:var(--pen);transform:rotate(-1.4deg);transform-origin:left;
-  font-size:clamp(1.2rem,1rem + .8vw,1.6rem)}
-
-/* a phone has no room for the running head at full tracking */
-@media (max-width:30rem){
-  .run{font-size:.55rem;letter-spacing:.14em}
-}
-@media (prefers-reduced-motion:reduce){
-  .card{transition:none}
-}
+/* ---------- a sheet that is only a title ---------- */
+.face.cover{justify-content:center}
+.cover h2{margin:0;font-weight:400;line-height:1.02;letter-spacing:-.015em;
+  font-size:clamp(1.7rem,1.3rem + 2vw,2.7rem)}
+.cover .sub{margin:.85rem 0 0;font-family:"Caveat",cursive;font-weight:600;
+  color:var(--pen);line-height:1.15;transform:rotate(-1.4deg);transform-origin:left;
+  font-size:clamp(1.05rem,.9rem + .7vw,1.45rem)}
+.face.plain{justify-content:center}
+.plain h3{margin:0 0 .9rem;font-weight:400;line-height:1.1;
+  font-size:clamp(1.2rem,1rem + 1vw,1.7rem)}
+.plain p{margin:0 0 .7rem;font-size:clamp(.88rem,.8rem + .4vw,1.05rem);line-height:1.5}
+.plain .todo{color:var(--ghost);font-style:italic}
 </style>
 </head>
 <body>
-<main class="stage" id="stage" tabindex="-1" aria-label="Deck">
+<main class="stage" id="stage" tabindex="-1" aria-label="Sheets">
   <div class="more" id="more" aria-hidden="true"></div>
   <div class="deck" id="deck"></div>
-  <div class="below" aria-hidden="true"></div>
 </main>
 
 <script>
@@ -123,138 +120,200 @@ body{margin:0;background:var(--night);color:var(--cink);
 'use strict';
 
 /* ===================================================================
-   An experiment, not the site.
+   An experiment, not the site. A4 sheets floating in the dark.
 
-   The same book, dealt as a deck instead of bound as one. A leaf is not
-   hinged here: you throw it away to the right, and the one behind it — whose
-   edge you can already see — takes the middle.
+   Two directions, and both of them are shown rather than captioned:
+     sideways   the next story, and the one after it, stepped off to the right
+     upwards    the next page of this story, its edge showing below this one
 
-   Nothing on screen explains itself in words. What you can do is what you
-   can see: a leaf half out from behind this one, more edges past it, and the
-   top of something purple below the bottom of the screen.
+   Sliding sideways moves between stories. Sliding the top sheet up flips it
+   over its own top edge, the way a page comes off a pad, and the page under
+   it was already there.
    =================================================================== */
 
-const CARDS = [
-  { run: ['THE INFINITE MACHINE', 'CAMILA RUSSO'], folio: '190',
-    body: `<p>&ldquo;Honey, remember that giant pile of money I was talking about last week? The one kept safe by unhackable code?&rdquo; <mark class="hl">Alex</mark>, still glued to his smartphone screen, said to his wife.</p>
-           <p>&ldquo;Yes?&rdquo;</p>
-           <p>&ldquo;Well, it was hacked.&rdquo;</p>` },
-  { title: 'Bend', sub: 'what happens when you stop assuming the surface is flat' },
-  { title: 'The triangle of everything', sub: 'three corners, and everything sits somewhere between them' },
-  { title: 'Hexagonal earth', sub: 'the whole planet, cut into sevens' },
-  { title: 'Blog', sub: 'shorter things, in no particular order' }
+const STORIES = [
+  { pages: [
+      { kind: 'book', run: ['THE INFINITE MACHINE', 'CAMILA RUSSO'], folio: '190',
+        body: `<p>&ldquo;Honey, remember that giant pile of money I was talking about last week? The one kept safe by unhackable code?&rdquo; <mark class="hl">Alex</mark>, still glued to his smartphone screen, said to his wife.</p>
+               <p>&ldquo;Yes?&rdquo;</p>
+               <p>&ldquo;Well, it was hacked.&rdquo;</p>` },
+      { kind: 'book', cls: 'cryp', run: ['THE CRYPTOPIANS', 'LAURA SHIN'], folio: '79',
+        body: `<p>Jeff was also funny. He played the grumpy guy but was actually a teddy bear. He often teased and screwed around with people, but it was obvious he was joking. He was a boss who didn&rsquo;t want to be a boss. Plus, he was always accessible. He was logged onto Gitter, on a public Go Ethereum channel, all day long, which was nice for his remote team members, such as the black-, curly-haired P&eacute;ter Szil&aacute;gyi in Transylvania and <mark class="hl">Alex van de Sande, aka Avsa, a designer in Rio de Janeiro whose high forehead and disheveled locks gave him a professorial vibe. Everyone felt part of the team.</mark></p>
+               <p>Those under Gavin had a different experience. If a few developers came up with an idea, he would sometimes immediately shoot it down. Often he was right, but still, it was frustrating to work with someone who was constantly telling you that you were wrong. <mark class="hl">Once, when Avsa was in Amsterdam from Rio, working with Jeff, the second Gav heard he was there, he immediately asked Alex to take a train to Zug to work with him.</mark></p>
+               <p>As time went on, however, his employees found Gavin became more of an &ldquo;ideas guy&rdquo; who made his underlings execute his vision, while claiming credit and never praising them. Still, they found him &ldquo;brilliant&rdquo; or thought him &ldquo;a smart guy, but not the best boss.&rdquo;</p>` },
+      { kind: 'book', cls: 'ether', run: ['OUT OF THE ETHER', 'MATT LEISING'], folio: 'x',
+        body: `<p>Ming Chan &ndash; First executive director of the Ethereum Foundation, whipped it into shape to keep it within its means, Vitalik favored her though she rubbed many the wrong way</p>
+               <h4>Badass blockchain ninja warriors</h4>
+               <p><mark class="hl">Alex Van de Sande &ndash; Known as avsa, helped marshal the Robin Hood Group from his apartment in Rio, co-developed the Mist wallet, excellent husband, the one who pushed the button to start the DAO counterattack</mark></p>
+               <p>Griff Green &ndash; The Mayor of Ethereum circa June 2016, hugger, visionary, driver of the RHG, slock.it&rsquo;s first employee</p>
+               <p>Fabian Vogelsteller &ndash; tech whiz who helped the RHG prepare to fight the ether thief, co-developed Mist wallet</p>
+               <p>Lefteris Karapetsas &ndash; coding guru, replicated DAO attack in a few hours</p>` }
+    ] },
+  { pages: [
+      { kind: 'cover', title: 'Bend', sub: 'what happens when you stop assuming the surface is flat' },
+      { kind: 'plain', title: 'Straight lines are a decision',
+        paras: ['<span class="todo">the opening image goes here, and the argument under it</span>'] }
+    ] },
+  { pages: [
+      { kind: 'cover', title: 'The triangle of everything', sub: 'three corners, and everything sits somewhere between them' },
+      { kind: 'plain', title: 'Why three',
+        paras: ['Two things make a slider and people pick an end. Three make a space, and you have to admit where you actually are.',
+                '<span class="todo">name the three corners</span>'] }
+    ] },
+  { pages: [
+      { kind: 'cover', title: 'Hexagonal earth', sub: 'the whole planet, cut into sevens' },
+      { kind: 'plain', title: 'An equal-area world',
+        paras: ['A hexagon splits into seven hexagons, each turned about 19 degrees and smaller by root 7. Do it twice and you have forty-nine.',
+                '<span class="todo">the projection, and the migration routes over ten thousand years</span>'] }
+    ] },
+  { pages: [
+      { kind: 'cover', title: 'Blog', sub: 'shorter things, in no particular order' },
+      { kind: 'plain', title: 'Recent',
+        paras: ['<span class="todo">point this at wherever the writing actually lives</span>'] }
+    ] }
 ];
 
 const $ = s => document.querySelector(s);
 const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
 const clamp01 = x => clamp(x, 0, 1);
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const stage = $('#stage'), deck = $('#deck');
 
-/* four edges out to the right; the last ones barely there */
-$('#more').innerHTML = [.9, .62, .4, .24].map(o =>
-  `<b style="opacity:${o}"></b>`).join('');
+$('#more').innerHTML = [.9, .62, .4, .24].map(o => `<b style="opacity:${o}"></b>`).join('');
 
-const els = CARDS.map(c => {
-  const el = document.createElement('article');
-  el.className = 'card' + (c.title ? ' title' : '');
-  el.innerHTML = c.title
-    ? `<h2>${c.title}</h2><p>${c.sub}</p>`
-    : `<header class="run"><span>${c.run[0]}</span><span>${c.run[1]}</span></header>
-       <div class="body">${c.body}</div>
-       <footer class="folio">${c.folio}</footer>`;
+/* ---------- build ---------- */
+function faceHTML(p){
+  if (p.kind === 'cover')
+    return `<div class="face cover"><h2>${p.title}</h2><p class="sub">${p.sub}</p></div>`;
+  if (p.kind === 'plain')
+    return `<div class="face plain"><h3>${p.title}</h3>${p.paras.map(x => `<p>${x}</p>`).join('')}</div>`;
+  return `<div class="face ${p.cls || ''}">
+    <header class="run"><span>${p.run[0]}</span><span>${p.run[1]}</span></header>
+    <div class="body">${p.body}</div>
+    <footer class="folio">${p.folio}</footer></div>`;
+}
+STORIES.forEach(st => {
+  const el = document.createElement('section');
+  el.className = 'story';
+  st.sheets = st.pages.map(p => {
+    const sh = document.createElement('div');
+    sh.className = 'sheet';
+    sh.innerHTML = faceHTML(p) + '<div class="back"></div>';
+    el.append(sh);
+    return sh;
+  });
+  st.el = el;
   deck.append(el);
-  return el;
 });
 
 /* ===================================================================
-   One number holds the whole deck: pos, the continuous index of the leaf in
-   the middle. 0 is the first one squarely centred, 0.5 is the first one
-   halfway thrown. A drag writes it, a spring catches it. Every leaf reads its
-   own position off it, so there is no state to keep in sync.
+   Two numbers. sx is the continuous story, sideways. py[i] is the continuous
+   page of story i, upwards. A half on either one is a sheet caught halfway.
+   A drag writes them, a spring catches them, and every sheet reads its own
+   position off them, so there is nothing to keep in sync.
    =================================================================== */
-const LAST = CARDS.length - 1;
-let pos = 0;
+const LASTS = STORIES.length - 1;
+let sx = 0;
+const py = STORIES.map(() => 0);
 
-const W = () => stage.clientWidth;
-const TOSS = () => W() * 1.15;             // far enough to clear the screen
-/* The step between leaves is worked out here, not in CSS, and written back as
-   a plain px value. A custom property holding a clamp() comes back out of
-   getComputedStyle as the unresolved token, so anything parsing it gets NaN
-   and every transform built from it is silently thrown away. */
-function GAP(){
-  const g = Math.round(clamp(W() * .034, 15, 36));
-  stage.style.setProperty('--gap', g + 'px');
-  return g;
-}
+const W = () => stage.clientWidth, H = () => stage.clientHeight;
+const TOSS = () => W() * 1.15;
+const cssPx = (name, v) => { stage.style.setProperty(name, v + 'px'); return v; };
+/* worked out here rather than in CSS: a custom property holding a clamp() comes
+   back out of getComputedStyle unresolved, so anything parsing it gets NaN and
+   every transform built from it is silently dropped */
+const GAP  = () => cssPx('--gap',  Math.round(clamp(W() * .034, 15, 36)));
+const DROP = () => cssPx('--drop', Math.round(clamp(H() * .014, 7, 16)));
 
 function render(){
-  const gap = GAP();
-  els.forEach((el, i) => {
-    const d = i - pos;
+  const gap = GAP(), drop = DROP();
+  STORIES.forEach((st, i) => {
+    const d = i - sx;
+    let tx = 0, ty = 0, rot = 0, sc = 1, op = 1, z = 100, br = 1;
     if (d <= 0){
-      /* leaving, or gone: t is how far through the throw it is */
       const t = clamp01(-d);
-      if (-d > 1.02){ el.classList.add('gone'); return; }
-      el.classList.remove('gone');
-      const ease = t * t;                                  // it accelerates away
-      el.style.transform =
-        `translate3d(${(ease * TOSS()).toFixed(1)}px, ${(ease * W() * .09).toFixed(1)}px, 0)` +
-        ` rotate(${(t * 15).toFixed(2)}deg)`;
-      el.style.opacity = (1 - clamp01((t - .55) / .45) * .85).toFixed(3);
-      el.style.zIndex = 100;
-      el.style.filter = '';
-      el.style.boxShadow = `0 ${(26 + t * 34).toFixed(0)}px ${(60 + t * 46).toFixed(0)}px -28px rgba(0,0,0,.85)`;
+      if (-d > 1.02){ st.el.classList.add('gone'); return; }
+      const ease = t * t;                                  /* it accelerates away */
+      tx = ease * TOSS(); ty = ease * W() * .09; rot = t * 15;
+      op = 1 - clamp01((t - .55) / .45) * .85;
     } else {
-      /* waiting behind: stepped to the right, a little smaller, a little darker */
       const s = Math.min(d, 4);
-      el.classList.toggle('gone', d > 3.6);
-      el.style.transform =
-        `translate3d(${(s * gap).toFixed(1)}px, 0, 0) scale(${(1 - s * .035).toFixed(4)})`;
-      el.style.opacity = (1 - clamp01((s - 1) / 3) * .55).toFixed(3);
-      el.style.zIndex = 100 - Math.round(s * 10);
-      el.style.filter = `brightness(${(1 - Math.min(s, 3) * .085).toFixed(3)})`;
-      el.style.boxShadow = '';
+      if (d > 3.6){ st.el.classList.add('gone'); return; }
+      tx = s * gap; sc = 1 - s * .035;
+      op = 1 - clamp01((s - 1) / 3) * .55;
+      z = 100 - Math.round(s * 10);
+      br = 1 - Math.min(s, 3) * .085;
     }
+    st.el.classList.remove('gone');
+    st.el.style.transform =
+      `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+    st.el.style.opacity = op.toFixed(3);
+    st.el.style.zIndex = z;
+    st.el.style.filter = br === 1 ? '' : `brightness(${br.toFixed(3)})`;
+
+    /* the pages of this story, hinged along the top */
+    const p = py[i];
+    st.sheets.forEach((sh, j) => {
+      const f = clamp01(p - j);                  /* 0 flat on the pad, 1 flipped over */
+      sh.style.zIndex = 50 - j;
+      if (f > 0){
+        if (p - j > 1.02){ sh.classList.add('gone'); return; }
+        sh.classList.remove('gone');
+        sh.style.transform = `rotateX(${(-172 * f).toFixed(2)}deg)`;
+        sh.style.opacity = (1 - clamp01((f - .62) / .38)).toFixed(3);
+      } else {
+        const b = clamp(j - p, 0, 3);            /* how far down the pad it sits */
+        sh.classList.toggle('gone', j - p > 3.4);
+        sh.style.transform = `translate3d(0, ${(b * drop).toFixed(1)}px, 0) scale(${(1 - b * .012).toFixed(4)})`;
+        sh.style.opacity = (1 - clamp01((b - 1) / 3) * .35).toFixed(3);
+      }
+    });
   });
 }
 
 /* ---------- the spring that catches what you let go of ---------- */
 const STIFF = 210, DAMP = 29.5;
-let vel = 0, target = 0, raf = 0, last = 0;
-function springTo(t, v0){
-  target = clamp(t, 0, LAST); vel = v0 || 0;
+const AX = {
+  story: { get: () => sx, set: v => { sx = v; }, lo: () => 0, hi: () => LASTS, give: .16 },
+  page:  { i: 0,
+           get(){ return py[this.i]; }, set(v){ py[this.i] = v; },
+           lo: () => 0, hi(){ return STORIES[this.i].pages.length - 1; }, give: .14 }
+};
+let anim = null, raf = 0, last = 0;
+function springTo(ax, target, v0){
+  anim = { ax, target: clamp(target, ax.lo(), ax.hi()), v: v0 || 0 };
   if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
 }
 function tick(now){
   const dt = clamp((now - last) / 1000, .001, .032); last = now;
-  vel += (-STIFF * (pos - target) - DAMP * vel) * dt;
-  pos += vel * dt;
-  if (Math.abs(pos - target) < .0006 && Math.abs(vel) < .02){
-    pos = target; vel = 0; raf = 0; render(); return;
+  const a = anim;
+  if (!a){ raf = 0; return; }
+  let x = a.ax.get();
+  a.v += (-STIFF * (x - a.target) - DAMP * a.v) * dt;
+  x += a.v * dt;
+  if (Math.abs(x - a.target) < .0006 && Math.abs(a.v) < .02){
+    a.ax.set(a.target); anim = null; raf = 0; render(); return;
   }
-  render();
+  a.ax.set(x); render();
   raf = requestAnimationFrame(tick);
 }
-function stop(){ if (raf){ cancelAnimationFrame(raf); raf = 0; } vel = 0; }
+function stop(){ anim = null; if (raf){ cancelAnimationFrame(raf); raf = 0; } }
 
-/* past a third of the way, or flicked hard enough to carry there */
-const COMMIT = .33, CARRY = .2;
-function settle(v){
-  const from = Math.round(pos), proj = pos + v * CARRY;
-  let t = proj > from + COMMIT ? from + 1 : proj < from - COMMIT ? from - 1 : from;
-  springTo(clamp(t, 0, LAST), v);
+const COMMIT = .32, CARRY = .2;
+function settle(ax, v){
+  const from = Math.round(ax.get()), proj = ax.get() + v * CARRY;
+  const t = proj > from + COMMIT ? from + 1 : proj < from - COMMIT ? from - 1 : from;
+  springTo(ax, t, v);
 }
-
-/* the further past either end you pull, the less it gives */
 const RUB = (over, give) => (1 - 1 / (over / give * .55 + 1)) * give;
-function bounded(x){
-  if (x < 0) return -RUB(-x, .16);
-  if (x > LAST) return LAST + RUB(x - LAST, .16);
+function bounded(ax, x){
+  const lo = ax.lo(), hi = ax.hi();
+  if (x < lo) return lo - RUB(lo - x, ax.give);
+  if (x > hi) return hi + RUB(x - hi, ax.give);
   return x;
 }
+function pageAxis(){ AX.page.i = clamp(Math.round(sx), 0, LASTS); return AX.page; }
 
-/* ---------- the throw ---------- */
+/* ---------- hand ---------- */
 function speed(s){
   if (s.length < 2) return 0;
   const a = s[0], b = s[s.length - 1], dt = (b[0] - a[0]) / 1000;
@@ -263,58 +322,67 @@ function speed(s){
 let g = null;
 stage.addEventListener('pointerdown', e => {
   stop();
-  g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, base: pos, axis: null, s: [] };
+  g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ax: null, base: 0, s: [] };
 });
 stage.addEventListener('pointermove', e => {
   if (!g || e.pointerId !== g.id) return;
   const dx = e.clientX - g.x0, dy = e.clientY - g.y0;
-  if (!g.axis){
+  if (!g.ax){
     if (Math.abs(dx) < 7 && Math.abs(dy) < 7) return;
-    // vertical belongs to whatever is under the purple bar, which is not built
-    // yet, so for now only the horizontal throw is live
-    g.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-    if (g.axis === 'y'){ g = null; return; }
+    g.ax = Math.abs(dx) > Math.abs(dy) ? AX.story : pageAxis();
+    g.base = g.ax.get();
     try { stage.setPointerCapture(e.pointerId); g.held = true; } catch (_) {}
-    g.x0 = e.clientX;
+    g.x0 = e.clientX; g.y0 = e.clientY;          /* drop the slop */
     return;
   }
-  // dragging right throws the leaf away, so right is forward
-  pos = bounded(g.base + (e.clientX - g.x0) / (W() * .55));
-  g.s.push([e.timeStamp, pos]);
+  /* sideways: dragging right sends this story away. upwards: dragging up peels
+     the sheet off the pad. Both forward directions move paper away from you. */
+  const raw = g.ax === AX.story
+    ? g.base + (e.clientX - g.x0) / (W() * .55)
+    : g.base - (e.clientY - g.y0) / (H() * .5);
+  g.ax.set(bounded(g.ax, raw));
+  g.s.push([e.timeStamp, g.ax.get()]);
   while (g.s.length > 2 && e.timeStamp - g.s[0][0] > 90) g.s.shift();
   render();
 });
 function release(e){
   if (!g || (e && e.pointerId !== g.id)) return;
   if (g.held) try { stage.releasePointerCapture(g.id); } catch (_) {}
-  const s = g.s; g = null;
-  if (s.length) settle(speed(s));
+  const ax = g.ax, s = g.s; g = null;
+  if (ax && s.length) settle(ax, speed(s));
 }
 stage.addEventListener('pointerup', release);
 stage.addEventListener('pointercancel', release);
 stage.addEventListener('dragstart', e => e.preventDefault());
 stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
-/* trackpad, on the same axis as the hand */
-let wT = 0, wRaw = null;
+/* ---------- trackpad, on the same two axes ---------- */
+let wT = 0, w = null;
 stage.addEventListener('wheel', e => {
   if (e.ctrlKey) return;
-  if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;    // vertical is not ours yet
   e.preventDefault();
-  if (wRaw === null){ stop(); wRaw = pos; }
-  const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? W() : 1;
-  wRaw += -e.deltaX * k * 2.2 / (W() * .55);
-  pos = bounded(wRaw);
+  const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
+  const dx = e.deltaX * k, dy = e.deltaY * k;
+  if (!w){
+    stop();
+    const ax = Math.abs(dx) > Math.abs(dy) ? AX.story : pageAxis();
+    w = { ax, raw: ax.get() };
+  }
+  w.raw += w.ax === AX.story ? -dx * 2.2 / (W() * .55) : dy * 2.2 / (H() * .5);
+  w.ax.set(bounded(w.ax, w.raw));
   render();
   clearTimeout(wT);
-  wT = setTimeout(() => { wRaw = null; settle(0); }, 90);
+  wT = setTimeout(() => { const q = w; w = null; settle(q.ax, 0); }, 90);
 }, { passive: false });
 
-/* a plain mouse has no second axis; keys are invisible, so they cost nothing */
+/* a plain mouse has one axis; keys cost nothing and say nothing on screen */
 addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.key === 'ArrowRight' || e.key === ' '){ e.preventDefault(); stop(); springTo(Math.round(pos) + 1); }
-  else if (e.key === 'ArrowLeft'){ e.preventDefault(); stop(); springTo(Math.round(pos) - 1); }
+  const go = (ax, d) => { e.preventDefault(); stop(); springTo(ax, Math.round(ax.get()) + d, 0); };
+  if (e.key === 'ArrowRight') go(AX.story, 1);
+  else if (e.key === 'ArrowLeft') go(AX.story, -1);
+  else if (e.key === 'ArrowUp' || e.key === ' ') go(pageAxis(), 1);
+  else if (e.key === 'ArrowDown') go(pageAxis(), -1);
 });
 
 let resizeT = 0;
