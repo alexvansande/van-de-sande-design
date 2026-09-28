@@ -15,7 +15,7 @@
   --ink:#262420;
   --ghost:#8c8674;
   --pen:#2b4d86;
-  --poster:#e3ef6a;
+  --poster:#ded8d6;        /* the poster's own paper, under the image */
   --bar:#4a4a47;
   color-scheme:dark;
   box-sizing:border-box;
@@ -59,7 +59,13 @@ body{margin:0;background:var(--dark);color:var(--ink);
      flat box it is measured in */
   margin-top:clamp(1.9rem,5.2vh,3.4rem);color:#e0dccc;opacity:.85;
   font-size:clamp(.88rem,.78rem + .4vw,1.12rem);letter-spacing:.015em}
-.poster{background:var(--poster);border-radius:var(--r);z-index:1;
+/* The poster is a real A4 sheet, so it is set to A4 rather than to the page's
+   slightly wider proportion — at `cover` any mismatch is taken off the top and
+   bottom, and that is where its title and byline live. */
+.poster{background:var(--poster) url("img/hexagonal-earth.webp") center/cover no-repeat;
+  border-radius:var(--r);z-index:1;
+  width:calc(var(--ph) * 0.7071);
+  margin-left:calc(var(--ph) * 0.7071 / -2);
   box-shadow:0 30px 70px -30px rgba(0,0,0,.8)}
 
 /* ---------- the story: a pad of sheets ---------- */
@@ -184,7 +190,7 @@ const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
 const clamp01 = x => clamp(x, 0, 1);
 const RAD = Math.PI / 180;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const stage = $('#stage'), rail = $('#rail'), story = $('#story');
+const stage = $('#stage'), rail = $('#rail'), story = $('#story'), poster = $('#poster');
 
 
 /* the corner already lifted, traced once so it sits under the real curl */
@@ -393,7 +399,7 @@ const ZOOM = .22;
    offsetWidth in there would force a reflow on each of them. */
 let ST = null;
 function measure(){
-  const pw = story.offsetWidth;
+  const pw = story.offsetWidth, qw = poster.offsetWidth;
   /* off the free space beside the page, not off the viewport: on a phone there
      is barely any room and a proportional gap puts the neighbours exactly off
      screen */
@@ -401,7 +407,9 @@ function measure(){
      about 45px, so a six-tenths gap left a sliver too narrow to read as
      anything at all. */
   const gap = clamp((W() - pw) / 2 * .38, 12, 210);
-  ST = { left: -(pw + gap), right: pw + gap };
+  /* half of each neighbour plus the gap, so the poster being a different width
+     from the page does not change how much of it shows */
+  ST = { left: -(pw + gap), right: pw / 2 + gap + qw / 2 };
 }
 function stations(){ if (!ST) measure(); return ST; }
 function render(){
@@ -411,7 +419,7 @@ function render(){
   rail.style.transform = `translate3d(${railX.toFixed(1)}px,0,0) scale(${zoom.toFixed(4)})`;
 
   $('#index').style.transform = `translate3d(${S.left}px,0,0)`;
-  $('#poster').style.transform = `translate3d(${S.right}px,0,0)`;
+  poster.style.transform = `translate3d(${S.right}px,0,0)`;
 
   /* which sheet is in hand, by index rather than by the sign of a number that
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
