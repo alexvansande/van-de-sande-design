@@ -28,7 +28,10 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .stage{position:fixed;inset:0;overflow:hidden;
   --ph:min(80vh, 60rem, 76vw / 0.7071);
   --pw:calc(var(--ph) * 0.7071);   /* A4: every sheet on the rail is one */
-  --r:clamp(14px, 2vw, 30px);          /* the corner radius on everything */
+  --r:0;                   /* square. A radius travels badly through a curl:
+                              the strips are square cuts across a rounded
+                              sheet, so it survives only on the top and bottom
+                              strip and the rest read as a mismatch */
   touch-action:none;user-select:none;-webkit-user-select:none;
   -webkit-tap-highlight-color:transparent;
   /* the type is fitted against the real fonts, so nothing is shown until they
@@ -59,11 +62,16 @@ body{margin:0;background:var(--dark);color:var(--ink);
      flat box it is measured in */
   margin-top:clamp(1.9rem,5.2vh,3.4rem);color:#e0dccc;opacity:.85;
   font-size:clamp(.88rem,.78rem + .4vw,1.12rem);letter-spacing:.015em}
-/* The poster is a pad like the story: its sheet carries the image, so it bows,
+/* A poster is a pad like the story: its sheet carries the image, so it bows,
    curls and zooms on exactly the same machinery. */
 .poster{z-index:1}
-.face.art{padding:0;
-  background:var(--poster) url("img/hexagonal-earth.webp") center/cover no-repeat}
+.face.art{padding:0;background-color:var(--poster);
+  background-position:center;background-size:cover;background-repeat:no-repeat}
+.art.maps{background-image:url("img/hexagonal-earth.webp")}
+/* padded to A4 in the file by extending its own top and bottom rows, so cover
+   shows all of it — cropping to fit would have taken the ends off the title */
+.art.triangle{background-color:#1b1124;
+  background-image:url("img/triangle-of-everything.webp")}
 
 /* ---------- the story: a pad of sheets ---------- */
 /* the 3D scene lives here, on the curl's own parent. Put it further up and
@@ -144,8 +152,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
     <section class="station story" id="story">
       <span class="cap">My ethereum story</span>
     </section>
-    <aside class="station poster" id="poster">
+    <aside class="station poster" id="maps">
       <span class="cap">Some experiments with maps</span>
+    </aside>
+    <aside class="station poster" id="triangle">
+      <span class="cap">The whole universe in one image</span>
     </aside>
   </div>
 </main>
@@ -190,14 +201,17 @@ const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
 const clamp01 = x => clamp(x, 0, 1);
 const RAD = Math.PI / 180;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const stage = $('#stage'), rail = $('#rail'), story = $('#story'), poster = $('#poster');
+const stage = $('#stage'), rail = $('#rail'), story = $('#story');
+/* the rail, left to right, with where each one sits along it */
+const RAIL = [[$('#index'), -1], [story, 0], [$('#maps'), 1], [$('#triangle'), 2]];
+const FIRST = RAIL[0][1], LAST = RAIL[RAIL.length - 1][1];
 
 
 /* A pad is a station with sheets in it. Both the story and the poster are
    pads, so they bow, curl and zoom on the same machinery — the only
    difference is what is printed on the paper. */
 const faceHTML = p => p.art
-  ? `<div class="face art"></div>`
+  ? `<div class="face art ${p.art}"></div>`
   : `<div class="face ${p.cls || ''}">
        <header class="run"><span>${p.run[0]}</span><span>${p.run[1]}</span></header>
        <div class="body">${p.body}</div>
@@ -214,9 +228,11 @@ function buildPad(station, pages){
   });
   return { sheets, pv: 0 };
 }
-const PADS = [buildPad(story, PAGES), buildPad(poster, [{ art: true }])];
-/* the rail runs index, story, poster; only the last two are pads */
-const padOf = h => h === 0 ? PADS[0] : h === 1 ? PADS[1] : null;
+const PADS = [buildPad(story, PAGES),
+              buildPad($('#maps'), [{ art: 'maps' }]),
+              buildPad($('#triangle'), [{ art: 'triangle' }])];
+/* the index sits at -1 and is not a pad; everything from 0 rightwards is */
+const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
 /* Where the text has to stop. Cutting at the box edge slices whichever line is
    crossing it in half; this finds the lowest line that fits whole and stops
@@ -332,7 +348,13 @@ function buildCurl(sheet){
           a2 = el('div', 'sh t'), b2 = el('div', 'sh b');
     parts.push({ face: plane('face', copy, a1, b1), back: plane('back', ghost, a2, b2), a1, b1, a2, b2 });
   }
+  /* Whatever colour this sheet is. The plate standing in behind the strips and
+     the underside of the paper were both hard-coded to the book's cream, which
+     showed as a pale band under the bow of a poster with a dark ground. */
+  const bg = getComputedStyle(sheet.querySelector('.face')).backgroundColor;
+  host.querySelectorAll('.pl').forEach(pl => { pl.style.backgroundColor = bg; });
   const cast = el('div', 'cast'), plate = el('div', 'plate');
+  plate.style.backgroundColor = bg;
   /* beside the sheet, not inside it: the sheet is hidden while its strips
      stand in for it, and a child would inherit that and never paint */
   sheet.parentNode.append(plate, cast, host);
@@ -389,7 +411,7 @@ function drawCurl(sheet, e, fade, bm){
 }
 
 /* ===================================================================
-   Two numbers. hx is the rail: -1 the index, 0 the story, 1 the poster.
+   Two numbers. hx is the rail: -1 the index, 0 the story, then the posters.
    pv is the page, continuous, and it also decides how far the story has
    zoomed toward you.
    =================================================================== */
@@ -405,24 +427,19 @@ const ZOOM = .22;
 
 /* Measured, never read back out of a custom property: --pw is a calc() of a
    min(), and getComputedStyle hands those back as the unresolved token, so
-   parseFloat gives NaN and every transform built from it is silently dropped. */
-/* Measured once and kept: the breathing loop renders every frame, and reading
-   offsetWidth in there would force a reflow on each of them. */
-let ST = null;
+   parseFloat gives NaN and every transform built from it is silently dropped.
+   Measured once and kept, too: the breathing loop renders every frame, and
+   reading offsetWidth in there would force a reflow on each of them. */
+let STEP = 0;
 function measure(){
-  const pw = story.offsetWidth, qw = poster.offsetWidth;
-  /* off the free space beside the page, not off the viewport: on a phone there
-     is barely any room and a proportional gap puts the neighbours exactly off
-     screen */
+  const pw = story.offsetWidth;
   /* a share of the free space beside the page. On a phone that space is only
      about 45px, so a six-tenths gap left a sliver too narrow to read as
      anything at all. */
   const gap = clamp((W() - pw) / 2 * .38, 12, 210);
-  /* half of each neighbour plus the gap, so the poster being a different width
-     from the page does not change how much of it shows */
-  ST = { left: -(pw + gap), right: pw / 2 + gap + qw / 2 };
+  STEP = pw + gap;             /* every station is A4, so one step fits all */
 }
-function stations(){ if (!ST) measure(); return ST; }
+function step(){ if (!STEP) measure(); return STEP; }
 /* Only whatever is in the middle carries the bow. Slide sideways and the one
    arriving starts lifting its corner, which is the invitation to read it. */
 function paintPad(pad, bm){
@@ -448,15 +465,12 @@ function paintPad(pad, bm){
 }
 
 function render(){
-  const S = stations();
-  const railX = hx <= 0 ? -hx * -S.left : -hx * S.right;
-  const mid = padOf(clamp(Math.round(hx), -1, 1));
+  const sp = step();
+  const mid = padOf(clamp(Math.round(hx), FIRST, LAST));
   const zoom = 1 + ZOOM * clamp01(mid ? mid.pv : 0);
-  rail.style.transform = `translate3d(${railX.toFixed(1)}px,0,0) scale(${zoom.toFixed(4)})`;
-
-  $('#index').style.transform = `translate3d(${S.left}px,0,0)`;
-  poster.style.transform = `translate3d(${S.right}px,0,0)`;
-
+  rail.style.transform =
+    `translate3d(${(-hx * sp).toFixed(1)}px,0,0) scale(${zoom.toFixed(4)})`;
+  RAIL.forEach(([el, i]) => { el.style.transform = `translate3d(${(i * sp).toFixed(1)}px,0,0)`; });
   PADS.forEach(pad => paintPad(pad, pad === mid ? bowMul : 0));
 }
 
@@ -465,7 +479,7 @@ function render(){
    but does not labour. A sheet this size has almost no mass. */
 const STIFF = 420, DAMP = 41;
 const AX = {
-  rail: { get: () => hx, set: v => { hx = v; }, lo: () => -1, hi: () => 1, give: .16 },
+  rail: { get: () => hx, set: v => { hx = v; }, lo: () => FIRST, hi: () => LAST, give: .16 },
   page: { pad: null,
           get(){ return this.pad ? this.pad.pv : 0; },
           set(v){ if (this.pad) this.pad.pv = v; },
@@ -476,7 +490,7 @@ const AX = {
           get give(){ return this.pad && this.pad.sheets.length > 1 ? .14 : .5; } }
 };
 /* bound at the moment a gesture starts, to whichever pad is in the middle */
-function pageAxis(){ AX.page.pad = padOf(clamp(Math.round(hx), -1, 1)); return AX.page; }
+function pageAxis(){ AX.page.pad = padOf(clamp(Math.round(hx), FIRST, LAST)); return AX.page; }
 let anim = null, raf = 0, last = 0;
 function springTo(ax, target, v0){
   anim = { ax, target: clamp(target, ax.lo(), ax.hi()), v: v0 || 0 };
