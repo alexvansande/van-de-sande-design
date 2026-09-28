@@ -205,11 +205,20 @@ body.ready .leaf.front .ear{opacity:1}
   bottom:calc(clamp(4.6rem,10vh,5.6rem) + env(safe-area-inset-bottom,0px));
   display:grid;grid-template-columns:1fr auto 1fr;gap:.5rem .9rem;align-items:baseline;
   font-family:"Caveat",cursive;font-weight:600;color:var(--pen);font-size:clamp(1.1rem,1rem + .4vw,1.35rem);
-  line-height:1.5;pointer-events:none;opacity:0;transition:opacity .7s ease;
+  line-height:1.5;pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity .7s ease,visibility 0s linear .7s;
   text-shadow:0 0 4px var(--paper),0 0 9px var(--paper),0 0 16px var(--paper),
     0 0 26px var(--paper),0 0 36px var(--paper)}
-.hints.on{opacity:1}
-.hints div{display:flex;gap:.5rem;align-items:baseline}
+.hints.on{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+/* each signpost is also the shortcut it describes. Only the words take the
+   click: the grid itself stays transparent to the finger, or an invisible
+   band across the foot of the page would swallow every drag that began there. */
+.hints button{display:flex;gap:.5rem;align-items:baseline;
+  background:none;border:0;margin:0;padding:.2rem .1rem;font:inherit;color:inherit;
+  text-align:left;-webkit-tap-highlight-color:transparent}
+.hints.on button{pointer-events:auto;cursor:pointer}
+.hints button:hover,.hints button:focus-visible{color:var(--ink)}
+.hints button:focus-visible{outline:2px solid var(--pen);outline-offset:3px;border-radius:3px}
 .hints .l{justify-self:start}
 .hints .c{justify-self:center}
 .hints .r{justify-self:end}
@@ -267,7 +276,7 @@ body.ready .leaf.front .ear{opacity:1}
   <div class="stack" id="stack"></div>
 </div>
 
-<div class="hints" id="hints" aria-hidden="true"></div>
+<div class="hints" id="hints"></div>
 <div class="ticks" id="ticks" aria-hidden="true"></div>
 <div class="pips" id="pips" aria-hidden="true"></div>
 
@@ -807,10 +816,22 @@ function vel(s){
   const a = s[0], b = s[s.length - 1], dt = (b[0] - a[0]) / 1000;
   return dt > .008 ? clamp((b[1] - a[1]) / dt, -14, 14) : 0;
 }
+/* The first gesture is spent on my handwriting: it fades the line in and the
+   book stays where it is. A wheel keeps firing for a while after one flick, so
+   the whole run is swallowed, not just its first event, and the book answers
+   the next gesture. */
+let spent = false, spentT = 0;
+function spendGesture(){
+  spent = true;
+  clearTimeout(spentT);
+  spentT = setTimeout(() => { spent = false; }, 180);
+}
 let g = null;
 shell.addEventListener('pointerdown', e => {
   if (e.target.closest('a')) return;
+  const first = !said;
   wake(); stopAnims();
+  if (first){ g = null; return; }              // this one only brought the line in
   g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, axis: null, key: null, base: 0, from: 0, s: [] };
 });
 shell.addEventListener('pointermove', e => {
@@ -861,7 +882,10 @@ shell.addEventListener('pointercancel', release);
 let w = null, wT = 0;
 shell.addEventListener('wheel', e => {
   if (e.ctrlKey) return;                       // pinch zoom
-  e.preventDefault(); wake();
+  e.preventDefault();
+  const first = !said;
+  wake();
+  if (first || spent){ spendGesture(); return; }
   const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
   const dx = e.deltaX * k * 2.2, dy = e.deltaY * k * 2.2;
   if (!w){
@@ -974,9 +998,15 @@ function idleHide(){
 }
 
 hints.innerHTML =
-  `<div class="l"><i>←</i><span>see all stories</span></div>` +
-  `<div class="c"><i>↓</i><span>see other stories</span></div>` +
-  `<div class="r"><i>→</i><span>keep reading this story</span></div>`;
+  `<button class="l" type="button"><i>←</i><span>see all stories</span></button>` +
+  `<button class="c" type="button"><i>↓</i><span>see other stories</span></button>` +
+  `<button class="r" type="button"><i>→</i><span>keep reading this story</span></button>`;
+{
+  const [toIndex, toStories, toNextPage] = hints.children;
+  toIndex.addEventListener('click', () => step('menu', 1, () => shelfItems[si].firstChild.focus()));
+  toStories.addEventListener('click', () => step('story', 1));
+  toNextPage.addEventListener('click', () => step('page', 1));
+}
 
 let relayoutT = 0;
 addEventListener('resize', () => {
