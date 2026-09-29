@@ -24,6 +24,10 @@ Earth series: the Lifezones print, the "Impossible" Map, the Gosper
 topographic. **The whole universe in one image** is the Triangle of
 Everything poster.
 
+Under the book and the release pages is not a title but a line of the
+story, one per page, which changes as the page turns: `cap` on each page in
+`PAGES` and in the blockchain pad. A pad without them keeps its title.
+
 Adding another is two lines: an entry in `PADS` and a `.art` class with its
 image. Everything on the rail is A4, so one step spaces all of it.
 

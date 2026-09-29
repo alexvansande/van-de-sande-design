@@ -42,7 +42,9 @@ body{margin:0;background:var(--dark);color:var(--ink);
 
 /* ---------- the rail: index | story | poster ---------- */
 .rail{position:absolute;inset:0;will-change:transform}
-.station{position:absolute;top:50%;left:50%;
+/* a little above the middle: the line underneath is a sentence now, and on a
+   wide screen, where the page is as tall as it gets, it needs the room */
+.station{position:absolute;top:calc(50% - 2.4vh);left:50%;
   width:var(--pw);height:var(--ph);
   margin-top:calc(var(--ph) / -2);margin-left:calc(var(--pw) / -2)}
 
@@ -61,8 +63,12 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .cap{position:absolute;top:100%;left:0;right:0;text-align:center;z-index:60;
   /* clear of the paper, which bows toward you and so reaches lower than the
      flat box it is measured in */
-  margin-top:clamp(1.9rem,5.2vh,3.4rem);color:#e0dccc;opacity:.85;
-  font-size:clamp(.88rem,.78rem + .4vw,1.12rem);letter-spacing:.015em}
+  margin-top:clamp(1.4rem,3.8vh,2.8rem);color:#e0dccc;opacity:.85;
+  font-size:clamp(.88rem,.78rem + .4vw,1.12rem);letter-spacing:.015em;
+  line-height:1.4;text-wrap:balance}
+/* a line per page, all in the same place, only one of them showing */
+.cap .line{position:absolute;left:0;right:0;top:0;opacity:0}
+.cap .line:first-child{opacity:1}
 /* A poster is a pad like the story: its sheet carries the image, so it bows,
    curls and zooms on exactly the same machinery. */
 .poster{z-index:1}
@@ -201,14 +207,17 @@ body{margin:0;background:var(--dark);color:var(--ink);
 
 const PAGES = [
   { cls: 'lead', run: ['THE INFINITE MACHINE', 'CAMILA RUSSO'], folio: '190',
+    cap: 'In 2014 I started working for a 19 year old who was going to pay me in a money he made up.',
     body: `<p>&ldquo;Honey, remember that giant pile of money I was talking about last week? The one kept safe by unhackable code?&rdquo; <mark class="hl">Alex</mark>, still glued to his smartphone screen, said to his wife.</p>
            <p>&ldquo;Yes?&rdquo;</p>
            <p>&ldquo;Well, it was hacked.&rdquo;</p>` },
   { cls: 'cryp', run: ['THE CRYPTOPIANS', 'LAURA SHIN'], folio: '79',
+    cap: 'The people I met were scruffy, disheveled, weirdos spread all over the world. Loved working with them.',
     body: `<p>Jeff was also funny. He played the grumpy guy but was actually a teddy bear. He often teased and screwed around with people, but it was obvious he was joking. He was a boss who didn&rsquo;t want to be a boss. Plus, he was always accessible. He was logged onto Gitter, on a public Go Ethereum channel, all day long, which was nice for his remote team members, such as the black-, curly-haired P&eacute;ter Szil&aacute;gyi in Transylvania and <mark class="hl">Alex van de Sande, aka Avsa, a designer in Rio de Janeiro whose high forehead and disheveled locks gave him a professorial vibe. Everyone felt part of the team.</mark></p>
            <p>Those under Gavin had a different experience. If a few developers came up with an idea, he would sometimes immediately shoot it down. Often he was right, but still, it was frustrating to work with someone who was constantly telling you that you were wrong. <mark class="hl">Once, when Avsa was in Amsterdam from Rio, working with Jeff, the second Gav heard he was there, he immediately asked Alex to take a train to Zug to work with him.</mark></p>
            <p>As time went on, however, his employees found Gavin became more of an &ldquo;ideas guy&rdquo; who made his underlings execute his vision, while claiming credit and never praising them. Still, they found him &ldquo;brilliant&rdquo; or thought him &ldquo;a smart guy, but not the best boss.&rdquo;</p>` },
   { cls: 'ether', run: ['OUT OF THE ETHER', 'MATT LEISING'], folio: 'x',
+    cap: 'There were lots of hiccups along the way. We wanted to change the world. Maybe we did but not in the way we expected.',
     body: `<p>Ming Chan &ndash; First executive director of the Ethereum Foundation, whipped it into shape to keep it within its means, Vitalik favored her though she rubbed many the wrong way</p>
            <h4>Badass blockchain ninja warriors</h4>
            <p><mark class="hl">Alex Van de Sande &ndash; Known as avsa, helped marshal the Robin Hood Group from his apartment in Rio, co-developed the Mist wallet, excellent husband, the one who pushed the button to start the DAO counterattack</mark></p>
@@ -251,10 +260,25 @@ function buildPad(station, pages){
     station.insertBefore(sh, cap);
     return sh;
   });
-  return { sheets, pv: 0 };
+  /* A pad whose pages carry their own line tells its story one page at a
+     time underneath, in place of a title: every line is set, stacked, and
+     render() shows the one for the page in hand. */
+  let lines = null;
+  if (pages.some(p => p.cap)){
+    cap.textContent = '';
+    lines = pages.map(p => {
+      const l = el('span', 'line');
+      l.textContent = p.cap || '';
+      cap.append(l);
+      return l;
+    });
+  }
+  return { sheets, pv: 0, cap, lines };
 }
 const PADS = [buildPad(story, PAGES),
-              buildPad($('#blockchain'), [{ art: 'eth1' }, { art: 'eth2' }]),
+              buildPad($('#blockchain'), [
+                { art: 'eth1', cap: 'Very few people understood what exactly we were doing, even among the team.' },
+                { art: 'eth2', cap: 'The launch pages were based on my own experience of trying to get it all to work. Recipes to build a new kind of society.' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
               buildPad($('#triangle'), [{ art: 'triangle' }])];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
@@ -530,6 +554,7 @@ let hx = FIRST;
 
 const W = () => stage.clientWidth, H = () => stage.clientHeight;
 const ZOOM = .22;
+let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs the room */
 
 /* Measured, never read back out of a custom property: --pw is a calc() of a
    min(), and getComputedStyle hands those back as the unresolved token, so
@@ -544,6 +569,18 @@ function measure(){
      anything at all. */
   const gap = clamp((W() - pw) / 2 * .38, 12, 210);
   STEP = pw + gap;             /* every station is A4, so one step fits all */
+  /* Going into a pad zooms it toward you, and the line under it goes with
+     it. Only as far as keeps the longest line on screen: on a wide screen
+     the page is already as tall as it can be, and zooming there would push
+     the story off the bottom while you read the page it belongs to. */
+  const ph = story.offsetHeight;
+  let foot = 0;
+  PADS.forEach(pad => {
+    if (!pad.lines) return;
+    const tallest = Math.max(...pad.lines.map(l => l.offsetHeight));
+    foot = Math.max(foot, pad.cap.offsetTop + tallest - ph / 2);
+  });
+  zoomBy = foot ? clamp((H() / 2 - 14) / foot - 1, 0, ZOOM) : ZOOM;
 }
 function step(){ if (!STEP) measure(); return STEP; }
 /* How much of the bow a pad carries. It holds full until the sheet is well off
@@ -585,6 +622,20 @@ function paintPad(pad, bm, lean){
   });
 }
 
+/* The line for the page in hand. Each fades out over the first half of a turn
+   and the next fades in over the second, so two sentences are never on top
+   of each other. A pad waiting beside the one in the middle keeps its line,
+   quieter, as the thing along from here. */
+function paintLines(pad, d){
+  if (!pad.lines) return;
+  const on = (.85 * (.4 + .6 * nearness(d))).toFixed(3);
+  if (pad.capOn !== on){ pad.capOn = on; pad.cap.style.opacity = on; }
+  pad.lines.forEach((l, j) => {
+    const o = clamp01(1 - Math.abs(pad.pv - j) * 2.2).toFixed(3);
+    if (l._o !== o){ l._o = o; l.style.opacity = o; }
+  });
+}
+
 function render(){
   const sp = step();
   /* How far in we are, blended across the two stations we are between. Taken
@@ -597,7 +648,7 @@ function render(){
      for any page past the first, so stepping back from the third to the second
      left you just as zoomed in — every flip back eases it out now. */
   const depth = p => p ? clamp01(p.pv / Math.max(1, p.sheets.length - 1)) : 0;
-  const zoom = 1 + ZOOM * (depth(padOf(lo)) * (1 - t) + depth(padOf(lo + 1)) * t);
+  const zoom = 1 + zoomBy * (depth(padOf(lo)) * (1 - t) + depth(padOf(lo + 1)) * t);
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
      offset 0 where the error is zero — a poster zooming drifts off centre. */
@@ -613,6 +664,7 @@ function render(){
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
   PADS.forEach((pad, i) => {
+    paintLines(pad, Math.abs(i - hx));
     /* n is how much this is the sheet in the middle, m how much a neighbour */
     const d = Math.abs(i - hx), n = nearness(d), m = clamp01((1.4 - d) / .5) * (1 - n);
     paintPad(pad, bowMul * (1 + airFlap) * n + airBow * m + HOVER_LIFT * (pad.ha || 0),
