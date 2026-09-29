@@ -15,7 +15,10 @@ The first screen is the HTML alone, about 13 KB: the line on the index,
 set in EB Garamond, which is preloaded. The script is deferred, so it
 builds the paper after that first paint, and the paper fades in once the
 faces it is set in have arrived. The fonts are served from here, latin
-only and only the cuts in use (97 KB for all four). A station asks for its
+only and only the cuts in use. Only EB Garamond (44 KB) is needed to open:
+Crimson Pro and Cardo, the faces of the second and third pages of the
+book, are asked for once the first screen is in, and those pages are
+fitted again when they arrive. A station asks for its
 pictures only when the rail comes near it; once the first screen is in and
 the page has gone quiet, the reach grows by one, so the next poster along
 is loaded before you get there. Nothing on the first screen is a picture.

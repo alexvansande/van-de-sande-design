@@ -865,12 +865,19 @@ function reveal(){
 /* Ask for the faces the paper is set in by name. The sheets were only just
    built, so waiting on document.fonts.ready alone could resolve before the
    browser had even noticed it needed them. */
-Promise.all(['1em "EB Garamond"', '500 1em "EB Garamond"', '1em "Crimson Pro"',
-             '1em Cardo', '700 1em Cardo'].map(f => document.fonts.load(f)))
+Promise.all(['1em "EB Garamond"', '500 1em "EB Garamond"'].map(f => document.fonts.load(f)))
   .then(() => document.fonts.ready).then(reveal, reveal);
 setTimeout(reveal, 1800);       /* if the fonts never turn up, show it anyway */
 /* then, once everything on the first screen is in, reach a step further */
-const further = () => { litNear = 2.5; light(); };
+const further = () => {
+  litNear = 2.5; light();
+  /* the faces of the pages under the first, and then those pages set again
+     in them: refitted, and every curl rebuilt, since each carries copies of
+     the pages as they were when it was cut */
+  stage.classList.add('faces');
+  Promise.all(['1em "Crimson Pro"', '1em Cardo', '700 1em Cardo'].map(f => document.fonts.load(f)))
+    .then(() => { PADS.forEach(pad => pad.sheets.forEach(dropCurl)); fitSheets(); render(); }, () => {});
+};
 const idle = () => (self.requestIdleCallback || (f => setTimeout(f, 300)))(further);
 if (document.readyState === 'complete') idle(); else addEventListener('load', idle);
 measure(); render();

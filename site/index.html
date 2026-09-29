@@ -140,8 +140,14 @@ body{margin:0;background:var(--dark);color:var(--ink);
 /* the opening page carries little text and a lot of paper, so it can afford
    to be set larger — it matters most on a phone */
 .lead .body p{font-size:calc(clamp(1rem,.88rem + .62vw,1.3rem) * var(--fit,1));line-height:1.5}
-.cryp .body p{font-family:"Crimson Pro",Georgia,serif;text-indent:1.3em}
-.ether .body{font-family:"Cardo",Georgia,serif}
+.cryp .body p{text-indent:1.3em}
+/* The second and third pages are set in faces of their own, after the books
+   they come from. Neither is on the first screen, so they are only asked for
+   once it is up (the script sets .faces); until then those pages, lying
+   under the first, are set in EB Garamond, and are fitted again when their
+   own faces arrive. */
+.faces .cryp .body p{font-family:"Crimson Pro",Georgia,serif}
+.faces .ether .body{font-family:"Cardo",Georgia,serif}
 .ether .body p{text-align:left;text-indent:-1.3em;padding-left:1.3em;margin:0 0 .3em;hyphens:none;
   font-size:calc(clamp(.78rem,.7rem + .36vw,.98rem) * var(--fit,1))}
 .ether .body h4{font-weight:700;font-size:calc(.88rem * var(--fit,1));margin:1em 0 .5em}
