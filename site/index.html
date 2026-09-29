@@ -8,10 +8,11 @@
 <meta name="description" content="Alex Van de Sande, designer. Pages and posters you turn by hand: the books he turns up in, the Ethereum release sites, and hexagonal maps of the world.">
 <meta name="theme-color" content="#333331">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23333331'/%3E%3Crect x='9' y='6' width='14' height='20' rx='1' fill='%23f4f1e4'/%3E%3C/svg%3E">
-<!-- The first screen is this file alone: the line on the index, set in the
-     one font it needs. The script, the other faces and the pictures come
-     after it is up. -->
-<link rel="preload" href="fonts/eb-garamond.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The first screen is this file alone: the line on the index, in whatever
+     serif the device already has. The script, the fonts and the pictures
+     come after it is up. Nothing is preloaded: preloading EB Garamond made
+     the browser hold that line back for it, a tenth of a second on a slow
+     phone, where letting it arrive and swap costs the paper only a twentieth. -->
 <style>
 /* Served from here rather than from Google: a stylesheet on another host
    held up the first paint while it went and fetched, and then sent the
@@ -19,7 +20,7 @@
    the cuts in use. EB Garamond is variable, so one file is both 400 and
    500. */
 @font-face{font-family:"EB Garamond";font-style:normal;font-weight:400 500;font-display:swap;
-  src:url(fonts/eb-garamond.woff2) format("woff2")}
+  src:local("EB Garamond"),local("EBGaramond-Regular"),url(fonts/eb-garamond.woff2) format("woff2")}
 @font-face{font-family:"Crimson Pro";font-style:normal;font-weight:400;font-display:swap;
   src:url(fonts/crimson-pro.woff2) format("woff2")}
 @font-face{font-family:"Cardo";font-style:normal;font-weight:400;font-display:swap;
@@ -38,7 +39,11 @@
 *,*::before,*::after{box-sizing:inherit}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 body{margin:0;background:var(--dark);color:var(--ink);
-  font-family:"EB Garamond",Garamond,Georgia,serif;-webkit-font-smoothing:antialiased}
+  /* Until EB Garamond is in, the nearest old-style serif to hand: Apple ships
+     no Garamond, but every iPhone and Mac has Iowan Old Style and Hoefler
+     Text; Windows with Office has Garamond; everyone has Georgia. */
+  font-family:"EB Garamond","Iowan Old Style","Hoefler Text",Garamond,Georgia,serif;
+  -webkit-font-smoothing:antialiased}
 
 .stage{position:fixed;inset:0;overflow:hidden;
   --ph:min(80vh, 60rem, 76vw / 0.7071);

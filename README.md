@@ -12,7 +12,9 @@ anywhere else.
 ## How it loads
 
 The first screen is the HTML alone, about 13 KB: the line on the index,
-set in EB Garamond, which is preloaded. The script is deferred, so it
+in whatever old-style serif the device already has (Iowan Old Style on
+Apple), swapping to EB Garamond when it arrives. It is not preloaded:
+that held the line back waiting for it. The script is deferred, so it
 builds the paper after that first paint, and the paper fades in once the
 faces it is set in have arrived. The fonts are served from here, latin
 only and only the cuts in use. Only EB Garamond (44 KB) is needed to open:
