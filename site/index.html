@@ -368,10 +368,26 @@ function buildCurl(sheet){
   /* Whatever colour this sheet is. The plate standing in behind the strips and
      the underside of the paper were both hard-coded to the book's cream, which
      showed as a pale band under the bow of a poster with a dark ground. */
-  const bg = getComputedStyle(sheet.querySelector('.face')).backgroundColor;
+  const face = sheet.querySelector('.face');
+  const bg = getComputedStyle(face).backgroundColor;
   host.querySelectorAll('.pl').forEach(pl => { pl.style.backgroundColor = bg; });
+  /* Every strip carries that colour as a backstop so the hairline between two
+     of them cannot show the ground through. The bottom one has no strip under
+     it to seam against, so it needs no backstop — and it is the lowest thing
+     on the page, so any of its own flat colour that shows is a bar along the
+     foot of the picture. It gets none. */
+  parts[STRIPS - 1].face.style.backgroundColor = 'transparent';
+  parts[STRIPS - 1].back.style.backgroundColor = 'transparent';
   const cast = el('div', 'cast'), plate = el('div', 'plate');
   plate.style.backgroundColor = bg;
+  /* and the plate is the page itself rather than a swatch of its ground, so
+     that wherever the strips fall short of it — at a seam, or at the foot
+     under the bow — what shows through is the picture that was always there */
+  const under = face.cloneNode(true), us = under.style;
+  us.position = 'absolute'; us.left = '0'; us.top = '0';
+  us.width = W + 'px'; us.height = H + 'px';
+  us.transform = 'none'; us.boxShadow = 'none';
+  plate.append(under);
   /* beside the sheet, not inside it: the sheet is hidden while its strips
      stand in for it, and a child would inherit that and never paint */
   sheet.parentNode.append(plate, cast, host);
