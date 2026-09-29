@@ -5,8 +5,20 @@ ground: the index off to the left, then a stack for each thing he has made.
 Sideways moves along the rail, upwards turns the page of whatever is in the
 middle, and the sheet bends while it goes.
 
-The whole site is one self-contained page, `site/index.html`, plus the
-posters in `site/img`. It pulls in nothing but Google Fonts.
+The site is `site/index.html`, its script `site/app.js`, the fonts in
+`site/fonts` and the posters in `site/img`. It pulls in nothing from
+anywhere else.
+
+## How it loads
+
+The first screen is the HTML alone, about 13 KB: the line on the index,
+set in EB Garamond, which is preloaded. The script is deferred, so it
+builds the paper after that first paint, and the paper fades in once the
+faces it is set in have arrived. The fonts are served from here, latin
+only and only the cuts in use (97 KB for all four). A station asks for its
+pictures only when the rail comes near it; once the first screen is in and
+the page has gone quiet, the reach grows by one, so the next poster along
+is loaded before you get there. Nothing on the first screen is a picture.
 
 ## What is on the rail
 
