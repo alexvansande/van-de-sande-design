@@ -42,10 +42,21 @@ nearest the free edge lead, so the paper curls on its way up instead of
 pivoting like a board, and the free edge stays under your finger. Going
 over the far side it fades rather than blinking off.
 
+**The fold can lean.** The strips are cut along the fold, and the fold
+does not have to lie level: lean it and one bottom corner rises ahead of
+the other. A page being turned always comes level.
+
 **Paper is never flat.** The sheet in the middle carries a standing bow. It
-is not there when the page arrives: it lifts after a beat and then keeps a
-slow flap until you touch something. Slide sideways and the bow crosses
-over from the sheet leaving to the one arriving.
+is not there when the page arrives: it lifts after a beat. Until you touch
+something the paper moves in a draught: the bow breathes, and the lift runs
+from one corner to the other and back, so the two sides never rise
+together. The draught reaches the sheets waiting either side too, so the
+story is already stirring at the edge of the index. A mouse over a sheet
+lifts the corner nearest it, more the lower it is. A phone that reports its
+tilt without asking (Android; iOS would need a permission prompt, so it is
+left alone) leans the fold as you move it. Touching anything stills the
+draught, and twelve seconds later it comes back. Slide sideways and the
+bow crosses over from the sheet leaving to the one arriving.
 
 **There is dead scroll either side of a page at rest**, so a long scroll has
 somewhere to stop rather than tumbling into the next turn.

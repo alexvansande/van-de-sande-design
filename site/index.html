@@ -128,7 +128,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
    one above. Nothing nests 3D inside 3D: WebKit flattens a deep chain of
    preserve-3d and the strips come apart. */
 .curl{position:absolute;inset:0;z-index:40;transform-style:preserve-3d;pointer-events:none}
-.pl{position:absolute;left:0;top:0;width:100%;transform-origin:50% 0;overflow:hidden;
+/* A strip is a band cut across the sheet along the fold, and the fold can
+   lean, so the band is wider than the page and reaches past its corners.
+   It is transparent: the paper is the page clone inside it, which clips
+   itself to the sheet. */
+.pl{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;
   border-radius:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 /* fr/bk, not face/back: a strip named "face" also matched the page's own
    .face rule, and inherited its padding — clamp(1.6rem,4.4vh,2.8rem) top and
@@ -138,8 +142,10 @@ body{margin:0;background:var(--dark);color:var(--ink);
    grew the moment it was selected and the strips took over, and the bottom
    strip hung ~21px of itself below the end of the picture. It was also
    handing each of the fourteen strips the page's drop shadow. */
-.pl.fr,.pl.bk{background:var(--paper)}
-.pl .sh{position:absolute;inset:0;opacity:0;will-change:opacity}
+/* the shading is laid across the band, but lives inside the page so it
+   stops at the edge of the paper instead of shading the air past a corner */
+.pl .sh{position:absolute;left:0;top:0;opacity:0;transform-origin:0 0;will-change:opacity}
+.pl .under{position:absolute;left:0;top:0;overflow:hidden;transform-origin:0 0}
 .pl .sh.t{background:linear-gradient(180deg,rgb(40,34,18),rgba(40,34,18,0))}
 .pl .sh.b{background:linear-gradient(180deg,rgba(40,34,18,0),rgb(40,34,18))}
 .pl .ghost{position:absolute;inset:0;overflow:hidden;transform:scaleY(-1);opacity:.09}
@@ -313,13 +319,22 @@ const BOW = 20;
 /* The bow is not there when the page arrives. It lifts after a beat, slowly,
    and then keeps breathing until you touch something — a sheet settling rather
    than a diagram of one. */
-const BOW_WAIT = 1000, BOW_RISE = 1600, FLAP = 3200, FLAP_DEPTH = .3;
+const BOW_WAIT = 1000, BOW_RISE = 1600, FLAP_DEPTH = .45;
 let bowMul = 0;
+/* The fold does not have to lie level. Lean it and the strips are cut along
+   the lean, so one bottom corner rises ahead of the other: positive lifts the
+   left, negative the right. Degrees, and never past TILT_MAX, which is what
+   the strips are cut long enough to reach. */
+const TILT_MAX = 14;
+let tilt = 0;
 
 /* how far through the turn each strip is. The free edge is the bottom, so
-   the bottom strip leads and the one at the hinge is last to follow. */
-const profile = (e, bm = 1) => [...Array(STRIPS)].map((_, k) => {
-  const f = k / (STRIPS - 1);
+   the bottom strip leads and the one at the hinge is last to follow. `span`
+   is how many strips it takes to cross the sheet along the fold; a leaning
+   fold crosses it corner to corner, and any strip past that stays with the
+   last. */
+const profile = (e, bm = 1, n = STRIPS, span = STRIPS - 1) => [...Array(n)].map((_, k) => {
+  const f = Math.min(1, k / span);
   const turn = 180 * clamp01(e * (1 + CURL) - CURL * (1 - f));
   return Math.max(turn, BOW * bm * Math.pow(f, 1.5));   /* the turn overtakes the bow */
 });
@@ -344,48 +359,61 @@ function bend(p){
 function buildCurl(sheet){
   const W = sheet.offsetWidth, H = sheet.offsetHeight, hs = H / STRIPS;
   const host = el('div', 'curl');
-  const plane = (cls, ph, ...kids) => {
+  const face = sheet.querySelector('.face');
+  /* Whatever colour this sheet is. The plate standing in behind the strips and
+     the underside of the paper were both hard-coded to the book's cream, which
+     showed as a pale band under the bow of a poster with a dark ground. */
+  const bg = getComputedStyle(face).backgroundColor;
+  /* A leaning fold crosses the sheet corner to corner, which is further than
+     top to bottom, so there are a few more strips than STRIPS and each is
+     long enough to span the sheet at the steepest lean. At a level fold the
+     extra ones hang past the foot with nothing in them. */
+  const lean = Math.sin(TILT_MAX * RAD);
+  const n = Math.ceil(STRIPS * (1 + W / H * lean)) + 1;
+  const BW = W + H * lean + 4;
+  /* a wider overlap than the turn strictly needs: at the resting bend the
+     page is almost flat and subpixel seams between strips read as ruled
+     lines across the paper. Past the end of the picture the overlap is
+     empty, since the strip itself is transparent. */
+  const ph = hs + 1.6;
+  const band = (cls, ...kids) => {
     const p = el('div', 'pl ' + cls);
-    p.style.height = ph + 'px';
+    p.style.width = BW + 'px'; p.style.height = ph + 'px';
     p.append(...kids); host.append(p); return p;
   };
-  const parts = [];
-  for (let k = 0; k < STRIPS; k++){
-    /* a wider overlap than the turn strictly needs: at the resting bend the
-       page is almost flat and subpixel seams between strips read as ruled
-       lines across the paper. The bottom one has nothing under it to seam
-       against, and there the overlap only hung 1.6px of bare strip past the
-       end of the picture. It ends where the picture ends. */
-    const ph = hs + (k < STRIPS - 1 ? 1.6 : 0);
-    const copy = sheet.querySelector('.face').cloneNode(true);
+  /* Each strip is a window onto the same page, turned and pushed by drawCurl
+     so that its own slice lands in it. */
+  const page = () => {
+    const copy = face.cloneNode(true);
     /* set one by one, never through cssText: that wipes every inline style on
        the clone, and --fit lives there. The strips are what you actually look
        at, so losing it meant the page on screen was never the fitted one. */
     const cs = copy.style;
-    cs.position = 'absolute'; cs.left = '0';
-    /* Each strip is a window onto the same page, pushed up by its own slice.
-       The bottom one is hung from its foot instead. The two are the same
-       number when everything agrees, but if the strip's height and the slice
-       ever drift apart by a hair — a stale measurement, a rounding — the
-       drift has to land at the top of that strip, under the one above it,
-       and never at the foot, where a few uncovered pixels read as a band
-       under the picture. */
-    cs.top = (k === STRIPS - 1 ? ph - H : -k * hs) + 'px';
+    cs.position = 'absolute'; cs.left = '0'; cs.top = '0';
     cs.width = W + 'px'; cs.height = H + 'px';
-    cs.transform = 'none'; cs.boxShadow = 'none';
-    /* the underside: the same ink showing through, mirrored, very faint */
-    const ghost = el('div', 'ghost'); ghost.append(copy.cloneNode(true));
-    const a1 = el('div', 'sh t'), b1 = el('div', 'sh b'),
-          a2 = el('div', 'sh t'), b2 = el('div', 'sh b');
-    parts.push({ face: plane('fr', ph, copy, a1, b1),
-                 back: plane('bk', ph, ghost, a2, b2), a1, b1, a2, b2, half: ph / 2 });
+    cs.transformOrigin = '0 0'; cs.transform = 'none'; cs.boxShadow = 'none';
+    return copy;
+  };
+  const shade = cls => {
+    const s = el('div', 'sh ' + cls);
+    s.style.width = BW + 'px'; s.style.height = ph + 'px';
+    return s;
+  };
+  const parts = [];
+  for (let k = 0; k < n; k++){
+    const copy = page(), a1 = shade('t'), b1 = shade('b');
+    copy.append(a1, b1);
+    /* the underside: paper the colour of the sheet, and the same ink showing
+       through, mirrored, very faint */
+    const under = el('div', 'under'), a2 = shade('t'), b2 = shade('b');
+    under.style.width = W + 'px'; under.style.height = H + 'px';
+    under.style.backgroundColor = bg;
+    under.append(a2, b2);
+    const ghost = el('div', 'ghost'), inked = page();
+    ghost.append(inked);
+    parts.push({ face: band('fr', copy), back: band('bk', under, ghost),
+                 copy, under, inked, a1, b1, a2, b2, half: ph / 2 });
   }
-  /* Whatever colour this sheet is. The plate standing in behind the strips and
-     the underside of the paper were both hard-coded to the book's cream, which
-     showed as a pale band under the bow of a poster with a dark ground. */
-  const face = sheet.querySelector('.face');
-  const bg = getComputedStyle(face).backgroundColor;
-  host.querySelectorAll('.pl').forEach(pl => { pl.style.backgroundColor = bg; });
   const cast = el('div', 'cast'), plate = el('div', 'plate');
   plate.style.backgroundColor = bg;
   /* and the plate is the page itself rather than a swatch of its ground, so
@@ -399,7 +427,7 @@ function buildCurl(sheet){
   /* beside the sheet, not inside it: the sheet is hidden while its strips
      stand in for it, and a child would inherit that and never paint */
   sheet.parentNode.append(plate, cast, host);
-  sheet._curl = { host, cast, plate, parts, H, hs, eye: H / 2 };
+  sheet._curl = { host, cast, plate, parts, W, H, hs };
   sheet.classList.add('lifted');
 }
 function dropCurl(sheet){
@@ -409,25 +437,50 @@ function dropCurl(sheet){
   sheet._curl = null; sheet.classList.remove('lifted');
 }
 
-function drawCurl(sheet, e, fade, bm){
+function drawCurl(sheet, e, fade, bm, lean){
   /* Twenty transforms and forty opacities. render() runs on every frame of a
      rail slide too, where the sheet in hand is not moving at all, so nothing
      is rewritten unless something about it actually changed. */
-  const sig = e + '|' + fade + '|' + bm;
+  const tq = Math.round(clamp(lean, -TILT_MAX, TILT_MAX) * 20) / 20;
+  const sig = e + '|' + fade + '|' + bm + '|' + tq;
   if (sheet._sig === sig) return;
   sheet._sig = sig;
-  const { parts, cast, plate, H, hs, eye } = sheet._curl;
-  const ang = profile(e, bm);
+  const { parts, cast, plate, W, H, hs } = sheet._curl;
+  /* The fold runs along v and the sheet falls away from it along u; at a
+     level fold those are across and down. s measures along u, t along v. */
+  const ls = Math.sin(tq * RAD), lc = Math.cos(tq * RAD);
+  const s0 = Math.min(0, -W * ls);                  /* the corner nearest the hinge */
+  const t0 = Math.min(0, H * ls) - 2;               /* where each strip starts, across */
+  const span = Math.max(1, (H * lc + W * Math.abs(ls)) / hs - 1);
+  const ang = profile(e, bm, parts.length, span);
   const dk = ang.map(a => Math.abs(Math.sin(a * RAD)));
-  const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(STRIPS - 1, i)]) / 2;
+  const edge = i => (dk[Math.max(0, i - 1)] + dk[Math.min(dk.length - 1, i)]) / 2;
   const shade = clamp01(e / .26);
-  let y = 0, z = 0;
+  const eye = H / 2 * lc - W / 2 * ls;               /* the eye's s */
+  const deg = tq + 'deg', ndeg = -tq + 'deg';
+  let y = s0, z = 0, foot = 0;
   parts.forEach((pt, k) => {
     const a = ang[k], c = Math.cos(a * RAD), sn = Math.sin(a * RAD), half = pt.half;
-    /* A strip faces you when its normal, (0, -sin a, cos a), points at the eye.
-       A plane is flat, so its middle decides for the whole of it. */
+    /* A strip faces you when its normal, (-sin a) u + (cos a) z, points at the
+       eye. A plane is flat, so its middle decides for the whole of it. */
     const cy = y + half * c, cz = z + half * sn;
     const front = -sn * (eye - cy) + c * (DEPTH - cz) > 0;
+    /* Which slice of the page this strip carries, and the shading laid back
+       across it. It only moves when the lean does, and only the side you can
+       see is kept up to date: each rewrite repaints the strip. */
+    const geo = tq + '|' + s0;
+    if (front ? pt.gf !== geo : pt.gb !== geo){
+      const sk = (s0 + k * hs).toFixed(2), tk = t0.toFixed(2);
+      const into = `translate(${-tk}px,${-sk}px) rotate(${ndeg})`;
+      const back = `rotate(${deg}) translate(${tk}px,${sk}px)`;
+      if (front){
+        pt.gf = geo; pt.copy.style.transform = into;
+        pt.a1.style.transform = pt.b1.style.transform = back;
+      } else {
+        pt.gb = geo; pt.under.style.transform = pt.inked.style.transform = into;
+        pt.a2.style.transform = pt.b2.style.transform = back;
+      }
+    }
     if (pt.front !== front){
       pt.front = front;
       /* opacity, not visibility: a hidden plane is never painted, so the back
@@ -438,7 +491,10 @@ function drawCurl(sheet, e, fade, bm){
       (pt.front ? pt.face : pt.back).style.opacity = fade;
     }
     pt.fade = fade;
-    const at = `translate3d(0, ${y.toFixed(2)}px, ${z.toFixed(2)}px) rotateX(${a.toFixed(2)}deg)`;
+    /* hinge at y along u, then turn the strip into the lean, bend it, and
+       slide it back across to where its slice starts */
+    const at = `translate3d(${(-y * ls).toFixed(2)}px, ${(y * lc).toFixed(2)}px, ${z.toFixed(2)}px) ` +
+               `rotateZ(${deg}) rotateX(${a.toFixed(2)}deg) translateX(${t0.toFixed(2)}px)`;
     pt.face.style.transform = at;
     pt.back.style.transform =
       `${at} translateY(${half.toFixed(2)}px) rotateX(180deg) translateY(${(-half).toFixed(2)}px)`;
@@ -448,8 +504,9 @@ function drawCurl(sheet, e, fade, bm){
     pt.a1.style.opacity = (T * .2).toFixed(3); pt.b1.style.opacity = (B * .2).toFixed(3);
     pt.a2.style.opacity = (B * .17).toFixed(3); pt.b2.style.opacity = (T * .17).toFixed(3);
     y += hs * c; z += hs * sn;
+    if (k === STRIPS - 1) foot = y - s0;
   });
-  const reach = Math.max(0, y) / H;              /* where the free edge sits now */
+  const reach = Math.max(0, foot) / H;           /* where the free edge sits now */
   /* the page keeps its own shadow while it is still lying there; once it is
      properly up, the shadow it throws on the page below takes over */
   plate.style.opacity = (1 - clamp01(e / .06)).toFixed(3);
@@ -505,7 +562,7 @@ const BOW_MIN = .12;
 
 /* Slide sideways and the one arriving lifts its corner as it comes, which is
    the invitation to read it. */
-function paintPad(pad, bm){
+function paintPad(pad, bm, lean){
   /* which sheet is in hand, by index rather than by the sign of a number that
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
      and the page snaps flat for a frame */
@@ -523,7 +580,8 @@ function paintPad(pad, bm){
        rushes the last fifth so the sheet flops over, and a fade keyed to it
        happened entirely inside that rush — which is the blink. */
     const fade = (1 - clamp01((t - .6) / .35)).toFixed(3);
-    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade, bm);
+    /* the lean is for paper lying there; a page on its way over comes level */
+    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade, bm, lean * (1 - clamp01(t / .2)));
   });
 }
 
@@ -554,7 +612,12 @@ function render(){
   indexText.style.opacity = (IDX_DIM + (IDX_LIT - IDX_DIM) * lit).toFixed(3);
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
-  PADS.forEach((pad, i) => paintPad(pad, bowMul * nearness(Math.abs(i - hx))));
+  PADS.forEach((pad, i) => {
+    /* n is how much this is the sheet in the middle, m how much a neighbour */
+    const d = Math.abs(i - hx), n = nearness(d), m = clamp01((1.4 - d) / .5) * (1 - n);
+    paintPad(pad, bowMul * (1 + airFlap) * n + airBow * m + HOVER_LIFT * (pad.ha || 0),
+                  tilt * n + airTilt * (n + m) + TILT * 1.2 * (pad.hs || 0));
+  });
 }
 
 /* ---------- the spring that catches what you let go of ---------- */
@@ -630,38 +693,128 @@ function bounded(ax, x){
   return x;
 }
 
-/* ---------- the sheet settling, before anyone touches it ----------
-   Flat on arrival, then the bow lifts after a beat and keeps a slow flap.
-   The first thing you do stops it, easing the bow out to its resting value
-   rather than snapping. */
-let woken = false, bowT0 = 0, bowRaf = 0, bowLast = 0;
-function bowCurve(age){
+/* ---------- the air around the sheet ----------
+   Flat on arrival, then the bow lifts after a beat. Until you touch something
+   the paper moves in a draught: the bow breathes, and the lift runs from one
+   bottom corner to the other and back, so the two sides never rise together.
+   The draught reaches the sheets waiting either side too, which on the index
+   is the only paper on screen. A mouse over a sheet lifts the corner nearest
+   it, more the lower it is, and a phone that reports its tilt leans the fold
+   as you move it. Touching anything stills the draught; leave everything
+   alone and it comes back. */
+const TILT = 9, HOVER_LIFT = .8, STILL = 12000;
+let woken = false, airT0 = 0, airRaf = 0, airLast = 0, touchedAt = 0, stillT = 0;
+let draught = 0, airFlap = 0, airBow = 0, airTilt = 0, hover = null, lean = null;
+function rise(age){
   if (age <= BOW_WAIT) return 0;
-  const a = age - BOW_WAIT;
-  const r = clamp01(a / BOW_RISE), s = r * r * (3 - 2 * r);
-  return s * (1 + Math.sin(a / FLAP * Math.PI * 2) * FLAP_DEPTH * s);
+  const r = clamp01((age - BOW_WAIT) / BOW_RISE);
+  return r * r * (3 - 2 * r);
 }
-function bowTick(now){
-  const dt = clamp((now - bowLast) / 1000, .001, .05); bowLast = now;
-  if (woken){
-    bowMul += (1 - bowMul) * (1 - Math.exp(-dt * 7));
-    if (Math.abs(1 - bowMul) < .002){ bowMul = 1; bowRaf = 0; render(); return; }
-  } else {
-    bowMul = bowCurve(now - bowT0);
-  }
+/* bowMul and tilt are the sheet in the middle at rest, and what the phone
+   does to it. The draught flaps that bow by airFlap, and lifts the sheets
+   waiting either side, which have none of their own, by airBow; airTilt
+   leans all of them. Each pad keeps its own eased share of the mouse. */
+function airTick(now){
+  const dt = clamp((now - airLast) / 1000, .001, .05); airLast = now;
+  const busy = !!g || !!w || anims.length > 0;
+  const up = woken ? 1 : rise(now - airT0);
+  const want = !busy && !hover && (!woken || now - touchedAt > STILL);
+  /* the draught comes up slowly and drops quickly when you reach for it */
+  draught += ((want ? 1 : 0) - draught) * (1 - Math.exp(-dt * (want ? .7 : 3)));
+  if (draught < .001 && !want) draught = 0;
+  /* two periods for each, neither a multiple of the other, so it never
+     settles into a visible loop */
+  const s = (now - airT0) / 1000, TAU = Math.PI * 2;
+  airFlap = draught * FLAP_DEPTH *
+            (.75 * Math.sin(s * TAU / 3.2) + .25 * Math.sin(s * TAU / 1.7 + 1.3));
+  airBow = up * (draught + airFlap);
+  airTilt = up * draught * TILT *
+             (.8 * Math.sin(s * TAU / 4.4 + .6) + .2 * Math.sin(s * TAU / 2.1));
+  const k = 1 - Math.exp(-dt * 6);
+  const b = up + (lean && !busy ? lean.lift : 0);
+  const l = lean && !busy ? lean.tilt : 0;
+  bowMul += (b - bowMul) * k;
+  tilt += (l - tilt) * k;
+  let still = !draught && !want && !lean && up === 1 &&
+              Math.abs(b - bowMul) < .002 && Math.abs(l - tilt) < .02;
+  if (still){ bowMul = b; tilt = l; }
+  PADS.forEach((pad, i) => {
+    const h = hover && !busy && hover.i === i ? hover : null;
+    const ha = h ? h.amt : 0, hs = h ? h.amt * h.side : 0;
+    pad.ha = (pad.ha || 0) + (ha - (pad.ha || 0)) * k;
+    pad.hs = (pad.hs || 0) + (hs - (pad.hs || 0)) * k;
+    if (Math.abs(pad.ha - ha) < .002 && Math.abs(pad.hs - hs) < .002){ pad.ha = ha; pad.hs = hs; }
+    else still = false;
+    if (h) still = false;
+  });
   render();
-  bowRaf = requestAnimationFrame(bowTick);
+  airRaf = still ? 0 : requestAnimationFrame(airTick);
+}
+function stir(){
+  if (reduce || airRaf || !airT0) return;
+  airLast = performance.now();
+  airRaf = requestAnimationFrame(airTick);
 }
 function startBreathing(){
   if (reduce){ bowMul = 1; render(); return; }
-  bowT0 = bowLast = performance.now();
-  if (!bowRaf) bowRaf = requestAnimationFrame(bowTick);
+  airT0 = performance.now();
+  stir();
 }
+/* every touch stills the draught and puts off its return */
 function wake(){
-  if (woken) return;
   woken = true;
-  bowLast = performance.now();
-  if (!bowRaf) bowRaf = requestAnimationFrame(bowTick);
+  touchedAt = performance.now();
+  clearTimeout(stillT);
+  stillT = setTimeout(stir, STILL + 50);
+  stir();
+}
+
+/* The corner nearest the mouse comes up to meet it: which corner by where it
+   is across the sheet, how far by how low. Any sheet on screen, once the rail
+   has stopped moving. */
+function hoverAt(x, y){
+  if (Math.abs(hx - Math.round(hx)) > .08) return null;
+  for (let i = 0; i < PADS.length; i++){
+    if (Math.abs(i - hx) > 1.2) continue;
+    const r = RAIL.find(([, j]) => j === i)[0].getBoundingClientRect();
+    const fx = (x - r.left) / r.width, fy = (y - r.top) / r.height;
+    const across = 1 - clamp01(Math.max(0, -fx, fx - 1) / .12);
+    const d = clamp01((fy - .1) / .9), down = d * d * (3 - 2 * d) * (1 - clamp01((fy - 1) / .12));
+    const amt = across * down;
+    if (amt > .01) return { i, amt, side: clamp((.5 - fx) * 2.4, -1, 1) };
+  }
+  return null;
+}
+if (!reduce){
+  stage.addEventListener('pointermove', e => {
+    if (g || e.pointerType === 'touch') return;
+    hover = hoverAt(e.clientX, e.clientY); stir();
+  });
+  stage.addEventListener('pointerleave', () => { hover = null; stir(); });
+}
+
+/* A phone that reports its tilt without asking. What moves the paper is the
+   change, not the angle: the phone's pose is followed slowly, and only how far
+   it has just swung from that leans the fold and lifts the sheet, so however
+   you hold it the paper comes to rest. iOS would put up a permission prompt
+   for this, and a dialog is no invitation, so there it is left alone. */
+if (!reduce && self.DeviceOrientationEvent &&
+    typeof DeviceOrientationEvent.requestPermission !== 'function'){
+  let pose = null;
+  addEventListener('deviceorientation', e => {
+    if (e.beta == null || e.gamma == null) return;
+    const now = performance.now();
+    const a = ((screen.orientation && screen.orientation.angle) || self.orientation || 0) % 360;
+    const lr = a === 90 ? e.beta : a === 270 || a === -90 ? -e.beta : e.gamma;
+    const fb = a === 90 ? -e.gamma : a === 270 || a === -90 ? e.gamma : e.beta;
+    if (!pose){ pose = { lr, fb, t: now }; return; }
+    const k = 1 - Math.exp(-clamp((now - pose.t) / 1000, 0, .2) / 1.6);
+    pose.t = now; pose.lr += (lr - pose.lr) * k; pose.fb += (fb - pose.fb) * k;
+    const dl = clamp((lr - pose.lr) / 18, -1, 1), df = clamp((fb - pose.fb) / 18, -1, 1);
+    lean = Math.abs(dl) < .01 && Math.abs(df) < .01 ? null
+      : { tilt: TILT * 1.2 * dl, lift: .7 * Math.max(Math.abs(dl), Math.abs(df)) };
+    stir();
+  });
 }
 
 /* ---------- hand ---------- */
@@ -703,6 +856,7 @@ function release(e){
   if (!g || (e && e.pointerId !== g.id)) return;
   if (g.held) try { stage.releasePointerCapture(g.id); } catch (_) {}
   const ax = g.ax, s = g.s, from = g.from; g = null;
+  wake();     /* the draught's quiet is counted from when you let go */
   if (ax && s.length) settle(ax, speed(s), from);
 }
 stage.addEventListener('pointerup', release);
