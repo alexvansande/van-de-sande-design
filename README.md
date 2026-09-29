@@ -48,18 +48,23 @@ over the far side it fades rather than blinking off.
 
 **The fold can lean.** The strips are cut along the fold, and the fold
 does not have to lie level: lean it and one bottom corner rises ahead of
-the other. A page being turned always comes level.
+the other. Take a page by a corner and that corner leads; draw sideways as
+you lift and it leans further, so a page goes over to the left or to the
+right. On a trackpad the sideways part of the scroll does the same. It
+comes level as it lands.
 
 **Paper is never flat.** The sheet in the middle carries a standing bow. It
-is not there when the page arrives: it lifts after a beat. Until you touch
-something the paper moves in a draught: the bow breathes, and the lift runs
-from one corner to the other and back, so the two sides never rise
-together. The draught reaches the sheets waiting either side too, so the
-story is already stirring at the edge of the index. A mouse over a sheet
+is not there when the page arrives: it lifts after a beat. Whenever nothing
+is being touched the paper moves in gusts: it opens and closes on a slow
+beat, each gust taking the other corner. The gusts reach the sheets waiting
+either side too, so the story is already stirring at the edge of the index.
+They stop the moment you touch anything and come back three and a half
+seconds after. A lifted foot throws a shadow on the paper under it,
+darkest under the corner that is up. Sliding along the rail leans every
+sheet against the slide, the trailing corner lifting. A mouse over a sheet
 lifts the corner nearest it, more the lower it is. A phone that reports its
 tilt without asking (Android; iOS would need a permission prompt, so it is
-left alone) leans the fold as you move it. Touching anything stills the
-draught, and twelve seconds later it comes back. Slide sideways and the
+left alone) leans the fold as you move it. Slide sideways and the
 bow crosses over from the sheet leaving to the one arriving.
 
 **There is dead scroll either side of a page at rest**, so a long scroll has

@@ -164,6 +164,12 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .cast{position:absolute;left:0;right:0;top:0;z-index:39;pointer-events:none;opacity:0;
   transform-origin:50% 0;will-change:transform,opacity;height:100%;
   background:linear-gradient(180deg,rgb(40,34,18) 0%,rgba(40,34,18,.5) 55%,rgba(40,34,18,0) 100%)}
+/* the shadow a lifted foot throws on the paper under it, pooled under
+   whichever corner is up; drawCurl moves it and sets how dark */
+.pool{position:absolute;inset:0;z-index:39;pointer-events:none;opacity:0;
+  will-change:opacity;
+  background:radial-gradient(ellipse 70% 34% at var(--px,50%) 100%,
+    rgba(30,24,12,.62), rgba(30,24,12,.25) 55%, rgba(30,24,12,0) 100%)}
 /* a phone has no room for the running head at full tracking */
 @media (max-width:30rem){
   .run{font-size:.55rem;letter-spacing:.13em}
@@ -438,7 +444,7 @@ function buildCurl(sheet){
     parts.push({ face: band('fr', copy), back: band('bk', under, ghost),
                  copy, under, inked, a1, b1, a2, b2, half: ph / 2 });
   }
-  const cast = el('div', 'cast'), plate = el('div', 'plate');
+  const cast = el('div', 'cast'), plate = el('div', 'plate'), pool = el('div', 'pool');
   plate.style.backgroundColor = bg;
   /* and the plate is the page itself rather than a swatch of its ground, so
      that wherever the strips fall short of it — at a seam, or at the foot
@@ -450,14 +456,15 @@ function buildCurl(sheet){
   plate.append(under);
   /* beside the sheet, not inside it: the sheet is hidden while its strips
      stand in for it, and a child would inherit that and never paint */
-  sheet.parentNode.append(plate, cast, host);
-  sheet._curl = { host, cast, plate, parts, W, H, hs };
+  sheet.parentNode.append(plate, pool, cast, host);
+  sheet._curl = { host, cast, plate, pool, parts, W, H, hs };
   sheet.classList.add('lifted');
 }
 function dropCurl(sheet){
   if (!sheet._curl) return;
   sheet._sig = null;
   sheet._curl.host.remove(); sheet._curl.cast.remove(); sheet._curl.plate.remove();
+  sheet._curl.pool.remove();
   sheet._curl = null; sheet.classList.remove('lifted');
 }
 
@@ -469,7 +476,7 @@ function drawCurl(sheet, e, fade, bm, lean){
   const sig = e + '|' + fade + '|' + bm + '|' + tq;
   if (sheet._sig === sig) return;
   sheet._sig = sig;
-  const { parts, cast, plate, W, H, hs } = sheet._curl;
+  const { parts, cast, plate, pool, W, H, hs } = sheet._curl;
   /* The fold runs along v and the sheet falls away from it along u; at a
      level fold those are across and down. s measures along u, t along v. */
   const ls = Math.sin(tq * RAD), lc = Math.cos(tq * RAD);
@@ -536,6 +543,13 @@ function drawCurl(sheet, e, fade, bm, lean){
   plate.style.opacity = (1 - clamp01(e / .06)).toFixed(3);
   cast.style.opacity = (Math.sin(Math.PI * e) * .3).toFixed(3);
   cast.style.transform = `scaleY(${Math.min(1, reach + .16).toFixed(4)})`;
+  /* While the page lies there with its foot up, the paper under the foot is
+     in its shade, darkest under the corner that is highest. It is what
+     parts the lifted sheet from the one below. Once the page is properly
+     up, the cast above takes over. */
+  const up = Math.sin(clamp(ang[Math.min(STRIPS - 1, ang.length - 1)], 0, 90) * RAD);
+  pool.style.opacity = (clamp01(up * 1.5) * (1 - clamp01(e / .2))).toFixed(3);
+  pool.style.setProperty('--px', (50 - tq / TILT_MAX * 42).toFixed(1) + '%');
 }
 
 /* ===================================================================
@@ -617,8 +631,11 @@ function paintPad(pad, bm, lean){
        rushes the last fifth so the sheet flops over, and a fade keyed to it
        happened entirely inside that rush — which is the blink. */
     const fade = (1 - clamp01((t - .6) / .35)).toFixed(3);
-    /* the lean is for paper lying there; a page on its way over comes level */
-    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade, bm, lean * (1 - clamp01(t / .2)));
+    /* the lean holds while the page goes up, and comes level only as it
+       lands on the far side */
+    const land = clamp01((t - .55) / .4);
+    drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade, bm,
+             lean * (1 - land * land * (3 - 2 * land)));
   });
 }
 
@@ -667,8 +684,10 @@ function render(){
     paintLines(pad, Math.abs(i - hx));
     /* n is how much this is the sheet in the middle, m how much a neighbour */
     const d = Math.abs(i - hx), n = nearness(d), m = clamp01((1.4 - d) / .5) * (1 - n);
-    paintPad(pad, bowMul * (1 + airFlap) * n + airBow * m + HOVER_LIFT * (pad.ha || 0),
-                  tilt * n + airTilt * (n + m) + TILT * 1.2 * (pad.hs || 0));
+    const own = i === Math.round(hx) ? handTilt : 0;
+    paintPad(pad, bowMul * (1 + airFlap) * n + airBow * m + HOVER_LIFT * (pad.ha || 0) +
+                  slideLift * (n + m),
+                  (tilt + own) * n + (airTilt + slideTilt) * (n + m) + TILT * 1.2 * (pad.hs || 0));
   });
 }
 
@@ -754,16 +773,23 @@ function bounded(ax, x){
    it, more the lower it is, and a phone that reports its tilt leans the fold
    as you move it. Touching anything stills the draught; leave everything
    alone and it comes back. */
-const TILT = 9, HOVER_LIFT = .8, STILL = 12000;
+const TILT = 11, HOVER_LIFT = .9, STILL = 3500;
+/* The draught comes in gusts: the sheet opens and closes on a slow beat,
+   BREATH seconds a gust, each one taking the other corner. GUST is how far
+   past its resting bow a gust opens it. */
+const BREATH = 2.9, GUST = 2;
 let woken = false, airT0 = 0, airRaf = 0, airLast = 0, touchedAt = 0, stillT = 0;
 let draught = 0, airFlap = 0, airBow = 0, airTilt = 0, hover = null, lean = null;
+/* the hand's own lean on the page it is turning, and the lean and lift a
+   slide along the rail puts into every sheet as it passes */
+let handTilt = 0, slideVel = 0, slideTilt = 0, slideLift = 0, lastHx = null;
 function rise(age){
   if (age <= BOW_WAIT) return 0;
   const r = clamp01((age - BOW_WAIT) / BOW_RISE);
   return r * r * (3 - 2 * r);
 }
 /* bowMul and tilt are the sheet in the middle at rest, and what the phone
-   does to it. The draught flaps that bow by airFlap, and lifts the sheets
+   does to it. The draught opens that bow by airFlap, and lifts the sheets
    waiting either side, which have none of their own, by airBow; airTilt
    leans all of them. Each pad keeps its own eased share of the mouse. */
 function airTick(now){
@@ -771,25 +797,34 @@ function airTick(now){
   const busy = !!g || !!w || anims.length > 0;
   const up = woken ? 1 : rise(now - airT0);
   const want = !busy && !hover && (!woken || now - touchedAt > STILL);
-  /* the draught comes up slowly and drops quickly when you reach for it */
-  draught += ((want ? 1 : 0) - draught) * (1 - Math.exp(-dt * (want ? .7 : 3)));
+  /* the draught comes back gently and drops at once when you reach for it */
+  draught += ((want ? 1 : 0) - draught) * (1 - Math.exp(-dt * (want ? 1.2 : 4)));
   if (draught < .001 && !want) draught = 0;
-  /* two periods for each, neither a multiple of the other, so it never
-     settles into a visible loop */
-  const s = (now - airT0) / 1000, TAU = Math.PI * 2;
-  airFlap = draught * FLAP_DEPTH *
-            (.75 * Math.sin(s * TAU / 3.2) + .25 * Math.sin(s * TAU / 1.7 + 1.3));
+  const s = (now - airT0) / 1000, TAU = Math.PI * 2, ph = s / BREATH * TAU;
+  /* open and close on the beat, some gusts a little stronger than others;
+     the lean swings at half the beat, so it peaks one way on this gust and
+     the other way on the next, and lies level while the sheet is closed */
+  const swell = Math.pow(.5 - .5 * Math.cos(ph), 1.4);   /* lingers closed, opens quicker */
+  airFlap = draught * GUST * (.8 + .2 * Math.sin(s * TAU / 11.3)) * swell;
   airBow = up * (draught + airFlap);
-  airTilt = up * draught * TILT *
-             (.8 * Math.sin(s * TAU / 4.4 + .6) + .2 * Math.sin(s * TAU / 2.1));
+  airTilt = up * draught * TILT * Math.sin(ph / 2) * (.85 + .15 * Math.sin(s * TAU / 7.1));
   const k = 1 - Math.exp(-dt * 6);
   const b = up + (lean && !busy ? lean.lift : 0);
   const l = lean && !busy ? lean.tilt : 0;
   bowMul += (b - bowMul) * k;
   tilt += (l - tilt) * k;
-  let still = !draught && !want && !lean && up === 1 &&
-              Math.abs(b - bowMul) < .002 && Math.abs(l - tilt) < .02;
-  if (still){ bowMul = b; tilt = l; }
+  /* a page let go of comes level again */
+  if (!g && !w) handTilt += (0 - handTilt) * (1 - Math.exp(-dt * 5));
+  /* Slide along the rail and the sheets lean against it, the trailing corner
+     lifting, and settle as the rail comes to rest. */
+  const v = lastHx === null ? 0 : (hx - lastHx) / dt; lastHx = hx;
+  slideVel += (v - slideVel) * (1 - Math.exp(-dt * 10));
+  slideTilt = -clamp(slideVel / 2.2, -1, 1) * TILT;
+  slideLift = Math.min(1, Math.abs(slideVel) / 2.2) * .7;
+  let still = !busy && !draught && !want && !lean && up === 1 &&
+              Math.abs(b - bowMul) < .002 && Math.abs(l - tilt) < .02 &&
+              Math.abs(handTilt) < .02 && Math.abs(slideVel) < .01;
+  if (still){ bowMul = b; tilt = l; handTilt = 0; slideVel = slideTilt = slideLift = 0; }
   PADS.forEach((pad, i) => {
     const h = hover && !busy && hover.i === i ? hover : null;
     const ha = h ? h.amt : 0, hs = h ? h.amt * h.side : 0;
@@ -879,6 +914,12 @@ let g = null;
 stage.addEventListener('pointerdown', e => {
   wake();     /* nothing is stopped yet: the axis is not known until you move */
   g = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ax: null, base: 0, s: [] };
+  /* where across the sheet you took hold of it, -1 at its left edge to 1 at
+     its right, and how wide it is on screen */
+  const st = RAIL.find(([, j]) => j === Math.round(hx));
+  const r = st ? st[0].getBoundingClientRect() : { left: 0, width: W() };
+  g.at = clamp((e.clientX - r.left) / r.width * 2 - 1, -1, 1);
+  g.pw = r.width;
 });
 stage.addEventListener('pointermove', e => {
   if (!g || e.pointerId !== g.id) return;
@@ -900,6 +941,11 @@ stage.addEventListener('pointermove', e => {
     ? g.base - (e.clientX - g.x0) / (W() * .42)
     : g.base - (e.clientY - g.y0) / (H() * .5);
   g.ax.set(bounded(g.ax, raw));
+  /* Turning a page, the hand leans the fold: take it by a corner and that
+     corner leads, and drawing sideways as you lift leans it further that
+     way, so a page can go over to the left or to the right. */
+  if (g.ax !== RAIL_AX)
+    handTilt = TILT_MAX * clamp(-.6 * g.at + (e.clientX - g.x0) / (g.pw * .45), -1, 1);
   g.s.push([e.timeStamp, g.ax.get()]);
   while (g.s.length > 2 && e.timeStamp - g.s[0][0] > 90) g.s.shift();
   render();
@@ -926,7 +972,12 @@ stage.addEventListener('wheel', e => {
   if (!w){
     const ax = Math.abs(dx) > Math.abs(dy) ? RAIL_AX : pageAxis();
     stop(ax);
-    w = { ax, raw: ax.get(), from: Math.round(ax.get()) };
+    w = { ax, raw: ax.get(), from: Math.round(ax.get()), side: 0 };
+  }
+  /* on a trackpad the sideways part of a turn leans the fold the same way */
+  if (w.ax !== RAIL_AX){
+    w.side += dx;
+    handTilt = TILT_MAX * clamp(-w.side / (W() * .2), -1, 1);
   }
   w.raw += w.ax === RAIL_AX ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .5);
   w.ax.set(bounded(w.ax, w.raw));
