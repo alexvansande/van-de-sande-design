@@ -720,6 +720,15 @@ let anims = [], raf = 0, last = 0;
 function springTo(ax, target, v0){
   anims = anims.filter(a => a.ax !== ax);
   anims.push({ ax, target: clamp(target, ax.lo(), ax.hi()), v: v0 || 0 });
+  /* Heading for a station, every other pad on the wall closes back to its
+     first page, so whatever you come back to starts from the beginning. The
+     one you leave flips shut as it slides away. */
+  if (ax === RAIL_AX){
+    const to = clamp(Math.round(target), FIRST, LAST);
+    PADS.forEach((pad, i) => {
+      if (i !== to && (pad.pv || flightOf(pageAxisOf(pad)))) springTo(pageAxisOf(pad), 0);
+    });
+  }
   if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
 }
 function tick(now){
