@@ -172,6 +172,43 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 .index>h1{margin:1.5rem 0 2.6rem;font-weight:400;font-size:clamp(1.9rem,1.2rem + 2.6vw,3rem);line-height:1.15;
   color:var(--light);text-wrap:balance}
 .index .cat::before{content:"#";opacity:.5}
+
+/* The index itself: a column beside the posts, with a line about them and
+   the years they span. The line goes by with the page; the years stay, the
+   one being read lit. On a phone the line sits under the title and the
+   years run along the top of the screen. */
+.front-index{max-width:78rem}
+.side .about{margin:0 0 1.6rem;font-size:1.2rem;line-height:1.45;color:var(--light);opacity:.75;font-style:italic;
+  text-wrap:pretty}
+.years{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;font-size:1.1rem;
+  font-feature-settings:"kern","lnum";font-variant-numeric:lining-nums tabular-nums}
+.years a{position:relative;padding:.12rem 0 .12rem 1.1rem;color:var(--light);text-decoration:none;opacity:.42;
+  transition:opacity .25s}
+.years a::before{content:"";position:absolute;left:0;top:50%;width:.55rem;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .25s}
+.years a:hover{opacity:.8}
+.years a.on{opacity:1}
+.years a.on::before{transform:none}
+.cards>.card[id]{scroll-margin-top:1.5rem}
+@media (min-width:60rem){
+  .spread{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:clamp(2.5rem,4vw,4rem)}
+  .years{position:sticky;top:1.5rem}
+}
+@media (max-width:59.99rem){
+  /* the column dissolves, so the years can stay at the top all the way down
+     the posts rather than only as far as the end of the line above them */
+  .side{display:contents}
+  .side .about{margin:-1.6rem 0 1.4rem;font-size:1.1rem}
+  .years{position:sticky;top:0;z-index:30;flex-direction:row;gap:0 1.1rem;overflow-x:auto;scrollbar-width:none;
+    margin:0 calc(var(--gutter) * -1) 1.6rem;padding:.7rem var(--gutter);
+    background:rgba(51,51,49,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.07)}
+  .years::-webkit-scrollbar{display:none}
+  .years a{padding:.1rem 0 .25rem}
+  .years a::before{left:0;right:0;top:auto;bottom:0;width:auto;transform:scaleX(0);transform-origin:50% 50%}
+  .years a.on::before{transform:none}
+  .cards>.card[id]{scroll-margin-top:4rem}
+}
 .lost{font-size:1.3rem}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:clamp(1.5rem,3vw,2.4rem)}
 .card{position:relative;isolation:isolate;display:flex;flex-direction:column;color:var(--ink);text-decoration:none;

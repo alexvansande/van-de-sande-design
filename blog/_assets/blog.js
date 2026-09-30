@@ -81,6 +81,45 @@ function pullAtTop(label, go, gone) {
   const site = document.querySelector(".index > h1 a.home");
   if (!site) return;
   let leaving = false;
+
+  /* The years beside the posts: the one being read is lit, and on a phone,
+     where they run along the top, it is kept in view there. */
+  const years = document.querySelector(".years");
+  const cards = [...document.querySelectorAll(".cards > .card[data-year]")];
+  if (years && cards.length) {
+    const links = new Map([...years.querySelectorAll("a")].map(a => [a.dataset.year, a]));
+    let lit = null, ticking = false;
+    const light = () => {
+      ticking = false;
+      // the first post still showing past the top third of the screen
+      const line = innerHeight * .33;
+      const c = cards.find(c => c.getBoundingClientRect().bottom > line) || cards[cards.length - 1];
+      const y = c.dataset.year;
+      if (y === lit) return;
+      if (lit && links.get(lit)) links.get(lit).classList.remove("on");
+      lit = y;
+      const a = links.get(y);
+      if (!a) return;
+      a.classList.add("on");
+      if (years.scrollWidth > years.clientWidth) {
+        const to = a.offsetLeft - (years.clientWidth - a.offsetWidth) / 2;
+        years.scrollTo({ left: to, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      }
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(light); } }, { passive: true });
+    addEventListener("resize", light);
+    light();
+    years.addEventListener("click", e => {
+      const a = e.target.closest("a[data-year]");
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const to = document.getElementById("y" + a.dataset.year);
+      if (!to) return;
+      e.preventDefault();
+      to.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      history.replaceState(history.state, "", "#y" + a.dataset.year);
+    });
+  }
+
   pullAtTop("Alex Van de Sande", () => {
     if (leaving) return;
     leaving = true;

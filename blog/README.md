@@ -61,6 +61,15 @@ paragraphs, headings, lists and pictures are Paragraph's own. Everything
 around the post is the rest of the site's: the dark ground, the paper, EB
 Garamond.
 
+## The index
+
+Beside the posts is a column with a line about them ("I have been writing
+on the internet for over 25 years…") and the years they span, newest
+first; each year goes to its first post. The line goes by with the page and
+the years stay in view, the year being read lit (`blog.js`). On a phone the
+line sits under the title and the years run along the top of the screen,
+keeping the lit one in view. The line is in `front_page()` in `build.py`.
+
 ## Opening a post, and reading on
 
 Clicking a card on the index grows its paper and picture into the post's

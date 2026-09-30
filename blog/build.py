@@ -575,10 +575,33 @@ def build(out, base, clean=False):
     def listing(title, heading, items, canonical, path, head=True):
         cards = "\n".join(card(p, base, pics, eager=True) for p in items)
         body = f'<main class="index"><h1 style="view-transition-name:site-title">{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
+        if not head:
+            body = front_page(heading, items)
         # the index itself (no header over it): pulled down, it goes back to the site
         front = {} if head else {"cls": "list front", "extra_head": f'<script src="{base}assets/blog.js" defer></script>'}
         write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical,
                               **{"cls": "list", "head": head, **front}))
+
+    def front_page(heading, items):
+        """The index itself: beside the posts, a line about them and the years
+        they span, the years staying in view as the posts go by; each year goes
+        to its first post. On a phone the line sits under the title and the
+        years run along the top."""
+        years, cards = [], []
+        for p in items:
+            y = p["date_dt"].year
+            c = card(p, base, pics, eager=True).replace('<a class="card" ', f'<a class="card" data-year="{y}" ', 1)
+            if y not in years:
+                years.append(y)
+                c = c.replace('<a class="card" ', f'<a class="card" id="y{y}" ', 1)
+            cards.append(c)
+        nav = "".join(f'<a href="#y{y}" data-year="{y}">{y}</a>' for y in years)
+        return (f'<main class="index front-index"><h1 style="view-transition-name:site-title">{heading}</h1>\n'
+                f'<div class="spread">\n<aside class="side">'
+                f'<p class="about">I have been writing on the internet for over 25 years. '
+                f'This is a collection of some of these weird ideas</p>'
+                f'<nav class="years" aria-label="Years">{nav}</nav></aside>\n'
+                f'<div class="cards">\n' + "\n".join(cards) + '\n</div>\n</div></main>')
 
     # the index is headed by the blog's name itself, so it has no header over it
     listing(TITLE, named(base), posts, SITE_URL + "/", "index.html", head=False)
