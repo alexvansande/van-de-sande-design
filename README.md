@@ -42,7 +42,8 @@ the fourth corner says to learn more about them. The shelf is a wall: each
 book hangs a little way out from it and throws its shadow on it, down and to
 the right. A book can be taken and turned right round — spine, back board,
 the edges of the leaves — flicked to spin, and left alone it comes back to
-face the room. The back and spine are the book's `base` colour for now. The covers are asked for
+face the room. While the shelf is showing none of them quite holds still:
+each sways a few degrees on a slow beat of its own. The back and spine are the book's `base` colour for now. The covers are asked for
 along with the faces of the later pages, once the first screen is in; a book
 in `BOOKS` without a `cover` is set in type instead.
 
@@ -129,7 +130,10 @@ starts the same server under the name `site`.
 ## Deploying
 
 Every push to `main` publishes `site/` to GitHub Pages through
-`.github/workflows/pages.yml`.
+`.github/workflows/pages.yml`. On the way it stamps the script's address
+with the commit, `app.js?v=…`: Pages lets a browser keep each file for ten
+minutes on its own clock, and without the stamp a visitor could get a new
+page with the old script.
 
 ## What is not in this repo
 

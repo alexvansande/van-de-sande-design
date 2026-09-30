@@ -23,6 +23,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # Pages lets a browser keep each file for ten minutes, on its own
+      # clock, so a visitor could get this deploy's page with the last one's
+      # script. The script's address changes with every deploy instead.
+      - name: Stamp the script with this commit
+        run: sed -i "s|src=\"app.js\"|src=\"app.js?v=${GITHUB_SHA::8}\"|" site/index.html
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

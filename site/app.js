@@ -81,7 +81,8 @@ const faceHTML = p => p.art
 function buildShelf(books){
   const host = el('div', 'shelf');
   host.setAttribute('aria-hidden', 'true');
-  const items = books.map(b => {
+  const shelf = { host, open: false };
+  const items = books.map((b, n) => {
     const a = el('a', 'bk ' + b.cls);
     a.href = b.href; a.target = '_blank'; a.rel = 'noopener';
     a.tabIndex = -1;
@@ -95,13 +96,13 @@ function buildShelf(books){
         <span class="hd top"></span><span class="hd foot"></span>
       </span>`;
     host.append(a);
-    spinnable(a);
+    a._go = spinnable(a, n, () => shelf.open);
     return a;
   });
   const note = el('p', 'note');
   note.innerHTML = '<span>Learn more about these books</span>';
   host.append(note);
-  return { host, items: items.concat(note), links: items, open: false };
+  return Object.assign(shelf, { items: items.concat(note), links: items });
 }
 /* A book on the shelf can be taken and turned: drag it round, flick it and
    it spins on and slows, and left alone a while it comes back to face the
@@ -110,7 +111,10 @@ function buildShelf(books){
    whatever the book shows of itself, and falls further and softer the
    further out it comes. */
 const REST = [-32, 4], FACE = [-12, 2], HOME_AFTER = 2600;
-function spinnable(a){
+/* and while the shelf is showing, none of them quite holds still: each sways
+   a few degrees about its resting pose, on a slow beat of its own */
+const SWAY = [7, 2.2], SWAY_BEAT = [6.4, 9.1];
+function spinnable(a, n, shown){
   const vol = a.querySelector('.vol'), ws = a.querySelector('.ws');
   const T = .15;                                /* --t, as a share of the width */
   let ry = REST[0], rx = REST[1], vy = 0, vx = 0, lift = 0;
@@ -141,7 +145,13 @@ function spinnable(a){
         /* home to the nearest turn of the resting pose, not all the way back
            round the way it came */
         if (near || now - letGo > HOME_AFTER){
-          const [ty, tx] = near ? FACE : REST;
+          let [ty, tx] = near ? FACE : REST;
+          if (!near && !reduce && shown()){
+            const s = now / 1000, ph = n * 2.1, TAU = Math.PI * 2;
+            ty += SWAY[0] * Math.sin(s / SWAY_BEAT[0] * TAU + ph);
+            tx += SWAY[1] * Math.sin(s / SWAY_BEAT[1] * TAU + ph * 1.7);
+            busy = true;
+          }
           const goal = ty + 360 * Math.round((ry - ty) / 360);
           ry += (goal - ry) * k; rx += (tx - rx) * k;
           if (Math.abs(goal - ry) > .05 || Math.abs(tx - rx) > .05) busy = true;
@@ -193,6 +203,7 @@ function spinnable(a){
   a.addEventListener('pointerup', drop);
   a.addEventListener('pointercancel', drop);
   draw();
+  return go;
 }
 function buildPad(station, pages, reel, shelf){
   const cap = station.querySelector('.cap');
@@ -702,7 +713,7 @@ function paintShelf(pad){
     sh.open = open;
     sh.host.classList.toggle('open', open);
     sh.host.setAttribute('aria-hidden', open ? 'false' : 'true');
-    sh.links.forEach(a => { a.tabIndex = open ? 0 : -1; });
+    sh.links.forEach(a => { a.tabIndex = open ? 0 : -1; a._go(); });
   }
 }
 
