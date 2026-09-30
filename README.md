@@ -41,9 +41,9 @@ Platform release pages. **The Mist browser** is the Ethereum Catalog, a
 window with rounded corners; turn it away and three Mist screenshots rise
 out of the dark one after another and pile up like windows. They are not A4
 and do not turn: they are the pad's `reel`, wider than the page and faded at
-its sides. **Victor** is the HVM logo looping on a plain sheet, then the
-HVM diagram, the unofficial guide to Bend and its TinyChess chapter, each
-with a line of the story. A line too deep for the room under the page takes
+its sides. **Victor** is the HVM logo, small, looping on a plain sheet,
+then the HVM diagram, the unofficial guide to Bend and its TinyChess
+chapter, each with a line of the story. A line too deep for the room under the page takes
 the page down by just enough to fit, on every sheet at once. **Some experiments with maps** is the Hexagonal
 Earth series: the Lifezones print, the "Impossible" Map, the Gosper
 topographic. **The whole universe in one image** is the Triangle of
@@ -55,7 +55,9 @@ story, one per page, which changes as the page turns: `cap` on each page in
 Where there is room under the paper — on a big display, where the sheets
 stop growing at 45rem and several sit side by side — the whole story is set
 out at once instead, like the lyrics of a song: every line showing, the one
-for the page in hand bright and the rest dim.
+for the page in hand bright and the rest dim. There the page may give up
+to 15% of its height to make room for a story; one that would need more
+stays one line at a time.
 
 Adding another is two lines: an entry in `PADS` and a `.art` class with its
 image. Everything on the rail is A4, so one step spaces all of it.
@@ -85,8 +87,10 @@ comes level as it lands.
 **Paper is never flat.** The sheet in the middle carries a standing bow. It
 is not there when the page arrives: it lifts after a beat. Whenever nothing
 is being touched the paper moves in gusts: it opens and closes on a slow
-beat, each gust taking the other corner. The gusts reach the sheets waiting
-either side too, so the story is already stirring at the edge of the index.
+beat, each gust taking the other corner. Only the sheet in the middle stirs —
+neighbours moving too were a hundred more layers to draw each frame, which
+Safari on a big screen felt — except the story seen from the index, where
+it is the only paper on screen.
 They stop the moment you touch anything and come back three and a half
 seconds after. A lifted foot throws a shadow on the paper under it,
 darkest under the corner that is up. Sliding along the rail leans every

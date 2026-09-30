@@ -108,10 +108,10 @@ const PADS = [buildPad(story, PAGES),
                 ['mist2', 2000, 1679, 'It was the first wallet to have tokens. In fact we were the ones who wrote the specs for it, which became industry standard, ERC20.'],
                 ['mist3', 2000, 1648, 'The Mist Browser died. But it was survived by lots of three letter acronyms it helped set: NFT, ICO, ENS, DAO.']]),
               buildPad($('#victor'), [
-                { art: 'hvmlogo', cap: 'One of the smartest persons I worked on my projects was Victor Taelin. I once gave him a small bug and he fixed in a day, then fixed the library it depended on, then proposed a larger refactor of the whole app, until finally he proposed refactoring ethereum from scratch' },
-                { art: 'hvm1', cap: 'I asked him if given more time he would make a new computer. And that’s what he did. He spent years creating a completely new way to compute. I became an early investor in the Higher Order Company.' },
-                { art: 'bend', cap: 'I believe the best way to teach about something is to learn it first so I did lots of visualizations for his machine. Not all of them were used.' },
-                { art: 'chess', cap: 'Bend doesn’t use Interaction combinators anymore – the fancy graphs on the logo. But I still love them as concepts.' }]),
+                { art: 'hvmlogo', cap: 'One of the smartest persons I worked on my projects was Victor Taelin – and I’ve worked with lots of smart people.' },
+                { art: 'hvm1', cap: 'He once fixed a bug on the app, then fixed the library it depended on, then proposed a larger refactor of the whole app, until finally he proposed refactoring ethereum from scratch.' },
+                { art: 'bend', cap: 'I asked him if given more time he would make a new computer. And that’s what he did. He spent years creating a completely new way to compute. I became an early investor in the Higher Order Company.' },
+                { art: 'chess', cap: 'I believe the best way to teach about something is to learn it first so I did lots of visualizations for his machine. Not all of them were used.' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
               buildPad($('#triangle'), [{ art: 'triangle' }])];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
@@ -415,6 +415,7 @@ let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs th
    Measured once and kept, too: the breathing loop renders every frame, and
    reading offsetWidth in there would force a reflow on each of them. */
 let STEP = 0, PH = 0, PW = 0, REEL_W = 0;
+const LYRIC_GIVE = .15;
 function measure(){
   /* The page is as tall as the screen allows, less whatever the deepest line
      under it needs: a line that ran off the foot of a laptop took the page
@@ -422,6 +423,11 @@ function measure(){
      the line's depth depends on how wide the page came out. */
   const before = story.offsetHeight;
   stage.style.removeProperty('--phfit');
+  /* On a big screen, where the page has already stopped growing, it may give
+     up to LYRIC_GIVE of itself so that a story can be set out whole beneath
+     it. A story that would need more than that stays one line at a time. */
+  const full = story.offsetHeight;
+  const big = full >= 45 * parseFloat(getComputedStyle(document.documentElement).fontSize) - 1;
   for (let pass = 0; pass < 2; pass++){
     const pw = story.offsetWidth, g = clamp((W() - pw) / 2 * .38, 12, 210);
     stage.style.setProperty('--gap', g + 'px');
@@ -434,7 +440,16 @@ function measure(){
     });
     /* the page sits 2.4vh above the middle, and its foot must leave `need`
        and a margin before the bottom of the screen */
-    const room = 2 * (H() * .524 - 12 - need);
+    let room = 2 * (H() * .524 - 12 - need);
+    if (big) PADS.forEach(pad => {
+      if (!pad.lines) return;
+      const st = pad.cap.parentNode;
+      st.classList.add('lyrics');
+      const deep = pad.cap.offsetTop - story.offsetHeight + pad.cap.offsetHeight;
+      st.classList.remove('lyrics');
+      const fits = 2 * (H() * .524 - 16 - deep);
+      if (fits >= full * (1 - LYRIC_GIVE)) room = Math.min(room, fits);
+    });
     if (story.offsetHeight <= room + .5) break;
     stage.style.setProperty('--phfit', Math.floor(room) + 'px');
   }
@@ -629,8 +644,13 @@ function render(){
      posters rightwards */
   PADS.forEach((pad, i) => {
     paintLines(pad, Math.abs(i - hx));
-    /* n is how much this is the sheet in the middle, m how much a neighbour */
-    const d = Math.abs(i - hx), n = nearness(d), m = clamp01((1.4 - d) / .5) * (1 - n);
+    /* n is how much this is the sheet in the middle, m how much a neighbour.
+       Only the sheet in the middle stirs: a neighbour moving too was a
+       hundred more layers for the browser to draw every frame, which a big
+       screen with several sheets on it felt. The one exception is the book
+       seen from the index, where it is the only paper there is. */
+    const d = Math.abs(i - hx), n = nearness(d);
+    const m = i === 0 && hx < 0 ? clamp01((1.4 - d) / .5) * (1 - n) : 0;
     const own = i === Math.round(hx) ? handTilt : 0;
     paintPad(pad, bowMul * (1 + (pad.flap || 0)) * n + (pad.air || 0) * m +
                   HOVER_LIFT * (pad.ha || 0) + slideLift * (n + m),
@@ -826,7 +846,7 @@ function wake(){
 function hoverAt(x, y){
   if (Math.abs(hx - Math.round(hx)) > .08) return null;
   for (let i = 0; i < PADS.length; i++){
-    if (Math.abs(i - hx) > 1.2) continue;
+    if (i !== Math.round(hx)) continue;      /* only the sheet in the middle */
     const r = RAIL.find(([, j]) => j === i)[0].getBoundingClientRect();
     const fx = (x - r.left) / r.width, fy = (y - r.top) / r.height;
     const across = 1 - clamp01(Math.max(0, -fx, fx - 1) / .12);
