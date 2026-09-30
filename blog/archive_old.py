@@ -224,20 +224,27 @@ def posterous(force):
         except Exception as e:
             say("posterous", slug, f"FAILED {e}")
             continue
-        if 'class="bodytext"' not in page:
+        # two themes: until 2010 the post is div#post_body under a full date;
+        # after, div.bodytext under a date with no year
+        old = 'id="post_body"' in page
+        if not old and 'class="bodytext"' not in page:
             say("posterous", slug, "no post on the page")
             continue
         body = page
-        t = re.search(r'<meta property="og:title" content="([^"]*)"', page)
-        title = html.unescape(t.group(1)).strip() if t else slug.replace("-", " ")
+        t = re.search(r'<meta property="og:title" content="([^"]*)"', page) or \
+            re.search(r'<h2 class="posttitle"[^>]*>\s*(?:<a [^>]*>)?(.*?)(?:</a>)?\s*</h2>', page, re.S)
+        title = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))).strip() if t else slug.replace("-", " ")
         if title.lower() in seen_titles:          # posted twice
             say("posterous", slug, f"same as {seen_titles[title.lower()]}")
             continue
         seen_titles[title.lower()] = slug
         # the date shows as "Mar 5": the year is the archive's, or the one before
         d = re.search(r'class="date"><a [^>]*>(\w{3}) (\d{1,2})</a>', page)
+        full = re.search(r'<div class="date">\s*(\w+ \d{1,2}, \d{4})', page)
         date = None
-        if d and d.group(1).lower() in MONTHS:
+        if full:
+            date = datetime.strptime(full.group(1), "%B %d, %Y").strftime("%Y-%m-%dT12:00:00Z")
+        elif d and d.group(1).lower() in MONTHS:
             mo, dy = MONTHS[d.group(1).lower()], int(d.group(2))
             y = int(ts[:4])
             if (mo, dy) > (int(ts[4:6]), int(ts[6:8])):
@@ -253,10 +260,15 @@ def posterous(force):
                            for f in files)
         body = re.sub(r"<div class='posterousGalleryMainDiv[^']*' data-posterous-file-list='([^']*)'.*?</div>", gallery, body, flags=re.S)
         body = re.sub(r"<div class=['\"]p_embed_description['\"].*?</div>", "", body, flags=re.S)
-        node = node_with(body, "bodytext")
+        root = ip.parse(body)
+        node = root.find(lambda n: n.attrs.get("id") == "post_body") if old else node_with(body, "bodytext")
+        if node is not None:          # the title is in the header already
+            for h in list(node.find_all(lambda n: n.tag == "h2")):
+                if h.text().strip() == title:
+                    h.parent.kids.remove(h)
         how = write_post("posterous", slug, title, date, "", url, "Posterous", ts, force=force, node=node,
-                         record=ip.node_html(node),
-                         extra={"date_approximate": "year inferred from when it was archived"} if date else None)
+                         record=ip.node_html(node) if node is not None else "",
+                         extra={"date_approximate": "year inferred from when it was archived"} if date and not full else None)
         say("posterous", slug, how)
 
 

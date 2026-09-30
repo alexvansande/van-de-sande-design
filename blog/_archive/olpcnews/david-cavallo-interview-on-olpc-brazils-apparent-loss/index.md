@@ -5,8 +5,10 @@ original: "http://www.olpcnews.com/countries/brazil/david_cavallo_olpc_brazil.ht
 original_site: "OLPC News"
 ---
 
-<br>
- Classmate PC over OLPC XO?
+<figure class="float-right" style="width:50%">
+<img src="01.jpg" width="200" height="273" alt="classmate pc olpc xo">
+<figcaption>Classmate PC over OLPC XO?</figcaption>
+</figure>
 
 The [Brazilian auction to purchase 150,000 computers for children](http://www.olpcnews.com/countries/brazil/um_computador_por_alno.html) is on currently on hold after the end of the first round which ended on December 19th. Positivo Informática won the first round of biding with the lowest offer, 98 millions of Reais, 6 million less than OLPC had offered.
 
@@ -24,7 +26,7 @@ From [Jaime's interview](http://www.media.mit.edu/people/bio_cavallo.html): <br>
  Local assembly: the key to Brazil**David Cavallo**: I personally believe that things went somewhat astray for a variety of reasons and that the structure of the governmental purchase request led to a result no one seems to be satisfied with.
 
 <figure>
-<img src="01.jpg" width="200" height="274" alt="olpc production keyboard">
+<img src="02.jpg" width="200" height="274" alt="olpc production keyboard">
 </figure>
 
 We are a non-profit. Our price to any country, including Brazil, is the cost of the laptop itself. Uruguay purchased the laptop for USD$197. They also purchased in a way that brought connectivity to homes and communities. We will not bid above our costs. We cannot bid below our costs, as a for-profit might do in order to make profit by charging more for other products and services, or to lock out competition and raise prices subsequently.
