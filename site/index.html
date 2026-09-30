@@ -165,38 +165,55 @@ body{margin:0;background:var(--dark);color:var(--ink);
   pointer-events:none}
 .shelf.open{pointer-events:auto}
 .shelf>*{opacity:0;will-change:transform,opacity}
-/* each cell is its own small scene: nothing here is part of the curl's */
+/* each cell is its own small scene: nothing here is part of the curl's. The
+   script turns the book, and it can be taken and spun right round, so it is a
+   whole box: the two boards, the spine, and the page block on three sides. */
 .bk{position:relative;display:block;width:58%;aspect-ratio:2 / 3;
-  container-type:inline-size;perspective:60em;color:inherit;text-decoration:none;
-  outline:none;-webkit-user-drag:none}
-/* the shadow it stands in, flat on the ground */
-.bk::after{content:"";position:absolute;left:-4%;right:-22%;bottom:-7%;height:12%;
-  background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0));
-  transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s}
+  container-type:size;perspective:60em;color:inherit;text-decoration:none;
+  outline:none;-webkit-user-drag:none;cursor:grab;touch-action:none}
+.bk.held{cursor:grabbing}
+/* The shelf is a wall and the books hang a little way out from it, lit from
+   the upper left, so each throws its shadow on the wall behind, down and to
+   the right. The script keeps it the width of the book as it turns, and
+   throws it further and softer as the book comes out toward you. */
+.ws{position:absolute;inset:0;border-radius:2px;background:rgba(0,0,0,.62);
+  filter:blur(2.4cqw);transform:translate(9cqw,6cqh);will-change:transform,opacity}
 .vol{position:absolute;inset:0;transform-style:preserve-3d;
   --t:15cqw;                /* how thick the book is */
-  transform:rotateY(-32deg) rotateX(4deg);
-  transition:transform .55s cubic-bezier(.2,.7,.2,1)}
-.bk:hover .vol,.bk:focus-visible .vol{transform:rotateY(-12deg) rotateX(2deg) translateZ(6cqw) translateY(-3%)}
-.bk:hover::after,.bk:focus-visible::after{transform:scale(.92);opacity:.8}
-.vol>span{position:absolute;display:block}
+  --e:.9cqw;                /* how thick a board is, seen on the page edges */
+  transform:rotateY(-32deg) rotateX(4deg);will-change:transform}
+.vol>span{position:absolute;display:block;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden}
 /* the front board, with a crease along the hinge and a little light on it */
 .vol>.cv{inset:0;overflow:hidden;border-radius:1px 3px 3px 1px;
   display:flex;flex-direction:column;padding:12% 10% 10% 14%;
   background:center / cover no-repeat;
+  transform:translateZ(calc(var(--t) / 2));
   box-shadow:inset 0 0 0 .5px rgba(255,255,255,.08)}
 .cv::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:
     linear-gradient(90deg,rgba(0,0,0,.35) 0,rgba(255,255,255,.18) 3%,rgba(0,0,0,.12) 6%,rgba(0,0,0,0) 9%),
     linear-gradient(115deg,rgba(255,255,255,.14) 0,rgba(255,255,255,0) 45%,rgba(0,0,0,.12) 100%)}
 .bk:focus-visible .cv{outline:2px solid #e6e2d2;outline-offset:4px}
-/* the page block along the fore-edge, and the back board behind it */
-.pg{top:1.6%;bottom:1.6%;right:0;width:var(--t);transform-origin:100% 50%;
-  transform:rotateY(90deg);
-  background:repeating-linear-gradient(90deg,#efe9d6 0 1px,#d9d1b8 1px 2px),#e8e1cb;
-  box-shadow:inset 0 0 6px rgba(80,60,20,.35)}
-.bc{inset:0;transform:translateZ(calc(var(--t) * -1));border-radius:3px 1px 1px 3px;
-  background:#15130f}
+/* the back board and the spine: for now only the book's own colour */
+.vol>.bc{inset:0;border-radius:3px 1px 1px 3px;background:var(--base,#15130f);
+  transform:rotateY(180deg) translateZ(calc(var(--t) / 2));
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.06)}
+.vol>.sp{top:0;bottom:0;left:calc(50% - var(--t) / 2);width:var(--t);
+  background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 30%,rgba(0,0,0,0) 55%,rgba(0,0,0,.3)),
+    var(--base,#15130f);
+  transform:rotateY(-90deg) translateZ(50cqw)}
+/* the page block: the fore-edge and the head and tail, ruled with the edges
+   of the leaves, with the edge of a board either side */
+.vol>.pg,.vol>.hd{background:
+    linear-gradient(var(--d),var(--base,#15130f) 0 var(--e),transparent var(--e) calc(100% - var(--e)),var(--base,#15130f) 0),
+    repeating-linear-gradient(var(--d),#efe9d6 0 1px,#d6cdb2 1px 2px),#e8e1cb}
+.vol>.pg{--d:90deg;top:0;bottom:0;left:calc(50% - var(--t) / 2);width:var(--t);
+  transform:rotateY(90deg) translateZ(50cqw);
+  box-shadow:inset 0 0 1.6cqw rgba(80,60,20,.3)}
+.vol>.hd{--d:180deg;left:0;right:0;top:calc(50% - var(--t) / 2);height:var(--t)}
+.vol>.hd.top{transform:rotateX(90deg) translateZ(50cqh)}
+.vol>.hd.foot{transform:rotateX(-90deg) translateZ(50cqh);filter:brightness(.7)}
 
 /* the covers are asked for once the first screen is in, with the faces */
 .covers .cv{background-image:var(--cover)}

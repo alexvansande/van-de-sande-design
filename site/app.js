@@ -35,20 +35,21 @@ const PAGES = [
 /* Under the last page, the books themselves: three small volumes on the dark
    ground, each a way out to where it is sold, and a round note in the fourth
    corner. `cover` is a picture of the real cover, in img/, and `ratio` its
-   proportions; without one the volume is set in type. */
+   proportions; without one the volume is set in type. `base` is the colour
+   of the back board and the spine, until there are pictures of those too. */
 const BOOKS = [
   { cls: 'infinite', title: 'The Infinite Machine', author: 'Camila Russo',
     sub: 'How an Army of Crypto-hackers Is Building the Next Internet with Ethereum',
     href: 'https://www.amazon.com/dp/0062886142',
-    cover: 'cover-infinite-machine.webp', ratio: '663 / 1000' },
+    cover: 'cover-infinite-machine.webp', ratio: '663 / 1000', base: '#2a6fd0' },
   { cls: 'cryptopians', title: 'The Cryptopians', author: 'Laura Shin',
     sub: 'Idealism, Greed, Lies, and the Making of the First Big Cryptocurrency Craze',
     href: 'https://www.amazon.com/dp/1541763009',
-    cover: 'cover-cryptopians.webp', ratio: '1678 / 2600' },
+    cover: 'cover-cryptopians.webp', ratio: '1678 / 2600', base: '#0b0b0d' },
   { cls: 'ether', title: 'Out of the Ether', author: 'Matthew Leising',
     sub: 'The Amazing Story of Ethereum and the $55 Million Heist that Almost Destroyed It All',
     href: 'https://www.amazon.com/dp/1119602939',
-    cover: 'cover-out-of-the-ether.webp', ratio: '676 / 1000' }
+    cover: 'cover-out-of-the-ether.webp', ratio: '676 / 1000', base: '#141414' }
 ];
 
 const $ = s => document.querySelector(s);
@@ -86,18 +87,112 @@ function buildShelf(books){
     a.tabIndex = -1;
     a.setAttribute('aria-label', `${b.title} by ${b.author}`);
     if (b.ratio) a.style.aspectRatio = b.ratio;
-    a.innerHTML = `<span class="vol">
+    if (b.base) a.style.setProperty('--base', b.base);
+    a.innerHTML = `<span class="ws"></span><span class="vol">
         <span class="cv"${b.cover ? ` style="--cover:url('img/${b.cover}')"` : ''}>${b.cover ? '' :
           `<span class="t">${b.title}</span><span class="s">${b.sub}</span><span class="a">${b.author}</span>`}</span>
-        <span class="pg"></span><span class="bc"></span>
+        <span class="bc"></span><span class="sp"></span><span class="pg"></span>
+        <span class="hd top"></span><span class="hd foot"></span>
       </span>`;
     host.append(a);
+    spinnable(a);
     return a;
   });
   const note = el('p', 'note');
   note.innerHTML = '<span>Learn more about these books</span>';
   host.append(note);
   return { host, items: items.concat(note), links: items, open: false };
+}
+/* A book on the shelf can be taken and turned: drag it round, flick it and
+   it spins on and slows, and left alone a while it comes back to face the
+   room. A mouse over it, or the keyboard on it, turns it toward you and
+   brings it out from the wall. Its shadow on the wall keeps the width of
+   whatever the book shows of itself, and falls further and softer the
+   further out it comes. */
+const REST = [-32, 4], FACE = [-12, 2], HOME_AFTER = 2600;
+function spinnable(a){
+  const vol = a.querySelector('.vol'), ws = a.querySelector('.ws');
+  const T = .15;                                /* --t, as a share of the width */
+  let ry = REST[0], rx = REST[1], vy = 0, vx = 0, lift = 0;
+  let near = false, hold = null, letGo = -1e9, raf = 0, prev = 0;
+  const draw = () => {
+    vol.style.transform = `translateZ(${(lift * 6).toFixed(2)}cqw) translateY(${(-lift * 3).toFixed(2)}%) ` +
+                          `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+    /* how wide and tall the book is seen from the front, turned as it is */
+    const wy = Math.abs(Math.cos(ry * RAD)) + T * Math.abs(Math.sin(ry * RAD));
+    const hx = Math.abs(Math.cos(rx * RAD)) + T * .7 * Math.abs(Math.sin(rx * RAD));
+    ws.style.transform = `translate(${(9 + lift * 5).toFixed(2)}cqw,${(6 + lift * 4).toFixed(2)}cqh) ` +
+                         `scale(${wy.toFixed(3)},${hx.toFixed(3)})`;
+    ws.style.opacity = (1 - lift * .25).toFixed(3);
+  };
+  const frame = now => {
+    const dt = clamp((now - prev) / 1000, .001, .05); prev = now;
+    let busy = !!hold;
+    if (!hold){
+      const k = 1 - Math.exp(-dt * 7);
+      lift += ((near ? 1 : 0) - lift) * k;
+      if (Math.abs(vy) + Math.abs(vx) > 4){
+        /* still spinning from a flick */
+        ry += vy * dt; rx = clamp(rx + vx * dt, -40, 40);
+        const f = Math.exp(-dt * 2.4); vy *= f; vx *= f;
+        busy = true;
+      } else {
+        vy = vx = 0;
+        /* home to the nearest turn of the resting pose, not all the way back
+           round the way it came */
+        if (near || now - letGo > HOME_AFTER){
+          const [ty, tx] = near ? FACE : REST;
+          const goal = ty + 360 * Math.round((ry - ty) / 360);
+          ry += (goal - ry) * k; rx += (tx - rx) * k;
+          if (Math.abs(goal - ry) > .05 || Math.abs(tx - rx) > .05) busy = true;
+          else { ry = ty; rx = tx; }
+        } else busy = true;
+      }
+      if (Math.abs((near ? 1 : 0) - lift) > .002) busy = true;
+    }
+    draw();
+    raf = busy ? requestAnimationFrame(frame) : 0;
+  };
+  const go = () => { if (!raf){ prev = performance.now(); raf = requestAnimationFrame(frame); } };
+  const into = on => { near = on; go(); };
+  a.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') into(true); });
+  a.addEventListener('pointerleave', () => into(false));
+  a.addEventListener('focus', () => into(true));
+  a.addEventListener('blur', () => into(false));
+  /* the book's own gesture: the stage never sees it, so taking hold of a
+     book neither turns the page nor slides the rail */
+  a.addEventListener('pointerdown', e => {
+    e.stopPropagation();
+    if (e.button) return;
+    hold = { id: e.pointerId, x: e.clientX, y: e.clientY, t: e.timeStamp, moved: false, w: a.offsetWidth };
+    vy = vx = 0;
+    try { a.setPointerCapture(e.pointerId); } catch (_) {}
+  });
+  a.addEventListener('pointermove', e => {
+    if (!hold || e.pointerId !== hold.id) return;
+    const dx = e.clientX - hold.x, dy = e.clientY - hold.y, dt = Math.max(.008, (e.timeStamp - hold.t) / 1000);
+    if (!hold.moved && Math.hypot(dx, dy) < 4) return;
+    if (!hold.moved){ hold.moved = true; a.classList.add('held'); }
+    /* the front follows the hand: a book's width of drag is half a turn */
+    const dY = dx / hold.w * 180, dX = -dy / hold.w * 120;
+    ry += dY; rx = clamp(rx + dX, -40, 40);
+    vy = vy * .5 + dY / dt * .5; vx = vx * .5 + dX / dt * .5;
+    hold.x = e.clientX; hold.y = e.clientY; hold.t = e.timeStamp;
+    go();
+  });
+  const drop = e => {
+    if (!hold || e.pointerId !== hold.id) return;
+    if (hold.moved){ draggedAt = performance.now(); letGo = draggedAt; }
+    /* a hand that stopped before letting go leaves the book where it is */
+    if (e.timeStamp - hold.t > 80) vy = vx = 0;
+    vy = clamp(vy, -1400, 1400); vx = clamp(vx, -600, 600);
+    hold = null; a.classList.remove('held');
+    if (e.pointerType === 'touch') near = false;
+    go();
+  };
+  a.addEventListener('pointerup', drop);
+  a.addEventListener('pointercancel', drop);
+  draw();
 }
 function buildPad(station, pages, reel, shelf){
   const cap = station.querySelector('.cap');

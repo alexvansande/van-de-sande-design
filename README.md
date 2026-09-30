@@ -38,7 +38,11 @@ Ether* — each with the passage about him run over in yellow marker. Turn
 the last one away and there are no more pages: the three books come up out
 of the dark as small volumes, each with the thickness of its pages showing
 along the fore-edge, and each a link to the book on Amazon. A round note in
-the fourth corner says to learn more about them. The covers are asked for
+the fourth corner says to learn more about them. The shelf is a wall: each
+book hangs a little way out from it and throws its shadow on it, down and to
+the right. A book can be taken and turned right round — spine, back board,
+the edges of the leaves — flicked to spin, and left alone it comes back to
+face the room. The back and spine are the book's `base` colour for now. The covers are asked for
 along with the faces of the later pages, once the first screen is in; a book
 in `BOOKS` without a `cover` is set in type instead.
 
