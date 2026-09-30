@@ -197,6 +197,17 @@ const Pile = (() => {
     paint();
   };
   if (!reduce) document.documentElement.classList.add(native ? "pile-css" : "piling");
+  /* The browser runs the pile only on the cards on or near the screen: one
+     it runs is a layer of its own, and all of them at once were more than a
+     phone would hold. Seen as drawn, so a card held in the pile counts as
+     where it is held, until it has gone. */
+  if (native && "IntersectionObserver" in self) {
+    const near = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("near", e.isIntersecting)),
+      { rootMargin: "100% 0px" });
+    cards.forEach(c => near.observe(c));
+  } else if (native) {
+    cards.forEach(c => c.classList.add("near"));
+  }
   measure();
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
   addEventListener("resize", measure);

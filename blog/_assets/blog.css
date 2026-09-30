@@ -290,24 +290,29 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
    --hold  where it is moved to by then
    --rise  how far up the screen a card comes before it is out of the dark */
 @supports (animation-timeline: view()) {
-  .pile-css .cards>.card{view-timeline:--card block;transition:none;transform-origin:50% 0;
-    animation:pile-back linear both;animation-timeline:--card;
-    animation-range:contain calc(100% - var(--line,0px)) contain calc(100% - var(--line,0px) + var(--deep,1px))}
-  .pile-css .cards>.card::before,.pile-css .cards>.card::after{content:"";position:absolute;inset:0;z-index:2;
-    background:var(--dark);pointer-events:none;animation-timeline:--card}
-  /* going back into the pile, into the dark */
-  .pile-css .cards>.card::before{opacity:0;animation:pile-dim linear both;animation-timeline:--card;
-    animation-range:contain calc(100% - var(--line,0px)) contain calc(100% - var(--line,0px) + var(--deep,1px))}
-  /* coming up out of the dark from the foot of the screen */
-  .pile-css .cards>.card::after{animation:pile-rise ease-in-out both;animation-timeline:--card;
-    animation-range:entry 0% entry var(--rise,1px)}
+  /* Two animations on the card itself and nothing else, each only while it
+     is doing something: rising in from the foot of the screen, and going
+     back into the pile. Outside those it is plain paper, with no layer of
+     its own; kept on every card, the whole page (three layers a card) was
+     over a gigabyte of pictures on a phone, and Safari closed it. */
+  .pile-css .cards>.card{transition:none;transform-origin:50% 0}
+  /* only the cards on or near the screen (blog.js marks them): a card with
+     one of these on it is a layer of its own even while it waits */
+  .pile-css .cards>.card.near{
+    animation:pile-rise ease-in-out none,pile-back linear none;
+    animation-timeline:view(),view();
+    animation-range:entry 0% entry var(--rise,1px),
+      contain calc(100% - var(--line,0px)) contain calc(100% - var(--line,0px) + var(--deep,1px))}
 }
+/* the pile: held at the line, stepping back a little higher and smaller
+   each row, darker, and gone by the third */
 @keyframes pile-back{
-  from{transform:none;opacity:1}
-  66.667%{opacity:1}
-  to{transform:translate3d(0,var(--hold,0px),0) scale(.88);opacity:0}}
-@keyframes pile-dim{from{opacity:0}to{opacity:.9}}
-@keyframes pile-rise{from{opacity:.75}to{opacity:0}}
+  from{transform:none;filter:none;opacity:1}
+  33.333%{filter:brightness(.72)}
+  66.667%{filter:brightness(.5);opacity:1}
+  to{transform:translate3d(0,var(--hold,0px),0) scale(.88);filter:brightness(.35);opacity:0}}
+/* up out of the dark */
+@keyframes pile-rise{from{opacity:.25;filter:brightness(.5)}to{opacity:1;filter:none}}
 /* arriving from the site part way down the posts, the years come down from
    the top once the page is there */
 .arrive .years{animation:years-down .7s .2s cubic-bezier(.2,.7,.2,1) both}

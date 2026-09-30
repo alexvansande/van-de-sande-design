@@ -141,7 +141,10 @@ has gone into the dark. Coming up from the foot of the screen, a card rises
 out of the dark. Not on the archive, which is in shelves. Where the browser can tie an
 animation to the scroll (Safari 26, Chrome 115), the pile is only that: each
 card's place in the page runs it, off the page's thread, so nothing trails
-the finger. Anywhere else a card is held by `position: sticky` and
+the finger. Only the cards on or near the screen carry it: a card with
+one on it is a layer of its own, and all of them at once (with two more for
+their shading) were over a gigabyte on a phone, which Safari answered by
+closing the page. Anywhere else a card is held by `position: sticky` and
 `blog.js` adds the little it steps back. Moved from the script on every
 scroll, a card trailed the page by a frame and shook on a phone.
 
