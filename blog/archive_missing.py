@@ -35,6 +35,11 @@ for src in folders:
         miss.append(("flash or video" if ".swf" in u.lower() else "media", urllib.parse.urljoin(base, html.unescape(u))))
     for u in re.findall(r'href="([^"]+\.(?:mov|swf|zip|mp3|flv))"', h, re.I):
         miss.append(("download", urllib.parse.urljoin(base, html.unescape(u))))
+    # pictures found elsewhere since (Posterous's, from Flickr) make up for as many
+    have = open(os.path.join(folder, "index.md")).read().count("<img")
+    shown = len([u for u in re.findall(r'<img[^>]+src="([^"]+)"', h) if not re.search(r"(spacer|pixel|/_/stat|emoji|flags/|\.thumb|thumb100)", u)])
+    if have >= shown:
+        miss = [m for m in miss if m[0] != "picture"]
     if not miss: continue
     title = re.search(r'^title: "(.*)"', open(os.path.join(folder, "index.md")).read(), re.M)
     where = "on the blog" if "/_archive/" not in folder else "archive: " + folder.split("/")[2]

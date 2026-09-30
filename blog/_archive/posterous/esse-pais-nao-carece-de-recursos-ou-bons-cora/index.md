@@ -6,4 +6,8 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
+<figure>
+<img src="01.jpg" width="612" height="612" alt="">
+</figure>
+
 Taken at HEMORIO
