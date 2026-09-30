@@ -18,6 +18,131 @@
    there (#at=px), so the hand-over does not move it.
 
    Without this script the card is a plain link and the rest is not there. */
+/* Pulling on past the top of a page draws it back from you, smaller the
+   further you go, and a line comes down above it saying where it goes; far
+   enough, and it goes there. A wheel or trackpad pushing up at the top, or
+   a finger dragging down. The browser's own pull (to refresh, or to bounce)
+   is turned off in blog.css, so this is the only one. */
+function pullAtTop(label, go, gone) {
+  const PULL = 150;
+  let pull = 0, pullT = 0;
+  const note = document.createElement("p");
+  note.className = "pullnote";
+  note.setAttribute("aria-hidden", "true");
+  note.textContent = label;
+  document.body.append(note);
+  const setPull = v => {
+    pull = Math.max(0, v);
+    const k = Math.min(1, pull / PULL);
+    document.body.style.setProperty("--pullk", (1 - Math.pow(1 - k, 2)).toFixed(3));
+    document.body.classList.toggle("pulling", pull > 0);
+    if (k >= 1) go(note);
+  };
+  const letGo = () => {
+    clearTimeout(pullT);
+    if (!pull || gone()) return;
+    document.body.classList.add("letgo");
+    setPull(0);
+    setTimeout(() => document.body.classList.remove("letgo"), 350);
+  };
+  /* A trackpad flung up to the top keeps sending its coast for a while after
+     the page has stopped there; that is not a pull. Only a gesture that
+     starts at the top is: one after a pause in the wheel. */
+  let lastWheel = 0, armed = false;
+  addEventListener("wheel", e => {
+    const now = performance.now(), gap = now - lastWheel;
+    lastWheel = now;
+    if (gone() || e.ctrlKey) return;
+    if (scrollY > 0) { armed = false; if (pull) letGo(); return; }
+    if (!armed && gap > 220) armed = true;
+    if (!armed) return;
+    if (e.deltaY < 0) {
+      setPull(pull - e.deltaY * (e.deltaMode === 1 ? 16 : 1) * .5);
+      clearTimeout(pullT);
+      pullT = setTimeout(letGo, 180);
+    } else if (pull && e.deltaY > 0) {
+      letGo();
+    }
+  }, { passive: true });
+  let touch0 = null;
+  addEventListener("touchstart", e => { touch0 = scrollY <= 0 ? e.touches[0].clientY : null; }, { passive: true });
+  addEventListener("touchmove", e => {
+    if (touch0 === null || gone()) return;
+    const dy = e.touches[0].clientY - touch0;
+    if (scrollY <= 0 && dy > 0) setPull(dy * .6);
+  }, { passive: true });
+  addEventListener("touchend", () => { touch0 = null; letGo(); }, { passive: true });
+}
+
+/* The blog's own index: pulled down past its top it goes back to the site,
+   sinking into the dark the site stands on, so the load is the only seam. */
+(() => {
+  if (!document.body.classList.contains("front")) return;
+  const site = document.querySelector(".index > h1 a.home");
+  if (!site) return;
+  let leaving = false;
+
+  /* The years beside the posts: the one being read is large and the others
+     fall away from it along a curve (--k, 0 to 1, in blog.css). Where the
+     reading is, is taken continuously, through each year's posts, so the
+     sizes glide as the page scrolls. On a phone, where the years run along
+     the top, the one being read is kept in view there. */
+  const years = document.querySelector(".years");
+  const cards = [...document.querySelectorAll(".cards > .card[data-year]")];
+  if (years && cards.length) {
+    const links = [...years.querySelectorAll("a")];
+    const order = links.map(a => a.dataset.year);
+    let lit = null, ticking = false;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const light = () => {
+      ticking = false;
+      const line = innerHeight * .33;
+      const i = cards.findIndex(c => c.getBoundingClientRect().bottom > line);
+      const c = cards[i < 0 ? cards.length - 1 : i], y = c.dataset.year;
+      // how far through this year's posts the line is, from its first to its last
+      const mine = cards.filter(k => k.dataset.year === y);
+      const top = mine[0].getBoundingClientRect().top, end = mine[mine.length - 1].getBoundingClientRect().bottom;
+      const through = end > top ? Math.min(1, Math.max(0, (line - top) / (end - top))) : .5;
+      // at the top of the page it is the newest year, whole
+      const at = scrollY < 4 ? 0 : order.indexOf(y) + through - .5;
+      links.forEach((a, j) => {
+        const d = j - Math.max(0, at);
+        a.style.setProperty("--k", Math.exp(-d * d / 7).toFixed(3));
+      });
+      if (y === lit) return;
+      if (lit !== null) links[order.indexOf(lit)].classList.remove("on");
+      lit = y;
+      const a = links[order.indexOf(y)];
+      a.classList.add("on");
+      a.setAttribute("aria-current", "true");
+      links.forEach(l => { if (l !== a) l.removeAttribute("aria-current"); });
+      if (years.scrollWidth > years.clientWidth) {
+        years.scrollTo({ left: a.offsetLeft - (years.clientWidth - a.offsetWidth) / 2, behavior: reduce ? "auto" : "smooth" });
+      }
+    };
+    addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(light); } }, { passive: true });
+    addEventListener("resize", light);
+    light();
+    years.addEventListener("click", e => {
+      const a = e.target.closest("a[data-year]");
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const to = document.getElementById("y" + a.dataset.year);
+      if (!to) return;
+      e.preventDefault();
+      to.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      history.replaceState(history.state, "", "#y" + a.dataset.year);
+    });
+  }
+
+  pullAtTop("Alex Van de Sande", () => {
+    if (leaving) return;
+    leaving = true;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.body.classList.add("leaving");
+    setTimeout(() => { location.href = site.href; }, reduce ? 0 : 380);
+  }, () => leaving);
+})();
+
 (() => {
   const main = document.querySelector("main");
   if (!main || !main.querySelector("article.sheet")) return;
@@ -226,59 +351,9 @@
     });
   }
 
-  /* Pulling on past the top draws the post back from you, smaller the
-   further you go, and a line comes down above it saying where it goes; far
-   enough, it goes to the index. A wheel or trackpad pushing up at the top,
-   or a finger dragging down. The browser's own pull (to refresh, or to
-   bounce) is turned off in blog.css, so this is the only one. */
-  const PULL = 150;
-  let pull = 0, pullT = 0;
-  const note = document.createElement("p");
-  note.className = "pullnote";
-  note.setAttribute("aria-hidden", "true");
-  note.textContent = "All the wandering about";
-  document.body.append(note);
-  const setPull = v => {
-    pull = Math.max(0, v);
-    const k = Math.min(1, pull / PULL);
-    document.body.style.setProperty("--pullk", (1 - Math.pow(1 - k, 2)).toFixed(3));
-    document.body.classList.toggle("pulling", pull > 0);
-    if (k >= 1) toIndex(note);
-  };
-  const letGo = () => {
-    clearTimeout(pullT);
-    if (!pull || leaving) return;
-    document.body.classList.add("letgo");
-    setPull(0);
-    setTimeout(() => document.body.classList.remove("letgo"), 350);
-  };
-  /* A trackpad flung up to the top keeps sending its coast for a while after
-     the page has stopped there; that is not a pull. Only a gesture that
-     starts at the top is: one after a pause in the wheel. */
-  let lastWheel = 0, armed = false;
-  addEventListener("wheel", e => {
-    const now = performance.now(), gap = now - lastWheel;
-    lastWheel = now;
-    if (leaving || e.ctrlKey) return;
-    if (scrollY > 0) { armed = false; if (pull) letGo(); return; }
-    if (!armed && gap > 220) armed = true;
-    if (!armed) return;
-    if (e.deltaY < 0) {
-      setPull(pull - e.deltaY * (e.deltaMode === 1 ? 16 : 1) * .5);
-      clearTimeout(pullT);
-      pullT = setTimeout(letGo, 180);
-    } else if (pull && e.deltaY > 0) {
-      letGo();
-    }
-  }, { passive: true });
-  let touch0 = null;
-  addEventListener("touchstart", e => { touch0 = scrollY <= 0 ? e.touches[0].clientY : null; }, { passive: true });
-  addEventListener("touchmove", e => {
-    if (touch0 === null || leaving) return;
-    const dy = e.touches[0].clientY - touch0;
-    if (scrollY <= 0 && dy > 0) setPull(dy * .6);
-  }, { passive: true });
-  addEventListener("touchend", () => { touch0 = null; letGo(); }, { passive: true });
+  /* Pulling on past the top draws the post back, and far enough it goes to
+     the index, the line that came down growing into the index's title. */
+  pullAtTop("All the wandering about", note => toIndex(note), () => leaving);
 
   /* ---------- on scroll ---------- */
   let ticking = false, lastY = scrollY;

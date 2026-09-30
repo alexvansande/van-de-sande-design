@@ -58,9 +58,13 @@ a{color:inherit}
 .bar p{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
   padding:.8rem var(--gutter) .75rem;padding-top:max(.8rem,env(safe-area-inset-top));
   color:var(--light);font-size:1.15rem;letter-spacing:.01em}
-/* the browser's own pull at the top of a post (to refresh, on a phone) is
-   off: pulling there is the way back to the index */
-html:has(>body.post),body.post{overscroll-behavior-y:none}
+/* the browser's own pull at the top of a post or the index (to refresh, on
+   a phone) is off: pulling there is the way back, to the index or the site */
+html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behavior-y:none}
+/* the index going back to the site: it sinks into the dark */
+.leaving main,.leaving .pullnote,.leaving .foot{transition:transform .38s cubic-bezier(.4,0,.6,1),opacity .38s}
+.leaving main{transform:translateY(4rem) scale(.8)!important;opacity:0!important}
+.leaving .pullnote,.leaving .foot{opacity:0!important}
 .pulling main{transform:translateY(calc(var(--pullk,0) * 3rem)) scale(calc(1 - var(--pullk,0) * .12));
   transform-origin:50% 0;opacity:calc(1 - var(--pullk,0) * .25)}
 .pulling .top{opacity:clamp(0,calc(1 - var(--pullk,0) * 3),1)}
@@ -168,6 +172,44 @@ html:has(>body.post),body.post{overscroll-behavior-y:none}
 .index>h1{margin:1.5rem 0 2.6rem;font-weight:400;font-size:clamp(1.9rem,1.2rem + 2.6vw,3rem);line-height:1.15;
   color:var(--light);text-wrap:balance}
 .index .cat::before{content:"#";opacity:.5}
+
+/* The index itself: a column beside the posts, with a line about them and
+   the years they span. The line goes by with the page; the years stay, the
+   one being read lit. On a phone the line sits under the title and the
+   years run along the top of the screen. */
+.front-index{max-width:78rem}
+.side .about{margin:0 0 1.6rem;font-size:1.2rem;line-height:1.45;color:var(--light);opacity:.75;font-style:italic;
+  text-wrap:pretty}
+/* the year being read is large and the others fall away from it along a
+   curve, both ways: --k is how near each is, 0 to 1, set by blog.js as
+   the page scrolls, so the sizes glide rather than step */
+.years{display:flex;flex-direction:column;align-items:flex-start;gap:0;
+  font-feature-settings:"kern","lnum";font-variant-numeric:lining-nums tabular-nums}
+.years a{padding:.08rem 0;color:var(--light);text-decoration:none;line-height:1.12;
+  font-size:calc(.9rem + 1.5rem * var(--k,0) * var(--k,0));opacity:calc(.28 + .72 * var(--k,0))}
+.years a:hover{opacity:.9}
+.cards>.card[id]{scroll-margin-top:1.5rem}
+@media (min-width:60rem){
+  .spread{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:clamp(2.5rem,4vw,4rem)}
+  /* the column leans on the posts: ranged right, against them */
+  .side{text-align:right}
+  .years{position:sticky;top:1.5rem;align-items:flex-end}
+}
+@media (max-width:59.99rem){
+  /* the column dissolves, so the years can stay at the top all the way down
+     the posts rather than only as far as the end of the line above them */
+  .side{display:contents}
+  .side .about{margin:-1.6rem 0 1.4rem;font-size:1.1rem}
+  .years{position:sticky;top:0;z-index:30;flex-direction:row;gap:0 1.1rem;overflow-x:auto;scrollbar-width:none;
+    margin:0 calc(var(--gutter) * -1) 1.6rem;padding:.7rem var(--gutter);
+    background:rgba(51,51,49,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.07)}
+  .years::-webkit-scrollbar{display:none}
+  /* along the top the curve is gentler, so the bar keeps its height */
+  .years{align-items:baseline}
+  .years a{padding:.1rem 0;font-size:calc(1rem + .55rem * var(--k,0))}
+  .cards>.card[id]{scroll-margin-top:4rem}
+}
 .lost{font-size:1.3rem}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:clamp(1.5rem,3vw,2.4rem)}
 .card{position:relative;isolation:isolate;display:flex;flex-direction:column;color:var(--ink);text-decoration:none;

@@ -290,9 +290,21 @@ const CARD_BELOW = .92;
 /* How far the page has to go up for the first paragraph to be read whole,
    with a little paper under it, and how small it is drawn: measured once it
    is in, and again on a resize. */
+/* How far a pad that ends in a post has zoomed in at page pv. On a phone it
+   has to be as wide as the screen by its last sheet, so that the post under
+   it is uncovered edge to edge. Elsewhere it zooms a little at every turn,
+   the last one, onto the post, too. */
+function postZoom(p, pv){
+  const L = p.sheets.length;
+  return FILL > 1 + zoomBy + 1e-3 ? (FILL - 1) * clamp01(pv / Math.max(1, L - 1))
+                                   : (FILL - 1) * clamp01(pv / L);
+}
 function needOf(post){
   if (post.need == null || !post.img.complete){
-    const st = post.station.getBoundingClientRect();
+    /* where the page is once the last sheet is over, zoom and all: the rail
+       scales about the middle of the screen, the page in the middle of it */
+    const z = 1 + postZoom(post.pad, post.pad.sheets.length), el = post.station;
+    const st = { width: el.offsetWidth * z, top: H() / 2 + (el.offsetTop - H() / 2) * z };
     /* as wide as the page, or a large card (34rem) if the page is narrower,
        so its words stay big enough to read */
     const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -379,6 +391,7 @@ function buildPad(station, pages, reel, shelf, post){
   if (post){
     pad.post = buildPost(post);
     pad.post.station = station;
+    pad.post.pad = pad;
     pad.hi += 2;                 /* the last sheet goes and the picture fills the
                                     screen; one more and it is the post */
   }
@@ -843,8 +856,8 @@ function paintPad(pad, bm, lean){
 }
 
 /* The post at the end of a pad. u is the last sheet going over, uncovering
-   it; the rest of the rail goes dark around the page as it does, so what is
-   left when the sheet is gone is the post alone. v is the step past that,
+   it; the rest of the rail steps back to half around the page as it does,
+   so the post is what stands out once the sheet is gone. v is the step past that,
    reading down it: the page follows the hand to the end of the first
    paragraph, then gives, and pulling on brings up the line under it and
    then the post itself. n is how much this pad is the one in the middle, so
@@ -1005,9 +1018,7 @@ function render(){
   /* how far into a pad you are, as a fraction of it. clamp01(pv) was fully on
      for any page past the first, so stepping back from the third to the second
      left you just as zoomed in — every flip back eases it out now. */
-  const more = p => !p ? 0
-    : p.post ? (FILL - 1) * clamp01(p.pv / Math.max(1, p.sheets.length - 1))
-    : zoomBy * clamp01(p.pv / Math.max(1, p.hi));
+  const more = p => !p ? 0 : p.post ? postZoom(p, p.pv) : zoomBy * clamp01(p.pv / Math.max(1, p.hi));
   const zoom = 1 + more(padOf(lo)) * (1 - t) + more(padOf(lo + 1)) * t;
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
@@ -1024,8 +1035,8 @@ function render(){
   light();
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
-  /* a post coming up under its last sheet: everything else on the rail goes
-     dark around the page, the page's own line with it */
+  /* a post coming up under its last sheet: everything else on the rail
+     steps back to half, and the page's own line goes */
   let upto = 0, upSt = null;
   PADS.forEach((pad, i) => {
     if (!pad.post) return;
@@ -1034,7 +1045,7 @@ function render(){
   });
   if (upto !== rail._upto){
     rail._upto = upto;
-    const o = upto > 0 ? (1 - clamp01(upto / .6)).toFixed(3) : '';
+    const o = upto > 0 ? (1 - .5 * clamp01(upto / .6)).toFixed(3) : '';
     RAIL.forEach(([st]) => {
       st.style.opacity = st === upSt ? '' : o;
       st.style.transition = upto > 0 ? 'none' : '';     /* with the hand, not after it */

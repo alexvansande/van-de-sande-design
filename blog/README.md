@@ -61,6 +61,18 @@ paragraphs, headings, lists and pictures are Paragraph's own. Everything
 around the post is the rest of the site's: the dark ground, the paper, EB
 Garamond.
 
+## The index
+
+Beside the posts is a column with a line about them ("I have been writing
+on the internet for over 25 years…") and the years they span, newest
+first; each year goes to its first post. The column is ranged right,
+against the posts. The line goes by with the page and the years stay in
+view, the year being read large and the others falling away from it along a
+curve; where the reading is is taken continuously through each year's
+posts, so the sizes glide as the page scrolls (`--k`, set by `blog.js`). On a phone the
+line sits under the title and the years run along the top of the screen,
+keeping the lit one in view. The line is in `front_page()` in `build.py`.
+
 ## Opening a post, and reading on
 
 Clicking a card on the index grows its paper and picture into the post's
@@ -89,6 +101,10 @@ brings "All the wandering about" down above it; pull a little harder and
 it goes to the index, where the post shrinks into its card. The browser's
 own pull (to refresh, on a phone) is turned off on a post, so this is the
 only one.
+
+The index works the same way the other way round: pulled down past its
+top, it draws back under "Alex Van de Sande" and, pulled hard enough,
+sinks into the dark and the site loads.
 
 A post opened from the site with `#at=px` opens that far down, where the
 site's copy of its head had been read to.

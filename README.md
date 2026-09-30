@@ -63,7 +63,8 @@ from the Planck length to the Hubble radius.
 
 Both of these end in a post on the blog. The head of the post lies under
 the last sheet, the whole screen of it, so turning that sheet over is all it
-takes: the rest of the rail goes dark around the page as it turns, and what
+takes: the rest of the rail steps back to half around the page as it
+turns, and what
 is left is the blog's name and the post's sheet with its picture, title,
 date and first paragraph. It is laid out exactly as the post lays out its
 own head (the `.ending` rules in `index.html` copy `blog/_assets/blog.css`);
