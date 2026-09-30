@@ -34,18 +34,21 @@ const PAGES = [
 
 /* Under the last page, the books themselves: three small volumes on the dark
    ground, each a way out to where it is sold, and a round note in the fourth
-   corner. `cover` is a picture of the real cover, in img/, when there is one;
-   without it the volume is set in type, which is what is here now. */
+   corner. `cover` is a picture of the real cover, in img/, and `ratio` its
+   proportions; without one the volume is set in type. */
 const BOOKS = [
   { cls: 'infinite', title: 'The Infinite Machine', author: 'Camila Russo',
     sub: 'How an Army of Crypto-hackers Is Building the Next Internet with Ethereum',
-    href: 'https://www.amazon.com/dp/0062886142', cover: '' },
+    href: 'https://www.amazon.com/dp/0062886142',
+    cover: 'cover-infinite-machine.webp', ratio: '663 / 1000' },
   { cls: 'cryptopians', title: 'The Cryptopians', author: 'Laura Shin',
     sub: 'Idealism, Greed, Lies, and the Making of the First Big Cryptocurrency Craze',
-    href: 'https://www.amazon.com/dp/1541763009', cover: '' },
+    href: 'https://www.amazon.com/dp/1541763009',
+    cover: 'cover-cryptopians.webp', ratio: '1678 / 2600' },
   { cls: 'ether', title: 'Out of the Ether', author: 'Matthew Leising',
     sub: 'The Amazing Story of Ethereum and the $55 Million Heist that Almost Destroyed It All',
-    href: 'https://www.amazon.com/dp/1119602939', cover: '' }
+    href: 'https://www.amazon.com/dp/1119602939',
+    cover: 'cover-out-of-the-ether.webp', ratio: '676 / 1000' }
 ];
 
 const $ = s => document.querySelector(s);
@@ -82,8 +85,9 @@ function buildShelf(books){
     a.href = b.href; a.target = '_blank'; a.rel = 'noopener';
     a.tabIndex = -1;
     a.setAttribute('aria-label', `${b.title} by ${b.author}`);
+    if (b.ratio) a.style.aspectRatio = b.ratio;
     a.innerHTML = `<span class="vol">
-        <span class="cv"${b.cover ? ` style="background-image:url('img/${b.cover}')"` : ''}>${b.cover ? '' :
+        <span class="cv"${b.cover ? ` style="--cover:url('img/${b.cover}')"` : ''}>${b.cover ? '' :
           `<span class="t">${b.title}</span><span class="s">${b.sub}</span><span class="a">${b.author}</span>`}</span>
         <span class="pg"></span><span class="bc"></span>
       </span>`;
@@ -1097,6 +1101,7 @@ const further = () => {
      in them: refitted, and every curl rebuilt, since each carries copies of
      the pages as they were when it was cut */
   stage.classList.add('faces');
+  stage.classList.add('covers');     /* and the book covers on the shelf */
   Promise.all(['1em "Crimson Pro"', '1em Cardo', '700 1em Cardo'].map(f => document.fonts.load(f)))
     .then(() => { PADS.forEach(pad => pad.sheets.forEach(dropCurl)); fitSheets(); render(); }, () => {});
 };

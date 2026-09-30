@@ -38,9 +38,9 @@ Ether* — each with the passage about him run over in yellow marker. Turn
 the last one away and there are no more pages: the three books come up out
 of the dark as small volumes, each with the thickness of its pages showing
 along the fore-edge, and each a link to the book on Amazon. A round note in
-the fourth corner says to learn more about them. Until there are pictures of
-the real covers the volumes are set in type; drop one in `site/img` and name
-it in that book's `cover` in `BOOKS`.
+the fourth corner says to learn more about them. The covers are asked for
+along with the faces of the later pages, once the first screen is in; a book
+in `BOOKS` without a `cover` is set in type instead.
 
 **Blockchain design work** holds the Ethereum Frontier and Blockchain App
 Platform release pages. **The Mist browser** is the Ethereum Catalog, a
