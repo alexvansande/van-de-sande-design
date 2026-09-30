@@ -14,19 +14,15 @@ A curva que representa o ciclo de vida de uma tecnologia não é um gráfico rep
 
 Mas a maior disparidade na transição de um grupo ao outro, segundo Moore, é no intervalo entre o visionário e o pragmático. Existem poucas relações entre todos os grupos, mas entre esses dois o que existe é uma verdadeira fenda de comunicação, um abismo onde muitos bons produtos já se perderam.
 
-Nesse ponto a palvra ‘mercado’ é muito polêmica, tendo diferentes interpretações dependendo se você está fazendo a contabilidade de uma venda, projetando um produto ou preparando uma campanha de marketing. Para a tese de Moore, um mercado é definido, no que interessa à um ‘mercado de produtos de alta tecnologia’ como:<br>
- <br>
- _Um conjunto de reais ou potenciais consumidores de determinado produto ou serviço<br>
- que têm certas necessidades ou desejos em comum e **fazem referências uns aos outros quando tomam uma decisão de compra**._
+Nesse ponto a palvra ‘mercado’ é muito polêmica, tendo diferentes interpretações dependendo se você está fazendo a contabilidade de uma venda, projetando um produto ou preparando uma campanha de marketing. Para a tese de Moore, um mercado é definido, no que interessa à um ‘mercado de produtos de alta tecnologia’ como:
+
+_Um conjunto de reais ou potenciais consumidores de determinado produto ou serviço
+
+que têm certas necessidades ou desejos em comum e **fazem referências uns aos outros quando tomam uma decisão de compra**._
 
 Enfatizar a última parte nunca é demais: se duas pessoas compram o mesmo produto pelas mesmas razões porém não tem comunicação entre si, fazem parte de dois mercados distintos. Portanto, se você vende um Palmtop para um estudante de medicina no Rio de Janeiro e depois vende outro para um estudante de medicina em Paris, e esses dois estudantes não tem qualquer comunicação entre si, são dois mercados distintos. Da mesma forma, se logo depois de vender esse Palm para esse estudante você vendê-lo para um engenheiro de construção que mora no mesmo prédio, mas os dois não se conhecem de forma alguma, são mercados distintos. O mercado, nessa definição restrita, é uma pequena rede social de consumidores que se trocam conselhos sobre determinado produto ou serviço. Isso é importante pois uma campanha de marketing jamais poderá alcançar absolutamente todos os potenciais compradores, e mesmo se alcançasse, dificilmente teria credibilidade para ser aceita por eles. Como toda agência de publicidade parece já ter aprendido, o melhor marketing é aquele feito por um colega.
 
-<br>
-
-<br>
-
-<br>
- Daí surgem as fendas, por serem grupos sociais distintos a transição de um setor ao outro é sempre mais lenta que dentro de um grupo. Os entusiastas todos se comunicam ativamente sobre tecnologia – é isso que faz deles entusiastas, mas ele dará uma sugestão a um visionário somente ocasionalmente, mas quando isso acontece, os dois se ouvem. Mas entre o visionário e o pragmático não: um raramente aceita ou acredita nos conselhos do outro, preferindo escutar iguais, e eis então, o abismo de Moore.
+Daí surgem as fendas, por serem grupos sociais distintos a transição de um setor ao outro é sempre mais lenta que dentro de um grupo. Os entusiastas todos se comunicam ativamente sobre tecnologia – é isso que faz deles entusiastas, mas ele dará uma sugestão a um visionário somente ocasionalmente, mas quando isso acontece, os dois se ouvem. Mas entre o visionário e o pragmático não: um raramente aceita ou acredita nos conselhos do outro, preferindo escutar iguais, e eis então, o abismo de Moore.
 
 A boa notícia é que, para uma empresa que está conquistando pragmáticos é que mais clientes irão ser atraídos como por magnetismo e estarão dispostos a ser clientes fiéis por muito tempo. A má notícia, para o produto que só conquistou visionários é que ele se encontra em um problema de ovo-galinha: não conquistará os pragmáticos enquanto não houver conquistado outros pragmáticos. Cruzar essa fenda que separa os dois grupos, é o que Geoffrey Moore chama de “cross the chasm”.
 

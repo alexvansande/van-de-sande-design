@@ -6,8 +6,8 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-[Download as quicktime](http://media.revver.com/qt;sharer=19513;download/247994.mov)
+<figure class="youtube">
+<iframe src="https://www.youtube-nocookie.com/embed/ehEUMgqV-Uc" title="Portfolio reel 2007" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</figure>
 
 A reel of my work in interaction design and video until 2007.
-
-[Animation & Video](http://wanderingabout.com/_/category/animation-video/)

@@ -39,5 +39,3 @@ Below are some samples of scanner photography.
 </figure>
 
 - about: This self Portrait as developed in 2002 in a course of introduction to representation techniques given by the teacher and artist Amador Perez.
-
-[Animation & Video](http://wanderingabout.com/_/category/animation-video/)

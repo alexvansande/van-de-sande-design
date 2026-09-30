@@ -5,54 +5,10 @@ original: "http://wanderingabout.com/paris/2006_02_01_archive.html"
 original_site: "wanderingabout.com/paris"
 ---
 
-Dizem que as viagens servem para testarmos nossos limites - eu descobri o meu.<br>
-Depois de 20 noites dormindo em albergues, 24 dias viajando, 30 dias<br>
-me sentindo sem casa, 45 dias sem abracar a fernanda, 166 dias sem ver<br>
-a familia e 173 sem programas com namorada, eu passei do meu. Na<br>
-verdade no trem pra istambul eu ja tinha a sensacao de "que que eu to<br>
-fazendo aqui", e ao chegar em milao ja tava rodando na reserva fazia<br>
-tempo.Alguns mamiferos superiores (e outros nem tanto assim) tem como parte<br>
-de seu ciclo vital uma busca por novos lugares, exploracao de<br>
-possiveis locais onde o ninho seja mais seguro ou a comida mais farta,<br>
-no qual ao fim desse ciclo ele deve voltar para seu ponto de partida.<br>
-Depois de certo limite de tempo o corpo vai percebendo que nao ha<br>
-nenhum estabilizacao nos periodos entre as funcoes do corpo, as horas<br>
-de comer, dormir e andar sempre ativas, o consciente sempre ativo,<br>
-explorando, atento. Em determinado ponto ele puxa a cordinha que<br>
-significa que ele provavelmente esta eh perdido, rodando em circulos e<br>
-que o polo sul deve ser do outro lado e todos os hormonios<br>
-responsaveis crem para a corrente sanguinea, felizes de trabalharem. O<br>
-coracao bate naquele ritmo duro, forte e constante, de quando a<br>
-adrenalina vem te dizer que algo esta errado, mas o corpo nao reage a<br>
-altura, nao luta nem foge. O mesmo paradoxo nos segundo que se seguem<br>
-a um assalto no qual voce nao teve muita reacao, a mesma quando voce<br>
-doa sangue e sangra por um tempao sem justificativa compreensivel<br>
-nesse nivel profundo e popular. As celulas cochicham entre si,<br>
-reclamam baixinho, nenhuma entendendo direito o que se passa naquele<br>
-governo central que eh o cerebro.Aterrisei em milao com a revelacao de que ninguem naquela cidade<br>
-inteira dava a minima importancia para onde eu ia dormir naquela<br>
-noite. dormi ruminando, oque que estou fazendo aqui, e acordei<br>
-entendendo. abandonei uma noite de albergue e fui direto a turim no<br>
-primeiro trem, que afinal era a unica coisa que eu vim fazer na<br>
-italia. decidi voltar pra casa (ou qualquer coisa parecida) mais cedo<br>
-e ia a paris o mais rapido possivel. Sairia inclusive mais barato do<br>
-que tres dias de viagem e comida...Me encontrei com um designer de usabilidade. conversamos umas duas<br>
-horas sobre interatividade, usabilidade, trabalho. Eu me senti<br>
-tranquilo, diferente de quando estava em londres. Uma dessas poucas e<br>
-divertidas situacoes awkward, mais para o outro que para voce, que no<br>
-fundo acho bem divertidas. Ele nao entendendo exatamente o que aquele<br>
-jovem estava fazendo la, eu simplesmente conversando. Nao tinha<br>
-perguntas especificas, talvez esse tenha sido a parte errada do<br>
-approach: eu tinha respostas demais as minhas proprias perguntas,<br>
-queria conversar, verbo intransitivo, nao ter respostas exatas. Ele<br>
-falou sobre usabilidade aplicada a tratamento publico de diabetes<br>
-(engracado na IDEO eu ouvi sobre design interativo aplicado ao<br>
-processo legislatorio da finlandia, eu vou pensando em dvds e<br>
-telefones e eles falam sobre servicos e sistemas muito maiores-<br>
-interessante), ele falou sobre a historia de turim (se sentindo um<br>
-tanto desconfortavel, eu certamente nao era a compania que ele<br>
-preferia ter no almoco). Guardei uma frase. Todo mundo se acha<br>
-importante, e ele no fundo falava de mudar o mundo por design,<br>
-melhorar tudo por usabilidade e perguntei se nao era isso o que os<br>
-todo mundo tentou faz tanto tempo."yes, but le corbusier didn't listen to people"\* \* \*nao consegui o primeiro trem para paris, peguei o da manha seguinte.<br>
+Dizem que as viagens servem para testarmos nossos limites - eu descobri o meu. Depois de 20 noites dormindo em albergues, 24 dias viajando, 30 dias me sentindo sem casa, 45 dias sem abracar a fernanda, 166 dias sem ver a familia e 173 sem programas com namorada, eu passei do meu. Na verdade no trem pra istambul eu ja tinha a sensacao de "que que eu to fazendo aqui", e ao chegar em milao ja tava rodando na reserva fazia tempo.Alguns mamiferos superiores (e outros nem tanto assim) tem como parte de seu ciclo vital uma busca por novos lugares, exploracao de possiveis locais onde o ninho seja mais seguro ou a comida mais farta, no qual ao fim desse ciclo ele deve voltar para seu ponto de partida. Depois de certo limite de tempo o corpo vai percebendo que nao ha nenhum estabilizacao nos periodos entre as funcoes do corpo, as horas de comer, dormir e andar sempre ativas, o consciente sempre ativo, explorando, atento. Em determinado ponto ele puxa a cordinha que significa que ele provavelmente esta eh perdido, rodando em circulos e que o polo sul deve ser do outro lado e todos os hormonios responsaveis crem para a corrente sanguinea, felizes de trabalharem. O coracao bate naquele ritmo duro, forte e constante, de quando a adrenalina vem te dizer que algo esta errado, mas o corpo nao reage a altura, nao luta nem foge. O mesmo paradoxo nos segundo que se seguem a um assalto no qual voce nao teve muita reacao, a mesma quando voce doa sangue e sangra por um tempao sem justificativa compreensivel nesse nivel profundo e popular. As celulas cochicham entre si, reclamam baixinho, nenhuma entendendo direito o que se passa naquele governo central que eh o cerebro.Aterrisei em milao com a revelacao de que ninguem naquela cidade
+
+inteira dava a minima importancia para onde eu ia dormir naquela noite. dormi ruminando, oque que estou fazendo aqui, e acordei entendendo. abandonei uma noite de albergue e fui direto a turim no primeiro trem, que afinal era a unica coisa que eu vim fazer na italia. decidi voltar pra casa (ou qualquer coisa parecida) mais cedo e ia a paris o mais rapido possivel. Sairia inclusive mais barato do que tres dias de viagem e comida...Me encontrei com um designer de usabilidade. conversamos umas duas
+
+horas sobre interatividade, usabilidade, trabalho. Eu me senti tranquilo, diferente de quando estava em londres. Uma dessas poucas e divertidas situacoes awkward, mais para o outro que para voce, que no fundo acho bem divertidas. Ele nao entendendo exatamente o que aquele jovem estava fazendo la, eu simplesmente conversando. Nao tinha perguntas especificas, talvez esse tenha sido a parte errada do approach: eu tinha respostas demais as minhas proprias perguntas, queria conversar, verbo intransitivo, nao ter respostas exatas. Ele falou sobre usabilidade aplicada a tratamento publico de diabetes (engracado na IDEO eu ouvi sobre design interativo aplicado ao processo legislatorio da finlandia, eu vou pensando em dvds e telefones e eles falam sobre servicos e sistemas muito maiores- interessante), ele falou sobre a historia de turim (se sentindo um tanto desconfortavel, eu certamente nao era a compania que ele preferia ter no almoco). Guardei uma frase. Todo mundo se acha importante, e ele no fundo falava de mudar o mundo por design, melhorar tudo por usabilidade e perguntei se nao era isso o que os todo mundo tentou faz tanto tempo."yes, but le corbusier didn't listen to people"\* \* \*nao consegui o primeiro trem para paris, peguei o da manha seguinte.
+
 estou aqui na ensci. fazendo as malas.

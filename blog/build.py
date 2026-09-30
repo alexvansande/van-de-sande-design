@@ -631,6 +631,7 @@ ARCHIVE = {
     "posterous": ("My life is not very interesting", "The Posterous blog, 2008–2012, mostly in Portuguese."),
     "monks": ("Computer for Monks", "The thesis blog for ESDI, 2006, in Portuguese. Only August was archived, and none of its pictures."),
     "wanderingabout": ("Wandering About", "The 2007 portfolio on wanderingabout.com, and Laser Chess's own site from 2005."),
+    "portfolio2011": ("Wandering About, 2011", "The later portfolio on wanderingabout.com, 2011–2012: the older pieces told again, and the work since."),
     "olpcnews": ("OLPC News", "An article for OLPC News, 2007."),
     "flickr": ("Flickr", "Two essays written as captions on Flickr, 2005."),
     "paris": ("Paris diary", "The diary from Paris, 2005–2006, in Portuguese."),

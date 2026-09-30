@@ -5,78 +5,18 @@ original: "http://wanderingabout.com/paris/2005_09_01_archive.html"
 original_site: "wanderingabout.com/paris"
 ---
 
-<br>
-  [pato](http://www.flickr.com/photos/avsa/44649800/) <br>
- Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). eu o egil estavamos saindo pela porta escura do boulevard e eu<br>
-<br>
-comentando: nao se preocupa nao tem ninguem escondido aqui. ai ligamos<br>
-<br>
-a luz para abrir a porta e eis que surge em nossa frente um pato. E<br>
-<br>
-quando olho para o gil para dizer o obvio atras dele tinha um gato,<br>
-<br>
-com uma cara que tinhamos frustrado o jantar dele.<br>
-<br>
-<br>
-<br>
-e enos encontramos assim, entre duas pontas da cadeia alimentar. E<br>
-<br>
-agoa? se saimos agora, o pobre pato vai ser devorado pelo gato. Mas<br>
-<br>
-nao podiamos pegar o pato e ele nao fazia questao de ir para a rua com<br>
-<br>
-a gente<br>
-<br>
-<br>
-<br>
-deixo o gil cuidandodo pato e vou ver se por acaso um pato bonito<br>
-<br>
-daqueles nao pertenceria a algum vizinho. Logo junta-se uma outra<br>
-<br>
-vizinha que achava a situacao "assez bizarre" - e seu gato de<br>
-<br>
-estimacao que aproveitou a situacao para ir garantir a proxima janta.<br>
-<br>
-E foi se juntando outra vizinha, mais luz acesa, o tempo passando os<br>
-<br>
-gatos se armando e o pato la, parado, se deitando no chao em posicao<br>
-<br>
-de assado.<br>
-<br>
-<br>
-<br>
-E se jogassemos um cobertor nele? E se, e se e se e dai? Entao nessa<br>
-<br>
-de conduzir o pato, pensando onde encontrariaos um lugar seguro para<br>
-<br>
-ele ele para em uma porta escrito guardiao. E na confusao do absurdo,<br>
-<br>
-usando a logica basica que aprendemos nos jogos e livros de crianca -<br>
-<br>
-pato - seguro- guardiao - surge a maior ideia de jerico da europa e<br>
-<br>
-abro a porta pro pato entrar.<br>
-<br>
-<br>
-<br>
-Eis que sai o guardiao, extermamante puto por estarmos pertubando a<br>
-<br>
-paz de sexta dele por uma razao estupida "quest-ce que voulez-vous que<br>
-<br>
-je fasse avec un canard ?"<br>
-<br>
-<br>
-<br>
-a voz da razao fala. desculpe guardiao, desculpe vizinhos, com licenca<br>
-<br>
-e boa sorte pro pato.<br>
-<br>
-<br>
-<br>
-Que desapareceu sem deixar pistas, endereco ou penas como testemunha<br>
-<br>
-de sua saida. Ou sobra de jantar.<br>
+eu o egil estavamos saindo pela porta escura do boulevard e eu comentando: nao se preocupa nao tem ninguem escondido aqui. ai ligamos a luz para abrir a porta e eis que surge em nossa frente um pato. E quando olho para o gil para dizer o obvio atras dele tinha um gato, com uma cara que tinhamos frustrado o jantar dele. e enos encontramos assim, entre duas pontas da cadeia alimentar. E agoa? se saimos agora, o pobre pato vai ser devorado pelo gato. Mas nao podiamos pegar o pato e ele nao fazia questao de ir para a rua com a gente
+
+deixo o gil cuidandodo pato e vou ver se por acaso um pato bonito daqueles nao pertenceria a algum vizinho. Logo junta-se uma outra vizinha que achava a situacao "assez bizarre" - e seu gato de estimacao que aproveitou a situacao para ir garantir a proxima janta. E foi se juntando outra vizinha, mais luz acesa, o tempo passando os gatos se armando e o pato la, parado, se deitando no chao em posicao de assado.
+
+E se jogassemos um cobertor nele? E se, e se e se e dai? Entao nessa de conduzir o pato, pensando onde encontrariaos um lugar seguro para ele ele para em uma porta escrito guardiao. E na confusao do absurdo, usando a logica basica que aprendemos nos jogos e livros de crianca - pato - seguro- guardiao - surge a maior ideia de jerico da europa e abro a porta pro pato entrar.
+
+Eis que sai o guardiao, extermamante puto por estarmos pertubando a paz de sexta dele por uma razao estupida "quest-ce que voulez-vous que je fasse avec un canard ?"
+
+a voz da razao fala. desculpe guardiao, desculpe vizinhos, com licenca e boa sorte pro pato.
+
+Que desapareceu sem deixar pistas, endereco ou penas como testemunha de sua saida. Ou sobra de jantar.
 
 <figure>
-<img src="01.jpg" width="240" height="180" alt="">
+<img src="01.jpg" width="1024" height="768" alt="">
 </figure>

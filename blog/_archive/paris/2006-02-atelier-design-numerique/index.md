@@ -5,14 +5,12 @@ original: "http://wanderingabout.com/paris/2006_02_01_archive.html"
 original_site: "wanderingabout.com/paris"
 ---
 
-(serie de posts de videos que ja preparei antes de ir)<br>
-<br>
-Esse foi meu trabalho final de projeto. O Projeto foi uma parceria com a japonesa Kenwood, uma firma nada inovadora que resolveuu recorrer a escolas de design para parte de uma pesquisa de tendencias para os proximos dez anos em termos tecnologicos. Eles estao presos nesses paradigmas deles: radios para carro, grandes aparelhos com neon azul para sua sala de estar e seu ultimo fiasco foi uma tentativa frustrada de fazer um iPod.<br>
-<br>
-Frustrada nao por que o produto era especialmente ruim, nem era feio, mas todo o processo foi feito de forma a falhar. Kenwood decide, com alguns anos de atraso, que quer uma fatia desse novo mercado do ipod. Os engenheiros calculam o custo de um tocador de mp3 portatil de disco rigido, de tamanho e capacidade nao muito diferentes dos atuais da apple, e tentam reduzir o custo. DAo a caixinha preta par aum designer e pedem para ele fazer uma carinha inovativa e diferente, desde que nao tenha nem uma ideia nova, por que todo o resto ja foi feito. Sai um produto decentezinho. E logo depois a apple, lanca um novo aparelho, nao mais usando disco rigido, de um quinto da espessura dos anteriores. Por que? Por que ela é a unica empresa nao tentando fazer um aparelho parecido com um iPod, e porque o designer que decide o icone da tela, ou o outro que trabalha o botao participa da mesma equipe do engenheiro que vai calcular o peso e o preco do produto. Trabalho integrado.<br>
-<br>
-E ironia do destino no mesmo dia que a kenwood nos mostrou o kenwood portatil, tambem nos mostrou algumas musicas japonesas. Mas essas foram trazidas em um ipod nano, que a designer da kenwood nao era besta de comprar o prorpio produto...<br>
-<br>
-Mas enfim, eu fujo do assunto.<br>
-<br>
+(serie de posts de videos que ja preparei antes de ir) Esse foi meu trabalho final de projeto. O Projeto foi uma parceria com a japonesa Kenwood, uma firma nada inovadora que resolveuu recorrer a escolas de design para parte de uma pesquisa de tendencias para os proximos dez anos em termos tecnologicos. Eles estao presos nesses paradigmas deles: radios para carro, grandes aparelhos com neon azul para sua sala de estar e seu ultimo fiasco foi uma tentativa frustrada de fazer um iPod.
+
+Frustrada nao por que o produto era especialmente ruim, nem era feio, mas todo o processo foi feito de forma a falhar. Kenwood decide, com alguns anos de atraso, que quer uma fatia desse novo mercado do ipod. Os engenheiros calculam o custo de um tocador de mp3 portatil de disco rigido, de tamanho e capacidade nao muito diferentes dos atuais da apple, e tentam reduzir o custo. DAo a caixinha preta par aum designer e pedem para ele fazer uma carinha inovativa e diferente, desde que nao tenha nem uma ideia nova, por que todo o resto ja foi feito. Sai um produto decentezinho. E logo depois a apple, lanca um novo aparelho, nao mais usando disco rigido, de um quinto da espessura dos anteriores. Por que? Por que ela é a unica empresa nao tentando fazer um aparelho parecido com um iPod, e porque o designer que decide o icone da tela, ou o outro que trabalha o botao participa da mesma equipe do engenheiro que vai calcular o peso e o preco do produto. Trabalho integrado.
+
+E ironia do destino no mesmo dia que a kenwood nos mostrou o kenwood portatil, tambem nos mostrou algumas musicas japonesas. Mas essas foram trazidas em um ipod nano, que a designer da kenwood nao era besta de comprar o prorpio produto...
+
+Mas enfim, eu fujo do assunto.
+
 A ideia do Le Button era simples: acabar com o aparelho de som em si, e tornar qualquer objeto um suporte para musica. Voce anda com um botao que pode colar em qualquer lugar, e qualquer objeto da sua casa ou da rua torna-se um lugar para armazenar ou tocar musica... Depois do video fizemos uma demosntracao pratica, mas esse video eu ainda nao tenho...

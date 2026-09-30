@@ -27,22 +27,19 @@ Fast learner, competitive and creative work. Communicative, curious and well inf
 
 ### Education & Affiliations
 
-<br>
- <br>
- Design<br>
- ESDI-UERJ (Escola Superior de Desenho Industrial- Universidade do estado do Rio de Janeiro)
+Design
+
+ESDI-UERJ (Escola Superior de Desenho Industrial- Universidade do estado do Rio de Janeiro)
 
 January 2001 - January 2007
 
-<br>
- <br>
- exchange Student Digital Design<br>
- ENSCI-Les Ateliers (École Nationale Superiéure de Création Industrielle - Paris)
+exchange Student Digital Design
+
+ENSCI-Les Ateliers (École Nationale Superiéure de Création Industrielle - Paris)
 
 September 2005 - March 2006
 
-<br>
- alexandre van de sande
+alexandre van de sande
 
 Present
 
@@ -50,15 +47,17 @@ Present
 
 ### Professional Experience
 
-Intern<br>
- Globo, Rio de Janeiro
+Intern
+
+Globo, Rio de Janeiro
 
 January 2005 - March 2007
 
 Internship in interface design, products benchmarking, online trends and market research, usability testing assitance, conceptual brainstorming of new applications. Globo organizations is world’s 5th biggest media conglomerate (1st in portuguese speaking countries).
 
-Intern<br>
- OESTUDIO Creation House, Rio de Janeiro
+Intern
+
+OESTUDIO Creation House, Rio de Janeiro
 
 July 2004 - December 2004
 

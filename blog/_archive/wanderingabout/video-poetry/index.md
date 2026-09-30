@@ -10,8 +10,11 @@ How do you freeze a moment? those two videos were made during my studies at the 
 
 ### In between the days
 
-<br>
- In between days” is about being into a daily routine while your mind wanders throught so many images and new ideas. It’s a mashup of many clips in a music by the coral sea..
+In between days” is about being into a daily routine while your mind wanders throught so many images and new ideas. It’s a mashup of many clips in a music by the coral sea..
+
+<figure class="youtube">
+<iframe src="https://www.youtube-nocookie.com/embed/woVgIt3Pcjs" title="In between the days" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</figure>
 
 <figure>
 <img src="01.jpg" width="200" height="153" alt="in between the days">
@@ -33,6 +36,10 @@ How do you freeze a moment? those two videos were made during my studies at the 
 
 The second, “come here”, is a work of love about missing something for long and then having a concentrated overdose.
 
+<figure class="youtube">
+<iframe src="https://www.youtube-nocookie.com/embed/LBKebN5-cMs" title="Come here" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</figure>
+
 <figure>
 <img src="05.jpg" width="200" height="153" alt="come4.jpg">
 </figure>
@@ -50,5 +57,3 @@ The second, “come here”, is a work of love about missing something for long 
 </figure>
 
 - about: Made in 2005 using Adobe Premiere, Adobe After Effects and Apple’s iMovie
-
-[Animation & Video](http://wanderingabout.com/_/category/animation-video/)

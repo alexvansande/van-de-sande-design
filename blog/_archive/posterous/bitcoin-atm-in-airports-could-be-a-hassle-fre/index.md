@@ -1,0 +1,34 @@
+---
+title: "Bitcoin ATM in airports could be a hassle free way for travelers to exchange local currencies"
+date: "2012-12-13T12:00:00Z"
+original: "http://mylifeisnotveryinteresting.posterous.com/bitcoin-atm-in-airports-could-be-a-hassle-fre"
+original_site: "Posterous"
+date_approximate: "year inferred from when it was archived"
+---
+
+### [Bitcoin ATM in airports could be a hassle free way for travelers to exchange local currencies](http://mylifeisnotveryinteresting.posterous.com/bitcoin-atm-in-airports-could-be-a-hassle-fre)
+
+Bitcoin ATMs in airports
+
+The problem for travelers:
+
+1. Arriving in a new country where you need to convert currency you always feel a but ripped up by the airport or hotel exchanges. 2. When leaving a country, you are always left with coins and small bills that you can't exchange back.
+
+Problems for bitcoins ATMs
+
+1. There isn't enough bitcoin users to justify the cost of installing multiple ATMs around the world
+
+2. Bitcoins are too geeky for most users who aren't really interested in most of its characteristics (decentralization, fixed amount, etc)
+
+3. ATMs by themselves are becoming less popular as people use less cash in their everyday lives. The solution \* Install bitcoins ATMs on major international airports \* The machine operation should be as straightforward as a vending machine: you insert cash and it either prints a paper wallet or it could send the coins to your mobile phone (NFC, Bluetooth, email?)
+
+\* alternatively you can put a "check" or deposit via mobile phone and the machine would spit local currency \* the machine shouldn't have "Bitcoins" as a proeminent name. It's not a bitcoin vending machine it's a "money without border", a "traveler's digital cash", "way to keep your money safe". It should mention bitcoins on the "how it works" section but btc is a means not a goal. \* Similarly, it shouldn't have a different "buy" and "sell" price: we don't want people to start thinking in "trade" mode where they want to buy something at a nicer price, and keep until it rises. Instead, every machine should display a current bitcoin/dollar value which would go both ways and a "transaction fee" (eg. $1 + 0.1%). This way the customer will think of bitcoins as something he can change back to "real money" at any time. I would be nice if the same machine also displayed the price on other currencies around the world so be wouldn't have any surprises. \* If the user chose to print a "check" he would also get a leaflet (for "carrying" it) it should have a brief explanation d what is bitcoins and a suggestion of mobile apps that would be able to read it. There's also an opportunity for places online that would accept bitcoin as payment. \* Machines could be put in major airports, as a "smart and safe way to bring money overseas". Preferably they would be inside the gates (at first), so it wouldn't get a reputation of a way to hide money from the border inspection authorities.
+
+\* If the machine proved it could turn a profit, soon hostels, hotels and other places for travelers would want to install them, hopefully competing for lower fees. \* As the traveler wants just to keep bitcoins for the time he is in transit - as that's his only protection against monetary fluctuations - this discourages coin hoarding, and encourages more bitcoin trading internationally. \* Since the traveller is only using BTC as a intermediate money, the usd/btc price is irrelevant. Given that the value doesn't change drastically in the 12 hour gap between transactions, it really doesn't matter if a bitcoin is valued at $1, $10 or $100.
+
+\* If a traveller goes to a market where BTC are less used and therefore are overvalued, he might get a net gain enough to cover machine fees and beat the competition with other traditional money exchanges. This will hopefully flood these markets with coins until BTC values worldwide reflects each local currency true exchange rate. Of course the opposite is true: if he goes from and overvalued market to a overvalued one, he might prefer to use traditional money exchanges on one way and btc exchanges in the way back. \* If bitcoins are able to prove their value for travelers, this will increase the awareness of the technology for more people worldwide - how many people are crossing borders everyday? Some people might choose not to trade them back to local currency and instead use it as online coupons, and some hotels might decide to accept bitcoins as well
+
+I really believe bitcoins have a great future as meta currency, an this project could be a decentralized way of starting it. You would only need two machines at the end of a major airport route to make it viable and travelers could dip their feet in a new technology.
+
+<br>
+Sent with Writer.

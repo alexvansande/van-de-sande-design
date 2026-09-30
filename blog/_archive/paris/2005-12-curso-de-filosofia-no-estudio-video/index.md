@@ -5,22 +5,22 @@ original: "http://wanderingabout.com/paris/2005_12_01_archive.html"
 original_site: "wanderingabout.com/paris"
 ---
 
-<br>
-  [curso de filosofia no estudio video](http://www.flickr.com/photos/avsa/74762262/) <br>
- Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). coisas que nao gosto nos franceses:<br>
-\* eles fumam muito, o tempo todo, e nao tem o menor respeito por nao fumantes, como se nao existisse a possibilidade de qquer um na sala se incomodar com a fumaca na sua cara. <br>
-\*Ainda no mesmo topico eles tem umas manias curiosas. Eu, que no brasil todos os maconheiros na rua achavam que tinha cara de ser o cara que ia ter seda, aqui ninguem tem a menor duvida que terei cigarro. mas isso nao me incomoda, o problema é o jeito que eles pedem: de supetao, voce esta passando apressado na rua e quando voce acabaou de passar por alguem essa pessoa grita, rapido e alto: "he vous avez une cigarrete?" e ate o momento que eu capto essas informacoes "quem é esse cara? ele gritou comigo? o que ele disse? ele pediu o que?" o fulano esta muito puto (ja ha uns tres metros la atras) e comeca a gritar como se eu fosse o sujeito mais mal educado e esnobe do mundo por ignora-lo. <br>
-\*Eles nao falam ingles, mas isso ninguem precisa saber. O problema é que junto do ingles, eles se mantem sem saber de mil coisas, uma recusa de digerir informacoes em lingua estrangeira de forma geral. Coisas que qualquer amigo meu toma como basicas, como gmail, googleearth e etc, pra eles é a maior novidade do universo<br>
-\*eles filosofam demais, no sentido fosforilacao da coisa<br>
-<br>
-coisas que gosto nos franceses<br>
-\*eles filosofam a beca, no sentido filosofar da coisa. Aqui ve filosofia com a naturalidade de quem aprendeu sobre isso como quem aprendeu mil vezes sobre o fim do feudalismo no colegio. <br>
-vale um comentario, nao que ninguem torne-se um filosofo por aprender estoicismo no colegial (apesar de a maior parte dos meus professores se achar um) mas eles conversam sobre isso com naturalidade e sem tabus. Eu nao sei muito sobre muitos assuntos, sei pouquissio sobre musica e nao lembro direito das aulas de historia, mas quando eu lembro, tenho de falar com jeito, por que em alguns circulos citar alguma coisa "do tempo do colegio" pega mal. Aqui eles discutem filosofia em qualquer ocasia mas como quem se interessa pela historia da segunda guerra mundial, ou pela historia do brasil, nada importante demais...<br>
-<br>
-Na foto por exemplo. O Yoan estava incomodado com o silencio de todo mundo trabalhando e resolveu trazer uma caixa de doze cds com aulas sobrea historia da filosofia pré-crista. Ninguem chiou "putz que nerd, ou cara que chato". Todo mundo achou interessante, e ficou escutando. É bom, que enquanto suas maos vao compondo cenas de video sua cabeca vai absorvendo meio passivamente, meio sem prestar atencao, meio por osmose, conceitos sobre quem eram os cinicos.<br>
-<br>
-Um dia platao disse que os homens eram bipedes desplumados. Diogenes trouxe uma galinha depenada de presente pra ele. Desde entao diogenes caminhava na rua, com uma lanterna, uma bengala e uma anfora dizendo procurar algum homem de verdade.. Esse era o cinico, o platao era o que deus as bases pro cristianismo. Platao eu conhecia bem, o outro nao. Todo dia voce aprende algo novo nao é?<br>
+coisas que nao gosto nos franceses: \* eles fumam muito, o tempo todo, e nao tem o menor respeito por nao fumantes, como se nao existisse a possibilidade de qquer um na sala se incomodar com a fumaca na sua cara.
+
+\*Ainda no mesmo topico eles tem umas manias curiosas. Eu, que no brasil todos os maconheiros na rua achavam que tinha cara de ser o cara que ia ter seda, aqui ninguem tem a menor duvida que terei cigarro. mas isso nao me incomoda, o problema é o jeito que eles pedem: de supetao, voce esta passando apressado na rua e quando voce acabaou de passar por alguem essa pessoa grita, rapido e alto: "he vous avez une cigarrete?" e ate o momento que eu capto essas informacoes "quem é esse cara? ele gritou comigo? o que ele disse? ele pediu o que?" o fulano esta muito puto (ja ha uns tres metros la atras) e comeca a gritar como se eu fosse o sujeito mais mal educado e esnobe do mundo por ignora-lo.
+
+\*Eles nao falam ingles, mas isso ninguem precisa saber. O problema é que junto do ingles, eles se mantem sem saber de mil coisas, uma recusa de digerir informacoes em lingua estrangeira de forma geral. Coisas que qualquer amigo meu toma como basicas, como gmail, googleearth e etc, pra eles é a maior novidade do universo
+
+\*eles filosofam demais, no sentido fosforilacao da coisa coisas que gosto nos franceses
+
+\*eles filosofam a beca, no sentido filosofar da coisa. Aqui ve filosofia com a naturalidade de quem aprendeu sobre isso como quem aprendeu mil vezes sobre o fim do feudalismo no colegio.
+
+vale um comentario, nao que ninguem torne-se um filosofo por aprender estoicismo no colegial (apesar de a maior parte dos meus professores se achar um) mas eles conversam sobre isso com naturalidade e sem tabus. Eu nao sei muito sobre muitos assuntos, sei pouquissio sobre musica e nao lembro direito das aulas de historia, mas quando eu lembro, tenho de falar com jeito, por que em alguns circulos citar alguma coisa "do tempo do colegio" pega mal. Aqui eles discutem filosofia em qualquer ocasia mas como quem se interessa pela historia da segunda guerra mundial, ou pela historia do brasil, nada importante demais...
+
+Na foto por exemplo. O Yoan estava incomodado com o silencio de todo mundo trabalhando e resolveu trazer uma caixa de doze cds com aulas sobrea historia da filosofia pré-crista. Ninguem chiou "putz que nerd, ou cara que chato". Todo mundo achou interessante, e ficou escutando. É bom, que enquanto suas maos vao compondo cenas de video sua cabeca vai absorvendo meio passivamente, meio sem prestar atencao, meio por osmose, conceitos sobre quem eram os cinicos.
+
+Um dia platao disse que os homens eram bipedes desplumados. Diogenes trouxe uma galinha depenada de presente pra ele. Desde entao diogenes caminhava na rua, com uma lanterna, uma bengala e uma anfora dizendo procurar algum homem de verdade.. Esse era o cinico, o platao era o que deus as bases pro cristianismo. Platao eu conhecia bem, o outro nao. Todo dia voce aprende algo novo nao é?
 
 <figure>
-<img src="01.jpg" width="240" height="180" alt="">
+<img src="01.jpg" width="1024" height="768" alt="">
 </figure>

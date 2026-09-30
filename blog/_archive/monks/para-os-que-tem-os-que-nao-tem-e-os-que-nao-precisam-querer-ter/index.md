@@ -6,8 +6,9 @@ original: "http://wanderingabout.com/computersformonks/2006/08/09/intro/"
 original_site: "wanderingabout.com/computersformonks"
 ---
 
-**Líbano, 14 de julho de 2006**<br>
- Mazen Kerbaj está em beirute quando Israel começa a bombardear a cidade. Com o aeroporto em chamas, e pontes destruídas, sair da cidade não é fácil, exige coragem. Decidir não sair, entretanto, exige além disto, um quê de sentimentalismo, uma pitada de idealismo burro e um pouco de loucura. Mazen tinha tudo isso mais um caderno de anotações e um laptop. Ele decide então fazer algo que poucas pessoas se lembrariam: ele faz um blog para contar sua história.
+#### Líbano, 14 de julho de 2006
+
+Mazen Kerbaj está em beirute quando Israel começa a bombardear a cidade. Com o aeroporto em chamas, e pontes destruídas, sair da cidade não é fácil, exige coragem. Decidir não sair, entretanto, exige além disto, um quê de sentimentalismo, uma pitada de idealismo burro e um pouco de loucura. Mazen tinha tudo isso mais um caderno de anotações e um laptop. Ele decide então fazer algo que poucas pessoas se lembrariam: ele faz um blog para contar sua história.
 
 Sob a música da artilharia que toca à noite, Mazen descreve, com rabiscos emocionados, arranhados e impulsivos, a rotina de viver em uma cidade sendo bombardeada. O boca a boca da internet logo traz leitores do mundo inteiro, querendo ver por olhos íntimos o que o noticiário diário não passa.
 

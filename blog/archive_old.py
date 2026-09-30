@@ -155,10 +155,83 @@ def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")[:70] or "post"
 
 
+# ---------------------------------------------------------------- tidying
+
+WRAP = (48, 86)       # how long the lines of hard-wrapped text run
+
+
+def visible(line):
+    return len(re.sub(r"[*_]", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", line)).strip())
+
+
+def tidy(md, hardwrapped=False):
+    """Undo what the old pages did to their text. Text that was written by
+    email or in a caption box came hard-wrapped at seventy-odd characters,
+    each line its own line (and on Blogger, its own <br><br>): the lines are
+    joined again, a paragraph ending where a line ends short or runs long.
+    A question in bold on a line of its own, as FAQs had them, becomes a
+    heading. Lone <br>s go."""
+    # Flickr's "blog this" put the photo's title and "Originally uploaded by …"
+    # over the text; the photo is there already
+    md = re.sub(r"(?m)^\s*\[[^\]]*\]\(https?://(?:www\.)?flickr\.com/photos/[^)]*\)\s*(?:<br>)?\s*$", "", md)
+    md = re.sub(r"\s*Originally uploaded by \[[^\]]*\]\([^)]*\)\.?\s*", "\n", md)
+    md = re.sub(r"\n{3,}", "\n\n", md).strip()
+    blocks = md.split("\n\n")
+    special = lambda b: re.match(r"(<(?!br)|```|#|- |\d+\. |> |\|)", b.strip())
+    if hardwrapped:             # a caption's lines each became a paragraph
+        merged = []
+        for b in blocks:
+            if (merged and not special(b) and not special(merged[-1]) and "\n" not in b.strip()
+                    and WRAP[0] <= visible(merged[-1].split("\n")[-1]) <= WRAP[1]):
+                merged[-1] += "\n" + b.strip()
+            else:
+                merged.append(b)
+        blocks = merged
+    out = []
+    for b in blocks:
+        if special(b):
+            out.append(b)
+            continue
+        lines = [l.strip() for l in re.split(r"\s*<br>\s*\n?|\n", b)]
+        para, paras = [], []
+        for l in lines:
+            if not l:
+                continue
+            if re.fullmatch(r"\*\*[^*]+\*\*:?", l):          # a question, or a little heading
+                if para:
+                    paras.append(" ".join(para)); para = []
+                paras.append("#### " + l.strip("*: "))
+                continue
+            q = re.match(r"(.*?)\s+(\*\*[^*]+\?\*\*)$", l)  # an answer, then the next question
+            if q and para is not None:
+                para.append(q.group(1)); paras.append(" ".join(para)); para = []
+                paras.append("#### " + q.group(2).strip("* "))
+                continue
+            para.append(l)
+            n = visible(l)
+            if not hardwrapped or n < WRAP[0] or n > WRAP[1]:
+                paras.append(" ".join(para)); para = []
+        if para:
+            paras.append(" ".join(para))
+        out.extend(p for p in paras if p.strip())
+    text = "\n\n".join(out)
+    return text.replace("\u00ca ", " ").replace(" \u00ca", " ")   # MacRoman's no-break space
+
+
+def tidy_file(path, hardwrapped=False):
+    src = open(path).read()
+    m = re.match(r"(---\n.*?\n---\n\n?)(.*)", src, re.S)
+    head, body = (m.group(1), m.group(2)) if m else ("", src)
+    with open(path, "w") as f:
+        f.write(head + tidy(body.strip(), hardwrapped) + "\n")
+
+
 def write_post(collection, slug, title, date, body_html, original, site, when, lang=None,
                extra=None, force=False, heading_shift=1, node=None, record=None):
     folder = os.path.join(OUT, collection, slug)
     md_path = os.path.join(folder, "index.md")
+    if os.path.exists(os.path.join(HERE, slug, "index.md")):
+        return "on the blog now; left alone"      # moved up, and perhaps edited there
     if os.path.exists(md_path) and not force:
         return "kept"
     os.makedirs(folder, exist_ok=True)
@@ -185,8 +258,9 @@ def write_post(collection, slug, title, date, body_html, original, site, when, l
     for k, v in (extra or {}).items():
         head.append(ip.fm(k, v))
     head += ["---", ""]
+    body = tidy("\n\n".join(blocks).strip(), hardwrapped=collection in HARDWRAPPED)
     with open(md_path, "w") as f:
-        f.write("\n".join(head) + "\n" + "\n\n".join(blocks).rstrip() + "\n")
+        f.write("\n".join(head) + "\n" + body + "\n")
     with open(os.path.join(folder, "source.html"), "w") as f:
         f.write(f"<!-- {original} (archived {when}) -->\n{record if record is not None else body_html}\n")
     return f"{len(blocks)} blocks, {conv.count} pictures"
@@ -289,6 +363,62 @@ def monks(force):
                          "wanderingabout.com/computersformonks", "20080530", lang="pt", force=force, node=node,
                          record=ip.node_html(node) if node is not None else "")
         say("monks", slug, how)
+
+
+# the later portfolio, 2011–2012, on WordPress again: some of the 2007
+# pieces told again, and the work since
+VIDEOS = {"aquatic-sugar": ("RZnEtoYlRiE", "Aqua sugar – the children's machine translated for adults")}
+
+
+def portfolio2011(force):
+    rows = cdx("url=wanderingabout.com/portfolio/&matchType=prefix&output=txt&fl=timestamp,original,statuscode,mimetype&collapse=urlkey&limit=500")
+    pages = {}
+    for r in rows:
+        if len(r) == 4 and r[2] == "200" and "html" in r[3]:
+            m = re.search(r"/portfolio/([a-z0-9-]+)/?$", r[1])
+            if m:
+                pages[m.group(1)] = (r[0], re.sub(r":80/", "/", r[1]))
+    for slug, (ts, url) in sorted(pages.items()):
+        try:
+            page = text(get(f"https://web.archive.org/web/{ts}id_/{url}"))
+        except Exception as e:
+            say("portfolio2011", slug, f"FAILED {e}")
+            continue
+        t = re.search(r'<h2 class="entry-title">(.*?)</h2>', page, re.S)
+        title = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))).strip() if t else slug
+        # the slider's pictures, then the words
+        root = ip.parse(page)
+        body = ip.Node("div")
+        slider = root.find(lambda n: n.attrs.get("id") == "slider")
+        if slider is not None:
+            for img in slider.find_all(lambda n: n.tag == "img"):
+                body.kids.append(img)
+        entry = root.find(lambda n: n.tag == "div" and "entry-content" in (n.attrs.get("class") or "").split())
+        if entry is not None:
+            body.kids.append(entry)
+        year = re.search(r'class="portfolio-date"[^>]*>\s*(\d{4})', page)
+        date = f"{year.group(1)}-07-01T12:00:00Z" if year else f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}T12:00:00Z"
+        clean = re.sub(r"-\d+$", "", slug)            # WordPress's le-button-2
+        how = write_post("portfolio2011", clean, title, date, "", url, "wanderingabout.com", ts, node=body,
+                         record=ip.node_html(body), extra={"date_circa": "the year shown, or when the archive first saw it"}, force=force)
+        if clean in VIDEOS and "blocks" in how:
+            add_video(os.path.join(OUT, "portfolio2011", clean, "index.md"), *VIDEOS[clean])
+        say("portfolio2011", clean, how)
+
+
+def youtube(vid, title):
+    return (f'<figure class="youtube">\n<iframe src="https://www.youtube-nocookie.com/embed/{vid}" title="{html.escape(title)}" '
+            f'loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>\n</figure>')
+
+
+def add_video(path, vid, title):
+    """The video after the first paragraph of words."""
+    src = open(path).read()
+    head, body = re.match(r"(---\n.*?\n---\n\n?)(.*)", src, re.S).groups()
+    blocks = body.strip().split("\n\n")
+    at = next((i + 1 for i, b in enumerate(blocks) if not b.startswith(("<", "#", "-", "["))), 0)
+    blocks.insert(at, youtube(vid, title))
+    open(path, "w").write(head + "\n\n".join(blocks) + "\n")
 
 
 PORTFOLIO = ["games/laser-chess", "games/the-wall-maze", "interaction-design/mind-the-pad", "interaction-design/radio-jaba",
@@ -411,16 +541,24 @@ def flickr(force):
         say("flickr", slug, how)
 
 
-COLLECTIONS = {"posterous": posterous, "monks": monks, "wanderingabout": wanderingabout, "paris": paris,
+HARDWRAPPED = {"paris", "flickr", "posterous"}
+
+COLLECTIONS = {"portfolio2011": portfolio2011, "posterous": posterous, "monks": monks, "wanderingabout": wanderingabout, "paris": paris,
                "olpcnews": olpcnews, "flickr": flickr}
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("collections", nargs="*", default=list(COLLECTIONS))
+    ap.add_argument("collections", nargs="*", default=[])
     ap.add_argument("--force", action="store_true", help="write again what is already there")
+    ap.add_argument("--tidy", nargs="+", metavar="INDEX_MD", help="just tidy these files in place")
+    ap.add_argument("--hardwrapped", action="store_true", help="with --tidy: the text is hard-wrapped")
     args = ap.parse_args()
-    for c in args.collections:
+    if args.tidy:
+        for f in args.tidy:
+            tidy_file(f, args.hardwrapped)
+        return
+    for c in args.collections or list(COLLECTIONS):
         print(c, flush=True)
         try:
             COLLECTIONS[c](args.force)
