@@ -70,12 +70,15 @@ function buildPad(station, pages, reel){
   /* A pad whose pages carry their own line tells its story one page at a
      time underneath, in place of a title: every line is set, stacked, and
      render() shows the one for the page in hand. */
+  /* a reel under the sheets has a line for each of its shots too, after the
+     sheets' own, one per stop of the pad */
+  const says = pages.map(p => p.cap).concat((reel || []).map(r => r[3]));
   let lines = null;
-  if (pages.some(p => p.cap)){
+  if (says.some(Boolean)){
     cap.textContent = '';
-    lines = pages.map(p => {
+    lines = says.map(t => {
       const l = el('span', 'line');
-      l.textContent = p.cap || '';
+      l.textContent = t || '';
       cap.append(l);
       return l;
     });
@@ -99,8 +102,11 @@ const PADS = [buildPad(story, PAGES),
               buildPad($('#blockchain'), [
                 { art: 'eth1', cap: 'Very few people understood what exactly we were doing, even among the team.' },
                 { art: 'eth2', cap: 'The launch pages were based on my own experience of trying to get it all to work. Recipes to build a new kind of society.' }]),
-              buildPad($('#browser'), [{ art: 'appstore' }], [
-                ['mist1', 1858, 1240], ['mist2', 2000, 1679], ['mist3', 2000, 1648]]),
+              buildPad($('#browser'), [
+                { art: 'appstore', cap: 'We wanted to change the world. We thought we’d start at a new browser.' }], [
+                ['mist1', 1858, 1240, 'When all crypto wallets were about trading, we built one around creating. Build your organization, a crowdsale, your own kind of money.'],
+                ['mist2', 2000, 1679, 'It was the first wallet to have tokens. In fact we were the ones who wrote the specs for it, which became industry standard, ERC20.'],
+                ['mist3', 2000, 1648, 'The Mist Browser died. But it was survived by lots of three letter acronyms it helped set: NFT, ICO, ENS, DAO.']]),
               buildPad($('#victor'), [{ art: 'hvmlogo' }, { art: 'hvm1' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
               buildPad($('#triangle'), [{ art: 'triangle' }])];
