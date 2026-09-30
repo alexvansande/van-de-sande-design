@@ -147,7 +147,10 @@ scroll, a card trailed the page by a frame and shook on a phone.
   pile. The address keeps it up to date as the posts go by, so a reload or
   a link stands there again; `#y2024` still goes to a year.
 - Going from a post to the index (the bar, or pulling past the top) opens
-  it at that post's card, which the post shrinks into.
+  it at that post's card, which the post shrinks into. If the post was
+  opened from the index, its card is put back exactly where it was on the
+  screen when it was clicked (noted for the tab), by the back button too;
+  otherwise it is at the front of the pile.
 - `/slug#at=px` opens a post that far down, where the site's copy of its
   head had been read to.
 - `#back=blog.<n>`, on a post or the index, is the page of the site's poster

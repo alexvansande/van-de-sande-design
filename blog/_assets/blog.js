@@ -234,10 +234,31 @@ const Pile = (() => {
   /* Opened at a post (#at=slug), from the site's poster or back from the
      post itself: stand with its card at the front of the pile, the ones
      before it stacked above. From the site, the years come down after. */
+  /* A card opened is noted, with where it was on the screen, so that coming
+     back from its post, by the back button, the bar or the pull at its top,
+     puts it back exactly there rather than at the front of the pile. */
+  const OPENED = "index-opened";
+  const layoutTop = c => Pile ? Pile.rect(c).top : c.getBoundingClientRect().top;
+  const opened = (() => { try { return JSON.parse(sessionStorage.getItem(OPENED) || "null"); } catch (_) { return null; } })();
+  document.querySelector(".cards").addEventListener("click", e => {
+    const c = e.target.closest(".cards > .card");
+    if (!c || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    try { sessionStorage.setItem(OPENED, JSON.stringify({ slug: c.dataset.slug, top: layoutTop(c) })); } catch (_) {}
+    // the back button comes back to this address, so it names this card
+    leaving = true;
+    setHash([["at", c.dataset.slug], ["back", args.get("back")]]);
+  });
+  addEventListener("pageshow", () => { leaving = false; });
+
   const landOn = (c, flow) => {
     if (!c) return;
     history.scrollRestoration = "manual";
-    const go = () => { if (Pile) Pile.measure(); scrollTo(0, Pile ? Pile.scrollFor(c) : c.offsetTop); };
+    const was = opened && opened.slug === c.dataset.slug ? opened.top : null;
+    const go = () => {
+      if (Pile) Pile.measure();
+      const docTop = layoutTop(c) + scrollY;
+      scrollTo(0, was !== null ? Math.max(0, docTop - was) : Pile ? Pile.scrollFor(c) : docTop);
+    };
     go();
     /* the gesture that brought us here (a trackpad pulling up out of a post,
        or turning the poster's last page over) is still coasting: that is
