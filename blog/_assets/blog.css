@@ -1,0 +1,150 @@
+/* The blog, in the clothes of the rest of the site: the same dark ground,
+   the same paper and ink, the same EB Garamond. Each post is one long sheet.
+
+   What is inside the sheet keeps Paragraph's layout: the column is 704px as
+   it was, so every picture shows at the size it did (its own size, or the
+   column's if it is wider); a picture floated right takes half the column
+   and drops under the text on a phone; captions sit centred under their
+   picture; and the gaps between paragraphs, headings, lists and pictures
+   are Paragraph's, only set in rem. */
+
+@font-face{font-family:"EB Garamond";font-style:normal;font-weight:400 800;font-display:swap;
+  src:local("EB Garamond"),url(fonts/eb-garamond.woff2) format("woff2")}
+@font-face{font-family:"EB Garamond";font-style:italic;font-weight:400 800;font-display:swap;
+  src:local("EB Garamond Italic"),url(fonts/eb-garamond-italic.woff2) format("woff2")}
+
+:root{
+  --dark:#333331;
+  --paper:#f4f1e4;
+  --ink:#262420;
+  --ghost:#8c8674;
+  --quiet:#6c6656;      /* captions and dates: the ghost, dark enough to read on paper */
+  --rule:#d4cdb8;
+  --light:#e6e2d2;      /* type on the dark ground, as on the index */
+  --column:44rem;       /* 704px: Paragraph's column */
+  --gutter:clamp(1.25rem, 6vw, 4.5rem);
+  color-scheme:dark;
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--dark);color:var(--light);
+  font-family:"EB Garamond","Iowan Old Style","Hoefler Text",Garamond,Georgia,serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-feature-settings:"kern","liga","onum";overflow-x:hidden}
+a{color:inherit}
+
+/* ---------- the dark around the paper ---------- */
+.top{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;padding:1.6rem var(--gutter) 1.4rem;
+  font-size:1.15rem;letter-spacing:.01em}
+.top a{text-decoration:none;opacity:.85}
+.top a:hover{opacity:1}
+.foot{display:flex;gap:.7em;justify-content:center;padding:3rem 1rem 3.5rem;
+  font-size:1rem;color:var(--light);opacity:.7}
+.foot a{text-decoration:none}
+.foot a:hover{text-decoration:underline;text-underline-offset:.2em}
+
+/* ---------- the sheet ---------- */
+.sheet{position:relative;max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
+  background:var(--paper);color:var(--ink);
+  box-shadow:0 1px 2px rgba(0,0,0,.25),0 18px 50px -10px rgba(0,0,0,.55)}
+.cover img{display:block;width:100%;height:auto;max-height:422px;object-fit:cover;object-position:center}
+.text{padding:clamp(2rem,6vw,4rem) var(--gutter) clamp(3rem,8vw,5.5rem)}
+.text>h1{margin:0;font-weight:500;font-size:clamp(2.1rem,1.5rem + 2.6vw,3.1rem);line-height:1.08;
+  letter-spacing:-.01em;text-wrap:balance}
+.text>.sub{margin:.7rem 0 0;font-size:clamp(1.25rem,1.1rem + .6vw,1.5rem);line-height:1.3;color:var(--quiet);
+  font-style:italic;text-wrap:balance}
+.when{margin:1.3rem 0 0;font-size:1rem;color:var(--quiet);letter-spacing:.04em;font-variant:small-caps}
+.when a{text-decoration:none;border-bottom:1px solid var(--rule)}
+.text>.when{margin-bottom:clamp(2.2rem,5vw,3.2rem)}
+
+/* ---------- the body of a post: Paragraph's layout ---------- */
+.body{font-size:1.25rem;line-height:1.6}
+.body::after{content:"";display:table;clear:both}
+.body>*{margin-top:0;margin-bottom:0}
+.body p{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.body p:empty{height:1em}
+.body a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em;
+  text-decoration-color:var(--ghost);transition:text-decoration-color .15s}
+.body a:hover{text-decoration-color:var(--ink)}
+.body strong{font-weight:650}
+.body h1,.body h2,.body h3,.body h4,.body h5,.body h6{font-weight:600;line-height:1.25;margin-top:2.5rem;
+  text-wrap:balance;scroll-margin-top:1.5rem}
+.body h1{font-size:1.9rem}.body h2{font-size:1.7rem}.body h3{font-size:1.55rem}
+.body h4,.body h5,.body h6{font-size:1.3rem}
+.body h3 strong,.body h2 strong{font-weight:inherit}
+.body>:first-child{margin-top:0!important}
+.body :is(h1,h2,h3,h4,h5,h6)+:is(h1,h2,h3,h4,h5,h6){margin-top:2rem}
+.body p+:is(h1,h2,h3,h4,h5,h6){margin-top:2.5rem}
+.body :is(h1,h2,h3,h4,h5,h6)+p{margin-top:1.5rem}
+.body p+p{margin-top:1.375rem}
+.body :is(h1,h2,h3,h4,h5,h6,p)+:is(ul,ol){margin-top:1.5rem}
+.body :is(ul,ol)+p{margin-top:1.25rem}
+.body :is(figure,pre,table)+:is(p,ul,ol,pre){margin-top:2rem}
+
+.body ul,.body ol{padding-left:1.5rem;clear:both}
+.body li::marker{color:var(--ink)}
+.body li>p{margin:0}
+.body li+li{margin-top:.35rem}
+
+.body blockquote{clear:both;position:relative;margin:2rem 0 1.5rem -1rem;padding-left:1.25rem;font-style:italic}
+.body blockquote::before{content:"";position:absolute;inset-block:0;left:0;width:.2rem;border-radius:9999px;
+  background:var(--ghost);opacity:.8}
+.body blockquote p+p{margin-top:.8rem}
+
+.body hr{clear:both;border:0;border-top:1px solid var(--rule);margin:2.5rem 0}
+.body pre{overflow-x:auto;padding:1rem 1.2rem;border-radius:6px;background:#e9e5d4;font-size:.9rem;line-height:1.5}
+.body code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85em}
+.body math{font-size:1.08em;font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math}
+
+/* pictures: their own size, or the column's if they are wider */
+.body figure{margin:0}
+.body figure img{display:block;max-width:100%;height:auto;margin:1.25rem auto;border-radius:6px}
+.body :is(p,ul,ol,pre,blockquote)+figure>img{margin-top:2rem}
+.body figure+figure>img{margin-top:2.5rem}
+.body figcaption{text-align:center;font-size:1.02rem;line-height:1.4;color:var(--quiet);text-wrap:balance}
+.body figcaption:not(:empty){margin:.75rem 0 1rem}
+.body figcaption a{text-decoration-color:var(--rule)}
+
+/* half the column, floated right, the text running round it */
+.body figure.float-right{float:right;margin:-.75rem 0 0 1rem}
+.body figure.float-left{float:left;margin:-.75rem 1rem 0 0}
+.body figure.float-right>figcaption,.body figure.float-left>figcaption{margin-bottom:.3em}
+@media (max-width:480px){
+  .body figure.float-right,.body figure.float-left{float:none;width:100%!important;margin:1rem auto}
+}
+
+.body figure.youtube{clear:both;margin:2rem 0}
+.body figure.youtube iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:6px;background:#000}
+
+/* ---------- after the post ---------- */
+.more{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;padding:3.2rem var(--gutter) 0}
+.more h2{margin:0 0 .9rem;font-weight:400;font-size:1rem;letter-spacing:.06em;font-variant:small-caps;opacity:.65}
+.more ul{list-style:none;margin:0;padding:0}
+.more li{margin:.45rem 0;font-size:1.3rem;line-height:1.3}
+.more a{text-decoration:none}
+.more a:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+
+/* ---------- the index: the posts as sheets on the dark ---------- */
+.index{max-width:66rem;margin:0 auto;padding:1rem var(--gutter) 0}
+.index>h1{margin:1.5rem 0 2.6rem;font-weight:400;font-size:clamp(1.9rem,1.2rem + 2.6vw,3rem);line-height:1.15;
+  color:var(--light);text-wrap:balance}
+.index .cat::before{content:"#";opacity:.5}
+.lost{font-size:1.3rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:clamp(1.5rem,3vw,2.4rem)}
+.card{display:flex;flex-direction:column;background:var(--paper);color:var(--ink);text-decoration:none;
+  box-shadow:0 1px 2px rgba(0,0,0,.25),0 14px 36px -12px rgba(0,0,0,.6);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.card:hover{transform:translateY(-4px) rotate(-.25deg);box-shadow:0 1px 2px rgba(0,0,0,.25),0 24px 46px -14px rgba(0,0,0,.7)}
+.card .thumb{aspect-ratio:2/1;overflow:hidden;background:#dcd7c6}
+.card .thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.card .words{padding:1.2rem 1.4rem 1.4rem;display:flex;flex-direction:column;flex:1}
+.card h2{margin:0;font-weight:500;font-size:1.45rem;line-height:1.15;text-wrap:balance}
+.card .sub{margin:.45rem 0 0;font-size:1.1rem;line-height:1.3;color:var(--quiet);font-style:italic}
+.card .when{margin-top:auto;padding-top:1rem;font-size:.95rem}
+
+@media (max-width:640px){
+  .sheet{box-shadow:none}
+  .top{padding-top:1.1rem;padding-bottom:1rem}
+}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}

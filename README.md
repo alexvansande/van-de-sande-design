@@ -135,6 +135,13 @@ with the commit, `app.js?v=…`: Pages lets a browser keep each file for ten
 minutes on its own clock, and without the stamp a visitor could get a new
 page with the old script.
 
+## The blog
+
+`blog/` holds the posts from blog.vandesande.design, brought over from
+Paragraph: a folder per post, named after its address, with its Markdown and
+its pictures, and `blog/build.py`, which makes the blog from them. The deploy
+builds it into `site/blog/` for now. See `blog/README.md`.
+
 ## What is not in this repo
 
 `References/` holds the book scans, screen recordings and a PSD that the

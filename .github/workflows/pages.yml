@@ -28,6 +28,15 @@ jobs:
       # script. The script's address changes with every deploy instead.
       - name: Stamp the script with this commit
         run: sed -i "s|src=\"app.js\"|src=\"app.js?v=${GITHUB_SHA::8}\"|" site/index.html
+      # The blog, from the Markdown in blog/, under /blog/ for now. Its own
+      # domain comes later: then it is built with --base / on its own.
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the blog
+        run: |
+          pip install pillow
+          python3 blog/build.py --out site/blog --base /blog/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
