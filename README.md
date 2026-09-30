@@ -84,6 +84,14 @@ the blog sets it, drawn smaller (a transform, so nothing reflows). Pulling
 through it grows it about the middle of the screen to the post's own size,
 and the post loads onto exactly that.
 
+On a trackpad each gesture, momentum and all, goes one step and no
+further: one page, one station along the rail. Turning the last sheet
+stops on the post; reading down stops at the end of the paragraph; the
+first pull there only brings "Keep scrolling to read" up, and it takes
+another to go into the post. Reading back up stops at the top of the post
+before the sheet comes back down. A finger or a mouse drag is left alone,
+since the hand is already where the page is.
+
 Before leaving, the site notes on its own address where it stood
 (`#read=slug`), so the back button comes back to the head of the post, and
 the site ignores the trackpad still coasting from the gesture. `BLOG` in
