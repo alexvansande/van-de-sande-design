@@ -1,9 +1,9 @@
 ---
 title: "Cuponzal"
-date: "2011-10-29T12:00:00Z"
+date: "2010-07-01T12:00:00Z"
 original: "http://wanderingabout.com/portfolio/cuponzal/"
 original_site: "wanderingabout.com"
-date_circa: "the year shown, or when the archive first saw it"
+date_circa: "the year only: “In 2009-2010 deals sites became…”, in the post"
 ---
 
 <figure>

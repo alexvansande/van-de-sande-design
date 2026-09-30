@@ -10,13 +10,59 @@ Our universe is very counterintuitive. Take Relativity, for example: we know for
 
 To illustrate, let's imagine a story.
 
+<figure>
+<img src="01.jpg" width="500" height="398" alt="">
+</figure>
+
 Imagine a Sailboat just crashed into an iceberg in the middle of a very dark night. There are only two lifeboats, and since no one agrees where is the closest land, the crew splits up, each in one direction.
+
+<figure>
+<img src="02.jpg" width="469" height="319" alt="">
+</figure>
 
 Before they departed, they devised a system that they would use to let the other one know they were all right, and how far they were: after a the first ten minutes on the sea, each one of them would blow a whistle, to signal they were still alive and rowing.
 
-Then they wait until they hear the signal and respond with another whistle. And wait again, each time the wait being longer and longer... So what happens here? Imagine there's somehow a super smart penguin on the iceberg and he can see both lifeboats, no matter how distant they are, or how dark the night is.
+<figure>
+<img src="03.jpg" width="917" height="1024" alt="">
+</figure>
 
-This is what he would see: First the ship crashes. The lifeboats leave. The penguin sees both of them sending a signal simultaneously... ..but he will only hear them a little while later. And the lifeboats will hear it later still, and respond back The penguin hears both responses simultaneously, way before each lifeboat can. And then finally, over a longer wait, each one of them hear the second signal, and sends a third one.
+Then they wait until they hear the signal and respond with another whistle.
+
+<figure>
+<img src="04.jpg" width="917" height="1024" alt="">
+</figure>
+
+And wait again, each time the wait being longer and longer...
+
+<figure>
+<img src="05.jpg" width="470" height="428" alt="">
+</figure>
+
+So what happens here? Imagine there's somehow a super smart penguin on the iceberg and he can see both lifeboats, no matter how distant they are, or how dark the night is.
+
+<figure>
+<img src="06.jpg" width="640" height="394" alt="">
+</figure>
+
+This is what he would see: First the ship crashes. The lifeboats leave.
+
+<figure>
+<img src="07.jpg" width="454" height="424" alt="">
+</figure>
+
+The penguin sees both of them sending a signal simultaneously...
+
+<figure>
+<img src="08.jpg" width="499" height="261" alt="">
+</figure>
+
+..but he will only hear them a little while later.
+
+<figure>
+<img src="09.jpg" width="639" height="505" alt="">
+</figure>
+
+And the lifeboats will hear it later still, and respond back The penguin hears both responses simultaneously, way before each lifeboat can. And then finally, over a longer wait, each one of them hear the second signal, and sends a third one.
 
 The end.
 

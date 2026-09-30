@@ -10,5 +10,13 @@ descobri que gosto de desenhar paisagens...
 Click here to download: **[a\_surpresa\_9\_-\_Quatro\_fatos\_so.zip](http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Wwk0kiXBObRpTmttjaUZzXDXMYmXN4s5GTWa8Z4h0SUNZyVBiIl11NGfpYcf/a_surpresa_9_-_Quatro_fatos_so.zip)** (472 KB)
 
 <figure>
-<img src="01.png" width="48" height="48" alt="">
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
+
+<figure>
+<img src="02.jpg" width="768" height="1024" alt="">
+</figure>
+
+<figure>
+<img src="03.png" width="48" height="48" alt="">
 </figure>

@@ -227,7 +227,7 @@ def tidy_file(path, hardwrapped=False):
 
 
 def write_post(collection, slug, title, date, body_html, original, site, when, lang=None,
-               extra=None, force=False, heading_shift=1, node=None, record=None):
+               extra=None, force=False, heading_shift=1, node=None, record=None, spare=None):
     folder = os.path.join(OUT, collection, slug)
     md_path = os.path.join(folder, "index.md")
     if os.path.exists(os.path.join(HERE, slug, "index.md")):
@@ -238,7 +238,8 @@ def write_post(collection, slug, title, date, body_html, original, site, when, l
     for f in os.listdir(folder):
         if re.fullmatch(r"(\d\d|cover)\.\w+", f):
             os.remove(os.path.join(folder, f))
-    conv = Conv(folder, when, heading_shift=heading_shift, base_url=original)
+    conv = (PosterousConv(folder, when, heading_shift=heading_shift, base_url=original, spare=spare)
+            if spare is not None else Conv(folder, when, heading_shift=heading_shift, base_url=original))
     tree = node if node is not None else ip.parse(body_html)
     blocks = [b for b in conv.blocks(tree) if b and b.strip()]
     def plain(b):     # a block as words: no marks, no link addresses
@@ -280,6 +281,69 @@ POSTEROUS = "mylifeisnotveryinteresting.posterous.com"
 NOT_POSTS = {"page", "tag", "archive", "rss", "private", "search", "login", "main", "posts", "fonts", "jwplayer",
              "p", "images", "stylesheets", "javascripts", "profile", "subscribe", "unsubscribe"}
 MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+
+# ---------------------------------------------------------------- Flickr, as a store of pictures
+
+_flickr = None
+
+
+def flickr_photos():
+    """The photos Flickr shows to someone not logged in: the newest hundred
+    and those in albums. For each: its title, its description, when it went
+    up, and its picture at the largest size the page offers."""
+    global _flickr
+    if _flickr is not None:
+        return _flickr
+    ids = []
+    for n in range(1, 5):
+        page = text(get(f"https://www.flickr.com/photos/avsa/page{n}"))
+        ids += re.findall(r'"photo-stats-models","dateTaken":"[^"]*","datePosted":"\d+","id":"(\d+)"', page)
+    albums = text(get("https://www.flickr.com/photos/avsa/albums"))
+    for al in sorted(set(re.findall(r"/photos/avsa/albums/(\d+)", albums))):
+        page = text(get(f"https://www.flickr.com/photos/avsa/albums/{al}"))
+        ids += re.findall(r'"datePosted":"\d+","id":"(\d+)"', page) + re.findall(r"/photos/avsa/(\d{8,})/in/album", page)
+    _flickr = []
+    for pid in dict.fromkeys(ids):
+        try:
+            page = text(get(f"https://www.flickr.com/photos/avsa/{pid}/"))
+        except Exception:
+            continue
+        t = re.search(r'<meta property="og:title" content="([^"]*)"', page)
+        d = re.search(r'<meta name="description" content="([^"]*)"', page)
+        img = re.search(r'<meta property="og:image" content="([^"]*)"', page)
+        dp = re.search(r'"datePosted":"?(\d+)', page)
+        _flickr.append({"id": pid, "title": html.unescape(t.group(1)) if t else "", "desc": html.unescape(d.group(1)) if d else "",
+                        "img": img.group(1) if img else None, "posted": int(dp.group(1)) if dp else 0})
+    return _flickr
+
+
+def norm_title(s):
+    return re.sub(r"[^a-z0-9]+", " ", slugify(s).replace("-", " ")).strip()
+
+
+def flickr_for(slug, title):
+    """The Flickr photos a Posterous post was sent on to, in the order they went up."""
+    hits = [p for p in flickr_photos() if p["img"] and (
+        f"posterous.com/{slug}" in p["desc"] or (norm_title(p["title"]) and norm_title(p["title"]) == norm_title(title)))]
+    return [p["img"] for p in sorted(hits, key=lambda p: (p["posted"], p["id"]))]
+
+
+class PosterousConv(Conv):
+    """Posterous's own files went with it; the same pictures, sent on to
+    Flickr, are taken in their place, one after another."""
+
+    def __init__(self, *a, spare=(), **k):
+        super().__init__(*a, **k)
+        self.spare = list(spare)
+
+    def picture(self, url):
+        try:
+            return super().picture(url)
+        except Exception:
+            if "posterous.com" in url and self.spare:
+                return super().picture(self.spare.pop(0))
+            raise
 
 
 def posterous(force):
@@ -340,10 +404,11 @@ def posterous(force):
             for h in list(node.find_all(lambda n: n.tag == "h2")):
                 if h.text().strip() == title:
                     h.parent.kids.remove(h)
-        how = write_post("posterous", slug, title, date, "", url, "Posterous", ts, force=force, node=node,
+        spare = flickr_for(slug, title)
+        how = write_post("posterous", slug, title, date, "", url, "Posterous", ts, force=force, node=node, spare=spare,
                          record=ip.node_html(node) if node is not None else "",
                          extra={"date_approximate": "year inferred from when it was archived"} if date and not full else None)
-        say("posterous", slug, how)
+        say("posterous", slug, how + (f" ({len(spare)} on Flickr)" if spare else ""))
 
 
 def monks(force):

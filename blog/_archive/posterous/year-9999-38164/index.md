@@ -7,3 +7,7 @@ date_approximate: "year inferred from when it was archived"
 ---
 
 Because the one thing we can count on lasting forever is human stupidity..
+
+<figure>
+<img src="01.jpg" width="1024" height="845" alt="">
+</figure>

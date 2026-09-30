@@ -8,3 +8,7 @@ original_site: "Posterous"
 Esse é uma homenagem ao bruno, o tipo de amigo que guarda um cartaz de 9 metros quadrados fedendo a tinta durante um mês. Aliás a pessoa que me fez conhecer a pessoa mais fantástica do meu mundo...
 
 tags: a surpresa
+
+<figure>
+<img src="01.jpg" width="1024" height="768" alt="">
+</figure>

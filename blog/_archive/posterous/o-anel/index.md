@@ -12,5 +12,13 @@ Tirei umas fériazinhas dos desenhos. Estava planejando segurar mais par a publi
 Click here to download: **[O\_anel.zip](http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/ECp4gWmq04kgO2HT4g9HnGCkvtFUPVKYRgchaB2njP4CIsEiKRs1blMzjXSx/O_anel.zip)** (383 KB)
 
 <figure>
-<img src="01.png" width="48" height="48" alt="">
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
+
+<figure>
+<img src="02.jpg" width="768" height="1024" alt="">
+</figure>
+
+<figure>
+<img src="03.png" width="48" height="48" alt="">
 </figure>

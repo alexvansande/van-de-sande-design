@@ -8,3 +8,7 @@ original_site: "Posterous"
 claro que continua.
 
 subiu? caiu? será que morri?
+
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>

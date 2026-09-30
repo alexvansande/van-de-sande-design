@@ -6,3 +6,7 @@ original_site: "Posterous"
 ---
 
 > but someone should.<br>
+
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>

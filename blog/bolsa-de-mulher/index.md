@@ -1,9 +1,9 @@
 ---
 title: "Bolsa de Mulher"
-date: "2012-04-15T12:00:00Z"
+date: "2011-07-01T12:00:00Z"
 original: "http://wanderingabout.com/portfolio/bolsa-de-mulher/"
 original_site: "wanderingabout.com"
-date_circa: "the year shown, or when the archive first saw it"
+date_circa: "the year only: “…going through many renovations in 2011”, in the post"
 ---
 
 <figure>
