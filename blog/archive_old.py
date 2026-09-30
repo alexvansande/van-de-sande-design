@@ -511,16 +511,27 @@ def parse_pt_date(s):
     return None
 
 
+OLPCNEWS = [
+    ("david-cavallo-interview-on-olpc-brazils-apparent-loss",
+     "http://www.olpcnews.com/countries/brazil/david_cavallo_olpc_brazil.html"),
+    ("aquatic-sugar-the-childrens-interface-translated-for-adults",
+     "http://www.olpcnews.com/software/operating_system/aquatic_sugar_childrens_interface.html"),
+]
+
+
 def olpcnews(force):
-    url = "http://www.olpcnews.com/countries/brazil/david_cavallo_olpc_brazil.html"
-    page = text(wayback(url, "2008"))
-    node = node_with(page, "entry-content")
-    for junk in list(node.find_all(lambda n: n.tag == "p" and "entry-footer" in (n.attrs.get("class") or ""))):
-        junk.parent.kids.remove(junk)
-    how = write_post("olpcnews", "david-cavallo-interview-on-olpc-brazils-apparent-loss",
-                     "David Cavallo Interview on OLPC Brazil's Apparent Loss", "2007-12-21T19:40:56Z", "",
-                     url, "OLPC News", "2008", force=force, node=node, record=ip.node_html(node))
-    say("olpcnews", "david-cavallo", how)
+    for slug, url in OLPCNEWS:
+        page = text(wayback(url, "2008"))
+        t = re.search(r'<h2>\s*<a class="permalink"[^>]*>(.*?)</a>', page, re.S) or re.search(r"<title>(.*?)(?: - One Laptop Per Child News)?</title>", page, re.S)
+        title = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))).replace("OLPC News: ", "").strip()
+        d = re.search(r"Posted (?:on|by .{0,300}? on) (\w+ \d{1,2}, \d{4})", page, re.S)
+        date = datetime.strptime(d.group(1), "%B %d, %Y").strftime("%Y-%m-%dT12:00:00Z") if d else None
+        node = node_with(page, "entry-content")
+        for junk in list(node.find_all(lambda n: n.tag in ("script", "noscript") or (n.tag == "p" and "entry-footer" in (n.attrs.get("class") or "")))):
+            junk.parent.kids.remove(junk)
+        node.kids = [k for k in node.kids if not (isinstance(k, str) and "ch_client" in k)]
+        how = write_post("olpcnews", slug, title, date, "", url, "OLPC News", "2008", force=force, node=node, record=ip.node_html(node))
+        say("olpcnews", slug, how)
 
 
 FLICKR = [("38981234", "ipod-video"), ("38981085", "iphone")]
