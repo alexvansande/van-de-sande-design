@@ -78,8 +78,9 @@ transition, since the blog may end up on a domain of its own where none
 could reach. The post is told how far down it was being read (`#at=px`)
 and opens there, so the load is the only seam. It is told the way back too
 (`#back=slug.last`): pulled down past its top, the post comes back to the
-site at the poster's last sheet (`#read=slug.last`), not to the blog's
-index. From then on everything is
+site (`#read=slug.last`), not to the blog's index: it opens on the head of
+the post, as it was left, and then the last sheet comes down over it, the
+turn that went there going back. From then on everything is
 the blog's. On a phone the pad zooms further than the others as its pages
 turn, so that by its last sheet the page is as wide as the screen and the
 post under it is the post at its own size. On a big screen it is a card

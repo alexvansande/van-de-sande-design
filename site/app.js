@@ -1654,7 +1654,11 @@ function reveal(){
   measure(); fitSheets(); render();
   stage.classList.add('up');
   startBreathing();
+  if (onUp) onUp();
 }
+/* Something to do once the page is up: a pad come back to as it was left,
+   going back to where it rests. */
+let onUp = null;
 /* Ask for the faces the paper is set in by name. The sheets were only just
    built, so waiting on document.fonts.ready alone could resolve before the
    browser had even noticed it needed them. */
@@ -1703,10 +1707,17 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
   if (i < 0) return;
   const pad = PADS[i];
   hx = i;
-  pad.pv = m[2] ? pad.sheets.length - 1 : pad.sheets.length;
+  /* either way it opens as it was left, on the head of the post; pulled
+     back from the post, the last sheet then comes down over it, as if the
+     turn that went there were going back */
+  pad.pv = pad.sheets.length;
   coast = performance.now() + 2500; coastLast = performance.now();
   pad.post.load();
   light();
+  if (m[2]){
+    const down = () => setTimeout(() => springTo(pageAxisOf(pad), pad.sheets.length - 1), 350);
+    if (shown) down(); else onUp = down;
+  }
 })();
 addEventListener('pageshow', e => {
   // kept whole by the browser on the way back: the address still has the note
