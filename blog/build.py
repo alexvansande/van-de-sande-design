@@ -360,6 +360,14 @@ class Ctx:
                 return self.base + href[len(prefix):]
         if href.rstrip("/") == SITE_URL:
             return self.base
+        # and a link to where one of the posts first appeared is to it, here
+        slug = MOVED.get(link_key(href))
+        if slug:
+            frag = href.split("#", 1)[1] if "#" in href else ""
+            return self.base + slug + ("#" + frag if frag else "")
+        # a site that is gone: its copy in the archive, from about when this was written
+        if gone(href):
+            return archived(href, self.post.get("date_dt"))
         return href
 
     def heading_id(self, text):
@@ -530,6 +538,10 @@ def build(out, base, clean=False):
             continue
         posts.append(read_post(folder))
     posts.sort(key=lambda p: p["date_dt"], reverse=True)
+    # a link to where a post first appeared goes to it here instead
+    MOVED.clear()
+    MOVED.update({link_key(u): slug for u, slug in MOVED_BY_HAND.items()})
+    MOVED.update({link_key(p["original"]): p["slug"] for p in posts if p.get("original")})
 
     # the assets
     shutil.copytree(os.path.join(HERE, "_assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
@@ -550,7 +562,7 @@ def build(out, base, clean=False):
         cats = "".join(f' · <a href="{base}category/{cat_slug(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
         # where it first appeared, for the posts brought here from elsewhere
         if p.get("original"):
-            cats += (f' · <span class="first">Originally published on <a href="{esc(p["original"])}">'
+            cats += (f' · <span class="first">Originally published on <a href="{esc(original_link(p))}">'
                      f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
         # the next one along, older, and after the oldest the newest again
@@ -586,6 +598,8 @@ def build(out, base, clean=False):
         md = re.sub(r'(src="|\]\()(?![a-z]+:|/)([^")\s]+)',
                     lambda m: m.group(1) + (SITE_URL + "/" + pics.variants(os.path.join(p["folder"], m.group(2)), p["slug"], m.group(2))[-1][0][len(base):]
                                             if os.path.exists(os.path.join(p["folder"], m.group(2))) else m.group(2)), p["source"])
+        # and nothing in it to a site that is gone: the archive's copy instead
+        md = re.sub(r'https?://[^\s)"\'<>\]]+', lambda m: archived(m.group(0), p.get("date_dt")) if gone(m.group(0)) else m.group(0), md)
         write(out, p["slug"] + ".md", md)
         print(f"  {p['slug']}")
 
@@ -738,6 +752,53 @@ PICKER_JS = """<script>
 </script>"""
 
 
+# Where posts first appeared, to their slug here: filled from each post's
+# `original` by build(), and by hand for what no post records. The posts
+# came to Paragraph from Mirror, and Paragraph kept no Mirror address.
+MOVED = {}
+MOVED_BY_HAND = {
+    "https://mirror.xyz/avsa.eth/4pvULeQRqWCS8mMnk_UY1THYt3p6tEQNL0JkCzflcd0":
+        "the-failures-of-instant-run-off-voting-from-a-designers-perspective",
+}
+
+
+# Sites that are gone, or no longer his: nothing links to them, only to the
+# Internet Archive's copy. wanderingabout.com is someone else's now, and
+# OLPC News went to ictworks.org, which kept none of the old pages.
+GONE_HOSTS = ("wanderingabout.com", "olpcnews.com")
+
+
+def gone(url):
+    host = re.sub(r"^www\.", "", (re.match(r"https?://([^/:?#]+)", url.strip(), re.I) or [None, ""])[1].lower())
+    return any(host == h or host.endswith("." + h) for h in GONE_HOSTS)
+
+
+def archived(url, when=None):
+    """The Internet Archive's copy of a page that is gone, the one nearest
+    the date given (it finds the closest it has)."""
+    stamp = when.strftime("%Y%m%d") if when else "2008"
+    return f"https://web.archive.org/web/{stamp}/{url.strip()}"
+
+
+def original_link(p):
+    """Where a post first appeared, or the archive's copy if that is gone."""
+    return archived(p["original"], p.get("date_dt")) if gone(p["original"]) else p["original"]
+
+
+def link_key(url):
+    """One form for the many ways of writing the same address: no scheme, no
+    www, no trailing slash, no query. A Medium post is its id, whichever of
+    Medium's hosts it is written on; an ENS forum topic is its number."""
+    u = re.sub(r"^https?://(www\.)?", "", url.strip()).split("#")[0].split("?")[0].rstrip("/").lower()
+    m = re.match(r"(?:[\w-]+\.)?medium\.com/.*-([0-9a-f]{10,12})$", u)
+    if m:
+        return "medium:" + m.group(1)
+    m = re.match(r"discuss\.ens\.domains/t/[^/]+/(\d+)$", u)
+    if m:
+        return "ens:" + m.group(1)
+    return u
+
+
 def cat_slug(c):
     """A category's address: "University portfolio" is /category/university-portfolio."""
     return re.sub(r"[^a-z0-9]+", "-", c.lower()).strip("-")
@@ -778,7 +839,7 @@ def build_archive(out, base, pics):
             html_ = render_blocks(p["body_md"], ctx)
             first = ""
             if p.get("original"):
-                first = (f' · <span class="first">Originally on <a href="{esc(p["original"])}">'
+                first = (f' · <span class="first">Originally on <a href="{esc(original_link(p))}">'
                          f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
             lang = f' lang="{esc(p["lang"])}"' if p.get("lang") else ""
             body = f"""<main>
