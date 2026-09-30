@@ -107,7 +107,11 @@ const PADS = [buildPad(story, PAGES),
                 ['mist1', 1858, 1240, 'When all crypto wallets were about trading, we built one around creating. Build your organization, a crowdsale, your own kind of money.'],
                 ['mist2', 2000, 1679, 'It was the first wallet to have tokens. In fact we were the ones who wrote the specs for it, which became industry standard, ERC20.'],
                 ['mist3', 2000, 1648, 'The Mist Browser died. But it was survived by lots of three letter acronyms it helped set: NFT, ICO, ENS, DAO.']]),
-              buildPad($('#victor'), [{ art: 'hvmlogo' }, { art: 'hvm1' }]),
+              buildPad($('#victor'), [
+                { art: 'hvmlogo', cap: 'One of the smartest persons I worked on my projects was Victor Taelin. I once gave him a small bug and he fixed in a day, then fixed the library it depended on, then proposed a larger refactor of the whole app, until finally he proposed refactoring ethereum from scratch' },
+                { art: 'hvm1', cap: 'I asked him if given more time he would make a new computer. And that’s what he did. He spent years creating a completely new way to compute. I became an early investor in the Higher Order Company.' },
+                { art: 'bend', cap: 'I believe the best way to teach about something is to learn it first so I did lots of visualizations for his machine. Not all of them were used.' },
+                { art: 'chess', cap: 'Bend doesn’t use Interaction combinators anymore – the fancy graphs on the logo. But I still love them as concepts.' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
               buildPad($('#triangle'), [{ art: 'triangle' }])];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
@@ -410,8 +414,32 @@ let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs th
    parseFloat gives NaN and every transform built from it is silently dropped.
    Measured once and kept, too: the breathing loop renders every frame, and
    reading offsetWidth in there would force a reflow on each of them. */
-let STEP = 0, PH = 0, PW = 0, REEL_W = 0, lyrics = false;
+let STEP = 0, PH = 0, PW = 0, REEL_W = 0;
 function measure(){
+  /* The page is as tall as the screen allows, less whatever the deepest line
+     under it needs: a line that ran off the foot of a laptop took the page
+     down by just enough to fit, rather than going off screen. Twice, since
+     the line's depth depends on how wide the page came out. */
+  const before = story.offsetHeight;
+  stage.style.removeProperty('--phfit');
+  for (let pass = 0; pass < 2; pass++){
+    const pw = story.offsetWidth, g = clamp((W() - pw) / 2 * .38, 12, 210);
+    stage.style.setProperty('--gap', g + 'px');
+    let need = 0;
+    PADS.forEach(pad => {
+      if (!pad.lines) return;
+      pad.cap.parentNode.classList.remove('lyrics');
+      need = Math.max(need, pad.cap.offsetTop - story.offsetHeight +
+                            Math.max(...pad.lines.map(l => l.offsetHeight)));
+    });
+    /* the page sits 2.4vh above the middle, and its foot must leave `need`
+       and a margin before the bottom of the screen */
+    const room = 2 * (H() * .524 - 12 - need);
+    if (story.offsetHeight <= room + .5) break;
+    stage.style.setProperty('--phfit', Math.floor(room) + 'px');
+  }
+  /* a page that came out a different size has to be cut into strips again */
+  if (story.offsetHeight !== before) PADS.forEach(pad => pad.sheets.forEach(dropCurl));
   const pw = story.offsetWidth;
   /* a share of the free space beside the page. On a phone that space is only
      about 45px, so a six-tenths gap left a sliver too narrow to read as
@@ -424,19 +452,23 @@ function measure(){
      the story off the bottom while you read the page it belongs to. */
   const ph = PH = story.offsetHeight;
   stage.style.setProperty('--gap', gap + 'px');
-  /* The whole story under the page at once, if every pad's fits between the
-     foot of its page and the bottom of the screen; one line at a time if
-     not. Tried each way round on every measure, so a window made smaller
-     goes back to one at a time. */
-  stage.classList.add('lyrics');
-  lyrics = PADS.every(pad => !pad.lines ||
-    story.offsetTop + pad.cap.offsetTop + pad.cap.offsetHeight <= H() - 16);
-  if (!lyrics) stage.classList.remove('lyrics');
-  PADS.forEach(pad => { pad.capOn = null; pad.lines && pad.lines.forEach(l => { l._o = null; }); });
+  /* The whole story under the page at once, where it fits between the foot
+     of the page and the bottom of the screen; one line at a time where it
+     does not. Pad by pad, and tried afresh on every measure, so a window made
+     smaller goes back to one at a time. */
+  PADS.forEach(pad => {
+    pad.capOn = null;
+    if (!pad.lines) return;
+    pad.lines.forEach(l => { l._o = null; });
+    const st = pad.cap.parentNode;
+    st.classList.add('lyrics');
+    pad.lyrics = story.offsetTop + pad.cap.offsetTop + pad.cap.offsetHeight <= H() - 16;
+    if (!pad.lyrics) st.classList.remove('lyrics');
+  });
   let foot = 0;
   PADS.forEach(pad => {
     if (!pad.lines) return;
-    const tallest = lyrics ? pad.cap.offsetHeight : Math.max(...pad.lines.map(l => l.offsetHeight));
+    const tallest = pad.lyrics ? pad.cap.offsetHeight : Math.max(...pad.lines.map(l => l.offsetHeight));
     foot = Math.max(foot, pad.cap.offsetTop + tallest - ph / 2);
   });
   zoomBy = foot ? clamp((H() / 2 - 14) / foot - 1, 0, ZOOM) : ZOOM;
@@ -550,8 +582,8 @@ function paintLines(pad, d){
   pad.lines.forEach((l, j) => {
     /* set out as lyrics, the line for the page in hand is lit and the rest
        wait dim; one at a time, the rest are not there at all */
-    const near = clamp01(1 - Math.abs(pad.pv - j) * (lyrics ? 1.4 : 2.2));
-    const o = (lyrics ? .3 + .7 * near * near * (3 - 2 * near) : near).toFixed(3);
+    const near = clamp01(1 - Math.abs(pad.pv - j) * (pad.lyrics ? 1.4 : 2.2));
+    const o = (pad.lyrics ? .3 + .7 * near * near * (3 - 2 * near) : near).toFixed(3);
     if (l._o !== o){ l._o = o; l.style.opacity = o; }
   });
 }

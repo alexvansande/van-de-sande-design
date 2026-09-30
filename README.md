@@ -41,8 +41,10 @@ Platform release pages. **The Mist browser** is the Ethereum Catalog, a
 window with rounded corners; turn it away and three Mist screenshots rise
 out of the dark one after another and pile up like windows. They are not A4
 and do not turn: they are the pad's `reel`, wider than the page and faded at
-its sides. **Victor** is the HVM logo looping on a plain sheet, over the
-HVM diagram. **Some experiments with maps** is the Hexagonal
+its sides. **Victor** is the HVM logo looping on a plain sheet, then the
+HVM diagram, the unofficial guide to Bend and its TinyChess chapter, each
+with a line of the story. A line too deep for the room under the page takes
+the page down by just enough to fit, on every sheet at once. **Some experiments with maps** is the Hexagonal
 Earth series: the Lifezones print, the "Impossible" Map, the Gosper
 topographic. **The whole universe in one image** is the Triangle of
 Everything poster.
