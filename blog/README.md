@@ -96,7 +96,8 @@ since the last export unless you pass `--force`.
 ## Known gaps, as they were on Paragraph
 
 Three figures in two posts have a caption but no picture: the picture was
-already gone on Paragraph (the posts came from Medium originally). They are
+already gone on Paragraph (the posts were first published on Mirror,
+mirror.xyz/avsa.eth, and moved to Paragraph with it). They are
 kept as they were, each marked with a comment in the Markdown:
 
 - *The Triangle of Everything*: "This poster about everything can be found
