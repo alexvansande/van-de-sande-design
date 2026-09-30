@@ -520,8 +520,12 @@ def card(p, base, pics, eager=False, named=True):
     # whole card is one
     tags = "".join(f'<span>{esc(c)}</span>' for c in (p.get("categories") or [])[:3])
     tags = f'<span class="tags">{tags}</span>' if tags else ""
+    # as many of its first lines as fit, as on the site's poster: blog.js
+    # cuts them at the last whole line
+    lead = plain(p["html"], 700) if p.get("html") else ""
+    lead = f'<p class="lines">{esc(lead)}</p>' if lead else ""
     return f"""<a class="card" href="{base}{p['slug']}" data-slug="{p['slug']}"><span class="paper" {name("paper")}></span>{cover}
-  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when">{when(p)}{tags}</p></div>
+  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}{lead}<p class="when">{when(p)}{tags}</p></div>
 </a>"""
 
 
@@ -546,9 +550,11 @@ def build(out, base, clean=False):
     # the assets
     shutil.copytree(os.path.join(HERE, "_assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
 
+    # every post's text first, so the card of the next one has its first lines
+    for p in posts:
+        p["html"] = render_blocks(p["body_md"], Ctx(p, pics, base))
     for p in posts:
         ctx = Ctx(p, pics, base)
-        p["html"] = render_blocks(p["body_md"], ctx)
         p["description"] = p.get("subtitle") or plain(p["html"], 180)
         p["url"] = f"{SITE_URL}/{p['slug']}"
         cover_img, p["og_image"] = "", ""
@@ -609,9 +615,9 @@ def build(out, base, clean=False):
         if not head:
             body = front_page(heading, items)
         # the index itself (no header over it): pulled down, it goes back to the site
-        front = {} if head else {"cls": "list front", "extra_head": f'<script src="{base}assets/blog.js" defer></script>'}
+        front = {} if head else {"cls": "list front"}
         write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical,
-                              **{"cls": "list", "head": head, **front}))
+                              **{"cls": "list", "head": head, "extra_head": f'<script src="{base}assets/blog.js" defer></script>', **front}))
 
     def front_page(heading, items):
         """The index itself: beside the posts, a line about them and the years

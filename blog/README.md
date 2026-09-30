@@ -126,8 +126,33 @@ post's, and gives less the further it goes, so it is never an accident.
 The build also writes `latest.json`: the three newest posts, as their cards
 show them, for the poster at the end of the site.
 
-A post opened from the site with `#at=px` opens that far down, where the
-site's copy of its head had been read to.
+A card is an A4 sheet, like the poster's pages: the picture across its top,
+the title, the subtitle, as many of the first lines as fit (cut at the last
+whole line by `blog.js`) and the date and categories at the foot, all set in
+container units. On the index and the category pages the cards pile up at
+the top as they go by, the way the Mist screenshots do on the site: a card
+reaching the top stays there and the next slides up over it, pushing it
+back, a little higher, smaller and fainter each time, until three rows on it
+has gone into the dark. Coming up from the foot of the screen, a card rises
+out of the dark. Not on the archive, which is in shelves.
+
+## Where the address says to stand
+
+- `/#at=slug` opens the index with that post's card at the front of the
+  pile. The address keeps it up to date as the posts go by, so a reload or
+  a link stands there again; `#y2024` still goes to a year.
+- Going from a post to the index (the bar, or pulling past the top) opens
+  it at that post's card, which the post shrinks into.
+- `/slug#at=px` opens a post that far down, where the site's copy of its
+  head had been read to.
+- `#back=blog.<n>`, on a post or the index, is the page of the site's poster
+  this was opened from: pulling back up past the top goes back to it
+  (`/#read=blog.<n>` on the site). Once seen it is kept for the tab, so the
+  index still goes back there after reading a post.
+
+Landing somewhere by the address, the trackpad still coasting from the
+gesture that brought you is held for a moment, so it does not scroll you
+away from it.
 
 ## Posts from elsewhere
 

@@ -1039,10 +1039,11 @@ function fillLatest(pad){
     fitSheets(); render();
   }).catch(() => { pad.asked = false; });
 }
-/* Opening the post on the page in hand. */
+/* Opening the post on the page in hand. The post is told which page it
+   was (#back=blog.<n>), so pulling back up past its top comes back here. */
 function openLatest(pad){
   const i = clamp(Math.round(pad.pv), 0, pad.sheets.length - 1);
-  if (pad.posts && pad.posts[i]) leaveFor(pad.posts[i], 'blog.' + i);
+  if (pad.posts && pad.posts[i]) leaveFor(pad.posts[i] + '#back=blog.' + i, 'blog.' + i);
 }
 /* Leaving for the blog, noting on this page's address where it stood, so
    the back button comes back to it. */
@@ -1052,7 +1053,14 @@ function leaveFor(href, note){
   try { history.replaceState(history.state, '', '#read=' + note); } catch (_) {}
   location.href = href;
 }
-function toBlog(pad, n){ leaveFor(BLOG, 'blog.' + n); }
+/* Turning the last page over goes on to the blog, which opens standing where
+   the poster left off: that post's card at the front of its pile, the ones
+   before it stacked above (#at=slug), and the way back up coming back to
+   this page (#back=blog.<n>). */
+function toBlog(pad, n){
+  const last = pad.posts && pad.posts[n - 1];
+  leaveFor(last ? `${BLOG}#at=${last.slice(BLOG.length)}&back=blog.${n - 1}` : BLOG, 'blog.' + n);
+}
 
 /* The line for the page in hand. Each fades out over the first half of a turn
    and the next fades in over the second, so two sentences are never on top

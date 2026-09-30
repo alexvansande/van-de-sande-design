@@ -77,6 +77,136 @@ function pullAtTop(label, go, gone, PULL = 150) {
   addEventListener("touchend", () => { touch0 = null; letGo(); }, { passive: true });
 }
 
+/* What the address says, after the #: where to stand (at=, a post's slug
+   on the index, how far down in px on a post) and where the way back up
+   goes (back=, a page of the blog's poster on the site, blog.<n>, when that
+   is where this was opened from). */
+const hashArgs = () => new URLSearchParams(location.hash.slice(1));
+const setHash = args => {
+  const h = [...args].filter(([, v]) => v).map(([k, v]) => `${k}=${v}`).join("&");
+  const url = location.pathname + location.search + (h ? "#" + h : "");
+  if (url !== location.pathname + location.search + location.hash) history.replaceState(history.state, "", url);
+};
+/* Come from the site's poster, the way back up goes back to it, wherever
+   the reading goes from there, for as long as the tab is open. */
+const BACK = "back-to-site";
+const backToSite = arrived => {
+  try {
+    if (arrived) sessionStorage.setItem(BACK, arrived);
+    return arrived || sessionStorage.getItem(BACK);
+  } catch (_) { return arrived; }
+};
+const leaveForSite = (site, back) => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.body.classList.add("leaving");
+  setTimeout(() => { location.href = site.split("#")[0] + (back ? "#read=" + back : ""); }, reduce ? 0 : 380);
+};
+
+/* A card's first lines, cut at the last whole line that fits: it is a sheet
+   of a fixed size, like a page of the poster on the site. */
+const fitCard = card => {
+  const lines = card.querySelector(".lines");
+  if (!lines) return;
+  const lh = parseFloat(getComputedStyle(lines).fontSize) * 1.5, h = lines.clientHeight;
+  const n = lh ? Math.floor((h + 1) / lh) : 0;
+  // what is under the last whole line is not drawn
+  lines.style.clipPath = n > 0 ? `inset(0 0 ${Math.max(0, h - n * lh).toFixed(1)}px 0)` : "inset(0 0 100% 0)";
+};
+// the room for them changes with the title above them as well as the card
+const cardSizes = "ResizeObserver" in self
+  ? new ResizeObserver(es => es.forEach(e => fitCard(e.target.closest(".card"))))
+  : { observe: el => fitCard(el.closest(".card")) };
+const fitCards = root => root.querySelectorAll(".card .lines").forEach(l => cardSizes.observe(l));
+fitCards(document);
+document.fonts && document.fonts.ready.then(() => document.querySelectorAll(".card").forEach(fitCard));
+
+/* ---------- the cards pile up at the top ----------
+   The way the Mist screenshots do on the site: a card that reaches the top
+   of the screen stays there, and the one coming up after it slides over it,
+   pushing it back, each a little higher, smaller and fainter (its --dim),
+   until three rows on it has gone into the dark. Below, a card comes up out
+   of the dark as it rises into the screen. Everything is placed from where
+   the cards lie in the page (card._top), not where they are drawn, so the
+   years beside them read the page as it is. */
+const Pile = (() => {
+  // the index and the category pages; not the archive, in shelves
+  const box = document.querySelector("main.index > .cards, main.index > .spread > .cards");
+  if (!box) return null;
+  const cards = [...box.children].filter(c => c.classList.contains("card"));
+  if (!cards.length) return null;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const years = document.querySelector(".years");
+  const PILE_UP = .045, PILE_SHRINK = .04, PILE_DIM = .3, DEEP = 3, RISE = .45;
+  let H = 1, pitch = 1, line = 0, ticking = false;
+  const docTop = el => { let t = 0; for (; el; el = el.offsetParent) t += el.offsetTop; return t; };
+  const clamp01 = v => Math.min(1, Math.max(0, v));
+
+  const paint = () => {
+    ticking = false;
+    if (reduce) return;
+    const y = scrollY, vh = innerHeight;
+    cards.forEach(c => {
+      const top = c._top - y;
+      let ty = 0, s = 1, dim = 0, op = 1;
+      const d = (line - top) / pitch;
+      if (d > 0) {
+        // at the line, pushed back by the ones come up after it
+        ty = line - PILE_UP * H * Math.min(d, DEEP) - top;
+        s = 1 - PILE_SHRINK * Math.min(d, DEEP);
+        dim = Math.min(1, PILE_DIM * d);
+        op = clamp01(DEEP - d);
+      } else {
+        // rising out of the dark from the foot of the screen
+        const e = clamp01((vh - top) / (H * RISE)), f = e * e * (3 - 2 * e);
+        ty = (1 - f) * H * .06;
+        dim = (1 - f) * .6;
+        op = f;
+      }
+      const sig = `${ty.toFixed(1)}|${s.toFixed(4)}|${dim.toFixed(3)}|${op.toFixed(3)}`;
+      if (c._sig === sig) return;
+      c._sig = sig;
+      c.style.transform = ty || s !== 1 ? `translate3d(0,${ty.toFixed(1)}px,0) scale(${s.toFixed(4)})` : "";
+      c.style.opacity = op < 1 ? op.toFixed(3) : "";
+      c.style.setProperty("--dim", dim.toFixed(3));
+      c.classList.toggle("gone", op <= 0);
+    });
+  };
+  const measure = () => {
+    cards.forEach(c => { c._top = docTop(c); });
+    H = cards[0].offsetHeight || 1;
+    pitch = H + (parseFloat(getComputedStyle(box).rowGap) || 0);
+    // under the years where they run along the top (a phone), with room
+    // above for the pile to step back into
+    const bar = years && getComputedStyle(years).position === "sticky" && getComputedStyle(years).flexDirection === "row"
+      ? years.offsetHeight : 0;
+    line = bar + Math.max(16, innerHeight * .025) + PILE_UP * H * DEEP;
+    cards.forEach(c => { c._sig = ""; });
+    paint();
+  };
+  if (!reduce) document.documentElement.classList.add("piling");
+  measure();
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
+  addEventListener("resize", measure);
+  addEventListener("load", measure);
+  document.fonts && document.fonts.ready.then(measure);
+  if ("ResizeObserver" in self) new ResizeObserver(() => requestAnimationFrame(measure)).observe(box);
+
+  return {
+    cards,
+    // where a card lies on the screen, as if nothing had moved it
+    rect: c => ({ top: c._top - scrollY, bottom: c._top - scrollY + H }),
+    // the scroll that puts a card at the front of the pile
+    scrollFor: c => Math.max(0, c._top - line),
+    // the card at the front: the one at the line, or coming up to it
+    front: () => {
+      const y = scrollY;
+      const i = cards.findIndex(c => c._top - y > line - pitch * .5);
+      return cards[i < 0 ? cards.length - 1 : i];
+    },
+    measure,
+  };
+})();
+
 /* The blog's own index: pulled down past its top it goes back to the site,
    sinking into the dark the site stands on, so the load is the only seam. */
 (() => {
@@ -84,6 +214,57 @@ function pullAtTop(label, go, gone, PULL = 150) {
   const site = document.querySelector(".index > h1 a.home");
   if (!site) return;
   let leaving = false;
+  const args = hashArgs();
+  const back = backToSite(args.get("back"));
+  const where = c => Pile ? Pile.rect(c) : c.getBoundingClientRect();
+
+  /* Opened at a post (#at=slug), from the site's poster or back from the
+     post itself: stand with its card at the front of the pile, the ones
+     before it stacked above. From the site, the years come down after. */
+  const landOn = c => {
+    if (!c) return;
+    history.scrollRestoration = "manual";
+    const go = () => { if (Pile) Pile.measure(); scrollTo(0, Pile ? Pile.scrollFor(c) : c.offsetTop); };
+    go();
+    /* the gesture that brought us here (a trackpad pulling up out of a post,
+       or turning the poster's last page over) is still coasting: that is
+       not a scroll of this page. Held while the wheel keeps coming, up to
+       two and a half seconds; the first pause lets go. */
+    const until = performance.now() + 2500;
+    let last = 0;
+    const hold = e => {
+      const now = performance.now(), gap = now - last;
+      last = now;
+      if (now > until || (gap > 250 && gap !== now)) { removeEventListener("wheel", hold); return; }
+      e.preventDefault();
+    };
+    addEventListener("wheel", hold, { passive: false });
+    const y = scrollY;
+    // the faces arriving can move it: stand there again, unless it has been moved since
+    document.fonts && document.fonts.ready.then(() => { if (Math.abs(scrollY - y) < 2) go(); });
+  };
+  const atSlug = args.get("at");
+  if (atSlug) {
+    landOn(document.querySelector(`.cards > .card[data-slug="${CSS.escape(atSlug)}"]`));
+    if (args.get("back")) document.documentElement.classList.add("arrive");
+  } else if (/^#y\d{4}$/.test(location.hash)) {
+    landOn(document.getElementById(location.hash.slice(1)));
+  }
+  /* and the address keeps the card at the front as the posts go by, so a
+     reload or a link stands there again */
+  if (Pile) {
+    let shown = atSlug || null, t = 0;
+    addEventListener("scroll", () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        if (leaving) return;
+        const slug = scrollY < 8 ? null : Pile.front().dataset.slug;
+        if (slug === shown && !/^#y/.test(location.hash)) return;
+        shown = slug;
+        setHash([["at", slug], ["back", args.get("back")]]);
+      }, 150);
+    }, { passive: true });
+  }
 
   /* The years beside the posts: the one being read is large and the others
      fall away from it along a curve (--k, 0 to 1, in blog.css). Where the
@@ -100,11 +281,11 @@ function pullAtTop(label, go, gone, PULL = 150) {
     const light = () => {
       ticking = false;
       const line = innerHeight * .33;
-      const i = cards.findIndex(c => c.getBoundingClientRect().bottom > line);
+      const i = cards.findIndex(c => where(c).bottom > line);
       const c = cards[i < 0 ? cards.length - 1 : i], y = c.dataset.year;
       // how far through this year's posts the line is, from its first to its last
       const mine = cards.filter(k => k.dataset.year === y);
-      const top = mine[0].getBoundingClientRect().top, end = mine[mine.length - 1].getBoundingClientRect().bottom;
+      const top = where(mine[0]).top, end = where(mine[mine.length - 1]).bottom;
       const through = end > top ? Math.min(1, Math.max(0, (line - top) / (end - top))) : .5;
       // at the top of the page it is the newest year, whole
       const at = scrollY < 4 ? 0 : order.indexOf(y) + through - .5;
@@ -132,17 +313,18 @@ function pullAtTop(label, go, gone, PULL = 150) {
       const to = document.getElementById("y" + a.dataset.year);
       if (!to) return;
       e.preventDefault();
-      to.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      if (Pile) scrollTo({ top: Pile.scrollFor(to), behavior: reduce ? "auto" : "smooth" });
+      else to.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       history.replaceState(history.state, "", "#y" + a.dataset.year);
     });
   }
 
+  /* up past the top is the site: back to the page of its poster this came
+     from, if it came from there */
   pullAtTop("Alex Van de Sande", () => {
     if (leaving) return;
     leaving = true;
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.body.classList.add("leaving");
-    setTimeout(() => { location.href = site.href; }, reduce ? 0 : 380);
+    leaveForSite(site.href, back);
   }, () => leaving, 300);   // leaving the blog for the site takes a purposeful pull
 })();
 
@@ -155,13 +337,18 @@ function pullAtTop(label, go, gone, PULL = 150) {
   const home = topLink.href;
 
   // opened from the site, part way down: stand where it was
-  const at = location.hash.match(/^#at=(\d+)$/);
-  if (at) {
+  const args = hashArgs();
+  const at = /^\d+$/.test(args.get("at") || "") ? +args.get("at") : null;
+  // opened from a page of the site's poster: the way up goes back to it
+  const back = /^[\w.-]+$/.test(args.get("back") || "") ? args.get("back") : null;
+  if (back) backToSite(back);
+  if (at !== null) {
     history.scrollRestoration = "manual";
-    history.replaceState(history.state, "", location.pathname + location.search);
-    scrollTo(0, +at[1]);
-    document.fonts && document.fonts.ready.then(() => { if (scrollY < 2) scrollTo(0, +at[1]); });
+    scrollTo(0, at);
+    document.fonts && document.fonts.ready.then(() => { if (scrollY < 2) scrollTo(0, at); });
   }
+  // the address keeps only the way back, so a reload still has it
+  if (location.hash) setHash([["back", back]]);
   const sheets = () => [...main.querySelectorAll("article.sheet")];
   const seen = new Set(sheets().map(a => a.dataset.slug));
   const pages = new Map();          // url -> promise of the parsed page
@@ -281,7 +468,7 @@ function pullAtTop(label, go, gone, PULL = 150) {
     } else {
       swap();
     }
-    if (following) arm(following);
+    if (following) { fitCards(following); arm(following); }
     const top = article.getBoundingClientRect().top;
     if (top > 0) scrollBy({ top: top - 16, behavior: reduce ? "auto" : "smooth" });
     opening = false;
@@ -341,9 +528,11 @@ function pullAtTop(label, go, gone, PULL = 150) {
     if (leaving) return;
     leaving = true;
     // only the post being read shrinks into its card; the name becomes the title
-    quiet(current());
+    const a = current();
+    quiet(a);
     from.style.viewTransitionName = "site-title";
-    location.href = home;
+    // and the index opens with its card at the front
+    location.href = home + (a ? "#at=" + a.dataset.slug : "");
   }
   // the wandering about goes to the index; his name, to the site, is a plain link
   for (const [link, name] of [[topLink, topLink.parentNode], [bar && bar.querySelector("a.blog"), bar && bar.firstElementChild]]) {
@@ -356,7 +545,18 @@ function pullAtTop(label, go, gone, PULL = 150) {
 
   /* Pulling on past the top draws the post back, and far enough it goes to
      the index, the line that came down growing into the index's title. */
-  pullAtTop("All the wandering about", note => toIndex(note), () => leaving);
+  /* Opened from the site's poster, it goes back there instead, to the page
+     it was opened from. */
+  const siteLink = document.querySelector(".top a.home");
+  if (back && siteLink) {
+    pullAtTop("Alex Van de Sande", () => {
+      if (leaving) return;
+      leaving = true;
+      leaveForSite(siteLink.href, back);
+    }, () => leaving);
+  } else {
+    pullAtTop("All the wandering about", note => toIndex(note), () => leaving);
+  }
 
   /* ---------- beside the post, on a big screen ----------
      Once the post's own title has gone off the top, a column beside it

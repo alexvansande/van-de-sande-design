@@ -241,22 +241,49 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 }
 .lost{font-size:1.3rem}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:clamp(1.5rem,3vw,2.4rem)}
+/* A card is an A4 sheet, like the pages of the blog's poster on the site:
+   the picture across its top, the title, the subtitle, as many of the first
+   lines as fit (blog.js cuts them at the last whole line), and the date and
+   categories at the foot. Set in container units, as the poster is, so it
+   is the same page at any size. */
 .card{position:relative;isolation:isolate;display:flex;flex-direction:column;color:var(--ink);text-decoration:none;
+  aspect-ratio:1 / 1.41;min-height:0;container-type:inline-size;
   transition:transform .35s cubic-bezier(.2,.7,.2,1)}
 .card .paper{box-shadow:0 1px 2px rgba(0,0,0,.25),0 14px 36px -12px rgba(0,0,0,.6);transition:box-shadow .35s}
 .card:hover{transform:translateY(-4px) rotate(-.25deg)}
 .card:hover .paper{box-shadow:0 1px 2px rgba(0,0,0,.25),0 24px 46px -14px rgba(0,0,0,.7)}
-.card .thumb{aspect-ratio:2/1;overflow:hidden;background:#dcd7c6}
+.card .thumb{flex:none;aspect-ratio:2/1;overflow:hidden;background:#dcd7c6}
 .card .thumb img{display:block;width:100%;height:100%;object-fit:cover}
-.card .words{padding:1.2rem 1.4rem 1.4rem;display:flex;flex-direction:column;flex:1}
-.card h2{margin:0;font-weight:500;font-size:1.45rem;line-height:1.15;text-wrap:balance}
-.card .sub{margin:.45rem 0 0;font-size:1.1rem;line-height:1.3;color:var(--quiet);font-style:italic}
-.card .when{margin-top:auto;padding-top:1rem;font-size:.95rem;
-  display:flex;justify-content:space-between;align-items:baseline;gap:.4rem 1rem}
+.card .words{flex:1;min-height:0;display:flex;flex-direction:column;padding:8cqw 8.5cqw 7cqw;overflow:hidden}
+.card h2{margin:0;font-weight:500;font-size:8cqw;line-height:1.1;text-wrap:balance}
+.card .sub{margin:2.2cqw 0 0;font-size:5cqw;line-height:1.3;color:var(--quiet);font-style:italic;text-wrap:balance}
+.card .lines{flex:1 1 0;min-height:0;margin:5cqw 0 0;font-size:4.3cqw;line-height:1.5;color:#3d3a33;
+  hyphens:auto;-webkit-hyphens:auto;overflow:hidden;overflow-wrap:break-word}
+.card .when{margin:auto 0 0;padding-top:4cqw;font-size:3.7cqw;
+  display:flex;justify-content:space-between;align-items:baseline;gap:.4rem 3cqw}
 .card .when time{flex:none}
 /* the post's categories, to the right of its date, as quiet as the date */
 .card .tags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:0 .45em;text-align:right;min-width:0}
 .card .tags span+span::before{content:"·";margin-right:.45em;opacity:.7}
+
+/* ---------- the cards pile up at the top ----------
+   As on the site, where the Mist screenshots come up one after another and
+   pile up like windows: a card reaching the top of the screen stays there
+   and is pushed back behind the one coming up after it, each a little
+   higher, smaller and fainter, until it goes into the dark. Coming up from
+   the foot of the screen, a card rises out of the dark. blog.js places them
+   (--dim is how far one has gone back, 0 to 1); without it the cards just
+   scroll. The lift on hover would fight it, so there is none. */
+.piling .cards>.card{transition:none;transform-origin:50% 0;will-change:transform,opacity}
+.piling .cards>.card:hover{transform:none}
+.piling .cards>.card::after{content:"";position:absolute;inset:0;background:var(--dark);
+  opacity:var(--dim,0);pointer-events:none}
+.piling .cards>.card.gone{visibility:hidden}
+/* arriving from the site part way down the posts, the years come down from
+   the top once the page is there */
+.arrive .years{animation:years-down .7s .2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes years-down{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.arrive .years{animation:none}}
 
 @media (max-width:640px){
   .sheet>.paper{box-shadow:none}

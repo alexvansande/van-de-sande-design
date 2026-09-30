@@ -104,6 +104,14 @@ blog, so they are always the newest; the site asks for it once the first
 screen is in. Coming back, by the back button, stands at the page that was
 opened, or at the last one (`#read=blog.<n>`).
 
+The blog is told where the poster stood, so the seam does not move you. A
+post opened from a page gets `#back=blog.<n>`, and pulling back up past its
+top comes back to that page instead of going to the blog's index. Turning
+the last page over opens the index at the post that was on it
+(`#at=slug&back=blog.<n>`): its card at the front of the pile, the two
+before it stacked above, and the years coming down from the top after. Pulled
+back up past its top, the index comes back to the poster's last page too.
+
 Before leaving, the site notes on its own address where it stood
 (`#read=slug`), so the back button comes back to the head of the post, and
 the site ignores the trackpad still coasting from the gesture. `BLOG` in
