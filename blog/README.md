@@ -116,7 +116,11 @@ only one.
 
 The index works the same way the other way round: pulled down past its
 top, it draws back under "Alex Van de Sande" and, pulled hard enough,
-sinks into the dark and the site loads.
+sinks into the dark and the site loads. That pull is twice as long as a
+post's, and gives less the further it goes, so it is never an accident.
+
+The build also writes `latest.json`: the three newest posts, as their cards
+show them, for the poster at the end of the site.
 
 A post opened from the site with `#at=px` opens that far down, where the
 site's copy of its head had been read to.

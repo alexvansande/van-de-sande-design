@@ -478,15 +478,22 @@ def vt(kind, slug):
     return f'style="view-transition-name:{kind}-{slug};view-transition-class:{kind}"'
 
 
-def card(p, base, pics, eager=False, named=True):
-    name = (lambda kind: vt(kind, p["slug"])) if named else (lambda kind: "")
-    cover = ""
-    # a post with no picture at its head shows its first picture on its card
+def thumb_of(p):
+    """The picture on a post's card: its cover, or, with none, its first
+    picture. (name, width, height), or Nones."""
     thumb, w, h = p.get("cover"), *(p.get("cover_size") or (None, None))
     if not thumb:
         m = re.search(r'<img src="([^":/]+)" width="(\d+)" height="(\d+)"', p["body_md"])
         if m:
             thumb, w, h = m.group(1), m.group(2), m.group(3)
+    return thumb, w, h
+
+
+def card(p, base, pics, eager=False, named=True):
+    name = (lambda kind: vt(kind, p["slug"])) if named else (lambda kind: "")
+    cover = ""
+    # a post with no picture at its head shows its first picture on its card
+    thumb, w, h = thumb_of(p)
     if thumb:
         ctx = Ctx(p, pics, base)
         img = ctx.img(thumb, "", w, h)
@@ -606,6 +613,21 @@ def build(out, base, clean=False):
                 f'This is a collection of some of these weird ideas</p>'
                 f'<nav class="years" aria-label="Years">{nav}</nav></aside>\n'
                 f'<div class="cards">\n' + "\n".join(cards) + '\n</div>\n</div></main>')
+
+    # The newest three, for the poster at the end of the site: what their
+    # cards say, and their pictures' addresses relative to the blog, so the
+    # site can find them wherever the blog is.
+    latest = []
+    for p in posts[:3]:
+        item = {"slug": p["slug"], "title": p["title"], "subtitle": p.get("subtitle") or "",
+                "date": re.sub(r"<[^>]+>", "", when(p)), "categories": (p.get("categories") or [])[:3],
+                "lead": plain(p["html"], 240)}
+        thumb, w, h = thumb_of(p)
+        v = Ctx(p, pics, base).picture(thumb) if thumb else None
+        if v:
+            item["picture"] = [[u[len(base):] if u.startswith(base) else u, x] for u, x in v]
+        latest.append(item)
+    write(out, "latest.json", json.dumps(latest, ensure_ascii=False, indent=1))
 
     # the index is headed by the blog's name itself, so it has no header over it
     listing(TITLE, named(base), posts, SITE_URL + "/", "index.html", head=False)

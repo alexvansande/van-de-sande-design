@@ -23,8 +23,7 @@
    enough, and it goes there. A wheel or trackpad pushing up at the top, or
    a finger dragging down. The browser's own pull (to refresh, or to bounce)
    is turned off in blog.css, so this is the only one. */
-function pullAtTop(label, go, gone) {
-  const PULL = 150;
+function pullAtTop(label, go, gone, PULL = 150) {
   let pull = 0, pullT = 0;
   const note = document.createElement("p");
   note.className = "pullnote";
@@ -57,7 +56,9 @@ function pullAtTop(label, go, gone) {
     if (!armed && gap > 220) armed = true;
     if (!armed) return;
     if (e.deltaY < 0) {
-      setPull(pull - e.deltaY * (e.deltaMode === 1 ? 16 : 1) * .5);
+      // it gives less the further it goes, so going all the way is meant
+      const k = Math.min(1, pull / PULL);
+      setPull(pull - e.deltaY * (e.deltaMode === 1 ? 16 : 1) * .5 * (1 - .55 * k));
       clearTimeout(pullT);
       pullT = setTimeout(letGo, 180);
     } else if (pull && e.deltaY > 0) {
@@ -69,7 +70,9 @@ function pullAtTop(label, go, gone) {
   addEventListener("touchmove", e => {
     if (touch0 === null || gone()) return;
     const dy = e.touches[0].clientY - touch0;
-    if (scrollY <= 0 && dy > 0) setPull(dy * .6);
+    // a finger goes all the way at 150px plus most of the pull again: about
+    // 270px down a post, 390px down the index
+    if (scrollY <= 0 && dy > 0) setPull(PULL * dy / (150 + .8 * PULL));
   }, { passive: true });
   addEventListener("touchend", () => { touch0 = null; letGo(); }, { passive: true });
 }
@@ -140,7 +143,7 @@ function pullAtTop(label, go, gone) {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.body.classList.add("leaving");
     setTimeout(() => { location.href = site.href; }, reduce ? 0 : 380);
-  }, () => leaving);
+  }, () => leaving, 300);   // leaving the blog for the site takes a purposeful pull
 })();
 
 (() => {

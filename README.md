@@ -93,6 +93,15 @@ another to go into the post. Reading back up stops at the top of the post
 before the sheet comes back down. A finger or a mouse drag is left alone,
 since the hand is already where the page is.
 
+The last poster is the blog itself. Its sheet is a title page, "Alex Van
+de Sande's wandering about", and under it the three newest posts rise one
+at a time, like the Mist screenshots, as cards the width of the page. The
+card in front opens its post. One more turn past the last goes to the blog.
+The three come from `latest.json`, which `blog/build.py` writes with the
+blog, so they are always the newest; the site asks for it once the first
+screen is in. Coming back, by the back button, stands at the card that was
+opened, or at the last one (`#read=blog.<n>`).
+
 Before leaving, the site notes on its own address where it stood
 (`#read=slug`), so the back button comes back to the head of the post, and
 the site ignores the trackpad still coasting from the gesture. `BLOG` in
