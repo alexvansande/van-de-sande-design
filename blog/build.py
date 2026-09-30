@@ -354,6 +354,11 @@ class Ctx:
                 return self.base + href[len(prefix):]
         if href.rstrip("/") == SITE_URL:
             return self.base
+        # and a link to where one of the posts first appeared is to it, here
+        slug = MOVED.get(link_key(href))
+        if slug:
+            frag = href.split("#", 1)[1] if "#" in href else ""
+            return self.base + slug + ("#" + frag if frag else "")
         return href
 
     def heading_id(self, text):
@@ -524,6 +529,10 @@ def build(out, base, clean=False):
             continue
         posts.append(read_post(folder))
     posts.sort(key=lambda p: p["date_dt"], reverse=True)
+    # a link to where a post first appeared goes to it here instead
+    MOVED.clear()
+    MOVED.update({link_key(u): slug for u, slug in MOVED_BY_HAND.items()})
+    MOVED.update({link_key(p["original"]): p["slug"] for p in posts if p.get("original")})
 
     # the assets
     shutil.copytree(os.path.join(HERE, "_assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
@@ -730,6 +739,30 @@ PICKER_JS = """<script>
   show();
 })();
 </script>"""
+
+
+# Where posts first appeared, to their slug here: filled from each post's
+# `original` by build(), and by hand for what no post records. The posts
+# came to Paragraph from Mirror, and Paragraph kept no Mirror address.
+MOVED = {}
+MOVED_BY_HAND = {
+    "https://mirror.xyz/avsa.eth/4pvULeQRqWCS8mMnk_UY1THYt3p6tEQNL0JkCzflcd0":
+        "the-failures-of-instant-run-off-voting-from-a-designers-perspective",
+}
+
+
+def link_key(url):
+    """One form for the many ways of writing the same address: no scheme, no
+    www, no trailing slash, no query. A Medium post is its id, whichever of
+    Medium's hosts it is written on; an ENS forum topic is its number."""
+    u = re.sub(r"^https?://(www\.)?", "", url.strip()).split("#")[0].split("?")[0].rstrip("/").lower()
+    m = re.match(r"(?:[\w-]+\.)?medium\.com/.*-([0-9a-f]{10,12})$", u)
+    if m:
+        return "medium:" + m.group(1)
+    m = re.match(r"discuss\.ens\.domains/t/[^/]+/(\d+)$", u)
+    if m:
+        return "ens:" + m.group(1)
+    return u
 
 
 def cat_slug(c):

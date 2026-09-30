@@ -167,7 +167,9 @@ bow crosses over from the sheet leaving to the one arriving.
 **There is dead scroll either side of a page at rest**, so a long scroll has
 somewhere to stop rather than tumbling into the next turn.
 
-A trackpad works on the same two axes. A plain mouse has one, so the arrow
+A click works too: on the page in the middle it turns it over, on a poster
+waiting to the side it slides along to it, and on his line on the index it
+starts the stories. A trackpad works on the same two axes. A plain mouse has one, so the arrow
 keys move along the rail and turn pages.
 
 ## Run it locally

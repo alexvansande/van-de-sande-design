@@ -131,6 +131,12 @@ site's copy of its head had been read to.
 
 ## Posts from elsewhere
 
+A link in a post to where another post first appeared goes to that post
+here instead: `build.py` knows every post's `original`, and a Medium link is
+matched by its id whichever of Medium's hosts it is written on, an ENS forum
+link by its topic number. The one Mirror address a post links to is in
+`MOVED_BY_HAND`, since Paragraph kept no record of Mirror's.
+
 Besides the posts from Paragraph, the blog holds what was written on Medium
 (his own account; not the UniLogin publication), on the Ethereum
 Foundation's blog, and three essays from the ENS forum. They are listed in
