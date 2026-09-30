@@ -87,9 +87,7 @@ function buildPad(station, pages, reel){
       const e = el('div', 'shot ' + cls);
       e.style.aspectRatio = `${w} / ${h}`;
       host.append(e);
-      /* its height as a share of the page's: the reel is half as wide again
-         as an A4 sheet, and the sheet is 0.7071 as wide as it is tall */
-      return { e, h: 1.5 * .7071 * h / w };
+      return { e, r: w / h, h: 0 };      /* h, its share of the page's height, once measured */
     });
     station.insertBefore(host, station.firstChild);
     pad.reel = { host, shots };
@@ -406,7 +404,7 @@ let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs th
    parseFloat gives NaN and every transform built from it is silently dropped.
    Measured once and kept, too: the breathing loop renders every frame, and
    reading offsetWidth in there would force a reflow on each of them. */
-let STEP = 0, PH = 0;
+let STEP = 0, PH = 0, PW = 0, REEL_W = 0;
 function measure(){
   const pw = story.offsetWidth;
   /* a share of the free space beside the page. On a phone that space is only
@@ -426,6 +424,13 @@ function measure(){
     foot = Math.max(foot, pad.cap.offsetTop + tallest - ph / 2);
   });
   zoomBy = foot ? clamp((H() / 2 - 14) / foot - 1, 0, ZOOM) : ZOOM;
+  /* The screenshots under a sheet are half as wide again as the page, but
+     never wider than the screen once the pad has zoomed all the way in: on a
+     phone half as wide again ran off both edges. Never narrower than the
+     page, either. */
+  PW = pw;
+  REEL_W = Math.round(Math.max(pw, Math.min(pw * 1.5, (W() - 24) / (1 + zoomBy))));
+  stage.style.setProperty('--rw', REEL_W + 'px');
 }
 function step(){ if (!STEP) measure(); return STEP; }
 /* How much of the bow a pad carries. It holds full until the sheet is well off
@@ -492,11 +497,19 @@ function paintReel(pad){
   const k = clamp(Math.floor(r), -1, n - 1);
   const u = k < n - 1 ? turnOf(clamp01(r - k)) : 0;
   const f = u * u * (3 - 2 * u);
-  const sig = k + '|' + f.toFixed(4) + '|' + PH;
+  const sig = k + '|' + f.toFixed(4) + '|' + PH + '|' + REEL_W;
   if (pad._rsig === sig) return;
+  if (pad._rw !== REEL_W){
+    pad._rw = REEL_W;
+    shots.forEach(s => { s.h = REEL_W / s.r / PH; });
+  }
   pad._rsig = sig;
-  /* the further in, the more of the sides have gone */
-  host.style.setProperty('--f', (12 + 12 * clamp01((k + f) / Math.max(1, n - 1))).toFixed(1) + '%');
+  /* The further in, the more of the sides have gone. Only as much as the reel
+     is wider than the page: on a phone it is barely wider, and a fade sized
+     for the desktop ate into the windows themselves. */
+  const spare = clamp((REEL_W / PW - 1) / .5, .35, 1);
+  host.style.setProperty('--f',
+    (spare * (12 + 12 * clamp01((k + f) / Math.max(1, n - 1)))).toFixed(1) + '%');
   shots.forEach((s, i) => {
     const a = layout(shots, i, k), b = layout(shots, i, Math.min(n - 1, k + 1));
     const mix = j => a[j] + (b[j] - a[j]) * f;
