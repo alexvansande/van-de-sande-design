@@ -435,7 +435,9 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { slug: 'gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball',
                   title: 'Gosper World - a novel world map made of hexagonal-like fractals (or, how I made Matt Parker’s Impossible Ball)',
                   widths: [480, 704, 1056, 1408, 2003] }),
-              buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }], null, null,
+              buildPad($('#triangle'), [
+                { art: 'triangle', cap: '“If the solution is not beautiful, I know it’s wrong.” — Buckminster Fuller' },
+                { art: 'scales', cap: 'One of the most wonderful graphs in physics comes from Lineweaver and Patel. But I really wanted it to also be beautiful.' }], null, null,
                 { slug: 'the-triangle-of-everything', title: 'The Triangle of Everything',
                   widths: [480, 704, 1056, 1408, 1848] }),
               /* the blog: its title page, the three newest posts under it, and
