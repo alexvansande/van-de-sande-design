@@ -173,12 +173,17 @@ keys move along the rail and turn pages.
 ## Run it locally
 
 ```bash
-python3 -m http.server 8765 --directory site
+python3 blog/build.py --out site/blog --base /blog/ --home /
+python3 serve.py
 ```
 
-The pictures at the end of the maps and the triangle come from the blog,
-which is only built on deploy. To see them locally, build it into the site
-first: `python3 blog/build.py --out site/blog --base /blog/`.
+The blog is only built on deploy, so build it into the site first: the
+posts at the end of the maps and the triangle, the blog's poster and the
+blog itself all come from it. `serve.py` serves `site/` the way Pages does:
+`/blog/some-post` is `blog/some-post.html` (the plain `python3 -m
+http.server` has no such rule, so every link to a post is a 404 with it),
+and nothing is kept by the browser, so an edited script is always the one
+that runs.
 
 Then open http://localhost:8765. In Claude Code, `.claude/launch.json`
 starts the same server under the name `site`.
