@@ -212,7 +212,19 @@ conversation. Putting a post on the blog is moving its folder up into
 `blog/`. A post the page gave no date for carries the day the archive first
 saw it, marked `date_circa` and shown as "c. 2005".
 
-    python3 blog/archive_old.py [posterous monks wanderingabout paris olpcnews flickr] [--force]
+    python3 blog/archive_old.py [posterous monks wanderingabout portfolio2011 paris olpcnews flickr] [--force]
+    python3 blog/archive_missing.py       # then: what is still missing, at /archive/missing
+
+Posterous's own pictures went with it in 2013 and the archive never kept
+them. Where a Posterous post had been sent on to Flickr, `archive_old.py`
+takes the same pictures from there, matched by title or by the Posterous
+address in the photo's description; 38 of the 73 posts have their pictures
+that way. Logged out, Flickr only shows the newest hundred photos and the
+albums, so the rest may still be in the full Flickr data export: match them
+the same way (the photo's title against the post's) and put them in the
+post's folder. The Paris diary's photos were swapped for Flickr's large
+versions, and the videos that went to YouTube are embedded where the old
+pages had them.
 
 ## Pulling from Paragraph again
 
