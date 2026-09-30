@@ -171,17 +171,6 @@ body{margin:0;background:var(--dark);color:var(--ink);
   .e-paper{box-shadow:none}
 }
 .ending:focus-visible{outline:2px solid #e6e2d2;outline-offset:-6px}
-/* the blog is on this same site, so going to a post and coming back can
-   carry the picture across: the post's own stylesheet says the same */
-@view-transition{navigation:auto}
-::view-transition-group(*){animation-duration:.6s;animation-timing-function:cubic-bezier(.2,.75,.15,1)}
-::view-transition-old(*.cover),::view-transition-new(*.cover){height:100%;object-fit:cover}
-::view-transition-image-pair(*.cover){overflow:hidden}
-::view-transition-old(*.paper),::view-transition-new(*.paper){height:100%}
-::view-transition-old(*.paper):not(:only-child){animation:none;opacity:0}
-::view-transition-new(*.paper):not(:only-child){animation:none}
-@media (prefers-reduced-motion:reduce){
-  ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
 }
 
 /* ---------- what lies under the last sheet of a pad ----------

@@ -207,15 +207,28 @@
    trackpad pushing up at the top, or a finger dragging down. */
   const PULL = 170;
   let pull = 0, pullT = 0;
-  // came from a picture on the site, not the index: go back to it
-  const cameFrom = (() => {
-    try { return sessionStorage.getItem("back-to-post"); } catch (_) { return null; }
-  })();
+  /* Came from the head of this post on the site (it says ?from=site): zooming
+     out goes back there, the site standing where it was left. The site may
+     be on another domain, so it is a plain page load, or the back button's. */
+  const params = new URLSearchParams(location.search);
+  const fromSite = params.get("from") === "site" ? sheets()[0].dataset.slug : null;
+  if (fromSite) {
+    params.delete("from");
+    const q = params.toString();
+    history.replaceState(history.state, "", location.pathname + (q ? "?" + q : "") + location.hash);
+  }
+  const siteHome = document.body.dataset.home;
   const zoomOut = () => {
     const first = sheets()[0];
-    if (cameFrom && first && cameFrom === first.dataset.slug && history.length > 1) {
+    if (fromSite && siteHome && first && first.dataset.slug === fromSite) {
       leaving = true;
-      history.back();
+      // back, if the page before really was the site; otherwise load it
+      const home = new URL(siteHome, location.href);
+      let ref = null;
+      try { ref = document.referrer ? new URL(document.referrer) : null; } catch (_) {}
+      const fromHome = ref && ref.origin === home.origin && !ref.pathname.startsWith(new URL(topLink.href).pathname);
+      if (fromHome && history.length > 1) history.back();
+      else location.href = home.href.replace(/#.*$/, "") + "#read=" + fromSite;
     } else {
       toIndex(topLink);
     }

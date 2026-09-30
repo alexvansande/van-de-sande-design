@@ -452,7 +452,7 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 <link rel="stylesheet" href="{base}assets/blog.css">
 {extra_head}
 </head>
-<body class="{cls}">
+<body class="{cls}" data-home="{esc(HOME)}">
 <header class="top">{f'<a href="{HOME}">{esc(AUTHOR)}</a>' if cls == "list" else f'<a href="{base}">{esc(TITLE)}</a>'}</header>{f'{chr(10)}<div class="bar" aria-hidden="true"><a href="{base}" tabindex="-1">{esc(TITLE)}</a></div>' if cls == "post" else ""}
 {body}
 <footer class="foot">
@@ -653,13 +653,16 @@ def serve(out, base, port):
 
 
 def main():
+    global HOME
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--out", default=os.path.join(HERE, "_site"))
     ap.add_argument("--base", default="/", help="the path the blog is served under, e.g. /blog/")
+    ap.add_argument("--home", default=HOME, help="the address of the rest of the site, which the blog links back to")
     ap.add_argument("--clean", action="store_true", help="empty the output first")
     ap.add_argument("--serve", type=int, metavar="PORT")
     args = ap.parse_args()
     base = "/" + args.base.strip("/") + "/" if args.base.strip("/") else "/"
+    HOME = args.home
     if Image is None:
         print("Pillow is not installed: the pictures are copied at full size (pip install pillow)", file=sys.stderr)
     build(args.out, base, args.clean)

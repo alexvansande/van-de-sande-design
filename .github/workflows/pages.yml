@@ -39,7 +39,7 @@ jobs:
           pip install pillow
           # under whatever path Pages serves the site from: on github.io
           # that is /van-de-sande-design, on a custom domain nothing
-          python3 blog/build.py --out site/blog --base "${{ steps.pages.outputs.base_path }}/blog/"
+          python3 blog/build.py --out site/blog --base "${{ steps.pages.outputs.base_path }}/blog/" --home "${{ steps.pages.outputs.base_path }}/"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

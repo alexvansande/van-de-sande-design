@@ -79,8 +79,9 @@ into the index's title and the post shrinking into its card. At the top of a
 post, the post before it is put back above if it was read this visit (read
 means its last lines were on screen), so scrolling up shows its ending.
 Otherwise pulling on past the top zooms out of the post: it draws back,
-smaller, and goes back to the picture on the site it came from, or else to
-the index, where it shrinks into its card.
+smaller, and goes back to the head of the post on the site if it came from
+there (the site sends it with `?from=site`; `--home` says where the site
+is), or else to the index, where it shrinks into its card.
 
 ## Posts from elsewhere
 

@@ -214,9 +214,12 @@ function spinnable(a, n, shown){
    and picture are tied to the post's (a view transition, since the blog is
    on this same site), and the words cross-fade where they already stand.
    It is on the stage, not the rail, so the rail's zoom does not reach it. */
+/* Where the blog is. Here, under this site; once it has a domain of its own,
+   its address, e.g. 'https://blog.vandesande.design/'. */
+const BLOG = 'blog/';
 function buildPost({ slug, title, widths, line }){
   const a = el('a', 'ending');
-  a.href = `blog/${slug}`;
+  a.href = `${BLOG}${slug}?from=site`;
   a.tabIndex = -1;
   a.setAttribute('aria-hidden', 'true');
   const page = el('div', 'e-page');
@@ -239,7 +242,7 @@ function buildPost({ slug, title, widths, line }){
   page.append(top, sheet);
   a.append(page);
   stage.append(a);
-  const base = `blog/media/${slug}/cover-`;
+  const base = `${BLOG}media/${slug}/cover-`;
   const load = () => {
     if (img.src) return;
     img.sizes = '(min-width: 53rem) 848px, 100vw';
@@ -250,20 +253,17 @@ function buildPost({ slug, title, widths, line }){
   a.addEventListener('click', e => { e.preventDefault(); go(post); });
   return post;
 }
-/* the names that tie it to the post, only when it goes there or comes back
-   from it: left on, a return with it put away would fly the post into nothing */
-function tie(post){
-  post.paper.style.viewTransitionName = `paper-${post.slug}`;
-  post.paper.style.viewTransitionClass = 'paper';
-  post.cover.style.viewTransitionName = `cover-${post.slug}`;
-  post.cover.style.viewTransitionClass = 'cover';
-}
+/* Going on is a plain page load of the post: the blog may be on another
+   domain, where no transition can reach. It already looks like the head of
+   the post, so the load is the only seam. This page's own address first
+   gets a note of where it stood (#read=slug), so that coming back to it,
+   by the back button or by zooming out of the post, is to here again; and
+   the post is told it came from the site (?from=site), so that zooming out
+   of it knows to come back. */
 function go(post){
   if (post.going) return;
   post.going = true;
-  tie(post);
-  /* and remember where this was, so that coming back is to it */
-  try { sessionStorage.setItem('back-to-post', post.slug); } catch (_) {}
+  try { history.replaceState(history.state, '', '#read=' + post.slug); } catch (_) {}
   location.href = post.a.href;
 }
 function buildPad(station, pages, reel, shelf, post){
@@ -1357,22 +1357,25 @@ const further = () => {
 };
 const idle = () => (self.requestIdleCallback || (f => setTimeout(f, 300)))(further);
 if (document.readyState === 'complete') idle(); else addEventListener('load', idle);
-/* Back from a post the rail went to: stand at the picture again, before the
-   first frame, so the post's cover can shrink back into it. */
+/* Back from a post the rail went to, or zoomed out of it: the address says
+   which (#read=slug). Stand at the head of the post again, before the first
+   frame, then take the note off the address so a reload starts afresh. */
 (() => {
-  let slug = null;
-  try { slug = sessionStorage.getItem('back-to-post'); sessionStorage.removeItem('back-to-post'); } catch (_) {}
-  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
-  if (!slug || !nav || nav.type !== 'back_forward') return;
-  const i = PADS.findIndex(pad => pad.post && pad.post.slug === slug);
+  const m = location.hash.match(/^#read=([\w-]+)$/);
+  if (!m) return;
+  const i = PADS.findIndex(pad => pad.post && pad.post.slug === m[1]);
+  try { history.replaceState(history.state, '', location.pathname + location.search); } catch (_) {}
   if (i < 0) return;
   const pad = PADS[i];
   hx = i;
   pad.pv = pad.sheets.length;
   coast = performance.now() + 2500; coastLast = performance.now();
-  tie(pad.post);
   pad.post.load();
   light();
 })();
+addEventListener('pageshow', e => {
+  // kept whole by the browser on the way back: the address still has the note
+  if (e.persisted && location.hash.startsWith('#read=')) try { history.replaceState(history.state, '', location.pathname + location.search); } catch (_) {}
+});
 measure(); render();
 })();

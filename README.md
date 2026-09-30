@@ -66,16 +66,23 @@ head of the post is under it, uncovered through a window that grows from
 the page to the whole screen: the blog's name, and the post's sheet with its
 picture whole on its white, its title, and "Keep scrolling to read it" where
 the date will be. It is laid out exactly as the post lays out its own head
-(the `.ending` rules in `index.html` copy `blog/_assets/blog.css`), so one
-more step opens the post and nothing moves: the paper and the picture are
-tied to the post's by a view transition, which works because the blog is on
-this same site, and the line under the title cross-fades into the date. On a phone the pad zooms further than
-the others as its pages turn, so that by its last sheet the page is as wide
-as the screen and the picture grows out of a page that already fills it.
-Back from the post, the site stands at the picture again, and ignores the
-trackpad still coasting from the gesture that came back. It is the `post` of a pad in `PADS`: its slug, its title, and the
-widths its cover was cut at by `blog/build.py`. The maps pad has a line per page,
-from McLuhan to the new projection.
+(the `.ending` rules in `index.html` copy `blog/_assets/blog.css`). One more
+step loads the post, a plain page load with no transition, since the blog
+may end up on a domain of its own where none could reach; it already looks
+like the post, so the load is the only seam. On a phone the pad zooms
+further than the others as its pages turn, so that by its last sheet the
+page is as wide as the screen.
+
+It goes both ways. Before leaving, the site notes on its own address where
+it stood (`#read=slug`), and the post is told it came from the site
+(`?from=site`, taken off its address as it loads). Zooming out of the top of
+the post goes back, by the back button's way if the site was the page
+before, or by loading the site with the note; either way the site stands at
+the head of the post again, and ignores the trackpad still coasting from the
+gesture. `BLOG` in `app.js` says where the blog is, and `--home` for
+`blog/build.py` where the site is. It is the `post` of a pad in `PADS`: its
+slug, its title, and the widths its cover was cut at by `blog/build.py`.
+The maps pad has a line per page, from McLuhan to the new projection.
 
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in
