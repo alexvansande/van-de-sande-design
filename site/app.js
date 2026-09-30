@@ -437,7 +437,8 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                   widths: [480, 704, 1056, 1408, 2003] }),
               buildPad($('#triangle'), [
                 { art: 'triangle', cap: '“If the solution is not beautiful, I know it’s wrong.” — Buckminster Fuller' },
-                { art: 'scales', cap: 'One of the most wonderful graphs in physics comes from Lineweaver and Patel. But I really wanted it to also be beautiful.' }], null, null,
+                { art: 'lineweaver', cap: 'One of the most wonderful graphs in physics comes from Lineweaver and Patel. But I really wanted it to also be beautiful.' },
+                { art: 'scales', cap: 'This chart connects relativity, quantum mechanics, biology, planetary science and the big bang. It’s worth taking a deeper look.' }], null, null,
                 { slug: 'the-triangle-of-everything', title: 'The Triangle of Everything',
                   widths: [480, 704, 1056, 1408, 1848] }),
               /* the blog: its title page, the three newest posts under it, and

@@ -108,8 +108,10 @@ the site ignores the trackpad still coasting from the gesture. `BLOG` in
 `app.js` says where the blog is, and `--home` for `blog/build.py` where the
 site is. It is the `post` of a pad in `PADS`: its slug, its title, and the
 widths its cover was cut at by `blog/build.py`.
-The maps pad has a line per page, from McLuhan to the new projection. The triangle has two: Buckminster Fuller on beauty, then Lineweaver and
-Patel's graph made beautiful.
+The maps pad has a line per page, from McLuhan to the new projection. The triangle has three: Buckminster Fuller on beauty over the poster,
+then Lineweaver and Patel's own chart (`img/lineweaver-patel.webp`, their
+graph from the post on a white A4 sheet), then the triangle drawn out along
+its axes, and what the chart connects.
 
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in
