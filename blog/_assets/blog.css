@@ -63,10 +63,10 @@ a{color:inherit}
 html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behavior-y:none}
 /* the index going back to the site: it sinks into the dark */
 .leaving main,.leaving .pullnote,.leaving .foot{transition:transform .38s cubic-bezier(.4,0,.6,1),opacity .38s}
-.leaving main{transform:translateY(4rem) scale(.8)!important;opacity:0!important}
+.leaving main{transform:translateY(4rem) scale(.8)!important;transform-origin:50% var(--pull-oy,0px);opacity:0!important}
 .leaving .pullnote,.leaving .foot{opacity:0!important}
 .pulling main{transform:translateY(calc(var(--pullk,0) * 3rem)) scale(calc(1 - var(--pullk,0) * .12));
-  transform-origin:50% 0;opacity:calc(1 - var(--pullk,0) * .25)}
+  transform-origin:50% var(--pull-oy,0px);opacity:calc(1 - var(--pullk,0) * .25)}
 .pulling .top{opacity:clamp(0,calc(1 - var(--pullk,0) * 3),1)}
 .letgo main,.letgo .top,.letgo .pullnote{transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
 /* where the pull goes, coming down above the post as it draws back */

@@ -118,6 +118,14 @@ it goes to the index, where the post shrinks into its card. The browser's
 own pull (to refresh, on a phone) is turned off on a post, so this is the
 only one.
 
+Two fingers do the same. Pinching in, anywhere down a post or the index,
+draws the page back about the middle of the screen, and far enough it goes
+where the pull at the top would. Spreading them on a card grows it towards
+you, and far enough it opens. Spreading them on a post is left to the
+browser, to zoom in and read, and so is a pinch on a page zoomed in. It is
+a finger pinch on a phone and a trackpad pinch on a computer; a pinch still
+going as a page arrives is not taken for a new one.
+
 On a big screen (88rem and up), a column to the left of the sheet keeps
 the post's year and title, and the posts before and after it, once its own
 title has gone off the top; it follows whichever post is being read.

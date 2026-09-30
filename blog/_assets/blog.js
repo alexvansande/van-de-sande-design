@@ -23,6 +23,112 @@
    enough, and it goes there. A wheel or trackpad pushing up at the top, or
    a finger dragging down. The browser's own pull (to refresh, or to bounce)
    is turned off in blog.css, so this is the only one. */
+/* Two fingers: pinching in on a page is the way out of it, spreading them
+   on a card the way into it. Whoever handles pinches says, from where they
+   start and which way they go, whether this one is theirs; the first taker
+   has it, and one nobody takes is left to the browser, so spreading two
+   fingers on a post still zooms in to read it. A finger pinch on a phone
+   (Safari's own gesture events there, touches elsewhere), and a trackpad
+   pinch, which Chrome and Firefox send as the wheel with ctrl held. */
+const pinchers = [];
+(() => {
+  let s = null, x = innerWidth / 2, y = innerHeight / 2;
+  const born = performance.now();
+  const begin = dir => {
+    // the pinch that brought us here, still going as the page comes: not a new one
+    if (performance.now() - born < 900) return null;
+    for (const h of pinchers) { const t = h(dir, x, y); if (t) return t; }
+    return null;
+  };
+  const end = () => { if (s && s !== "no") s.end(); s = null; };
+  addEventListener("mousemove", e => { x = e.clientX; y = e.clientY; }, { passive: true });
+  if ("ongesturestart" in self) {
+    // Safari, on a phone and on a Mac: it says how far apart, as a scale
+    addEventListener("touchstart", e => {
+      if (e.touches.length === 2) {
+        x = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        y = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      }
+    }, { passive: true });
+    addEventListener("gesturestart", () => { s = null; });
+    addEventListener("gesturechange", e => {
+      if (s === "no") return;
+      if (!s) {
+        if (Math.abs(e.scale - 1) < .02) { e.preventDefault(); return; }
+        s = begin(e.scale < 1 ? "in" : "out") || "no";
+        if (s === "no") return;
+      }
+      e.preventDefault();
+      s.move(e.scale);
+    }, { passive: false });
+    addEventListener("gestureend", end);
+  } else {
+    let d0 = 0;
+    const dist = t => Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY);
+    addEventListener("touchstart", e => {
+      if (e.touches.length !== 2) return;
+      d0 = dist(e.touches); s = null;
+      x = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      y = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+    }, { passive: true });
+    addEventListener("touchmove", e => {
+      if (e.touches.length !== 2 || !d0 || s === "no") return;
+      const k = dist(e.touches) / d0;
+      if (!s) {
+        if (Math.abs(k - 1) < .04) return;
+        s = begin(k < 1 ? "in" : "out") || "no";
+        if (s === "no") return;
+      }
+      e.preventDefault();
+      s.move(k);
+    }, { passive: false });
+    addEventListener("touchend", e => { if (e.touches.length < 2) { d0 = 0; end(); } }, { passive: true });
+  }
+  // a trackpad pinch, as the wheel with ctrl held; it ends when it stops
+  let k = 1, wT = 0;
+  addEventListener("wheel", e => {
+    if (!e.ctrlKey) return;
+    if (s === null) {
+      k = 1;
+      s = begin(e.deltaY > 0 ? "in" : "out") || "no";
+    }
+    clearTimeout(wT);
+    wT = setTimeout(end, 160);
+    if (s === "no") return;
+    e.preventDefault();
+    k *= Math.exp(-e.deltaY / 120);
+    s.move(k);
+  }, { passive: false });
+})();
+
+/* Spreading two fingers on a card grows it towards you, and far enough it
+   opens, as a click on it would: on the index, and the next post's card
+   under a post. Let go sooner and it settles back. */
+pinchers.push((dir, x, y) => {
+  if (dir !== "out") return null;
+  const hit = document.elementFromPoint(x, y);
+  const c = hit && hit.closest("a.card");
+  if (!c) return null;
+  let k = 1;
+  c.style.zIndex = "5";
+  c.style.transition = "none";
+  return {
+    move: v => { k = v; c.style.scale = Math.min(1.6, Math.max(1, v)).toFixed(3); },
+    end: () => {
+      if (k > 1.3) { c.click(); return; }
+      c.style.transition = "scale .3s cubic-bezier(.2,.7,.2,1)";
+      c.style.scale = "";
+      setTimeout(() => { c.style.zIndex = ""; c.style.transition = ""; }, 320);
+    },
+  };
+});
+// kept whole by the browser on the way back: the card is not still grown
+addEventListener("pageshow", e => {
+  if (e.persisted) document.querySelectorAll("a.card[style]").forEach(c => {
+    c.style.scale = ""; c.style.zIndex = ""; c.style.transition = "";
+  });
+});
+
 function pullAtTop(label, go, gone, PULL = 150) {
   let pull = 0, pullT = 0;
   const note = document.createElement("p");
@@ -42,8 +148,24 @@ function pullAtTop(label, go, gone, PULL = 150) {
     if (!pull || gone()) return;
     document.body.classList.add("letgo");
     setPull(0);
-    setTimeout(() => document.body.classList.remove("letgo"), 350);
+    setTimeout(() => {
+      document.body.classList.remove("letgo");
+      if (!pull) document.body.style.removeProperty("--pull-oy");
+    }, 350);
   };
+  /* Pinched in, anywhere down the page, it draws back the same way, about
+     the middle of the screen rather than the top of the page; not while the
+     page is zoomed in, when a pinch is only zooming back out. */
+  pinchers.push(dir => {
+    if (dir !== "in" || gone() || (self.visualViewport && visualViewport.scale > 1.02)) return null;
+    const main = document.querySelector("main");
+    const oy = main ? scrollY + innerHeight / 2 - (main.getBoundingClientRect().top + scrollY) : 0;
+    document.body.style.setProperty("--pull-oy", oy.toFixed(0) + "px");
+    return {
+      move: k => setPull(PULL * Math.min(1, Math.max(0, (1 - k) / .45))),
+      end: letGo,
+    };
+  });
   /* A trackpad flung up to the top keeps sending its coast for a while after
      the page has stopped there; that is not a pull. Only a gesture that
      starts at the top is: one after a pause in the wheel. */
