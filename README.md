@@ -53,7 +53,8 @@ chapter, each with a line of the story. A line too deep for the room under the p
 the page down by just enough to fit, on every sheet at once. **Some experiments with maps** is the Hexagonal
 Earth series: the Lifezones print, the "Impossible" Map, the Gosper
 topographic. **The whole universe in one image** is the Triangle of
-Everything poster.
+Everything poster, and under it the same triangle drawn out along its axes,
+from the Planck length to the Hubble radius.
 
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in

@@ -155,7 +155,7 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { art: 'bend', cap: 'I asked him if given more time he would make a new computer. And that’s what he did. He spent years creating a completely new way to compute. I became an early investor in the Higher Order Company.' },
                 { art: 'chess', cap: 'I believe the best way to teach about something is to learn it first so I did lots of visualizations for his machine. Not all of them were used.' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
-              buildPad($('#triangle'), [{ art: 'triangle' }])];
+              buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }])];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
 const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
