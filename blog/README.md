@@ -134,10 +134,12 @@ the top as they go by, the way the Mist screenshots do on the site: a card
 reaching the top stays there and the next slides up over it, pushing it
 back, a little higher, smaller and fainter each time, until three rows on it
 has gone into the dark. Coming up from the foot of the screen, a card rises
-out of the dark. Not on the archive, which is in shelves. Staying at the top is `position:
-sticky`, so the browser holds a card where it scrolls; the script only adds
-the little it steps back. Moved from the script on every scroll, a card
-trailed the page by a frame and shook on a phone.
+out of the dark. Not on the archive, which is in shelves. Where the browser can tie an
+animation to the scroll (Safari 26, Chrome 115), the pile is only that: each
+card's place in the page runs it, off the page's thread, so nothing trails
+the finger. Anywhere else a card is held by `position: sticky` and
+`blog.js` adds the little it steps back. Moved from the script on every
+scroll, a card trailed the page by a frame and shook on a phone.
 
 ## Where the address says to stand
 

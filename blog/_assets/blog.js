@@ -145,9 +145,11 @@ const Pile = (() => {
   const docTop = el => { let t = 0; for (; el; el = el.offsetParent) t += el.offsetTop; return t; };
   const clamp01 = v => Math.min(1, Math.max(0, v));
 
+  // the browser runs the pile from the scroll itself (blog.css); failing that, this does
+  const native = !reduce && !!(self.CSS && CSS.supports && CSS.supports("animation-timeline: view()"));
   const paint = () => {
     ticking = false;
-    if (reduce) return;
+    if (reduce || native) return;
     const y = scrollY, vh = innerHeight;
     cards.forEach(c => {
       const top = c._top - y;
@@ -188,10 +190,13 @@ const Pile = (() => {
     const bar = ys && ys.position === "sticky" && ys.flexDirection === "row" ? years.offsetHeight : 0;
     line = bar + Math.max(16, innerHeight * .025) + PILE_UP * H * DEEP;
     box.style.setProperty("--line", line.toFixed(1) + "px");
+    box.style.setProperty("--deep", (DEEP * pitch).toFixed(1) + "px");
+    box.style.setProperty("--hold", (DEEP * pitch - PILE_UP * H * DEEP).toFixed(1) + "px");
+    box.style.setProperty("--rise", (H * RISE).toFixed(1) + "px");
     cards.forEach(c => { c._sig = ""; });
     paint();
   };
-  if (!reduce) document.documentElement.classList.add("piling");
+  if (!reduce) document.documentElement.classList.add(native ? "pile-css" : "piling");
   measure();
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(paint); } }, { passive: true });
   addEventListener("resize", measure);
