@@ -877,6 +877,9 @@ function paintPost(pad, n){
   post.page.style.transform = `translate3d(0,${(y0 - post.shift).toFixed(1)}px,0) scale(${sc.toFixed(4)})`;
   const k = clamp01(pull / (PULL_GO * .6));
   post.more.style.opacity = (k * k * (3 - 2 * k)).toFixed(3);
+  /* the line has been seen: the next pull may go on */
+  if (k >= 1) post.primed = true;
+  if (v <= 0 && u < 1) post.primed = false;
   const shown = u > .9;
   if (post.shown !== shown){
     post.shown = shown;
@@ -1074,6 +1077,21 @@ function pageAxisOf(pad){
     /* Reading down the head of a post, it stays where it is let go, as a
        page scrolled by hand does; pulled on past the paragraph, it springs
        back to it, unless pulled far enough to go on into the post. */
+    /* What one trackpad gesture may do, momentum and all, from where it
+       starts: turn the last sheet over onto the post and stop there; read
+       down to the end of the first paragraph and stop there; and only a
+       gesture begun at the end of it may pull on into the post. And reading
+       goes with the trackpad one to one, as scrolling a page does. */
+    gesture: pad.post && (start => {
+      const L = pad.sheets.length, post = pad.post;
+      if (start < L - .01) return { hi: Math.min(Math.floor(start + 1e-6) + 1, L) };
+      /* and reading back up stops at the top of the post, before the sheet */
+      const end = L + needOf(post) / unitOf(post), lo = start > L + .01 ? L : L - 1;
+      if (start < end - 2 / unitOf(post)) return { lo, hi: end };
+      /* the first pull only brings the line up; it takes another to go */
+      return post.primed ? { lo } : { lo, hi: end + PULL_GO * .8 / unitOf(post) };
+    }),
+    perPx: pad.post && (raw => raw >= pad.sheets.length - 1e-6 ? 1 / unitOf(pad.post) : 0),
     rest: pad.post && ((x, from) => {
       const L = pad.sheets.length;
       if (x <= L || from < L - 1) return null;
@@ -1381,15 +1399,28 @@ stage.addEventListener('wheel', e => {
   if (!w){
     const ax = Math.abs(dx) > Math.abs(dy) ? RAIL_AX : pageAxis();
     stop(ax);
-    w = { ax, raw: ax.get(), from: Math.round(ax.get()), side: 0 };
+    /* One gesture, however hard, and however long its momentum runs on,
+       goes one step and no further: one page, one station. Letting it run
+       on turned three or four pages in a swipe on a big screen, and
+       straight through the last of them into the post. */
+    const x = ax.get(), from = Math.round(x);
+    w = Object.assign({ ax, raw: x, from, side: 0, lo: from - 1, hi: from + 1 },
+                      ax.gesture ? ax.gesture(x) : {});
   }
   /* on a trackpad the sideways part of a turn leans the fold the same way */
   if (w.ax !== RAIL_AX){
     w.side += dx;
     handTilt = TILT_MAX * clamp(-w.side / (W() * .2), -1, 1);
   }
-  w.raw += w.ax === RAIL_AX ? dx * 2.2 / (W() * .42) : dy * 2.2 / (H() * .5);
-  w.ax.set(bounded(w.ax, w.raw));
+  const per = w.ax === RAIL_AX ? 2.2 / (W() * .42) : (w.ax.perPx && w.ax.perPx(w.raw)) || 2.2 / (H() * .5);
+  w.raw += (w.ax === RAIL_AX ? dx : dy) * per;
+  /* past what this gesture may reach it only gives a little, and what is
+     pushed past there is not kept to be undone on the way back */
+  const edge = .05;
+  if (w.raw > w.hi + edge) w.raw = w.hi + edge;
+  if (w.raw < w.lo - edge) w.raw = w.lo - edge;
+  const at = w.raw > w.hi ? w.hi + RUB(w.raw - w.hi, edge) : w.raw < w.lo ? w.lo - RUB(w.lo - w.raw, edge) : w.raw;
+  w.ax.set(bounded(w.ax, at));
   render();
   clearTimeout(wT);
   wT = setTimeout(() => { const q = w; w = null; settle(q.ax, 0, q.from); }, 90);
@@ -1416,6 +1447,7 @@ addEventListener('pageshow', e => {
   PADS.forEach(pad => {
     if (!pad.post) return;
     pad.post.going = false;
+    pad.post.primed = false;
     pad.post.page.style.transition = '';
     pad.post._sig = null;
     if (pad.pv > pad.sheets.length){ stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), pad.sheets.length); }
