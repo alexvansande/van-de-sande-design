@@ -365,6 +365,9 @@ class Ctx:
         if slug:
             frag = href.split("#", 1)[1] if "#" in href else ""
             return self.base + slug + ("#" + frag if frag else "")
+        # a site that is gone: its copy in the archive, from about when this was written
+        if gone(href):
+            return archived(href, self.post.get("date_dt"))
         return href
 
     def heading_id(self, text):
@@ -559,7 +562,7 @@ def build(out, base, clean=False):
         cats = "".join(f' · <a href="{base}category/{cat_slug(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
         # where it first appeared, for the posts brought here from elsewhere
         if p.get("original"):
-            cats += (f' · <span class="first">Originally published on <a href="{esc(p["original"])}">'
+            cats += (f' · <span class="first">Originally published on <a href="{esc(original_link(p))}">'
                      f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
         # the next one along, older, and after the oldest the newest again
@@ -595,6 +598,8 @@ def build(out, base, clean=False):
         md = re.sub(r'(src="|\]\()(?![a-z]+:|/)([^")\s]+)',
                     lambda m: m.group(1) + (SITE_URL + "/" + pics.variants(os.path.join(p["folder"], m.group(2)), p["slug"], m.group(2))[-1][0][len(base):]
                                             if os.path.exists(os.path.join(p["folder"], m.group(2))) else m.group(2)), p["source"])
+        # and nothing in it to a site that is gone: the archive's copy instead
+        md = re.sub(r'https?://[^\s)"\'<>\]]+', lambda m: archived(m.group(0), p.get("date_dt")) if gone(m.group(0)) else m.group(0), md)
         write(out, p["slug"] + ".md", md)
         print(f"  {p['slug']}")
 
@@ -757,6 +762,29 @@ MOVED_BY_HAND = {
 }
 
 
+# Sites that are gone, or no longer his: nothing links to them, only to the
+# Internet Archive's copy. wanderingabout.com is someone else's now, and
+# OLPC News went to ictworks.org, which kept none of the old pages.
+GONE_HOSTS = ("wanderingabout.com", "olpcnews.com")
+
+
+def gone(url):
+    host = re.sub(r"^www\.", "", (re.match(r"https?://([^/:?#]+)", url.strip(), re.I) or [None, ""])[1].lower())
+    return any(host == h or host.endswith("." + h) for h in GONE_HOSTS)
+
+
+def archived(url, when=None):
+    """The Internet Archive's copy of a page that is gone, the one nearest
+    the date given (it finds the closest it has)."""
+    stamp = when.strftime("%Y%m%d") if when else "2008"
+    return f"https://web.archive.org/web/{stamp}/{url.strip()}"
+
+
+def original_link(p):
+    """Where a post first appeared, or the archive's copy if that is gone."""
+    return archived(p["original"], p.get("date_dt")) if gone(p["original"]) else p["original"]
+
+
 def link_key(url):
     """One form for the many ways of writing the same address: no scheme, no
     www, no trailing slash, no query. A Medium post is its id, whichever of
@@ -811,7 +839,7 @@ def build_archive(out, base, pics):
             html_ = render_blocks(p["body_md"], ctx)
             first = ""
             if p.get("original"):
-                first = (f' · <span class="first">Originally on <a href="{esc(p["original"])}">'
+                first = (f' · <span class="first">Originally on <a href="{esc(original_link(p))}">'
                          f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
             lang = f' lang="{esc(p["lang"])}"' if p.get("lang") else ""
             body = f"""<main>

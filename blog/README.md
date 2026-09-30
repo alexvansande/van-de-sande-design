@@ -137,6 +137,12 @@ matched by its id whichever of Medium's hosts it is written on, an ENS forum
 link by its topic number. The one Mirror address a post links to is in
 `MOVED_BY_HAND`, since Paragraph kept no record of Mirror's.
 
+Nothing links to a site that is gone: wanderingabout.com (someone else's
+now) and olpcnews.com (moved to ictworks.org, which kept none of the old
+pages). Every link to them, in a post, in its "Originally published on",
+and in its `.md`, goes to the Internet Archive's copy from about the post's
+date instead (`GONE_HOSTS` in `build.py`).
+
 Besides the posts from Paragraph, the blog holds what was written on Medium
 (his own account; not the UniLogin publication), on the Ethereum
 Foundation's blog, and three essays from the ENS forum. They are listed in
