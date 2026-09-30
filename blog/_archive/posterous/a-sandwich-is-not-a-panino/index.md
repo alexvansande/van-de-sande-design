@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [a sandwich is not a Panino](http://mylifeisnotveryinteresting.posterous.com/a-sandwich-is-not-a-panino)
-
-<br>
 Taken at Atlas Cafe

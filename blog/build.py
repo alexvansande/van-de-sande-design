@@ -770,6 +770,20 @@ def build_archive(out, base, pics):
             f'<div class="picker"><span class="count"></span><button type="button" class="copy">Copy the list</button>'
             f'<span class="done">Copied</span></div>\n'
             + "\n".join(sections) + "</main>" + PICKER_JS)
+    missing = os.path.join(root, "MISSING.md")
+    if os.path.exists(missing):
+        md = open(missing, encoding="utf-8").read()
+        # each post's heading links to its page, where there is one here
+        def link(m):
+            folder = m.group(2)
+            rel = folder[len("blog/_archive/"):] if folder.startswith("blog/_archive/") else folder[len("blog/"):]
+            href = f"{base}archive/{rel}" if folder.startswith("blog/_archive/") else f"{base}{rel}"
+            return f"## [{m.group(1)}]({href})\n`{folder}`"
+        md = re.sub(r"(?m)^## (.+)\n`([^`]+)`", link, md)
+        ctx = Ctx({"slug": "archive", "folder": root}, pics, base)
+        mbody = f'<main><article class="sheet"><span class="paper"></span><div class="text"><div class="body">{render_blocks(md, ctx)}</div></div></article></main>'
+        write(out, "archive/missing.html", page(base, "Missing · archive", mbody, cls="post archived", extra_head=noindex))
+        body = body.replace('<div class="picker">', f'<p class="lead"><a href="{base}archive/missing">What the old pages showed that is still missing</a></p>\n<div class="picker">', 1)
     write(out, "archive/index.html", page(base, "The archive · " + TITLE, body, cls="list", extra_head=noindex))
     print(f"{total} archived posts into {out}/archive")
 

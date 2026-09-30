@@ -6,5 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-<br>
 Taken at The New York Palace

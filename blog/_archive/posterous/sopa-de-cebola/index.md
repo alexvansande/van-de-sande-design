@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Sopa de cebola](http://mylifeisnotveryinteresting.posterous.com/sopa-de-cebola)
-
-<br>
 Taken at Blue Ribbon Bakery

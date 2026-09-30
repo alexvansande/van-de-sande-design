@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Festa de dois anos da Ana Flor](http://mylifeisnotveryinteresting.posterous.com/festa-de-dois-anos-da-ana-flor)
-
-<br>
 Taken at Parque Estadual Da Chacrinha

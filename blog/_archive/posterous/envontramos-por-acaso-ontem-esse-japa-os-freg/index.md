@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Envontramos por acaso ontem esse japa. Os fregueses ficam em torno do grill pedindo ingredientes e os japinhas pulam no balcão pra pegar ingredientes, gritam, contam piada em japonês e entregam os pedidos a distancia, usando um remo.](http://mylifeisnotveryinteresting.posterous.com/envontramos-por-acaso-ontem-esse-japa-os-freg)
-
-<br>
 Taken at Robataya

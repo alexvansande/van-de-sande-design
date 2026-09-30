@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Exposição de arte entreguerras no guggenheim](http://mylifeisnotveryinteresting.posterous.com/exposicao-de-arte-entreguerras-no-guggenheim)
-
-<br>
 Taken at Guggenheim Museum

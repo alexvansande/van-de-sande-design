@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [One strawberry cheesecake to go please!](http://mylifeisnotveryinteresting.posterous.com/one-strawberry-cheesecake-to-go-please)
-
-<br>
 Taken at Carnegie Deli

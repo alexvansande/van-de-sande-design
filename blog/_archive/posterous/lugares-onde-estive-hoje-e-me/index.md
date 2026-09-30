@@ -6,4 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [lugares onde estive hoje e me senti sozinho](http://mylifeisnotveryinteresting.posterous.com/lugares-onde-estive-hoje-e-me)
+

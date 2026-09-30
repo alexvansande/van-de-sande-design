@@ -12,7 +12,7 @@ Baixei um software de HDR (palavrinha da vez em fotografia) no iPhone e fui pass
 
 Na verdade, fotógrafo > cenário > lente > software > megapixels mas o resto eu não tenho mesmo.
 
-Click here to download: **[HDR\_no\_iPhone\_fotos\_lindas\_com.zip](http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/knb9oOz9LFusqTiDjLmr4zze1ZKjvab6kohznQ6uBVAwqrBuOSOCgVcL9vuo/HDR_no_iPhone_fotos_lindas_com.zip)** (694 KB) <br>
+Click here to download: **[HDR\_no\_iPhone\_fotos\_lindas\_com.zip](http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/knb9oOz9LFusqTiDjLmr4zze1ZKjvab6kohznQ6uBVAwqrBuOSOCgVcL9vuo/HDR_no_iPhone_fotos_lindas_com.zip)** (694 KB)
 
 <figure>
 <img src="01.png" width="48" height="48" alt="">

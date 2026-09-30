@@ -6,8 +6,6 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [The Deal](http://mylifeisnotveryinteresting.posterous.com/the-deal)
-
 DOG
 
 -Hey man.
@@ -64,9 +62,7 @@ COW
 
 -They didn't want me to talk to you, but I insisted. I'm warning you though, if this is another of your smart moves, forget it. We got you surrounded and outnumbered. We got a large herd, all I have to do is give them a sign and you'll be trampled.
 
--Relax, we came to talk. We want to make you a proposal.
-
--A proposal?
+-Relax, we came to talk. We want to make you a proposal. -A proposal?
 
 -Yeah, a peace deal.
 
@@ -86,31 +82,19 @@ Cow gives out a smirk.
 
 -Yeah, you laugh now. Just like last time you laughed at our Clothes – everyone had a blast when we popped up with our new skins. Now tell me, how many did you lost last winter?
 
-The smirk dissapears in an instant, Cow isn't amused.
-
--Im asking you a question. How many? A hundred? Two hundred? You know how many we lost?
+The smirk dissapears in an instant, Cow isn't amused. -Im asking you a question. How many? A hundred? Two hundred? You know how many we lost?
 
 Cow keeps silent.
 
 -Seventeen. And most of them were children, the others were stupid. We don't need stupid. Do you want to be stupid, cow, or do you want to listen?
 
--Watch your tone here. We got you surrounded. I'm listening.
+-Watch your tone here. We got you surrounded. I'm listening. -So pay attention: we call it City. It's going to be big, it's going to change everything: we want to stay put. No more hunting, no more spending summer migrating, trying to find a nice spot, trying to find water. We find somewhere we like and we bring everything we need to us.
 
--So pay attention: we call it City. It's going to be big, it's going to change everything: we want to stay put. No more hunting, no more spending summer migrating, trying to find a nice spot, trying to find water. We find somewhere we like and we bring everything we need to us.
+-So what Antelope said is true. You're giving up on your freedom. -Fuck Antelope. He goes jumping around, bragging about his "freedom", just to be snatched up by the next Leopard. Is that freedom for you? Can you be free if you're dead? Watching your back all day, not knowing when you're going to find water or food? Being dependent on summer or spring? Fuck summer, fuck winter, we're working on some things that you wouldn't believe cow. You keep cool in summer, hot in winter.
 
--So what Antelope said is true. You're giving up on your freedom.
+-You're talking about that fire thing again? We don't like that. -No it's not that. It's bigger, but we can't talk about that now. -And what does any of that have to do with us.
 
--Fuck Antelope. He goes jumping around, bragging about his "freedom", just to be snatched up by the next Leopard. Is that freedom for you? Can you be free if you're dead? Watching your back all day, not knowing when you're going to find water or food? Being dependent on summer or spring? Fuck summer, fuck winter, we're working on some things that you wouldn't believe cow. You keep cool in summer, hot in winter.
-
--You're talking about that fire thing again? We don't like that.
-
--No it's not that. It's bigger, but we can't talk about that now.
-
--And what does any of that have to do with us.
-
--We want to offer you protection. We want to take us to City.
-
--Protection?
+-We want to offer you protection. We want to take us to City. -Protection?
 
 -Yeah. We're gonna take care of you. We're protecting you from the others, you're never going to need to worry about predators anymore. Protection from winter and summer: you're always going to have a nice place to sleep, water. Food even. We bring you everything.
 
@@ -132,9 +116,7 @@ Cow keeps silent.
 
 -You're not ever touching our children.
 
--As opposed to what today? We already got them when we want.
-
--This conversation is over.
+-As opposed to what today? We already got them when we want. -This conversation is over.
 
 -Cow, I'm going to be frank with you all right? You're seeing it all wrong. We are not the enemies – maybe we are right now, but we don't want to be anymore. The real enemy is Lion, Tiger, Crocodile. They're the ones you should be worried about. They want to win this war if they do, you're not going to have any children left.
 
@@ -146,11 +128,7 @@ Cow keeps silent.
 
 -Cow, I'll give you some time to think. But take a look at the big picture: this is a meat-eater's game. You don't actually stand a chance, you're just between the big players. You know, that, you have the numbers but you don't stand a chance in the long run. Now, you might think that Lion is the king now and that might be true, but for how long really? We've been just growing in numbers and strength, anyone who takes a look from the outside can see it clearly: we're going to win this thing. And once we show you what we're building on that City you won't have any doubts of who's on top. Now you can stand in the sidelines and be collateral damage or you can join us. It's an easy choice really.
 
--I'm going to have to talk to my people about it.
-
--I understand. Take your time. But we can't wait forever you know..
-
-• • •
+-I'm going to have to talk to my people about it. -I understand. Take your time. But we can't wait forever you know.. • • •
 
 CAT
 
@@ -164,21 +142,11 @@ CAT
 
 -A favor? You came here by yourself and chased the Rat. We never asked you anything. We were just getting to that problem.
 
--Sure you were. Now can we talk? We have something you should hear about.
+-Sure you were. Now can we talk? We have something you should hear about. -Look if Tiger thinks he's going to get an easy way out of this, you can tell him.. -What do you think we are, messenger pigeons? If you have anything to say to tiger go talk to him yourself. We're not here representing family, it's just us. We have something of a deal.
 
--Look if Tiger thinks he's going to get an easy way out of this, you can tell him..
+-A deal? From you? What we could possibly want from you? -Since the Rat thing we got a chance to see your Houses closer. We like them, a lot. -We don't need you to tell us that.
 
--What do you think we are, messenger pigeons? If you have anything to say to tiger go talk to him yourself. We're not here representing family, it's just us. We have something of a deal.
-
--A deal? From you? What we could possibly want from you?
-
--Since the Rat thing we got a chance to see your Houses closer. We like them, a lot.
-
--We don't need you to tell us that.
-
--It's really well, it's comfy. You got some great beds also. That fur thing is great.
-
--You've been in our beds? How dare you?
+-It's really well, it's comfy. You got some great beds also. That fur thing is great. -You've been in our beds? How dare you?
 
 -Rats were there first, we just followed. That's not the point, the point is that we liked what we saw.
 
@@ -200,13 +168,9 @@ CAT
 
 Laugh erupted on the room.
 
--And you want us to feed you? _We_ feed _you_? You and what army?
+-And you want us to feed you? _We_ feed _you_? You and what army? -We have a weapon.
 
--We have a weapon.
-
--Your claws? _These_ claws? You can't scratch past my leather pant.
-
--We also have them. But we've been taking a close look at you and we found your weakness. And we've been working on it for the past millennia. Let's call it our secret weapon.
+-Your claws? _These_ claws? You can't scratch past my leather pant. -We also have them. But we've been taking a close look at you and we found your weakness. And we've been working on it for the past millennia. Let's call it our secret weapon.
 
 Another burst of laughter.
 

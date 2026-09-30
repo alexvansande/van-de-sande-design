@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [O Rio doa. Fila Indiana para colocar doações em caminhões.](http://mylifeisnotveryinteresting.posterous.com/o-rio-doa-fila-indiana-para-colocar-doacoes-e)
-
-<br>
 Taken at Parque dos Patins

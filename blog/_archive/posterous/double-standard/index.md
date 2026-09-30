@@ -6,4 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Double standard](http://mylifeisnotveryinteresting.posterous.com/double-standard)
+

@@ -6,8 +6,6 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [a subtle message](http://mylifeisnotveryinteresting.posterous.com/a-subtle-message)
-
 <figure>
 <img src="01.png" width="647" height="718" alt="">
 </figure>

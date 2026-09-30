@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [2011! (do alto é mais bonito)](http://mylifeisnotveryinteresting.posterous.com/2011-do-alto-e-mais-bonito)
-
-<br>
 Taken at Praia de Copacabana

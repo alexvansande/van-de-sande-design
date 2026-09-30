@@ -8,6 +8,4 @@ date_approximate: "year inferred from when it was archived"
 
 ### ["Controversy"](http://mylifeisnotveryinteresting.posterous.com/controversy)
 
-Have you ever wondered why some issues seems to have been there for a <br>
-long time without anyone caring and then suddenly it becomes very <br>
-important?
+Have you ever wondered why some issues seems to have been there for a long time without anyone caring and then suddenly it becomes very important?

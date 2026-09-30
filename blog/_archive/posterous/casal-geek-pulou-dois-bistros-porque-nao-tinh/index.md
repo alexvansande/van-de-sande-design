@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Casal geek pulou dois bistrôs porque não tinham wifi ou banheiros. :)](http://mylifeisnotveryinteresting.posterous.com/casal-geek-pulou-dois-bistros-porque-nao-tinh)
-
-<br>
 Taken at El Beit

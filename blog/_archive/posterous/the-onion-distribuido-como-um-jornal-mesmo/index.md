@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [The Onion distribuído como um jornal mesmo.](http://mylifeisnotveryinteresting.posterous.com/the-onion-distribuido-como-um-jornal-mesmo)
-
-<br>
 Taken at Brooklyn

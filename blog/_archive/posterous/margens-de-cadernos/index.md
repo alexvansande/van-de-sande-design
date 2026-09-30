@@ -6,6 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Margens de cadernos](http://mylifeisnotveryinteresting.posterous.com/margens-de-cadernos)
-
 todo dia eu vou treinando um pouco, parece que vai voltando alguma coisa...

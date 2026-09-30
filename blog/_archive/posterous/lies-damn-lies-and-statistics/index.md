@@ -6,11 +6,7 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Lies, Damn lies and statistics](http://mylifeisnotveryinteresting.posterous.com/lies-damn-lies-and-statistics)
-
 Business insider [published this chart today,](http://www.businessinsider.com/chart-of-the-day-music-industry-sales-2011-2) labeling it as a visualization of the collapse of the music industry, and how digital sales aren't doing enough to offset it.
-
-<br>
 
 The issue with this kind of stacking graph is that big changes on bottom layers always distort the top layers. Just changing the stack order, from bigger to smaller, gives us this chart:
 

@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Everyone is a designer](http://mylifeisnotveryinteresting.posterous.com/everyone-is-a-designer)
-
-<br>
 Taken at Cooper-Hewitt National Design Museum

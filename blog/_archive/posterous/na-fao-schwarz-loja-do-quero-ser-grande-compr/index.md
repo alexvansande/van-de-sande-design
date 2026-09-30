@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Na FAO Schwarz, loja do "quero ser grande", comprei um bicho de pelúcia tão barato que sai achando que estava fazendo algo errado](http://mylifeisnotveryinteresting.posterous.com/na-fao-schwarz-loja-do-quero-ser-grande-compr)
-
-<br>
 Taken at FAO Schwarz

@@ -4,7 +4,7 @@ Pictures and media the original pages pointed to, which neither the live
 web nor the Wayback Machine still had when `archive_old.py` looked.
 Found one? Put it in the post's folder and point the post at it.
 
-96 things, in 28 posts. Videos now on YouTube are embedded already.
+196 things, in 96 posts. Videos now on YouTube are embedded already.
 
 ## Crossing the Chasm
 `blog/_archive/monks/crossing-the-chasm` · archive: monks · from http://wanderingabout.com/computersformonks/2006/08/23/crossing-the-chasm/
@@ -64,11 +64,207 @@ Found one? Put it in the post's folder and point the post at it.
 
 - download: `in_the_city_of_eggtimers.mp3` — http://log.tenseforms.com/notes/uploads/audio/in_the_city_of_eggtimers.mp3
 
+## Bolsa de Mulher
+`blog/_archive/portfolio2011/bolsa-de-mulher` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/bolsa-de-mulher/
+
+- picture: `bolsadeMulher.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/bolsadeMulher.jpg
+- picture: `bolsadeMulher02.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/bolsadeMulher02.jpg
+- picture: `bolsadeMulher03.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/bolsadeMulher03.jpg
+- picture: `bolsadeMulher04.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/bolsadeMulher04.jpg
+
+## Cartola
+`blog/_archive/portfolio2011/cartola` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/cartola/
+
+- picture: `cartola-01.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/cartola-01.png
+- picture: `cartola-02.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/cartola-02.png
+- picture: `cartola-03.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/cartola-03.png
+- picture: `cartola-ipad1.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/cartola-ipad1.png
+
+## Cuponzal
+`blog/_archive/portfolio2011/cuponzal` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/cuponzal/
+
+- picture: `cuponzal.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/cuponzal.png
+- picture: `cuponzal01.jpg` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/cuponzal01.jpg
+- picture: `cuponzal02.jpg` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/cuponzal02.jpg
+
+## Estrela Guia iPhone
+`blog/_archive/portfolio2011/estrela-guia-iphone` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/estrela-guia-iphone/
+
+- picture: `Estrela-Guia-1.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/Estrela-Guia-1.png
+- picture: `Estrela-Guia-2.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/Estrela-Guia-2.png
+- picture: `Estrela-Guia-3.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/Estrela-Guia-3.png
+
+## Frugar
+`blog/_archive/portfolio2011/frugar` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/frugar/
+
+- picture: `frugar-01.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/frugar-01.png
+- picture: `frugar-02.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/frugar-02.png
+- picture: `frugar-03.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/frugar-03.png
+- picture: `frugar-04.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/frugar-04.png
+
+## Itsy Deal
+`blog/_archive/portfolio2011/itsy-deal` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/itsy-deal/
+
+- picture: `itsy-01.jpg` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/itsy-01.jpg
+- picture: `itsy-02.jpg` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/itsy-02.jpg
+
+## Live video effects programming
+`blog/_archive/portfolio2011/live-video-effects-programming` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/live-video-effects-programming/
+
+- download: `quartz-experimentszip.zip` — http://wanderingabout.com/uploads/quartz-experimentszip.zip
+
+## Presidential elections live results
+`blog/_archive/portfolio2011/presidential-elections-live-results` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/presidential-elections-live-results/
+
+- picture: `eleicoes-01.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/eleicoes-01.png
+- picture: `eleicoes-02.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/eleicoes-02.png
+- picture: `eleicoes-03.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/eleicoes-03.png
+
+## site O Globo para iPhone
+`blog/_archive/portfolio2011/site-o-globo-para-iphone` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/site-o-globo-para-iphone/
+
+- picture: `o-globo-01.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/o-globo-01.png
+- picture: `o-globo-02.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/09/o-globo-02.png
+
+## Tarot for iPad and iPhone
+`blog/_archive/portfolio2011/tarot-for-ipad-and-iphone` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/tarot-for-ipad-and-iphone/
+
+- picture: `ok41-680x510.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok41-680x510.png
+- picture: `ok71-680x510.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok71-680x510.png
+- picture: `ok12-680x510.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok12-680x510.png
+- picture: `ok6-680x453.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok6-680x453.png
+- picture: `ok42-680x453.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok42-680x453.png
+- picture: `ok51-680x453.png` — http://wanderingabout.com/wordpress/wp-content/uploads/2012/05/ok51-680x453.png
+
+## Testes de Perfil
+`blog/_archive/portfolio2011/testes-de-perfil` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/testes-de-perfil/
+
+- picture: `Testes-de-Perfil-01.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/Testes-de-Perfil-01.jpg
+- picture: `Testes-de-Perfil-02.jpg` — http://wanderingabout.com/wordpress/wp-content/uploads/2011/11/Testes-de-Perfil-02.jpg
+
+## Trânsito iPhone
+`blog/_archive/portfolio2011/transito-iphone` · archive: portfolio2011 · from http://wanderingabout.com/portfolio/transito-iphone/
+
+- picture: `iPhoneGoodie.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/iPhoneGoodie.png
+- picture: `iPhoneGoodie2.png` — http://dujourapp.com/wanderingabout.com/wordpress/wp-content/uploads/2011/08/iPhoneGoodie2.png
+
+## 2011! (do alto é mais bonito)
+`blog/_archive/posterous/2011-do-alto-e-mais-bonito` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/2011-do-alto-e-mais-bonito
+
+- picture: `media_httpdistillerys_wCdze.jpg` — http://getfile0.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/JzkFzkbvgcyjBluktaijoqJvcqoxvnFafnpGropxxvhHrGnlcbdrlCmeAGGz/media_httpdistillerys_wCdze.jpg
+
+## Untitled
+`blog/_archive/posterous/37180983` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/37180983
+
+- picture: `media_httpdistillerys_htmid.jpg` — http://getfile8.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/vxfzoeiuhJoJuewtgcHlnmflbDzxsnlIpFrFtwrJkhCGhIjbtoaIlgjdAhAE/media_httpdistillerys_htmid.jpg
+
+## a sandwich is not a Panino
+`blog/_archive/posterous/a-sandwich-is-not-a-panino` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-sandwich-is-not-a-panino
+
+- picture: `media_httpdistillerys_lfHIF.jpg` — http://getfile8.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/DEsewhygAoByambdxAufmxIzpkxrswcxjBpHzrsikhtqClbkHxJecqmIIEHr/media_httpdistillerys_lfHIF.jpg
+
+## a subtle message
+`blog/_archive/posterous/a-subtle-message` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-subtle-message
+
+- picture: `rapture.png` — http://getfile3.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/6XiIDeU8mFemQWSQuuj70Z7lafnxfpnKtGQJLZP9bOFnd4Q4L2XvGLtk9zBN/rapture.png
+
+## A surpresa 12 – Aterrisando
+`blog/_archive/posterous/a-surpresa-12-aterrisando` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-12-aterrisando
+
+- picture: `a-surpresa-parte-12-aterrisand.png` — http://getfile8.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/pMTe3Rp3PAz8hq46XeKqP3F23FWgprjtDSg2dpw0UfXx6x2LLptU3ohaEnCv/a-surpresa-parte-12-aterrisand.png
+
+## a surpresa 13 – indo pro brejo
+`blog/_archive/posterous/a-surpresa-13-indo-pro-brejo` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-13-indo-pro-brejo
+
+- picture: `a-surpresa-parte-13-no-charco.png` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/dB9FA6uxQGxoqXOTf6eg1Xse95zcn3oneHoWbQZV183CQvla6zRUOtn5lB0F/a-surpresa-parte-13-no-charco.png
+
+## a surpresa 9 - Quatro fatos sobre a experiência de voar de balão
+`blog/_archive/posterous/a-surpresa-9-quatro-fatos-sobr` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-9-quatro-fatos-sobr
+
+- picture: `zip.png` — http://posterous.com/images/filetypes/zip.png
+- download: `a_surpresa_9_-_Quatro_fatos_so.zip` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Wwk0kiXBObRpTmttjaUZzXDXMYmXN4s5GTWa8Z4h0SUNZyVBiIl11NGfpYcf/a_surpresa_9_-_Quatro_fatos_so.zip
+
 ## a surpresa final
 `blog/_archive/posterous/a-surpresa-final` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-final
 
 - picture: `zip.png` — http://posterous.com/images/filetypes/zip.png
 - download: `A_surpresa_final.zip` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/slVy3qGD2GTDfRYAF4d1sUQDOftVLah5b181oWZa7BEOtpjXGfcMuH9NkqBX/A_surpresa_final.zip
+
+## A surpresa parte 10: Enquanto isso, no aeroporto..
+`blog/_archive/posterous/a-surpresa-parte-10-enquanto-i` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-10-enquanto-i
+
+- picture: `a-surpresa-parte-10-enquanto-i.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/JOhQK3G5aQlY0zgUPItJFrqqybOPyy7N4BFQ12NoKwCmTv29y44T2hXIipd2/a-surpresa-parte-10-enquanto-i.jpg.scaled.500.jpg
+
+## a surpresa parte 5- sobremesa
+`blog/_archive/posterous/a-surpresa-parte-5-sobremesa` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-5-sobremesa
+
+- picture: `zip.png` — http://posterous.com/images/filetypes/zip.png
+- download: `a_surpresa_parte_5-_sobremesa.zip` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/YdNh3b9KT0IX2fJH1ETlWsKmAy1m6VRurWJGfUsOGwJHHvw49wvnpcfidGmL/a_surpresa_parte_5-_sobremesa.zip
+
+## a surpresa parte 6 - como fazer pra tirá-la de casa?
+`blog/_archive/posterous/a-surpresa-parte-6-como-fazer` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-6-como-fazer
+
+- picture: `a-surpresa-parte-6.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/AlImvWEfW2LnYa7JTG59ajFqpakKZC8UiFOeADSm1HDQjNZvhMLqqS4BD30t/a-surpresa-parte-6.jpg.scaled.500.jpg
+
+## a surpresa parte 7: na praia
+`blog/_archive/posterous/a-surpresa-parte-7-na-praia` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-7-na-praia
+
+- picture: `a-surpresa-parte-7.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/jJYNfgRtRs1sqE4vaqAQMqWGkhH4Le6nuyfuQiFwORCHpuGQa6TEf1EAwLJJ/a-surpresa-parte-7.jpg.scaled.500.jpg
+
+## a surpresa parte 8 - finalmente, o dito cujo
+`blog/_archive/posterous/a-surpresa-parte-8-finalmente` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-8-finalmente
+
+- picture: `a-surpresa-parte-8-o-balo.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/KBHsefxtcQRix1weHDKUSlUmjCLOiHH3ZJn2cylyLo6OUMNaqPDXF1VBLLnB/a-surpresa-parte-8-o-balo.jpg.scaled.500.jpg
+
+## a surpresa parte II: tentativa um
+`blog/_archive/posterous/a-surpresa-parte-ii-tentativa` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-ii-tentativa
+
+- picture: `a_surpresa_parte_2.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/eEcRHAMOixNDQvP8A6u6NrXebjqjLRpHArkr1PGvUscwhTuZEIETgAyUJjCV/a_surpresa_parte_2.jpg.scaled.500.jpg
+
+## a surpresa parte III - Porquê ainda não pedi ela em casamento?
+`blog/_archive/posterous/a-surpresa-parte-iii-porque-ai` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-iii-porque-ai
+
+- picture: `a-surpresa-parte-3.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Ez1sFdVfElUGqIIuhbH79H4RQaeP9NQA0VLfhaPqJik6CV0RPy3Es5fS9cCN/a-surpresa-parte-3.jpg.scaled.500.jpg
+
+## a surpresa parte IV : domingo de sol
+`blog/_archive/posterous/a-surpresa-parte-iv-domingo-de` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-iv-domingo-de
+
+- picture: `a-surpresa-parte-4.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/aUVv7TRL2atmdV8ZpwMNKdyu5PF3MzZ6UA6uf0DuhrsiSjZoTbkiJNjrBvTm/a-surpresa-parte-4.jpg.scaled.500.jpg
+
+## Acabei de receber um pacote da NASA!
+`blog/_archive/posterous/acabei-de-receber-um-pacote-da-nasa` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/acabei-de-receber-um-pacote-da-nasa
+
+- picture: `media_httpdistillerys_EtBhh.jpg` — http://getfile8.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/lddzDgmfzwgnJeebCjbCFHxmaaicJkgCksCyygskdjkvAmqbwmlscIxCHvvf/media_httpdistillerys_EtBhh.jpg
+
+## Anatomia de uma reunião inútil
+`blog/_archive/posterous/anatomia-de-uma-reuniao-inutil` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/anatomia-de-uma-reuniao-inutil
+
+- picture: `anatomia-de-uma-reuniao.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/zUkgeeLkd7CccalWYGgIGfDYJykli95t3MwGdTkaFETM4QQGv15By1NN4570/anatomia-de-uma-reuniao.jpg.scaled.500.jpg
+
+## Aquecedor solar
+`blog/_archive/posterous/aquecedor-solar` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/aquecedor-solar
+
+- picture: `media_httpdistillerys_CoCpo.jpg` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/CqBzHpvyHztzqkfbEBbcplvxgvbljpvdlFyBvtlghFdGzIkzlegcJwvtIqJE/media_httpdistillerys_CoCpo.jpg
+
+## Belo monte: tem outro jeito?
+`blog/_archive/posterous/belo-monte-tem-outro-jeito` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/belo-monte-tem-outro-jeito
+
+- picture: `belo-monte.png` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/rOh08MG6Y1veCKHlLhWeBZ3uiQE2palgMUjDO70p1PPVudR6YLz9pPQ5IHEr/belo-monte.png
+
+## Cafe da manha delicioso
+`blog/_archive/posterous/cafe-da-manha-delicioso` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/cafe-da-manha-delicioso
+
+- picture: `media_httpdistillerys_kbAzH.jpg` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/ktmjpcmdjiHrhDatdfFrHftEfCkpeetkIlrIEtCyvfwfodCoFEzcxapHwIch/media_httpdistillerys_kbAzH.jpg
+
+## Casal geek pulou dois bistrôs porque não tinham wifi ou banheiros. :)
+`blog/_archive/posterous/casal-geek-pulou-dois-bistros-porque-nao-tinh` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/casal-geek-pulou-dois-bistros-porque-nao-tinh
+
+- picture: `media_httpdistillerys_Hykyl.jpg` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/DthaBFoIiyzgjtwBqeHECwxzIlqxExqBaygzdCCmqlJFyeJCAgeoFIprArbf/media_httpdistillerys_Hykyl.jpg
+
+## Comic review: Ghost map (ou seria crítica em quadrinhos?)
+`blog/_archive/posterous/comic-review-ghost-map-ou-seri` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/comic-review-ghost-map-ou-seri
+
+- picture: `the-ghost-map.jpg` — http://getfile4.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Y9wiNL28akfJqXvFzkawcO3Ij9nqFcEH7uSDkH5R1OjhbyFbLL44sEhCZDhb/the-ghost-map.jpg
 
 ## controversy
 `blog/_archive/posterous/controversy` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/controversy
@@ -79,6 +275,14 @@ Found one? Put it in the post's folder and point the post at it.
 `blog/_archive/posterous/desenho-do-sapic-em-fundo-pastel` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/desenho-do-sapic-em-fundo-pastel
 
 - picture: `sapic.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/X904UmsFpzG1qhQIW7q0Kdyso3SGWNzIAja5nXXmwLvzMNw89FKa38gVo2ns/sapic.jpg.scaled.500.jpg
+
+## Dinossauros! Dinossauros!
+`blog/_archive/posterous/dinossauros-dinossauros` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/dinossauros-dinossauros
+
+- picture: `DSC00064.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Znu3kNdSEYfXCSs1x2ubSmVl9t4e3UaGZkk7sF4nwAoZFOQr506h4NCO4oWT/DSC00064.jpg
+- picture: `DSC00083.jpg` — http://getfile0.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/0X7MIcD1scSALOesB7UAEQh2JnPMr649nAPluscZtiZmRXDxq82jj14SMOfi/DSC00083.jpg
+- picture: `DSC00107.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/mGSTn8qAVTTPK7wxi7uVYOa6j0BbuiMb4djBVyTgsrrF1eyfph5pFZ2BpMRT/DSC00107.jpg
+- download: `Dinossauros_Dinossauros.zip` — http://getfile0.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/836HLT9PtKZd61FWsUjn7QhiqLieWHOfpErQ0l40dDpOFZd5qjegtTZ2Zb7A/Dinossauros_Dinossauros.zip
 
 ## double standard
 `blog/_archive/posterous/double-standard` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/double-standard
@@ -133,10 +337,55 @@ Found one? Put it in the post's folder and point the post at it.
 - picture: `Screen_shot_2011-03-05_at_10.3.png` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/QdwxaFxkTtyDXKYkUhgsW7xLX95EFsgubgsgaCWxkjAJMxwJIudQyG5AqHb6/Screen_shot_2011-03-05_at_10.3.png
 - picture: `Screen_shot_2011-03-05_at_10.5.png` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Qf5u0Ug7qos1WojqgjCIsq0wvD0TkW1TshJ8Q06OAFdTfeWBkVQzWMSLkVHo/Screen_shot_2011-03-05_at_10.5.png
 
+## Envontramos por acaso ontem esse japa. Os fregueses ficam em torno do grill pedindo ingredientes e os japinhas pulam no balcão pra pegar ingredientes, gritam, contam piada em japonês e entregam os pedidos a distancia, usando um remo.
+`blog/_archive/posterous/envontramos-por-acaso-ontem-esse-japa-os-freg` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/envontramos-por-acaso-ontem-esse-japa-os-freg
+
+- picture: `media_httpdistillerys_cAdeg.jpg` — http://getfile6.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/fhbwGqotiJCaEeEhkqFGgaDnzwquHCcdFcCGnqgfxnmedydfHBcpIvjeFJre/media_httpdistillerys_cAdeg.jpg
+
+## Esperando uma amiga da Helen
+`blog/_archive/posterous/esperando-uma-amiga-da-helen` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/esperando-uma-amiga-da-helen
+
+- picture: `media_httpdistillerys_kEqbv.jpg` — http://getfile2.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/sczqigCkbDrjezDydDlhjdvEDaHaEpfyvuhIaBxqxFvywkjiqCjsDmbpfdra/media_httpdistillerys_kEqbv.jpg
+
+## Essas marquinhas táteis no chão de metro são para guiar os cegos, mas tb são ótimas para usuários de smartphone q não olham onde andam q
+`blog/_archive/posterous/essas-marquinhas-tateis-no-chao-de-metro-sao` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/essas-marquinhas-tateis-no-chao-de-metro-sao
+
+- picture: `media_httpdistillerys_IJtjo.jpg` — http://getfile3.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/kddsoFtyimelzAslioaCuuuFvrfkusJxosJzbtAipbzfgAwByanmwugEmrAH/media_httpdistillerys_IJtjo.jpg
+
+## Esse pais não carece de recursos ou bons corações, mas infraestrututa. Vim ao hemorio e não pude doar.
+`blog/_archive/posterous/esse-pais-nao-carece-de-recursos-ou-bons-cora` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/esse-pais-nao-carece-de-recursos-ou-bons-cora
+
+- picture: `media_httpdistillerys_typCw.jpg` — http://getfile2.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/hmkgskdGnhEFxhkjhanJffCiFIvqurhHbzBvuDjsFGetizaAqwhostlFrBpo/media_httpdistillerys_typCw.jpg
+
+## Everyone is a designer
+`blog/_archive/posterous/everyone-is-a-designer` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/everyone-is-a-designer
+
+- picture: `media_httpdistillerys_fIecI.jpg` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/JdiECJzrotJHxDzfEwBFpBBmBzuippHjdCFykxwafGanhhlnpmwjIpwgFtbA/media_httpdistillerys_fIecI.jpg
+
+## Exposição de arte entreguerras no guggenheim
+`blog/_archive/posterous/exposicao-de-arte-entreguerras-no-guggenheim` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/exposicao-de-arte-entreguerras-no-guggenheim
+
+- picture: `media_httpdistillerys_DquHt.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/zlCHGphztFuazlAEGzjCfnqidGGAiurtclJepvstjFfhceopEsJqrvualBwF/media_httpdistillerys_DquHt.jpg
+
 ## Festa de dois anos da Ana Flor
 `blog/_archive/posterous/festa-de-dois-anos-da-ana-flor` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/festa-de-dois-anos-da-ana-flor
 
 - picture: `media_httpdistillerys_tcEHy.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/krdaqocytBqgjqDHtdyhyiIhdydygektiHHbjuHqJIBrrHmjIjfxbhgnBGxa/media_httpdistillerys_tcEHy.jpg
+
+## Flying is simple. Not hitting The ground is hard.
+`blog/_archive/posterous/flying-is-simple-not-hitting-the-ground-is-ha` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/flying-is-simple-not-hitting-the-ground-is-ha
+
+- picture: `media_httpdistillerys_hgrBj.jpg` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/xfwkzlclqjdwhAjoFeJrkfmptHGDaHHsGxkuwtEFAbyxyHvwaejhIGCIedyy/media_httpdistillerys_hgrBj.jpg
+
+## French toast
+`blog/_archive/posterous/french-toast` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/french-toast
+
+- picture: `media_httpdistillerys_amsJc.jpg` — http://getfile8.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/GskmgCHHGohIabpiGIABwkjGobIoFbHjqHxeIsqytdbDmsBkCIwqgvyylnAq/media_httpdistillerys_amsJc.jpg
+
+## Garça
+`blog/_archive/posterous/garca` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/garca
+
+- picture: `media_httpdistillerys_IAzwp.jpg` — http://getfile2.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/knovtnpiBvelgcjJuuCucqaCEtDgwoGCveyECJkbiehCHFiAarlzzplteyGq/media_httpdistillerys_IAzwp.jpg
 
 ## hdr no iphone fotos lindas com uma camera mai
 `blog/_archive/posterous/hdr-no-iphone-fotos-lindas-com-uma-camera-mai` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/hdr-no-iphone-fotos-lindas-com-uma-camera-mai
@@ -149,6 +398,18 @@ Found one? Put it in the post's folder and point the post at it.
 
 - picture: `media_httpdistillerys_hjdIF.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/AJGbyFGDjEajIHICcEzzneBJmcfyhjdfoHbywjAonCAdjJDbzgyIwxhfhgee/media_httpdistillerys_hjdIF.jpg
 
+## iOS, Android and Win 8: the holodeck, the cyborg and the invisible screen
+`blog/_archive/posterous/ios-android-and-win-8-the-holodeck-the-cyborg` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/ios-android-and-win-8-the-holodeck-the-cyborg
+
+- picture: `iOs.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/temp-2012-07-23/xruiGlxjzqkmHEceFvgpcauqyxiDdjHtbgupdFveenveoFfCmHfyihDlplcp/iOs.jpg
+- picture: `Android.jpg` — http://getfile8.posterous.com/getfile/files.posterous.com/temp-2012-07-23/csGFqFezaewyhupffAxFtqtdyjajDGprGkqqJdrxftAuIevdFFhgaHekEcrn/Android.jpg
+- picture: `WIndowsPhone.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/temp-2012-07-23/inyGJyfhEFjuvExGeerasCnuziekbkrwnqfddAxelecAaAjmHorDtElEmfnE/WIndowsPhone.jpg
+
+## ironia
+`blog/_archive/posterous/ironia-1` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/ironia-1
+
+- picture: `ironias.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/mnFYok56I2igOQOE0i6sWKZPAKChcjng05HzZV6sJtRVgBe5nKBuuct8rjtv/ironias.jpg.scaled.500.jpg
+
 ## Lies, Damn lies and statistics
 `blog/_archive/posterous/lies-damn-lies-and-statistics` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/lies-damn-lies-and-statistics
 
@@ -160,16 +421,102 @@ Found one? Put it in the post's folder and point the post at it.
 
 - picture: `lost.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/sZbPxKuZDJTadKAXSw3qlL5Nda0BhqDtg4bxkfVPk369Xdtm7PF3kiXyyyn5/lost.jpg.scaled.500.jpg
 
-## novo integrante da casa 0
+## lugares onde estive hoje e me senti sozinho
+`blog/_archive/posterous/lugares-onde-estive-hoje-e-me` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/lugares-onde-estive-hoje-e-me
+
+- picture: `sozinho.jpg` — http://getfile3.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/C1Xk4O2I53E5N1vxQmZeLVDFND84NVgrQrMT6c6AGvShzKuhhSocCqFYJEv8/sozinho.jpg
+
+## Margens de cadernos
+`blog/_archive/posterous/margens-de-cadernos` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/margens-de-cadernos
+
+- picture: `rascunhos.jpg` — http://getfile2.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/qE9bZXEC1gA9lemrUkWm2OLyBrljwMbKsvqnDDofu01esEzIk5HJpQkSj8gx/rascunhos.jpg
+
+## minha gata
+`blog/_archive/posterous/minha-gata` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/minha-gata
+
+- picture: `ela-e-a-gata.jpg` — http://getfile9.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/u6Gp1qE2oL7HP2TPvpbavO4wa2dJiXb8NhC7EQSAaAqQHMIYqlip4UFjJ9H1/ela-e-a-gata.jpg
+
+## Na FAO Schwarz, loja do \"quero ser grande\", comprei um bicho de pelúcia tão barato que sai achando que estava fazendo algo errado
+`blog/_archive/posterous/na-fao-schwarz-loja-do-quero-ser-grande-compr` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/na-fao-schwarz-loja-do-quero-ser-grande-compr
+
+- picture: `media_httpdistillerys_BEzIu.jpg` — http://getfile3.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/EhpcIbwbfggqIfqGgqgfAlHcbFktFasnghdoHgzdfDHvaaGJwCfqeoHzgbnG/media_httpdistillerys_BEzIu.jpg
+
+## Novo integrante da casa
 `blog/_archive/posterous/novo-integrante-da-casa-0` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/novo-integrante-da-casa-0
 
 - picture: `unknown.png` — http://posterous.com/images/filetypes/unknown.png
 - flash or video: `player.swf` — http://mylifeisnotveryinteresting.posterous.com/jwplayer/player.swf
 
+## O anel
+`blog/_archive/posterous/o-anel` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/o-anel
+
+- picture: `zip.png` — http://posterous.com/images/filetypes/zip.png
+- download: `O_anel.zip` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/ECp4gWmq04kgO2HT4g9HnGCkvtFUPVKYRgchaB2njP4CIsEiKRs1blMzjXSx/O_anel.zip
+
+## O dia onde tive uma das conversas mais importantes da minha vida.
+`blog/_archive/posterous/o-dia-onde-tive-uma-das-conver` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/o-dia-onde-tive-uma-das-conver
+
+- picture: `a-conversa.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/TM8kVjWRewrOxO3FcHvUEWKuYpz7otgx5W4VyIOrUeHuKAc0YhrxNAtDWLF9/a-conversa.jpg.scaled.500.jpg
+
+## O Rio doa. Fila Indiana para colocar doações em caminhões.
+`blog/_archive/posterous/o-rio-doa-fila-indiana-para-colocar-doacoes-e` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/o-rio-doa-fila-indiana-para-colocar-doacoes-e
+
+- picture: `media_httpdistillerys_xeHAy.jpg` — http://getfile3.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/aDcGEHHHmrCdBAxijBBdfDulrGDzkIgxyxDobgfxcajjEpjfgpdguDIulACw/media_httpdistillerys_xeHAy.jpg
+
+## One strawberry cheesecake to go please!
+`blog/_archive/posterous/one-strawberry-cheesecake-to-go-please` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/one-strawberry-cheesecake-to-go-please
+
+- picture: `media_httpdistillerys_wwmpn.jpg` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/zmhBqxplzIFcmqmqifpggfFbdJbhnlnkjfEBlaEkADgHjjsJtuzibHsarJbn/media_httpdistillerys_wwmpn.jpg
+
+## oque andei aprontando secretamente nessas últimas semanas:
+`blog/_archive/posterous/oque-andei-aprontando-secretam` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/oque-andei-aprontando-secretam
+
+- picture: `a-surpresa.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/js9k4AXQJ9QkKtN59gNfZ4gMF57DwSfgjUcVTttZ6fkQ0Ml4QcagvnPxG9Z1/a-surpresa.jpg.scaled.500.jpg
+
+## Pode cachorro na Apple Store!
+`blog/_archive/posterous/pode-cachorro-na-apple-store` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/pode-cachorro-na-apple-store
+
+- picture: `media_httpdistillerys_zrcvm.jpg` — http://getfile2.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/zladaHqgnuFHvsgtACfegreojlyAaHlDzBgJccFCflycxgADDpjhBFntCfcG/media_httpdistillerys_zrcvm.jpg
+
+## por que eu deveria ouvir mais feist e menos stephen hawking
+`blog/_archive/posterous/por-que-eu-deveria-ouvir-mais` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/por-que-eu-deveria-ouvir-mais
+
+- picture: `stephen-hawkings.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/miFgRMfPJQykcUlFOzy2Vvx5N1brMK2FiULbKdrsPYA0f1XpZJjcYf9lguCg/stephen-hawkings.jpg.scaled.500.jpg
+
+## projetos que eu provavelmente não vou fazer
+`blog/_archive/posterous/projetos-que-eu-provavelmente-1` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/projetos-que-eu-provavelmente-1
+
+- picture: `steresocopic-vision-iphone.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/bleJNQolcr6R48nCNIO6SclV2fzAZRNvRFNAm4wBhObFTQQgOTUNXpVZhfPF/steresocopic-vision-iphone.jpg.scaled.500.jpg
+
+## Recomendadíssimo: Escher no CCBB. Alem das gravuras, instalações com espelhos que reproduzem os cenários loucos do artista
+`blog/_archive/posterous/recomendadissimo-escher-no-ccbb-alem-das-grav` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/recomendadissimo-escher-no-ccbb-alem-das-grav
+
+- picture: `media_httpdistillerys_rcnDD.jpg` — http://getfile9.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/fCxwrxrssHBbuGiaBfgDhBgDsahHnmheurfrgcxzAtvimrAqjylwEfwJAJds/media_httpdistillerys_rcnDD.jpg
+
+## resumo de ontem: pãezinhos, dinossauros, dinossauros, asteróide, planetas, grego, árvore, lego e topo do mundo
+`blog/_archive/posterous/resumo-de-ontem-paezinhos-dinossauros-dinossa` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/resumo-de-ontem-paezinhos-dinossauros-dinossa
+
+- picture: `DSC00039.jpg` — http://getfile6.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/Z6SzFbXxoOYyiabn7jQjuTRnvX2Sll8i2C8fgckNTjRuKiOmuLCq2Ww8zqdz/DSC00039.jpg
+
+## Saber sorrir
+`blog/_archive/posterous/saber-sorrir` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/saber-sorrir
+
+- picture: `saber-sorrir.jpg.scaled.500.jpg` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/mRa82Jahbfta4Du6LoAU3THgLi7bLL2xsDFGTWNG0r8D0jbnR0pPXBbEQXXd/saber-sorrir.jpg.scaled.500.jpg
+
 ## sapic dormindo no meu colo com colar elizabet
 `blog/_archive/posterous/sapic-dormindo-no-meu-colo-com-colar-elizabet` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/sapic-dormindo-no-meu-colo-com-colar-elizabet
 
 - picture: `brushes` — http://posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/lR9Stjbs8oHHX2V9QRvvP0hqEYYJZJPDlgveQA7oL4On70g0iVY9WAYD1VKK/brushes
+
+## Se você prestar atenção vai ver que há vários tons de preto. E uma escuna.
+`blog/_archive/posterous/se-voce-prestar-atencao-vai-ver-que-ha-varios` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/se-voce-prestar-atencao-vai-ver-que-ha-varios
+
+- picture: `media_httpdistillerys_rJcwm.jpg` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/FqHrDGIICtaegvfIwacpedugpwAvzuilyDBfhtpIgueCnmHspvimDxmFnCEz/media_httpdistillerys_rJcwm.jpg
+
+## Sopa de cebola
+`blog/_archive/posterous/sopa-de-cebola` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/sopa-de-cebola
+
+- picture: `media_httpdistillerys_yxgvk.jpg` — http://getfile7.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/gojszcejmChDlGBsyrJacsapJajzfiqBghBaloCfiCDunrxyIIrwCigrgJrg/media_httpdistillerys_yxgvk.jpg
 
 ## The Law of Truly Large Numbers
 `blog/_archive/posterous/the-law-of-truly-large-numbers` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/the-law-of-truly-large-numbers
@@ -182,6 +529,26 @@ Found one? Put it in the post's folder and point the post at it.
 - picture: `Blank-1` — http://getfile6.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/RI8ODtUQGpo5tYk1Xfi19a6c0XeNKdFU58rplGtqvAlngd0CSC6d1InkmX10/Blank-1
 - picture: `Blank-2` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/2a04vyL9GNdXpJYINC7UxgTwJMYzAB2ofhH2OLidGPvz7TYJs4Gf0ICvByKz/Blank-2
 - download: `The_master_plan.zip` — http://getfile6.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/dBxHWAJpwtXNaNSev8169GxcXUC0tJmJZUEZnG7XQYm0sEebvtX0Y750XRIf/The_master_plan.zip
+
+## The Onion distribuído como um jornal mesmo.
+`blog/_archive/posterous/the-onion-distribuido-como-um-jornal-mesmo` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/the-onion-distribuido-como-um-jornal-mesmo
+
+- picture: `media_httpdistillerys_HmkFI.jpg` — http://getfile1.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/rGEHyxwImBCHofGvhjJJfaawJDwJCtcsEwAxwlqIefddfshpjDIfvkfEEkyt/media_httpdistillerys_HmkFI.jpg
+
+## Utensílio de cozinha para químicos
+`blog/_archive/posterous/utensilio-de-cozinha-para-quimicos` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/utensilio-de-cozinha-para-quimicos
+
+- picture: `media_httpdistillerys_adCDs.jpg` — http://getfile4.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/EJIArzqajjefqFIcAFbfIqpyoFEjvojzcgDCqxdewvwpxlsyyzfufxiJIjtj/media_httpdistillerys_adCDs.jpg
+
+## Wired store! É meio museu Tech meio loja super cara!
+`blog/_archive/posterous/wired-store-e-meio-museu-tech-meio-loja-super` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/wired-store-e-meio-museu-tech-meio-loja-super
+
+- picture: `media_httpdistillerys_CIkwF.jpg` — http://getfile5.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/wxbgbehCcoDelplayCFEHlnwbysghjwmCwbHpnctqJqAdCrzGdssonCIHblr/media_httpdistillerys_CIkwF.jpg
+
+## Year 9999
+`blog/_archive/posterous/year-9999-38164` · archive: posterous · from http://mylifeisnotveryinteresting.posterous.com/year-9999-38164
+
+- picture: `end-of-the-universe.jpg` — http://getfile4.posterous.com/getfile/files.posterous.com/mylifeisnotveryinteresting/07i77nXhvHv0AxgtqyqWPtXp5hiL1Qa05ibCjJ12Vpm0e5uXvXT64Kz1ogYy/end-of-the-universe.jpg
 
 ## The Laser Chess Game
 `blog/_archive/wanderingabout/laser-chess-2005` · archive: wanderingabout · from http://www.wanderingabout.com/thingswithlaser/index.php
@@ -202,6 +569,11 @@ Found one? Put it in the post's folder and point the post at it.
 
 - flash or video: `player.swf` — http://flash.revver.com/player/1.0/player.swf
 - download: `247994.mov` — http://media.revver.com/qt;sharer=19513;download/247994.mov
+
+## Aquatic Sugar: The Children's Interface, Translated for Adults
+`blog/aquatic-sugar` · on the blog · from http://www.olpcnews.com/software/operating_system/aquatic_sugar_childrens_interface.html
+
+- picture: `aquatic sugar.jpg` — http://www.olpcnews.com/images/aquatic sugar.jpg
 
 ## How to sell Computers to Orthodox Monks
 `blog/how-to-sell-computers-to-orthodox-monks` · on the blog · from http://wanderingabout.com/_/animation-video/how-to-sell-computers-to-orthodox-monks/

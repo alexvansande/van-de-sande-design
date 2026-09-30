@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Garça](http://mylifeisnotveryinteresting.posterous.com/garca)
-
-<br>
 Taken at Parque do Museu da República

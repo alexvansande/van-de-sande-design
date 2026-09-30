@@ -6,8 +6,6 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Sobre acupuntura](http://mylifeisnotveryinteresting.posterous.com/sobre-acupuntura)
-
 Hoje tive uma discussão sobre acupuntura. Começou porque me revoltou ver em horário nobre uma longa cena sem relação com mais nada que basicamente só fazia promover a acupuntura pra uma menina que é paraplégica, como complemento a fisioterapia dela. Minha opinião, não muito informada é que é um tratamento basicamente placebo. Há diferentes tipos de placebo e estudos já mostraram que é possível você é possível você aumentar a eficácia do placebo aumentando a dose ou mudando a embalage, então sempre acreditei que acupuntura, com todo o charme que a envolve era uma grande embalagem para o placebo. Aliás acho que o placebo deveria ser levado mais a sério pela comunidade médica como tratamento mas isso é uma outra conversa.
 
 Curiosamente minha opinião não era compartilhada nem pelas pessoas próximas. Na minha família, cresci com homeopatia e minha vó teve acupuntura até o final da vida. Até na da fernanda, família de cientistas já tinha ouvido diversas vezes que havia evidência científica pró-acupuntura. Fiquei curioso e resolvi tirar a limpo.

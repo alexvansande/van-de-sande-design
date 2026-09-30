@@ -6,13 +6,11 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [iOS, Android and Win 8: the holodeck, the cyborg and the invisible screen](http://mylifeisnotveryinteresting.posterous.com/ios-android-and-win-8-the-holodeck-the-cyborg)
-
 It ocurred to me a neat way to see the logic behind the UI differences between the major mobile operating systems: iOS, Android and Windows 8. It’s surprinsingly simple, explains major visual decisions but I haven’t seen it written anywhere else, so I decided to put it here.
 
 For all major players the future of computing is, of course, simplifying the interaction and making the computer disappear. But currently, there are three ways of making it go away..
 
-**iOS is the holodeck**
+#### iOS is the holodeck
 
 Skeumorphic used to be word only used in some design and engineering circles, but Apple has really made it common use in the tech world – usually in a negative fashion. Why does the podcast app needs to look like a tape recorder, why does garage band has faux wood background? Just appeal to emotion and a kitsch design sense?
 
@@ -28,7 +26,7 @@ In the short term it’s also clarifying why apple refuses and probably will alw
 
 _In apple’s vision of the future, there is no such thing as the personal computer, just an infinite toolbox of things you can use to do the things you want._
 
-**Android is a cyber implant**
+#### Android is a cyber implant
 
 It’s right there in the name: Android. This is not toy meant for cellphones or tablets, this is an extension of your brain, a fully capable computer that makes you more powerful. Some early android ads shared this, showing a human slowly becoming one with his machine.
 
@@ -42,7 +40,7 @@ In the short term here’s what to expect uniquely from Android: things that mak
 
 _In Google’s vision of the future there is no computer or user: you just become integrated with the technology._
 
-**Windows 8 is an information machine**
+#### Windows 8 is an information machine
 
 Finally what to make of Windows 8 Metro UI? Microsoft is running into a unique direction, getting away from textures, shadows and shines that were so common in it’s previous Windows XP “Luna” and Windows Vista/7 “Aero” themes. But is it just a cosmetic difference? Not at all.
 

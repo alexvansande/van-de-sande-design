@@ -6,10 +6,6 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [resumo de ontem: pãezinhos, dinossauros, dinossauros, asteróide, planetas, grego, árvore, lego e topo do mundo](http://mylifeisnotveryinteresting.posterous.com/resumo-de-ontem-paezinhos-dinossauros-dinossa)
-
 A maior razão que passei a postar menos fotos do twitter é que compramos uma super camera por aqui e estou tirando minhas fotos nela. O unico problema é que tenho que esperar chegar em casa para subir as fotos.
-
-<br>
 
 o dia começpou com um otimo café na Le Pain Quotidien, dica da Helen

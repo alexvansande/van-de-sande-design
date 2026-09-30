@@ -6,8 +6,6 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Bitcoin ATM in airports could be a hassle free way for travelers to exchange local currencies](http://mylifeisnotveryinteresting.posterous.com/bitcoin-atm-in-airports-could-be-a-hassle-fre)
-
 Bitcoin ATMs in airports
 
 The problem for travelers:
@@ -30,5 +28,4 @@ Problems for bitcoins ATMs
 
 I really believe bitcoins have a great future as meta currency, an this project could be a decentralized way of starting it. You would only need two machines at the end of a major airport route to make it viable and travelers could dip their feet in a new technology.
 
-<br>
 Sent with Writer.

@@ -6,7 +6,4 @@ original_site: "Posterous"
 date_approximate: "year inferred from when it was archived"
 ---
 
-### [Flying is simple. Not hitting The ground is hard.](http://mylifeisnotveryinteresting.posterous.com/flying-is-simple-not-hitting-the-ground-is-ha)
-
-<br>
 Taken at Peking Duck House
