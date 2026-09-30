@@ -65,8 +65,11 @@ Garamond.
 
 Beside the posts is a column with a line about them ("I have been writing
 on the internet for over 25 years…") and the years they span, newest
-first; each year goes to its first post. The line goes by with the page and
-the years stay in view, the year being read lit (`blog.js`). On a phone the
+first; each year goes to its first post. The column is ranged right,
+against the posts. The line goes by with the page and the years stay in
+view, the year being read large and the others falling away from it along a
+curve; where the reading is is taken continuously through each year's
+posts, so the sizes glide as the page scrolls (`--k`, set by `blog.js`). On a phone the
 line sits under the title and the years run along the top of the screen,
 keeping the lit one in view. The line is in `front_page()` in `build.py`.
 

@@ -180,19 +180,20 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 .front-index{max-width:78rem}
 .side .about{margin:0 0 1.6rem;font-size:1.2rem;line-height:1.45;color:var(--light);opacity:.75;font-style:italic;
   text-wrap:pretty}
-.years{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;font-size:1.1rem;
+/* the year being read is large and the others fall away from it along a
+   curve, both ways: --k is how near each is, 0 to 1, set by blog.js as
+   the page scrolls, so the sizes glide rather than step */
+.years{display:flex;flex-direction:column;align-items:flex-start;gap:0;
   font-feature-settings:"kern","lnum";font-variant-numeric:lining-nums tabular-nums}
-.years a{position:relative;padding:.12rem 0 .12rem 1.1rem;color:var(--light);text-decoration:none;opacity:.42;
-  transition:opacity .25s}
-.years a::before{content:"";position:absolute;left:0;top:50%;width:.55rem;height:1px;background:currentColor;
-  transform:scaleX(0);transform-origin:0 50%;transition:transform .25s}
-.years a:hover{opacity:.8}
-.years a.on{opacity:1}
-.years a.on::before{transform:none}
+.years a{padding:.08rem 0;color:var(--light);text-decoration:none;line-height:1.12;
+  font-size:calc(.9rem + 1.5rem * var(--k,0) * var(--k,0));opacity:calc(.28 + .72 * var(--k,0))}
+.years a:hover{opacity:.9}
 .cards>.card[id]{scroll-margin-top:1.5rem}
 @media (min-width:60rem){
   .spread{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:clamp(2.5rem,4vw,4rem)}
-  .years{position:sticky;top:1.5rem}
+  /* the column leans on the posts: ranged right, against them */
+  .side{text-align:right}
+  .years{position:sticky;top:1.5rem;align-items:flex-end}
 }
 @media (max-width:59.99rem){
   /* the column dissolves, so the years can stay at the top all the way down
@@ -204,9 +205,9 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
     background:rgba(51,51,49,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
     border-bottom:1px solid rgba(255,255,255,.07)}
   .years::-webkit-scrollbar{display:none}
-  .years a{padding:.1rem 0 .25rem}
-  .years a::before{left:0;right:0;top:auto;bottom:0;width:auto;transform:scaleX(0);transform-origin:50% 50%}
-  .years a.on::before{transform:none}
+  /* along the top the curve is gentler, so the bar keeps its height */
+  .years{align-items:baseline}
+  .years a{padding:.1rem 0;font-size:calc(1rem + .55rem * var(--k,0))}
   .cards>.card[id]{scroll-margin-top:4rem}
 }
 .lost{font-size:1.3rem}

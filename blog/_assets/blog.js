@@ -82,28 +82,42 @@ function pullAtTop(label, go, gone) {
   if (!site) return;
   let leaving = false;
 
-  /* The years beside the posts: the one being read is lit, and on a phone,
-     where they run along the top, it is kept in view there. */
+  /* The years beside the posts: the one being read is large and the others
+     fall away from it along a curve (--k, 0 to 1, in blog.css). Where the
+     reading is, is taken continuously, through each year's posts, so the
+     sizes glide as the page scrolls. On a phone, where the years run along
+     the top, the one being read is kept in view there. */
   const years = document.querySelector(".years");
   const cards = [...document.querySelectorAll(".cards > .card[data-year]")];
   if (years && cards.length) {
-    const links = new Map([...years.querySelectorAll("a")].map(a => [a.dataset.year, a]));
+    const links = [...years.querySelectorAll("a")];
+    const order = links.map(a => a.dataset.year);
     let lit = null, ticking = false;
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const light = () => {
       ticking = false;
-      // the first post still showing past the top third of the screen
       const line = innerHeight * .33;
-      const c = cards.find(c => c.getBoundingClientRect().bottom > line) || cards[cards.length - 1];
-      const y = c.dataset.year;
+      const i = cards.findIndex(c => c.getBoundingClientRect().bottom > line);
+      const c = cards[i < 0 ? cards.length - 1 : i], y = c.dataset.year;
+      // how far through this year's posts the line is, from its first to its last
+      const mine = cards.filter(k => k.dataset.year === y);
+      const top = mine[0].getBoundingClientRect().top, end = mine[mine.length - 1].getBoundingClientRect().bottom;
+      const through = end > top ? Math.min(1, Math.max(0, (line - top) / (end - top))) : .5;
+      // at the top of the page it is the newest year, whole
+      const at = scrollY < 4 ? 0 : order.indexOf(y) + through - .5;
+      links.forEach((a, j) => {
+        const d = j - Math.max(0, at);
+        a.style.setProperty("--k", Math.exp(-d * d / 7).toFixed(3));
+      });
       if (y === lit) return;
-      if (lit && links.get(lit)) links.get(lit).classList.remove("on");
+      if (lit !== null) links[order.indexOf(lit)].classList.remove("on");
       lit = y;
-      const a = links.get(y);
-      if (!a) return;
+      const a = links[order.indexOf(y)];
       a.classList.add("on");
+      a.setAttribute("aria-current", "true");
+      links.forEach(l => { if (l !== a) l.removeAttribute("aria-current"); });
       if (years.scrollWidth > years.clientWidth) {
-        const to = a.offsetLeft - (years.clientWidth - a.offsetWidth) / 2;
-        years.scrollTo({ left: to, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+        years.scrollTo({ left: a.offsetLeft - (years.clientWidth - a.offsetWidth) / 2, behavior: reduce ? "auto" : "smooth" });
       }
     };
     addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(light); } }, { passive: true });
@@ -115,7 +129,7 @@ function pullAtTop(label, go, gone) {
       const to = document.getElementById("y" + a.dataset.year);
       if (!to) return;
       e.preventDefault();
-      to.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      to.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
       history.replaceState(history.state, "", "#y" + a.dataset.year);
     });
   }
