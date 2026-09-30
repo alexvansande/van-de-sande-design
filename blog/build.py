@@ -575,7 +575,10 @@ def build(out, base, clean=False):
     def listing(title, heading, items, canonical, path, head=True):
         cards = "\n".join(card(p, base, pics, eager=True) for p in items)
         body = f'<main class="index"><h1 style="view-transition-name:site-title">{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
-        write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical, cls="list", head=head))
+        # the index itself (no header over it): pulled down, it goes back to the site
+        front = {} if head else {"cls": "list front", "extra_head": f'<script src="{base}assets/blog.js" defer></script>'}
+        write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical,
+                              **{"cls": "list", "head": head, **front}))
 
     # the index is headed by the blog's name itself, so it has no header over it
     listing(TITLE, named(base), posts, SITE_URL + "/", "index.html", head=False)

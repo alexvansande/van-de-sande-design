@@ -58,9 +58,13 @@ a{color:inherit}
 .bar p{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
   padding:.8rem var(--gutter) .75rem;padding-top:max(.8rem,env(safe-area-inset-top));
   color:var(--light);font-size:1.15rem;letter-spacing:.01em}
-/* the browser's own pull at the top of a post (to refresh, on a phone) is
-   off: pulling there is the way back to the index */
-html:has(>body.post),body.post{overscroll-behavior-y:none}
+/* the browser's own pull at the top of a post or the index (to refresh, on
+   a phone) is off: pulling there is the way back, to the index or the site */
+html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behavior-y:none}
+/* the index going back to the site: it sinks into the dark */
+.leaving main,.leaving .pullnote,.leaving .foot{transition:transform .38s cubic-bezier(.4,0,.6,1),opacity .38s}
+.leaving main{transform:translateY(4rem) scale(.8)!important;opacity:0!important}
+.leaving .pullnote,.leaving .foot{opacity:0!important}
 .pulling main{transform:translateY(calc(var(--pullk,0) * 3rem)) scale(calc(1 - var(--pullk,0) * .12));
   transform-origin:50% 0;opacity:calc(1 - var(--pullk,0) * .25)}
 .pulling .top{opacity:clamp(0,calc(1 - var(--pullk,0) * 3),1)}

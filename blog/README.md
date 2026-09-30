@@ -90,6 +90,10 @@ it goes to the index, where the post shrinks into its card. The browser's
 own pull (to refresh, on a phone) is turned off on a post, so this is the
 only one.
 
+The index works the same way the other way round: pulled down past its
+top, it draws back under "Alex Van de Sande" and, pulled hard enough,
+sinks into the dark and the site loads.
+
 A post opened from the site with `#at=px` opens that far down, where the
 site's copy of its head had been read to.
 
