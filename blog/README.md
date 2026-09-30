@@ -1,6 +1,6 @@
 # The blog
 
-Alex Van de Sande's wanderings, which was at blog.vandesande.design on
+Alex Van de Sande's wandering about, which was at blog.vandesande.design on
 Paragraph, brought home. Each post is a folder named after its address:
 
     blog/the-triangle-of-everything/
@@ -73,15 +73,23 @@ follow whichever post is being read. After the oldest it comes round to the
 newest, and it stops once every post is on the page. Browsers without view
 transitions just go to the page; without the script, the card is a link.
 
-Going back up, a grey bar with the blog's name comes down from the top, and
-goes again as you read on; clicking it goes to the index, the name growing
-into the index's title and the post shrinking into its card. At the top of a
-post, the post before it is put back above if it was read this visit (read
-means its last lines were on screen), so scrolling up shows its ending.
-Otherwise pulling on past the top zooms out of the post: it draws back,
-smaller, and goes back to the head of the post on the site if it came from
-there (the site sends it with `?from=site`; `--home` says where the site
-is), or else to the index, where it shrinks into its card.
+The blog's name heads every page: "Alex Van de Sande" goes to the site
+(`--home`), "wandering about" to the index. The index has it as its title
+and nothing over it.
+
+Going back up, a grey bar with the name comes down from the top, and goes
+again as you read on; clicking "wandering about" in it goes to the index,
+the name growing into the index's title and the post shrinking into its
+card. At the top of a post, the post before it is put back above if it was
+read this visit (read means its last lines were on screen), so scrolling up
+shows its ending. Otherwise pulling on past the top draws the post back and
+brings "All the wandering about" down above it; pull a little harder and
+it goes to the index, where the post shrinks into its card. The browser's
+own pull (to refresh, on a phone) is turned off on a post, so this is the
+only one.
+
+A post opened from the site with `#at=px` opens that far down, where the
+site's copy of its head had been read to.
 
 ## Posts from elsewhere
 

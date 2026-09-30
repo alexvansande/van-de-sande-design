@@ -13,3 +13,4 @@ archive/ink-mask-prototype/assets/*.jpg
 # The blog as built by blog/build.py: made again on every deploy.
 blog/_site/
 site/blog/
+__pycache__/

@@ -61,35 +61,38 @@ topographic. **The whole universe in one image** is the Triangle of
 Everything poster, and under it the same triangle drawn out along its axes,
 from the Planck length to the Hubble radius.
 
-Both of these end in a post on the blog. When the last sheet turns away, the
-head of the post is under it, uncovered through a window that grows from
-the page to the whole screen: the blog's name, and the post's sheet with its
-picture whole on its white, its title, and "Keep scrolling to read it" where
-the date will be. It is laid out exactly as the post lays out its own head
-(the `.ending` rules in `index.html` copy `blog/_assets/blog.css`). One more
-step loads the post, a plain page load with no transition, since the blog
-may end up on a domain of its own where none could reach; it already looks
-like the post, so the load is the only seam. On a phone the pad zooms
-further than the others as its pages turn, so that by its last sheet the
-page is as wide as the screen.
+Both of these end in a post on the blog. The head of the post lies under
+the last sheet, the whole screen of it, so turning that sheet over is all it
+takes: the rest of the rail goes dark around the page as it turns, and what
+is left is the blog's name and the post's sheet with its picture, title,
+date and first paragraph. It is laid out exactly as the post lays out its
+own head (the `.ending` rules in `index.html` copy `blog/_assets/blog.css`);
+the date and the first paragraph are fetched from the post's own page, so
+they never drift from it. Going on from there reads down it, the page
+following the hand to the end of the paragraph and staying where it is let
+go. Under the paragraph there is only blank paper; pull on and "Keep
+scrolling to read" comes up in it, and let go too soon and it springs back.
+Pull far enough (`PULL_GO`) and it is the post, a plain page load with no
+transition, since the blog may end up on a domain of its own where none
+could reach. The post is told how far down it was being read (`#at=px`)
+and opens there, so the load is the only seam. From then on everything is
+the blog's. On a phone the pad zooms further than the others as its pages
+turn, so that by its last sheet the page is as wide as the screen.
 
-It goes both ways. Before leaving, the site notes on its own address where
-it stood (`#read=slug`), and the post is told it came from the site
-(`?from=site`, taken off its address as it loads). Zooming out of the top of
-the post goes back, by the back button's way if the site was the page
-before, or by loading the site with the note; either way the site stands at
-the head of the post again, and ignores the trackpad still coasting from the
-gesture. `BLOG` in `app.js` says where the blog is, and `--home` for
-`blog/build.py` where the site is. It is the `post` of a pad in `PADS`: its
-slug, its title, and the widths its cover was cut at by `blog/build.py`.
+Before leaving, the site notes on its own address where it stood
+(`#read=slug`), so the back button comes back to the head of the post, and
+the site ignores the trackpad still coasting from the gesture. `BLOG` in
+`app.js` says where the blog is, and `--home` for `blog/build.py` where the
+site is. It is the `post` of a pad in `PADS`: its slug, its title, and the
+widths its cover was cut at by `blog/build.py`.
 The maps pad has a line per page, from McLuhan to the new projection.
 
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in
 `PAGES` and in the blockchain pad. A pad without them keeps its title.
-Where there is room under the paper — on a big display, where the sheets
-stop growing at 45rem and several sit side by side — the whole story is set
-out at once instead, like the lyrics of a song: every line showing, the one
+Where there is room under the paper, and only on a big display, where the
+sheets stop growing at 45rem and several sit side by side, the whole story
+is set out at once instead, like the lyrics of a song: every line showing, the one
 for the page in hand bright and the rest dim. There the page may give up
 to 15% of its height to make room for a story; one that would need more
 stays one line at a time.
