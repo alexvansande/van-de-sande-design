@@ -1,0 +1,55 @@
+---
+title: "iOS, Android and Win 8: the holodeck, the cyborg and the invisible screen"
+date: "2012-07-23T12:00:00Z"
+original: "http://mylifeisnotveryinteresting.posterous.com/ios-android-and-win-8-the-holodeck-the-cyborg"
+original_site: "Posterous"
+date_approximate: "year inferred from when it was archived"
+---
+
+### [iOS, Android and Win 8: the holodeck, the cyborg and the invisible screen](http://mylifeisnotveryinteresting.posterous.com/ios-android-and-win-8-the-holodeck-the-cyborg)
+
+It ocurred to me a neat way to see the logic behind the UI differences between the major mobile operating systems: iOS, Android and Windows 8. It’s surprinsingly simple, explains major visual decisions but I haven’t seen it written anywhere else, so I decided to put it here.
+
+For all major players the future of computing is, of course, simplifying the interaction and making the computer disappear. But currently, there are three ways of making it go away..
+
+**iOS is the holodeck**
+
+Skeumorphic used to be word only used in some design and engineering circles, but Apple has really made it common use in the tech world – usually in a negative fashion. Why does the podcast app needs to look like a tape recorder, why does garage band has faux wood background? Just appeal to emotion and a kitsch design sense?
+
+A better way to see it is not to think about the iPad as a device itself, but as a blank state that can become any device you want. It’s a typewriter, push a button and it’s a reel to reel tape player, then the next moment it’s a grand piano or a chess set.
+
+Adam Engst:
+
+> _The iPad becomes the app you’re using. That’s part of the magic. (…) You’re using the app, whatever it may be, and while you’re doing so, the iPad is that app. Switch to another app and the iPad becomes that app._
+
+If the iPad evolved into a science fiction gadget it would be the holodeck: a 3D environment perfectly capable of simulating any technology that ever existed.
+
+In the short term it’s also clarifying why apple refuses and probably will always refuse to implement some features: you can’t run two apps side by side or in a windowed environment or in any other way where the app doesn’t take the whole device – because that would take you out of the immersive experience. You are not sitting in a computer running a word processor: you have travelled back in time, writing the next great novel in a portable olivetti typewriter.
+
+_In apple’s vision of the future, there is no such thing as the personal computer, just an infinite toolbox of things you can use to do the things you want._
+
+**Android is a cyber implant**
+
+It’s right there in the name: Android. This is not toy meant for cellphones or tablets, this is an extension of your brain, a fully capable computer that makes you more powerful. Some early android ads shared this, showing a human slowly becoming one with his machine.
+
+Ask a Android user what are the features he has that the iPhone doesn’t and they usually fall in distinct categories. Some are simply OS features that iOS is truly catching up, copy and paste one year, then voice search the next, and then turn by turn navigation. Those are temporary. But others are ones that have been implemented for years in the jailbreak community and that Apple seems insistent in never implementing: fine tune customization of every aspect of the phone and changing the core phone functions under given conditions – programatically send a text message or record a voice call under certain conditions.
+
+Here’s a great way to tell if apple is going to implement your favorite android/jailbreak feature: if it makes your device function more like a computer that you can program in any way, then Apple probably won’t. If that disappoints you, then it’s about time you jump to Android.
+
+If Android was a science fiction technology it would be a brain implant. Sergey Brin has said so already, and it really explains why a product like google glasses could only come from a company like google.
+
+In the short term here’s what to expect uniquely from Android: things that make the device more and more invisible and more integrated into your everyday life. Features that use the device like a computer and make it more akin to an extension of your brain.
+
+_In Google’s vision of the future there is no computer or user: you just become integrated with the technology._
+
+**Windows 8 is an information machine**
+
+Finally what to make of Windows 8 Metro UI? Microsoft is running into a unique direction, getting away from textures, shadows and shines that were so common in it’s previous Windows XP “Luna” and Windows Vista/7 “Aero” themes. But is it just a cosmetic difference? Not at all.
+
+The Windows 8 home screen looks nothing like the app grid that both Android and iOS has, the live tiles are a mix of notifications, widgets and app icon, more similar to Flipboard than to LaunchPad. The reason is that Microsoft sees the future of computing not as high tech simulators or brain enhancements, but information devices. All aspects of the system are designed to help the user gather, access and manipulate information. Apps aren’t devices nor brain enhancements, apps are information sources. That’s why having two apps share the screen real state feels natural, while it would look terribly weird on the iPad.
+
+The surface is a tool for workers who manage, analyze and organize information. This fits perfectly with the Microsoft that makes MS Office and it finally brings multiple projects like Bing and Azure into one unified vision (I wonder who’s the person behind that vision, because that really doesn’t look like Ballmer). If they can deliver on that vision, and if the legacy code they’re bringing with them will help or be a hurdle is yet to be seen, but that’s beyond the point.
+
+If Windows 8 was a piece of science fiction what would it be? We don’t have to guess, Microsoft has shown us what they believe: information everywhere. Numbers, maps, graphs, everything floating in thin air.
+
+_In Microsoft future there’s no technology, just information._

@@ -374,10 +374,11 @@ def portfolio2011(force):
     rows = cdx("url=wanderingabout.com/portfolio/&matchType=prefix&output=txt&fl=timestamp,original,statuscode,mimetype&collapse=urlkey&limit=500")
     pages = {}
     for r in rows:
-        if len(r) == 4 and r[2] == "200" and "html" in r[3]:
+        if len(r) == 4 and r[2] in ("200", "301") and "html" in r[3]:
             m = re.search(r"/portfolio/([a-z0-9-]+)/?$", r[1])
-            if m:
-                pages[m.group(1)] = (r[0], re.sub(r":80/", "/", r[1]))
+            if m and (r[2] == "200" or m.group(1) not in pages):
+                # a 301 is the address without its slash: the page is at the one with it
+                pages[m.group(1)] = (r[0], re.sub(r":80/", "/", r[1]).rstrip("/") + "/")
     for slug, (ts, url) in sorted(pages.items()):
         try:
             page = text(get(f"https://web.archive.org/web/{ts}id_/{url}"))
