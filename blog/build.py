@@ -453,7 +453,7 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 {extra_head}
 </head>
 <body class="{cls}">
-<header class="top">{f'<a href="{HOME}">{esc(AUTHOR)}</a>' if cls == "list" else f'<a href="{base}">{esc(TITLE)}</a>'}</header>
+<header class="top">{f'<a href="{HOME}">{esc(AUTHOR)}</a>' if cls == "list" else f'<a href="{base}">{esc(TITLE)}</a>'}</header>{f'{chr(10)}<div class="bar" aria-hidden="true"><a href="{base}" tabindex="-1">{esc(TITLE)}</a></div>' if cls == "post" else ""}
 {body}
 <footer class="foot">
   <a href="{HOME}">{esc(AUTHOR)}</a><span>·</span><a href="{base}rss.xml">RSS</a>
@@ -520,8 +520,9 @@ def build(out, base, clean=False):
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
         # the next one along, older, and after the oldest the newest again
         nxt = posts[(posts.index(p) + 1) % len(posts)]
+        prv = posts[posts.index(p) - 1]
         body = f"""<main>
-<article class="sheet" data-slug="{p['slug']}" data-url="{base}{p['slug']}" data-title="{esc(p['title'])}">
+<article class="sheet" data-slug="{p['slug']}" data-url="{base}{p['slug']}" data-title="{esc(p['title'])}" data-prev="{prv['slug']}">
 <span class="paper" {vt("paper", p["slug"])}></span>
 {cover_img}
 <div class="text" {vt("words", p["slug"])}>
@@ -555,7 +556,7 @@ def build(out, base, clean=False):
 
     def listing(title, heading, items, canonical, path):
         cards = "\n".join(card(p, base, pics, eager=True) for p in items)
-        body = f'<main class="index"><h1>{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
+        body = f'<main class="index"><h1 style="view-transition-name:site-title">{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
         write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical, cls="list"))
 
     listing(TITLE, esc(TITLE), posts, SITE_URL + "/", "index.html")

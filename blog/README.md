@@ -73,6 +73,13 @@ follow whichever post is being read. After the oldest it comes round to the
 newest, and it stops once every post is on the page. Browsers without view
 transitions just go to the page; without the script, the card is a link.
 
+Going back up, a grey bar with the blog's name comes down from the top, and
+goes again as you read on; clicking it goes to the index, the name growing
+into the index's title and the post shrinking into its card. At the top of a
+post, the post before it is put back above if it was read this visit (read
+means its last lines were on screen), so scrolling up shows its ending.
+Otherwise there is just the name, and pulling on past it goes to the index.
+
 ## Pulling from Paragraph again
 
 ```bash

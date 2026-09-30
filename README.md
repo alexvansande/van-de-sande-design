@@ -61,6 +61,15 @@ topographic. **The whole universe in one image** is the Triangle of
 Everything poster, and under it the same triangle drawn out along its axes,
 from the Planck length to the Hubble radius.
 
+Both of these end in a post on the blog. When the last sheet turns away, the
+picture the post opens with comes up out of the page and grows to fill the
+screen, with "Keep scrolling to read more"; one more step opens the post, and
+the picture shrinks into its head (a view transition, which works because the
+blog is on this same site). Back from the post, the site stands at the
+picture again. It is the `post` of a pad in `PADS`: its slug, and the widths
+its cover was cut at by `blog/build.py`. The maps pad has a line per page,
+from McLuhan to the new projection.
+
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in
 `PAGES` and in the blockchain pad. A pad without them keeps its title.
@@ -123,6 +132,10 @@ keys move along the rail and turn pages.
 ```bash
 python3 -m http.server 8765 --directory site
 ```
+
+The pictures at the end of the maps and the triangle come from the blog,
+which is only built on deploy. To see them locally, build it into the site
+first: `python3 blog/build.py --out site/blog --base /blog/`.
 
 Then open http://localhost:8765. In Claude Code, `.claude/launch.json`
 starts the same server under the name `site`.

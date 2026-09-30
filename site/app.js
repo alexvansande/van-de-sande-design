@@ -205,7 +205,49 @@ function spinnable(a, n, shown){
   draw();
   return go;
 }
-function buildPad(station, pages, reel, shelf){
+/* A pad that ends in a post on the blog: when the last sheet turns away, the
+   picture the post opens with comes up out of the page and grows until it is
+   the whole screen, with a line asking you to keep going. Going on opens the
+   post, and the picture shrinks into the head of it: a view transition, the
+   same one the blog's own cards use, since the blog is on this same site.
+   The picture is outside the rail, on the stage itself, so that it can reach
+   the edges of the screen whatever the rail is zoomed to. */
+function buildPost({ slug, widths, line }){
+  const a = el('a', 'ending');
+  a.href = `blog/${slug}`;
+  a.tabIndex = -1;
+  a.setAttribute('aria-hidden', 'true');
+  const img = el('img');
+  img.alt = '';
+  img.decoding = 'async';
+  const base = `blog/media/${slug}/cover-`;
+  const load = () => {
+    if (img.src) return;
+    img.sizes = '100vw';
+    img.srcset = widths.map(w => `${base}${w}.webp ${w}w`).join(', ');
+    img.src = `${base}${widths[widths.length - 1]}.webp`;
+  };
+  const say = el('span', 'say');
+  say.textContent = line;
+  a.append(img, say);
+  stage.append(a);
+  const post = { a, img, say, slug, load, going: false };
+  a.addEventListener('click', e => { e.preventDefault(); go(post); });
+  return post;
+}
+function go(post){
+  if (post.going) return;
+  post.going = true;
+  /* tie the picture to the cover of the post, only now: left on, a return to
+     the site with the picture put away would fly the post's cover into
+     nothing */
+  post.img.style.viewTransitionName = `cover-${post.slug}`;
+  post.img.style.viewTransitionClass = 'cover';
+  /* and remember where this was, so that coming back is to the picture */
+  try { sessionStorage.setItem('back-to-post', post.slug); } catch (_) {}
+  location.href = post.a.href;
+}
+function buildPad(station, pages, reel, shelf, post){
   const cap = station.querySelector('.cap');
   const sheets = pages.map((p, i) => {
     const sh = el('div', 'sheet');
@@ -219,7 +261,8 @@ function buildPad(station, pages, reel, shelf){
      render() shows the one for the page in hand. */
   /* a reel under the sheets has a line for each of its shots too, after the
      sheets' own, one per stop of the pad */
-  const says = pages.map(p => p.cap).concat((reel || []).map(r => r[3]));
+  const says = pages.map(p => p.cap).concat((reel || []).map(r => r[3]))
+    .concat(post ? ['', ''] : []);      /* the post carries its own line, on the picture */
   let lines = null;
   if (says.some(Boolean)){
     cap.textContent = '';
@@ -248,6 +291,11 @@ function buildPad(station, pages, reel, shelf){
     station.insertBefore(pad.shelf.host, station.firstChild);
     pad.hi += 1;                 /* the last sheet turns away, and there they are */
   }
+  if (post){
+    pad.post = buildPost(post);
+    pad.hi += 2;                 /* the last sheet goes and the picture fills the
+                                    screen; one more and it is the post */
+  }
   return pad;
 }
 const PADS = [buildPad(story, PAGES, null, BOOKS),
@@ -264,8 +312,14 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { art: 'hvm1', cap: 'He once fixed a bug on the app, then fixed the library it depended on, then proposed a larger refactor of the whole app, until finally he proposed refactoring ethereum from scratch.' },
                 { art: 'bend', cap: 'I asked him if given more time he would make a new computer. And that’s what he did. He spent years creating a completely new way to compute. I became an early investor in the Higher Order Company.' },
                 { art: 'chess', cap: 'I believe the best way to teach about something is to learn it first so I did lots of visualizations for his machine. Not all of them were used.' }]),
-              buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
-              buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }])];
+              buildPad($('#maps'), [
+                { art: 'maps', cap: '“There are no passengers on Spaceship Earth. We are all crew.” — Marshall McLuhan' },
+                { art: 'felv', cap: 'I’m a bit obsessed about maps that show a different perspective of earth.' },
+                { art: 'gosper', cap: 'I’ve created a new projection using only hexagons and some fractals.' }], null, null,
+                { slug: 'gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball',
+                  widths: [480, 704, 1056, 1408, 2003], line: 'Keep scrolling to read more' }),
+              buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }], null, null,
+                { slug: 'the-triangle-of-everything', widths: [480, 704, 1056, 1408, 1848], line: 'Keep scrolling to read more' })];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
 const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
@@ -669,7 +723,7 @@ function paintPad(pad, bm, lean){
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
      and the page snaps flat for a frame */
   /* with a reel or the shelf under it, the last sheet can go too */
-  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - (pad.reel || pad.shelf ? 0 : 1));
+  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - (pad.reel || pad.shelf || pad.post ? 0 : 1));
   pad.sheets.forEach((sh, j) => {
     if (j < front){ dropCurl(sh); sh.classList.add('gone'); return; }
     sh.classList.remove('gone');
@@ -691,6 +745,43 @@ function paintPad(pad, bm, lean){
   });
   if (pad.reel) paintReel(pad);
   if (pad.shelf) paintShelf(pad);
+}
+
+/* The picture at the end of a pad. u is the last sheet going over: through
+   it the picture grows from the page's own box to the whole stage. v is the
+   step past that, into the post: a little further in, and a third of the
+   way along it goes. n is how much this pad is the one in the middle, so
+   that sliding away along the rail puts the picture back. */
+function paintPost(pad, n, station){
+  const post = pad.post, L = pad.sheets.length;
+  const u = turnOf(clamp01(pad.pv - (L - 1))) * n;
+  const v = clamp01(pad.pv - L) * n;
+  const sig = u.toFixed(4) + '|' + v.toFixed(4) + '|' + W() + 'x' + H();
+  if (post._sig === sig) return;
+  post._sig = sig;
+  const a = post.a, s = a.style;
+  if (u <= 0){
+    if (post.shown){ post.shown = false; s.opacity = '0'; s.visibility = 'hidden'; a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
+    return;
+  }
+  post.load();
+  const f = u * u * (3 - 2 * u);
+  const r = station.getBoundingClientRect(), sw = W(), sh = H();
+  s.left = (r.left * (1 - f)).toFixed(1) + 'px';
+  s.top = (r.top * (1 - f)).toFixed(1) + 'px';
+  s.width = (r.width + (sw - r.width) * f).toFixed(1) + 'px';
+  s.height = (r.height + (sh - r.height) * f).toFixed(1) + 'px';
+  s.visibility = 'visible';
+  s.opacity = clamp01(u / .25).toFixed(3);
+  post.img.style.transform = `scale(${(1 + .06 * v).toFixed(4)})`;
+  post.say.style.opacity = (clamp01((u - .7) / .3) * (1 - clamp01(v / .3))).toFixed(3);
+  const shown = u > .9;
+  if (post.shown !== shown){
+    post.shown = shown;
+    a.tabIndex = shown ? 0 : -1;
+    a.setAttribute('aria-hidden', shown ? 'false' : 'true');
+  }
+  if (v > .34) go(post);
 }
 
 /* The shelf comes up out of the dark as the last page goes over, a volume at
@@ -829,6 +920,7 @@ function render(){
     const d = Math.abs(i - hx), n = nearness(d);
     const m = i === 0 && hx < 0 ? clamp01((1.4 - d) / .5) * (1 - n) : 0;
     const own = i === Math.round(hx) ? handTilt : 0;
+    if (pad.post) paintPost(pad, n, RAIL.find(([, j]) => j === i)[0]);
     paintPad(pad, bowMul * (1 + (pad.flap || 0)) * n + (pad.air || 0) * m +
                   HOVER_LIFT * (pad.ha || 0) + slideLift * (n + m),
                   (tilt + own) * n + ((pad.lean || 0) + slideTilt) * (n + m) +
@@ -1169,6 +1261,15 @@ addEventListener('keydown', e => {
   else if (e.key === 'ArrowDown') go(pageAxis(), -1);
 });
 
+addEventListener('pageshow', e => {
+  if (!e.persisted) return;
+  PADS.forEach(pad => {
+    if (!pad.post) return;
+    pad.post.going = false;
+    if (pad.pv > pad.sheets.length){ stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), pad.sheets.length); }
+  });
+});
+
 let resizeT = 0;
 function relayout(){
   clearTimeout(resizeT);
@@ -1213,5 +1314,22 @@ const further = () => {
 };
 const idle = () => (self.requestIdleCallback || (f => setTimeout(f, 300)))(further);
 if (document.readyState === 'complete') idle(); else addEventListener('load', idle);
+/* Back from a post the rail went to: stand at the picture again, before the
+   first frame, so the post's cover can shrink back into it. */
+(() => {
+  let slug = null;
+  try { slug = sessionStorage.getItem('back-to-post'); sessionStorage.removeItem('back-to-post'); } catch (_) {}
+  const nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  if (!slug || !nav || nav.type !== 'back_forward') return;
+  const i = PADS.findIndex(pad => pad.post && pad.post.slug === slug);
+  if (i < 0) return;
+  const pad = PADS[i];
+  hx = i;
+  pad.pv = pad.sheets.length;
+  pad.post.img.style.viewTransitionName = `cover-${slug}`;
+  pad.post.img.style.viewTransitionClass = 'cover';
+  pad.post.load();
+  light();
+})();
 measure(); render();
 })();
