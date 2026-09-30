@@ -168,7 +168,13 @@ def write_post(collection, slug, title, date, body_html, original, site, when, l
     conv = Conv(folder, when, heading_shift=heading_shift, base_url=original)
     tree = node if node is not None else ip.parse(body_html)
     blocks = [b for b in conv.blocks(tree) if b and b.strip()]
-    while blocks and blocks[0].lstrip("# ").strip("*_ ").strip().lower() == title.strip().lower():
+    def plain(b):     # a block as words: no marks, no link addresses
+        b = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", b)
+        return re.sub(r"[#*_\\]", "", b).strip().lower()
+    while blocks and plain(blocks[0]) == title.strip().lower():
+        blocks.pop(0)
+    # and the date the page printed under it, which the header now carries
+    while blocks and re.fullmatch(r"(january|february|march|april|may|june|july|august|september|october|november|december) \d{1,2}, \d{4}", plain(blocks[0])):
         blocks.pop(0)
     head = ["---", ip.fm("title", title)]
     if date:
@@ -303,11 +309,14 @@ def wanderingabout(force):
                          extra={"category": p.split("/")[0]} if "/" in p else None, force=force)
         say("wanderingabout", slug, how)
     # Laser Chess's own pages, 2005
-    for name, url, title in (("laser-chess-2005", "http://www.wanderingabout.com/thingswithlaser/index.php", "The Laser Chess Game"),
-                             ("laser-chess-faq", "http://www.wanderingabout.com/thingswithlaser/faq.php", "The Laser Chess – FAQ")):
+    # these carry no date: they are given the day the archive first saw them,
+    # and marked as a guess
+    for name, url, title, seen in (("laser-chess-2005", "http://www.wanderingabout.com/thingswithlaser/index.php", "The Laser Chess Game", "2005-05-18"),
+                                   ("laser-chess-faq", "http://www.wanderingabout.com/thingswithlaser/faq.php", "The Laser Chess – FAQ", "2006-10-31")):
         page = text(wayback(url, "2006"))
         b = re.search(r"<body[^>]*>(.*)</body>", page, re.S)
-        how = write_post("wanderingabout", name, title, None, b.group(1) if b else page, url, "wanderingabout.com", "2006", force=force)
+        how = write_post("wanderingabout", name, title, seen + "T12:00:00Z", b.group(1) if b else page, url, "wanderingabout.com", "2006",
+                         extra={"date_circa": "no later than this: first seen by the Wayback Machine"}, force=force)
         say("wanderingabout", name, how)
 
 

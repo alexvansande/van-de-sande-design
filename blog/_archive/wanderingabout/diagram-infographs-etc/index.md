@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "visualizing-information"
 ---
 
-### [Diagram, Infographs etc](http://wanderingabout.com/_/visualizing-information/diagram-infographs-etc/)
-
-April 19, 2007
-
 To make the complex visible. to make novel information understandable, with minimal or no words at all. The following are a series of infographs, diagrams and maps that tries to show a different view of things you are used to see. Some where made just for the fun of it. some where donated to wikipedia’s open commons and there where selected by the community as the best of the crop\*. Many made their own way to graduation thesis and books in europe, books on photography and a lecture in MIT.
 
 <figure>

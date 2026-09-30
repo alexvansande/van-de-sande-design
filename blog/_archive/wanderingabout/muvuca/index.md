@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Muvuca](http://wanderingabout.com/_/animation-video/muvuca/)
-
-April 19, 2003
-
 muvuca is about connecting distant friends through some kind of non verbal sharing. throught their avatar on the movie screen they can sense that their friends have a common focus of attention.
 
 <figure>
@@ -33,7 +29,11 @@ It’s a virtual movie theather, where all friends watch the same movie at the s
 Also see this [Bill gate’s comment on the project](http://www.youtube.com/watch?v=Sn-rhyY8Mj0)
 
 <figure>
-<img src="05.jpg" width="400" height="182" alt="alchemy">
+<img src="05.gif" width="15" height="15" alt=";)">
+</figure>
+
+<figure>
+<img src="06.jpg" width="400" height="182" alt="alchemy">
 </figure>
 
 - about: Made for the Microsoft Research Design Expo 2003 contest, along with Rodrigo Rego and Ricardo Bacellar

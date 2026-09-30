@@ -113,6 +113,21 @@ Machine's copies from around 2020. The Wayback Machine limits how fast it
 answers: when it refuses, wait and run it again with `--only`. A post with
 no picture at its head shows its first picture on its card.
 
+## The archive
+
+`blog/_archive/` keeps the older writing, as `archive_old.py` found it on the
+Wayback Machine and Flickr: the Posterous blog, Computer for Monks, the 2007
+portfolio and Laser Chess, the Paris diary, the OLPC News article and two
+Flickr essays. It is built to `/archive/`, which no index, feed or sitemap
+links to and which asks search engines to stay away. On its index each post
+has an "On the blog" box; the ticks stay in that browser, and "Copy the
+list" copies what is in and what is out, to paste back into the
+conversation. Putting a post on the blog is moving its folder up into
+`blog/`. A post the page gave no date for carries the day the archive first
+saw it, marked `date_circa` and shown as "c. 2005".
+
+    python3 blog/archive_old.py [posterous monks wanderingabout paris olpcnews flickr] [--force]
+
 ## Pulling from Paragraph again
 
 ```bash

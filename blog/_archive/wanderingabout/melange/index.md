@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Mélange](http://wanderingabout.com/_/animation-video/melange/)
-
-September 1, 2005
-
 Digital tools are great but they lack the refinement or the sensibility of the classical drawing tools such as pens and pencils. Mélange is an attempt of bringing those together not by simulating how ink flows in a paper but by bringing the digital screen over the canvas.
 
 <figure>

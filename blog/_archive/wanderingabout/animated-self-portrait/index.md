@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [animated self portrait](http://wanderingabout.com/_/animation-video/animated-self-portrait/)
-
-June 23, 2002
-
 <figure>
 <img src="01.jpg" width="480" height="184" alt="mainimage.jpg">
 </figure>

@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Portfolio Reel 2007](http://wanderingabout.com/_/animation-video/portfolio-reel-2007/)
-
-April 26, 2007
-
 [Download as quicktime](http://media.revver.com/qt;sharer=19513;download/247994.mov)
 
 A reel of my work in interaction design and video until 2007.

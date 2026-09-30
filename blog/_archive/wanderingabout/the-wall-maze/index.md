@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "games"
 ---
 
-### [the Wall Maze](http://wanderingabout.com/_/games/the-wall-maze/)
-
-April 19, 2002
-
 <figure>
 <img src="01.jpg" width="476" height="452" alt="maze1.gif">
 </figure>

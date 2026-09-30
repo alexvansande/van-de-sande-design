@@ -474,6 +474,7 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 def vt(kind, slug):
     """A view-transition name: the same thing on the index, in a next card and
     in the post itself, so the browser can grow one into the other."""
+    slug = slug.replace("/", "--")        # the archive's posts sit in folders
     return f'style="view-transition-name:{kind}-{slug};view-transition-class:{kind}"'
 
 
@@ -495,7 +496,7 @@ def card(p, base, pics, eager=False, named=True):
         cover = f'<div class="thumb" {name("cover")}>{img}</div>'
     sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
     return f"""<a class="card" href="{base}{p['slug']}" data-slug="{p['slug']}"><span class="paper" {name("paper")}></span>{cover}
-  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when"><time datetime="{p['date_dt'].date().isoformat()}">{nice_date(p['date_dt'])}</time></p></div>
+  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when">{when(p)}</p></div>
 </a>"""
 
 
@@ -616,11 +617,134 @@ def build(out, base, clean=False):
     urls = [SITE_URL + "/"] + [f"{SITE_URL}/category/{c}" for c in cats] + [p["url"] for p in posts]
     write(out, "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "\n".join(f"  <url><loc>{u}</loc></url>" for u in urls) + "\n</urlset>\n")
-    write(out, "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
+    write(out, "robots.txt", f"User-agent: *\nAllow: /\nDisallow: {base}archive/\nSitemap: {SITE_URL}/sitemap.xml\n")
     write(out, "llms.txt", f"# {TITLE}\n\n## Posts\n\n" + "\n".join(
         f"- [{p['title']}]({p['url']}.md)" + (f": {p['subtitle']}" if p.get("subtitle") else "") for p in posts)
         + f"\n\n## Blog Information\n\n- [Homepage]({SITE_URL}/): Main blog page\n- [RSS Feed]({SITE_URL}/rss.xml): Subscribe to updates\n")
     print(f"{len(posts)} posts into {out}")
+    build_archive(out, base, pics)
+
+
+# ---------------------------------------------------------------- the archive
+
+ARCHIVE = {
+    "posterous": ("My life is not very interesting", "The Posterous blog, 2008–2012, mostly in Portuguese."),
+    "monks": ("Computer for Monks", "The thesis blog for ESDI, 2006, in Portuguese. Only August was archived, and none of its pictures."),
+    "wanderingabout": ("Wandering About", "The 2007 portfolio on wanderingabout.com, and Laser Chess's own site from 2005."),
+    "olpcnews": ("OLPC News", "An article for OLPC News, 2007."),
+    "flickr": ("Flickr", "Two essays written as captions on Flickr, 2005."),
+    "paris": ("Paris diary", "The diary from Paris, 2005–2006, in Portuguese."),
+}
+
+
+# The ticks are kept in this browser only; the list they make is what
+# decides, pasted back into the conversation.
+PICKER_JS = """<script>
+(() => {
+  const KEY = "archive-picks";
+  let picks = {};
+  try { picks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (_) {}
+  const boxes = [...document.querySelectorAll(".vis input")];
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (_) {} };
+  const show = () => {
+    let n = 0;
+    boxes.forEach(b => { b.closest(".pick").classList.toggle("in", b.checked); if (b.checked) n++; });
+    document.querySelector(".picker .count").textContent = n + " of " + boxes.length + " on the blog";
+  };
+  boxes.forEach(b => {
+    b.checked = !!picks[b.dataset.id];
+    b.addEventListener("change", () => { picks[b.dataset.id] = b.checked; save(); show(); });
+  });
+  document.querySelectorAll(".shelf-of .all").forEach(btn => btn.addEventListener("click", () => {
+    const mine = [...btn.closest(".shelf-of").querySelectorAll(".vis input")];
+    const on = !mine.every(b => b.checked);
+    mine.forEach(b => { b.checked = on; picks[b.dataset.id] = on; });
+    save(); show();
+  }));
+  document.querySelector(".picker .copy").addEventListener("click", async () => {
+    const line = b => "- " + b.dataset.id + "  (" + b.dataset.title + ")";
+    const inn = boxes.filter(b => b.checked), out = boxes.filter(b => !b.checked);
+    const text = "On the blog (" + inn.length + "):\\n" + inn.map(line).join("\\n") +
+                 "\\n\\nKept in the archive only (" + out.length + "):\\n" + out.map(line).join("\\n") + "\\n";
+    try { await navigator.clipboard.writeText(text); }
+    catch (_) {
+      const t = document.createElement("textarea"); t.value = text; document.body.append(t);
+      t.select(); document.execCommand("copy"); t.remove();
+    }
+    const d = document.querySelector(".picker .done"); d.classList.add("on");
+    setTimeout(() => d.classList.remove("on"), 1600);
+  });
+  show();
+})();
+</script>"""
+
+
+def when(p):
+    if not p.get("date"):
+        return "undated"
+    if p.get("date_circa"):
+        return f'<time datetime="{p["date_dt"].year}">c. {p["date_dt"].year}</time>'
+    return f'<time datetime="{p["date_dt"].date().isoformat()}">{nice_date(p["date_dt"])}</time>'
+
+
+def build_archive(out, base, pics):
+    """The older writing kept in blog/_archive: published at /archive/, but on
+    no index, feed or sitemap, and asking search engines to leave it be. It is
+    there to be looked through, and to pick from."""
+    root = os.path.join(HERE, "_archive")
+    if not os.path.isdir(root):
+        return
+    noindex = '<meta name="robots" content="noindex, nofollow">'
+    sections, total = [], 0
+    for coll in [c for c in ARCHIVE if os.path.isdir(os.path.join(root, c))] + sorted(
+            c for c in os.listdir(root) if c not in ARCHIVE and not c.startswith(".") and os.path.isdir(os.path.join(root, c))):
+        posts = []
+        for name in sorted(os.listdir(os.path.join(root, coll))):
+            folder = os.path.join(root, coll, name)
+            if os.path.isfile(os.path.join(folder, "index.md")):
+                p = read_post(folder)
+                p["slug"] = f"archive/{coll}/{name}"
+                posts.append(p)
+        if not posts:
+            continue
+        posts.sort(key=lambda p: p["date_dt"])
+        label, about = ARCHIVE.get(coll, (coll, ""))
+        for p in posts:
+            ctx = Ctx(p, pics, base)
+            html_ = render_blocks(p["body_md"], ctx)
+            first = ""
+            if p.get("original"):
+                first = (f' · <span class="first">Originally on <a href="{esc(p["original"])}">'
+                         f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
+            lang = f' lang="{esc(p["lang"])}"' if p.get("lang") else ""
+            body = f"""<main>
+<article class="sheet"{lang}>
+<span class="paper"></span>
+<div class="text">
+<h1>{esc(p['title'])}</h1>
+<p class="when">In the archive: <a href="{base}archive/#{coll}">{esc(label)}</a> · {when(p)}{first}</p>
+<div class="body">
+{html_}
+</div>
+</div>
+</article>
+</main>"""
+            write(out, p["slug"] + ".html", page(base, p["title"] + " · archive", body, cls="post archived", extra_head=noindex))
+        total += len(posts)
+        cards = "\n".join(
+            f'<div class="pick">{card(p, base, pics, named=False)}'
+            f'<label class="vis"><input type="checkbox" data-id="{esc(p["slug"][8:])}" data-title="{esc(p["title"])}"> On the blog</label></div>'
+            for p in posts)
+        sections.append(f'<section class="shelf-of" id="{coll}"><h2>{esc(label)}<button class="all" type="button">all / none</button></h2>'
+                        f'<p class="about">{esc(about)} {len(posts)} {"post" if len(posts) == 1 else "posts"}.</p>\n'
+                        f'<div class="cards">\n{cards}\n</div></section>')
+    body = (f'<main class="index"><h1>The archive</h1><p class="lead">Older writing, kept as it was found: '
+            f'not on the blog, and not for search engines. Tick what should go on the blog, then copy the list.</p>\n'
+            f'<div class="picker"><span class="count"></span><button type="button" class="copy">Copy the list</button>'
+            f'<span class="done">Copied</span></div>\n'
+            + "\n".join(sections) + "</main>" + PICKER_JS)
+    write(out, "archive/index.html", page(base, "The archive · " + TITLE, body, cls="list", extra_head=noindex))
+    print(f"{total} archived posts into {out}/archive")
 
 
 def write(out, rel, text):

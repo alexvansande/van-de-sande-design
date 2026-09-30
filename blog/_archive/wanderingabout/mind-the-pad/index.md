@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "interaction-design"
 ---
 
-### [Mind the pad](http://wanderingabout.com/_/interaction-design/mind-the-pad/)
-
-January 23, 2004
-
 <figure>
 <img src="01.jpg" width="480" height="480" alt="hand.jpg">
 </figure>

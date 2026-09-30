@@ -1,7 +1,9 @@
 ---
 title: "The Laser Chess – FAQ"
+date: "2006-10-31T12:00:00Z"
 original: "http://www.wanderingabout.com/thingswithlaser/faq.php"
 original_site: "wanderingabout.com"
+date_circa: "no later than this: first seen by the Wayback Machine"
 ---
 
 <figure>

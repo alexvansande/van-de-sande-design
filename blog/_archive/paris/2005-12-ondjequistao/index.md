@@ -1,0 +1,150 @@
+---
+title: "ondjequistao"
+lang: "pt"
+original: "http://wanderingabout.com/paris/2005_12_01_archive.html"
+original_site: "wanderingabout.com/paris"
+---
+
+<br>
+  [ondjequistao](http://www.flickr.com/photos/avsa/72589924/) <br>
+ Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). ok, volto ao assunto de coisas unicas que acontecem nessa<br>
+<br>
+universidade. Eis que ao chegar, em um sabado, para trabalhar no meu<br>
+<br>
+projeto encontro um grande yourt no meio do hall de recepcao. Um yourt<br>
+<br>
+para quem nao sabe (como eu ate hoje sabado de manha por exemplo) é a<br>
+<br>
+tenda tipica dos povos nomades das estepes da asia central.<br>
+<br>
+<br>
+<br>
+Estava rolando uma exposicao sobre esses paises, ou os seis istoes da<br>
+<br>
+asia central. Quem sabe dizer de cor? tente se lembrar antes de ler a<br>
+<br>
+proxima frase: Afeganistao, Turcomenistao, Casaquistão, uzbequistao,<br>
+<br>
+(vamos la, lembra dos outros?), Quirguistão e (esse é bom)<br>
+<br>
+Tajiquistão. Nao, paquistao nao conta.<br>
+<br>
+<br>
+<br>
+Alem de musica e comida rolou um filmezinho de graca. O filme foi dos<br>
+<br>
+mais curiosos, chamava o anjo do ombro direito e se voce acha que vai<br>
+<br>
+ve-lo um dia pode parar de ler esse post.<br>
+<br>
+<br>
+<br>
+O filho nem tao prodigo assim retorna a sua vila natal pois sua mae<br>
+<br>
+esta no leito de morte. Ao chegar, da logo uma reforma na casa e<br>
+<br>
+compra uma nova porta por que a atual nao passa o caixao. Eis que foi<br>
+<br>
+so um golpe da mae para ganhar uma porta nova e ela vai muito bem de<br>
+<br>
+saude. dialogo memoravel<br>
+<br>
+<br>
+<br>
+-com licenca seu pai ainda faz portas<br>
+<br>
+-nao senhor ele morreu, mas eu trabalho nisso ainda<br>
+<br>
+-eu comprei uma porta fazem dez anos. vim busca-la<br>
+<br>
+-ah certo meu pai me falou, perai vou busca-la<br>
+<br>
+<br>
+<br>
+Eis que todo mundo na cidade é meio golpista e bandido e na verdade<br>
+<br>
+passaram a perna na velha tambem e descobrimos que tudo foi uma<br>
+<br>
+armacao para fazer o filho voltar pra cidade, consertar a porta e dali<br>
+<br>
+os credores pularem em cima da casa nova do rapaz. Determinado tempo<br>
+<br>
+alguem aparece entregando uma crianca dizendo:<br>
+<br>
+<br>
+<br>
+-toma teu filho<br>
+<br>
+-voce toma isso! e comeca a porradaria<br>
+<br>
+<br>
+<br>
+entao o rapaz se afunda em problemas, tenta roubar o prefeito, so se<br>
+<br>
+dao mal. Certo momento a mae dele vai falar com o prefeito (que tb é o<br>
+<br>
+chefao dos mafiosos) tentar livrar a divida do filho , sugerindo que<br>
+<br>
+ela podia morrer passava a casa pro filho e ele voltava pra russia.<br>
+<br>
+<br>
+<br>
+-mas a senhora é jovem ainda tem muitos anos pra viver<br>
+<br>
+-quantos?<br>
+<br>
+o prefeito levanta e pega um livro. abre e diz com naturalidade<br>
+<br>
+-sete<br>
+<br>
+-e sera que nao tem jeito de trocar meu lugar na fila?<br>
+<br>
+-mm talvez eu possa resolver isso<br>
+<br>
+o prefeito pega um telefone vermelho e troca umas ideias com "a pessoa certa"<br>
+<br>
+-esta acertado, voce toca com minha mae que estava pra morrer faz<br>
+<br>
+tempo. Amanha ta bom pra voce?<br>
+<br>
+<br>
+<br>
+Ha uma mulher no filme, enfermeira, que mantem uma relacao estranha<br>
+<br>
+com o personagem principal. Um momento quando ela cuida de suas<br>
+<br>
+feridas ele passa a mao na sua cintura. Ela se silencia e se esquiva<br>
+<br>
+(ja houve outra cena antes onde ele tentou ser mais agressivo e ela<br>
+<br>
+brigou e foi-se embora). Ela vai para um canto e no momento que<br>
+<br>
+achamos que ela vai-se embora ela faz algo inesperado: solta o cabelo,<br>
+<br>
+o gesto mais sensual que desponta em um filme duro desses. Entao, sem<br>
+<br>
+esbocar reacao ela vai para um canto, e em uma fotografia<br>
+<br>
+especialmente bonita, percebemos, somente por uma sombra palida em<br>
+<br>
+cima dele e por sugestao de sons, que ela parece se despir. Ele nao<br>
+<br>
+reage. No final, levanta-se, automatico e inexpressivo como ela e vai<br>
+<br>
+ate ela. A luz, a cortina, as sombras, tornam a cena de uma<br>
+<br>
+sensualidade interessante. O contexto, a inexpressividade, a<br>
+<br>
+ambiguidade das intencoes e o machismo da sociedade tornam-a cruel.<br>
+<br>
+<br>
+<br>
+Mas filtrando as minhas observacoes cretinas, é um filme gostoso e<br>
+<br>
+bonito, se um tanto lento e fala de uma cultura de dificil acesso para<br>
+<br>
+mim. Mas bonito sim.<br>
+
+<figure>
+<img src="01.jpg" width="240" height="144" alt="">
+</figure>

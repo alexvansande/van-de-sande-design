@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "interaction-design"
 ---
 
-### [Radio Jaba](http://wanderingabout.com/_/interaction-design/radio-jaba/)
-
-January 23, 2004
-
 <figure>
 <img src="01.jpg" width="890" height="452" alt="maze1.gif">
 </figure>

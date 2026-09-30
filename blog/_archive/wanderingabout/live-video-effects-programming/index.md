@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Live video effects programming](http://wanderingabout.com/_/animation-video/live-video-effects-programming/)
-
-December 19, 2005
-
 Experiment. learn new tools. the following are a series of experiments I did when I first started exploring an isight iMac with quartz composer, a node-based visual programming language for open-gl effects. all movies are around motion detection, and video interferences.
 
 If you are a visual artist with a mac and an iSight camera, I recommend playing with quartz composer for a fun time. Below are the source files for the projects:

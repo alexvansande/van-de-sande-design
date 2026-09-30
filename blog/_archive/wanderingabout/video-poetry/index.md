@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Video Poetry](http://wanderingabout.com/_/animation-video/video-poetry/)
-
-January 19, 2005
-
 How do you freeze a moment? those two videos were made during my studies at the École Nationale Superieure de Création Industrielle in paris, and where meant to represent two distinct feelings. Both clips were made during my stay at l’Ecole nationale de Creation Industrielle, Paris, but not necessarily _for_ the school.
 
 ### In between the days
@@ -47,6 +43,10 @@ The second, “come here”, is a work of love about missing something for long 
 
 <figure>
 <img src="07.jpg" width="200" height="153" alt="come4.jpg">
+</figure>
+
+<figure>
+<img src="08.jpg" width="200" height="153" alt="come4.jpg">
 </figure>
 
 - about: Made in 2005 using Adobe Premiere, Adobe After Effects and Apple’s iMovie

@@ -5,8 +5,6 @@ original: "http://wanderingabout.com/_/my-life/"
 original_site: "wanderingabout.com"
 ---
 
-### [my life](http://wanderingabout.com/_/my-life/)
-
 [Uncategorized](http://wanderingabout.com/_/category/uncategorized/) —
 
 May 23, 2007

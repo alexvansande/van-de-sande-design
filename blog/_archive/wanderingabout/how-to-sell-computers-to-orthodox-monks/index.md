@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [How to sell Computers to Orthodox Monks](http://wanderingabout.com/_/animation-video/how-to-sell-computers-to-orthodox-monks/)
-
-January 25, 2007
-
 [Download as quicktime](http://media.revver.com/qt;sharer=%2019513;download/204271.mov)
 
 A video about how technology may affect certain cultures, and what could be changed in the computer as it is today, so we will not need to change the cultures themselves. How to sell computers for monks is a proposition that designers should start thinking about the laggards, the last people to adopt technologies, as benchmarks. Because if we can fit their requirements of a non-intrusive and fail-proof equipment, then we will build a better machines for all of us.

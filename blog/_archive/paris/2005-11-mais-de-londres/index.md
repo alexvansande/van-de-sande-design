@@ -1,0 +1,128 @@
+---
+title: "mais de londres"
+lang: "pt"
+original: "http://wanderingabout.com/paris/2005_11_01_archive.html"
+original_site: "wanderingabout.com/paris"
+---
+
+<br>
+  [mais de londres](http://www.flickr.com/photos/avsa/60166456/) <br>
+ Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). uma das diferencas que gostei de londres foram os museus. Nao entendam<br>
+<br>
+mal, o louvre tem uma curadoria impecavel, organizam e mostram de<br>
+<br>
+forma qause perfeita o seu conteudo, mas o british (e a national<br>
+<br>
+gallery) dao um passo alem. O british parece um livro aberto, com<br>
+<br>
+ilustracoes tridimensionais na sua frente. Enquanto o material grafico<br>
+<br>
+do louvre -so pra toma-lo como exemplo- descrevem suficientemente o<br>
+<br>
+que voce bai ver, no british me dava a impressao que na verdade eles<br>
+<br>
+eram o destaque, e que os objetos eram a ilustracao. Na pratica<br>
+<br>
+significa nao somente generosos cartazes, mas mapas, ilustracoes,<br>
+<br>
+infograficos contando a historia da epoca, replicas modernas da espada<br>
+<br>
+enferrujada para mostrar como ela devia ser na epoca, ensinando aquela<br>
+<br>
+materia, falando sobre a origem da escrita cuneiforme que alias, voces<br>
+<br>
+podem ver um exemplo na vitrine seguinte.<br>
+<br>
+<br>
+<br>
+Algo que me chamou atencao e ilustra bem isso foi um cartaz grande<br>
+<br>
+falando sobre o codigo de hamurabi e suas implicacoes historicas.<br>
+<br>
+Procurei e nao vi sequer um mini-codigo de hamurabi, um pedaco e<br>
+<br>
+granito ou qualquer pedaco do rei da babilonia: ele estava la por que<br>
+<br>
+aquela secao falava de tabuas de leis nas civilizacoes antigas, e o<br>
+<br>
+codigo de hamurabi é a maior referencia indispensavel. Ao vivo, no<br>
+<br>
+british, tinham somente alguns pedacos de argila da persia, mas ou<br>
+<br>
+menos da mesma epoca. Quem quisesse saber mais estava la no final da<br>
+<br>
+explicacao "o codigo de hamurabi se encontra exposto no louvre,<br>
+<br>
+paris". Fiquei com isso tao na cabeca que aproveitei a tarde de hoje<br>
+<br>
+pra ver o tal la no louvre.<br>
+<br>
+<br>
+<br>
+Outro exemplo sao os "explorer's packs" ou seja la como o pessoal de<br>
+<br>
+marketing chamou. Sao kits e roteiros de atividades para o pai<br>
+<br>
+transformar a visita do filho pequeno em uma aventura. Na national<br>
+<br>
+gallery vi um livro desses, e o pai sentava e ia lendo "esse quadro de<br>
+<br>
+um sujeito que vestia o rei. observe a palmeira, voce ve algo de<br>
+<br>
+curioso?". No british, era uma mochila completa de brinquedos, a la<br>
+<br>
+explorador egipcio. Vi um outro pai tambem, esse no salao dos<br>
+<br>
+sarcofagos, fazendo uma brincadeira com o filho que tinha que<br>
+<br>
+adivinhar de olhos vendados qual era o hieroglifo que ele estava<br>
+<br>
+tocando (obviamente uma replica que vinha no kit). Super interessante.<br>
+<br>
+Pra quem quer saber as respostas, a palmeira da india tinha sido<br>
+<br>
+pintada como uma arvore inglesa. E o garoto pegou um ankh.<br>
+<br>
+<br>
+<br>
+ps1. a foto nao tem nada a ver, é por que gostei dela<br>
+<br>
+<br>
+<br>
+ps2; esqueci de comentar: a flor do ultimo post era um repolho<br>
+<br>
+asiatico. Isso mesmo um repolho, era impossivel de nao reconhecer pelo<br>
+<br>
+cheiro quando arranquei umas folhas. foi isso que no outro dia chamei<br>
+<br>
+de "couve que nao se come", confundi couve com repolho<br>
+<br>
+<br>
+<br>
+ps3: valeu por todo mundo que me mandou mensagem perguntando se eu<br>
+<br>
+tava bem, por que leu nos jornais sobre as revoltas nos suburbios. eu<br>
+<br>
+estou bem, e tb, como voces soube delas pelos jornais. Os tais<br>
+<br>
+suburbios sao cidades a parte na ile-de-france longe do circulo de<br>
+<br>
+conurbacao do centro de paris. A vida no centro nao se altera em nada<br>
+<br>
+(tudo bem que tem que selvar em conta que eu tb, como estudante<br>
+<br>
+estrangeiro de design, nao estou tao afinado com a vida diaria do<br>
+<br>
+parisiense, que afinal nao leio le monde nem liberation). Nao digo que<br>
+<br>
+essas revoltas nao sejam graves ou que os jornais exagerem, mas é<br>
+<br>
+interessante ver como nao alteram a rotina ou sequer o papo do<br>
+<br>
+parisiense como por exemplo as guerras entre os traficantes alteram a<br>
+<br>
+nossa rotina ou dominam as nossas conversas no rio.<br>
+
+<figure>
+<img src="01.jpg" width="240" height="180" alt="">
+</figure>

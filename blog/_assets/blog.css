@@ -214,3 +214,28 @@ html:has(>body.post),body.post{overscroll-behavior-y:none}
   .card{transition:none}.card:hover{transform:none}
   ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
 }
+
+/* ---------- the archive: older writing, not on the blog ---------- */
+.index .lead{max-width:40rem;margin:-1.4rem 0 2.6rem;font-size:1.2rem;line-height:1.45;color:var(--light);opacity:.75}
+.shelf-of{margin-bottom:3.6rem}
+.shelf-of>h2{margin:0 0 .3rem;font-weight:400;font-size:1.7rem;color:var(--light)}
+.shelf-of .about{margin:0 0 1.4rem;font-size:1.05rem;color:var(--light);opacity:.65;font-style:italic}
+/* picking what goes on the blog: a box under each card, and a bar that
+   keeps count and copies the list out */
+.picker{position:sticky;top:0;z-index:40;display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;
+  margin:0 calc(var(--gutter) * -1) 2.4rem;padding:.8rem var(--gutter);
+  background:rgba(51,51,49,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.08);color:var(--light);font-size:1.05rem}
+.picker .count{opacity:.8}
+.picker button,.shelf-of .all{font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:0;
+  border-radius:999px;padding:.35rem 1rem;cursor:pointer}
+.picker button:hover,.shelf-of .all:hover{background:#fff}
+.picker .done{font-style:italic;opacity:0;transition:opacity .3s}
+.picker .done.on{opacity:.8}
+.shelf-of .all{background:transparent;color:var(--light);border:1px solid rgba(230,226,210,.35);margin-left:.6rem;font-size:.85rem;padding:.15rem .7rem}
+.pick{display:flex;flex-direction:column}
+.pick .card{flex:1}
+.vis{display:flex;align-items:center;gap:.5rem;margin-top:.7rem;color:var(--light);font-size:1rem;cursor:pointer;user-select:none}
+.vis input{width:1.15rem;height:1.15rem;accent-color:#e6c46a;margin:0}
+.pick.in .card .paper{box-shadow:0 0 0 3px #e6c46a,0 14px 36px -12px rgba(0,0,0,.6)}
+.pick.in .vis{color:#f0d68c}

@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "visualizing-information"
 ---
 
-### [Alchemy of Juices](http://wanderingabout.com/_/visualizing-information/alchemy-of-juices/)
-
-April 19, 2003
-
 <br>
  [Experiment the Alchemy!](http://wanderingabout.com/fruitjuices/alquimia.html)
 

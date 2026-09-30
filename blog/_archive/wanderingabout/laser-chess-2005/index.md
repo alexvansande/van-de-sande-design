@@ -1,7 +1,9 @@
 ---
 title: "The Laser Chess Game"
+date: "2005-05-18T12:00:00Z"
 original: "http://www.wanderingabout.com/thingswithlaser/index.php"
 original_site: "wanderingabout.com"
+date_circa: "no later than this: first seen by the Wayback Machine"
 ---
 
 <figure>

@@ -1,0 +1,44 @@
+---
+title: "domingo"
+lang: "pt"
+original: "http://wanderingabout.com/paris/2005_10_01_archive.html"
+original_site: "wanderingabout.com/paris"
+---
+
+<br>
+  [domingo](http://www.flickr.com/photos/avsa/53137380/) <br>
+ Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). <br>
+<br>
+Domingo preguicoso esse. De manha-nem tao manha assim, sai para a<br>
+feirinha daqui de perto. dei a sorte de encontrar a italiana minha<br>
+vizinha na saida entao fomos juntos batendo papo. Depois passear por<br>
+ai.<br>
+<br>
+estava chovendo entao peguei o casaco da nanda para estrear. Ele era<br>
+bem quente mas o melhor contra a chuva que tinha, pensei eu.<br>
+Desnecessario dizer que no meio do caminho abriu um sol maravilhoso e<br>
+eu fiquei carregando o casaco de um lado ao outro. Fui ate o marais<br>
+que tinha um evento sobre revistas eletronicas, dentro de uma<br>
+exposicao maior sobre revistas. nada demais.<br>
+<br>
+Depois corri -passando por baixo, pela beira do sena - ate os<br>
+invalidos, para conhecer a esplanada. Na grama gente fazendo com<br>
+frisbee oque jamais imaginei que desse para. Chutando, repassando,<br>
+acrobacia. Filmei, vai no proximo podcast. Voltamos a biblioteca<br>
+francois miterrand, do outro lado de paris. Em 30 minutinhos com vento<br>
+na cara estamos la. Biblioteca bonita, mas os parisienses nao gostam.<br>
+Foi uma obra cara o bastante para se desconfiar, os lindo predios<br>
+brilhantes e transparentes nao combinam com o ambiente escuro que os<br>
+livros precisam, e o mini bosque de pinheiros no interior nao tinha<br>
+profundidade o bastante para as raizes das arvores. Mas apesar disso,<br>
+apesar dos fios segurando as coitadas de pe, a arquitetura é bonita.<br>
+<br>
+Fui para ver macunaima, mas esqueci que essa foi ontem e hoje era<br>
+domingo. entrei e peguei o final de 'tenda dos milagres' que ate o<br>
+final nao estava entendendo nada - cade mario de andrade nessa<br>
+historia? Tudo bem, valeu pelo 'deus e o diabo' de graca que vi na<br>
+sexta. Ano do brasil na franca é isso ai.
+
+<figure>
+<img src="01.jpg" width="500" height="375" alt="">
+</figure>

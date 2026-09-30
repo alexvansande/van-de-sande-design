@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "games"
 ---
 
-### [Laser Chess](http://wanderingabout.com/_/games/laser-chess/)
-
-May 23, 2001
-
 <figure>
 <img src="01.jpg" width="480" height="320" alt="laser1.jpg">
 </figure>

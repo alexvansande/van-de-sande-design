@@ -1,0 +1,40 @@
+---
+title: "festa inesperada"
+lang: "pt"
+original: "http://wanderingabout.com/paris/2005_10_01_archive.html"
+original_site: "wanderingabout.com/paris"
+---
+
+<br>
+  [festa inesperada](http://www.flickr.com/photos/avsa/53528737/) <br>
+ Originally uploaded by [Alexandre Van de Sande](http://www.flickr.com/people/avsa/). hoje convidei meu grupo para uma reuniao de trabalho aqui em casa, decidir o<br>
+<br>
+que vamos fazer para o curso de video "image de pensee". Um curso que<br>
+<br>
+imaginei ser sobre videomontagem e esta saindo mais para videoinstalacao.<br>
+<br>
+Meu grupo: clemont,frances, e maria, costa-riquenha. Mas eis que no meio da<br>
+<br>
+sobremesa- fiz comida pra eles aparece uma brasileira que estava na casa da<br>
+<br>
+vizinha. Assim essas loucas que vieram passar tres meses na europa e foram<br>
+<br>
+ficando. ai conheceu uma amiga, que chamou a prima, que mora aqui ao lado,<br>
+<br>
+que me apresentou a ela, a quem apresentei maria, que apresentou uma amiga<br>
+<br>
+que esta em paris, fala portugues e quer compania. Acho que nessa ela<br>
+<br>
+estende a estada em paris alguns dias. E no meio de tudo vem a outra<br>
+<br>
+vizinha, uma italiana a quem tinha emprestado uma bicicleta - ela voltava<br>
+<br>
+tarde do trabalho hoje- para me devolve-la. Foi divertido ter um monte de<br>
+<br>
+gente assim de repente na casa. E nao é que ate sairam boas ideias no final?<br>
+<br>
+Sobre imagem, movimento, e som.<br>
+
+<figure>
+<img src="01.jpg" width="240" height="180" alt="">
+</figure>

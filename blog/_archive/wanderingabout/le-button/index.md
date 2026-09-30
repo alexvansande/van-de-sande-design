@@ -6,10 +6,6 @@ original_site: "wanderingabout.com"
 category: "animation-video"
 ---
 
-### [Le button](http://wanderingabout.com/_/animation-video/le-button/)
-
-January 19, 2006
-
 _Le_ button is one single button that can transform any surface in a radio tuner. It allows to use any printed page as an link to an internet audio file which you can stream to your headphones. And because it’s able to save any pattern in it’s internal memory, you can re-save those links in any surface you can look at. how much can you do with a single button?
 
 <figure>
