@@ -78,6 +78,9 @@ a{color:inherit}
   font-style:italic;text-wrap:balance}
 .when{margin:1.3rem 0 0;font-size:1rem;color:var(--quiet);letter-spacing:.04em;font-variant:small-caps}
 .when a{text-decoration:none;border-bottom:1px solid var(--rule)}
+/* "Originally published on …": the rest of the line is small capitals, this
+   is a sentence */
+.when .first{font-variant:normal;letter-spacing:0;font-style:italic}
 .text>.when{margin-bottom:clamp(2.2rem,5vw,3.2rem)}
 
 /* ---------- the body of a post: Paragraph's layout ---------- */

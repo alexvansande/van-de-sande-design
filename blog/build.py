@@ -472,10 +472,15 @@ def vt(kind, slug):
 def card(p, base, pics, eager=False, named=True):
     name = (lambda kind: vt(kind, p["slug"])) if named else (lambda kind: "")
     cover = ""
-    if p.get("cover"):
+    # a post with no picture at its head shows its first picture on its card
+    thumb, w, h = p.get("cover"), *(p.get("cover_size") or (None, None))
+    if not thumb:
+        m = re.search(r'<img src="([^":/]+)" width="(\d+)" height="(\d+)"', p["body_md"])
+        if m:
+            thumb, w, h = m.group(1), m.group(2), m.group(3)
+    if thumb:
         ctx = Ctx(p, pics, base)
-        w, h = p.get("cover_size") or (None, None)
-        img = ctx.img(p["cover"], "", w, h)
+        img = ctx.img(thumb, "", w, h)
         img = img.replace('sizes="(min-width: 50rem) 704px, 100vw"', 'sizes="(min-width: 50rem) 440px, 100vw"')
         if eager:
             img = img.replace('loading="lazy"', 'loading="eager"')
@@ -517,6 +522,10 @@ def build(out, base, clean=False):
             if v:
                 p["og_image"] = SITE_URL + "/" + next((u for u, x in v if x >= 1056), v[-1][0])[len(base):]
         cats = "".join(f' · <a href="{base}category/{esc(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
+        # where it first appeared, for the posts brought here from elsewhere
+        if p.get("original"):
+            cats += (f' · <span class="first">Originally published on <a href="{esc(p["original"])}">'
+                     f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
         # the next one along, older, and after the oldest the newest again
         nxt = posts[(posts.index(p) + 1) % len(posts)]

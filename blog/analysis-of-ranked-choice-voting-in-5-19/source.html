@@ -1,0 +1,67 @@
+<!-- https://discuss.ens.domains/t/analysis-of-ranked-choice-voting-in-5-19-governance-distribution-pilot/19797 (forum) -->
+<p>The DAO has voted and it has approved <a href="https://discuss.ens.domains/t/ep-5-19-social-governance-distribution-pilot-program/19759">EP5.19 with the project having being set as a budget of 30k</a>. Since I am a big governance geek and I have been vocal about my issues with Ranked Choice voting and its alternatives I’d like to analyze the resulting data.</p>
+<p>Before, I’d like to clarify that this is a debate on how different voting methods lead to different result and not a complaint about the result itself. I would have been writing this regardless of the outcome. In fact the choice I voted as my first choice did not win and there is no way of analyzing the data that it would’ve won.</p>
+<p>First, probably the best graphical analysis of the vote can be seen on <a href="https://dhive.io/proposal/1478/analytics" rel="noopener nofollow ugc">https://dhive.io/proposal/1478/analytics</a><br>
+<div class="lightbox-wrapper"><a class="lightbox" href="https://discuss.ens.domains/uploads/db9688/original/2X/b/b5bcc803208acf60aebd84551b66266424b4ab57.png" data-download-href="https://discuss.ens.domains/uploads/db9688/b5bcc803208acf60aebd84551b66266424b4ab57" title="Screenshot 2024-10-29 at 1.01.45 PM"><img src="https://discuss.ens.domains/uploads/db9688/optimized/2X/b/b5bcc803208acf60aebd84551b66266424b4ab57_2_633x500.png" alt="Screenshot 2024-10-29 at 1.01.45 PM" data-base62-sha1="pVISOVuNaokPTbOHZsCWBcdtTV5" width="633" height="500" srcset="https://discuss.ens.domains/uploads/db9688/optimized/2X/b/b5bcc803208acf60aebd84551b66266424b4ab57_2_633x500.png, https://discuss.ens.domains/uploads/db9688/optimized/2X/b/b5bcc803208acf60aebd84551b66266424b4ab57_2_949x750.png 1.5x, https://discuss.ens.domains/uploads/db9688/optimized/2X/b/b5bcc803208acf60aebd84551b66266424b4ab57_2_1266x1000.png 2x" data-dominant-color="E1D1EE"></a></div></p>
+<p>The vote’s purpose was both to approve the pilot program and to decide its budget. There were three different budgets, let’s call them Big, Medium and Small, and the option of Rejecting the program as a whole, which set the budget at 0.</p>
+<p>Looking at the graph above we can see some interesting things: first, the 10 largest votes represented 90% of the final voting power, and this is the main issue the pilot program is trying to address. The second interesting thing is that everyone’s first choice was roughly split equally in 3 ways, with only one major vote outright rejecting it. For those used to First past the post, even with runoff elections, “vote splitting” is a bad thing, but ranked choice vote is designed to solve that.</p>
+<p>In the current scenario the only vote to reject the proposal received the least amount of votes, so that ballot’s voting power was then redirected to the Small option, leading it to reaching over 50% of the votes and therefore winning.</p>
+<p>Another visualization of the same data is below:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" href="https://discuss.ens.domains/uploads/db9688/original/2X/9/911982ec8bce44a1a087a164692b8cf2d0f6e784.jpeg" data-download-href="https://discuss.ens.domains/uploads/db9688/911982ec8bce44a1a087a164692b8cf2d0f6e784" title="Screenshot 2024-10-29 at 1.18.11 PM"><img src="https://discuss.ens.domains/uploads/db9688/optimized/2X/9/911982ec8bce44a1a087a164692b8cf2d0f6e784_2_677x500.jpeg" alt="Screenshot 2024-10-29 at 1.18.11 PM" data-base62-sha1="kHBTfId9ArPXUNi8pUPzqZXHUJ6" width="677" height="500" srcset="https://discuss.ens.domains/uploads/db9688/optimized/2X/9/911982ec8bce44a1a087a164692b8cf2d0f6e784_2_677x500.jpeg, https://discuss.ens.domains/uploads/db9688/optimized/2X/9/911982ec8bce44a1a087a164692b8cf2d0f6e784_2_1015x750.jpeg 1.5x, https://discuss.ens.domains/uploads/db9688/original/2X/9/911982ec8bce44a1a087a164692b8cf2d0f6e784.jpeg 2x" data-dominant-color="C9DEF1"></a></div></p>
+<p>First, second and third choices are here visualized as different shades of blue. We can see the same scenario: the option for a budget of 0 was the least voted, so these votes were then transferred to the Small option (blue arrow), taking it over the 50% line (red dotted line). But interestingly, this was the ONLY moment where a second choice ballot was considered. The second choice values of the voters that voted for all the other options were never considered. This could lead to some strategic voting: voters who want the largest possible budget would do well of changing their voting preference to put Medium as their first choice and Large as second.</p>
+<p>In fact if instead of a ranked choice, let’s assume this election was an approval voting. And for simplicity’s sake, let’s also assume that voters “approved” their first and second choices and did not approve their third and fourth.</p>
+<p>In this scenario, the small budget would’ve won 51% of the approval, as it happened with the Instant Run Off method. But the Medium Budget would’ve received an 87% approval! A Big budget would’ve received 49% and the rejection is at 12%. This is because in the current Instant Runoff, the secondary options of most ballots are not being taken in consideration, we are only counting the secondary options of candidates who were eliminated in early rounds.</p>
+<p>However, if we assume all voters approve their top 3 preferences, then Small and Medium are tied. This would basically be an election on the least rejected option and it would ignore voters preferred outcome.</p>
+<p>This means that if the choice was only between 60k and 30k, then the Medium sized budget would’ve won by a large margin. We can graph all those choices, using the exact voting data as follows:</p>
+<p><div class="lightbox-wrapper"><a class="lightbox" href="https://discuss.ens.domains/uploads/db9688/original/2X/f/fb49cb9cea270042ec3e3b722de646a3376f4abe.png" data-download-href="https://discuss.ens.domains/uploads/db9688/fb49cb9cea270042ec3e3b722de646a3376f4abe" title="Screenshot 2024-10-29 at 2.24.21 PM"><img src="https://discuss.ens.domains/uploads/db9688/optimized/2X/f/fb49cb9cea270042ec3e3b722de646a3376f4abe_2_690x408.png" alt="Screenshot 2024-10-29 at 2.24.21 PM" data-base62-sha1="zQZWXkBCdFfCgIdo5m4YACFwmPY" width="690" height="408" srcset="https://discuss.ens.domains/uploads/db9688/optimized/2X/f/fb49cb9cea270042ec3e3b722de646a3376f4abe_2_690x408.png, https://discuss.ens.domains/uploads/db9688/optimized/2X/f/fb49cb9cea270042ec3e3b722de646a3376f4abe_2_1035x612.png 1.5x, https://discuss.ens.domains/uploads/db9688/original/2X/f/fb49cb9cea270042ec3e3b722de646a3376f4abe.png 2x" data-dominant-color="CED2CF"></a></div></p>
+<p>Putting all the options like this, is called a Condorcet Analysis. We can see that a Medium Budget would’ve been preferred by all voters over any other option (although it’s a very close call when compared to a small budget). The Medium option is what is called a Condorcet Winner, meaning it wins over all other options. The NONE option is a Condorcet Loser,  as it loses all one to one comparisons.</p>
+<p>This analysis also helps us see how the vote can be changed. Before, a voter that wanted a larger budget would do well by switching their vote from Large first and Medium second into a Medium first and Large second. In this Condorcet scenario that wouldn’t matter, as the Medium x Large preference is very strong.</p>
+<p>In this scenario however we can see the closest comparisons are Medium vs Small  and Small x Large, both that are almost a tie. But unlike the previous example, a voter who’s interested in the smaller budget possible doesn’t have many options rather than changing someone’s else vote from ranking Medium over Small to the opposite.</p>
+<p>There are many ways to tally a Condorcet Election but when there is a clear Condorcet winner, then they always result the same. What is in my opinion the most straightforward  method is Copeland/Roundrobin, in which you just count up the victories.</p>
+<p>The only issue here is when there is no clear Condorcet winner, then a tie could occur. For example, a big voter that preferred Big over Small over Medium could change the metrics so that the last two disputes would result in a tie. This is why we need to have separate tiebreaker metrics. Here are them for this data set:</p>
+<div class="md-table">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Victories</th>
+<th>Avg Support</th>
+<th>Margin of Victory</th>
+<th>Worst Defeat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Medium (60k ENS)</td>
+<td><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"></td>
+<td>70.5%</td>
+<td>41.8%</td>
+<td>0.0%</td>
+</tr>
+<tr>
+<td>Small (30k ENS)</td>
+<td><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"></td>
+<td>63.1%</td>
+<td>40.1%</td>
+<td>0.2%</td>
+</tr>
+<tr>
+<td>Big (90k ENS)</td>
+<td><img src="https://discuss.ens.domains/images/emoji/twitter/trophy.png?v=15" title=":trophy:" class="emoji only-emoji" alt=":trophy:" loading="lazy" width="20" height="20"></td>
+<td>45.7%</td>
+<td>27.7%</td>
+<td>50.1%</td>
+</tr>
+<tr>
+<td>None (0 ENS)</td>
+<td>-</td>
+<td>20.0%</td>
+<td>0.0%</td>
+<td>77.5%</td>
+</tr>
+</tbody>
+</table>
+</div><p>In the current Data Set, the Medium Budget has 3 victories. It also has an average of 70% support across all comparisons, it has the highest average margin of victory and has the lowest rejection.</p>
+<h2><a name="p-54887-conclusion-1" class="anchor" href="#p-54887-conclusion-1" aria-label="Heading link"></a>Conclusion</h2>
+<p>This has been a close election. While the proposal itself was widely approved (as seen by the low numbers of the NONE option), the highest budget was unlikely to win. Medium vs Small budget were a close call, and the result could’ve changed depending on the vote method.</p>
+<p>But most important of all is the transparency of the election and it is my belief that Round Robin elections provide more of that.</p>

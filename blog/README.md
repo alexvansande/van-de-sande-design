@@ -82,6 +82,26 @@ Otherwise pulling on past the top zooms out of the post: it draws back,
 smaller, and goes back to the picture on the site it came from, or else to
 the index, where it shrinks into its card.
 
+## Posts from elsewhere
+
+Besides the posts from Paragraph, the blog holds what was written on Medium
+(his own account; not the UniLogin publication), on the Ethereum
+Foundation's blog, and three essays from the ENS forum. They are listed in
+`SOURCES` in `import_posts.py`, which brings each into a folder like the
+others, with `source.html`, the post as it was fetched, in place of
+`paragraph.json`. Their header carries `original` and `original_site`, and
+the page says "Originally published on …" under the date, linked. Links
+from one of these posts to another point at the copy here.
+
+    pip install pillow
+    python3 blog/import_posts.py [--only SLUG] [--force]
+
+Medium refuses plain requests for its pages, so its last ten posts come from
+its RSS feed, which carries them whole, and the older ones from the Wayback
+Machine's copies from around 2020. The Wayback Machine limits how fast it
+answers: when it refuses, wait and run it again with `--only`. A post with
+no picture at its head shows its first picture on its card.
+
 ## Pulling from Paragraph again
 
 ```bash
