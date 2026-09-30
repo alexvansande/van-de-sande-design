@@ -2,6 +2,7 @@
 title: "UX Audit: MetaMask Main Navigation"
 subtitle: "a UX audit about rethinking metamask menus"
 date: "2020-08-13T12:00:00Z"
+categories: ["UX", "Ethereum"]
 original: "https://avsa.medium.com/on-metamask-main-navigation-ac8b756599b1"
 original_site: "Medium"
 ---

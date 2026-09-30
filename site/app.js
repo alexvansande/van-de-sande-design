@@ -64,14 +64,14 @@ const IDX_DIM = .22, IDX_LIT = .92;     /* faded in the corner of the eye, lit w
 /* the rail, left to right, with where each one sits along it */
 const RAIL = [[$('#index'), -1], [story, 0], [$('#blockchain'), 1],
               [$('#browser'), 2], [$('#victor'), 3],
-              [$('#maps'), 4], [$('#triangle'), 5]];
+              [$('#maps'), 4], [$('#triangle'), 5], [$('#latest'), 6]];
 const FIRST = RAIL[0][1], LAST = RAIL[RAIL.length - 1][1];
 
 
 /* A pad is a station with sheets in it. Both the story and the poster are
    pads, so they bow, curl and zoom on the same machinery — the only
    difference is what is printed on the paper. */
-const faceHTML = p => p.art
+const faceHTML = p => p.face ? p.face : p.art
   ? `<div class="face art ${p.art}"></div>`
   : `<div class="face ${p.cls || ''}">
        <header class="run"><span>${p.run[0]}</span><span>${p.run[1]}</span></header>
@@ -219,6 +219,14 @@ function spinnable(a, n, shown){
 /* Where the blog is. Here, under this site; once it has a domain of its own,
    its address, e.g. 'https://blog.vandesande.design/'. */
 const BLOG = 'blog/';
+/* The blog's own poster: a title page, the three newest posts under it. */
+const BLOG_FACE = `<div class="face blogface">
+    <p class="bf-kick">THE BLOG</p>
+    <h2>Alex Van de Sande’s <em>wandering about</em></h2>
+    <div class="bf-rule"></div>
+    <p class="bf-line">Twenty-five years of weird ideas, written on the internet</p>
+    <p class="bf-years">2001 — 2025</p>
+  </div>`;
 /* how far past the first paragraph you pull, in pixels of the hand, before
    it lets go into the post; and how much of that the paper follows */
 const PULL_GO = 150, PULL_GIVE = .45;
@@ -344,7 +352,7 @@ function go(post){
   post.curS = 1;
   setTimeout(leave, 520);
 }
-function buildPad(station, pages, reel, shelf, post){
+function buildPad(station, pages, reel, shelf, post, onward){
   const cap = station.querySelector('.cap');
   const sheets = pages.map((p, i) => {
     const sh = el('div', 'sheet');
@@ -359,7 +367,8 @@ function buildPad(station, pages, reel, shelf, post){
   /* a reel under the sheets has a line for each of its shots too, after the
      sheets' own, one per stop of the pad */
   const says = pages.map(p => p.cap).concat((reel || []).map(r => r[3]))
-    .concat(post ? ['', ''] : []);      /* the post carries its own line, on the picture */
+    .concat(post ? ['', ''] : [])       /* the post carries its own line, on the picture */
+    .concat(onward ? [''] : []);
   let lines = null;
   if (says.some(Boolean)){
     cap.textContent = '';
@@ -374,14 +383,22 @@ function buildPad(station, pages, reel, shelf, post){
   if (reel){
     const host = el('div', 'reel');
     const shots = reel.map(([cls, w, h]) => {
-      const e = el('div', 'shot ' + cls);
+      /* a post is a card to open, as wide as the page; a screenshot is a
+         picture, wider than it, fading out at its sides */
+      const e = el(cls === 'post' ? 'a' : 'div', 'shot ' + cls);
       e.style.aspectRatio = `${w} / ${h}`;
       host.append(e);
       return { e, r: w / h, h: 0 };      /* h, its share of the page's height, once measured */
     });
+    const narrow = reel.every(([cls]) => cls === 'post');
+    if (narrow) host.classList.add('posts');
     station.insertBefore(host, station.firstChild);
-    pad.reel = { host, shots };
+    pad.reel = { host, shots, narrow };
     pad.hi += shots.length;      /* the last sheet turns away, then one stop per shot */
+  }
+  if (onward){
+    pad.onward = onward;
+    pad.hi += 1;                 /* and one more turn past the last of them */
   }
   if (shelf){
     pad.shelf = buildShelf(shelf);
@@ -418,9 +435,19 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { slug: 'gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball',
                   title: 'Gosper World - a novel world map made of hexagonal-like fractals (or, how I made Matt Parker’s Impossible Ball)',
                   widths: [480, 704, 1056, 1408, 2003] }),
-              buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }], null, null,
+              buildPad($('#triangle'), [
+                { art: 'triangle', cap: '“If the solution is not beautiful, I know it’s wrong.” — Buckminster Fuller' },
+                { art: 'lineweaver', cap: 'One of the most wonderful graphs in physics comes from Lineweaver and Patel. But I really wanted it to also be beautiful.' },
+                { art: 'scales', cap: 'This chart connects relativity, quantum mechanics, biology, planetary science and the big bang. It’s worth taking a deeper look.' }], null, null,
                 { slug: 'the-triangle-of-everything', title: 'The Triangle of Everything',
-                  widths: [480, 704, 1056, 1408, 1848] })];
+                  widths: [480, 704, 1056, 1408, 1848] }),
+              /* the blog: its title page, the three newest posts under it, and
+                 one more turn to go to it */
+              buildPad($('#latest'), [{ face: BLOG_FACE,
+                  cap: 'I’ve been writing on the internet for over 25 years.' }], [
+                ['post', 5, 6, 'The newest things I’ve written. Open one to read it.'],
+                ['post', 5, 6, 'Or keep turning.'],
+                ['post', 5, 6, 'Keep going for all of them, back to 2001.']], null, null, true)];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
 const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
@@ -943,24 +970,36 @@ function layout(sh, i, m){
   return [top - PILE_UP * d, 1 - PILE_SHRINK * d, 1, 1 - PILE_DIM * d];
 }
 function paintReel(pad){
-  const { host, shots } = pad.reel, n = shots.length;
+  const { host, shots, narrow } = pad.reel, n = shots.length;
   const r = pad.pv - pad.sheets.length;           /* -1 while the sheet is still on top */
   const k = clamp(Math.floor(r), -1, n - 1);
   const u = k < n - 1 ? turnOf(clamp01(r - k)) : 0;
   const f = u * u * (3 - 2 * u);
-  const sig = k + '|' + f.toFixed(4) + '|' + PH + '|' + REEL_W;
+  /* and past the last, the turn on to the whole blog: the pile goes up and away */
+  const on = pad.onward ? turnOf(clamp01(r - (n - 1))) : 0;
+  const RW = narrow ? PW : REEL_W;
+  const sig = k + '|' + f.toFixed(4) + '|' + on.toFixed(4) + '|' + PH + '|' + RW;
   if (pad._rsig === sig) return;
-  if (pad._rw !== REEL_W){
-    pad._rw = REEL_W;
-    shots.forEach(s => { s.h = REEL_W / s.r / PH; });
+  if (pad._rw !== RW){
+    pad._rw = RW;
+    shots.forEach(s => { s.h = RW / s.r / PH; });
   }
   pad._rsig = sig;
   /* The further in, the more of the sides have gone. Only as much as the reel
      is wider than the page: on a phone it is barely wider, and a fade sized
      for the desktop ate into the windows themselves. */
-  const spare = clamp((REEL_W / PW - 1) / .5, .35, 1);
-  host.style.setProperty('--f',
-    (spare * (12 + 12 * clamp01((k + f) / Math.max(1, n - 1)))).toFixed(1) + '%');
+  if (!narrow){
+    const spare = clamp((REEL_W / PW - 1) / .5, .35, 1);
+    host.style.setProperty('--f',
+      (spare * (12 + 12 * clamp01((k + f) / Math.max(1, n - 1)))).toFixed(1) + '%');
+  }
+  if (pad.onward){
+    host.style.transform = on ? `translate3d(0,${(-on * PH * .12).toFixed(1)}px,0)` : '';
+    host.style.opacity = on ? (1 - on).toFixed(3) : '';
+    if (on > .5) toBlog(pad, n);
+  }
+  /* the card in front is the one that opens */
+  const front = u > .5 ? k + 1 : k;
   shots.forEach((s, i) => {
     const a = layout(shots, i, k), b = layout(shots, i, Math.min(n - 1, k + 1));
     const mix = j => a[j] + (b[j] - a[j]) * f;
@@ -971,8 +1010,75 @@ function paintReel(pad){
     s.e.style.transform = `translate3d(0,${(mix(0) * PH).toFixed(1)}px,0) scale(${mix(1).toFixed(4)})`;
     s.e.style.opacity = op.toFixed(3);
     s.e.style.filter = `brightness(${mix(3).toFixed(3)})`;
+    if (narrow){
+      const is = i === front && !on;
+      if (s.front !== is){
+        s.front = is;
+        s.e.classList.toggle('front', is);
+        s.e.tabIndex = is ? 0 : -1;
+      }
+    }
   });
 }
+
+/* The blog's poster: its three newest posts, from the blog itself, so they
+   are always the newest. Asked for once the first screen is in. */
+function fillLatest(pad){
+  if (pad.asked) return;
+  pad.asked = true;
+  fetch(`${BLOG}latest.json`).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(posts => {
+    pad.reel.shots.forEach((s, i) => {
+      const p = posts[i];
+      if (!p) return;
+      const a = s.e;
+      a.href = BLOG + p.slug;
+      a.tabIndex = -1;
+      a.setAttribute('aria-label', p.title);
+      const pic = el('div', 'lp-pic');
+      if (p.picture && p.picture.length){
+        const img = el('img');
+        img.alt = ''; img.decoding = 'async';
+        img.sizes = `${Math.round(PW || 480)}px`;
+        img.srcset = p.picture.map(([u, w]) => `${BLOG}${u} ${w}w`).join(', ');
+        img.src = BLOG + (p.picture.find(([, w]) => w >= 704) || p.picture[p.picture.length - 1])[0];
+        pic.append(img);
+      }
+      const words = el('div', 'lp-words');
+      const h = el('h3'); h.textContent = p.title;
+      words.append(h);
+      if (p.subtitle){ const sub = el('p', 'lp-sub'); sub.textContent = p.subtitle; words.append(sub); }
+      if (p.lead){ const lead = el('p', 'lp-lead'); lead.textContent = p.lead; words.append(lead); }
+      const when = el('p', 'lp-when');
+      const d = el('span'); d.textContent = p.date;
+      const tags = el('span', 'lp-tags');
+      (p.categories || []).forEach(c => { const t = el('span'); t.textContent = c; tags.append(t); });
+      when.append(d, tags);
+      words.append(when);
+      a.append(pic, words);
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        if (!s.front) return;
+        leaveFor(a.href, 'blog.' + i);
+      });
+    });
+    /* the title page runs to the newest year */
+    const newest = posts[0] && (posts[0].date.match(/\d{4}/) || [])[0];
+    const years = pad.sheets[0].querySelector('.bf-years');
+    if (newest && years){
+      years.textContent = `2001 — ${newest}`;
+      dropCurl(pad.sheets[0]); render();
+    }
+  }).catch(() => { pad.asked = false; });
+}
+/* Leaving for the blog, noting on this page's address where it stood, so
+   the back button comes back to it. */
+function leaveFor(href, note){
+  if (leaveFor.gone) return;
+  leaveFor.gone = true;
+  try { history.replaceState(history.state, '', '#read=' + note); } catch (_) {}
+  location.href = href;
+}
+function toBlog(pad, n){ leaveFor(BLOG, 'blog.' + n); }
 
 /* The line for the page in hand. Each fades out over the first half of a turn
    and the next fades in over the second, so two sentences are never on top
@@ -1455,7 +1561,9 @@ addEventListener('keydown', e => {
 
 addEventListener('pageshow', e => {
   if (!e.persisted) return;
+  leaveFor.gone = false;
   PADS.forEach(pad => {
+    if (pad.onward && pad.pv > pad.hi - 1){ stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), pad.hi - 1); }
     if (!pad.post) return;
     pad.post.going = false;
     pad.post.primed = false;
@@ -1499,6 +1607,7 @@ setTimeout(reveal, 1800);       /* if the fonts never turn up, show it anyway */
 /* then, once everything on the first screen is in, reach a step further */
 const further = () => {
   litNear = 2.5; light();
+  PADS.forEach(pad => { if (pad.onward) fillLatest(pad); });
   /* the faces of the pages under the first, and then those pages set again
      in them: refitted, and every curl rebuilt, since each carries copies of
      the pages as they were when it was cut */
@@ -1513,6 +1622,21 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
    which (#read=slug). Stand at the head of the post again, before the first
    frame, then take the note off the address so a reload starts afresh. */
 (() => {
+  const b = location.hash.match(/^#read=blog\.(\d+)$/);
+  if (b){
+    /* back from the blog's poster: at the card that was opened, or at the
+       last of them if it went on to the whole blog */
+    try { history.replaceState(history.state, '', location.pathname + location.search); } catch (_) {}
+    const i = PADS.findIndex(pad => pad.onward);
+    if (i < 0) return;
+    const pad = PADS[i];
+    hx = i;
+    pad.pv = pad.sheets.length + Math.min(+b[1], pad.reel.shots.length - 1);
+    coast = performance.now() + 2500; coastLast = performance.now();
+    fillLatest(pad);
+    litNear = 2.5; light();
+    return;
+  }
   const m = location.hash.match(/^#read=([\w-]+)$/);
   if (!m) return;
   const i = PADS.findIndex(pad => pad.post && pad.post.slug === m[1]);

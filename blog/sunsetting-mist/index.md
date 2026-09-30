@@ -2,6 +2,7 @@
 title: "Sunsetting Mist"
 subtitle: "What’s ahead for our team"
 date: "2019-03-22T12:00:00Z"
+categories: ["Ethereum", "Mist"]
 original: "https://avsa.medium.com/sunsetting-mist-da21c8e943d2"
 original_site: "Medium"
 ---

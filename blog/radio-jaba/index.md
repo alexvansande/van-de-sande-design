@@ -1,6 +1,7 @@
 ---
 title: "Radio Jaba"
 date: "2004-01-23T12:00:00Z"
+categories: ["University portfolio", "Music"]
 original: "http://wanderingabout.com/_/interaction-design/radio-jaba/"
 original_site: "wanderingabout.com"
 category: "interaction-design"

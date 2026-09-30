@@ -1,6 +1,7 @@
 ---
 title: "iPod Video"
 date: "2005-08-31T20:11:01Z"
+categories: ["Apple", "Interface concepts"]
 original: "https://www.flickr.com/photos/avsa/38981234/"
 original_site: "Flickr"
 ---

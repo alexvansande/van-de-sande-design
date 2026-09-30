@@ -1,6 +1,7 @@
 ---
 title: "Token-Curating the Truth"
 date: "2018-07-31T12:00:00Z"
+categories: ["Ethereum", "Governance"]
 original: "https://avsa.medium.com/token-curating-the-truth-6d699a71ef5a"
 original_site: "Medium"
 ---

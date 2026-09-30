@@ -2,6 +2,7 @@
 title: "It’s time for social media interoperability"
 subtitle: "Social media is too important to be owned by a few private companies — or governments"
 date: "2021-08-06T12:00:00Z"
+categories: ["Social media", "Governance"]
 original: "https://avsa.medium.com/its-time-for-social-media-interoperability-4cee38673fa3"
 original_site: "Medium"
 ---

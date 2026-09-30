@@ -1,6 +1,7 @@
 ---
 title: "Condorcet voting explained from a Graphic Designer's point of view"
 date: "2022-11-29T14:26:13Z"
+categories: ["Voting", "Infographics"]
 updated: "2025-10-03T18:45:48Z"
 cover: "cover.png"
 cover_size: [1990, 760]

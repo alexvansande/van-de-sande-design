@@ -1,6 +1,7 @@
 ---
 title: "How to sell Computers to Orthodox Monks"
 date: "2007-01-25T12:00:00Z"
+categories: ["Interface concepts", "Culture"]
 original: "http://wanderingabout.com/_/animation-video/how-to-sell-computers-to-orthodox-monks/"
 original_site: "wanderingabout.com"
 category: "animation-video"

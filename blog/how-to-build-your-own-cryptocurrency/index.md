@@ -1,6 +1,7 @@
 ---
 title: "Ethereum in practice part 1: how to build your own cryptocurrency without touching a line of code"
 date: "2015-12-03T22:04:45Z"
+categories: ["Ethereum", "Tutorials"]
 original: "https://blog.ethereum.org/2015/12/03/how-to-build-your-own-cryptocurrency"
 original_site: "blog.ethereum.org"
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Recovering lost ether, past and future"
 date: "2018-04-24T12:00:00Z"
+categories: ["Ethereum", "Governance"]
 original: "https://medium.com/@avsa/recovering-lost-ether-past-and-future-eeb38b17aeb5"
 original_site: "Medium"
 ---

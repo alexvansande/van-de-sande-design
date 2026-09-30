@@ -1,6 +1,7 @@
 ---
 title: "Aquatic Sugar: The Children's Interface, Translated for Adults"
 date: "2007-11-07T12:00:00Z"
+categories: ["OLPC", "UX"]
 original: "http://www.olpcnews.com/software/operating_system/aquatic_sugar_childrens_interface.html"
 original_site: "OLPC News"
 ---

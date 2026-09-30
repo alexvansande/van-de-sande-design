@@ -3,7 +3,7 @@ title: "A defense of Tetrahedron Maps"
 subtitle: "This very unsphere shape can actually be a great globe"
 date: "2025-12-23T20:12:14Z"
 updated: "2025-12-23T20:12:13Z"
-categories: ["hexagons", "map", "maps", "mapmaking"]
+categories: ["Maps", "Geometry"]
 cover: "cover.jpg"
 cover_size: [5522, 2761]
 paragraph_id: "caobT8CQvZCbvlTRZuO9"

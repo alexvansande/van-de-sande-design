@@ -1,6 +1,7 @@
 ---
 title: "Ethereum in practice part 3: how to build your own transparent bank on the blockchain"
 date: "2015-12-07T10:00:16Z"
+categories: ["Ethereum", "Tutorials"]
 original: "https://blog.ethereum.org/2015/12/07/ethereum-in-practice-part-3-how-to-build-your-own-transparent-bank-on-the-blockchain"
 original_site: "blog.ethereum.org"
 ---

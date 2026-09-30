@@ -1,6 +1,7 @@
 ---
 title: "iPhone"
 date: "2005-08-31T20:10:34Z"
+categories: ["Apple", "Interface concepts"]
 original: "https://www.flickr.com/photos/avsa/38981085/"
 original_site: "Flickr"
 ---
