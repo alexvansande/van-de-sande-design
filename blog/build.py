@@ -332,6 +332,12 @@ class Pictures:
 
 
 def fresh(target, src):
+    # On the deploy, the pictures made last time come back from a cache that
+    # is only used when no picture has changed at all (the workflow keys it on
+    # every picture's content), so there being one is enough: a fresh
+    # checkout gives every source a new time, and would make them all again.
+    if os.environ.get("BLOG_MEDIA_CACHED") == "true":
+        return os.path.exists(target)
     return os.path.exists(target) and os.path.getmtime(target) >= os.path.getmtime(src)
 
 

@@ -34,7 +34,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # Resizing every picture takes minutes. What the last deploy made is
+      # kept, for as long as not one picture in blog/ has changed.
+      - id: media
+        uses: actions/cache@v4
+        with:
+          path: site/blog/media
+          key: blog-media-${{ hashFiles('blog/**/*.png', 'blog/**/*.jpg', 'blog/**/*.jpeg', 'blog/**/*.gif', 'blog/**/*.webp') }}
       - name: Build the blog
+        env:
+          BLOG_MEDIA_CACHED: ${{ steps.media.outputs.cache-hit }}
         run: |
           pip install pillow
           # under whatever path Pages serves the site from: on github.io
