@@ -61,6 +61,18 @@ paragraphs, headings, lists and pictures are Paragraph's own. Everything
 around the post is the rest of the site's: the dark ground, the paper, EB
 Garamond.
 
+## Opening a post, and reading on
+
+Clicking a card on the index grows its paper and picture into the post's
+sheet, and the words come up once the paper is there: a cross-document view
+transition (`@view-transition` in `blog.css`), so it needs no script. At the
+foot of every post is the next one, older, as a card. Scroll on past it, or
+click it, and `blog.js` fetches that post and opens it in place the same
+way, with the one after it waiting underneath; the address and the title
+follow whichever post is being read. After the oldest it comes round to the
+newest, and it stops once every post is on the page. Browsers without view
+transitions just go to the page; without the script, the card is a link.
+
 ## Pulling from Paragraph again
 
 ```bash

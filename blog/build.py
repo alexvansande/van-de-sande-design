@@ -463,16 +463,26 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 """
 
 
-def card(p, base, pics):
+def vt(kind, slug):
+    """A view-transition name: the same thing on the index, in a next card and
+    in the post itself, so the browser can grow one into the other."""
+    return f'style="view-transition-name:{kind}-{slug};view-transition-class:{kind}"'
+
+
+def card(p, base, pics, eager=False, named=True):
+    name = (lambda kind: vt(kind, p["slug"])) if named else (lambda kind: "")
     cover = ""
     if p.get("cover"):
         ctx = Ctx(p, pics, base)
         w, h = p.get("cover_size") or (None, None)
-        cover = f'<div class="thumb">{ctx.img(p["cover"], "", w, h)}</div>'
-        cover = cover.replace('sizes="(min-width: 50rem) 704px, 100vw"', 'sizes="(min-width: 50rem) 440px, 100vw"')
+        img = ctx.img(p["cover"], "", w, h)
+        img = img.replace('sizes="(min-width: 50rem) 704px, 100vw"', 'sizes="(min-width: 50rem) 440px, 100vw"')
+        if eager:
+            img = img.replace('loading="lazy"', 'loading="eager"')
+        cover = f'<div class="thumb" {name("cover")}>{img}</div>'
     sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
-    return f"""<a class="card" href="{base}{p['slug']}">{cover}
-  <div class="words"><h2>{esc(p['title'])}</h2>{sub}<p class="when"><time datetime="{p['date_dt'].date().isoformat()}">{nice_date(p['date_dt'])}</time></p></div>
+    return f"""<a class="card" href="{base}{p['slug']}" data-slug="{p['slug']}"><span class="paper" {name("paper")}></span>{cover}
+  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when"><time datetime="{p['date_dt'].date().isoformat()}">{nice_date(p['date_dt'])}</time></p></div>
 </a>"""
 
 
@@ -501,18 +511,20 @@ def build(out, base, clean=False):
         cover_img, p["og_image"] = "", ""
         if p.get("cover"):
             w, h = p.get("cover_size") or (None, None)
-            cover_img = f'<div class="cover">{ctx.img(p["cover"], "", w, h)}</div>'
+            img = ctx.img(p["cover"], "", w, h).replace('loading="lazy"', 'loading="eager" fetchpriority="high"')
+            cover_img = f'<div class="cover" {vt("cover", p["slug"])}>{img}</div>'
             v = ctx.picture(p["cover"])
             if v:
                 p["og_image"] = SITE_URL + "/" + next((u for u, x in v if x >= 1056), v[-1][0])[len(base):]
         cats = "".join(f' · <a href="{base}category/{esc(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
-        others = [q for q in posts if q is not p][:4]
-        more = "".join(f'<li><a href="{base}{q["slug"]}">{esc(q["title"])}</a></li>' for q in others)
+        # the next one along, older, and after the oldest the newest again
+        nxt = posts[(posts.index(p) + 1) % len(posts)]
         body = f"""<main>
-<article class="sheet">
+<article class="sheet" data-slug="{p['slug']}" data-url="{base}{p['slug']}" data-title="{esc(p['title'])}">
+<span class="paper" {vt("paper", p["slug"])}></span>
 {cover_img}
-<div class="text">
+<div class="text" {vt("words", p["slug"])}>
 <h1>{esc(p['title'])}</h1>
 {sub}
 <p class="when"><time datetime="{p['date_dt'].date().isoformat()}">{nice_date(p['date_dt'])}</time>{cats}</p>
@@ -521,7 +533,9 @@ def build(out, base, clean=False):
 </div>
 </div>
 </article>
-<nav class="more"><h2>More wanderings</h2><ul>{more}</ul></nav>
+<section class="next"><p class="label">Next</p>
+{card(nxt, base, pics, named=False)}
+</section>
 </main>"""
         ld = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": p["title"],
               "datePublished": p["date_dt"].isoformat(), "dateModified": parse_date(p.get("updated") or p.get("date")).isoformat(),
@@ -530,7 +544,8 @@ def build(out, base, clean=False):
             ld["image"] = p["og_image"]
         extra = f'<meta property="article:published_time" content="{p["date_dt"].isoformat()}">\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
         write(out, p["slug"] + ".html", page(base, p["title"], body, description=p["description"], canonical=p["url"],
-                                              image=p["og_image"], kind="article", extra_head=extra, cls="post"))
+                                              image=p["og_image"], kind="article", cls="post",
+                                              extra_head=extra + f'\n<script src="{base}assets/blog.js" defer></script>'))
         # the Markdown too, with its pictures at their full addresses
         md = re.sub(r'(src="|\]\()(?![a-z]+:|/)([^")\s]+)',
                     lambda m: m.group(1) + (SITE_URL + "/" + pics.variants(os.path.join(p["folder"], m.group(2)), p["slug"], m.group(2))[-1][0][len(base):]
@@ -539,7 +554,7 @@ def build(out, base, clean=False):
         print(f"  {p['slug']}")
 
     def listing(title, heading, items, canonical, path):
-        cards = "\n".join(card(p, base, pics) for p in items)
+        cards = "\n".join(card(p, base, pics, eager=True) for p in items)
         body = f'<main class="index"><h1>{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
         write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical, cls="list"))
 
