@@ -16,3 +16,4 @@ site/blog/
 
 # what archive_old.py asked the Wayback Machine, kept so it need not ask again
 blog/_archive/.cache/
+__pycache__/
