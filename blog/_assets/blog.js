@@ -358,6 +358,48 @@ function pullAtTop(label, go, gone, PULL = 150) {
      the index, the line that came down growing into the index's title. */
   pullAtTop("All the wandering about", note => toIndex(note), () => leaving);
 
+  /* ---------- beside the post, on a big screen ----------
+     Once the post's own title has gone off the top, a column beside it
+     keeps it: the year, the title, and the posts either side. It follows
+     whichever post is being read, and goes again when the title is back. */
+  const side = document.createElement("aside");
+  side.className = "aside-nav";
+  side.setAttribute("aria-label", "This post");
+  side.innerHTML = `<p class="an-year"></p><p class="an-title"></p>
+    <nav><a class="an-prev"><small>Previous</small><span></span></a><a class="an-next"><small>Next</small><span></span></a></nav>`;
+  document.body.append(side);
+  const sideEls = {
+    year: side.querySelector(".an-year"), title: side.querySelector(".an-title"),
+    prev: side.querySelector(".an-prev"), next: side.querySelector(".an-next"),
+  };
+  let sideFor = null, sideOn = false;
+  const fillSide = a => {
+    if (sideFor === a) return;
+    sideFor = a;
+    sideEls.year.textContent = a.dataset.year || "";
+    sideEls.title.textContent = a.dataset.title;
+    for (const [k, el] of [["prev", sideEls.prev], ["next", sideEls.next]]) {
+      const slug = a.dataset[k];
+      el.hidden = !slug;
+      if (!slug) continue;
+      el.href = urlOf(slug);
+      el.querySelector("span").textContent = a.dataset[k + "Title"] || "";
+    }
+  };
+  const placeSide = () => {
+    const a = current();
+    if (!a) return;
+    const h = a.querySelector(".text > h1"), r = a.getBoundingClientRect();
+    // on once the title is gone above, and while the post is still on screen
+    const on = !!h && h.getBoundingClientRect().bottom < 0 && r.bottom > innerHeight * .35;
+    if (on) fillSide(a);
+    if (on !== sideOn) {
+      sideOn = on;
+      side.classList.toggle("on", on);
+      side.querySelectorAll("a").forEach(l => { l.tabIndex = on ? 0 : -1; });
+    }
+  };
+
   /* ---------- on scroll ---------- */
   let ticking = false, lastY = scrollY;
   addEventListener("scroll", () => {
@@ -367,6 +409,7 @@ function pullAtTop(label, go, gone, PULL = 150) {
       ticking = false;
       const y = scrollY, dy = y - lastY;
       lastY = y;
+      placeSide();
       // the bar: down going up, away going on, never over the name at the top
       if (y < 80) setBar(false);
       else if (dy < -6) setBar(true);
@@ -391,6 +434,7 @@ function pullAtTop(label, go, gone, PULL = 150) {
     history.replaceState(history.state, "", url);
     document.title = article.dataset.title;
     if (canonical && site) canonical.href = site + article.dataset.slug;
+    placeSide();
   };
   const reading = new IntersectionObserver(es => {
     for (const e of es) if (e.isIntersecting) show(e.target);

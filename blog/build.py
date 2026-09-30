@@ -551,7 +551,7 @@ def build(out, base, clean=False):
         nxt = posts[(posts.index(p) + 1) % len(posts)]
         prv = posts[posts.index(p) - 1]
         body = f"""<main>
-<article class="sheet" data-slug="{p['slug']}" data-url="{base}{p['slug']}" data-title="{esc(p['title'])}" data-prev="{prv['slug']}">
+<article class="sheet" data-slug="{p['slug']}" data-url="{base}{p['slug']}" data-title="{esc(p['title'])}" data-year="{p['date_dt'].year}" data-prev="{prv['slug']}" data-prev-title="{esc(prv['title'])}" data-next="{nxt['slug']}" data-next-title="{esc(nxt['title'])}">
 <span class="paper" {vt("paper", p["slug"])}></span>
 {cover_img}
 <div class="text" {vt("words", p["slug"])}>

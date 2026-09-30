@@ -114,6 +114,10 @@ it goes to the index, where the post shrinks into its card. The browser's
 own pull (to refresh, on a phone) is turned off on a post, so this is the
 only one.
 
+On a big screen (88rem and up), a column to the left of the sheet keeps
+the post's year and title, and the posts before and after it, once its own
+title has gone off the top; it follows whichever post is being read.
+
 The index works the same way the other way round: pulled down past its
 top, it draws back under "Alex Van de Sande" and, pulled hard enough,
 sinks into the dark and the site loads. That pull is twice as long as a

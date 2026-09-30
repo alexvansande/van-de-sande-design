@@ -78,6 +78,35 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 .pulling .pullnote{opacity:clamp(0,calc((var(--pullk,0) - .3) / .6),1);transform:translateY(calc((var(--pullk,0) - 1) * 1.5rem))}
 ::view-transition-group(site-title){animation-duration:.55s}
 
+/* ---------- beside the post, on a big screen ----------
+   Where there is room either side of the sheet, a column to its left keeps
+   the post's year and title, and the posts either side, once its own title
+   has gone off the top (blog.js puts it on). Ranged right, against the
+   sheet, like the years beside the index. */
+.aside-nav{display:none}
+@media (min-width:88rem){
+  .aside-nav{display:block;position:fixed;z-index:20;top:6.5rem;width:15rem;
+    right:calc(50% + (var(--column) + 2 * var(--gutter)) / 2 + 3rem);
+    text-align:right;color:var(--light);opacity:0;transform:translateY(.5rem);pointer-events:none;
+    transition:opacity .35s,transform .35s cubic-bezier(.2,.7,.2,1)}
+  .aside-nav.on{opacity:1;transform:none;pointer-events:auto}
+  .aside-nav p{margin:0}
+  .an-year{font-size:1rem;letter-spacing:.08em;opacity:.55;font-variant-numeric:lining-nums}
+  .an-title{margin-top:.35rem!important;font-size:1.45rem;line-height:1.2;text-wrap:balance;
+    display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden}
+  .aside-nav nav{display:flex;flex-direction:column;gap:1.1rem;margin-top:2.4rem;padding-top:1.4rem;
+    border-top:1px solid rgba(230,226,210,.14)}
+  .aside-nav nav a{display:block;text-decoration:none;opacity:.6;transition:opacity .2s}
+  .aside-nav nav a:hover{opacity:1}
+  .aside-nav nav a[hidden]{display:none}
+  .aside-nav small{display:block;font-size:.85rem;letter-spacing:.08em;font-variant:small-caps;opacity:.75}
+  .aside-nav nav span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;
+    font-size:1.05rem;line-height:1.3;text-wrap:balance}
+  .an-prev small::before{content:"↑ "}
+  .an-next small::before{content:"↓ "}
+}
+@media (prefers-reduced-motion:reduce){.aside-nav{transition:none}}
+
 /* ---------- the sheet ---------- */
 /* The paper is its own layer under the words, in the sheet and in a card
    alike, so that opening a post can grow the card's paper into the sheet's
