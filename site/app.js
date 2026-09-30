@@ -329,12 +329,15 @@ const unitOf = post => Math.max(H() * .5, needOf(post) + PULL_GO + 40);
    the post, so the load is the only seam, and the post is told how far down
    it was being read (#at=px) so that it opens there. This page's own address
    first gets a note of where it stood (#read=slug), so that the back button
-   comes back to here. */
+   comes back to here. The post is also told the way back (#back=slug.last):
+   pulled down past its top, it comes back here, to the poster's last sheet. */
 function go(post){
   if (post.going) return;
   post.going = true;
   try { history.replaceState(history.state, '', '#read=' + post.slug); } catch (_) {}
-  const leave = () => { location.href = post.a.href + (post.shift > 0 ? '#at=' + Math.round(post.shift) : ''); };
+  const leave = () => {
+    location.href = post.a.href + (post.shift > 0 ? '#at=' + Math.round(post.shift) + '&' : '#') + 'back=' + post.slug + '.last';
+  };
   const { s, y0 } = post.fit;
   if (s >= 1 || reduce){ leave(); return; }
   /* a card first: it grows to the post's own size about the middle of the
@@ -1691,14 +1694,16 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
     litNear = 2.5; light();
     return;
   }
-  const m = location.hash.match(/^#read=([\w-]+)$/);
+  /* #read=slug is the back button, at the head of the post; #read=slug.last
+     is the post pulled back down past its top, at the poster's last sheet */
+  const m = location.hash.match(/^#read=([\w-]+?)(\.last)?$/);
   if (!m) return;
   const i = PADS.findIndex(pad => pad.post && pad.post.slug === m[1]);
   try { history.replaceState(history.state, '', location.pathname + location.search); } catch (_) {}
   if (i < 0) return;
   const pad = PADS[i];
   hx = i;
-  pad.pv = pad.sheets.length;
+  pad.pv = m[2] ? pad.sheets.length - 1 : pad.sheets.length;
   coast = performance.now() + 2500; coastLast = performance.now();
   pad.post.load();
   light();
