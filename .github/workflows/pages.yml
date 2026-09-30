@@ -22,7 +22,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - id: pages
+        uses: actions/configure-pages@v5
       # Pages lets a browser keep each file for ten minutes, on its own
       # clock, so a visitor could get this deploy's page with the last one's
       # script. The script's address changes with every deploy instead.
@@ -36,7 +37,9 @@ jobs:
       - name: Build the blog
         run: |
           pip install pillow
-          python3 blog/build.py --out site/blog --base /blog/
+          # under whatever path Pages serves the site from: on github.io
+          # that is /van-de-sande-design, on a custom domain nothing
+          python3 blog/build.py --out site/blog --base "${{ steps.pages.outputs.base_path }}/blog/"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
