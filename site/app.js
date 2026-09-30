@@ -205,45 +205,64 @@ function spinnable(a, n, shown){
   draw();
   return go;
 }
-/* A pad that ends in a post on the blog: when the last sheet turns away, the
-   picture the post opens with comes up out of the page and grows until it is
-   the whole screen, with a line asking you to keep going. Going on opens the
-   post, and the picture shrinks into the head of it: a view transition, the
-   same one the blog's own cards use, since the blog is on this same site.
-   The picture is outside the rail, on the stage itself, so that it can reach
-   the edges of the screen whatever the rail is zoomed to. */
-function buildPost({ slug, widths, line }){
+/* A pad that ends in a post on the blog. When the last sheet turns away, the
+   head of the post is there under it: the blog's name, and the post's own
+   sheet with its picture whole on its white, its title, and in place of the
+   date a line asking you to keep going. It is laid out as the post itself
+   is, and uncovered by a window that grows from the page to the whole
+   screen, so nothing in it is stretched. Going on opens the post: its paper
+   and picture are tied to the post's (a view transition, since the blog is
+   on this same site), and the words cross-fade where they already stand.
+   It is on the stage, not the rail, so the rail's zoom does not reach it. */
+function buildPost({ slug, title, widths, line }){
   const a = el('a', 'ending');
   a.href = `blog/${slug}`;
   a.tabIndex = -1;
   a.setAttribute('aria-hidden', 'true');
+  const page = el('div', 'e-page');
+  const top = el('div', 'e-top');
+  top.textContent = "Alex Van de Sande's wanderings";
+  const sheet = el('div', 'e-sheet');
+  const paper = el('span', 'e-paper');
+  const cover = el('div', 'e-cover');
   const img = el('img');
   img.alt = '';
   img.decoding = 'async';
+  const words = el('div', 'e-text');
+  const h = el('h1');
+  h.textContent = title;
+  const say = el('p', 'e-when');
+  say.textContent = line;
+  words.append(h, say);
+  cover.append(img);
+  sheet.append(paper, cover, words);
+  page.append(top, sheet);
+  a.append(page);
+  stage.append(a);
   const base = `blog/media/${slug}/cover-`;
   const load = () => {
     if (img.src) return;
-    img.sizes = '100vw';
+    img.sizes = '(min-width: 53rem) 848px, 100vw';
     img.srcset = widths.map(w => `${base}${w}.webp ${w}w`).join(', ');
     img.src = `${base}${widths[widths.length - 1]}.webp`;
   };
-  const say = el('span', 'say');
-  say.textContent = line;
-  a.append(img, say);
-  stage.append(a);
-  const post = { a, img, say, slug, load, going: false };
+  const post = { a, page, paper, cover, img, slug, load, going: false };
   a.addEventListener('click', e => { e.preventDefault(); go(post); });
   return post;
+}
+/* the names that tie it to the post, only when it goes there or comes back
+   from it: left on, a return with it put away would fly the post into nothing */
+function tie(post){
+  post.paper.style.viewTransitionName = `paper-${post.slug}`;
+  post.paper.style.viewTransitionClass = 'paper';
+  post.cover.style.viewTransitionName = `cover-${post.slug}`;
+  post.cover.style.viewTransitionClass = 'cover';
 }
 function go(post){
   if (post.going) return;
   post.going = true;
-  /* tie the picture to the cover of the post, only now: left on, a return to
-     the site with the picture put away would fly the post's cover into
-     nothing */
-  post.img.style.viewTransitionName = `cover-${post.slug}`;
-  post.img.style.viewTransitionClass = 'cover';
-  /* and remember where this was, so that coming back is to the picture */
+  tie(post);
+  /* and remember where this was, so that coming back is to it */
   try { sessionStorage.setItem('back-to-post', post.slug); } catch (_) {}
   location.href = post.a.href;
 }
@@ -317,9 +336,11 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { art: 'felv', cap: 'I’m a bit obsessed about maps that show a different perspective of earth.' },
                 { art: 'gosper', cap: 'I’ve created a new projection using only hexagons and some fractals.' }], null, null,
                 { slug: 'gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball',
-                  widths: [480, 704, 1056, 1408, 2003], line: 'Keep scrolling to read more' }),
+                  title: 'Gosper World - a novel world map made of hexagonal-like fractals (or, how I made Matt Parker’s Impossible Ball)',
+                  widths: [480, 704, 1056, 1408, 2003], line: 'Keep scrolling to read it' }),
               buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }], null, null,
-                { slug: 'the-triangle-of-everything', widths: [480, 704, 1056, 1408, 1848], line: 'Keep scrolling to read more' })];
+                { slug: 'the-triangle-of-everything', title: 'The Triangle of Everything',
+                  widths: [480, 704, 1056, 1408, 1848], line: 'Keep scrolling to read it' })];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
 const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
@@ -775,16 +796,15 @@ function paintPost(pad, n, station){
     return;
   }
   post.load();
-  const f = u * u * (3 - 2 * u);
+  /* the window onto it, from the page's box to the whole screen */
+  const f = u * u * (3 - 2 * u), g = 1 - f;
   const r = station.getBoundingClientRect(), sw = W(), sh = H();
-  s.left = (r.left * (1 - f)).toFixed(1) + 'px';
-  s.top = (r.top * (1 - f)).toFixed(1) + 'px';
-  s.width = (r.width + (sw - r.width) * f).toFixed(1) + 'px';
-  s.height = (r.height + (sh - r.height) * f).toFixed(1) + 'px';
+  s.clipPath = `inset(${(r.top * g).toFixed(1)}px ${((sw - r.right) * g).toFixed(1)}px ` +
+               `${((sh - r.bottom) * g).toFixed(1)}px ${(r.left * g).toFixed(1)}px)`;
   s.visibility = 'visible';
-  s.opacity = clamp01(u / .25).toFixed(3);
-  post.img.style.transform = `scale(${(1 + .06 * v).toFixed(4)})`;
-  post.say.style.opacity = (clamp01((u - .7) / .3) * (1 - clamp01(v / .3))).toFixed(3);
+  s.opacity = clamp01(u / .2).toFixed(3);
+  /* going on, it starts up the screen the way the post will */
+  post.page.style.transform = `translate3d(0,${(-v * H() * .08).toFixed(1)}px,0)`;
   const shown = u > .9;
   if (post.shown !== shown){
     post.shown = shown;
@@ -1350,8 +1370,7 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
   hx = i;
   pad.pv = pad.sheets.length;
   coast = performance.now() + 2500; coastLast = performance.now();
-  pad.post.img.style.viewTransitionName = `cover-${slug}`;
-  pad.post.img.style.viewTransitionClass = 'cover';
+  tie(pad.post);
   pad.post.load();
   light();
 })();
