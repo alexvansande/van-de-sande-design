@@ -46,7 +46,10 @@ body{margin:0;background:var(--dark);color:var(--ink);
   -webkit-font-smoothing:antialiased}
 
 .stage{position:fixed;inset:0;overflow:hidden;
-  --ph:min(80vh, 60rem, 76vw / 0.7071);
+  /* never taller than 45rem, which is what a laptop already shows: on a big
+     display the paper stops growing and the rail shows several sheets side
+     by side instead of one filling the screen */
+  --ph:min(80vh, 45rem, 76vw / 0.7071);
   --pw:calc(var(--ph) * 0.7071);   /* A4: every sheet on the rail is one */
   --r:0;                   /* square. A radius travels badly through a curl:
                               the strips are square cuts across a rounded
@@ -91,6 +94,13 @@ body{margin:0;background:var(--dark);color:var(--ink);
 /* a line per page, all in the same place, only one of them showing */
 .cap .line{position:absolute;left:0;right:0;top:0;opacity:0}
 .cap .line:first-child{opacity:1}
+/* Where there is room under the paper, the whole story is set out at once,
+   like the lyrics of a song: every line showing, the one for the page in
+   hand bright and the rest dim. A little wider than the page, into the gap,
+   so the lines run to two rather than four. The script decides by measuring
+   whether it fits. */
+.lyrics .cap{left:calc(var(--gap,0px) * -.3);right:calc(var(--gap,0px) * -.3)}
+.lyrics .cap .line{position:relative;display:block;margin-bottom:.7em}
 /* A poster is a pad like the story: its sheet carries the image, so it bows,
    curls and zooms on exactly the same machinery. */
 .poster{z-index:1}

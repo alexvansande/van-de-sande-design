@@ -410,7 +410,7 @@ let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs th
    parseFloat gives NaN and every transform built from it is silently dropped.
    Measured once and kept, too: the breathing loop renders every frame, and
    reading offsetWidth in there would force a reflow on each of them. */
-let STEP = 0, PH = 0, PW = 0, REEL_W = 0;
+let STEP = 0, PH = 0, PW = 0, REEL_W = 0, lyrics = false;
 function measure(){
   const pw = story.offsetWidth;
   /* a share of the free space beside the page. On a phone that space is only
@@ -423,10 +423,20 @@ function measure(){
      the page is already as tall as it can be, and zooming there would push
      the story off the bottom while you read the page it belongs to. */
   const ph = PH = story.offsetHeight;
+  stage.style.setProperty('--gap', gap + 'px');
+  /* The whole story under the page at once, if every pad's fits between the
+     foot of its page and the bottom of the screen; one line at a time if
+     not. Tried each way round on every measure, so a window made smaller
+     goes back to one at a time. */
+  stage.classList.add('lyrics');
+  lyrics = PADS.every(pad => !pad.lines ||
+    story.offsetTop + pad.cap.offsetTop + pad.cap.offsetHeight <= H() - 16);
+  if (!lyrics) stage.classList.remove('lyrics');
+  PADS.forEach(pad => { pad.capOn = null; pad.lines && pad.lines.forEach(l => { l._o = null; }); });
   let foot = 0;
   PADS.forEach(pad => {
     if (!pad.lines) return;
-    const tallest = Math.max(...pad.lines.map(l => l.offsetHeight));
+    const tallest = lyrics ? pad.cap.offsetHeight : Math.max(...pad.lines.map(l => l.offsetHeight));
     foot = Math.max(foot, pad.cap.offsetTop + tallest - ph / 2);
   });
   zoomBy = foot ? clamp((H() / 2 - 14) / foot - 1, 0, ZOOM) : ZOOM;
@@ -538,7 +548,10 @@ function paintLines(pad, d){
   const on = (.85 * (.4 + .6 * nearness(d))).toFixed(3);
   if (pad.capOn !== on){ pad.capOn = on; pad.cap.style.opacity = on; }
   pad.lines.forEach((l, j) => {
-    const o = clamp01(1 - Math.abs(pad.pv - j) * 2.2).toFixed(3);
+    /* set out as lyrics, the line for the page in hand is lit and the rest
+       wait dim; one at a time, the rest are not there at all */
+    const near = clamp01(1 - Math.abs(pad.pv - j) * (lyrics ? 1.4 : 2.2));
+    const o = (lyrics ? .3 + .7 * near * near * (3 - 2 * near) : near).toFixed(3);
     if (l._o !== o){ l._o = o; l.style.opacity = o; }
   });
 }

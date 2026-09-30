@@ -50,6 +50,10 @@ Everything poster.
 Under the book and the release pages is not a title but a line of the
 story, one per page, which changes as the page turns: `cap` on each page in
 `PAGES` and in the blockchain pad. A pad without them keeps its title.
+Where there is room under the paper — on a big display, where the sheets
+stop growing at 45rem and several sit side by side — the whole story is set
+out at once instead, like the lyrics of a song: every line showing, the one
+for the page in hand bright and the rest dim.
 
 Adding another is two lines: an entry in `PADS` and a `.art` class with its
 image. Everything on the rail is A4, so one step spaces all of it.
