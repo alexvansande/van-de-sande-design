@@ -32,6 +32,22 @@ const PAGES = [
            <p>Lefteris Karapetsas &ndash; coding guru, replicated DAO attack in a few hours</p>` }
 ];
 
+/* Under the last page, the books themselves: three small volumes on the dark
+   ground, each a way out to where it is sold, and a round note in the fourth
+   corner. `cover` is a picture of the real cover, in img/, when there is one;
+   without it the volume is set in type, which is what is here now. */
+const BOOKS = [
+  { cls: 'infinite', title: 'The Infinite Machine', author: 'Camila Russo',
+    sub: 'How an Army of Crypto-hackers Is Building the Next Internet with Ethereum',
+    href: 'https://www.amazon.com/dp/0062886142', cover: '' },
+  { cls: 'cryptopians', title: 'The Cryptopians', author: 'Laura Shin',
+    sub: 'Idealism, Greed, Lies, and the Making of the First Big Cryptocurrency Craze',
+    href: 'https://www.amazon.com/dp/1541763009', cover: '' },
+  { cls: 'ether', title: 'Out of the Ether', author: 'Matthew Leising',
+    sub: 'The Amazing Story of Ethereum and the $55 Million Heist that Almost Destroyed It All',
+    href: 'https://www.amazon.com/dp/1119602939', cover: '' }
+];
+
 const $ = s => document.querySelector(s);
 const el = (t, c) => { const e = document.createElement(t); if (c) e.className = c; return e; };
 const clamp = (x, a, b) => x < a ? a : x > b ? b : x;
@@ -58,7 +74,28 @@ const faceHTML = p => p.art
        <div class="body">${p.body}</div>
        <footer class="folio">${p.folio}</footer>
      </div>`;
-function buildPad(station, pages, reel){
+function buildShelf(books){
+  const host = el('div', 'shelf');
+  host.setAttribute('aria-hidden', 'true');
+  const items = books.map(b => {
+    const a = el('a', 'bk ' + b.cls);
+    a.href = b.href; a.target = '_blank'; a.rel = 'noopener';
+    a.tabIndex = -1;
+    a.setAttribute('aria-label', `${b.title} by ${b.author}`);
+    a.innerHTML = `<span class="vol">
+        <span class="cv"${b.cover ? ` style="background-image:url('img/${b.cover}')"` : ''}>${b.cover ? '' :
+          `<span class="t">${b.title}</span><span class="s">${b.sub}</span><span class="a">${b.author}</span>`}</span>
+        <span class="pg"></span><span class="bc"></span>
+      </span>`;
+    host.append(a);
+    return a;
+  });
+  const note = el('p', 'note');
+  note.innerHTML = '<span>Learn more about these books</span>';
+  host.append(note);
+  return { host, items: items.concat(note), links: items, open: false };
+}
+function buildPad(station, pages, reel, shelf){
   const cap = station.querySelector('.cap');
   const sheets = pages.map((p, i) => {
     const sh = el('div', 'sheet');
@@ -96,9 +133,14 @@ function buildPad(station, pages, reel){
     pad.reel = { host, shots };
     pad.hi += shots.length;      /* the last sheet turns away, then one stop per shot */
   }
+  if (shelf){
+    pad.shelf = buildShelf(shelf);
+    station.insertBefore(pad.shelf.host, station.firstChild);
+    pad.hi += 1;                 /* the last sheet turns away, and there they are */
+  }
   return pad;
 }
-const PADS = [buildPad(story, PAGES),
+const PADS = [buildPad(story, PAGES, null, BOOKS),
               buildPad($('#blockchain'), [
                 { art: 'eth1', cap: 'Very few people understood what exactly we were doing, even among the team.' },
                 { art: 'eth2', cap: 'The launch pages were based on my own experience of trying to get it all to work. Recipes to build a new kind of society.' }]),
@@ -516,8 +558,8 @@ function paintPad(pad, bm, lean){
   /* which sheet is in hand, by index rather than by the sign of a number that
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
      and the page snaps flat for a frame */
-  /* with a reel under it, the last sheet can go too */
-  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - (pad.reel ? 0 : 1));
+  /* with a reel or the shelf under it, the last sheet can go too */
+  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - (pad.reel || pad.shelf ? 0 : 1));
   pad.sheets.forEach((sh, j) => {
     if (j < front){ dropCurl(sh); sh.classList.add('gone'); return; }
     sh.classList.remove('gone');
@@ -538,6 +580,31 @@ function paintPad(pad, bm, lean){
              lean * (1 - land * land * (3 - 2 * land)));
   });
   if (pad.reel) paintReel(pad);
+  if (pad.shelf) paintShelf(pad);
+}
+
+/* The shelf comes up out of the dark as the last page goes over, a volume at
+   a time, left to right and top to bottom, and the note last. Its links only
+   take a click or a tab once it is there. */
+function paintShelf(pad){
+  const sh = pad.shelf;
+  const u = turnOf(clamp01(pad.pv - pad.sheets.length + 1));
+  const sig = u.toFixed(4) + '|' + PH;
+  if (sh._sig === sig) return;
+  sh._sig = sig;
+  const n = sh.items.length, lag = .12, run = 1 - lag * (n - 1);
+  sh.items.forEach((it, i) => {
+    const a = clamp01((u - lag * i) / run), f = a * a * (3 - 2 * a);
+    it.style.opacity = f.toFixed(3);
+    it.style.transform = `translate3d(0,${((1 - f) * PH * .07).toFixed(1)}px,0)`;
+  });
+  const open = u > .6;
+  if (sh.open !== open){
+    sh.open = open;
+    sh.host.classList.toggle('open', open);
+    sh.host.setAttribute('aria-hidden', open ? 'false' : 'true');
+    sh.links.forEach(a => { a.tabIndex = open ? 0 : -1; });
+  }
 }
 
 /* The reel, at stop m, has shot m in the middle of the page and the ones
@@ -938,11 +1005,17 @@ function release(e){
   if (!g || (e && e.pointerId !== g.id)) return;
   if (g.held) try { stage.releasePointerCapture(g.id); } catch (_) {}
   const ax = g.ax, s = g.s, from = g.from; g = null;
+  if (ax) draggedAt = performance.now();
   wake();     /* the draught's quiet is counted from when you let go */
   if (ax && s.length) settle(ax, speed(s), from);
 }
 stage.addEventListener('pointerup', release);
 stage.addEventListener('pointercancel', release);
+/* a drag that began on a book is a turn or a slide, not a click on it */
+let draggedAt = -1e9;
+stage.addEventListener('click', e => {
+  if (performance.now() - draggedAt < 350 && e.target.closest('a')) e.preventDefault();
+}, true);
 stage.addEventListener('dragstart', e => e.preventDefault());
 stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
