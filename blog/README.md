@@ -26,6 +26,10 @@ path instead, which is how the deploy uses it for now (`--out site/blog
 --base /blog/`). Once blog.vandesande.design points at it, build with the
 default `--base /`.
 
+The addresses of `blog.css` and `blog.js` carry a stamp of what is in
+them (`?v=`), as the site's script does: a browser may keep a file for ten
+minutes, and a page must not run with the script of the version before it.
+
 It writes the index, one `<slug>.html` per post, which GitHub Pages serves at
 `/<slug>`, `/category/<name>`, `/rss.xml`, `/sitemap.xml`, `/llms.txt` and
 `/<slug>.md`, as Paragraph had them. It needs only Python. Pillow cuts the
@@ -156,7 +160,8 @@ scroll, a card trailed the page by a frame and shook on a phone.
 - `#back=blog.<n>`, on a post or the index, is the page of the site's poster
   this was opened from: pulling back up past the top goes back to it
   (`/#read=blog.<n>` on the site). Once seen it is kept for the tab, so the
-  index still goes back there after reading a post.
+  index still goes back there after reading a post. An index come to from the site
+  without it still goes back to the poster, at its last page.
 
 Landing somewhere by the address, the trackpad still coasting from the
 gesture that brought you is held for a moment, so it does not scroll you

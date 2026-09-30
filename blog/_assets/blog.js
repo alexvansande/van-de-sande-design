@@ -228,7 +228,16 @@ const Pile = (() => {
   if (!site) return;
   let leaving = false;
   const args = hashArgs();
-  const back = backToSite(args.get("back"));
+  /* come from the site without its note (a script of the version before),
+     it was still the blog's poster that brought you: back to its last page,
+     which the site takes any number past its end to mean */
+  const fromSite = (() => {
+    try {
+      const r = new URL(document.referrer), h = new URL(site.href);
+      return r.origin === h.origin && r.pathname === h.pathname;
+    } catch (_) { return false; }
+  })();
+  const back = backToSite(args.get("back") || (fromSite ? "blog.99" : null));
   const where = c => Pile ? Pile.rect(c) : c.getBoundingClientRect();
 
   /* Opened at a post (#at=slug), from the site's poster or back from the

@@ -19,7 +19,7 @@ Only the standard library is needed. With Pillow installed, pictures are
 resized into WebP at the widths the page can show them at; without it they
 are copied as they are, which works but is heavy.
 """
-import argparse, html, http.server, json, os, re, shutil, sys
+import argparse, hashlib, html, http.server, json, os, re, shutil, sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
@@ -433,6 +433,14 @@ def nice_date(d):
     return f"{d.day} {d.strftime('%B %Y')}"
 
 
+def asset_v(name):
+    """A stamp for the address of a file in _assets, from what is in it: a
+    browser may keep a file for ten minutes (GitHub Pages), and a page must
+    not be run by the script of the version before it."""
+    with open(os.path.join(HERE, "_assets", name), "rb") as f:
+        return hashlib.sha1(f.read()).hexdigest()[:8]
+
+
 def plain(html_text, n=None):
     t = re.sub(r"\s+", " ", html.unescape(re.sub(r"<math.*?</math>|<figure.*?</figure>|<[^>]+>", " ", html_text, flags=re.S))).strip()
     if n and len(t) > n:
@@ -471,7 +479,7 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 {chr(10).join(og)}
 <link rel="alternate" type="application/rss+xml" title="{esc(TITLE)}" href="{base}rss.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23333331'/%3E%3Crect x='9' y='6' width='14' height='20' rx='1' fill='%23f4f1e4'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="{base}assets/blog.css">
+<link rel="stylesheet" href="{base}assets/blog.css?v={asset_v('blog.css')}">
 {extra_head}
 </head>
 <body class="{cls}">
@@ -599,7 +607,7 @@ def build(out, base, clean=False):
         extra = f'<meta property="article:published_time" content="{p["date_dt"].isoformat()}">\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
         write(out, p["slug"] + ".html", page(base, p["title"], body, description=p["description"], canonical=p["url"],
                                               image=p["og_image"], kind="article", cls="post",
-                                              extra_head=extra + f'\n<script src="{base}assets/blog.js" defer></script>'))
+                                              extra_head=extra + f'\n<script src="{base}assets/blog.js?v={asset_v("blog.js")}" defer></script>'))
         # the Markdown too, with its pictures at their full addresses
         md = re.sub(r'(src="|\]\()(?![a-z]+:|/)([^")\s]+)',
                     lambda m: m.group(1) + (SITE_URL + "/" + pics.variants(os.path.join(p["folder"], m.group(2)), p["slug"], m.group(2))[-1][0][len(base):]
@@ -617,7 +625,7 @@ def build(out, base, clean=False):
         # the index itself (no header over it): pulled down, it goes back to the site
         front = {} if head else {"cls": "list front"}
         write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical,
-                              **{"cls": "list", "head": head, "extra_head": f'<script src="{base}assets/blog.js" defer></script>', **front}))
+                              **{"cls": "list", "head": head, "extra_head": f'<script src="{base}assets/blog.js?v={asset_v("blog.js")}" defer></script>', **front}))
 
     def front_page(heading, items):
         """The index itself: beside the posts, a line about them and the years
