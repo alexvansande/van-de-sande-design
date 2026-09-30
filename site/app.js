@@ -205,26 +205,31 @@ function spinnable(a, n, shown){
   draw();
   return go;
 }
-/* A pad that ends in a post on the blog. When the last sheet turns away, the
-   head of the post is there under it: the blog's name, and the post's own
-   sheet with its picture whole on its white, its title, and in place of the
-   date a line asking you to keep going. It is laid out as the post itself
-   is, and uncovered by a window that grows from the page to the whole
-   screen, so nothing in it is stretched. Going on opens the post: its paper
-   and picture are tied to the post's (a view transition, since the blog is
-   on this same site), and the words cross-fade where they already stand.
-   It is on the stage, not the rail, so the rail's zoom does not reach it. */
+/* A pad that ends in a post on the blog. The head of the post lies under the
+   last sheet, the whole screen of it, so turning that sheet over is all it
+   takes to be looking at the post: the blog's name, the post's own sheet
+   with its picture, title and date, and its first paragraph. It is laid out
+   as the post itself is (blog/_assets/blog.css), so nothing moves when the
+   real one loads in its place.
+   Going on from there reads down it: the page follows the hand, and under
+   the first paragraph there is only blank paper, and a line saying to keep
+   going that comes up as you pull at it. Pull hard enough and it is the
+   post, loaded for real, from there on the blog's own.
+   It is on the stage, under the rail, so the rail's zoom does not reach it. */
 /* Where the blog is. Here, under this site; once it has a domain of its own,
    its address, e.g. 'https://blog.vandesande.design/'. */
 const BLOG = 'blog/';
-function buildPost({ slug, title, widths, line }){
+/* how far past the first paragraph you pull, in pixels of the hand, before
+   it lets go into the post; and how much of that the paper follows */
+const PULL_GO = 150, PULL_GIVE = .45;
+function buildPost({ slug, title, widths }){
   const a = el('a', 'ending');
-  a.href = `${BLOG}${slug}?from=site`;
+  a.href = `${BLOG}${slug}`;
   a.tabIndex = -1;
   a.setAttribute('aria-hidden', 'true');
   const page = el('div', 'e-page');
   const top = el('div', 'e-top');
-  top.textContent = "Alex Van de Sande's wanderings";
+  top.innerHTML = 'Alex Van de Sande&rsquo;s wandering about';
   const sheet = el('div', 'e-sheet');
   const paper = el('span', 'e-paper');
   const cover = el('div', 'e-cover');
@@ -234,37 +239,98 @@ function buildPost({ slug, title, widths, line }){
   const words = el('div', 'e-text');
   const h = el('h1');
   h.textContent = title;
-  const say = el('p', 'e-when');
-  say.textContent = line;
-  words.append(h, say);
+  const more = el('p', 'e-more');
+  more.textContent = 'Keep scrolling to read';
+  words.append(h);
   cover.append(img);
-  sheet.append(paper, cover, words);
+  sheet.append(paper, cover, words, more);
   page.append(top, sheet);
   a.append(page);
   stage.append(a);
   const base = `${BLOG}media/${slug}/cover-`;
-  const load = () => {
+  const post = { a, page, top, sheet, paper, cover, img, words, more, slug, going: false, shift: 0,
+                 fit: { s: 1, y0: 0 }, curS: 1 };
+  /* The date and the first paragraph come from the post itself, so they are
+     never out of step with it. Its .html, which every host serves, where
+     the bare address needs Pages. */
+  const fill = () => {
+    fetch(`${BLOG}${slug}.html`).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => {
+      const doc = new DOMParser().parseFromString(t, 'text/html');
+      const text = doc.querySelector('article.sheet .text');
+      if (!text) return;
+      const sub = text.querySelector(':scope > .sub'), when = text.querySelector(':scope > .when');
+      const first = text.querySelector('.body > :is(p, blockquote, ul, ol)');
+      const body = el('div', 'e-body');
+      if (first) body.append(document.importNode(first, true));
+      /* inside the one link to the post, a link is a span */
+      const kept = [sub, when].filter(Boolean).map(n => document.importNode(n, true));
+      kept.concat(body).forEach(n => n.querySelectorAll('a').forEach(l => {
+        const s = el('span'); s.append(...l.childNodes); l.replaceWith(s);
+      }));
+      words.append(...kept, body);
+      post.need = null;
+    }).catch(() => {});
+  };
+  post.load = () => {
     if (img.src) return;
     img.sizes = '(min-width: 53rem) 848px, 100vw';
     img.srcset = widths.map(w => `${base}${w}.webp ${w}w`).join(', ');
     img.src = `${base}${widths[widths.length - 1]}.webp`;
+    fill();
   };
-  const post = { a, page, paper, cover, img, slug, load, going: false };
   a.addEventListener('click', e => { e.preventDefault(); go(post); });
   return post;
 }
+/* On a big screen the head of the post is not the whole screen but a card,
+   no bigger than the page it was under: the post as the blog sets it,
+   drawn smaller, lying where the page lay. Only pulling on through it grows
+   it to the post's own size, and then it is the post. On a phone the page
+   was already as wide as the screen, so it is the post at its own size. */
+const CARD_BELOW = .92;
+/* How far the page has to go up for the first paragraph to be read whole,
+   with a little paper under it, and how small it is drawn: measured once it
+   is in, and again on a resize. */
+function needOf(post){
+  if (post.need == null || !post.img.complete){
+    const st = post.station.getBoundingClientRect();
+    /* as wide as the page, or a large card (34rem) if the page is narrower,
+       so its words stay big enough to read */
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let s = Math.min(1, Math.max(st.width, 34 * rem) / post.sheet.offsetWidth), y0 = 0;
+    if (s > CARD_BELOW) s = 1;
+    else y0 = st.top - post.top.offsetHeight * s;
+    post.fit = { s, y0 };
+    const r = post.words.getBoundingClientRect(), p = post.page.getBoundingClientRect();
+    const local = (r.bottom - p.top) / post.curS;
+    post.need = Math.max(0, Math.ceil(y0 + local * s + 40 - H()));
+  }
+  return post.need;
+}
+/* the step past the last sheet, in pixels of the hand: long enough to read
+   down to the end of the paragraph and then pull */
+const unitOf = post => Math.max(H() * .5, needOf(post) + PULL_GO + 40);
 /* Going on is a plain page load of the post: the blog may be on another
    domain, where no transition can reach. It already looks like the head of
-   the post, so the load is the only seam. This page's own address first
-   gets a note of where it stood (#read=slug), so that coming back to it,
-   by the back button or by zooming out of the post, is to here again; and
-   the post is told it came from the site (?from=site), so that zooming out
-   of it knows to come back. */
+   the post, so the load is the only seam, and the post is told how far down
+   it was being read (#at=px) so that it opens there. This page's own address
+   first gets a note of where it stood (#read=slug), so that the back button
+   comes back to here. */
 function go(post){
   if (post.going) return;
   post.going = true;
   try { history.replaceState(history.state, '', '#read=' + post.slug); } catch (_) {}
-  location.href = post.a.href;
+  const leave = () => { location.href = post.a.href + (post.shift > 0 ? '#at=' + Math.round(post.shift) : ''); };
+  const { s, y0 } = post.fit;
+  if (s >= 1 || reduce){ leave(); return; }
+  /* a card first: it grows to the post's own size about the middle of the
+     screen, and the post loads onto exactly that */
+  const c = (H() / 2 - (y0 - post.shift)) / s;
+  post.shift = Math.max(0, c - H() / 2);
+  post.more.style.opacity = '0';
+  post.page.style.transition = 'transform .5s cubic-bezier(.2,.75,.15,1)';
+  post.page.style.transform = `translate3d(0,${(-post.shift).toFixed(1)}px,0) scale(1)`;
+  post.curS = 1;
+  setTimeout(leave, 520);
 }
 function buildPad(station, pages, reel, shelf, post){
   const cap = station.querySelector('.cap');
@@ -312,6 +378,7 @@ function buildPad(station, pages, reel, shelf, post){
   }
   if (post){
     pad.post = buildPost(post);
+    pad.post.station = station;
     pad.hi += 2;                 /* the last sheet goes and the picture fills the
                                     screen; one more and it is the post */
   }
@@ -337,10 +404,10 @@ const PADS = [buildPad(story, PAGES, null, BOOKS),
                 { art: 'gosper', cap: 'I’ve created a new projection using only hexagons and some fractals.' }], null, null,
                 { slug: 'gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball',
                   title: 'Gosper World - a novel world map made of hexagonal-like fractals (or, how I made Matt Parker’s Impossible Ball)',
-                  widths: [480, 704, 1056, 1408, 2003], line: 'Keep scrolling to read it' }),
+                  widths: [480, 704, 1056, 1408, 2003] }),
               buildPad($('#triangle'), [{ art: 'triangle' }, { art: 'scales' }], null, null,
                 { slug: 'the-triangle-of-everything', title: 'The Triangle of Everything',
-                  widths: [480, 704, 1056, 1408, 1848], line: 'Keep scrolling to read it' })];
+                  widths: [480, 704, 1056, 1408, 1848] })];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
 const padOf = h => h >= 0 && h < PADS.length ? PADS[h] : null;
 
@@ -709,7 +776,7 @@ function measure(){
     pad.lines.forEach(l => { l._o = null; });
     const st = pad.cap.parentNode;
     st.classList.add('lyrics');
-    pad.lyrics = story.offsetTop + pad.cap.offsetTop + pad.cap.offsetHeight <= H() - 16;
+    pad.lyrics = big && story.offsetTop + pad.cap.offsetTop + pad.cap.offsetHeight <= H() - 16;
     if (!pad.lyrics) st.classList.remove('lyrics');
   });
   let foot = 0;
@@ -775,43 +842,50 @@ function paintPad(pad, bm, lean){
   if (pad.shelf) paintShelf(pad);
 }
 
-/* The picture at the end of a pad. u is the last sheet going over: through
-   it the picture grows from the page's own box to the whole stage. v is the
-   step past that, into the post: a little further in, and a third of the
-   way along it goes. n is how much this pad is the one in the middle, so
-   that sliding away along the rail puts the picture back. */
-function paintPost(pad, n, station){
+/* The post at the end of a pad. u is the last sheet going over, uncovering
+   it; the rest of the rail goes dark around the page as it does, so what is
+   left when the sheet is gone is the post alone. v is the step past that,
+   reading down it: the page follows the hand to the end of the first
+   paragraph, then gives, and pulling on brings up the line under it and
+   then the post itself. n is how much this pad is the one in the middle, so
+   that sliding away along the rail puts it all back. Returns how far the
+   post has come up, for render() to dim the rest by. */
+function paintPost(pad, n){
   const post = pad.post, L = pad.sheets.length;
   const u = turnOf(clamp01(pad.pv - (L - 1))) * n;
-  const v = clamp01(pad.pv - L) * n;
-  const sig = u.toFixed(4) + '|' + v.toFixed(4) + '|' + W() + 'x' + H();
-  if (post._sig === sig) return;
+  const v = Math.max(0, pad.pv - L) * n;
+  const sig = u.toFixed(4) + '|' + v.toFixed(4) + '|' + W() + 'x' + H() + '|' + post.need;
+  if (post._sig === sig) return u;
   post._sig = sig;
   const a = post.a, s = a.style;
-  /* put away whenever it is not coming up at all, however far it got: a
-     turn let go of half way used to leave it lying there, see-through */
+  /* put away whenever it is not coming up at all, however far it got */
   if (u <= 0){
     s.opacity = '0'; s.visibility = 'hidden';
     if (post.shown){ post.shown = false; a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
-    return;
+    stage.classList.remove('reading');
+    return 0;
   }
   post.load();
-  /* the window onto it, from the page's box to the whole screen */
-  const f = u * u * (3 - 2 * u), g = 1 - f;
-  const r = station.getBoundingClientRect(), sw = W(), sh = H();
-  s.clipPath = `inset(${(r.top * g).toFixed(1)}px ${((sw - r.right) * g).toFixed(1)}px ` +
-               `${((sh - r.bottom) * g).toFixed(1)}px ${(r.left * g).toFixed(1)}px)`;
   s.visibility = 'visible';
-  s.opacity = clamp01(u / .2).toFixed(3);
-  /* going on, it starts up the screen the way the post will */
-  post.page.style.transform = `translate3d(0,${(-v * H() * .08).toFixed(1)}px,0)`;
+  s.opacity = clamp01(u / .3).toFixed(3);
+  if (post.going) return u;          /* growing into the post: hands off */
+  const need = needOf(post), px = v * unitOf(post);
+  const pull = Math.max(0, px - need);
+  post.shift = Math.min(px, need) + pull * PULL_GIVE;
+  const { s: sc, y0 } = post.fit;
+  post.curS = sc;
+  post.page.style.transform = `translate3d(0,${(y0 - post.shift).toFixed(1)}px,0) scale(${sc.toFixed(4)})`;
+  const k = clamp01(pull / (PULL_GO * .6));
+  post.more.style.opacity = (k * k * (3 - 2 * k)).toFixed(3);
   const shown = u > .9;
   if (post.shown !== shown){
     post.shown = shown;
     a.tabIndex = shown ? 0 : -1;
     a.setAttribute('aria-hidden', shown ? 'false' : 'true');
+    stage.classList.toggle('reading', shown);
   }
-  if (v > .34) go(post);
+  if (pull >= PULL_GO && n > .9) go(post);
+  return u;
 }
 
 /* The shelf comes up out of the dark as the last page goes over, a volume at
@@ -889,8 +963,13 @@ function paintReel(pad){
    of each other. A pad waiting beside the one in the middle keeps its line,
    quieter, as the thing along from here. */
 function paintLines(pad, d){
-  if (!pad.lines) return;
-  const on = (.85 * (.4 + .6 * nearness(d))).toFixed(3);
+  if (!pad.lines){
+    /* a title that stays put still gives way to the post */
+    const o = pad.away ? (.85 * (1 - clamp01(pad.away / .4))).toFixed(3) : '';
+    if (pad.capOn !== o){ pad.capOn = o; pad.cap.style.opacity = o; }
+    return;
+  }
+  const on = (.85 * (.4 + .6 * nearness(d)) * (1 - clamp01((pad.away || 0) / .4))).toFixed(3);
   if (pad.capOn !== on){ pad.capOn = on; pad.cap.style.opacity = on; }
   pad.lines.forEach((l, j) => {
     /* set out as lyrics, the line for the page in hand is lit and the rest
@@ -942,6 +1021,22 @@ function render(){
   light();
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
+  /* a post coming up under its last sheet: everything else on the rail goes
+     dark around the page, the page's own line with it */
+  let upto = 0, upSt = null;
+  PADS.forEach((pad, i) => {
+    if (!pad.post) return;
+    pad.away = paintPost(pad, nearness(Math.abs(i - hx)));
+    if (pad.away > upto){ upto = pad.away; upSt = RAIL.find(([, j]) => j === i)[0]; }
+  });
+  if (upto !== rail._upto){
+    rail._upto = upto;
+    const o = upto > 0 ? (1 - clamp01(upto / .6)).toFixed(3) : '';
+    RAIL.forEach(([st]) => {
+      st.style.opacity = st === upSt ? '' : o;
+      st.style.transition = upto > 0 ? 'none' : '';     /* with the hand, not after it */
+    });
+  }
   PADS.forEach((pad, i) => {
     paintLines(pad, Math.abs(i - hx));
     /* n is how much this is the sheet in the middle, m how much a neighbour.
@@ -952,7 +1047,6 @@ function render(){
     const d = Math.abs(i - hx), n = nearness(d);
     const m = i === 0 && hx < 0 ? clamp01((1.4 - d) / .5) * (1 - n) : 0;
     const own = i === Math.round(hx) ? handTilt : 0;
-    if (pad.post) paintPost(pad, n, RAIL.find(([, j]) => j === i)[0]);
     paintPad(pad, bowMul * (1 + (pad.flap || 0)) * n + (pad.air || 0) * m +
                   HOVER_LIFT * (pad.ha || 0) + slideLift * (n + m),
                   (tilt + own) * n + ((pad.lean || 0) + slideTilt) * (n + m) +
@@ -976,7 +1070,17 @@ function pageAxisOf(pad){
     lo: () => 0, hi: () => pad.hi,
     /* a pad with nothing behind its face still gives, so pulling at it curls
        and springs back rather than feeling dead */
-    give: pad.hi > 0 ? .14 : .5
+    give: pad.hi > 0 ? .14 : .5,
+    /* Reading down the head of a post, it stays where it is let go, as a
+       page scrolled by hand does; pulled on past the paragraph, it springs
+       back to it, unless pulled far enough to go on into the post. */
+    rest: pad.post && ((x, from) => {
+      const L = pad.sheets.length;
+      if (x <= L || from < L - 1) return null;
+      const post = pad.post, unit = unitOf(post), px = (x - L) * unit;
+      if (px - needOf(post) >= PULL_GO) return pad.hi;
+      return L + Math.min(px, needOf(post)) / unit;
+    })
   });
 }
 function pageAxis(){ return pageAxisOf(padOf(clamp(Math.round(hx), FIRST, LAST))); }
@@ -1031,6 +1135,9 @@ const COMMIT = .3, CARRY = .3;
    being heavy: you do the work and it drops. */
 function settle(ax, v, from){
   const proj = ax.get() + v * CARRY;
+  /* an axis may know better where it comes to rest */
+  const own = ax.rest && ax.rest(ax.get(), from);
+  if (own != null) return springTo(ax, own, v);
   const t = proj > from + COMMIT ? from + 1 : proj < from - COMMIT ? from - 1 : from;
   springTo(ax, t, v);
 }
@@ -1309,6 +1416,8 @@ addEventListener('pageshow', e => {
   PADS.forEach(pad => {
     if (!pad.post) return;
     pad.post.going = false;
+    pad.post.page.style.transition = '';
+    pad.post._sig = null;
     if (pad.pv > pad.sheets.length){ stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), pad.sheets.length); }
   });
 });
@@ -1317,7 +1426,7 @@ let resizeT = 0;
 function relayout(){
   clearTimeout(resizeT);
   resizeT = setTimeout(() => {
-    PADS.forEach(pad => pad.sheets.forEach(dropCurl));
+    PADS.forEach(pad => { pad.sheets.forEach(dropCurl); if (pad.post) pad.post.need = null; });
     measure(); fitSheets(); render();
   }, 140);
 }

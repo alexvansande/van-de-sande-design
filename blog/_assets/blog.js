@@ -9,9 +9,13 @@
    Going back up, a grey bar with the blog's name comes down from the top;
    it goes away again as you read on, and clicking it goes to the index, the
    name growing into the index's title. At the top of a post the post before
-   it is put back above, if it has been read; otherwise pulling on past the
-   top zooms out of the post: back to the site's picture it came from, or to
-   the index, where it shrinks into its card.
+   it is put back above only if that is how you got here, reading it to the
+   end and going on, like a back button; otherwise pulling on past the
+   top draws the post back, a line above it saying where it goes, and pulled
+   hard enough it goes to the index, where it shrinks into its card.
+
+   Coming from the site, the post opens as far down as it was being read
+   there (#at=px), so the hand-over does not move it.
 
    Without this script the card is a plain link and the rest is not there. */
 (() => {
@@ -19,7 +23,17 @@
   if (!main || !main.querySelector("article.sheet")) return;
   document.documentElement.classList.add("js");
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const home = document.querySelector(".top a").href;
+  const topLink = document.querySelector(".top a.blog");
+  const home = topLink.href;
+
+  // opened from the site, part way down: stand where it was
+  const at = location.hash.match(/^#at=(\d+)$/);
+  if (at) {
+    history.scrollRestoration = "manual";
+    history.replaceState(history.state, "", location.pathname + location.search);
+    scrollTo(0, +at[1]);
+    document.fonts && document.fonts.ready.then(() => { if (scrollY < 2) scrollTo(0, +at[1]); });
+  }
   const sheets = () => [...main.querySelectorAll("article.sheet")];
   const seen = new Set(sheets().map(a => a.dataset.slug));
   const pages = new Map();          // url -> promise of the parsed page
@@ -146,13 +160,26 @@
   }
 
   /* ---------- back, into the one before ----------
-     Put back above the first sheet on the page, if it has been read, keeping
-     what is on screen exactly where it is. */
+     Put back above the first sheet on the page, keeping what is on screen
+     exactly where it is, but only when that is how you got here: the page
+     before this one was that post, read to its end. Reading on in place
+     leaves it on the page anyway; this is for arriving by its link. It goes
+     one post back and no further, like the back button. Come from anywhere
+     else and the top of the post is the way to the index. */
+  const bare = u => u.replace(/\.html$/, "").replace(/\/$/, "");
+  const cameFrom = (() => {
+    try {
+      const r = new URL(document.referrer);
+      return r.origin === location.origin ? bare(r.pathname) : null;
+    } catch (_) { return null; }
+  })();
+  const firstPrev = sheets()[0].dataset.prev;
+  const fromPrev = !!firstPrev && read.has(firstPrev) && cameFrom === bare(new URL(urlOf(firstPrev)).pathname);
   let prepending = false;
   async function prepend() {
     const first = sheets()[0];
     const prev = first && first.dataset.prev;
-    if (prepending || !prev || seen.has(prev) || !read.has(prev)) return;
+    if (prepending || !fromPrev || prev !== firstPrev || seen.has(prev)) return;
     prepending = true;
     try {
       const doc = await load(urlOf(prev));
@@ -178,7 +205,7 @@
     barOn = on;
     bar.classList.toggle("on", on);
     bar.setAttribute("aria-hidden", on ? "false" : "true");
-    bar.firstElementChild.tabIndex = on ? 0 : -1;
+    bar.querySelectorAll("a").forEach(a => { a.tabIndex = on ? 0 : -1; });
   };
 
   /* ---------- to the index, the name growing into its title ---------- */
@@ -190,55 +217,33 @@
     from.style.viewTransitionName = "site-title";
     location.href = home;
   }
-  if (bar) bar.firstElementChild.addEventListener("click", e => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-    e.preventDefault();
-    toIndex(bar.firstElementChild);
-  });
-  const topLink = document.querySelector(".top a");
-  topLink.addEventListener("click", e => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-    e.preventDefault();
-    toIndex(topLink);
-  });
-
-  /* Pulling on past the top zooms out of the post: the page draws back from
-   you, smaller the further you go, and far enough it is gone. A wheel or
-   trackpad pushing up at the top, or a finger dragging down. */
-  const PULL = 170;
-  let pull = 0, pullT = 0;
-  /* Came from the head of this post on the site (it says ?from=site): zooming
-     out goes back there, the site standing where it was left. The site may
-     be on another domain, so it is a plain page load, or the back button's. */
-  const params = new URLSearchParams(location.search);
-  const fromSite = params.get("from") === "site" ? sheets()[0].dataset.slug : null;
-  if (fromSite) {
-    params.delete("from");
-    const q = params.toString();
-    history.replaceState(history.state, "", location.pathname + (q ? "?" + q : "") + location.hash);
+  // the wandering about goes to the index; his name, to the site, is a plain link
+  for (const [link, name] of [[topLink, topLink.parentNode], [bar && bar.querySelector("a.blog"), bar && bar.firstElementChild]]) {
+    if (link) link.addEventListener("click", e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      toIndex(name);
+    });
   }
-  const siteHome = document.body.dataset.home;
-  const zoomOut = () => {
-    const first = sheets()[0];
-    if (fromSite && siteHome && first && first.dataset.slug === fromSite) {
-      leaving = true;
-      // back, if the page before really was the site; otherwise load it
-      const home = new URL(siteHome, location.href);
-      let ref = null;
-      try { ref = document.referrer ? new URL(document.referrer) : null; } catch (_) {}
-      const fromHome = ref && ref.origin === home.origin && !ref.pathname.startsWith(new URL(topLink.href).pathname);
-      if (fromHome && history.length > 1) history.back();
-      else location.href = home.href.replace(/#.*$/, "") + "#read=" + fromSite;
-    } else {
-      toIndex(topLink);
-    }
-  };
+
+  /* Pulling on past the top draws the post back from you, smaller the
+   further you go, and a line comes down above it saying where it goes; far
+   enough, it goes to the index. A wheel or trackpad pushing up at the top,
+   or a finger dragging down. The browser's own pull (to refresh, or to
+   bounce) is turned off in blog.css, so this is the only one. */
+  const PULL = 150;
+  let pull = 0, pullT = 0;
+  const note = document.createElement("p");
+  note.className = "pullnote";
+  note.setAttribute("aria-hidden", "true");
+  note.textContent = "All the wandering about";
+  document.body.append(note);
   const setPull = v => {
     pull = Math.max(0, v);
     const k = Math.min(1, pull / PULL);
     document.body.style.setProperty("--pullk", (1 - Math.pow(1 - k, 2)).toFixed(3));
     document.body.classList.toggle("pulling", pull > 0);
-    if (k >= 1) zoomOut();
+    if (k >= 1) toIndex(note);
   };
   const letGo = () => {
     clearTimeout(pullT);
@@ -247,9 +252,18 @@
     setPull(0);
     setTimeout(() => document.body.classList.remove("letgo"), 350);
   };
+  /* A trackpad flung up to the top keeps sending its coast for a while after
+     the page has stopped there; that is not a pull. Only a gesture that
+     starts at the top is: one after a pause in the wheel. */
+  let lastWheel = 0, armed = false;
   addEventListener("wheel", e => {
+    const now = performance.now(), gap = now - lastWheel;
+    lastWheel = now;
     if (leaving || e.ctrlKey) return;
-    if (scrollY <= 0 && e.deltaY < 0) {
+    if (scrollY > 0) { armed = false; if (pull) letGo(); return; }
+    if (!armed && gap > 220) armed = true;
+    if (!armed) return;
+    if (e.deltaY < 0) {
       setPull(pull - e.deltaY * (e.deltaMode === 1 ? 16 : 1) * .5);
       clearTimeout(pullT);
       pullT = setTimeout(letGo, 180);

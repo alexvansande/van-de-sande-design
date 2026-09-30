@@ -30,7 +30,7 @@ except ImportError:          # pictures are copied instead of resized
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://blog.vandesande.design"
-TITLE = "Alex Van de Sande's wanderings"
+TITLE = "Alex Van de Sande's wandering about"
 AUTHOR = "Alex Van de Sande"
 HOME = "https://vandesande.design"
 COLUMN = 704                  # the text column, in CSS pixels: what Paragraph had
@@ -426,7 +426,15 @@ def plain(html_text, n=None):
     return t
 
 
-def page(base, title, body, *, description="", canonical="", image="", kind="website", extra_head="", cls=""):
+def named(base, tab=True):
+    """The blog's name, in two links: his name goes to the rest of the site,
+    the wandering about to the blog's own index."""
+    t = "" if tab else ' tabindex="-1"'
+    return (f'<a class="home" href="{esc(HOME)}"{t}>{esc(AUTHOR)}</a>&rsquo;s '
+            f'<a class="blog" href="{base}"{t}>wandering about</a>')
+
+
+def page(base, title, body, *, description="", canonical="", image="", kind="website", extra_head="", cls="", head=True):
     og = [f'<meta property="og:title" content="{esc(title)}">',
           f'<meta property="og:type" content="{kind}">',
           f'<meta property="og:site_name" content="{esc(TITLE)}">']
@@ -452,11 +460,11 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 <link rel="stylesheet" href="{base}assets/blog.css">
 {extra_head}
 </head>
-<body class="{cls}" data-home="{esc(HOME)}">
-<header class="top">{f'<a href="{HOME}">{esc(AUTHOR)}</a>' if cls == "list" else f'<a href="{base}">{esc(TITLE)}</a>'}</header>{f'{chr(10)}<div class="bar" aria-hidden="true"><a href="{base}" tabindex="-1">{esc(TITLE)}</a></div>' if cls == "post" else ""}
+<body class="{cls}">
+{f'<header class="top">{named(base)}</header>' if head else ""}{f'{chr(10)}<div class="bar" aria-hidden="true"><p>{named(base, tab=False)}</p></div>' if cls == "post" else ""}
 {body}
 <footer class="foot">
-  <a href="{HOME}">{esc(AUTHOR)}</a><span>·</span><a href="{base}rss.xml">RSS</a>
+  <a href="{base}rss.xml">RSS</a>
 </footer>
 </body>
 </html>
@@ -563,12 +571,13 @@ def build(out, base, clean=False):
         write(out, p["slug"] + ".md", md)
         print(f"  {p['slug']}")
 
-    def listing(title, heading, items, canonical, path):
+    def listing(title, heading, items, canonical, path, head=True):
         cards = "\n".join(card(p, base, pics, eager=True) for p in items)
         body = f'<main class="index"><h1 style="view-transition-name:site-title">{heading}</h1>\n<div class="cards">\n{cards}\n</div></main>'
-        write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical, cls="list"))
+        write(out, path, page(base, title, body, description=f"Posts by {AUTHOR}.", canonical=canonical, cls="list", head=head))
 
-    listing(TITLE, esc(TITLE), posts, SITE_URL + "/", "index.html")
+    # the index is headed by the blog's name itself, so it has no header over it
+    listing(TITLE, named(base), posts, SITE_URL + "/", "index.html", head=False)
     cats = sorted({c for p in posts for c in p.get("categories") or []})
     for c in cats:
         listing(f"{c} · {TITLE}", f'<span class="cat">{esc(c)}</span>', [p for p in posts if c in (p.get("categories") or [])],

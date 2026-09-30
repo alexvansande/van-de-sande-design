@@ -35,10 +35,12 @@ body{margin:0;background:var(--dark);color:var(--light);
 a{color:inherit}
 
 /* ---------- the dark around the paper ---------- */
+/* The blog's name, over every page but the index, which it heads itself:
+   his name goes back to the site, the wandering about to the index */
 .top{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;padding:1.6rem var(--gutter) 1.4rem;
-  font-size:1.15rem;letter-spacing:.01em}
-.top a{text-decoration:none;opacity:.85}
-.top a:hover{opacity:1}
+  font-size:1.15rem;letter-spacing:.01em;color:rgba(230,226,210,.85)}
+.top a,.bar a,.index>h1 a{text-decoration:none;text-underline-offset:.18em;text-decoration-thickness:1px}
+.top a:hover,.bar a:hover,.index>h1 a:hover{text-decoration:underline;color:var(--light)}
 .foot{display:flex;gap:.7em;justify-content:center;padding:3rem 1rem 3.5rem;
   font-size:1rem;color:var(--light);opacity:.7}
 .foot a{text-decoration:none}
@@ -53,13 +55,23 @@ a{color:inherit}
   box-shadow:0 1px 0 rgba(255,255,255,.05),0 6px 24px -10px rgba(0,0,0,.6);
   transform:translateY(-105%);transition:transform .32s cubic-bezier(.2,.7,.2,1)}
 .bar.on{transform:none}
-.bar a{display:block;max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
+.bar p{max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
   padding:.8rem var(--gutter) .75rem;padding-top:max(.8rem,env(safe-area-inset-top));
-  color:var(--light);text-decoration:none;font-size:1.15rem;letter-spacing:.01em}
-.pulling main{transform:scale(calc(1 - var(--pullk,0) * .2));transform-origin:50% 0;
-  opacity:calc(1 - var(--pullk,0) * .25)}
-.pulling .top{opacity:calc(1 - var(--pullk,0))}
-.letgo main,.letgo .top{transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
+  color:var(--light);font-size:1.15rem;letter-spacing:.01em}
+/* the browser's own pull at the top of a post (to refresh, on a phone) is
+   off: pulling there is the way back to the index */
+html:has(>body.post),body.post{overscroll-behavior-y:none}
+.pulling main{transform:translateY(calc(var(--pullk,0) * 3rem)) scale(calc(1 - var(--pullk,0) * .12));
+  transform-origin:50% 0;opacity:calc(1 - var(--pullk,0) * .25)}
+.pulling .top{opacity:clamp(0,calc(1 - var(--pullk,0) * 3),1)}
+.letgo main,.letgo .top,.letgo .pullnote{transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
+/* where the pull goes, coming down above the post as it draws back */
+.pullnote{position:fixed;top:0;left:0;right:0;z-index:40;margin:0;pointer-events:none;
+  padding:max(1.2rem,env(safe-area-inset-top)) var(--gutter) 0;text-align:center;
+  font-size:1.15rem;letter-spacing:.01em;color:var(--light);
+  opacity:0;transform:translateY(-100%)}
+.pullnote::before{content:"↑";display:block;margin-bottom:.1rem;opacity:.6}
+.pulling .pullnote{opacity:clamp(0,calc((var(--pullk,0) - .3) / .6),1);transform:translateY(calc((var(--pullk,0) - 1) * 1.5rem))}
 ::view-transition-group(site-title){animation-duration:.55s}
 
 /* ---------- the sheet ---------- */
