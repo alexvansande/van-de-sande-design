@@ -9,7 +9,8 @@
    Going back up, a grey bar with the blog's name comes down from the top;
    it goes away again as you read on, and clicking it goes to the index, the
    name growing into the index's title. At the top of a post the post before
-   it is put back above, if it has been read; otherwise pulling on past the
+   it is put back above only if that is how you got here, reading it to the
+   end and going on, like a back button; otherwise pulling on past the
    top draws the post back, a line above it saying where it goes, and pulled
    hard enough it goes to the index, where it shrinks into its card.
 
@@ -159,13 +160,26 @@
   }
 
   /* ---------- back, into the one before ----------
-     Put back above the first sheet on the page, if it has been read, keeping
-     what is on screen exactly where it is. */
+     Put back above the first sheet on the page, keeping what is on screen
+     exactly where it is, but only when that is how you got here: the page
+     before this one was that post, read to its end. Reading on in place
+     leaves it on the page anyway; this is for arriving by its link. It goes
+     one post back and no further, like the back button. Come from anywhere
+     else and the top of the post is the way to the index. */
+  const bare = u => u.replace(/\.html$/, "").replace(/\/$/, "");
+  const cameFrom = (() => {
+    try {
+      const r = new URL(document.referrer);
+      return r.origin === location.origin ? bare(r.pathname) : null;
+    } catch (_) { return null; }
+  })();
+  const firstPrev = sheets()[0].dataset.prev;
+  const fromPrev = !!firstPrev && read.has(firstPrev) && cameFrom === bare(new URL(urlOf(firstPrev)).pathname);
   let prepending = false;
   async function prepend() {
     const first = sheets()[0];
     const prev = first && first.dataset.prev;
-    if (prepending || !prev || seen.has(prev) || !read.has(prev)) return;
+    if (prepending || !fromPrev || prev !== firstPrev || seen.has(prev)) return;
     prepending = true;
     try {
       const doc = await load(urlOf(prev));

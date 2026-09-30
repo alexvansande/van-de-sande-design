@@ -248,7 +248,8 @@ function buildPost({ slug, title, widths }){
   a.append(page);
   stage.append(a);
   const base = `${BLOG}media/${slug}/cover-`;
-  const post = { a, page, paper, cover, img, words, more, slug, going: false, shift: 0 };
+  const post = { a, page, top, sheet, paper, cover, img, words, more, slug, going: false, shift: 0,
+                 fit: { s: 1, y0: 0 }, curS: 1 };
   /* The date and the first paragraph come from the post itself, so they are
      never out of step with it. Its .html, which every host serves, where
      the bare address needs Pages. */
@@ -280,13 +281,28 @@ function buildPost({ slug, title, widths }){
   a.addEventListener('click', e => { e.preventDefault(); go(post); });
   return post;
 }
+/* On a big screen the head of the post is not the whole screen but a card,
+   no bigger than the page it was under: the post as the blog sets it,
+   drawn smaller, lying where the page lay. Only pulling on through it grows
+   it to the post's own size, and then it is the post. On a phone the page
+   was already as wide as the screen, so it is the post at its own size. */
+const CARD_BELOW = .92;
 /* How far the page has to go up for the first paragraph to be read whole,
-   with a little paper under it: measured once it is in, and again on a
-   resize. */
+   with a little paper under it, and how small it is drawn: measured once it
+   is in, and again on a resize. */
 function needOf(post){
   if (post.need == null || !post.img.complete){
+    const st = post.station.getBoundingClientRect();
+    /* as wide as the page, or a large card (34rem) if the page is narrower,
+       so its words stay big enough to read */
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let s = Math.min(1, Math.max(st.width, 34 * rem) / post.sheet.offsetWidth), y0 = 0;
+    if (s > CARD_BELOW) s = 1;
+    else y0 = st.top - post.top.offsetHeight * s;
+    post.fit = { s, y0 };
     const r = post.words.getBoundingClientRect(), p = post.page.getBoundingClientRect();
-    post.need = Math.max(0, Math.ceil(r.bottom - p.top + 40 - H()));
+    const local = (r.bottom - p.top) / post.curS;
+    post.need = Math.max(0, Math.ceil(y0 + local * s + 40 - H()));
   }
   return post.need;
 }
@@ -303,7 +319,18 @@ function go(post){
   if (post.going) return;
   post.going = true;
   try { history.replaceState(history.state, '', '#read=' + post.slug); } catch (_) {}
-  location.href = post.a.href + (post.shift > 0 ? '#at=' + Math.round(post.shift) : '');
+  const leave = () => { location.href = post.a.href + (post.shift > 0 ? '#at=' + Math.round(post.shift) : ''); };
+  const { s, y0 } = post.fit;
+  if (s >= 1 || reduce){ leave(); return; }
+  /* a card first: it grows to the post's own size about the middle of the
+     screen, and the post loads onto exactly that */
+  const c = (H() / 2 - (y0 - post.shift)) / s;
+  post.shift = Math.max(0, c - H() / 2);
+  post.more.style.opacity = '0';
+  post.page.style.transition = 'transform .5s cubic-bezier(.2,.75,.15,1)';
+  post.page.style.transform = `translate3d(0,${(-post.shift).toFixed(1)}px,0) scale(1)`;
+  post.curS = 1;
+  setTimeout(leave, 520);
 }
 function buildPad(station, pages, reel, shelf, post){
   const cap = station.querySelector('.cap');
@@ -351,6 +378,7 @@ function buildPad(station, pages, reel, shelf, post){
   }
   if (post){
     pad.post = buildPost(post);
+    pad.post.station = station;
     pad.hi += 2;                 /* the last sheet goes and the picture fills the
                                     screen; one more and it is the post */
   }
@@ -840,10 +868,13 @@ function paintPost(pad, n){
   post.load();
   s.visibility = 'visible';
   s.opacity = clamp01(u / .3).toFixed(3);
+  if (post.going) return u;          /* growing into the post: hands off */
   const need = needOf(post), px = v * unitOf(post);
   const pull = Math.max(0, px - need);
   post.shift = Math.min(px, need) + pull * PULL_GIVE;
-  post.page.style.transform = `translate3d(0,${(-post.shift).toFixed(1)}px,0)`;
+  const { s: sc, y0 } = post.fit;
+  post.curS = sc;
+  post.page.style.transform = `translate3d(0,${(y0 - post.shift).toFixed(1)}px,0) scale(${sc.toFixed(4)})`;
   const k = clamp01(pull / (PULL_GO * .6));
   post.more.style.opacity = (k * k * (3 - 2 * k)).toFixed(3);
   const shown = u > .9;
@@ -1385,6 +1416,8 @@ addEventListener('pageshow', e => {
   PADS.forEach(pad => {
     if (!pad.post) return;
     pad.post.going = false;
+    pad.post.page.style.transition = '';
+    pad.post._sig = null;
     if (pad.pv > pad.sheets.length){ stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), pad.sheets.length); }
   });
 });

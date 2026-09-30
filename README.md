@@ -77,7 +77,12 @@ transition, since the blog may end up on a domain of its own where none
 could reach. The post is told how far down it was being read (`#at=px`)
 and opens there, so the load is the only seam. From then on everything is
 the blog's. On a phone the pad zooms further than the others as its pages
-turn, so that by its last sheet the page is as wide as the screen.
+turn, so that by its last sheet the page is as wide as the screen and the
+post under it is the post at its own size. On a big screen it is a card
+instead, lying where the page lay and no narrower than 34rem: the post as
+the blog sets it, drawn smaller (a transform, so nothing reflows). Pulling
+through it grows it about the middle of the screen to the post's own size,
+and the post loads onto exactly that.
 
 Before leaving, the site notes on its own address where it stood
 (`#read=slug`), so the back button comes back to the head of the post, and

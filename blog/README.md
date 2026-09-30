@@ -80,9 +80,11 @@ and nothing over it.
 Going back up, a grey bar with the name comes down from the top, and goes
 again as you read on; clicking "wandering about" in it goes to the index,
 the name growing into the index's title and the post shrinking into its
-card. At the top of a post, the post before it is put back above if it was
-read this visit (read means its last lines were on screen), so scrolling up
-shows its ending. Otherwise pulling on past the top draws the post back and
+card. At the top of a post, the post before it is put back above only if
+that is how you got here: you read it to the end (its last lines were on
+screen) and came on from it, so scrolling up shows its ending, like a back
+button, and one post back only. Otherwise, from the index, the site or a
+link, pulling on past the top draws the post back and
 brings "All the wandering about" down above it; pull a little harder and
 it goes to the index, where the post shrinks into its card. The browser's
 own pull (to refresh, on a phone) is turned off on a post, so this is the
