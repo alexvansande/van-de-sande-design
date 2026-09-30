@@ -46,8 +46,8 @@ a{color:inherit}
 
 /* ---------- going back up ----------
    The grey bar comes down as you scroll back up and goes again as you read
-   on. At the top, pulling on brings the page down after the hand and the
-   name grows toward the index's title; far enough, and it is the index. */
+   on. At the top, pulling on zooms out of the post: it draws back, smaller,
+   and far enough it goes back where it came from. */
 .bar{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(72,72,69,.92);
   -webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);
   box-shadow:0 1px 0 rgba(255,255,255,.05),0 6px 24px -10px rgba(0,0,0,.6);
@@ -56,11 +56,10 @@ a{color:inherit}
 .bar a{display:block;max-width:calc(var(--column) + 2 * var(--gutter));margin:0 auto;
   padding:.8rem var(--gutter) .75rem;padding-top:max(.8rem,env(safe-area-inset-top));
   color:var(--light);text-decoration:none;font-size:1.15rem;letter-spacing:.01em}
-.top a{display:inline-block;transform-origin:0 60%;transform:scale(calc(1 + var(--pullk,0) * .45))}
-.pullhint{margin:.35rem 0 0;font-size:.95rem;font-style:italic;color:var(--light);
-  opacity:calc(var(--pullk,0) * .8);height:0;overflow:visible}
-body.pulling main,body.pulling .top{transform:translateY(var(--pull,0))}
-body.letgo main,body.letgo .top,body.letgo .top a{transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+.pulling main{transform:scale(calc(1 - var(--pullk,0) * .2));transform-origin:50% 0;
+  opacity:calc(1 - var(--pullk,0) * .25)}
+.pulling .top{opacity:calc(1 - var(--pullk,0))}
+.letgo main,.letgo .top{transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
 ::view-transition-group(site-title){animation-duration:.55s}
 
 /* ---------- the sheet ---------- */

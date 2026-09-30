@@ -65,8 +65,11 @@ Both of these end in a post on the blog. When the last sheet turns away, the
 picture the post opens with comes up out of the page and grows to fill the
 screen, with "Keep scrolling to read more"; one more step opens the post, and
 the picture shrinks into its head (a view transition, which works because the
-blog is on this same site). Back from the post, the site stands at the
-picture again. It is the `post` of a pad in `PADS`: its slug, and the widths
+blog is on this same site). On a phone the pad zooms further than
+the others as its pages turn, so that by its last sheet the page is as wide
+as the screen and the picture grows out of a page that already fills it.
+Back from the post, the site stands at the picture again, and ignores the
+trackpad still coasting from the gesture that came back. It is the `post` of a pad in `PADS`: its slug, and the widths
 its cover was cut at by `blog/build.py`. The maps pad has a line per page,
 from McLuhan to the new projection.
 

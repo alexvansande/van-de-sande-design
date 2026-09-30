@@ -78,7 +78,9 @@ goes again as you read on; clicking it goes to the index, the name growing
 into the index's title and the post shrinking into its card. At the top of a
 post, the post before it is put back above if it was read this visit (read
 means its last lines were on screen), so scrolling up shows its ending.
-Otherwise there is just the name, and pulling on past it goes to the index.
+Otherwise pulling on past the top zooms out of the post: it draws back,
+smaller, and goes back to the picture on the site it came from, or else to
+the index, where it shrinks into its card.
 
 ## Pulling from Paragraph again
 

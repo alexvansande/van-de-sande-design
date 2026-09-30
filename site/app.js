@@ -614,6 +614,11 @@ let hx = FIRST;
 const W = () => stage.clientWidth, H = () => stage.clientHeight;
 const ZOOM = .22;
 let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs the room */
+/* A pad that ends in a post zooms further: by its last sheet the page is as
+   wide as the screen, nothing either side of it, so that the picture after
+   it grows from a page that already fills the width. Where that would mean
+   more than half as big again (a laptop, a desktop), it zooms as the others. */
+let FILL = 1 + ZOOM;
 
 /* Measured, never read back out of a custom property: --pw is a calc() of a
    min(), and getComputedStyle hands those back as the unresolved token, so
@@ -693,6 +698,8 @@ function measure(){
     foot = Math.max(foot, pad.cap.offsetTop + tallest - ph / 2);
   });
   zoomBy = foot ? clamp((H() / 2 - 14) / foot - 1, 0, ZOOM) : ZOOM;
+  const fill = W() / story.offsetWidth + .004;
+  FILL = fill <= 1.5 ? Math.max(fill, 1 + zoomBy) : 1 + zoomBy;
   /* The screenshots under a sheet are half as wide again as the page, but
      never wider than the screen once the pad has zoomed all the way in: on a
      phone half as wide again ran off both edges. Never narrower than the
@@ -760,8 +767,11 @@ function paintPost(pad, n, station){
   if (post._sig === sig) return;
   post._sig = sig;
   const a = post.a, s = a.style;
+  /* put away whenever it is not coming up at all, however far it got: a
+     turn let go of half way used to leave it lying there, see-through */
   if (u <= 0){
-    if (post.shown){ post.shown = false; s.opacity = '0'; s.visibility = 'hidden'; a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
+    s.opacity = '0'; s.visibility = 'hidden';
+    if (post.shown){ post.shown = false; a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); }
     return;
   }
   post.load();
@@ -893,8 +903,10 @@ function render(){
   /* how far into a pad you are, as a fraction of it. clamp01(pv) was fully on
      for any page past the first, so stepping back from the third to the second
      left you just as zoomed in — every flip back eases it out now. */
-  const depth = p => p ? clamp01(p.pv / Math.max(1, p.hi)) : 0;
-  const zoom = 1 + zoomBy * (depth(padOf(lo)) * (1 - t) + depth(padOf(lo + 1)) * t);
+  const more = p => !p ? 0
+    : p.post ? (FILL - 1) * clamp01(p.pv / Math.max(1, p.sheets.length - 1))
+    : zoomBy * clamp01(p.pv / Math.max(1, p.hi));
+  const zoom = 1 + more(padOf(lo)) * (1 - t) + more(padOf(lo + 1)) * t;
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
      offset 0 where the error is zero — a poster zooming drifts off centre. */
@@ -1223,8 +1235,19 @@ stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
 
 /* ---------- trackpad, on the same two axes ---------- */
 let wT = 0, w = null;
+/* Arriving back from a post, the trackpad may still be coasting from the
+   gesture that left it, and that would turn the pages under the picture.
+   Until the wheel has been still for a moment, it is not listened to. */
+let coast = 0, coastLast = 0;
 stage.addEventListener('wheel', e => {
   if (e.ctrlKey) return;
+  if (coast){
+    /* a second of nothing at all, then as long as it keeps coming without a
+       break, up to two and a half */
+    const now = performance.now(), gone = now - (coast - 2500);
+    if (gone < 1000 || (gone < 2500 && now - coastLast < 200)){ coastLast = now; e.preventDefault(); return; }
+    coast = 0;
+  }
   e.preventDefault(); wake();
   const k = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? H() : 1;
   const dx = e.deltaX * k, dy = e.deltaY * k;
@@ -1326,6 +1349,7 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
   const pad = PADS[i];
   hx = i;
   pad.pv = pad.sheets.length;
+  coast = performance.now() + 2500; coastLast = performance.now();
   pad.post.img.style.viewTransitionName = `cover-${slug}`;
   pad.post.img.style.viewTransitionClass = 'cover';
   pad.post.load();

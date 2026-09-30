@@ -9,8 +9,9 @@
    Going back up, a grey bar with the blog's name comes down from the top;
    it goes away again as you read on, and clicking it goes to the index, the
    name growing into the index's title. At the top of a post the post before
-   it is put back above, if it has been read; otherwise there is only the
-   blog's name up there, and pulling on past it goes to the index too.
+   it is put back above, if it has been read; otherwise pulling on past the
+   top zooms out of the post: back to the site's picture it came from, or to
+   the index, where it shrinks into its card.
 
    Without this script the card is a plain link and the rest is not there. */
 (() => {
@@ -201,23 +202,30 @@
     toIndex(topLink);
   });
 
-  /* Pulling up past the top: the page comes down after the hand, a line
-     says what happens if you go on, and far enough it goes to the index.
-     A wheel or trackpad pushing up at the top, or a finger dragging down. */
-  const PULL = 150;
+  /* Pulling on past the top zooms out of the post: the page draws back from
+   you, smaller the further you go, and far enough it is gone. A wheel or
+   trackpad pushing up at the top, or a finger dragging down. */
+  const PULL = 170;
   let pull = 0, pullT = 0;
-  const hint = document.createElement("p");
-  hint.className = "pullhint";
-  hint.textContent = "Keep going for all the posts";
-  document.querySelector(".top").append(hint);
+  // came from a picture on the site, not the index: go back to it
+  const cameFrom = (() => {
+    try { return sessionStorage.getItem("back-to-post"); } catch (_) { return null; }
+  })();
+  const zoomOut = () => {
+    const first = sheets()[0];
+    if (cameFrom && first && cameFrom === first.dataset.slug && history.length > 1) {
+      leaving = true;
+      history.back();
+    } else {
+      toIndex(topLink);
+    }
+  };
   const setPull = v => {
     pull = Math.max(0, v);
     const k = Math.min(1, pull / PULL);
-    const eased = PULL * .55 * (1 - Math.pow(1 - k, 2));
-    document.body.style.setProperty("--pull", eased.toFixed(1) + "px");
-    document.body.style.setProperty("--pullk", k.toFixed(3));
+    document.body.style.setProperty("--pullk", (1 - Math.pow(1 - k, 2)).toFixed(3));
     document.body.classList.toggle("pulling", pull > 0);
-    if (k >= 1) toIndex(topLink);
+    if (k >= 1) zoomOut();
   };
   const letGo = () => {
     clearTimeout(pullT);
