@@ -73,6 +73,8 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .rail{position:absolute;inset:0;will-change:transform}
 /* a little above the middle: the line underneath is a sentence now, and on a
    wide screen, where the page is as tall as it gets, it needs the room */
+/* a click turns the page, or slides along to the one clicked */
+.station{cursor:pointer}
 .station{position:absolute;top:calc(50% - 2.4vh);left:50%;
   width:var(--pw);height:var(--ph);
   margin-top:calc(var(--ph) / -2);margin-left:calc(var(--pw) / -2)}

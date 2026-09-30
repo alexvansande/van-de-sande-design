@@ -1484,6 +1484,34 @@ function release(e){
   if (ax) draggedAt = performance.now();
   wake();     /* the draught's quiet is counted from when you let go */
   if (ax && s.length) settle(ax, speed(s), from);
+  /* not a drag at all: a click */
+  else if (!ax && e && e.type === 'pointerup' && !e.button) tap(e);
+}
+/* The oldest way to turn a page: click it. A click on the page in the
+   middle turns it over, as the arrow key does; a click on one waiting to the
+   side slides along to it, and a click on his line starts the stories. Links, the books and the posts' cards keep their
+   own clicks. */
+function tap(e){
+  if (e.target.closest('a[href], button, input')) return;
+  const hit = RAIL.find(([st]) => {
+    const r = st.getBoundingClientRect();
+    return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+  });
+  if (!hit) return;
+  const [, i] = hit, here = clamp(Math.round(hx), FIRST, LAST);
+  const step = (ax, d) => {
+    const flight = flightOf(ax);
+    const from = flight ? flight.target : Math.round(ax.get());
+    stop(ax); springTo(ax, from + d, 0);
+  };
+  if (i === here){
+    const pad = padOf(i);
+    if (pad) step(pageAxisOf(pad), 1);
+    /* his line on the index: a click on it is to hear the stories */
+    else { stop(RAIL_AX); springTo(RAIL_AX, i + 1, 0); }
+  } else {
+    stop(RAIL_AX); springTo(RAIL_AX, i, 0);
+  }
 }
 stage.addEventListener('pointerup', release);
 stage.addEventListener('pointercancel', release);
