@@ -136,12 +136,13 @@ function pullAtTop(label, go, gone, PULL = 150) {
   note.setAttribute("aria-hidden", "true");
   note.textContent = label;
   document.body.append(note);
+  let pinching = false;
   const setPull = v => {
     pull = Math.max(0, v);
     const k = Math.min(1, pull / PULL);
     document.body.style.setProperty("--pullk", (1 - Math.pow(1 - k, 2)).toFixed(3));
     document.body.classList.toggle("pulling", pull > 0);
-    if (k >= 1) go(note);
+    if (k >= 1) go(note, pinching ? "pinch" : "pull");
   };
   const letGo = () => {
     clearTimeout(pullT);
@@ -161,9 +162,10 @@ function pullAtTop(label, go, gone, PULL = 150) {
     const main = document.querySelector("main");
     const oy = main ? scrollY + innerHeight / 2 - (main.getBoundingClientRect().top + scrollY) : 0;
     document.body.style.setProperty("--pull-oy", oy.toFixed(0) + "px");
+    pinching = true;
     return {
       move: k => setPull(PULL * Math.min(1, Math.max(0, (1 - k) / .45))),
-      end: letGo,
+      end: () => { pinching = false; letGo(); },
     };
   });
   /* A trackpad flung up to the top keeps sending its coast for a while after
@@ -726,10 +728,12 @@ const Pile = (() => {
      it was opened from. */
   const siteLink = document.querySelector(".top a.home");
   if (back && siteLink) {
-    pullAtTop("Alex Van de Sande", () => {
+    /* pulled past the top, the poster turns back down over the post's head;
+       pinched out of, it is the head, as it was left, and stays */
+    pullAtTop("Alex Van de Sande", (note, how) => {
       if (leaving) return;
       leaving = true;
-      leaveForSite(siteLink.href, back);
+      leaveForSite(siteLink.href, how === "pinch" ? back.replace(/\.last$/, "") : back);
     }, () => leaving);
   } else {
     pullAtTop("All the wandering about", note => toIndex(note), () => leaving);

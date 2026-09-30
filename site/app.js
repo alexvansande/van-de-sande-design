@@ -297,6 +297,18 @@ const CARD_BELOW = .92;
    has to be as wide as the screen by its last sheet, so that the post under
    it is uncovered edge to edge. Elsewhere it zooms a little at every turn,
    the last one, onto the post, too. */
+/* Come back from the post and the last sheet brought down over its head
+   (pad.calm), the pad zooms back out with it, to where its line fits under
+   it among the other posters, rather than staying the width of the screen.
+   The two meet at the head, so turning on to it again is the same as ever;
+   and it is forgotten once the pad is back at its first page. */
+function postZoomOf(p){
+  if (p.calm && p.pv <= 1e-3) p.calm = false;
+  const full = postZoom(p, p.pv);
+  if (!p.calm) return full;
+  const L = p.sheets.length, c = clamp01(L - p.pv);
+  return full * (1 - c) + zoomBy * clamp01(p.pv / L) * c;
+}
 function postZoom(p, pv){
   const L = p.sheets.length;
   return FILL > 1 + zoomBy + 1e-3 ? (FILL - 1) * clamp01(pv / Math.max(1, L - 1))
@@ -1152,7 +1164,7 @@ function render(){
   /* how far into a pad you are, as a fraction of it. clamp01(pv) was fully on
      for any page past the first, so stepping back from the third to the second
      left you just as zoomed in — every flip back eases it out now. */
-  const more = p => !p ? 0 : p.post ? postZoom(p, p.pv) : zoomBy * clamp01(p.pv / Math.max(1, p.hi));
+  const more = p => !p ? 0 : p.post ? postZoomOf(p) : zoomBy * clamp01(p.pv / Math.max(1, p.hi));
   const zoom = 1 + more(padOf(lo)) * (1 - t) + more(padOf(lo + 1)) * t;
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
@@ -1715,6 +1727,7 @@ if (document.readyState === 'complete') idle(); else addEventListener('load', id
   pad.post.load();
   light();
   if (m[2]){
+    pad.calm = true;
     const down = () => setTimeout(() => springTo(pageAxisOf(pad), pad.sheets.length - 1), 350);
     if (shown) down(); else onUp = down;
   }
