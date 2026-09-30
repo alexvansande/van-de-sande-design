@@ -1,6 +1,7 @@
 ---
 title: "the Wall Maze"
 date: "2002-04-19T12:00:00Z"
+categories: ["University portfolio", "Games"]
 original: "http://wanderingabout.com/_/games/the-wall-maze/"
 original_site: "wanderingabout.com"
 category: "games"

@@ -495,8 +495,12 @@ def card(p, base, pics, eager=False, named=True):
             img = img.replace('loading="lazy"', 'loading="eager"')
         cover = f'<div class="thumb" {name("cover")}>{img}</div>'
     sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
+    # its categories, to the right of the date: words, not links, since the
+    # whole card is one
+    tags = "".join(f'<span>{esc(c)}</span>' for c in (p.get("categories") or [])[:3])
+    tags = f'<span class="tags">{tags}</span>' if tags else ""
     return f"""<a class="card" href="{base}{p['slug']}" data-slug="{p['slug']}"><span class="paper" {name("paper")}></span>{cover}
-  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when">{when(p)}</p></div>
+  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}<p class="when">{when(p)}{tags}</p></div>
 </a>"""
 
 
@@ -530,7 +534,7 @@ def build(out, base, clean=False):
             v = ctx.picture(p["cover"])
             if v:
                 p["og_image"] = SITE_URL + "/" + next((u for u, x in v if x >= 1056), v[-1][0])[len(base):]
-        cats = "".join(f' · <a href="{base}category/{esc(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
+        cats = "".join(f' · <a href="{base}category/{cat_slug(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
         # where it first appeared, for the posts brought here from elsewhere
         if p.get("original"):
             cats += (f' · <span class="first">Originally published on <a href="{esc(p["original"])}">'
@@ -608,7 +612,7 @@ def build(out, base, clean=False):
     cats = sorted({c for p in posts for c in p.get("categories") or []})
     for c in cats:
         listing(f"{c} · {TITLE}", f'<span class="cat">{esc(c)}</span>', [p for p in posts if c in (p.get("categories") or [])],
-                f"{SITE_URL}/category/{c}", f"category/{c}.html")
+                f"{SITE_URL}/category/{cat_slug(c)}", f"category/{cat_slug(c)}.html")
     write(out, "404.html", page(base, "Not here · " + TITLE,
                                 f'<main class="index"><h1>Nothing is here.</h1><p class="lost"><a href="{base}">All the posts</a></p></main>', cls="list"))
 
@@ -640,7 +644,7 @@ def build(out, base, clean=False):
 </rss>
 """)
 
-    urls = [SITE_URL + "/"] + [f"{SITE_URL}/category/{c}" for c in cats] + [p["url"] for p in posts]
+    urls = [SITE_URL + "/"] + [f"{SITE_URL}/category/{cat_slug(c)}" for c in cats] + [p["url"] for p in posts]
     write(out, "sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
           + "\n".join(f"  <url><loc>{u}</loc></url>" for u in urls) + "\n</urlset>\n")
     write(out, "robots.txt", f"User-agent: *\nAllow: /\nDisallow: {base}archive/\nSitemap: {SITE_URL}/sitemap.xml\n")
@@ -704,6 +708,11 @@ PICKER_JS = """<script>
   show();
 })();
 </script>"""
+
+
+def cat_slug(c):
+    """A category's address: "University portfolio" is /category/university-portfolio."""
+    return re.sub(r"[^a-z0-9]+", "-", c.lower()).strip("-")
 
 
 def when(p):

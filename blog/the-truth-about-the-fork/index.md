@@ -1,6 +1,7 @@
 ---
 title: "The Truth about the Fork"
 date: "2016-08-03T12:00:00Z"
+categories: ["Ethereum", "Governance"]
 original: "https://medium.com/@avsa/the-truth-about-the-fork-fd040c7ca955"
 original_site: "Medium"
 ---

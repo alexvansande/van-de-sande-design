@@ -1,6 +1,7 @@
 ---
 title: "Mind the pad"
 date: "2004-01-23T12:00:00Z"
+categories: ["University portfolio", "Interface concepts"]
 original: "http://wanderingabout.com/_/interaction-design/mind-the-pad/"
 original_site: "wanderingabout.com"
 category: "interaction-design"

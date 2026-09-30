@@ -1,6 +1,7 @@
 ---
 title: "Sponsored Burning for TCR"
 date: "2018-08-03T12:00:00Z"
+categories: ["Ethereum", "Governance"]
 original: "https://avsa.medium.com/sponsored-burning-for-tcr-c0ab08eef9d4"
 original_site: "Medium"
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Muvuca"
 date: "2003-04-19T12:00:00Z"
+categories: ["University portfolio", "Interface concepts"]
 original: "http://wanderingabout.com/_/animation-video/muvuca/"
 original_site: "wanderingabout.com"
 category: "animation-video"

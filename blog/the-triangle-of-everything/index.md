@@ -1,6 +1,7 @@
 ---
 title: "The Triangle of Everything"
 date: "2024-07-01T19:28:57Z"
+categories: ["Science", "Infographics"]
 updated: "2025-10-03T18:46:36Z"
 cover: "cover.png"
 cover_size: [1848, 924]

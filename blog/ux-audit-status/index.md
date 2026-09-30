@@ -2,6 +2,7 @@
 title: "UX Audit: Status"
 subtitle: "The Dreaded Triple Bar – or when design is outside your control"
 date: "2020-11-19T12:00:00Z"
+categories: ["UX", "Ethereum"]
 original: "https://avsa.medium.com/ux-audit-status-b0fa0062c96f"
 original_site: "Medium"
 ---

@@ -1,6 +1,7 @@
 ---
 title: "A map of all ENS contracts"
 date: "2022-02-10T19:21:48Z"
+categories: ["ENS", "Infographics"]
 cover: "cover.jpg"
 cover_size: [1920, 1085]
 original: "https://discuss.ens.domains/t/a-map-of-all-ens-contracts/10754"

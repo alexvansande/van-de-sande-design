@@ -1,6 +1,7 @@
 ---
 title: "David Cavallo Interview on OLPC Brazil's Apparent Loss"
 date: "2007-12-21T19:40:56Z"
+categories: ["OLPC", "Education"]
 original: "http://www.olpcnews.com/countries/brazil/david_cavallo_olpc_brazil.html"
 original_site: "OLPC News"
 ---

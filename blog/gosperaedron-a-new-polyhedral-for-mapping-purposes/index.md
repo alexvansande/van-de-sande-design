@@ -1,6 +1,7 @@
 ---
 title: "Gosperaedron: a new polyhedral for mapping purposes"
 date: "2023-05-22T15:43:34Z"
+categories: ["Maps", "Geometry"]
 updated: "2025-10-03T18:46:13Z"
 cover: "cover.jpg"
 cover_size: [1083, 551]

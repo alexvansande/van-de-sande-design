@@ -1,6 +1,7 @@
 ---
 title: "Le button"
 date: "2006-01-19T12:00:00Z"
+categories: ["Interface concepts", "Music"]
 original: "http://wanderingabout.com/_/animation-video/le-button/"
 original_site: "wanderingabout.com"
 category: "animation-video"
