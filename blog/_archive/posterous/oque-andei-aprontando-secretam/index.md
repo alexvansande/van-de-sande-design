@@ -5,4 +5,8 @@ original: "http://mylifeisnotveryinteresting.posterous.com/oque-andei-aprontando
 original_site: "Posterous"
 ---
 
+<figure>
+<img src="01.jpg" width="1024" height="768" alt="">
+</figure>
+
 era um plano simples. O que pode dar errado afinal?

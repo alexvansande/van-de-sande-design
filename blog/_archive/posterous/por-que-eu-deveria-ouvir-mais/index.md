@@ -5,4 +5,8 @@ original: "http://mylifeisnotveryinteresting.posterous.com/por-que-eu-deveria-ou
 original_site: "Posterous"
 ---
 
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
+
 Neutral milk hotel e feist me ajudaram mais a terminar o trabalho. Mas a idéia até agora ainda me fascina...

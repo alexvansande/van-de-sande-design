@@ -5,4 +5,8 @@ original: "http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-iii-
 original_site: "Posterous"
 ---
 
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
+
 meu cabelo cresceu o bastante pra voltar a ter rabo nesse meio tempo.

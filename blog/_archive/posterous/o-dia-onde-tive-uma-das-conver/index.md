@@ -5,4 +5,8 @@ original: "http://mylifeisnotveryinteresting.posterous.com/o-dia-onde-tive-uma-d
 original_site: "Posterous"
 ---
 
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
+
 E eles responderam basicamente "te entendemos, não concordamos com isso agora, mas vamos te dar todo o apoio que você precisar"

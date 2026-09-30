@@ -408,6 +408,16 @@ def posterous(force):
         how = write_post("posterous", slug, title, date, "", url, "Posterous", ts, force=force, node=node, spare=spare,
                          record=ip.node_html(node) if node is not None else "",
                          extra={"date_approximate": "year inferred from when it was archived"} if date and not full else None)
+        # a post whose own pictures left no trace in its page: its Flickr ones at the head
+        md_path = os.path.join(OUT, "posterous", slug, "index.md")
+        if spare and os.path.exists(md_path) and "<img" not in open(md_path).read():
+            conv = Conv(os.path.dirname(md_path), ts)
+            figs = [f for f in (conv.figure(ip.Node("img", {"src": u})) for u in spare) if f]
+            if figs:
+                src = open(md_path).read()
+                head, body = re.match(r"(---\n.*?\n---\n\n?)(.*)", src, re.S).groups()
+                open(md_path, "w").write(head + "\n\n".join(figs) + ("\n\n" + body if body.strip() else "\n"))
+                how += f", {len(figs)} from Flickr"
         say("posterous", slug, how + (f" ({len(spare)} on Flickr)" if spare else ""))
 
 

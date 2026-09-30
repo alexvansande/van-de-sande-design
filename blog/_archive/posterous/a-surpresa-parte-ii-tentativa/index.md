@@ -5,6 +5,10 @@ original: "http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-ii-t
 original_site: "Posterous"
 ---
 
+<figure>
+<img src="01.jpg" width="855" height="1024" alt="">
+</figure>
+
 Lembram a primeira semana onde só fez chover e fazer sol no mesmo dia o dia todo? lembra, há tanto tempo atrás? pois é.
 
 E o mais triste é que nunca escondi nada dela e dessa vez nao podia dividir nada...

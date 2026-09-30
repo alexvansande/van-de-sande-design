@@ -5,4 +5,6 @@ original: "http://mylifeisnotveryinteresting.posterous.com/anatomia-de-uma-reuni
 original_site: "Posterous"
 ---
 
-
+<figure>
+<img src="01.jpg" width="1024" height="768" alt="">
+</figure>

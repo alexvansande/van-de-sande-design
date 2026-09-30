@@ -5,4 +5,6 @@ original: "http://mylifeisnotveryinteresting.posterous.com/a-surpresa-parte-iv-d
 original_site: "Posterous"
 ---
 
-
+<figure>
+<img src="01.jpg" width="768" height="1024" alt="">
+</figure>
