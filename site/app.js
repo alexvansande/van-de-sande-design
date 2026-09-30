@@ -43,7 +43,8 @@ const indexText = $('#index p');
 const IDX_DIM = .22, IDX_LIT = .92;     /* faded in the corner of the eye, lit when it is yours */
 /* the rail, left to right, with where each one sits along it */
 const RAIL = [[$('#index'), -1], [story, 0], [$('#blockchain'), 1],
-              [$('#maps'), 2], [$('#triangle'), 3]];
+              [$('#browser'), 2], [$('#victor'), 3],
+              [$('#maps'), 4], [$('#triangle'), 5]];
 const FIRST = RAIL[0][1], LAST = RAIL[RAIL.length - 1][1];
 
 
@@ -57,7 +58,7 @@ const faceHTML = p => p.art
        <div class="body">${p.body}</div>
        <footer class="folio">${p.folio}</footer>
      </div>`;
-function buildPad(station, pages){
+function buildPad(station, pages, reel){
   const cap = station.querySelector('.cap');
   const sheets = pages.map((p, i) => {
     const sh = el('div', 'sheet');
@@ -79,12 +80,30 @@ function buildPad(station, pages){
       return l;
     });
   }
-  return { sheets, pv: 0, cap, lines };
+  const pad = { sheets, pv: 0, hi: sheets.length - 1, cap, lines };
+  if (reel){
+    const host = el('div', 'reel');
+    const shots = reel.map(([cls, w, h]) => {
+      const e = el('div', 'shot ' + cls);
+      e.style.aspectRatio = `${w} / ${h}`;
+      host.append(e);
+      /* its height as a share of the page's: the reel is half as wide again
+         as an A4 sheet, and the sheet is 0.7071 as wide as it is tall */
+      return { e, h: 1.5 * .7071 * h / w };
+    });
+    station.insertBefore(host, station.firstChild);
+    pad.reel = { host, shots };
+    pad.hi += shots.length;      /* the last sheet turns away, then one stop per shot */
+  }
+  return pad;
 }
 const PADS = [buildPad(story, PAGES),
               buildPad($('#blockchain'), [
                 { art: 'eth1', cap: 'Very few people understood what exactly we were doing, even among the team.' },
                 { art: 'eth2', cap: 'The launch pages were based on my own experience of trying to get it all to work. Recipes to build a new kind of society.' }]),
+              buildPad($('#browser'), [{ art: 'appstore' }], [
+                ['mist1', 1858, 1240], ['mist2', 2000, 1679], ['mist3', 2000, 1648]]),
+              buildPad($('#victor'), [{ art: 'hvmlogo' }, { art: 'hvm1' }]),
               buildPad($('#maps'), [{ art: 'maps' }, { art: 'felv' }, { art: 'gosper' }]),
               buildPad($('#triangle'), [{ art: 'triangle' }])];
 /* the index sits at -1 and is not a pad; everything from 0 rightwards is */
@@ -194,6 +213,10 @@ function buildCurl(sheet){
      the underside of the paper were both hard-coded to the book's cream, which
      showed as a pale band under the bow of a poster with a dark ground. */
   const bg = getComputedStyle(face).backgroundColor;
+  /* and whatever corners it has: the page clones carry their own, and the
+     underside and the plate are the same size as the page, so they take the
+     same value */
+  const radius = getComputedStyle(face).borderRadius;
   /* A leaning fold crosses the sheet corner to corner, which is further than
      top to bottom, so there are a few more strips than STRIPS and each is
      long enough to span the sheet at the steepest lean. At a level fold the
@@ -239,12 +262,14 @@ function buildCurl(sheet){
     const under = el('div', 'under'), a2 = shade('t'), b2 = shade('b'), d2 = el('div', 'dim');
     under.style.width = W + 'px'; under.style.height = H + 'px';
     under.style.backgroundColor = bg;
+    under.style.borderRadius = radius;
     under.append(a2, b2, d2);
     parts.push({ face: band('fr', copy), back: band('bk', under),
                  copy, under, a1, b1, a2, b2, d1, d2, half: ph / 2 });
   }
   const cast = el('div', 'cast'), plate = el('div', 'plate'), pool = el('div', 'pool');
   plate.style.backgroundColor = bg;
+  plate.style.borderRadius = radius;
   /* and the plate is the page that really lies underneath, so that wherever
      the strips fall short of it — at a seam, or under a lifted foot — what
      shows is the next page of the pad. It was this page again once, which
@@ -381,7 +406,7 @@ let zoomBy = ZOOM;             /* ZOOM, or less if the story underneath needs th
    parseFloat gives NaN and every transform built from it is silently dropped.
    Measured once and kept, too: the breathing loop renders every frame, and
    reading offsetWidth in there would force a reflow on each of them. */
-let STEP = 0;
+let STEP = 0, PH = 0;
 function measure(){
   const pw = story.offsetWidth;
   /* a share of the free space beside the page. On a phone that space is only
@@ -393,7 +418,7 @@ function measure(){
      it. Only as far as keeps the longest line on screen: on a wide screen
      the page is already as tall as it can be, and zooming there would push
      the story off the bottom while you read the page it belongs to. */
-  const ph = story.offsetHeight;
+  const ph = PH = story.offsetHeight;
   let foot = 0;
   PADS.forEach(pad => {
     if (!pad.lines) return;
@@ -423,7 +448,8 @@ function paintPad(pad, bm, lean){
   /* which sheet is in hand, by index rather than by the sign of a number that
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
      and the page snaps flat for a frame */
-  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - 1);
+  /* with a reel under it, the last sheet can go too */
+  const front = clamp(Math.floor(pad.pv + 1e-9), 0, pad.sheets.length - (pad.reel ? 0 : 1));
   pad.sheets.forEach((sh, j) => {
     if (j < front){ dropCurl(sh); sh.classList.add('gone'); return; }
     sh.classList.remove('gone');
@@ -442,6 +468,45 @@ function paintPad(pad, bm, lean){
     const land = clamp01((t - .55) / .4);
     drawCurl(sh, reduce ? (t > .5 ? 1 : 0) : bend(t), fade, bm,
              lean * (1 - land * land * (3 - 2 * land)));
+  });
+  if (pad.reel) paintReel(pad);
+}
+
+/* The reel, at stop m, has shot m in the middle of the page and the ones
+   before it pushed back behind it: each a little higher, smaller and darker,
+   so their title bars show above it like a pile of windows. The shots after
+   it wait below, in the dark. Between two stops everything is the blend of
+   the two, so the next one scrolls up into place and the pile steps back.
+   Stop -1 is the sheet still on top: every shot is below, and the first one
+   rises with the turn rather than lying there waiting to be uncovered.
+   Each entry is [top, scale, opacity, brightness]. */
+const PILE_UP = .045, PILE_SHRINK = .04, PILE_DIM = .3, BELOW = 1.02, DARK = .08;
+function layout(sh, i, m){
+  if (i > m) return [BELOW, 1, 0, DARK];
+  const top = (1 - sh[m].h) / 2, d = m - i;
+  return [top - PILE_UP * d, 1 - PILE_SHRINK * d, 1, 1 - PILE_DIM * d];
+}
+function paintReel(pad){
+  const { host, shots } = pad.reel, n = shots.length;
+  const r = pad.pv - pad.sheets.length;           /* -1 while the sheet is still on top */
+  const k = clamp(Math.floor(r), -1, n - 1);
+  const u = k < n - 1 ? turnOf(clamp01(r - k)) : 0;
+  const f = u * u * (3 - 2 * u);
+  const sig = k + '|' + f.toFixed(4) + '|' + PH;
+  if (pad._rsig === sig) return;
+  pad._rsig = sig;
+  /* the further in, the more of the sides have gone */
+  host.style.setProperty('--f', (12 + 12 * clamp01((k + f) / Math.max(1, n - 1))).toFixed(1) + '%');
+  shots.forEach((s, i) => {
+    const a = layout(shots, i, k), b = layout(shots, i, Math.min(n - 1, k + 1));
+    const mix = j => a[j] + (b[j] - a[j]) * f;
+    /* the one arriving is solid almost as soon as it moves, and comes up out
+       of the dark rather than through a see-through fade; darkness is kept
+       for the ones going back into the pile */
+    const op = i === k + 1 ? clamp01(f / .2) : mix(2);
+    s.e.style.transform = `translate3d(0,${(mix(0) * PH).toFixed(1)}px,0) scale(${mix(1).toFixed(4)})`;
+    s.e.style.opacity = op.toFixed(3);
+    s.e.style.filter = `brightness(${mix(3).toFixed(3)})`;
   });
 }
 
@@ -481,7 +546,7 @@ function render(){
   /* how far into a pad you are, as a fraction of it. clamp01(pv) was fully on
      for any page past the first, so stepping back from the third to the second
      left you just as zoomed in — every flip back eases it out now. */
-  const depth = p => p ? clamp01(p.pv / Math.max(1, p.sheets.length - 1)) : 0;
+  const depth = p => p ? clamp01(p.pv / Math.max(1, p.hi)) : 0;
   const zoom = 1 + zoomBy * (depth(padOf(lo)) * (1 - t) + depth(padOf(lo + 1)) * t);
   /* the scale multiplies every station's offset inside the rail, so the shift
      has to be scaled too. Only the story ever zoomed before, and it sits at
@@ -523,10 +588,10 @@ function pageAxisOf(pad){
   if (!pad) return NO_PAGE;
   return pad.ax || (pad.ax = {
     get: () => pad.pv, set: v => { pad.pv = v; },
-    lo: () => 0, hi: () => pad.sheets.length - 1,
+    lo: () => 0, hi: () => pad.hi,
     /* a pad with nothing behind its face still gives, so pulling at it curls
        and springs back rather than feeling dead */
-    give: pad.sheets.length > 1 ? .14 : .5
+    give: pad.hi > 0 ? .14 : .5
   });
 }
 function pageAxis(){ return pageAxisOf(padOf(clamp(Math.round(hx), FIRST, LAST))); }

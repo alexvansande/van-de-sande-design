@@ -28,6 +28,7 @@ is loaded before you get there. Nothing on the first screen is a picture.
 ## What is on the rail
 
     the index · My ethereum story · Blockchain design work
+    The Mist browser · Victor and HVM
     Some experiments with maps · The whole universe in one image
 
 **My ethereum story** is three pages from books that mention him — page 190
@@ -36,7 +37,12 @@ Cryptopians*, and the cast of characters from Matt Leising's *Out of the
 Ether* — each with the passage about him run over in yellow marker.
 
 **Blockchain design work** holds the Ethereum Frontier and Blockchain App
-Platform release pages. **Some experiments with maps** is the Hexagonal
+Platform release pages. **The Mist browser** is the Ethereum Catalog, a
+window with rounded corners; turn it away and three Mist screenshots rise
+out of the dark one after another and pile up like windows. They are not A4
+and do not turn: they are the pad's `reel`, wider than the page and faded at
+its sides. **Victor** is the HVM logo looping on a plain sheet, over the
+HVM diagram. **Some experiments with maps** is the Hexagonal
 Earth series: the Lifezones print, the "Impossible" Map, the Gosper
 topographic. **The whole universe in one image** is the Triangle of
 Everything poster.
