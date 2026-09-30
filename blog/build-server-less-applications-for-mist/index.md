@@ -1,6 +1,7 @@
 ---
 title: "How to build server less applications for Mist"
 date: "2016-07-12T16:47:52Z"
+categories: ["Ethereum", "Mist", "Tutorials"]
 original: "https://blog.ethereum.org/2016/07/12/build-server-less-applications-mist"
 original_site: "blog.ethereum.org"
 ---

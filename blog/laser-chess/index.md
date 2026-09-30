@@ -1,6 +1,7 @@
 ---
 title: "Laser Chess"
 date: "2001-05-23T12:00:00Z"
+categories: ["University portfolio", "Games"]
 original: "http://wanderingabout.com/_/games/laser-chess/"
 original_site: "wanderingabout.com"
 category: "games"

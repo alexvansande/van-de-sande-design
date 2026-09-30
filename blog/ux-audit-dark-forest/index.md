@@ -1,6 +1,7 @@
 ---
 title: "UX Audit: Dark Forest Game"
 date: "2020-08-18T12:00:00Z"
+categories: ["UX", "Ethereum", "Games"]
 original: "https://avsa.medium.com/a-dark-forest-ux-audit-6235c2fd04e"
 original_site: "Medium"
 ---

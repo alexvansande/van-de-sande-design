@@ -1,6 +1,7 @@
 ---
 title: "Visualization of Money Flows between DAO Wallets"
 date: "2023-10-23T18:22:49Z"
+categories: ["ENS", "Governance", "Infographics"]
 original: "https://discuss.ens.domains/t/visualization-of-money-flows-between-dao-wallets/18010"
 original_site: "discuss.ens.domains"
 ---

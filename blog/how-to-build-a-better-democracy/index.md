@@ -1,6 +1,7 @@
 ---
 title: "Ethereum in practice part 2: how to build a better democracy in under a 100 lines of code"
 date: "2015-12-04T10:00:31Z"
+categories: ["Ethereum", "Governance", "Tutorials"]
 original: "https://blog.ethereum.org/2015/12/04/ethereum-in-practice-part-2-how-to-build-a-better-democracy-in-under-a-100-lines-of-code"
 original_site: "blog.ethereum.org"
 ---

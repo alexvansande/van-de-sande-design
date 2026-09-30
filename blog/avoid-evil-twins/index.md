@@ -1,6 +1,7 @@
 ---
 title: "Avoid Evil Twins: every ethereum app pays the price of a chain split"
 date: "2018-04-18T12:00:00Z"
+categories: ["Ethereum", "UX"]
 original: "https://avsa.medium.com/avoid-evil-twins-every-ethereum-app-pays-the-price-of-a-chain-split-e04c2a560ba8"
 original_site: "Medium"
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Como aumentar a Representatividade mas diminuir os Representantes"
 date: "2016-10-06T12:00:00Z"
+categories: ["Governance", "Voting"]
 original: "https://avsa.medium.com/como-aumentar-a-representatividade-mas-diminuir-os-representantes-5430dc381439"
 original_site: "Medium"
 ---

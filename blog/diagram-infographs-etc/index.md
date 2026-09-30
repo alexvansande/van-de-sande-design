@@ -1,6 +1,7 @@
 ---
 title: "Diagram, Infographs etc"
 date: "2007-04-19T12:00:00Z"
+categories: ["Infographics", "Maps"]
 original: "http://wanderingabout.com/_/visualizing-information/diagram-infographs-etc/"
 original_site: "wanderingabout.com"
 category: "visualizing-information"

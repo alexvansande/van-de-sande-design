@@ -1,6 +1,7 @@
 ---
 title: "Aquatic Sugar"
 date: "2008-01-01T12:00:00Z"
+categories: ["OLPC", "UX"]
 original: "http://wanderingabout.com/portfolio/aquatic-sugar/"
 original_site: "wanderingabout.com"
 date_circa: "about when its video went up on YouTube"

@@ -1,6 +1,7 @@
 ---
 title: "Gosper World - a novel world map made of hexagonal-like fractals (or, how I made Matt Parker’s Impossible Ball)"
 date: "2024-08-08T16:04:19Z"
+categories: ["Maps", "Geometry"]
 updated: "2025-10-03T18:47:06Z"
 cover: "cover.jpg"
 cover_size: [2003, 1002]

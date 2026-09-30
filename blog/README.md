@@ -61,6 +61,18 @@ paragraphs, headings, lists and pictures are Paragraph's own. Everything
 around the post is the rest of the site's: the dark ground, the paper, EB
 Garamond.
 
+## Categories
+
+Each post has two or three, in its header: `categories: ["Ethereum",
+"Governance"]`. They show on its card to the right of the date (the first
+three), and under its title on the post, where each links to its page,
+`/category/<name>` with the name in lowercase and dashes
+(`/category/university-portfolio`). Keep to the ones already in use where
+one fits, so that each category page has something in it: Ethereum,
+Governance, Voting, UX, ENS, Mist, Tutorials, Maps, Geometry, Infographics,
+Science, Games, Interface concepts, University portfolio, Apple, OLPC,
+Education, Music, Culture, Social media.
+
 ## The index
 
 Beside the posts is a column with a line about them ("I have been writing

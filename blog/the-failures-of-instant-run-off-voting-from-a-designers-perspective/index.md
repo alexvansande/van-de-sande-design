@@ -1,6 +1,7 @@
 ---
 title: "The failures of Instant Run-off voting from a Designer's perspective"
 date: "2022-11-28T15:02:50Z"
+categories: ["Voting", "Governance"]
 updated: "2025-10-03T18:10:53Z"
 cover: "cover.png"
 cover_size: [900, 450]

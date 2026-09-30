@@ -1,6 +1,7 @@
 ---
 title: "Analysis of Ranked Choice voting in 5.19 (Governance Distribution Pilot)"
 date: "2024-10-29T17:52:19Z"
+categories: ["Voting", "ENS", "Governance"]
 original: "https://discuss.ens.domains/t/analysis-of-ranked-choice-voting-in-5-19-governance-distribution-pilot/19797"
 original_site: "discuss.ens.domains"
 ---

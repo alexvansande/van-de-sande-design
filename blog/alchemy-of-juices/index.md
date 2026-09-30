@@ -1,6 +1,7 @@
 ---
 title: "Alchemy of Juices"
 date: "2003-04-19T12:00:00Z"
+categories: ["University portfolio", "Infographics"]
 original: "http://wanderingabout.com/_/visualizing-information/alchemy-of-juices/"
 original_site: "wanderingabout.com"
 category: "visualizing-information"
