@@ -352,7 +352,9 @@ function buildPad(station, pages, reel, shelf, post, onward){
   const sheets = pages.map((p, i) => {
     const sh = el('div', 'sheet');
     sh.innerHTML = faceHTML(p);
-    sh.style.zIndex = 20 - i;
+    /* the blog's posts are a pile, the later ones on top; every other pad's
+       pages are a stack, the first on top */
+    sh.style.zIndex = onward ? 10 + i : 20 - i;
     station.insertBefore(sh, cap);
     return sh;
   });
@@ -848,6 +850,7 @@ const BOW_MIN = .12;
 /* Slide sideways and the one arriving lifts its corner as it comes, which is
    the invitation to read it. */
 function paintPad(pad, bm, lean){
+  if (pad.onward) return paintStack(pad);
   /* which sheet is in hand, by index rather than by the sign of a number that
      rubber-bands past zero — otherwise an over-pull downwards drops the curl
      and the page snaps flat for a frame */
@@ -874,8 +877,48 @@ function paintPad(pad, bm, lean){
   });
   if (pad.reel) paintReel(pad);
   if (pad.shelf) paintShelf(pad);
-  /* the blog's poster: its last page turned over is the way on to the blog */
-  if (pad.onward && turnOf(clamp01(pad.pv - (pad.sheets.length - 1))) > .5) toBlog(pad, pad.sheets.length);
+}
+
+/* The blog's poster does not turn its pages: it scrolls them, the way the
+   blog's own index does. The newest post lies on the station; going on, the
+   next comes up from below, over it, and pushes it back into a pile, each a
+   little higher, smaller and fainter, and then the next. Going on past the
+   last, the site hands over to the blog, which opens standing exactly there
+   (the last post at the front, the ones before it piled above) and goes on
+   scrolling. The numbers are the blog's (PILE_ in blog.js). */
+const STACK_UP = .045, STACK_SHRINK = .04, STACK_DIM = .3, STACK_DEEP = 3, STACK_GAP = .06;
+function paintStack(pad){
+  const n = pad.sheets.length, m = pad.pv;
+  const sig = m.toFixed(4) + '|' + PH;
+  if (pad._ssig === sig) return;
+  pad._ssig = sig;
+  /* the line under the poster gives way as the posts start to move */
+  pad.away = clamp01(m) * .4;
+  pad.sheets.forEach((sh, j) => {
+    dropCurl(sh);
+    const d = m - j;
+    let ty, s = 1, dim = 0, op = 1;
+    if (d >= 0){
+      ty = -STACK_UP * PH * Math.min(d, STACK_DEEP);
+      s = 1 - STACK_SHRINK * Math.min(d, STACK_DEEP);
+      dim = Math.min(1, STACK_DIM * d);
+      op = clamp01(STACK_DEEP - d);
+    } else {
+      /* one page and a gap below, coming up out of the dark: solid almost
+         as soon as it moves, as the Mist shots are, so two pages never show
+         through each other */
+      ty = -d * PH * (1 + STACK_GAP);
+      const e = clamp01(1 + d), f = e * e * (3 - 2 * e);
+      dim = (1 - f) * .6;
+      op = clamp01(e / .2);
+    }
+    sh.style.transform = `translate3d(0,${ty.toFixed(1)}px,0) scale(${s.toFixed(4)})`;
+    sh.style.opacity = op < 1 ? op.toFixed(3) : '';
+    sh.style.setProperty('--dim', dim.toFixed(3));
+    sh.classList.toggle('gone', op <= 0);
+  });
+  /* on past the last one, and it is the blog */
+  if (m > n - 1 + .15) toBlog(pad, n);
 }
 
 /* The post at the end of a pad. u is the last sheet going over, uncovering

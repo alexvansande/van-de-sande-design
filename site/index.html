@@ -235,6 +235,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
   font-size:3.7cqw;color:#6c6656;letter-spacing:.04em;font-variant:small-caps}
 .postcard .lp-tags{text-align:right}
 .postcard .lp-tags span+span::before{content:"·";margin:0 .45em;opacity:.7}
+/* its pages do not turn: they scroll up and pile, as on the blog's index
+   (paintStack in app.js), and --dim takes one back into the dark */
+#latest .sheet{transform-origin:50% 0}
+#latest .sheet::after{content:"";position:absolute;inset:0;z-index:3;border-radius:var(--r);
+  background:var(--dark);opacity:var(--dim,0);pointer-events:none}
 
 /* ---------- the shelf under the last page of the story ----------
    Four to a page: the three books the pages came from, as small volumes you

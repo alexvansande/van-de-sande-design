@@ -125,9 +125,13 @@ document.fonts && document.fonts.ready.then(() => document.querySelectorAll(".ca
    of the screen stays there, and the one coming up after it slides over it,
    pushing it back, each a little higher, smaller and fainter (its --dim),
    until three rows on it has gone into the dark. Below, a card comes up out
-   of the dark as it rises into the screen. Everything is placed from where
-   the cards lie in the page (card._top), not where they are drawn, so the
-   years beside them read the page as it is. */
+   of the dark as it rises into the screen.
+   Staying at the top is position:sticky (blog.css), so the browser holds it
+   where it scrolls, off the page's own thread: moved from here, on the
+   scroll event, a card trailed the page by a frame and shook on a phone.
+   All that is moved from here is the little it steps back into the pile.
+   Everything is placed from where the cards lie in the grid (card._top),
+   not where they are drawn, so the years beside them read the page as it is. */
 const Pile = (() => {
   // the index and the category pages; not the archive, in shelves
   const box = document.querySelector("main.index > .cards, main.index > .spread > .cards");
@@ -150,15 +154,14 @@ const Pile = (() => {
       let ty = 0, s = 1, dim = 0, op = 1;
       const d = (line - top) / pitch;
       if (d > 0) {
-        // at the line, pushed back by the ones come up after it
-        ty = line - PILE_UP * H * Math.min(d, DEEP) - top;
+        // held at the line, and pushed back by the ones come up after it
+        ty = -PILE_UP * H * Math.min(d, DEEP);
         s = 1 - PILE_SHRINK * Math.min(d, DEEP);
         dim = Math.min(1, PILE_DIM * d);
         op = clamp01(DEEP - d);
-      } else {
-        // rising out of the dark from the foot of the screen
+      } else if (top > vh - H * RISE) {
+        // coming up out of the dark from the foot of the screen
         const e = clamp01((vh - top) / (H * RISE)), f = e * e * (3 - 2 * e);
-        ty = (1 - f) * H * .06;
         dim = (1 - f) * .6;
         op = f;
       }
@@ -172,14 +175,19 @@ const Pile = (() => {
     });
   };
   const measure = () => {
-    cards.forEach(c => { c._top = docTop(c); });
     H = cards[0].offsetHeight || 1;
-    pitch = H + (parseFloat(getComputedStyle(box).rowGap) || 0);
+    const cs = getComputedStyle(box);
+    pitch = H + (parseFloat(cs.rowGap) || 0);
+    // where each lies in the grid, sticking or not
+    const cols = Math.max(1, cs.gridTemplateColumns.split(" ").filter(Boolean).length);
+    const top0 = docTop(box);
+    cards.forEach((c, i) => { c._top = top0 + Math.floor(i / cols) * pitch; });
     // under the years where they run along the top (a phone), with room
     // above for the pile to step back into
-    const bar = years && getComputedStyle(years).position === "sticky" && getComputedStyle(years).flexDirection === "row"
-      ? years.offsetHeight : 0;
+    const ys = years && getComputedStyle(years);
+    const bar = ys && ys.position === "sticky" && ys.flexDirection === "row" ? years.offsetHeight : 0;
     line = bar + Math.max(16, innerHeight * .025) + PILE_UP * H * DEEP;
+    box.style.setProperty("--line", line.toFixed(1) + "px");
     cards.forEach(c => { c._sig = ""; });
     paint();
   };
@@ -221,7 +229,7 @@ const Pile = (() => {
   /* Opened at a post (#at=slug), from the site's poster or back from the
      post itself: stand with its card at the front of the pile, the ones
      before it stacked above. From the site, the years come down after. */
-  const landOn = c => {
+  const landOn = (c, flow) => {
     if (!c) return;
     history.scrollRestoration = "manual";
     const go = () => { if (Pile) Pile.measure(); scrollTo(0, Pile ? Pile.scrollFor(c) : c.offsetTop); };
@@ -230,7 +238,8 @@ const Pile = (() => {
        or turning the poster's last page over) is still coasting: that is
        not a scroll of this page. Held while the wheel keeps coming, up to
        two and a half seconds; the first pause lets go. */
-    const until = performance.now() + 2500;
+    // come on from the site's poster, the coast is the scroll going on: let it
+    const until = flow ? 0 : performance.now() + 2500;
     let last = 0;
     const hold = e => {
       const now = performance.now(), gap = now - last;
@@ -245,7 +254,7 @@ const Pile = (() => {
   };
   const atSlug = args.get("at");
   if (atSlug) {
-    landOn(document.querySelector(`.cards > .card[data-slug="${CSS.escape(atSlug)}"]`));
+    landOn(document.querySelector(`.cards > .card[data-slug="${CSS.escape(atSlug)}"]`), !!args.get("back"));
     if (args.get("back")) document.documentElement.classList.add("arrive");
   } else if (/^#y\d{4}$/.test(location.hash)) {
     landOn(document.getElementById(location.hash.slice(1)));
@@ -325,7 +334,7 @@ const Pile = (() => {
     if (leaving) return;
     leaving = true;
     leaveForSite(site.href, back);
-  }, () => leaving, 300);   // leaving the blog for the site takes a purposeful pull
+  }, () => leaving, back ? 150 : 300);   // leaving for the site takes a purposeful pull, unless that is where this came from
 })();
 
 (() => {

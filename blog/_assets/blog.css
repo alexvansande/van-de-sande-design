@@ -274,7 +274,7 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
    the foot of the screen, a card rises out of the dark. blog.js places them
    (--dim is how far one has gone back, 0 to 1); without it the cards just
    scroll. The lift on hover would fight it, so there is none. */
-.piling .cards>.card{transition:none;transform-origin:50% 0;will-change:transform,opacity}
+.piling .cards>.card{position:sticky;top:var(--line,0);align-self:start;transition:none;transform-origin:50% 0}
 .piling .cards>.card:hover{transform:none}
 .piling .cards>.card::after{content:"";position:absolute;inset:0;background:var(--dark);
   opacity:var(--dim,0);pointer-events:none}
