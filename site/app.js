@@ -125,7 +125,7 @@ function spinnable(a, n, shown){
     /* how wide and tall the book is seen from the front, turned as it is */
     const wy = Math.abs(Math.cos(ry * RAD)) + T * Math.abs(Math.sin(ry * RAD));
     const hx = Math.abs(Math.cos(rx * RAD)) + T * .7 * Math.abs(Math.sin(rx * RAD));
-    ws.style.transform = `translate(${(9 + lift * 5).toFixed(2)}cqw,${(6 + lift * 4).toFixed(2)}cqh) ` +
+    ws.style.transform = `translate(${(15 + lift * 7).toFixed(2)}cqw,${(10 + lift * 5).toFixed(2)}cqh) ` +
                          `scale(${wy.toFixed(3)},${hx.toFixed(3)})`;
     ws.style.opacity = (1 - lift * .25).toFixed(3);
   };
