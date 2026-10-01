@@ -70,6 +70,62 @@ other, as before.
 
 `$$E = mc^2$$` is set as maths (MathML: fractions, powers and indices).
 
+## Writing in the editor
+
+```bash
+pip install pillow          # optional, but phone photos need it (below)
+python3 blog/editor.py      # then http://localhost:8767
+```
+
+A page on this machine for writing a post the way it will look: the
+paper, the type, the picture at its head, all as the blog sets them. There
+are no buttons over the text. Select some and bold, italic, link, the two
+sizes of heading and quote come up over it; on an empty line a + comes up
+beside it, for a picture, a video, a divider or code. Several pictures
+chosen at once are a carousel, and a picture's + adds more beside it. A
+caption is typed under its picture. Pictures and videos can also be
+dropped or pasted in. The Markdown shortcuts work as they are typed
+(`## `, `- `, `> `, `**bold**`). The featured image is the strip at the top
+of the paper; a picture dropped on it replaces it.
+
+It writes what `build.py` reads and nothing else (`editor.py`, with the
+page in `_editor/`, which is not published):
+
+- **A draft** is `index.draft.md` in the post's folder. The build leaves it
+  out, so a draft can sit in the folder, or be committed, without being on
+  the blog. A new one is in a folder called `draft-<when>` until it is out.
+  It is saved as it is written, and with Save draft (⌘S).
+- **The pictures** go into the folder as they are added, numbered on from
+  the last (`01.jpg`, `02.png`…), the featured image as `cover.*`. With
+  Pillow, a photo is turned the way the phone was held (the build would
+  otherwise show it sideways) and made no wider than 2400 pixels. A `.mov`
+  becomes an `.mp4`, and a `.webm` is made beside every `.mp4`, if ffmpeg
+  is installed.
+- **Preview** builds the blog with the drafts in it (`build.py --drafts
+  --quick` into `blog/_preview`: the pictures are linked as they are, not
+  resized, so it takes a second) and opens the post.
+- **Publish** asks for the post's address (from its title; it cannot change
+  once the post is out), dates it, renames its folder to that address, makes
+  `index.draft.md` its `index.md`, deletes the pictures the post no longer
+  uses, then commits that one folder and pushes. The push is what deploys
+  it. If the push fails (another machine pushed first, say) it pulls,
+  replays the commit on top, and tries once more; otherwise it says what git
+  said, and the commit is there to push by hand.
+
+A post that is out is edited the same way: saving writes `index.draft.md`
+beside its `index.md`, and the post on the blog stays as it was until
+Publish changes (which adds `updated` to its header, for `dateModified`).
+Discard changes throws the draft away. 46 of the posts brought from
+Paragraph open in it too; HTML blocks in them are shown as they are written
+and kept. The others have maths, HTML in the middle of a sentence or a link
+with a title, which the editor can only hold as plain text; it says so when
+one is opened, and those are better changed in their `index.md`.
+
+The Markdown it writes (`_editor/md.js`) is read by the same rules as
+`render_blocks()` and `Inline` in `build.py`: what it writes, the build
+reads back as the same post. Bold and italic together are written
+`**_this_**`, as `***this***` comes out of the build as overlapping tags.
+
 ## How it keeps Paragraph's layout
 
 The text column is 704px, as on Paragraph, and a picture shows at its own
