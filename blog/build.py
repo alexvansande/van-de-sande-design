@@ -99,6 +99,8 @@ def tex_to_mathml(tex):
 
     def atom():
         nonlocal pos
+        if pos >= len(toks):     # x^ or \frac{a}: nothing left to be the rest
+            return "<mrow></mrow>"
         t = toks[pos]
         pos += 1
         if t == "\\frac":

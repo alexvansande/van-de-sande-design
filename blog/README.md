@@ -79,12 +79,26 @@ python3 blog/editor.py      # then http://localhost:8767
 
 A page on this machine for writing a post the way it will look: the
 paper, the type, the picture at its head, all as the blog sets them. There
-are no buttons over the text. Select some and bold, italic, link, the two
-sizes of heading and quote come up over it; on an empty line a + comes up
-beside it, for a picture, a video, a divider or code. Several pictures
-chosen at once are a carousel, and a picture's + adds more beside it. A
-caption is typed under its picture. Pictures and videos can also be
-dropped or pasted in. The Markdown shortcuts work as they are typed
+are no buttons over the text. Select some and bold, italic, link, maths
+(∑), the two sizes of heading and quote come up over it; on an empty line a
++ comes up beside it, for a picture, a video, a YouTube video, maths, a
+divider or code. Several pictures chosen at once are a carousel, and a
+picture's + adds more beside it. A caption is typed under its picture.
+Pictures and videos can also be dropped or pasted in.
+
+- **Maths** is typed as `$$E = mc^2$$` in the text, or made from a selection
+  with ∑. A click on it opens its TeX, with the maths set under it as it is
+  typed. It is set by `build.py`'s own TeX (`tex_to_mathml`, which
+  `editor.py` asks), so it looks as it will on the blog, and a command that
+  TeX does not know is underlined, as the blog would show it as text.
+- **A YouTube video** comes from the +, or from its link pasted on an empty
+  line; a `t=` in the link is where it starts. It is written as the other
+  videos are, a `<figure class="youtube">` with the video in it, its title
+  asked of YouTube, and its caption, if it has one, in the figure.
+- **Half the column, the text running round it**: ◧ and ◨ on a picture
+  float it left or right at half the width, and again bring it back. It is
+  written as the older posts have it, `<figure class="float-right"
+  style="width:50%">`; on a phone it is the whole width, as there. The Markdown shortcuts work as they are typed
 (`## `, `- `, `> `, `**bold**`). The featured image is the strip at the top
 of the paper; a picture dropped on it replaces it.
 
@@ -115,11 +129,13 @@ page in `_editor/`, which is not published):
 A post that is out is edited the same way: saving writes `index.draft.md`
 beside its `index.md`, and the post on the blog stays as it was until
 Publish changes (which adds `updated` to its header, for `dateModified`).
-Discard changes throws the draft away. 46 of the posts brought from
-Paragraph open in it too; HTML blocks in them are shown as they are written
-and kept. The others have maths, HTML in the middle of a sentence or a link
-with a title, which the editor can only hold as plain text; it says so when
-one is opened, and those are better changed in their `index.md`.
+Discard changes throws the draft away. 51 of the 53 posts brought from
+Paragraph open in it too. Their pictures written as HTML (`<figure><img>`),
+YouTube videos and floated pictures are shown as such and written back as
+the same HTML; any other HTML block is shown as it is written, and kept.
+The other two have HTML in the middle of a sentence, which the editor can
+only hold as plain text; it says so when one is opened, and those are
+better changed in their `index.md`.
 
 The Markdown it writes (`_editor/md.js`) is read by the same rules as
 `render_blocks()` and `Inline` in `build.py`: what it writes, the build

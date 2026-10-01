@@ -6,6 +6,10 @@
 // in the editor goes round unchanged; for an older one, roundTrips() says
 // whether the editor can hold all of it (raw HTML blocks are kept as they
 // are, but not, say, HTML in the middle of a sentence).
+//
+// Three things the blog writes as HTML are read into the editor's own pieces
+// and written back as the same HTML: a YouTube video, a picture at half the
+// column with the text running round it, and their captions.
 
 const HTML_BLOCK = /^<(?:\/?(?:figure|p|div|iframe|table|section|details|video|blockquote|ul|ol|h[1-6]|hr|pre|math)\b|!--)/i
 const LIST_ITEM = /^( {0,3})([-*+]|\d+[.)])( +)/
@@ -47,7 +51,8 @@ function blocks(md, state) {
     if (HTML_BLOCK.test(s)) {
       let j = i
       while (j < lines.length && lines[j].trim()) j++
-      out.push({ type: 'rawHtml', content: [{ type: 'text', text: lines.slice(i, j).join('\n') }] })
+      const html = lines.slice(i, j).join('\n')
+      out.push(youtube(html, state) || floated(html, state) || { type: 'rawHtml', content: [{ type: 'text', text: html }] })
       i = j
       continue
     }
@@ -172,13 +177,24 @@ function inline(text, state, marks = []) {
       case 'bold': case 'italic':
         out.push(...inline(m[1], state, [...marks, { type: kind }])); break
       case 'break': out.push({ type: 'hardBreak' }); break
-      default:        // $$maths$$, <tags>, <http://…>, a picture mid-sentence: shown as written
+      case 'math':
+        out.push(marks.length ? { type: 'math', attrs: { tex: m[1] }, marks } : { type: 'math', attrs: { tex: m[1] } }); break
+      case 'html':
+        if (/^<br\s*\/?>$/i.test(m[0])) { out.push({ type: 'hardBreak' }); break }
+      // falls through
+      default:        // other <tags>, <http://…>, a picture mid-sentence: shown as written
         state.clean = false
         push(m[0])
     }
     rest = rest.slice(m.index + m[0].length)
   }
-  return merge(out)
+  return trimBreaks(merge(out))
+}
+
+// a break at the end of a paragraph shows nothing, and has nothing to write
+function trimBreaks(nodes) {
+  while (nodes.length && nodes[nodes.length - 1].type === 'hardBreak') nodes.pop()
+  return nodes
 }
 
 function merge(nodes) {
@@ -190,6 +206,92 @@ function merge(nodes) {
   }
   return out
 }
+
+// ---------------------------------------------------------------- the blocks written as HTML
+
+const ENTITY = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: '\u00a0' }
+const unescape = s => s.replace(/&(#x[0-9a-f]+|#\d+|\w+);/gi, (all, e) =>
+  e[0] === '#' ? String.fromCodePoint(e[1].toLowerCase() === 'x' ? parseInt(e.slice(2), 16) : +e.slice(1)) : ENTITY[e.toLowerCase()] ?? all)
+const escapeHtml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const escapeAttr = s => escapeHtml(s).replace(/"/g, '&quot;').replace(/'/g, '&#x27;')   // as Python's html.escape
+
+// A caption in HTML: bold, italic, code, links and line breaks; anything
+// else is not the editor's to hold.
+const TAGS = { strong: 'bold', b: 'bold', em: 'italic', i: 'italic', code: 'code', a: 'link' }
+function htmlInline(s, state) {
+  const out = []
+  const marks = []
+  const re = /<(\/?)(strong|b|em|i|code|a)\b([^>]*)>|<br\s*\/?>|<[^>]*>|[^<]+/gi
+  let m
+  while ((m = re.exec(s))) {
+    if (m[2]) {
+      const type = TAGS[m[2].toLowerCase()]
+      if (m[1]) {
+        const k = marks.map(x => x.type).lastIndexOf(type)
+        if (k >= 0) marks.splice(k, 1)
+      } else {
+        const h = m[3].match(/href="([^"]*)"/)
+        marks.push(type === 'link' ? { type, attrs: { href: unescape(h ? h[1] : '') } } : { type })
+      }
+    } else if (/^<br/i.test(m[0])) out.push({ type: 'hardBreak' })
+    else if (m[0][0] === '<') state.clean = false
+    else {
+      const t = unescape(m[0]).replace(/\s+/g, ' ')
+      if (t) out.push(marks.length ? { type: 'text', text: t, marks: [...marks] } : { type: 'text', text: t })
+    }
+  }
+  // a caption's spaces at either end show nothing
+  const nodes = trimBreaks(merge(out))
+  const first = nodes[0], last = nodes[nodes.length - 1]
+  if (first && first.type === 'text') first.text = first.text.trimStart()
+  if (last && last.type === 'text') last.text = last.text.trimEnd()
+  return nodes.filter(n => n.type !== 'text' || n.text)
+}
+
+const YOUTUBE = /^<figure class="youtube">\n<iframe src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/([\w-]+)(\?[^"]*)?"(?: title="([^"]*)")?[^>]*><\/iframe>(?:\n<figcaption>(.*)<\/figcaption>)?\n<\/figure>$/
+const ALLOW = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+
+function youtube(html, state) {
+  const m = html.match(YOUTUBE)
+  if (!m) return null
+  const content = m[4] ? htmlInline(m[4], state) : []
+  return { type: 'youtube', attrs: { id: m[1], params: m[2] || '', title: unescape(m[3] || '') }, content }
+}
+
+function youtubeHtml(n) {
+  const a = n.attrs
+  const cap = captionHtml(n)
+  return '<figure class="youtube">\n' +
+    `<iframe src="https://www.youtube-nocookie.com/embed/${a.id}${a.params || ''}" title="${escapeAttr(a.title || '')}" loading="lazy" allowfullscreen allow="${ALLOW}"></iframe>\n` +
+    (cap ? `<figcaption>${cap}</figcaption>\n` : '') + '</figure>'
+}
+
+// a picture written as HTML: at part of the column's width, the text
+// running round it, or the whole width, as the older posts have them
+const FLOAT = /^<figure(?: class="float-(right|left)" style="width:\s*(\d+%)")?>\n<img ([^>]*?)\s*\/?>(?:\n<figcaption>(.*)<\/figcaption>)?\n<\/figure>$/
+
+function floated(html, state) {
+  const m = html.match(FLOAT)
+  if (!m) return null
+  const img = {}
+  for (const [, k, v] of m[3].matchAll(/([\w-]+)="([^"]*)"/g)) img[k] = unescape(v)
+  if (!img.src || Object.keys(img).some(k => !['src', 'alt', 'width', 'height'].includes(k))) return null
+  const size = img.width && img.height ? `${img.width}x${img.height}` : null
+  return { type: 'figure', attrs: { src: img.src, alt: img.alt || '', float: m[1] || null, width: m[2] || '50%', size, html: true },
+    content: m[4] ? htmlInline(m[4], state) : [] }
+}
+
+function floatHtml(n) {
+  const a = n.attrs
+  const [w, h] = (a.size || '').split('x')
+  const cap = captionHtml(n)
+  const head = a.float ? `<figure class="float-${a.float}" style="width:${a.width || '50%'}">` : '<figure>'
+  return head + '\n' +
+    `<img src="${escapeAttr(a.src)}"${w && h ? ` width="${w}" height="${h}"` : ''} alt="${escapeAttr(a.alt || '')}">\n` +
+    (cap ? `<figcaption>${cap}</figcaption>\n` : '') + '</figure>'
+}
+
+const captionHtml = n => emit(n.content || [], HTML).replace(/\n/g, ' ').trim()
 
 const markKey = m => m.type + (m.type === 'link' ? ' ' + m.attrs.href : '')
 const sameMarks = (a, b) => a.length === b.length && a.every(m => b.some(n => markKey(n) === markKey(m)))
@@ -213,8 +315,8 @@ function block(n) {
     }
     case 'heading': {
       const s = inlineMd(kids).replace(/\n/g, ' ')
-      if (!s.trim()) return null
-      return '#'.repeat(n.attrs.level) + ' ' + s + (n.attrs.hid ? ` {#${n.attrs.hid}}` : '')
+      if (!s.trim() && !n.attrs.hid) return null
+      return ['#'.repeat(n.attrs.level), s, n.attrs.hid ? `{#${n.attrs.hid}}` : ''].filter(Boolean).join(' ')
     }
     case 'blockquote':
       return blockList(kids).split('\n').map(l => (l ? '> ' + l : '>')).join('\n')
@@ -233,7 +335,10 @@ function block(n) {
     case 'horizontalRule':
       return '---'
     case 'figure':
-      return picture(n)
+      // in HTML if it floats, or if it came as HTML (so it goes back as it came)
+      return (n.attrs.float || n.attrs.html) && !isVideo(n.attrs.src) ? floatHtml(n) : picture(n)
+    case 'youtube':
+      return youtubeHtml(n)
     case 'carousel':
       return kids.length ? kids.map(picture).join('\n') : null
     case 'rawHtml':
@@ -271,15 +376,41 @@ function href(h) {
   return /^(?:[^()\s]|\([^()\s]*\))+$/.test(h) ? h : h.replace(/ /g, '%20').replace(/\(/g, '%28').replace(/\)/g, '%29')
 }
 
-function inlineMd(nodes) {
+// Markdown and HTML are written by one walk over the text: they differ only
+// in how a mark opens and closes, and in what is escaped.
+const MD = {
+  open(m, out, open) {
+    if (m.type === 'link') return ['[', m]
+    if (m.type === 'bold') return ['**', m]
+    // inside bold, italic is _x_: build.py reads ***x*** as bold over half of italic
+    const delim = open.some(o => o.type === 'bold') && !/[\p{L}\p{N}_]$/u.test(out) ? '_' : '*'
+    return [delim, { ...m, delim }]
+  },
+  close: m => (m.type === 'link' ? `](${href(m.attrs.href)})` : m.type === 'bold' ? '**' : m.delim),
+  text: escapeText,
+  code: t => codeSpan(t.replace(/\n/g, ' ')),
+  math: tex => `$$${tex}$$`,
+  brk: '\\\n',
+}
+const HTML = {
+  open: m => [m.type === 'link' ? `<a href="${escapeAttr(m.attrs.href)}">` : m.type === 'bold' ? '<strong>' : '<em>', m],
+  close: m => (m.type === 'link' ? '</a>' : m.type === 'bold' ? '</strong>' : '</em>'),
+  text: escapeHtml,
+  code: t => `<code>${escapeHtml(t)}</code>`,
+  math: tex => escapeHtml(`$$${tex}$$`),
+  brk: '<br>',
+}
+
+function emit(nodes, fmt) {
+  nodes = trimBreaks([...nodes])
   // whitespace at the edge of bold or italic is moved out of it (** a** is
   // not bold), out of just the marks that begin or end there
-  const sorted = n => (n && n.type === 'text' ? (n.marks || []) : []).filter(m => ORDER.includes(m.type))
+  const sorted = n => (n && (n.type === 'text' || n.type === 'math') ? (n.marks || []) : []).filter(m => ORDER.includes(m.type))
     .sort((a, b) => ORDER.indexOf(a.type) - ORDER.indexOf(b.type))
   const keep = (ms, other) => ms.filter(m => m.type === 'link' || sorted(other).some(o => markKey(o) === markKey(m)))
   const pieces = []
   nodes.forEach((n, x) => {
-    if (n.type !== 'text') { pieces.push(n); return }
+    if (n.type !== 'text') { pieces.push({ ...n, marks: sorted(n) }); return }
     const marks = sorted(n)
     if (marks.some(m => m.type === 'code')) { pieces.push({ ...n, marks }); return }
     const [, lead, core, trail] = n.text.match(/^(\s*)([\s\S]*?)(\s*)$/)
@@ -289,33 +420,30 @@ function inlineMd(nodes) {
   })
   let out = ''
   const open = []
-  const close = to => {
-    while (open.length > to) {
-      const m = open.pop()
-      out += m.type === 'link' ? `](${href(m.attrs.href)})` : m.type === 'bold' ? '**' : m.type === 'italic' ? m.delim : ''
-    }
-  }
+  const close = to => { while (open.length > to) out += fmt.close(open.pop()) }
   for (const p of pieces) {
-    if (p.type === 'hardBreak') { out += '\\\n'; continue }
-    if (p.type !== 'text') continue
-    const marks = (p.marks || []).filter(m => m.type !== 'code')
+    if (p.type === 'hardBreak') { out += fmt.brk; continue }
+    if (p.type !== 'text' && p.type !== 'math') continue
+    const marks = p.marks.filter(m => m.type !== 'code')
     let k = 0
     while (k < open.length && k < marks.length && markKey(open[k]) === markKey(marks[k])) k++
     close(k)
-    for (let m of marks.slice(k)) {
-      if (m.type === 'italic') {
-        // inside bold, italic is _x_: build.py reads ***x*** as bold over half of italic
-        const inBold = open.some(o => o.type === 'bold')
-        m = { ...m, delim: inBold && !/[\p{L}\p{N}_]$/u.test(out) ? '_' : '*' }
-      }
-      out += m.type === 'link' ? '[' : m.type === 'bold' ? '**' : m.delim
-      open.push(m)
+    for (const m of marks.slice(k)) {
+      const [s, opened] = fmt.open(m, out, open)
+      out += s
+      open.push(opened)
     }
-    out += (p.marks || []).some(m => m.type === 'code') ? codeSpan(p.text.replace(/\n/g, ' ')) : escapeText(p.text)
+    if (p.type === 'math') out += fmt.math(p.attrs.tex)
+    else out += p.marks.some(m => m.type === 'code') ? fmt.code(p.text) : fmt.text(p.text)
   }
   close(0)
+  return out
+}
+
+function inlineMd(nodes) {
   // what would start a block at the start of a line is written as text
-  return out.split('\n').map(l => l.replace(/^(\s*)(#|>|[-+](?=\s|$))/, '$1\\$2').replace(/^(\s*\d+)([.)])(?=\s|$)/, '$1\\$2')).join('\n')
+  return emit(nodes, MD).split('\n')
+    .map(l => l.replace(/^(\s*)(#|>|[-+](?=\s|$))/, '$1\\$2').replace(/^(\s*\d+)([.)])(?=\s|$)/, '$1\\$2')).join('\n')
 }
 
 // ---------------------------------------------------------------- going round

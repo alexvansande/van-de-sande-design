@@ -18,11 +18,15 @@ It answers only on this machine (127.0.0.1), and only to its own page.
 """
 import http.server, json, os, re, shutil, struct, subprocess, sys, threading, urllib.parse
 from datetime import datetime, timezone
+import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 EDITOR = os.path.join(HERE, "_editor")
 PREVIEW = os.path.join(HERE, "_preview")
+sys.path.insert(0, HERE)
+import build  # noqa: E402  (its TeX, so maths shows here as the blog will set it)
+
 try:
     from PIL import Image, ImageOps
 except ImportError:
@@ -331,6 +335,28 @@ def tidy(path):
         pass
 
 
+# ---------------------------------------------------------------- maths and videos
+
+def tex(src):
+    """TeX as the blog sets it, and the commands in it the blog does not know."""
+    mathml = build.tex_to_mathml(src)
+    unknown = sorted(set(re.findall(r"<mtext>(\\[A-Za-z]+)</mtext>", mathml)))
+    return {"mathml": mathml, "unknown": unknown}
+
+
+def youtube_title(vid):
+    """The video's title, from YouTube, for the page to name it by; none
+    without a connection."""
+    if not re.fullmatch(r"[\w-]{6,20}", vid or ""):
+        raise Bad("not a YouTube video")
+    url = "https://www.youtube.com/oembed?format=json&url=" + urllib.parse.quote(f"https://www.youtube.com/watch?v={vid}")
+    try:
+        with urllib.request.urlopen(url, timeout=4) as r:
+            return {"title": json.load(r).get("title", "")}
+    except (OSError, ValueError):
+        return {"title": ""}
+
+
 # ---------------------------------------------------------------- preview
 
 building = threading.Lock()
@@ -404,6 +430,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                                         "ffmpeg": bool(FFMPEG)})
             if url.path == "/api/post":
                 return self.reply(200, load(q.get("slug", "")))
+            if url.path == "/api/tex":
+                return self.reply(200, tex(q.get("tex", "")))
+            if url.path == "/api/youtube":
+                return self.reply(200, youtube_title(q.get("id", "")))
             if url.path == "/api/leftovers":
                 folder = folder_of(q.get("slug", ""))
                 p = load(q["slug"])

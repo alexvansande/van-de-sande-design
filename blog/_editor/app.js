@@ -1,9 +1,11 @@
 // The editor's page: the list of posts, and one post written on the paper
 // the blog will set it on. Formatting comes up on a selection; a + on an
-// empty line adds a picture, a video, a divider. Everything is saved into
+// empty line adds a picture, a video, a YouTube video, maths, a divider.
+// Everything is saved into
 // the post's folder by editor.py, as Markdown and files beside it.
 
-import { Editor, Node, Extension, StarterKit, BubbleMenu, FloatingMenu, Placeholder, TextSelection } from './vendor/tiptap.js'
+import { Editor, Node, Extension, StarterKit, BubbleMenu, FloatingMenu, Placeholder, TextSelection,
+  nodeInputRule, nodePasteRule } from './vendor/tiptap.js'
 import { parse, serialize, roundTrips, isVideo } from './md.js'
 
 const $ = (s, el = document) => el.querySelector(s)
@@ -24,6 +26,10 @@ let linkRange = null     // the text being linked, while its link is typed
 // and would show one that is still in the page though it never showed it
 bubble.remove()
 plus.remove()
+// the box that asks for a line of text over the page: TeX, a YouTube link
+const askbox = document.getElementById('askbox')
+const askInput = document.getElementById('ask-input')
+const askPreview = document.getElementById('ask-preview')
 
 // ---------------------------------------------------------------- talking to editor.py
 
@@ -110,14 +116,22 @@ const Figure = Node.create({
   marks: 'bold italic link code',
   isolating: true,
   addAttributes() {
-    return { src: { default: null }, alt: { default: '' } }
+    // float: 'left' or 'right' for a picture at part of the column, the
+    // text running round it; size: the width and height an older post gave
+    // html: it came written as HTML, and is written back so
+    return { src: { default: null }, alt: { default: '' }, float: { default: null }, width: { default: '50%' }, size: { default: null },
+      html: { default: false } }
   },
   parseHTML() {
     return [{ tag: 'figure[data-src]', contentElement: 'figcaption',
-      getAttrs: e => ({ src: e.getAttribute('data-src'), alt: e.getAttribute('data-alt') || '' }) }]
+      getAttrs: e => ({ src: e.getAttribute('data-src'), alt: e.getAttribute('data-alt') || '',
+        float: e.getAttribute('data-float') || null, width: e.getAttribute('data-width') || '50%', size: e.getAttribute('data-size') || null,
+        html: e.hasAttribute('data-html') }) }]
   },
   renderHTML({ node }) {
-    return ['figure', { 'data-src': node.attrs.src, 'data-alt': node.attrs.alt }, ['figcaption', 0]]
+    const a = node.attrs
+    return ['figure', { 'data-src': a.src, 'data-alt': a.alt, 'data-float': a.float, 'data-width': a.width, 'data-size': a.size,
+      'data-html': a.html ? '' : null }, ['figcaption', 0]]
   },
   addNodeView() {
     return ({ node, getPos, editor }) => figureView(node, getPos, editor)
@@ -126,7 +140,7 @@ const Figure = Node.create({
     // Enter in a caption goes on to a new paragraph under the picture
     const out = ({ editor }) => {
       const { $from } = editor.state.selection
-      if ($from.parent.type.name !== 'figure') return false
+      if (!['figure', 'youtube'].includes($from.parent.type.name)) return false
       const after = $from.after(1)
       return editor.chain().insertContentAt(after, { type: 'paragraph' }).setTextSelection(after + 1).run()
     }
@@ -178,6 +192,186 @@ const RawHtml = Node.create({
   renderHTML() { return ['pre', { class: 'raw-html' }, ['code', 0]] },
 })
 
+// Maths in the text, $$TeX$$, set as the blog sets it: editor.py asks
+// build.py's own TeX for the MathML. Typed as $$…$$, or made from a
+// selection with ∑; a click on it opens its TeX.
+const MathNode = Node.create({
+  name: 'math',
+  group: 'inline',
+  inline: true,
+  atom: true,
+  selectable: true,
+  addAttributes() { return { tex: { default: '' } } },
+  parseHTML() { return [{ tag: 'span[data-tex]', getAttrs: e => ({ tex: e.getAttribute('data-tex') }) }] },
+  renderHTML({ node }) { return ['span', { 'data-tex': node.attrs.tex }, `$$${node.attrs.tex}$$`] },
+  renderText({ node }) { return `$$${node.attrs.tex}$$` },
+  addNodeView() {
+    return ({ node, getPos }) => {
+      const dom = el('span', 'ed-math')
+      dom.contentEditable = 'false'
+      drawMath(dom, node.attrs.tex)
+      dom.addEventListener('click', e => { e.preventDefault(); editMath(getPos()) })
+      return {
+        dom,
+        update(n) {
+          if (n.type.name !== 'math') return false
+          if (n.attrs.tex !== node.attrs.tex) drawMath(dom, n.attrs.tex)
+          node = n
+          return true
+        },
+        ignoreMutation: () => true,
+      }
+    }
+  },
+  addInputRules() {
+    // no group in these: with one, Tiptap would put the node inside the $$s and keep them
+    return [nodeInputRule({ find: /\$\$[^$\n]+\$\$$/, type: this.type, getAttributes: m => ({ tex: m[0].slice(2, -2).trim() }) })]
+  },
+  addPasteRules() {
+    return [nodePasteRule({ find: /\$\$[^$\n]+\$\$/g, type: this.type, getAttributes: m => ({ tex: m[0].slice(2, -2).trim() }) })]
+  },
+})
+
+const mathCache = new Map()
+const mathml = tex => {
+  if (!mathCache.has(tex)) mathCache.set(tex, fetch('/api/tex?tex=' + encodeURIComponent(tex)).then(r => r.json()))
+  return mathCache.get(tex)
+}
+const unknownNote = r => (r.unknown.length ? `The blog does not know ${r.unknown.join(', ')}, and sets it as text` : '')
+
+function drawMath(dom, tex) {
+  dom.dataset.tex = tex
+  dom.classList.toggle('empty', !tex)
+  dom.classList.remove('unknown')
+  dom.textContent = tex || '∑'
+  if (!tex) return
+  mathml(tex).then(r => {
+    if (dom.dataset.tex !== tex) return
+    dom.innerHTML = r.mathml           // from build.py, which escapes what it is given
+    dom.classList.toggle('unknown', r.unknown.length > 0)
+    dom.title = unknownNote(r) || tex
+  }).catch(() => {})
+}
+
+function editMath(pos) {
+  const node = editor.state.doc.nodeAt(pos)
+  if (!node || node.type.name !== 'math') return
+  ask({
+    value: node.attrs.tex,
+    placeholder: 'TeX: E = mc^2, \\frac{a}{b}, x_i…',
+    near: editor.view.nodeDOM(pos).getBoundingClientRect(),
+    preview: async v => {
+      if (!v.trim()) return ''
+      const r = await mathml(v.trim())
+      return r.mathml + (r.unknown.length ? `<small>${unknownNote(r)}</small>` : '')
+    },
+    done: v => {
+      const now = editor.state.doc.nodeAt(pos)
+      if (!now || now.type.name !== 'math') return
+      const tex = v === null ? now.attrs.tex : v.replace(/\$\$/g, '').trim()
+      const tr = editor.state.tr
+      if (!tex) tr.delete(pos, pos + 1)                  // no maths left: no node
+      else tr.setNodeAttribute(pos, 'tex', tex)
+      tr.setSelection(TextSelection.create(tr.doc, tex ? pos + 1 : pos))
+      editor.view.dispatch(tr)
+      editor.view.focus()
+    },
+  })
+}
+
+// maths where the text is selected (its text taken for TeX), or at the caret
+function insertMath() {
+  let { from, to } = editor.state.selection
+  // the spaces at either end of a selection stay text
+  const picked = editor.state.doc.textBetween(from, to, ' ')
+  from += picked.length - picked.trimStart().length
+  to -= picked.length - picked.trimEnd().length
+  if (to < from) to = from
+  const tex = picked.trim().replace(/\$\$/g, '')
+  editor.chain().focus().insertContentAt({ from, to }, { type: 'math', attrs: { tex } }).run()
+  requestAnimationFrame(() => editMath(from))
+}
+
+// A YouTube video, written as the blog's other ones are: a figure with the
+// video in it, and a caption if it has one.
+const Youtube = Node.create({
+  name: 'youtube',
+  group: 'block',
+  content: 'inline*',
+  marks: 'bold italic link code',
+  isolating: true,
+  addAttributes() { return { id: { default: null }, params: { default: '' }, title: { default: '' } } },
+  parseHTML() {
+    return [{ tag: 'figure[data-youtube]', contentElement: 'figcaption',
+      getAttrs: e => ({ id: e.getAttribute('data-youtube'), params: e.getAttribute('data-params') || '', title: e.getAttribute('data-title') || '' }) }]
+  },
+  renderHTML({ node }) {
+    const a = node.attrs
+    return ['figure', { 'data-youtube': a.id, 'data-params': a.params, 'data-title': a.title }, ['figcaption', 0]]
+  },
+  addNodeView() {
+    return ({ node, getPos }) => {
+      const dom = el('figure', 'ed-fig ed-yt')
+      const media = el('div', 'ed-media')
+      media.contentEditable = 'false'
+      const cap = el('figcaption')
+      dom.append(media, cap)
+      const draw = () => {
+        const frame = el('a', 'ed-yt-frame')
+        frame.href = `https://www.youtube.com/watch?v=${node.attrs.id}`
+        frame.target = '_blank'
+        frame.title = (node.attrs.title || 'The video') + ', on YouTube'
+        const img = el('img')
+        img.src = `https://i.ytimg.com/vi/${node.attrs.id}/hqdefault.jpg`
+        img.alt = ''
+        img.onerror = () => img.remove()
+        frame.append(img, el('span', 'play', '▶'), el('span', 'name', node.attrs.title || 'YouTube'))
+        const tools = el('div', 'ed-tools')
+        const x = el('button', '', '×')
+        x.type = 'button'
+        x.title = 'Take it out'
+        x.onclick = e => {
+          e.preventDefault()
+          const pos = getPos()
+          editor.view.dispatch(editor.state.tr.delete(pos, pos + editor.state.doc.nodeAt(pos).nodeSize))
+        }
+        tools.append(x)
+        media.replaceChildren(frame, tools)
+      }
+      draw()
+      return {
+        dom, contentDOM: cap,
+        update(n) {
+          if (n.type.name !== 'youtube') return false
+          const again = n.attrs.id !== node.attrs.id || n.attrs.title !== node.attrs.title
+          node = n
+          if (again) draw()
+          return true
+        },
+        ignoreMutation: m => m.type !== 'selection' && !cap.contains(m.target),
+        stopEvent: e => media.contains(e.target),
+      }
+    }
+  },
+})
+
+// youtube.com/watch?v=…, youtu.be/…, /shorts/…, /embed/…, and where in it to start
+function youtubeLink(s) {
+  const m = (s || '').trim().match(/^(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{6,20})([?&#][^\s]*)?$/)
+  if (!m) return null
+  const t = (m[2] || '').match(/[?&#](?:t|start)=(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?(?:&|$)/)
+  const start = t ? (+t[1] || 0) * 3600 + (+t[2] || 0) * 60 + (+t[3] || 0) : 0
+  return { id: m[1], params: start ? `?start=${start}` : '' }
+}
+
+async function insertYoutube(link, at) {
+  toast('Adding the video…', false, 0)
+  const { title } = await call('/api/youtube?id=' + link.id).catch(() => ({ title: '' }))
+  toast('Added')
+  placeBlock({ type: 'youtube', attrs: { ...link, title } }, at)
+  changed()
+}
+
 // The id an older heading had, so the links to it keep working.
 const HeadingId = Extension.create({
   name: 'headingId',
@@ -214,6 +408,17 @@ function figureView(node, getPos, editor) {
     } else {
       tools.append(act('+', 'Add pictures beside it, as a carousel', () =>
         pick('image/*,video/mp4,video/webm,video/quicktime', true, files => addSlides(getPos, files))))
+      if (!isVideo(src)) {
+        // half the column, on one side, the text running round it; again, back to the whole column
+        const side = node.attrs.float
+        for (const [to, label, title] of [['left', '◧', 'Half the column, on the left, the text running round it'],
+          ['right', '◨', 'Half the column, on the right, the text running round it']]) {
+          const b = act(label, side === to ? 'Back to the whole column' : title, () =>
+            editor.view.dispatch(editor.state.tr.setNodeAttribute(getPos(), 'float', side === to ? null : to)))
+          b.classList.toggle('on', side === to)
+          tools.append(b)
+        }
+      }
     }
     tools.append(act('alt', 'Describe it, for anyone who cannot see it', () => {
       const alt = prompt('Describe the picture, for anyone who cannot see it:', node.attrs.alt || '')
@@ -232,6 +437,10 @@ function figureView(node, getPos, editor) {
       m.onerror = () => m.replaceWith(el('div', 'missing', `${src} is not in the post's folder`))
     }
     media.replaceChildren(m, tools)
+    const side = !w.inCarousel && !isVideo(src) && node.attrs.float
+    dom.classList.toggle('float-left', side === 'left')
+    dom.classList.toggle('float-right', side === 'right')
+    dom.style.width = side ? node.attrs.width || '50%' : ''
   }
   // drawn once it is in the document, so it can tell whether it is in a carousel
   queueMicrotask(draw)
@@ -239,7 +448,7 @@ function figureView(node, getPos, editor) {
     dom, contentDOM: cap,
     update(n) {
       if (n.type.name !== 'figure') return false
-      const again = n.attrs.src !== node.attrs.src || n.attrs.alt !== node.attrs.alt
+      const again = ['src', 'alt', 'float', 'width'].some(k => n.attrs[k] !== node.attrs[k])
       node = n
       if (again) draw()
       else queueMicrotask(draw)   // it may have moved in or out of a carousel
@@ -297,7 +506,8 @@ async function addSlides(getPos, files) {
     if ($pos.parent.type.name === 'carousel') {
       view.dispatch(state.tr.insert($pos.after() - 1, figs))
     } else {
-      const car = state.schema.nodes.carousel.create(null, [node, ...figs])
+      const whole = node.type.create({ ...node.attrs, float: null, html: false }, node.content)
+      const car = state.schema.nodes.carousel.create(null, [whole, ...figs])
       view.dispatch(state.tr.replaceWith(pos, pos + node.nodeSize, car))
     }
   }
@@ -343,18 +553,28 @@ async function insertFiles(files, at) {
   const names = await uploadAll(files)
   if (!names.length) return
   const figs = names.map(n => ({ type: 'figure', attrs: { src: n } }))
-  const node = figs.length > 1 ? { type: 'carousel', content: figs } : figs[0]
+  placeBlock(figs.length > 1 ? { type: 'carousel', content: figs } : figs[0], at)
+}
+
+// a block in place of the empty line the caret is on, or after the block at pos
+function placeBlock(node, at) {
   const { state } = editor
-  if (at == null) {
+  let where = at
+  if (where == null) {
     const { $from } = state.selection
     const block = $from.node(1)
-    if (block && block.type.name === 'paragraph' && !block.textContent && $from.depth === 1) {
-      editor.chain().focus().insertContentAt({ from: $from.before(1), to: $from.after(1) }, node).run()
-      return
-    }
-    at = $from.depth ? $from.after(1) : $from.pos
+    const empty = block && block.type.name === 'paragraph' && !block.textContent && $from.depth === 1
+    where = empty ? { from: $from.before(1), to: $from.after(1) } : $from.depth ? $from.after(1) : $from.pos
   }
-  editor.chain().focus().insertContentAt(at, node).run()
+  const start = typeof where === 'number' ? where : where.from
+  // and the caret goes on to the line after it, made if there is none
+  editor.chain().focus().insertContentAt(where, node).command(({ tr }) => {
+    const end = start + tr.doc.nodeAt(start).nodeSize
+    const next = tr.doc.nodeAt(end)
+    if (!next || next.type.name !== 'paragraph' || next.content.size) tr.insert(end, tr.doc.type.schema.nodes.paragraph.create())
+    tr.setSelection(TextSelection.create(tr.doc, end + 1))
+    return true
+  }).run()
 }
 
 // ---------------------------------------------------------------- one post
@@ -476,6 +696,13 @@ function makeEditor(doc) {
       },
       handlePaste(view, event) {
         const files = [...(event.clipboardData?.files || [])]
+        // a YouTube link pasted on an empty line is the video
+        const link = youtubeLink(event.clipboardData?.getData('text/plain'))
+        const { $from } = view.state.selection
+        if (!files.length && link && $from.depth === 1 && $from.parent.type.name === 'paragraph' && !$from.parent.textContent) {
+          insertYoutube(link)
+          return true
+        }
         if (!files.length) return false
         insertFiles(files)
         return true
@@ -489,6 +716,8 @@ function makeEditor(doc) {
         link: { openOnClick: false, autolink: true, linkOnPaste: true, HTMLAttributes: { target: null, rel: null } },
       }),
       HeadingId,
+      MathNode,
+      Youtube,
       Figure,
       Carousel,
       RawHtml,
@@ -536,7 +765,7 @@ function lightBubble() {
     ['h2', editor.isActive('heading', { level: 2 })], ['h3', editor.isActive('heading', { level: 3 })], ['quote', editor.isActive('blockquote')]]) {
     b.querySelector(`[data-cmd="${cmd}"]`).classList.toggle('on', on)
   }
-  b.classList.toggle('caption', editor.isActive('figure'))
+  b.classList.toggle('caption', editor.isActive('figure') || editor.isActive('youtube'))
 }
 
 // ---------------------------------------------------------------- the menus
@@ -552,6 +781,7 @@ bubble.addEventListener('click', e => {
   if (cmd === 'h3') c.toggleHeading({ level: 3 }).run()
   if (cmd === 'quote') c.toggleBlockquote().run()
   if (cmd === 'link') startLink()
+  if (cmd === 'math') insertMath()
 })
 
 function startLink() {
@@ -596,9 +826,70 @@ plus.addEventListener('click', e => {
   plus.classList.remove('open')
   if (cmd === 'image') pick('image/*', true, files => insertFiles(files))
   if (cmd === 'video') pick('video/mp4,video/webm,video/quicktime,.mov,.m4v', false, files => insertFiles(files))
+  if (cmd === 'youtube') {
+    const { from } = editor.state.selection
+    const c = editor.view.coordsAtPos(from)
+    ask({
+      placeholder: 'Paste a YouTube link, then Enter',
+      near: { left: c.left, right: c.left + 280, bottom: c.bottom },
+      done: v => {
+        if (!v) return editor.view.focus()
+        const link = youtubeLink(v)
+        if (link) insertYoutube(link)
+        else toast('That is not a YouTube link', true)
+      },
+    })
+  }
+  if (cmd === 'math') insertMath()
   if (cmd === 'hr') editor.chain().focus().setHorizontalRule().run()
   if (cmd === 'code') editor.chain().focus().setCodeBlock().run()
 })
+
+// ---------------------------------------------------------------- asking for a line
+
+let asking = null
+let previewTimer = null
+
+function ask({ value = '', placeholder = '', near, preview = null, done }) {
+  asking = { done, preview }
+  askInput.value = value
+  askInput.placeholder = placeholder
+  askPreview.replaceChildren()
+  askPreview.hidden = !preview
+  askbox.hidden = false
+  const mid = (near.left + near.right) / 2
+  askbox.style.left = Math.max(8, Math.min(mid - askbox.offsetWidth / 2, innerWidth - askbox.offsetWidth - 8)) + scrollX + 'px'
+  askbox.style.top = near.bottom + 10 + scrollY + 'px'
+  askInput.focus()
+  askInput.select()
+  showPreview()
+}
+
+function showPreview() {
+  if (!asking || !asking.preview) return
+  const { preview } = asking
+  const v = askInput.value
+  clearTimeout(previewTimer)
+  previewTimer = setTimeout(async () => {
+    const html = await preview(v).catch(() => '')
+    if (asking && asking.preview === preview && askInput.value === v) askPreview.innerHTML = html
+  }, 120)
+}
+
+function finishAsk(value) {
+  if (!asking) return
+  const { done } = asking
+  asking = null
+  askbox.hidden = true
+  done(value)
+}
+
+askInput.addEventListener('input', showPreview)
+askInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); finishAsk(askInput.value) }
+  if (e.key === 'Escape') { e.preventDefault(); finishAsk(null) }
+})
+askInput.addEventListener('blur', () => finishAsk(askInput.value))
 
 document.addEventListener('keydown', e => {
   if (!post || $('#edit').hidden) return

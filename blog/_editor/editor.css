@@ -101,6 +101,24 @@ body.editor{min-height:100vh}
 .ed-strip .ed-tools{top:1rem}
 .ed-strip figcaption{font-size:.95rem;margin:.5rem 0 .5rem}
 
+/* maths in the text: a click opens its TeX */
+.ed-math{padding:0 .1em;border-radius:3px;cursor:pointer}
+.ed-math:hover,.ed-math.ProseMirror-selectednode{background:rgba(176,141,60,.18);outline:none}
+.ed-math.empty{color:var(--ghost)}
+.ed-math.unknown{text-decoration:underline wavy #b0603c;text-underline-offset:.2em}
+.body .ed-math math{font-size:1.08em;font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math}
+
+/* a YouTube video: its picture here, the video on the blog */
+.body .ed-yt{clear:both;margin:2rem 0}
+.ed-yt-frame{position:relative;display:block;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111;color:#fff;text-decoration:none}
+.body .ed-yt-frame img{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:cover;border-radius:0}
+.ed-yt-frame .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:4.2rem;height:3rem;border-radius:12px;
+  background:rgba(20,20,20,.8);display:grid;place-items:center;font-size:1.3rem}
+.ed-yt-frame:hover .play{background:#c4302b}
+.ed-yt-frame .name{position:absolute;left:.8rem;right:.8rem;bottom:.6rem;font-size:1rem;text-shadow:0 1px 3px #000;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ed-tools button.on{background:#b08d3c;color:#fff}
+
 /* HTML from an older post, kept just as it was written */
 .body pre.raw-html{position:relative;margin:1.5rem 0;padding:1.6rem 1rem .8rem;border:1px dashed var(--rule);background:#ece8d8;
   font-size:.8rem;white-space:pre-wrap;word-break:break-word}
@@ -118,7 +136,12 @@ body.editor{min-height:100vh}
   background:none;color:inherit;cursor:pointer}
 .bubble button:hover{background:rgba(244,241,228,.12)}
 .bubble button.on{color:#e8c66a}
-.linkbox{position:absolute;visibility:visible}
+.linkbox,.askbox{position:absolute;visibility:visible}
+.askbox{flex-direction:column;align-items:stretch;gap:4px;min-width:min(22rem,90vw)}
+.askbox input{width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.95rem}
+.ask-preview{padding:.4rem .6rem .5rem;border-radius:6px;background:var(--paper);color:var(--ink);font-size:1.3rem;text-align:center}
+.ask-preview:empty{display:none}
+.ask-preview small{display:block;margin-top:.3rem;font-size:.85rem;color:#8a3b1e}
 .bubble.caption .block{display:none}
 .bubble input{font:inherit;font-size:1rem;width:18rem;max-width:70vw;padding:.3rem .5rem;border:0;outline:none;border-radius:6px;
   background:rgba(244,241,228,.1);color:#f4f1e4}
@@ -129,7 +152,8 @@ body.editor{min-height:100vh}
   color:var(--quiet);font:inherit;font-size:1.4rem;line-height:1;cursor:pointer;transition:transform .2s;padding:0 0 .1em}
 .plus .open-btn:hover{color:var(--ink);border-color:var(--ink)}
 .plus.open .open-btn{transform:rotate(45deg)}
-.plus .opts{display:none;gap:.3rem}
+/* the options hang to the right of the +, so the menu is placed by the + alone */
+.plus .opts{display:none;gap:.3rem;position:absolute;left:calc(100% + .5rem);top:.1rem;white-space:nowrap}
 .plus.open .opts{display:flex}
 .plus .opts button{font:inherit;font-size:.95rem;padding:.3rem .8rem;border-radius:999px;border:1px solid var(--rule);
   background:var(--paper);color:var(--ink);cursor:pointer}

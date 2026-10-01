@@ -53,6 +53,7 @@
       <button data-cmd="bold" title="Bold (⌘B)"><b>B</b></button>
       <button data-cmd="italic" title="Italic (⌘I)"><i>i</i></button>
       <button data-cmd="link" title="Link (⌘K)">link</button>
+      <button data-cmd="math" title="Maths: the selection as TeX">∑</button>
       <span class="block">
         <button data-cmd="h2" title="Heading">H</button>
         <button data-cmd="h3" title="Small heading">h</button>
@@ -60,6 +61,7 @@
       </span>
     </span>
   </div>
+  <div class="bubble askbox" id="askbox" hidden><input id="ask-input" autocomplete="off" spellcheck="false"><div class="ask-preview" id="ask-preview"></div></div>
   <div class="bubble linkbox" id="linkbox" hidden><input id="link-input" type="url" placeholder="Paste a link, then Enter (empty to remove)"></div>
 
   <!-- on an empty line -->
@@ -68,6 +70,8 @@
     <span class="opts">
       <button data-cmd="image" title="One picture, or several for a carousel">Picture</button>
       <button data-cmd="video">Video</button>
+      <button data-cmd="youtube" title="Or paste a YouTube link on an empty line">YouTube</button>
+      <button data-cmd="math" title="Or type $$TeX$$ anywhere in the text">Maths</button>
       <button data-cmd="hr">Divider</button>
       <button data-cmd="code">Code</button>
     </span>
