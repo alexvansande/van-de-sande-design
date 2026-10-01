@@ -19,7 +19,7 @@ Only the standard library is needed. With Pillow installed, pictures are
 resized into WebP at the widths the page can show them at; without it they
 are copied as they are, which works but is heavy.
 """
-import argparse, hashlib, html, http.server, json, os, re, shutil, sys
+import argparse, hashlib, html, http.server, json, os, re, shutil, subprocess, sys
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
@@ -35,6 +35,7 @@ AUTHOR = "Alex Van de Sande"
 HOME = "https://vandesande.design"
 COLUMN = 704                  # the text column, in CSS pixels: what Paragraph had
 WIDTHS = (480, 704, 1056, 1408, 2112)
+VIDEOS = (".mp4", ".webm")    # copied as they are, beside the pictures
 
 
 # ---------------------------------------------------------------- front matter
@@ -189,6 +190,8 @@ class Inline:
 
 HTML_BLOCK = re.compile(r"<(?:/?(?:figure|p|div|iframe|table|section|details|video|blockquote|ul|ol|h[1-6]|hr|pre|math)\b|!--)", re.I)
 LIST_ITEM = re.compile(r"( {0,3})([-*+]|\d+[.)])( +)")
+# a picture on a line of its own: ![alt](file "caption"); the file may be a video
+PICTURE = re.compile(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)')
 
 
 def render_blocks(md, ctx):
@@ -281,10 +284,21 @@ def render_blocks(md, ctx):
         while j < len(lines) and lines[j].strip() and not starts_block(lines[j]):
             j += 1
         para = "\n".join(l.strip() for l in lines[i:j])
-        lone = re.fullmatch(r'!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)', para)
-        if lone:     # a picture on its own is a figure, its title the caption
+        shots = [PICTURE.fullmatch(l) for l in para.split("\n")]
+        if len(shots) > 1 and all(shots):
+            # pictures on lines of their own, one after another with no blank
+            # line between them, are a carousel: one at a time, side to side
+            slides = "\n".join(f'<div class="slide">{ctx.media(m.group(2), m.group(1))}'
+                                + (f"<figcaption>{inline(m.group(3))}</figcaption>" if m.group(3) else "")
+                                + "</div>" for m in shots)
+            out.append(f'<figure class="carousel">\n<div class="slides" tabindex="0">\n{slides}\n</div>\n'
+                       f'<div class="steer"><button type="button" class="prev" aria-label="Previous" disabled>\u2039</button>'
+                       f'<span class="count">1 / {len(shots)}</span>'
+                       f'<button type="button" class="next" aria-label="Next">\u203a</button></div>\n</figure>')
+        elif shots[0]:     # a picture on its own is a figure, its title the caption
+            lone = shots[0]
             cap = f"\n<figcaption>{inline(lone.group(3))}</figcaption>" if lone.group(3) else ""
-            out.append(f"<figure>\n{ctx.img(lone.group(2), lone.group(1))}{cap}\n</figure>")
+            out.append(f"<figure>\n{ctx.media(lone.group(2), lone.group(1))}{cap}\n</figure>")
         else:
             out.append(f"<p>{inline(para)}</p>")
         i = j
@@ -308,11 +322,11 @@ class Pictures:
         stem, ext = os.path.splitext(name)
         url = f"{self.base}media/{slug}/"
         result = []
-        if Image is None or ext.lower() in (".gif", ".svg", ".webp"):
+        if Image is None or ext.lower() in (".gif", ".svg", ".webp") + VIDEOS:
             target = os.path.join(dest, name)
             if not fresh(target, src):
                 shutil.copyfile(src, target)
-            w = size_of(src)[0] if Image else 0
+            w = size_of(src)[0] if Image and ext.lower() not in VIDEOS else 0
             result = [(url + name, w)]
         else:
             with Image.open(src) as im:
@@ -406,6 +420,30 @@ class Ctx:
         attrs["loading"], attrs["decoding"] = "lazy", "async"
         return "<img " + " ".join(f'{k}="{html.escape(str(val))}"' for k, val in attrs.items()) + extra + ">"
 
+    def media(self, src, alt=""):
+        """A picture, or, if the file is a video, the video: playing on its
+        own, silent and looping, like a moving picture. A .webm and an .mp4 of
+        the same name are both offered, the .webm first. It is fetched and
+        played only once it is on screen (blog.js)."""
+        stem, ext = os.path.splitext(src)
+        if ext.lower() not in VIDEOS:
+            return self.img(src, alt)
+        sources, size = [], ""
+        for e in sorted(VIDEOS, key=lambda e: e != ".webm"):
+            if e == ext.lower() or os.path.exists(os.path.join(self.post["folder"], stem + e)):
+                v = self.picture(stem + e)
+                sources.append(f'<source src="{html.escape(v[-1][0] if v else stem + e)}" type="video/{e[1:]}">')
+        try:
+            wh = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v", "-show_entries", "stream=width,height",
+                                 "-of", "csv=p=0", os.path.join(self.post["folder"], src)],
+                                capture_output=True, text=True).stdout.split()[0].split(",")
+            size = f' width="{wh[0]}" height="{wh[1]}"'
+        except (OSError, IndexError):     # no ffprobe: the page just learns the size late
+            pass
+        label = f' aria-label="{html.escape(alt)}"' if alt else ""
+        # blog.js plays it while it is on screen; without the script, the controls
+        return f'<video{size}{label} class="moving" loop muted playsinline preload="none" controls>{"".join(sources)}</video>'
+
     def fix_html(self, block):
         """Raw HTML from the Markdown: pictures pointed at their resized copies,
         links between posts kept on this host."""
@@ -418,6 +456,9 @@ class Ctx:
             return self.img(html.unescape(a["src"]), html.unescape(a.get("alt", "")), a.get("width"), a.get("height"), share=share)
 
         block = re.sub(r"<img\b[^>]*>", one_img, block)
+        # a video's file goes with the pictures, as it is
+        block = re.sub(r'(<(?:video|source)\b[^>]*?\b(?:src|poster)=")([^"]+)"',
+                       lambda m: m.group(1) + html.escape((self.picture(html.unescape(m.group(2))) or [(m.group(2), 0)])[-1][0]) + '"', block)
         block = re.sub(r'href="([^"]*)"', lambda m: f'href="{html.escape(self.href(html.unescape(m.group(1))))}"'
                        + (' target="_blank" rel="noopener"' if re.match(r"https?://", self.href(html.unescape(m.group(1)))) else ""), block)
         return block

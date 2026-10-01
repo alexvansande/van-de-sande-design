@@ -836,3 +836,62 @@ const Pile = (() => {
   if (first) arm(first);
   if (scrollY < innerHeight * 2) prepend();
 })();
+
+/* Carousels: the arrows step a slide at a time, the count follows the
+   scroll. Listened for on the document, so a post fetched into the page
+   works the same as the one it opened on. */
+(() => {
+  document.documentElement.classList.add("steered");
+  const at = slides => Math.round(slides.scrollLeft / slides.clientWidth);
+  const mark = fig => {
+    const slides = fig.querySelector(".slides"), n = slides.children.length, i = at(slides);
+    fig.querySelector(".count").textContent = `${i + 1} / ${n}`;
+    fig.querySelector(".prev").disabled = i <= 0;
+    fig.querySelector(".next").disabled = i >= n - 1;
+  };
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".carousel .steer button");
+    if (!b) return;
+    const slides = b.closest(".carousel").querySelector(".slides");
+    const i = at(slides) + (b.classList.contains("next") ? 1 : -1);
+    slides.scrollTo({ left: i * slides.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  document.addEventListener("scroll", e => {
+    const fig = e.target.closest && e.target.closest(".carousel");
+    if (fig) mark(fig);
+  }, true);
+  document.addEventListener("keydown", e => {
+    const slides = e.target.closest && e.target.closest(".carousel .slides");
+    if (!slides || (e.key !== "ArrowLeft" && e.key !== "ArrowRight")) return;
+    e.preventDefault();
+    slides.closest(".carousel").querySelector(e.key === "ArrowRight" ? ".next" : ".prev").click();
+  });
+})();
+
+/* Moving pictures (a video in the Markdown) play while they are on screen
+   and stop when they leave it, so a post with several fetches only the ones
+   being looked at. Started any earlier, as the page opens, one could stay
+   black. Looked for on every scroll, so a post fetched into the page is
+   covered too. */
+(() => {
+  let queued = false;
+  const look = () => {
+    queued = false;
+    for (const v of document.querySelectorAll("video.moving")) {
+      v.controls = false;
+      const r = v.getBoundingClientRect();
+      // in a carousel, only the slide showing counts as on screen
+      const b = (v.closest(".slides") || document.documentElement).getBoundingClientRect();
+      const on = r.width > 0 && r.bottom > Math.max(0, b.top) && r.top < Math.min(innerHeight, b.bottom)
+              && r.right > Math.max(0, b.left) + 1 && r.left < Math.min(innerWidth, b.right) - 1;
+      if (on && v.paused) v.play().catch(() => {});
+      else if (!on && !v.paused) v.pause();
+    }
+  };
+  const soon = () => { if (!queued) { queued = true; requestAnimationFrame(look); } };
+  addEventListener("scroll", soon, { capture: true, passive: true });
+  addEventListener("resize", soon);
+  document.addEventListener("visibilitychange", soon);
+  new MutationObserver(soon).observe(document.documentElement, { childList: true, subtree: true });
+  soon();
+})();

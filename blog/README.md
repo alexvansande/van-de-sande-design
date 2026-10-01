@@ -52,6 +52,22 @@ For anything more, write the figure as HTML, as the imported posts do:
     <figcaption>Half the column, the text running round it</figcaption>
     </figure>
 
+A video is written the same way, and plays like a moving picture: silent,
+looping, and only while it is on screen. If a `.webm` of the same name is
+beside the `.mp4`, it is offered first (some browsers draw the MP4 black):
+
+    ![](mandelbrot.mp4 "The caption")
+
+Pictures and videos on lines of their own, one after another with no blank
+line between them, are a carousel: one at a time, swiped from side to side
+or stepped with the arrows under it, each with its own caption:
+
+    ![](04.jpg "The law")
+    ![](05.jpg "The queen breaks it")
+
+With a blank line between them they are separate figures, one above the
+other, as before.
+
 `$$E = mc^2$$` is set as maths (MathML: fractions, powers and indices).
 
 ## How it keeps Paragraph's layout

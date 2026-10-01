@@ -376,3 +376,17 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 .vis input{width:1.15rem;height:1.15rem;accent-color:#e6c46a;margin:0}
 .pick.in .card .paper{box-shadow:0 0 0 3px #e6c46a,0 14px 36px -12px rgba(0,0,0,.6)}
 .pick.in .vis{color:#f0d68c}
+.body figure video{display:block;max-width:100%;height:auto;margin:1.25rem auto;border-radius:6px;background:#000}
+/* A carousel: pictures one after another in the Markdown, shown one at a
+   time and swiped (or stepped with the arrows) from side to side. Without
+   the script it still scrolls sideways; the arrows need it. */
+.body figure.carousel{margin:1.25rem 0}
+.carousel .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;align-items:center;outline:none}
+.carousel .slides::-webkit-scrollbar{display:none}
+.carousel .slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;flex-direction:column;align-items:center}
+.body .carousel .slide img,.body .carousel .slide video{margin:0 auto;width:auto;max-width:100%;height:auto;max-height:min(78vh,44rem)}
+.carousel .steer{display:none;justify-content:center;align-items:center;gap:1.1rem;margin-top:.6rem;color:var(--quiet);font-size:.95rem;font-variant-numeric:tabular-nums}
+html.steered .carousel .steer{display:flex}
+.carousel .steer button{font:inherit;font-size:1.6rem;line-height:1;width:2.2rem;height:2.2rem;border:1px solid var(--rule);border-radius:50%;background:none;color:var(--ink);cursor:pointer;padding:0 0 .15em}
+.carousel .steer button:hover:not(:disabled){background:var(--light)}
+.carousel .steer button:disabled{opacity:.3;cursor:default}
