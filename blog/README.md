@@ -84,15 +84,20 @@ are no buttons over the text. Select some and bold, italic, link, maths
 + comes up beside it, for a picture, a video, a YouTube video, maths, a
 divider or code. Several pictures chosen at once are a carousel, and a
 picture's + adds more beside it. A caption is typed under its picture.
-Pictures and videos can also be dropped or pasted in.
+Pictures and videos can also be pasted in, or dragged onto the page,
+anywhere on it: they go between the paragraphs nearest where they are let
+go, a line showing where while they are held (onto the strip at the top,
+a picture is the featured image). A link pasted over a selection links it.
 
 - **Maths** is typed as `$$E = mc^2$$` in the text, or made from a selection
   with ∑. A click on it opens its TeX, with the maths set under it as it is
   typed. It is set by `build.py`'s own TeX (`tex_to_mathml`, which
   `editor.py` asks), so it looks as it will on the blog, and a command that
   TeX does not know is underlined, as the blog would show it as text.
-- **A YouTube video** comes from the +, or from its link pasted on an empty
-  line; a `t=` in the link is where it starts. It is written as the other
+- **A YouTube video** comes from the +, or from its link (or the embed code
+  YouTube gives) pasted where the caret is: on an empty line, before or
+  after a paragraph, or in the middle of one, which it splits; a `t=` in
+  the link is where it starts. It is written as the other
   videos are, a `<figure class="youtube">` with the video in it, its title
   asked of YouTube, and its caption, if it has one, in the figure.
 - **Half the column, the text running round it**: ◧ and ◨ on a picture

@@ -159,6 +159,10 @@ body.editor{min-height:100vh}
   background:var(--paper);color:var(--ink);cursor:pointer}
 .plus .opts button:hover{border-color:var(--ink)}
 
+/* where a picture dragged over the page will go */
+.dropline{position:fixed;z-index:75;height:3px;margin-top:-1.5px;border-radius:2px;background:#b08d3c;pointer-events:none;
+  box-shadow:0 0 0 3px rgba(176,141,60,.25)}
+
 /* ---------- dialog and messages ---------- */
 .ed-dialog{width:min(34rem,calc(100vw - 2rem));padding:1.6rem 1.8rem 1.4rem;border:0;border-radius:12px;background:var(--paper);color:var(--ink);
   font-size:1.1rem;line-height:1.45;box-shadow:0 20px 60px rgba(0,0,0,.5)}

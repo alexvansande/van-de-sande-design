@@ -355,21 +355,38 @@ const Youtube = Node.create({
   },
 })
 
+// a pasted link: one word, http(s):, mailto: or www.
+function asUrl(text) {
+  if (/\s/.test(text)) return null
+  if (/^(https?:\/\/|mailto:)\S+$/i.test(text)) return text
+  if (/^www\.[^\s/]+\.[a-z]{2,}/i.test(text)) return 'https://' + text
+  return null
+}
+
 // youtube.com/watch?v=…, youtu.be/…, /shorts/…, /embed/…, and where in it to start
 function youtubeLink(s) {
-  const m = (s || '').trim().match(/^(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{6,20})([?&#][^\s]*)?$/)
+  s = (s || '').trim()
+  // the embed code YouTube gives (Share, Embed) has the link in it
+  const frame = s.match(/^<iframe\b[^>]*\ssrc="([^"]+)"[\s\S]*<\/iframe>$/i)
+  if (frame) s = frame[1].replace(/&amp;/g, '&')
+  const m = s.match(/^(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{6,20})([?&#][^\s]*)?$/)
   if (!m) return null
   const t = (m[2] || '').match(/[?&#](?:t|start)=(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s?)?(?:&|$)/)
   const start = t ? (+t[1] || 0) * 3600 + (+t[2] || 0) * 60 + (+t[3] || 0) : 0
   return { id: m[1], params: start ? `?start=${start}` : '' }
 }
 
+// in at once, where the caret is; its title, asked of YouTube, follows
 async function insertYoutube(link, at) {
-  toast('Adding the video…', false, 0)
-  const { title } = await call('/api/youtube?id=' + link.id).catch(() => ({ title: '' }))
-  toast('Added')
-  placeBlock({ type: 'youtube', attrs: { ...link, title } }, at)
+  placeBlock({ type: 'youtube', attrs: { ...link, title: '' } }, at)
   changed()
+  const { title } = await call('/api/youtube?id=' + link.id).catch(() => ({ title: '' }))
+  if (!title) return
+  const tr = editor.state.tr
+  editor.state.doc.descendants((n, pos) => {
+    if (n.type.name === 'youtube' && n.attrs.id === link.id && !n.attrs.title) tr.setNodeAttribute(pos, 'title', title)
+  })
+  if (tr.docChanged) editor.view.dispatch(tr)
 }
 
 // The id an older heading had, so the links to it keep working.
@@ -557,25 +574,92 @@ async function insertFiles(files, at) {
 }
 
 // a block in place of the empty line the caret is on, or after the block at pos
-function placeBlock(node, at) {
+// A picture, a video, a carousel, put in where the caret is: in place of an
+// empty line; before or after a paragraph if the caret is at its start or
+// end; and in the middle of one, the paragraph is split there for it. Or at
+// pos, between two blocks, or in place of {from, to}.
+function placeBlock(node, at, { newLine = at == null } = {}) {
   const { state } = editor
   let where = at
   if (where == null) {
     const { $from } = state.selection
-    const block = $from.node(1)
-    const empty = block && block.type.name === 'paragraph' && !block.textContent && $from.depth === 1
-    where = empty ? { from: $from.before(1), to: $from.after(1) } : $from.depth ? $from.after(1) : $from.pos
+    const p = $from.parent
+    if ($from.depth === 1 && p.type.name === 'paragraph') {
+      if (!p.content.size) where = { from: $from.before(1), to: $from.after(1) }
+      else if ($from.parentOffset === 0) where = $from.before(1)
+      else if ($from.parentOffset === p.content.size) where = $from.after(1)
+      else {
+        editor.view.dispatch(state.tr.split($from.pos))
+        where = $from.pos + 1          // between the two halves
+      }
+    } else where = $from.depth ? $from.after(1) : $from.pos
   }
   const start = typeof where === 'number' ? where : where.from
-  // and the caret goes on to the line after it, made if there is none
+  // and the caret goes on to the paragraph after it; put in from the caret,
+  // to a new line if there is none (a drop between two blocks makes none)
   editor.chain().focus().insertContentAt(where, node).command(({ tr }) => {
     const end = start + tr.doc.nodeAt(start).nodeSize
     const next = tr.doc.nodeAt(end)
-    if (!next || next.type.name !== 'paragraph' || next.content.size) tr.insert(end, tr.doc.type.schema.nodes.paragraph.create())
+    const para = next && next.type.name === 'paragraph'
+    if (!para && !newLine) return true
+    if (!para) tr.insert(end, tr.doc.type.schema.nodes.paragraph.create())
     tr.setSelection(TextSelection.create(tr.doc, end + 1))
     return true
   }).run()
 }
+
+// Where between the blocks a point on the page is: the gap nearest it, or
+// an empty line it is on. line: where on the screen to show it.
+function gapAt(y) {
+  const { doc } = editor.state
+  let best = null
+  let prevBottom = null
+  doc.forEach((node, offset) => {
+    if (best) return
+    const dom = editor.view.nodeDOM(offset)
+    if (!(dom instanceof Element)) return
+    const r = dom.getBoundingClientRect()
+    if (node.type.name === 'paragraph' && !node.content.size && y >= r.top - 6 && y <= r.bottom + 6) {
+      best = { at: { from: offset, to: offset + node.nodeSize }, line: (r.top + r.bottom) / 2 }
+    } else if (y < r.top + r.height / 2) {
+      best = { at: offset, line: prevBottom == null ? r.top - 8 : (prevBottom + r.top) / 2 }
+    }
+    prevBottom = r.bottom
+  })
+  return best || { at: doc.content.size, line: (prevBottom ?? 0) + 10 }
+}
+
+// Pictures and videos dragged onto the page go between the paragraphs
+// nearest where they are let go, a line showing where while they are held.
+// Anywhere on the page: a file let go of outside the text would otherwise
+// be opened by the browser in place of the editor. The featured image's
+// strip takes its own.
+const dropline = el('div', 'dropline')
+dropline.hidden = true
+document.body.append(dropline)
+const holdsFiles = e => [...(e.dataTransfer?.types || [])].includes('Files')
+const forText = e => editor && !$('#edit').hidden && !(e.target instanceof Element && e.target.closest('#cover'))
+
+document.addEventListener('dragover', e => {
+  if (!holdsFiles(e)) return
+  e.preventDefault()
+  if (!forText(e)) { dropline.hidden = true; return }
+  e.stopPropagation()
+  e.dataTransfer.dropEffect = 'copy'
+  const r = editor.view.dom.getBoundingClientRect()
+  Object.assign(dropline.style, { left: r.left + 'px', width: r.width + 'px', top: gapAt(e.clientY).line + 'px' })
+  dropline.hidden = false
+}, true)
+document.addEventListener('drop', e => {
+  if (!holdsFiles(e)) return
+  e.preventDefault()
+  dropline.hidden = true
+  if (!forText(e)) return
+  e.stopPropagation()
+  insertFiles([...e.dataTransfer.files], gapAt(e.clientY).at)
+}, true)
+document.addEventListener('dragleave', e => { if (!e.relatedTarget) dropline.hidden = true })
+document.addEventListener('dragend', () => { dropline.hidden = true })
 
 // ---------------------------------------------------------------- one post
 
@@ -681,31 +765,25 @@ function makeEditor(doc) {
       // the bar over the post is not where the line being written goes
       scrollMargin: { top: 110, bottom: 80, left: 0, right: 0 },
       scrollThreshold: { top: 110, bottom: 80, left: 0, right: 0 },
-      handleDrop(view, event, slice, moved) {
-        const files = [...(event.dataTransfer?.files || [])]
-        if (moved || !files.length) return false
-        event.preventDefault()
-        const hit = view.posAtCoords({ left: event.clientX, top: event.clientY })
-        let at = null
-        if (hit) {
-          const $p = view.state.doc.resolve(hit.pos)
-          at = $p.depth ? $p.after(1) : hit.pos
-        }
-        insertFiles(files, at)
-        return true
-      },
       handlePaste(view, event) {
         const files = [...(event.clipboardData?.files || [])]
-        // a YouTube link pasted on an empty line is the video
-        const link = youtubeLink(event.clipboardData?.getData('text/plain'))
-        const { $from } = view.state.selection
-        if (!files.length && link && $from.depth === 1 && $from.parent.type.name === 'paragraph' && !$from.parent.textContent) {
-          insertYoutube(link)
+        if (files.length) { insertFiles(files); return true }
+        const text = (event.clipboardData?.getData('text/plain') || '').trim()
+        const { selection } = view.state
+        if (!text || selection.$from.parent.type.spec.code) return false
+        // a link pasted over a selection links it
+        const url = asUrl(text)
+        if (url && !selection.empty && selection instanceof TextSelection) {
+          editor.chain().focus().setLink({ href: url }).run()
           return true
         }
-        if (!files.length) return false
-        insertFiles(files)
-        return true
+        // a YouTube link, or YouTube's embed code, is the video, where the caret is
+        const video = youtubeLink(text)
+        if (video && selection.empty && selection.$from.depth === 1 && selection.$from.parent.type.name === 'paragraph') {
+          insertYoutube(video)
+          return true
+        }
+        return false
       },
     },
     extensions: [
@@ -744,7 +822,7 @@ function makeEditor(doc) {
         element: plus,
         shouldShow: ({ editor, state }) => {
           const { $from, empty } = state.selection
-          const ok = empty && $from.depth === 1 && $from.parent.type.name === 'paragraph' && !$from.parent.textContent
+          const ok = empty && $from.depth === 1 && $from.parent.type.name === 'paragraph' && !$from.parent.content.size
           if (!ok) plus.classList.remove('open')
           return ok && editor.isEditable
         },
