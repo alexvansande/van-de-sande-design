@@ -59,12 +59,13 @@ const clamp01 = x => clamp(x, 0, 1);
 const RAD = Math.PI / 180;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const stage = $('#stage'), rail = $('#rail'), story = $('#story');
-const indexText = $('#index p');
+const indexText = $('#index p'), endText = $('#elsewhere p');
 const IDX_DIM = .22, IDX_LIT = .92;     /* faded in the corner of the eye, lit when it is yours */
 /* the rail, left to right, with where each one sits along it */
 const RAIL = [[$('#index'), -1], [story, 0], [$('#blockchain'), 1],
               [$('#browser'), 2], [$('#victor'), 3],
-              [$('#maps'), 4], [$('#triangle'), 5], [$('#latest'), 6]];
+              [$('#maps'), 4], [$('#triangle'), 5], [$('#latest'), 6],
+              [$('#elsewhere'), 7]];
 const FIRST = RAIL[0][1], LAST = RAIL[RAIL.length - 1][1];
 
 
@@ -1180,6 +1181,9 @@ function render(){
   const litT = clamp01(1 - Math.abs(FIRST - hx));
   const lit = litT * litT * (3 - 2 * litT);
   indexText.style.opacity = (IDX_DIM + (IDX_LIT - IDX_DIM) * lit).toFixed(3);
+  /* and the line at the far end, where to find him, the same way */
+  const endT = clamp01(1 - Math.abs(LAST - hx));
+  endText.style.opacity = (IDX_DIM + (IDX_LIT - IDX_DIM) * endT * endT * (3 - 2 * endT)).toFixed(3);
   light();
   /* a pad's index in PADS is where it sits on the rail: story 0, then the
      posters rightwards */
@@ -1550,8 +1554,9 @@ function tap(e){
     const pad = padOf(i);
     if (pad && pad.onward) openLatest(pad);      /* the blog's pages open their posts */
     else if (pad) step(pageAxisOf(pad), 1);
-    /* his line on the index: a click on it is to hear the stories */
-    else { stop(RAIL_AX); springTo(RAIL_AX, i + 1, 0); }
+    /* his line on the index: a click on it is to hear the stories; the one
+       at the end is only its links */
+    else if (i < LAST){ stop(RAIL_AX); springTo(RAIL_AX, i + 1, 0); }
   } else {
     stop(RAIL_AX); springTo(RAIL_AX, i, 0);
   }
@@ -1564,6 +1569,12 @@ stage.addEventListener('click', e => {
   if (performance.now() - draggedAt < 350 && e.target.closest('a')) e.preventDefault();
 }, true);
 stage.addEventListener('dragstart', e => e.preventDefault());
+/* Tabbing to a link at the far end: the rail goes there, rather than the
+   browser scrolling the stage to bring it into view */
+$('#elsewhere').addEventListener('focusin', () => {
+  stage.scrollLeft = stage.scrollTop = 0;
+  if (Math.round(hx) !== LAST){ wake(); stop(RAIL_AX); springTo(RAIL_AX, LAST, 0); }
+});
 stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
 /* ---------- trackpad, on the same two axes ---------- */
