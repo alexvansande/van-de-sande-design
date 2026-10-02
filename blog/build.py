@@ -2,7 +2,7 @@
 """Build the blog from the folders next to this file.
 
     python3 blog/build.py                          # into blog/_site, served at /
-    python3 blog/build.py --out site/blog --base /blog/
+    python3 blog/build.py --out site/blog --base /blog/   # under a path instead
     python3 blog/build.py --serve 8766             # build, then serve it
 
 Every folder here with an index.md is a post, and its name is its address

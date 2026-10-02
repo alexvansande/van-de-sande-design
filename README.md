@@ -220,9 +220,18 @@ page with the old script.
 
 ## The blog
 
-The blog is its own repo, [alexvansande/blog](https://github.com/alexvansande/blog),
-published at blog.vandesande.design. It was built here, under `/blog/`,
-until it had its own domain.
+`blog/` holds the posts from blog.vandesande.design, brought over from
+Paragraph: a folder per post, named after its address, with its Markdown and
+its pictures, and `blog/build.py`, which makes the blog from them. See
+`blog/README.md`.
+
+It is written here but published from
+[alexvansande/blog](https://github.com/alexvansande/blog), since Pages
+gives a repo one domain and this one's is vandesande.design. That repo
+checks this one every quarter of an hour and builds and publishes `blog/`
+at the root of blog.vandesande.design when it has changed; run its
+workflow by hand to publish at once. The site reads the blog from there
+(`BLOG` in `app.js`).
 
 ## Addresses kept from the shop
 

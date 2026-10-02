@@ -21,10 +21,11 @@ pip install pillow                       # optional: resizes pictures to WebP
 python3 blog/build.py --serve 8766       # builds into blog/_site, then serves it
 ```
 
-Then open http://localhost:8766. `--base /blog/` builds it to sit under a
-path instead, which is how the deploy uses it for now (`--out site/blog
---base /blog/`). Once blog.vandesande.design points at it, build with the
-default `--base /`.
+Then open http://localhost:8766. It is published the same way, at the root
+of blog.vandesande.design (`--base /`), by the
+[alexvansande/blog](https://github.com/alexvansande/blog) repo, which
+builds it from here within a quarter of an hour of a change reaching
+`main`. `--base /blog/` builds it to sit under a path instead.
 
 The addresses of `blog.css` and `blog.js` carry a stamp of what is in
 them (`?v=`), as the site's script does: a browser may keep a file for ten
