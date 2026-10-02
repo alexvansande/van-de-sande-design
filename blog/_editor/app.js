@@ -7,6 +7,7 @@
 import { Editor, Node, Extension, StarterKit, BubbleMenu, FloatingMenu, Placeholder, TextSelection,
   nodeInputRule, nodePasteRule } from './vendor/tiptap.js'
 import { parse, serialize, roundTrips, isVideo } from './md.js'
+import { reviewer } from './review.js'
 
 const $ = (s, el = document) => el.querySelector(s)
 const el = (tag, cls, text) => {
@@ -103,6 +104,37 @@ async function showList() {
   const live = data.posts.filter(p => p.published && !p.draft)
   $('#drafts').replaceChildren(...(drafts.length ? [el('h2', '', 'Drafts'), ...drafts.map(row)] : []))
   $('#live').replaceChildren(el('h2', '', 'On the blog'), ...live.map(row))
+  drawTrash()
+}
+
+// what was thrown away, until the trash is emptied: each can come back
+async function drawTrash() {
+  const { items } = await call('/api/trash').catch(() => ({ items: [] }))
+  const box = $('#trash')
+  if (!items.length) return box.replaceChildren()
+  const head = el('h2', 'trash-head', 'Trash')
+  const empty = el('button', 'btn quiet', 'Empty the trash')
+  empty.onclick = async () => {
+    if (!await sure(['Empty the trash?', `${items.length === 1 ? 'The draft' : `All ${items.length} drafts`} in it, and their pictures, will be gone for good. This cannot be undone.`, 'Empty the trash'])) return
+    await call('/api/trash/empty', {}).catch(e => toast(e.message, true))
+    drawTrash()
+  }
+  head.append(empty)
+  box.replaceChildren(head, ...items.map(t => {
+    const r = el('div', 'ed-row trashed')
+    const words = el('span', 't')
+    words.append(el('b', '', t.title || 'Untitled'),
+      el('span', '', (t.what === 'changes' ? 'Unpublished changes to /' + t.slug : 'Draft') + ' · thrown away ' + niceDate(t.at)))
+    const back = el('button', 'btn', 'Restore')
+    back.onclick = async () => {
+      try {
+        const { slug } = await call('/api/trash/restore', { name: t.name })
+        location.hash = '#/edit/' + slug
+      } catch (e) { toast(e.message, true, 8000) }
+    }
+    r.append(words, back)
+    return r
+  }))
 }
 
 // ---------------------------------------------------------------- the document's pieces
@@ -437,8 +469,8 @@ function figureView(node, getPos, editor) {
         }
       }
     }
-    tools.append(act('alt', 'Describe it, for anyone who cannot see it', () => {
-      const alt = prompt('Describe the picture, for anyone who cannot see it:', node.attrs.alt || '')
+    tools.append(act('alt', 'Describe it, for anyone who cannot see it', async () => {
+      const alt = await askLine('Describe the picture, for anyone who cannot see it', node.attrs.alt || '')
       if (alt !== null) editor.chain().command(({ tr }) => { tr.setNodeAttribute(getPos(), 'alt', alt.trim()); return true }).run()
     }))
     tools.append(act('×', 'Take it out', () => removeFigure(getPos)))
@@ -664,6 +696,7 @@ document.addEventListener('dragend', () => { dropline.hidden = true })
 // ---------------------------------------------------------------- one post
 
 let editor = null
+let review = null         // the proofreader's underlines on it
 let post = null          // {slug, published, title, subtitle, date, categories, cover}
 let dirty = false
 let saving = null
@@ -714,7 +747,7 @@ async function save(quiet = true) {
 
 function setDiscard() {
   const b = $('#discard')
-  b.textContent = post.published ? (post.draft ? 'Discard changes' : '') : 'Delete draft'
+  b.textContent = post.published ? (post.draft ? 'Discard changes' : '') : 'Move to trash'
   b.hidden = !b.textContent
   $('#publish').textContent = post.published ? 'Publish changes' : 'Publish'
   $('#share').hidden = !post.published
@@ -738,7 +771,6 @@ async function showPost(slug) {
   $('#title').textContent = post.title
   $('#subtitle').textContent = post.subtitle
   $('#when').textContent = post.published ? niceDate(post.date) : 'Draft'
-  $('#cat-list').replaceChildren(...(config.categories || []).map(c => Object.assign(el('option'), { value: c })))
   drawCats()
   drawCover()
   setDiscard()
@@ -831,10 +863,19 @@ function makeEditor(doc) {
         options: { placement: 'left-start', offset: 14, flip: false, hide: true },
       }),
     ],
-    onUpdate: changed,
+    onUpdate: () => { changed(); review?.edited() },
     onSelectionUpdate: lightBubble,
     onTransaction: lightBubble,
   })
+  review = reviewer(editor, { slug: () => post.slug, call, toast, factState,
+    report: (text, why) => Object.assign($('#review-status'), { textContent: text, title: why || '' }) })
+}
+
+// idle, busy, or done: checked and nothing found, until the text changes
+function factState(state) {
+  const b = $('#facts')
+  b.disabled = state === 'busy'
+  b.textContent = state === 'busy' ? 'Fact checking…' : state === 'done' ? 'Fact checked ✔' : 'Fact check'
 }
 
 function lightBubble() {
@@ -1011,10 +1052,11 @@ function drawCats() {
   }))
 }
 
-function addCat() {
+function addCat(v = $('#cat-add').value) {
   const input = $('#cat-add')
-  const v = input.value.trim().replace(/,$/, '')
+  v = v.trim().replace(/,$/, '')
   input.value = ''
+  drawCatMenu()
   if (!v) return
   const known = (config.categories || []).find(c => c.toLowerCase() === v.toLowerCase())
   const c = known || v
@@ -1022,13 +1064,48 @@ function addCat() {
   drawCats()
   changed()
 }
+
+// the categories the blog already has, under the field, narrowed by what is typed
+let catPick = -1
+function drawCatMenu() {
+  const input = $('#cat-add'), menu = $('#cat-menu')
+  const q = input.value.trim().toLowerCase()
+  const open = document.activeElement === input
+  const opts = open ? (config.categories || [])
+    .filter(c => !post.categories.some(k => k.toLowerCase() === c.toLowerCase()))
+    .filter(c => c.toLowerCase().includes(q)) : []
+  catPick = Math.min(catPick, opts.length - 1)
+  menu.replaceChildren(...opts.map((c, i) => {
+    const b = el('button', i === catPick ? 'on' : '', c)
+    b.type = 'button'
+    b.onmousedown = e => { e.preventDefault(); addCat(c) }
+    return b
+  }))
+  menu.hidden = !opts.length
+}
 $('#cat-add').addEventListener('keydown', e => {
-  if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addCat() }
+  const opts = [...$('#cat-menu').children]
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault()
+    if (!opts.length) return
+    // round through the options and back to what is typed
+    const n = opts.length + 1
+    catPick = (catPick + 1 + (e.key === 'ArrowDown' ? 1 : -1) + n) % n - 1
+    drawCatMenu()
+  }
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault()
+    addCat(catPick >= 0 && opts[catPick] ? opts[catPick].textContent : e.target.value)
+    catPick = -1
+  }
+  if (e.key === 'Escape') { catPick = -1; e.target.blur() }
   if (e.key === 'Backspace' && !e.target.value && post.categories.length) {
-    post.categories.pop(); drawCats(); changed()
+    post.categories.pop(); drawCats(); changed(); drawCatMenu()
   }
 })
-$('#cat-add').addEventListener('change', addCat)
+$('#cat-add').addEventListener('input', () => { catPick = -1; drawCatMenu() })
+$('#cat-add').addEventListener('focus', drawCatMenu)
+$('#cat-add').addEventListener('blur', () => { catPick = -1; drawCatMenu() })
 
 function drawCover() {
   const box = $('#cover')
@@ -1088,6 +1165,7 @@ $('#edit .ed-bar').addEventListener('click', async e => {
   const act = e.target.closest('button')?.dataset.act
   if (act === 'save') { dirty = true; save(false) }
   if (act === 'preview') preview()
+  if (act === 'facts') review?.checkFacts()
   if (act === 'publish') publishDialog()
   if (act === 'discard') discard()
   if (act === 'share') shareDialog()
@@ -1112,15 +1190,58 @@ async function preview() {
 }
 
 async function discard() {
-  const sure = post.published
-    ? confirm('Throw away the changes, and go back to the post as it is on the blog?')
-    : confirm('Delete this draft, and the pictures in it? This cannot be undone.')
-  if (!sure) return
+  const ok = await sure(post.published
+    ? ['Discard the changes?', 'They go to the trash, and the post is as it is on the blog. They can come back from the trash, at the foot of the list of posts, until it is emptied.', 'Discard changes']
+    : ['Move this draft to the trash?', 'With its pictures. It can come back from the trash, at the foot of the list of posts, until it is emptied.', 'Move to trash'])
+  if (!ok) return
   clearTimeout(saveTimer)
   dirty = false
-  await call('/api/discard', { slug: post.slug })
+  try {
+    await call('/api/discard', { slug: post.slug })
+  } catch (e) {
+    return toast(e.message, true, 8000)
+  }
   if (post.published) showPost(post.slug)
   else location.hash = '#/'
+}
+
+// Asked on the page: the browser's own confirm() and prompt() are not shown
+// everywhere (the app's browser answers them with a silent no).
+function sure([title, text, yes]) {
+  return new Promise(done => {
+    const d = dialog(d => {
+      const row = el('div', 'row')
+      const no = el('button', 'btn', 'Cancel')
+      no.onclick = () => d.close()
+      const go = el('button', 'btn primary', yes)
+      go.onclick = () => { d.returnValue = 'yes'; d.close() }
+      row.append(no, go)
+      return [el('h2', '', title), el('p', '', text), row]
+    })
+    d.returnValue = ''
+    d.addEventListener('close', () => done(d.returnValue === 'yes'), { once: true })
+  })
+}
+
+function askLine(title, value) {
+  return new Promise(done => {
+    let input
+    const d = dialog(d => {
+      input = el('input', 'line')
+      input.value = value
+      const row = el('div', 'row')
+      const no = el('button', 'btn', 'Cancel')
+      no.onclick = () => d.close()
+      const go = el('button', 'btn primary', 'Done')
+      go.onclick = () => { d.returnValue = 'yes'; d.close() }
+      input.onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); go.click() } }
+      row.append(no, go)
+      return [el('h2', '', title), input, row]
+    })
+    d.returnValue = ''
+    input.focus()
+    d.addEventListener('close', () => done(d.returnValue === 'yes' ? input.value : null), { once: true })
+  })
 }
 
 function dialog(build) {

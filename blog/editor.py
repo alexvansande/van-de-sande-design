@@ -16,7 +16,7 @@ was until it is published again.
 
 It answers only on this machine (127.0.0.1), and only to its own page.
 """
-import http.server, json, os, re, shutil, struct, subprocess, sys, threading, urllib.parse
+import html, http.server, json, os, re, select, shutil, socket, struct, subprocess, sys, threading, urllib.parse
 from datetime import datetime, timezone
 import urllib.request
 
@@ -24,8 +24,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 EDITOR = os.path.join(HERE, "_editor")
 PREVIEW = os.path.join(HERE, "_preview")
+TRASH = os.path.join(HERE, "_trash")       # what is thrown away, until the trash is emptied
 sys.path.insert(0, HERE)
 import build  # noqa: E402  (its TeX, so maths shows here as the blog will set it)
+import review  # noqa: E402  (the proofreader: grammar here, facts online)
 import crosspost  # noqa: E402  (the post on Bluesky, as a Standard.site document)
 
 try:
@@ -205,6 +207,74 @@ def publish(post):
     return out
 
 
+# ---------------------------------------------------------------- the trash
+
+def trash(slug):
+    """Throwing away moves, it never deletes: a draft never published goes to
+    _trash with its pictures; a published post's unpublished changes (its
+    index.draft.md) go there alone, and the post is as it is on the blog."""
+    folder = folder_of(slug)
+    live, draft = (os.path.join(folder, n) for n in ("index.md", "index.draft.md"))
+    if os.path.isfile(live) and not os.path.isfile(draft):
+        return {"ok": True}
+    if not os.path.isdir(folder):
+        return {"ok": True}
+    name = "%s--%s" % (slug, datetime.now().strftime("%Y%m%d-%H%M%S"))
+    dest = os.path.join(TRASH, name)
+    os.makedirs(TRASH, exist_ok=True)
+    title = dict(front(draft)[0]).get("title", "") if os.path.isfile(draft) else ""
+    if os.path.isfile(live):
+        os.makedirs(dest)
+        shutil.move(draft, os.path.join(dest, "index.draft.md"))
+        what = "changes"
+    else:
+        shutil.move(folder, dest)
+        what = "draft"
+    with open(os.path.join(dest, "trashed.json"), "w", encoding="utf-8") as f:
+        json.dump({"slug": slug, "what": what, "title": title, "at": now()}, f, ensure_ascii=False)
+    return {"ok": True, "trashed": name}
+
+
+def in_trash():
+    out = []
+    for name in os.listdir(TRASH) if os.path.isdir(TRASH) else []:
+        try:
+            with open(os.path.join(TRASH, name, "trashed.json"), encoding="utf-8") as f:
+                out.append({"name": name, **json.load(f)})
+        except (OSError, ValueError):
+            continue
+    return sorted(out, key=lambda t: t.get("at", ""), reverse=True)
+
+
+def restore(name):
+    if not FILE.fullmatch(name or "") or not os.path.isdir(os.path.join(TRASH, name)):
+        raise Bad("That is not in the trash.")
+    src = os.path.join(TRASH, name)
+    with open(os.path.join(src, "trashed.json"), encoding="utf-8") as f:
+        info = json.load(f)
+    target = folder_of(info["slug"])
+    if info["what"] == "draft":
+        if os.path.exists(target):
+            raise Bad("There is a post at %s again; it can't come back over it." % info["slug"])
+        os.remove(os.path.join(src, "trashed.json"))
+        shutil.move(src, target)
+    else:
+        draft = os.path.join(target, "index.draft.md")
+        if not os.path.isdir(target):
+            raise Bad("The post %s is not there any more." % info["slug"])
+        if os.path.isfile(draft):
+            raise Bad("That post has other unpublished changes now: publish or discard them first.")
+        shutil.move(os.path.join(src, "index.draft.md"), draft)
+        shutil.rmtree(src)
+    return {"slug": info["slug"]}
+
+
+def empty_trash():
+    if os.path.isdir(TRASH):
+        shutil.rmtree(TRASH)
+    return {"ok": True}
+
+
 def git(*args):
     r = subprocess.run(["git", *args], cwd=REPO, capture_output=True, text=True)
     return r.returncode, (r.stdout + r.stderr).strip()
@@ -365,6 +435,26 @@ def youtube_title(vid):
         return {"title": ""}
 
 
+# ---------------------------------------------------------------- his own pages, for the fact check to link to
+
+def own_pages(slug, n=10):
+    """The main site and the n newest posts on the blog, not this one: what a
+    fact check may suggest linking to."""
+    try:
+        home = open(os.path.join(REPO, "site", "index.html"), encoding="utf-8").read()
+    except OSError:
+        home = ""
+    home = re.sub(r"<(script|style)[^>]*>.*?</\1>|<[^>]+>", " ", home, flags=re.S)
+    pages = [{"title": "The main site", "url": "https://vandesande.design",
+              "about": " ".join(html.unescape(home).split())[:600]}]
+    for p in [p for p in posts() if p["published"] and p["slug"] != slug][:n]:
+        body = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", load(p["slug"])["body"])
+        body = re.sub(r"<[^>]+>|[#*_>`$]", "", body)
+        about = (p["subtitle"] + " " if p["subtitle"] else "") + " ".join(body.split())[:300]
+        pages.append({"title": p["title"], "url": f"{build.SITE_URL}/{p['slug']}", "about": about})
+    return pages
+
+
 # ---------------------------------------------------------------- preview
 
 building = threading.Lock()
@@ -422,6 +512,15 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def gone(self):
+        """Whether the page that asked has closed its connection (reloaded, or
+        gone to another post): a request waiting for the model is then dropped."""
+        try:
+            ready = select.select([self.connection], [], [], 0)[0]
+            return bool(ready) and self.connection.recv(1, socket.MSG_PEEK) == b""
+        except OSError:
+            return True
+
     def ours(self):
         # only this page may change things: not some other site the browser has open
         origin = self.headers.get("Origin") or self.headers.get("Referer") or ""
@@ -442,9 +541,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return self.reply(200, tex(q.get("tex", "")))
             if url.path == "/api/youtube":
                 return self.reply(200, youtube_title(q.get("id", "")))
+            if url.path == "/api/review":
+                data = review.sidecar(folder_of(q.get("slug", "")))
+                return self.reply(200, {"dismissed": data["dismissed"], "facts": data.get("facts")})
             if url.path == "/api/bluesky":
                 folder_of(q.get("slug", ""))
                 return self.reply(200, crosspost.status(q["slug"]))
+            if url.path == "/api/trash":
+                return self.reply(200, {"items": in_trash()})
             if url.path == "/api/leftovers":
                 folder = folder_of(q.get("slug", ""))
                 p = load(q["slug"])
@@ -473,20 +577,29 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if url.path == "/api/preview":
                 save(post)
                 return self.reply(200, preview())
+            if url.path == "/api/review":
+                slug = post.get("slug", "")
+                return self.reply(200, review.review(folder_of(slug), post.get("kind"), post.get("blocks") or [],
+                                                     self.gone, own_pages(slug)))
+            if url.path == "/api/review/comment":
+                return self.reply(200, review.comment(folder_of(post.get("slug", "")), post["issue"], post.get("comment")))
+            if url.path == "/api/review/dismiss":
+                return self.reply(200, review.dismiss(folder_of(post.get("slug", "")), post["issue"]))
             if url.path == "/api/bluesky":
                 folder_of(post.get("slug", ""))
                 return self.reply(200, crosspost.announce(post["slug"], post.get("text")))
             if url.path == "/api/discard":
-                folder = folder_of(post.get("slug", ""))
-                draft = os.path.join(folder, "index.draft.md")
-                if os.path.isfile(os.path.join(folder, "index.md")):
-                    if os.path.isfile(draft):
-                        os.remove(draft)       # back to what is on the blog
-                elif os.path.isdir(folder):
-                    shutil.rmtree(folder)      # a draft never published: gone, pictures and all
-                return self.reply(200, {"ok": True})
+                return self.reply(200, trash(post.get("slug", "")))
+            if url.path == "/api/trash/restore":
+                return self.reply(200, restore(post.get("name", "")))
+            if url.path == "/api/trash/empty":
+                return self.reply(200, empty_trash())
         except (Bad, crosspost.Bad) as e:
             return self.reply(400, {"error": str(e)})
+        except review.Gone:
+            return None             # no one is there to answer
+        except review.Unavailable as e:
+            return self.reply(503, {"error": str(e)})
         except (ValueError, KeyError) as e:
             return self.reply(400, {"error": "bad request: %s" % e})
         return self.reply(404, {"error": "no such thing"})
