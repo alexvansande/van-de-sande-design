@@ -26,11 +26,11 @@ This post explores redesigns Lineweaver and Patel’s chart and tries to explain
 
 Anything that has ever existed can be plotted on a chart, a single image that tells the story of the Big Bang, how space relates to time and energy, a poster-sized document about how quarks become protons, how stars become black holes, how asteroids become planets, and even why hippopotamus can’t float. It’s a whole physics lecture on a single page. Let’s walk through it.
 
-**A summarized poster version of this article can be found at** [**vandesande.design**](https://vandesande.design/products/poster)
+**A summarized poster version of this article can be found at** [**triangleofeverything.com**](https://triangleofeverything.com)
 
 <figure>
 <!-- The picture that stood here was already gone on Paragraph: only its caption was left. -->
-<figcaption>This poster about everything can be found at www.vandesande.design</figcaption>
+<figcaption>This poster about everything can be found at triangleofeverything.com</figcaption>
 </figure>
 
 ### The Powers of 100 {#h-the-powers-of-100}
@@ -219,7 +219,7 @@ This inspired Einstein to think about what it would mean if the speed of light w
 
 On that note, we end our journey. What started as a simple density plot became a story of the universe’s past, present, and future, a map of the things we know, an indication of what we know we don’t know, and maybe where to find those we don’t even know we don’t know.
 
-**A print version of the main poster can be found at** [**vandesande.design**](https://vandesande.design/products/poster)
+**A print version of the main poster can be found at** [**triangleofeverything.com**](https://triangleofeverything.com)
 
 _References:_
 

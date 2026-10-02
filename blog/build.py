@@ -713,7 +713,13 @@ def build(out, base, clean=False):
     write(out, "404.html", page(base, "Not here · " + TITLE,
                                 f'<main class="index"><h1>Nothing is here.</h1><p class="lost"><a href="{base}">All the posts</a></p></main>', cls="list"))
 
-    # the feed, with whole posts in it
+    # the feed, with whole posts in it. A post brought from Paragraph keeps
+    # the id Paragraph's feed gave it, so a reader that already had it does
+    # not show it again as new.
+    def guid(p):
+        if p.get("paragraph_id"):
+            return f'<guid isPermaLink="false">{esc(p["paragraph_id"])}</guid>'
+        return f'<guid isPermaLink="true">{p["url"]}</guid>'
     now = format_datetime(datetime.now(timezone.utc))
     items = []
     for p in posts:
@@ -722,7 +728,7 @@ def build(out, base, clean=False):
         items.append(f"""<item>
 <title>{esc(p['title'])}</title>
 <link>{p['url']}</link>
-<guid isPermaLink="true">{p['url']}</guid>
+{guid(p)}
 <pubDate>{format_datetime(p['date_dt'])}</pubDate>
 <description>{esc(p['description'])}</description>
 <content:encoded><![CDATA[{content.replace(']]>', ']]]]><![CDATA[>')}]]></content:encoded>
@@ -748,6 +754,27 @@ def build(out, base, clean=False):
     write(out, "llms.txt", f"# {TITLE}\n\n## Posts\n\n" + "\n".join(
         f"- [{p['title']}]({p['url']}.md)" + (f": {p['subtitle']}" if p.get("subtitle") else "") for p in posts)
         + f"\n\n## Blog Information\n\n- [Homepage]({SITE_URL}/): Main blog page\n- [RSS Feed]({SITE_URL}/rss.xml): Subscribe to updates\n")
+    # Addresses Paragraph answered that the posts do not need, kept working:
+    # its feed was at /feed and /rss, a few categories were folded into
+    # Maps, and its sitemap was named in robots.txt as sitemap-index.xml.
+    # Pages cannot redirect, so each is a page that goes on by itself.
+    def onward(name, to, title, alternate=False):
+        alt = f'\n<link rel="alternate" type="application/rss+xml" title="{esc(TITLE)}" href="{to}">' if alternate else ""
+        write(out, name, f"""<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>{esc(title)}</title>
+<link rel="canonical" href="{to}">{alt}
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url={to}">
+</head><body><p><a href="{to}">{esc(title)}</a></p></body></html>
+""")
+    for name in ("feed.html", "rss.html"):
+        onward(name, f"{SITE_URL}/rss.xml", f"The feed of {TITLE}", alternate=True)
+    onward("subscribe.html", f"{SITE_URL}/rss.xml", f"Follow {TITLE} by its feed", alternate=True)
+    for c in ("hexagons", "map", "mapmaking"):
+        onward(f"category/{c}.html", f"{SITE_URL}/category/maps", f"Maps · {TITLE}")
+    write(out, "sitemap-index.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+          f"  <sitemap><loc>{SITE_URL}/sitemap.xml</loc></sitemap>\n</sitemapindex>\n")
     print(f"{len(posts)} posts into {out}")
     build_archive(out, base, pics)
 

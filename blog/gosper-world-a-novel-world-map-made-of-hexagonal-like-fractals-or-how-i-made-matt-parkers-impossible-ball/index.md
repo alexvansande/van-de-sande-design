@@ -8,7 +8,7 @@ cover_size: [2003, 1002]
 paragraph_id: "U7ntcrg62Ph9AHAJy6ge"
 ---
 
-_This is a blog format of the presentation given at the Bridges Conference of Mathematics and Art 2024 in Richmond._ [_The original paper the presentation is based on can be found on the Bridges Website._](https://archive.bridgesmathart.org/2024/bridges2024-507.html#gsc.tab=0) _You can also_ [_order a large format print_](https://vandesande.design/products/the-impossible-map) _of the poster._
+_This is a blog format of the presentation given at the Bridges Conference of Mathematics and Art 2024 in Richmond._ [_The original paper the presentation is based on can be found on the Bridges Website._](https://archive.bridgesmathart.org/2024/bridges2024-507.html#gsc.tab=0) _You can also_ [_download the poster_](https://hexagonal.earth) _and print it in large format._
 
 ### **Is it possible to wrap a sphere using ONLY hexagons?** {#h-is-it-possible-to-wrap-a-sphere-using-only-hexagons}
 
@@ -184,6 +184,6 @@ All models are wrong, some models are useful. Wrapping the globe (or a soccer ba
 
 ### **Available for printing!** {#h-available-for-printing}
 
-If you want to decorate your (or someone’s else) office or classroom, [the poster is now available at my tiny store](https://vandesande.design/products/the-impossible-map). I’ve made the price at almost cost, because my goal is more to share a new vision of the world.
+If you want to decorate your (or someone’s else) office or classroom, [the poster can be downloaded at hexagonal.earth](https://hexagonal.earth) and printed as large as you like. My goal is more to share a new vision of the world.
 
 <figure></figure>

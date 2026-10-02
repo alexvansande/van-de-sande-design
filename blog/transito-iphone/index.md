@@ -13,5 +13,3 @@ date_circa: "the year only: 2010, as Alex remembers it"
 <figure>
 <img src="02.png" width="680" height="830" alt="Trânsito iPhone">
 </figure>
-
-asd
