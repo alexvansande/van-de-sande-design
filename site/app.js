@@ -1097,6 +1097,14 @@ function fillLatest(pad){
       face.append(pic, words);
       face.setAttribute('aria-label', p.title);
       dropCurl(sh);
+      /* and a plain link to it, for the keyboard: focused, the poster turns
+         to this page */
+      const go = el('a', 'go');
+      go.href = `${BLOG}${p.slug}#back=blog.${i}`;
+      go.dataset.note = 'blog.' + i;
+      go.dataset.page = i;
+      go.textContent = p.title;
+      $('#to-blog').before(go);
     });
     fitSheets(); render();
   }).catch(() => { pad.asked = false; });
@@ -1570,11 +1578,24 @@ stage.addEventListener('click', e => {
   if (performance.now() - draggedAt < 350 && e.target.closest('a')) e.preventDefault();
 }, true);
 stage.addEventListener('dragstart', e => e.preventDefault());
-/* Tabbing to a link at the far end: the rail goes there, rather than the
-   browser scrolling the stage to bring it into view */
-$('#elsewhere').addEventListener('focusin', () => {
+/* Tabbing to a link: the rail goes to its station, rather than the
+   browser scrolling the stage to bring it into view, and on the blog's
+   poster the page turns to its post */
+stage.addEventListener('focusin', e => {
+  const hit = RAIL.find(([st]) => st.contains(e.target));
+  if (!hit) return;
   stage.scrollLeft = stage.scrollTop = 0;
-  if (Math.round(hx) !== LAST){ wake(); stop(RAIL_AX); springTo(RAIL_AX, LAST, 0); }
+  const [, i] = hit;
+  if (Math.round(hx) !== i){ wake(); stop(RAIL_AX); springTo(RAIL_AX, i, 0); }
+  const page = e.target.dataset && e.target.dataset.page, pad = padOf(i);
+  if (page != null && pad && Math.round(pad.pv) !== +page){ wake(); stop(pageAxisOf(pad)); springTo(pageAxisOf(pad), +page, 0); }
+});
+/* and leaving by one of them notes where the site stood, as a pull does */
+stage.addEventListener('click', e => {
+  const a = e.target.closest('a.go');
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  leaveFor(a.href, a.dataset.note || '');
 });
 stage.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 

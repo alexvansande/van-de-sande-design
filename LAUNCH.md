@@ -102,8 +102,8 @@ Blog:
    no newsletter; they would otherwise be lost. *(Alex)*
 7. [ ] **Shopify:** check there are no open orders; then close the shop and
    remove vandesande.design from it (Settings → Domains). *(Alex)*
-8. [ ] Make sure **site@vandesande.design** exists in Google Workspace (a
-   user or an alias) and send it a test. *(Alex)*
+8. [x] **site@vandesande.design** reaches him: the domain's mail is a
+   catch-all.
 
 ### The switch, at GoDaddy (both together)
 
@@ -168,8 +168,11 @@ on the new site; the rest is not, by choice or for later.
 
 ## Worth doing soon, not for the launch
 
-- Without JavaScript the page has no links at all: give the captions and
-  the blog's poster plain `<a>`s, or a `<noscript>` list, for crawlers.
-- Keyboard: only the socials are reached by Tab; the blog's cards are not
-  links.
-- A DMARC record for the mail.
+- [x] Plain links under the posters, for crawlers and the page without its
+  script: the posts, the posters' sites, the blog and its newest posts.
+- [x] Keyboard: Tab goes through those links, taking the rail to each
+  poster and drawing a ring round it; Enter opens it.
+- [ ] A DMARC record for the mail, at GoDaddy: TXT `_dmarc`,
+  `v=DMARC1; p=none; rua=mailto:site@vandesande.design`. `p=none` only
+  reports; tighten it to `quarantine` once the reports show only Google
+  sending for the domain. *(Alex)*

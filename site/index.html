@@ -107,6 +107,11 @@ body{margin:0;background:var(--dark);color:var(--ink);
 .elsewhere a{color:inherit;text-decoration:underline;text-decoration-thickness:.04em;
   text-underline-offset:.15em;text-decoration-color:rgba(230,226,210,.45)}
 .elsewhere a:hover,.elsewhere a:focus-visible{text-decoration-color:currentColor;outline:none}
+/* Plain links under the posters, for a crawler or a page without its
+   script, and for the keyboard: out of sight, and while one has the focus
+   the rail goes to its poster and a ring is drawn round it. */
+.go{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.station:has(.go:focus-visible){outline:2px solid #e6e2d2;outline-offset:clamp(.5rem,1.5vw,1rem)}
 
 /* the next thing along, mostly off to the right */
 /* above the page's own shadow, which reaches seventy pixels past its foot and
@@ -458,15 +463,21 @@ body{margin:0;background:var(--dark);color:var(--ink);
     </aside>
     <aside class="station poster" id="victor">
       <span class="cap">Victor was the smartest person I&rsquo;ve worked with. And I&rsquo;ve worked with very smart people.</span>
+      <a class="go" href="https://blog.vandesande.design/bend-2" data-note="bend-2">Bend 2 is live!, on the blog</a>
     </aside>
     <aside class="station poster" id="maps">
       <span class="cap">Some experiments with maps</span>
+      <a class="go" href="https://blog.vandesande.design/gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball" data-note="gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball">Gosper World, a novel world map made of hexagonal-like fractals, on the blog</a>
+      <a class="go" href="https://hexagonal.earth/">Hexagonal Earth, the maps and their posters</a>
     </aside>
     <aside class="station poster" id="triangle">
       <span class="cap">The whole universe in one image</span>
+      <a class="go" href="https://blog.vandesande.design/the-triangle-of-everything" data-note="the-triangle-of-everything">The Triangle of Everything, on the blog</a>
+      <a class="go" href="https://triangleofeverything.com/">The Triangle of Everything poster</a>
     </aside>
     <aside class="station poster" id="latest">
       <span class="cap">This is a compendium of all my writings for the last 25 years on the internet</span>
+      <a class="go" id="to-blog" href="https://blog.vandesande.design/" data-note="blog.0">The blog: Alex Van de Sande&rsquo;s wandering about</a>
     </aside>
     <nav class="station elsewhere" id="elsewhere">
       <p>Find me as avsa almost everywhere:

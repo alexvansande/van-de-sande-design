@@ -34,8 +34,16 @@ is loaded before you get there. Nothing on the first screen is a picture.
 
 The last is the index's answer at the other end: a line, ranged left so
 its start is what shows from the blog's poster, with his Bluesky, X,
-avsa.eth and an address to write to. Its links are the first a Tab
-reaches, and tabbing to one takes the rail there.
+avsa.eth and an address to write to.
+
+Under the posters are plain links, out of sight (`.go` in `index.html`):
+Bend's, the maps' and the triangle's posts, the posters' own sites, and the
+blog, with a link for each of its three newest posts once `latest.json` is
+in. They are what a crawler, or a browser without the script, finds on the
+page, and what Tab goes through: tabbing to one takes the rail to its
+poster, turns the blog's poster to its post and draws a ring round it, and
+Enter leaves by `leaveFor`, as a pull does, so the back button comes back
+to it.
 
 **My ethereum story** is three pages from books that mention him — page 190
 of Camila Russo's *The Infinite Machine*, page 79 of Laura Shin's *The
