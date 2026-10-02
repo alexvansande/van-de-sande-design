@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing</title>
+<link rel="stylesheet" href="/assets/blog.css">
+<link rel="stylesheet" href="/editor.css">
+<script type="module" src="/app.js"></script>
+</head>
+<body class="editor">
+
+<!-- every post: drafts first, then what is on the blog -->
+<section id="list" class="ed-list" hidden>
+  <header class="ed-list-head">
+    <h1>Writing</h1>
+    <button class="btn primary" data-act="new">New post</button>
+  </header>
+  <p class="ed-warn" id="warn" hidden></p>
+  <div id="drafts"></div>
+  <div id="live"></div>
+</section>
+
+<!-- one post, as the blog will set it -->
+<section id="edit" hidden>
+  <div class="ed-bar">
+    <a href="#/" class="back">← All posts</a>
+    <span class="status" id="status"></span>
+    <span class="spacer"></span>
+    <button class="btn quiet" data-act="discard" id="discard"></button>
+    <button class="btn" data-act="preview">Preview</button>
+    <button class="btn" data-act="save">Save draft</button>
+    <button class="btn primary" data-act="publish" id="publish">Publish</button>
+  </div>
+  <p class="ed-warn ed-old" id="old" hidden></p>
+  <main class="ed-main">
+    <article class="sheet">
+      <span class="paper"></span>
+      <div class="ed-cover" id="cover"></div>
+      <div class="text">
+        <h1 class="ed-title" id="title" contenteditable="plaintext-only" spellcheck="true" data-ph="Title"></h1>
+        <p class="sub ed-sub" id="subtitle" contenteditable="plaintext-only" spellcheck="true" data-ph="Subtitle (optional)"></p>
+        <p class="when"><time id="when">Draft</time><span id="cats"></span><input id="cat-add" class="cat-add" list="cat-list" placeholder="+ category" autocomplete="off"></p>
+        <datalist id="cat-list"></datalist>
+        <div id="body"></div>
+      </div>
+    </article>
+  </main>
+
+  <!-- on a selection -->
+  <div class="bubble" id="bubble">
+    <span class="tools">
+      <button data-cmd="bold" title="Bold (⌘B)"><b>B</b></button>
+      <button data-cmd="italic" title="Italic (⌘I)"><i>i</i></button>
+      <button data-cmd="link" title="Link (⌘K)">link</button>
+      <button data-cmd="math" title="Maths: the selection as TeX">∑</button>
+      <span class="block">
+        <button data-cmd="h2" title="Heading">H</button>
+        <button data-cmd="h3" title="Small heading">h</button>
+        <button data-cmd="quote" title="Quote">“</button>
+      </span>
+    </span>
+  </div>
+  <div class="bubble askbox" id="askbox" hidden><input id="ask-input" autocomplete="off" spellcheck="false"><div class="ask-preview" id="ask-preview"></div></div>
+  <div class="bubble linkbox" id="linkbox" hidden><input id="link-input" type="url" placeholder="Paste a link, then Enter (empty to remove)"></div>
+
+  <!-- on an empty line -->
+  <div class="plus" id="plus">
+    <button class="open-btn" data-cmd="toggle" title="Add a picture, a video…">+</button>
+    <span class="opts">
+      <button data-cmd="image" title="One picture, or several for a carousel">Picture</button>
+      <button data-cmd="video">Video</button>
+      <button data-cmd="youtube" title="Or paste a YouTube link on an empty line">YouTube</button>
+      <button data-cmd="math" title="Or type $$TeX$$ anywhere in the text">Maths</button>
+      <button data-cmd="hr">Divider</button>
+      <button data-cmd="code">Code</button>
+    </span>
+  </div>
+</section>
+
+<dialog id="dialog" class="ed-dialog"></dialog>
+<div class="toast" id="toast" role="status"></div>
+<input type="file" id="file" hidden>
+</body>
+</html>

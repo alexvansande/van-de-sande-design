@@ -5,7 +5,8 @@
     python3 blog/build.py --out site/blog --base /blog/
     python3 blog/build.py --serve 8766             # build, then serve it
 
-Every folder here with an index.md is a post, and its name is its address:
+Every folder here with an index.md is a post, and its name is its address
+(an index.draft.md, the editor's, is left out unless --drafts is given):
 blog/<slug>/index.md is published at /<slug>, as it was on Paragraph. The
 page is written as <slug>.html, which GitHub Pages (and most hosts) serve at
 /<slug> with no extension and no trailing slash, so the address is the same
@@ -36,12 +37,13 @@ HOME = "https://vandesande.design"
 COLUMN = 704                  # the text column, in CSS pixels: what Paragraph had
 WIDTHS = (480, 704, 1056, 1408, 2112)
 VIDEOS = (".mp4", ".webm")    # copied as they are, beside the pictures
+QUICK = False                 # --quick: pictures copied, not resized, for the editor's preview
 
 
 # ---------------------------------------------------------------- front matter
 
-def read_post(folder):
-    text = open(os.path.join(folder, "index.md"), encoding="utf-8").read()
+def read_post(folder, name="index.md"):
+    text = open(os.path.join(folder, name), encoding="utf-8").read()
     meta, body = {}, text
     m = re.match(r"---\n(.*?)\n---\n", text, re.S)
     if m:
@@ -97,6 +99,8 @@ def tex_to_mathml(tex):
 
     def atom():
         nonlocal pos
+        if pos >= len(toks):     # x^ or \frac{a}: nothing left to be the rest
+            return "<mrow></mrow>"
         t = toks[pos]
         pos += 1
         if t == "\\frac":
@@ -322,10 +326,18 @@ class Pictures:
         stem, ext = os.path.splitext(name)
         url = f"{self.base}media/{slug}/"
         result = []
-        if Image is None or ext.lower() in (".gif", ".svg", ".webp") + VIDEOS:
+        if Image is None or QUICK or ext.lower() in (".gif", ".svg", ".webp") + VIDEOS:
             target = os.path.join(dest, name)
             if not fresh(target, src):
-                shutil.copyfile(src, target)
+                if QUICK:               # the same file, not a copy of it
+                    try:
+                        if os.path.exists(target):
+                            os.remove(target)
+                        os.link(src, target)
+                    except OSError:
+                        shutil.copyfile(src, target)
+                else:
+                    shutil.copyfile(src, target)
             w = size_of(src)[0] if Image and ext.lower() not in VIDEOS else 0
             result = [(url + name, w)]
         else:
@@ -578,7 +590,7 @@ def card(p, base, pics, eager=False, named=True):
 </a>"""
 
 
-def build(out, base, clean=False):
+def build(out, base, clean=False, drafts=False):
     if clean and os.path.isdir(out):
         shutil.rmtree(out)
     os.makedirs(out, exist_ok=True)
@@ -587,9 +599,12 @@ def build(out, base, clean=False):
     posts = []
     for name in sorted(os.listdir(HERE)):
         folder = os.path.join(HERE, name)
-        if name.startswith((".", "_")) or not os.path.isfile(os.path.join(folder, "index.md")):
+        if name.startswith((".", "_")):
             continue
-        posts.append(read_post(folder))
+        # a draft, from the editor, is index.draft.md: left out unless asked for
+        draft = drafts and os.path.isfile(os.path.join(folder, "index.draft.md"))
+        if draft or os.path.isfile(os.path.join(folder, "index.md")):
+            posts.append(read_post(folder, "index.draft.md" if draft else "index.md"))
     posts.sort(key=lambda p: p["date_dt"], reverse=True)
     # a link to where a post first appeared goes to it here instead
     MOVED.clear()
@@ -1007,19 +1022,22 @@ def serve(out, base, port):
 
 
 def main():
-    global HOME
+    global HOME, QUICK
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--out", default=os.path.join(HERE, "_site"))
     ap.add_argument("--base", default="/", help="the path the blog is served under, e.g. /blog/")
     ap.add_argument("--home", default=HOME, help="the address of the rest of the site, which the blog links back to")
     ap.add_argument("--clean", action="store_true", help="empty the output first")
     ap.add_argument("--serve", type=int, metavar="PORT")
+    ap.add_argument("--drafts", action="store_true", help="build the editor's drafts (index.draft.md) too, for a preview")
+    ap.add_argument("--quick", action="store_true", help="copy the pictures instead of resizing them, for a preview")
     args = ap.parse_args()
     base = "/" + args.base.strip("/") + "/" if args.base.strip("/") else "/"
     HOME = args.home
+    QUICK = args.quick
     if Image is None:
         print("Pillow is not installed: the pictures are copied at full size (pip install pillow)", file=sys.stderr)
-    build(args.out, base, args.clean)
+    build(args.out, base, args.clean, args.drafts)
     if args.serve:
         serve(args.out, base, args.serve)
 

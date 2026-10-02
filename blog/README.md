@@ -70,6 +70,83 @@ other, as before.
 
 `$$E = mc^2$$` is set as maths (MathML: fractions, powers and indices).
 
+## Writing in the editor
+
+```bash
+pip install pillow          # optional, but phone photos need it (below)
+python3 blog/editor.py      # then http://localhost:8767
+```
+
+A page on this machine for writing a post the way it will look: the
+paper, the type, the picture at its head, all as the blog sets them. There
+are no buttons over the text. Select some and bold, italic, link, maths
+(∑), the two sizes of heading and quote come up over it; on an empty line a
++ comes up beside it, for a picture, a video, a YouTube video, maths, a
+divider or code. Several pictures chosen at once are a carousel, and a
+picture's + adds more beside it. A caption is typed under its picture.
+Pictures and videos can also be pasted in, or dragged onto the page,
+anywhere on it: they go between the paragraphs nearest where they are let
+go, a line showing where while they are held (onto the strip at the top,
+a picture is the featured image). A link pasted over a selection links it.
+
+- **Maths** is typed as `$$E = mc^2$$` in the text, or made from a selection
+  with ∑. A click on it opens its TeX, with the maths set under it as it is
+  typed. It is set by `build.py`'s own TeX (`tex_to_mathml`, which
+  `editor.py` asks), so it looks as it will on the blog, and a command that
+  TeX does not know is underlined, as the blog would show it as text.
+- **A YouTube video** comes from the +, or from its link (or the embed code
+  YouTube gives) pasted where the caret is: on an empty line, before or
+  after a paragraph, or in the middle of one, which it splits; a `t=` in
+  the link is where it starts. It is written as the other
+  videos are, a `<figure class="youtube">` with the video in it, its title
+  asked of YouTube, and its caption, if it has one, in the figure.
+- **Half the column, the text running round it**: ◧ and ◨ on a picture
+  float it left or right at half the width, and again bring it back. It is
+  written as the older posts have it, `<figure class="float-right"
+  style="width:50%">`; on a phone it is the whole width, as there. The Markdown shortcuts work as they are typed
+(`## `, `- `, `> `, `**bold**`). The featured image is the strip at the top
+of the paper; a picture dropped on it replaces it.
+
+It writes what `build.py` reads and nothing else (`editor.py`, with the
+page in `_editor/`, which is not published):
+
+- **A draft** is `index.draft.md` in the post's folder. The build leaves it
+  out, so a draft can sit in the folder, or be committed, without being on
+  the blog. A new one is in a folder called `draft-<when>` until it is out.
+  It is saved as it is written, and with Save draft (⌘S).
+- **The pictures** go into the folder as they are added, numbered on from
+  the last (`01.jpg`, `02.png`…), the featured image as `cover.*`. With
+  Pillow, a photo is turned the way the phone was held (the build would
+  otherwise show it sideways) and made no wider than 2400 pixels. A `.mov`
+  becomes an `.mp4`, and a `.webm` is made beside every `.mp4`, if ffmpeg
+  is installed.
+- **Preview** builds the blog with the drafts in it (`build.py --drafts
+  --quick` into `blog/_preview`: the pictures are linked as they are, not
+  resized, so it takes a second) and opens the post.
+- **Publish** asks for the post's address (from its title; it cannot change
+  once the post is out), dates it, renames its folder to that address, makes
+  `index.draft.md` its `index.md`, deletes the pictures the post no longer
+  uses, then commits that one folder and pushes. The push is what deploys
+  it. If the push fails (another machine pushed first, say) it pulls,
+  replays the commit on top, and tries once more; otherwise it says what git
+  said, and the commit is there to push by hand.
+
+A post that is out is edited the same way: saving writes `index.draft.md`
+beside its `index.md`, and the post on the blog stays as it was until
+Publish changes (which adds `updated` to its header, for `dateModified`).
+Discard changes throws the draft away. 51 of the 53 posts brought from
+Paragraph open in it too. Their pictures written as HTML (`<figure><img>`),
+YouTube videos and floated pictures are shown as such and written back as
+the same HTML; any other HTML block is shown as it is written, and kept.
+The other two have HTML in the middle of a sentence, which the editor can
+only hold as plain text; it says so when one is opened, and those are
+better changed in their `index.md`.
+
+The Markdown it writes (`_editor/md.js`) is read by the same rules as
+`render_blocks()` and `Inline` in `build.py`: what it writes, the build
+reads back as the same post. Bold and italic together are written
+`**_this_**`, as `***this***` comes out of the build as overlapping tags.
+
 ## How it keeps Paragraph's layout
 
 The text column is 704px, as on Paragraph, and a picture shows at its own
