@@ -24,7 +24,7 @@ empty list is the usual answer.
 What he dismisses, what he answers, and Claude's last reading are kept beside
 the post, in index.review.json.
 """
-import concurrent.futures, difflib, hashlib, json, os, re, shutil, subprocess, sys, tempfile, threading, urllib.request
+import concurrent.futures, contextlib, difflib, hashlib, json, os, re, shutil, subprocess, sys, tempfile, threading, urllib.request
 from datetime import datetime, timezone
 
 OLLAMA = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434").rstrip("/")
@@ -161,7 +161,32 @@ def schema():
 
 # ---------------------------------------------------------------- the two models
 
-local_lock = threading.Lock()   # one paragraph at a time on this machine's model
+class Turns:
+    """One request at a time on this machine's model, and an answer to him
+    goes before the paragraphs waiting to be read: he is waiting for it."""
+
+    def __init__(self):
+        self.c = threading.Condition()
+        self.busy = False
+        self.urgent = 0
+
+    @contextlib.contextmanager
+    def take(self, urgent=False):
+        with self.c:
+            self.urgent += urgent
+            while self.busy or (self.urgent and not urgent):
+                self.c.wait()
+            self.urgent -= urgent
+            self.busy = True
+        try:
+            yield
+        finally:
+            with self.c:
+                self.busy = False
+                self.c.notify_all()
+
+
+turns = Turns()
 
 
 def local_model():
@@ -195,7 +220,7 @@ def ask_local(blocks, dismissed, comments=(), gone=lambda: False, pages=()):
     return loads(local_chat(prompt("local"), message(blocks, dismissed, comments, pages), schema(), gone))
 
 
-def local_chat(system, user, shape, gone=lambda: False):
+def local_chat(system, user, shape, gone=lambda: False, urgent=False):
     model = local_model()
     body = json.dumps({
         "model": model,
@@ -207,7 +232,7 @@ def local_chat(system, user, shape, gone=lambda: False):
         "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
     }).encode()
     req = urllib.request.Request(OLLAMA + "/api/chat", data=body, headers={"Content-Type": "application/json"})
-    with local_lock:
+    with turns.take(urgent):
         if gone():
             raise Gone()            # the page that asked was closed or reloaded while it waited
         try:
@@ -408,7 +433,7 @@ def stamp():
 
 REPLY = """You are one of two reviewers of a blog post (a small model on the author's machine, and Claude, online). You made a suggestion on the post, and the author has answered it. Answer him.
 
-Reply in one or two plain sentences, as a colleague would: no flattery, no apology. If he is right, or you are no longer sure, say so and withdraw the suggestion. If you still think the text is wrong, say why, briefly, with what you know; you may revise your correction, which replaces exactly the quoted words. You flag; you never rewrite more than those words, and you never comment on style, tone or opinions.
+Reply in one or two plain sentences, as a colleague would: no flattery, no apology. If he is right, or you are no longer sure, say so and withdraw the suggestion. If he says the words are meant as they are (a joke, a parody, a quotation, his own way of putting it), that is his call: withdraw it. If you still think the text is wrong, say why, briefly, with what you know; you may revise your correction, which replaces exactly the quoted words. You flag; you never rewrite more than those words, and you never comment on style, tone or opinions.
 
 Answer with JSON: {"reply": "...", "withdraw": true or false, "replacement": the corrected text for the quoted words, or null to keep your correction as it was}."""
 
@@ -445,11 +470,14 @@ def comment(folder, issue, text, paragraph=""):
                                                         json.dumps(issue.get("replacement"), ensure_ascii=False)),
                      "Why you said so: " + issue.get("why", ""), "", "The conversation so far:"]
                     + [line for t in thread for line in said(t)])
-    if agent == "local":
-        out = loads_obj(local_chat(REPLY + REPLY_LOCAL, ask, reply_shape()))
-    else:
-        out = online_chat(REPLY + REPLY_ONLINE, ask, reply_shape())
-    answer = str(out.get("reply") or "").strip() or "(no answer)"
+    for _ in range(2):              # an empty answer is asked for again, once
+        if agent == "local":
+            out = loads_obj(local_chat(REPLY + REPLY_LOCAL, ask, reply_shape(), urgent=True))
+        else:
+            out = online_chat(REPLY + REPLY_ONLINE, ask, reply_shape())
+        if str(out.get("reply") or "").strip():
+            break
+    answer = str(out.get("reply") or "").strip() or "(it did not answer)"
     withdrew = bool(out.get("withdraw"))
     rep = out.get("replacement")
     if isinstance(rep, str) and rep.strip() and rep != issue["span"] and not withdrew:
