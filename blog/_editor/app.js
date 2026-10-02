@@ -717,6 +717,7 @@ function setDiscard() {
   b.textContent = post.published ? (post.draft ? 'Discard changes' : '') : 'Delete draft'
   b.hidden = !b.textContent
   $('#publish').textContent = post.published ? 'Publish changes' : 'Publish'
+  $('#share').hidden = !post.published
 }
 
 async function showPost(slug) {
@@ -1089,6 +1090,7 @@ $('#edit .ed-bar').addEventListener('click', async e => {
   if (act === 'preview') preview()
   if (act === 'publish') publishDialog()
   if (act === 'discard') discard()
+  if (act === 'share') shareDialog()
 })
 
 $('[data-act="new"]').addEventListener('click', () => { location.hash = '#/new' })
@@ -1195,15 +1197,106 @@ function published(r) {
       out.push(el('p', '', 'The post is now index.md in its folder, but git did not commit it. Commit and push it yourself.'))
     }
     if (!r.pushed && r.log) out.push(el('pre', '', r.log))
+    if (r.bluesky) out.push(el('p', 'note', 'Its record on Bluesky was not updated: ' + r.bluesky))
     const row = el('div', 'row')
-    const ok = el('button', 'btn primary', 'Done')
-    ok.onclick = () => {
-      d.close()
+    const back = () => {
       const to = '#/edit/' + r.slug
-      if (location.hash === to) route()
-      else location.hash = to
+      if (location.hash === to) return route()
+      location.hash = to
+      return new Promise(ok => window.addEventListener('hashchange', () => setTimeout(ok, 300), { once: true }))
     }
+    if (r.pushed && r.branch === 'main') {
+      const share = el('button', 'btn', 'Share on Bluesky…')
+      share.onclick = async () => { d.close(); await back(); shareDialog() }
+      row.append(share)
+    }
+    const ok = el('button', 'btn primary', 'Done')
+    ok.onclick = () => { d.close(); back() }
     row.append(ok)
+    out.push(row)
+    return out
+  })
+}
+
+// ---------------------------------------------------------------- on Bluesky
+
+const graphemes = s => [...new Intl.Segmenter().segment(s)].length
+
+async function shareDialog() {
+  let st
+  try { st = await call('/api/bluesky?slug=' + encodeURIComponent(post.slug)) } catch (e) { toast(e.message, true, 8000); return }
+  dialog(d => {
+    const out = [el('h2', '', 'Share on Bluesky')]
+    const row = el('div', 'row')
+    const close = el('button', 'btn', 'Close')
+    close.onclick = () => d.close()
+    if (!st.account) {
+      out.push(el('p', '', 'No Bluesky account is set up for the blog. Make an app password on bsky.app (Settings → Privacy and security → App passwords), then in a terminal:'))
+      out.push(el('pre', '', 'security add-generic-password -s blog-bluesky -a YOUR.HANDLE -w\npython3 blog/crosspost.py setup'))
+      out.push(el('p', 'note', 'The first keeps the password in the keychain (it asks for it). The second puts the blog on Bluesky as a publication; commit what it writes in blog/_well-known.'))
+      row.append(close); out.push(row)
+      return out
+    }
+    if (st.posted) {
+      const p = el('p', '', 'It is on Bluesky: ')
+      const a = el('a', '', st.posted)
+      a.href = st.posted; a.target = '_blank'
+      p.append(a)
+      out.push(p)
+      row.append(close); out.push(row)
+      return out
+    }
+    // the card it will have, as Bluesky draws it
+    const card = el('div', 'bsky-card')
+    if (post.cover) {
+      const img = el('img')
+      img.src = mediaUrl(post.cover, coverBust)
+      card.append(img)
+    }
+    const words = el('div')
+    words.append(el('small', '', st.url.replace(/^https?:\/\//, '')), el('b', '', post.title))
+    if (post.subtitle) words.append(el('span', '', post.subtitle))
+    card.append(words)
+    out.push(el('label', '', 'What you say over it, if anything'))
+    const text = el('textarea', 'bsky-text')
+    text.rows = 4
+    text.placeholder = 'Nothing: the card alone'
+    const count = el('span', 'count', '0 / 300')
+    text.oninput = () => {
+      const n = graphemes(text.value)
+      count.textContent = `${n} / 300`
+      count.classList.toggle('over', n > 300)
+      go.disabled = n > 300
+    }
+    out.push(text, count, card)
+    const note = el('p', 'note', st.live ? `As @${st.account}.` : `As @${st.account}. The post is not live at ${st.url} yet: it is sent once it is.`)
+    out.push(note)
+    const go = el('button', 'btn primary', 'Post')
+    let waiting = false
+    close.onclick = () => { waiting = false; d.close() }
+    go.onclick = async () => {
+      go.disabled = text.disabled = true
+      go.textContent = 'Posting…'
+      try {
+        // the blog deploys a minute or two after a push: wait for the page, ten minutes at most
+        waiting = true
+        for (let i = 0; !st.live; i++) {
+          if (!waiting || i >= 40) throw new Error(`The post is not live at ${st.url}.`)
+          note.textContent = `Waiting for the post to be live at ${st.url}…`
+          await new Promise(ok => setTimeout(ok, 15000))
+          if (!waiting) return
+          st = await call('/api/bluesky?slug=' + encodeURIComponent(post.slug))
+        }
+        const r = await call('/api/bluesky', { slug: post.slug, text: text.value })
+        st.posted = r.posted
+        shareDialog()
+      } catch (e) {
+        go.disabled = text.disabled = false
+        go.textContent = 'Try again'
+        note.textContent = e.message
+      }
+    }
+    row.append(close, go)
     out.push(row)
     return out
   })

@@ -72,6 +72,19 @@ def parse_date(s):
     return datetime.fromisoformat(str(s).replace("Z", "+00:00"))
 
 
+def tid(dt):
+    """A moment as an AT Protocol record key (a TID): a post's document on
+    Bluesky is keyed by the post's date, so its address is known here."""
+    n = int(dt.timestamp() * 1_000_000) << 10
+    return "".join("234567abcdefghijklmnopqrstuvwxyz"[(n >> (5 * i)) & 31] for i in reversed(range(13)))
+
+
+def publication():
+    """The blog's record on the AT Protocol (crosspost.py setup), or None."""
+    path = os.path.join(HERE, "_well-known", "site.standard.publication")
+    return open(path).read().strip() if os.path.isfile(path) else None
+
+
 # ---------------------------------------------------------------- TeX, the little there is
 
 TEX_OPS = {"+": "+", "-": "\u2212", "=": "=", "/": "/", "(": "(", ")": ")", ",": ",",
@@ -613,6 +626,10 @@ def build(out, base, clean=False, drafts=False):
 
     # the assets
     shutil.copytree(os.path.join(HERE, "_assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
+    # and the proof that the blog's records on Bluesky are its own
+    pub = publication()
+    if pub:
+        shutil.copytree(os.path.join(HERE, "_well-known"), os.path.join(out, ".well-known"), dirs_exist_ok=True)
 
     # every post's text first, so the card of the next one has its first lines
     for p in posts:
@@ -661,6 +678,9 @@ def build(out, base, clean=False, drafts=False):
         if p["og_image"]:
             ld["image"] = p["og_image"]
         extra = f'<meta property="article:published_time" content="{p["date_dt"].isoformat()}">\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
+        if pub:
+            doc = f'at://{pub[5:].split("/")[0]}/site.standard.document/{tid(p["date_dt"])}'
+            extra += f'\n<link rel="site.standard.publication" href="{pub}">\n<link rel="site.standard.document" href="{doc}">'
         write(out, p["slug"] + ".html", page(base, p["title"], body, description=p["description"], canonical=p["url"],
                                               image=p["og_image"], kind="article", cls="post",
                                               extra_head=extra + f'\n<script src="{base}assets/blog.js?v={asset_v("blog.js")}" defer></script>'))

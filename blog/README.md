@@ -147,6 +147,29 @@ The Markdown it writes (`_editor/md.js`) is read by the same rules as
 reads back as the same post. Bold and italic together are written
 `**_this_**`, as `***this***` comes out of the build as overlapping tags.
 
+## On Bluesky
+
+Each post can be on Bluesky as itself: a [Standard.site](https://standard.site)
+document, which Bluesky shows as an essay. The writing stays here; the
+network holds a record of it (title, address, date, the text), and the blog
+proves the record is its own: `/.well-known/site.standard.publication`, and a
+`<link rel="site.standard.document">` in each post's head. `crosspost.py`
+does it. Once, with an app password from bsky.app (Settings → Privacy and
+security → App passwords):
+
+```bash
+security add-generic-password -s blog-bluesky -a YOUR.HANDLE -w
+python3 blog/crosspost.py setup       # writes blog/_well-known/: commit it
+python3 blog/crosspost.py backfill    # optional: every post already out
+```
+
+The password is in the keychain, never in the repo. After that, publishing
+in the editor writes the post's record too, and **Share** posts it on
+Bluesky: whatever you write over it, if anything, and a card of the post.
+It waits for the page to be live first, so the card never points at nothing.
+A post's record is keyed by its date, so the build knows its address and
+publishing again rewrites the same record.
+
 ## How it keeps Paragraph's layout
 
 The text column is 704px, as on Paragraph, and a picture shows at its own
