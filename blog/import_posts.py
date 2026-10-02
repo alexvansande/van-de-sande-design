@@ -78,6 +78,8 @@ SOURCES = [
      "http://forum.ethereum.org/discussion/751/so-i-designed-a-concept-ui-for-the-alephzero-client", "vanilla", None),
     ("should-ether-contracts-have-guis",
      "http://forum.ethereum.org/discussion/766/should-ether-contracts-have-guis-i-m-a-ui-designer-and-here-s-why-i-don-t-think-so", "vanilla", None),
+    # a reply of his in someone else's discussion: the day he wrote it after the #
+    ("the-nightmare-scenario", "http://forum.ethereum.org/discussion/830/the-nightmare-scenario#2014-04-26", "vanilla", None),
     # Reddit, his own posts (u/avsa)
     ("starter-guide-to-ethereum", "https://www.reddit.com/r/ethereum/comments/3vxvlx/", "reddit", None),
     ("if-you-are-coming-from-rbitcoin", "https://www.reddit.com/r/ethereum/comments/415kx8/", "reddit", None),
@@ -716,12 +718,17 @@ def from_github(url):
 
 
 def from_vanilla(url):
-    """His opening post in a discussion on the old forum (Vanilla), from the
-    Wayback Machine's first copy: the paragraphs were line breaks."""
+    """His opening post in a discussion on the old forum (Vanilla), or his
+    reply on the day after the #, from the Wayback Machine's first copy: the
+    paragraphs were line breaks."""
     did = re.search(r"/discussion/(\d+)", url).group(1)
+    url, _, day = url.partition("#")
     # the copy nearest 2014 (the archive goes to it from any date)
     page = get(f"https://web.archive.org/web/2014id_/{url}").decode("utf-8", "replace")
-    first = re.split(r'(?=<(?:div|li) [^>]*class="Item[^"]*ItemComment\b)', page)[0]
+    items = re.split(r'(?=<(?:div|li) [^>]*class="Item[^"]*ItemComment\b)', page)
+    first = items[0]
+    if day:
+        first = next(i for i in items[1:] if re.search(r'class="Username">avsa<', i) and f'datetime="{day}' in i)
     msg = re.search(r'class="Message(?: [^"]*)?"[^>]*>(.*?)</div>', first, re.S).group(1)     # not MessageList
     title = html.unescape(re.sub(r"<[^>]+>", "", re.search(r"<h1[^>]*>(.*?)</h1>", page, re.S).group(1))).strip()
     when = re.search(r'datetime="([^"]+)"', first).group(1)
@@ -840,7 +847,7 @@ def write(slug, url, kind, date, links, items, force):
     head.append(fm("date", iso(date)))
     if cover:
         head += [fm("cover", cover), fm("cover_size", cover_size)]
-    head += [fm("original", url), fm("original_site", SITE_NAME[kind]), "---", ""]
+    head += [fm("original", url.split("#")[0]), fm("original_site", SITE_NAME[kind]), "---", ""]
     text = "\n".join(head) + "\n" + "\n\n".join(blocks).rstrip() + "\n"
     with open(md_path, "w") as f:
         f.write(text)

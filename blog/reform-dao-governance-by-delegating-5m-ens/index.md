@@ -1,5 +1,5 @@
 ---
-title: "[Draft] Reform DAO governance by delegating 5M ENS tokens"
+title: "Reform DAO governance by delegating 5M ENS tokens"
 date: "2026-07-06T13:55:36Z"
 original: "https://discuss.ens.domains/t/draft-reform-dao-governance-by-delegating-5m-ens-tokens/22247"
 original_site: "discuss.ens.domains"

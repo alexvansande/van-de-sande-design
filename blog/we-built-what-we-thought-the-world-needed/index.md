@@ -2,6 +2,8 @@
 title: "We built what we thought the world needed"
 date: "2026-06-30T20:25:22Z"
 categories: ["Ethereum"]
+cover: "cover.jpg"
+cover_size: [1200, 924]
 original: "https://x.com/avsa/status/2072053903420461321"
 original_site: "Twitter"
 ---

@@ -33,7 +33,8 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.expanduser("~/Downloads/twitter-2026-10-01-354bc0b4d7bd578f09c8547ef2dcc0570c14c92e651955e7eab572da7e53c99f/data")
 
-# (first tweet, slug here, title, categories, whether its first picture is the cover)
+# (first tweet, slug here, title, categories, whether its first picture is the
+# cover, or "last": a copy of its last picture, which stays where it is too)
 # The titles are his own words from the thread.
 THREADS = [
     ("1304483988497629184", "a-security-audit-of-mist", "A security audit of Mist", ["Ethereum", "Mist"], False),
@@ -44,7 +45,7 @@ THREADS = [
     ("1650503712559726594", "brazils-digital-real", "Brazil's Digital Real", ["Ethereum"], False),
     ("1008501144887463937", "was-the-hard-fork-worth-it", "Was the hard fork worth it?", ["Ethereum", "Governance"], False),
     ("1490786374248812549", "decentralization-and-governance", "Decentralization and governance", ["ENS", "Governance"], False),
-    ("2072053903420461321", "we-built-what-we-thought-the-world-needed", "We built what we thought the world needed", ["Ethereum"], False),
+    ("2072053903420461321", "we-built-what-we-thought-the-world-needed", "We built what we thought the world needed", ["Ethereum"], "last"),
     ("1058837812366229505", "ive-been-to-all-devcons", "I’ve been to all devcons", ["Ethereum"], True),
     ("1091337929362952192", "paying-my-whole-team-with-a-single-click", "Paying my whole team with a single click", ["Ethereum"], False),
     ("961252705443418112", "so-about-the-petro", "So, about the Petro", ["Ethereum"], False),
@@ -308,7 +309,7 @@ def write(arc, root, slug, title, categories, use_cover, force, groups=None):
             ext = os.path.splitext(src)[1].lower()
             if m["type"] == "photo":
                 w, h = Image.open(src).size
-                if use_cover and i == 0 and cover is None:
+                if use_cover is True and i == 0 and cover is None:
                     cover, cover_size = "cover" + ext, [w, h]
                     shutil.copy2(src, os.path.join(folder, cover))
                     continue
@@ -329,6 +330,11 @@ def write(arc, root, slug, title, categories, use_cover, force, groups=None):
         else:
             blocks += [fig for _, fig in shown]
 
+    if use_cover == "last" and pictures:
+        last = max((f for f in os.listdir(folder) if re.fullmatch(r"\d\d\.(jpe?g|png)", f)), key=lambda f: int(f[:2]))
+        cover = "cover" + os.path.splitext(last)[1]
+        shutil.copy2(os.path.join(folder, last), os.path.join(folder, cover))
+        cover_size = list(Image.open(os.path.join(folder, cover)).size)
     head = ["---", fm("title", title), fm("date", iso(tweets[0]["created_at"]))]
     if categories:
         head.append(fm("categories", categories))
