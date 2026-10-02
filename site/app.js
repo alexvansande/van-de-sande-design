@@ -220,7 +220,10 @@ function spinnable(a, n, shown){
 /* Where the blog is: on a domain of its own, from the blog repo. GitHub
    Pages lets any site fetch from it, so latest.json and the posts' heads
    come across. */
-const BLOG = 'https://blog.vandesande.design/';
+/* Until blog.vandesande.design has its certificate, the site builds the
+   blog under /blog/ again and reads it from there (and pages.yml builds
+   it); then back to 'https://blog.vandesande.design/'. */
+const BLOG = '/blog/';
 /* The blog's poster: its newest posts, each a page of its own, filled in
    from the blog by fillLatest(). */
 const POST_FACE = '<div class="face postcard"></div>';
