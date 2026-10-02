@@ -176,6 +176,14 @@ body.editor{min-height:100vh}
 .ed-dialog ul{margin:.6rem 0;padding-left:1.2rem;font-size:1rem}
 .ed-dialog .note{font-size:.95rem;color:var(--quiet)}
 .ed-dialog pre{max-height:12rem;overflow:auto;font-size:.75rem;background:#e9e5d4;padding:.6rem .8rem;border-radius:6px;white-space:pre-wrap}
+.ed-dialog textarea{display:block;width:100%;box-sizing:border-box;font:inherit;font-size:1rem;color:var(--ink);background:#e9e5d4;border:0;border-radius:6px;padding:.6rem .8rem;resize:vertical;outline:none}
+.ed-dialog .count{display:block;text-align:right;font-size:.8rem;color:var(--quiet);margin:.25rem 0 .8rem}
+.ed-dialog .count.over{color:#a3301f}
+.bsky-card{border:1px solid var(--rule);border-radius:10px;overflow:hidden;font-size:.9rem}
+.bsky-card img{display:block;width:100%;aspect-ratio:1.91;object-fit:cover}
+.bsky-card div{padding:.6rem .8rem;display:grid;gap:.15rem}
+.bsky-card small{color:var(--quiet)}
+.bsky-card span{color:var(--quiet);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ed-dialog .row{display:flex;justify-content:flex-end;gap:.6rem;margin-top:1.4rem}
 .ed-dialog .btn{color:var(--ink);border-color:var(--rule)}
 .ed-dialog .btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}

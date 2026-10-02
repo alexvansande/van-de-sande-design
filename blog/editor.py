@@ -26,6 +26,7 @@ EDITOR = os.path.join(HERE, "_editor")
 PREVIEW = os.path.join(HERE, "_preview")
 sys.path.insert(0, HERE)
 import build  # noqa: E402  (its TeX, so maths shows here as the blog will set it)
+import crosspost  # noqa: E402  (the post on Bluesky, as a Standard.site document)
 
 try:
     from PIL import Image, ImageOps
@@ -193,8 +194,15 @@ def publish(post):
         os.rename(folder, target)
     rel = os.path.relpath(target, REPO)
     old = os.path.relpath(folder, REPO)
-    return {"slug": new, "removed": removed, **commit_and_push(rel, old if new != slug else None,
-                                                               ("New post: " if first else "Edited: ") + meta["title"])}
+    out = {"slug": new, "removed": removed, **commit_and_push(rel, old if new != slug else None,
+                                                              ("New post: " if first else "Edited: ") + meta["title"])}
+    # its record on Bluesky follows it, once the blog is set up there
+    if crosspost.account() and crosspost.publication():
+        try:
+            crosspost.document(new)
+        except crosspost.Bad as e:
+            out["bluesky"] = str(e)
+    return out
 
 
 def git(*args):
@@ -434,11 +442,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return self.reply(200, tex(q.get("tex", "")))
             if url.path == "/api/youtube":
                 return self.reply(200, youtube_title(q.get("id", "")))
+            if url.path == "/api/bluesky":
+                folder_of(q.get("slug", ""))
+                return self.reply(200, crosspost.status(q["slug"]))
             if url.path == "/api/leftovers":
                 folder = folder_of(q.get("slug", ""))
                 p = load(q["slug"])
                 return self.reply(200, {"files": leftovers(folder, p["body"], p["cover"]) if os.path.isdir(folder) else []})
-        except Bad as e:
+        except (Bad, crosspost.Bad) as e:
             return self.reply(400, {"error": str(e)})
         if url.path.startswith("/api/"):
             return self.reply(404, {"error": "no such thing"})
@@ -462,6 +473,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if url.path == "/api/preview":
                 save(post)
                 return self.reply(200, preview())
+            if url.path == "/api/bluesky":
+                folder_of(post.get("slug", ""))
+                return self.reply(200, crosspost.announce(post["slug"], post.get("text")))
             if url.path == "/api/discard":
                 folder = folder_of(post.get("slug", ""))
                 draft = os.path.join(folder, "index.draft.md")
@@ -471,7 +485,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 elif os.path.isdir(folder):
                     shutil.rmtree(folder)      # a draft never published: gone, pictures and all
                 return self.reply(200, {"ok": True})
-        except Bad as e:
+        except (Bad, crosspost.Bad) as e:
             return self.reply(400, {"error": str(e)})
         except (ValueError, KeyError) as e:
             return self.reply(400, {"error": "bad request: %s" % e})
