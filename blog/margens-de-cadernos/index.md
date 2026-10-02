@@ -2,8 +2,10 @@
 title: "Margens de cadernos"
 date: "2008-10-07T19:19:57Z"
 lang: "pt"
-original: "http://mylifeisnotveryinteresting.posterous.com/margens-de-cadernos"
-original_site: "Posterous"
+original: "https://www.flickr.com/photos/avsa/2922697537/"
+original_site: "Flickr"
+via: "http://mylifeisnotveryinteresting.posterous.com/margens-de-cadernos"
+via_site: "Posterous"
 ---
 
 <figure>

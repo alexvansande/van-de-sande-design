@@ -2,8 +2,10 @@
 title: "Comic review: Ghost map (ou seria crítica em quadrinhos?)"
 date: "2008-10-28T18:44:22Z"
 lang: "pt"
-original: "http://mylifeisnotveryinteresting.posterous.com/comic-review-ghost-map-ou-seri"
-original_site: "Posterous"
+original: "https://www.flickr.com/photos/avsa/2983173716/"
+original_site: "Flickr"
+via: "http://mylifeisnotveryinteresting.posterous.com/comic-review-ghost-map-ou-seri"
+via_site: "Posterous"
 ---
 
 <figure>

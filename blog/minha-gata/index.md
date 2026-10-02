@@ -2,8 +2,10 @@
 title: "minha gata"
 date: "2008-10-19T19:31:36Z"
 lang: "pt"
-original: "http://mylifeisnotveryinteresting.posterous.com/minha-gata"
-original_site: "Posterous"
+original: "https://www.flickr.com/photos/avsa/2957170762/"
+original_site: "Flickr"
+via: "http://mylifeisnotveryinteresting.posterous.com/minha-gata"
+via_site: "Posterous"
 ---
 
 <figure>

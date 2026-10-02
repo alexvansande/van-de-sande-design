@@ -771,6 +771,18 @@ def same_title(a, b):
     return a == b or len(min(a, b, key=len)) >= 8 and (a.startswith(b) or b.startswith(a))
 
 
+def via_posterous(head, photo):
+    """The header of a post Posterous put on Flickr: first published on
+    Flickr (its picture's page), via Posterous."""
+    post = json.loads(re.search(r'^original: (".*")$', head, re.M).group(1))
+    if "posterous" not in post:
+        return head
+    head = re.sub(r'^original: .*$', ip.fm("original", photo["photopage"]), head, count=1, flags=re.M)
+    head = re.sub(r'^original_site: .*$', "\n".join([ip.fm("original_site", "Flickr"), ip.fm("via", post),
+                                                     ip.fm("via_site", "Posterous")]), head, count=1, flags=re.M)
+    return head
+
+
 def posterous_dates(force):
     """Posterous put every post's pictures on Flickr as it was published, so
     the day a post's picture was uploaded is the day of the post: better
@@ -842,8 +854,11 @@ def surpresa(force):
         if names:
             blocks.append("\n".join(f"![]({x})" for x in names))
         say("surpresa", slug, f"{len(names)} pages")
+    first = next(p for p in sorted(photos, key=lambda p: p["date_imported"])
+                 if p["file"] and same_title(p["name"], "oque andei aprontando secretamente nessas últimas semanas:"))
     head = ["---", ip.fm("title", "A surpresa"), ip.fm("date", last.replace(" ", "T") + "Z"), ip.fm("lang", "pt"),
-            ip.fm("original", f"http://{POSTEROUS}/{SURPRESA[0]}"), ip.fm("original_site", "Posterous"), "---", ""]
+            ip.fm("original", first["photopage"]), ip.fm("original_site", "Flickr"),
+            ip.fm("via", f"http://{POSTEROUS}/{SURPRESA[0]}"), ip.fm("via_site", "Posterous"), "---", ""]
     with open(md_path, "w") as f:
         f.write("\n".join(head) + "\n" + "\n\n".join(blocks) + "\n")
     say("surpresa", "a-surpresa", f"{n} pages in all")
@@ -891,6 +906,8 @@ def cartoons(force):
                 continue
             blocks.append(re.sub(r"(<br>)+$", "", b).rstrip())
         blocks += [f'<figure>\n<img src="{name}" width="{w}" height="{h}" alt="">\n</figure>' for name, (w, h) in left]
+        if pages:
+            head = via_posterous(head, pages[0])
         if "\nlang:" not in "\n" + head:          # Posterous's were all in Portuguese
             head = re.sub(r'^(date: .*)$', lambda m: m.group(1) + "\n" + ip.fm("lang", "pt"), head, count=1, flags=re.M)
         with open(os.path.join(folder, "index.md"), "w") as f:

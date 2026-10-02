@@ -658,6 +658,7 @@ def build(out, base, clean=False, drafts=False):
     MOVED.clear()
     MOVED.update({link_key(u): slug for u, slug in MOVED_BY_HAND.items()})
     MOVED.update({link_key(p["original"]): p["slug"] for p in posts if p.get("original")})
+    MOVED.update({link_key(p["via"]): p["slug"] for p in posts if p.get("via")})
 
     # the assets
     shutil.copytree(os.path.join(HERE, "_assets"), os.path.join(out, "assets"), dirs_exist_ok=True)
@@ -684,8 +685,11 @@ def build(out, base, clean=False, drafts=False):
         cats = "".join(f' · <a href="{base}category/{cat_slug(c)}">{esc(c)}</a>' for c in p.get("categories") or [])
         # where it first appeared, for the posts brought here from elsewhere
         if p.get("original"):
+            # and what it went through on its way, as the drawings Posterous put on Flickr
+            via = (f' via <a href="{esc(original_link(p, "via"))}">{esc(p.get("via_site") or p["via"].split("/")[2])}</a>'
+                   if p.get("via") else "")
             cats += (f' · <span class="first">Originally published on <a href="{esc(original_link(p))}">'
-                     f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a></span>')
+                     f'{esc(p.get("original_site") or p["original"].split("/")[2])}</a>{via}</span>')
         sub = f'<p class="sub">{esc(p["subtitle"])}</p>' if p.get("subtitle") else ""
         # the next one along, older, and after the oldest the newest again
         nxt = posts[(posts.index(p) + 1) % len(posts)]
@@ -917,7 +921,7 @@ MOVED_BY_HAND = {
 # Sites that are gone, or no longer his: nothing links to them, only to the
 # Internet Archive's copy. wanderingabout.com is someone else's now, and
 # OLPC News went to ictworks.org, which kept none of the old pages.
-GONE_HOSTS = ("wanderingabout.com", "olpcnews.com")
+GONE_HOSTS = ("wanderingabout.com", "olpcnews.com", "posterous.com", "forum.ethereum.org")
 
 
 def gone(url):
@@ -932,9 +936,10 @@ def archived(url, when=None):
     return f"https://web.archive.org/web/{stamp}/{url.strip()}"
 
 
-def original_link(p):
-    """Where a post first appeared, or the archive's copy if that is gone."""
-    return archived(p["original"], p.get("date_dt")) if gone(p["original"]) else p["original"]
+def original_link(p, key="original"):
+    """Where a post first appeared (or what it came through, "via"), or the
+    archive's copy if that is gone."""
+    return archived(p[key], p.get("date_dt")) if gone(p[key]) else p[key]
 
 
 def link_key(url):

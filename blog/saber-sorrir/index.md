@@ -2,8 +2,10 @@
 title: "Saber sorrir"
 date: "2008-10-15T12:00:00Z"
 lang: "pt"
-original: "http://mylifeisnotveryinteresting.posterous.com/saber-sorrir"
-original_site: "Posterous"
+original: "https://www.flickr.com/photos/avsa/2945494187/"
+original_site: "Flickr"
+via: "http://mylifeisnotveryinteresting.posterous.com/saber-sorrir"
+via_site: "Posterous"
 ---
 
 <figure>

@@ -2,8 +2,10 @@
 title: "A surpresa"
 date: "2009-08-16T19:03:15Z"
 lang: "pt"
-original: "http://mylifeisnotveryinteresting.posterous.com/oque-andei-aprontando-secretam"
-original_site: "Posterous"
+original: "https://www.flickr.com/photos/avsa/3054867240/"
+original_site: "Flickr"
+via: "http://mylifeisnotveryinteresting.posterous.com/oque-andei-aprontando-secretam"
+via_site: "Posterous"
 ---
 
 ### oque andei aprontando secretamente nessas últimas semanas
