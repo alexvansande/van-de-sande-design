@@ -1,0 +1,592 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503712559726594"
+    ],
+    "editableUntil": "2023-04-24T14:45:24.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "257"
+  ],
+  "favorite_count": "197",
+  "id_str": "1650503712559726594",
+  "truncated": false,
+  "retweet_count": "40",
+  "id": "1650503712559726594",
+  "created_at": "Mon Apr 24 14:15:24 +0000 2023",
+  "favorited": false,
+  "full_text": "SEC, Anticrypto Army, while the US is waging war against crypto, Brazil Central Bank attended Ethereal Rio to show off their plan to put the Real on chain.|\n\nIt's not China's CDBC, but rather a model I predict that will be copied all over the western world.",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503715835506692"
+    ],
+    "editableUntil": "2023-04-24T14:45:25.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/4WI75XJc02",
+     "expanded_url": "https://oglobo.globo.com/economia/noticia/2023/04/com-pix-brasil-fica-em-segundo-lugar-em-ranking-de-paises-por-uso-de-pagamentos-instantaneos.ghtml",
+     "display_url": "oglobo.globo.com/economia/notic…",
+     "indices": [
+      "253",
+      "276"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "1650503712559726594",
+  "id_str": "1650503715835506692",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503715835506692",
+  "in_reply_to_status_id": "1650503712559726594",
+  "possibly_sensitive": false,
+  "created_at": "Mon Apr 24 14:15:25 +0000 2023",
+  "favorited": false,
+  "full_text": "First, a context: Brazil is fast to adopt new technologies. Everyone already has phones, social media accounts and WhatsApp. Also, Brazil is already a pioneer with digital payments, being the second largest market of digital transactions behind India:\n\nhttps://t.co/4WI75XJc02",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503718259884033"
+    ],
+    "editableUntil": "2023-04-24T14:45:25.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1650503718259884033/photo/1",
+     "indices": [
+      "239",
+      "262"
+     ],
+     "url": "https://t.co/3rhiMhV5f4",
+     "media_url": "http://pbs.twimg.com/media/FufBfLhWwAEiVLq.jpg",
+     "id_str": "1650500529867374593",
+     "id": "1650500529867374593",
+     "media_url_https": "https://pbs.twimg.com/media/FufBfLhWwAEiVLq.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "2029",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1189",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "674",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/3rhiMhV5f4"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "262"
+  ],
+  "favorite_count": "18",
+  "in_reply_to_status_id_str": "1650503715835506692",
+  "id_str": "1650503718259884033",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503718259884033",
+  "in_reply_to_status_id": "1650503715835506692",
+  "possibly_sensitive": false,
+  "created_at": "Mon Apr 24 14:15:25 +0000 2023",
+  "favorited": false,
+  "full_text": "Pix, launched in 2020 was adopted much faster than digital payment platforms anywhere else in the world. You can go anywhere with just the phone and assume it will be accepted, even with informal beach vendors.\n(sorry for the pic quality) https://t.co/3rhiMhV5f4",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1650503718259884033/photo/1",
+     "indices": [
+      "239",
+      "262"
+     ],
+     "url": "https://t.co/3rhiMhV5f4",
+     "media_url": "http://pbs.twimg.com/media/FufBfLhWwAEiVLq.jpg",
+     "id_str": "1650500529867374593",
+     "id": "1650500529867374593",
+     "media_url_https": "https://pbs.twimg.com/media/FufBfLhWwAEiVLq.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "2029",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1189",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "674",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/3rhiMhV5f4"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503723351678979"
+    ],
+    "editableUntil": "2023-04-24T14:45:27.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "260"
+  ],
+  "favorite_count": "16",
+  "in_reply_to_status_id_str": "1650503718259884033",
+  "id_str": "1650503723351678979",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503723351678979",
+  "in_reply_to_status_id": "1650503718259884033",
+  "created_at": "Mon Apr 24 14:15:27 +0000 2023",
+  "favorited": false,
+  "full_text": "Brazil's \"Digital Real\" will be launched by 2024. It's a hard deadline because that's when the Central Bank's president term ends and he made that his top priority. With Pix and open Finance already launched, he wants to make sure his legacy is digitalization.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503729747992580"
+    ],
+    "editableUntil": "2023-04-24T14:45:28.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "234"
+  ],
+  "favorite_count": "9",
+  "in_reply_to_status_id_str": "1650503723351678979",
+  "id_str": "1650503729747992580",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503729747992580",
+  "in_reply_to_status_id": "1650503723351678979",
+  "created_at": "Mon Apr 24 14:15:28 +0000 2023",
+  "favorited": false,
+  "full_text": "How does it work? Well it's a sort of compromise that is not intended to be revolutionary, rather it's purposefully built to make sure that it is welcomed by the same players of the current system. It's pragmatic, but also innovative.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503732323315712"
+    ],
+    "editableUntil": "2023-04-24T14:45:29.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "275"
+  ],
+  "favorite_count": "16",
+  "in_reply_to_status_id_str": "1650503729747992580",
+  "id_str": "1650503732323315712",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503732323315712",
+  "in_reply_to_status_id": "1650503729747992580",
+  "created_at": "Mon Apr 24 14:15:29 +0000 2023",
+  "favorited": false,
+  "full_text": "The goal is NOT to have end users have a digital wallet, but rather focused on financial institutions. It would use Hyperledger Besu (a Consensys developed Ethereum implementation for private networks) to act as a the famous \"settlement layer\" between financial institutions.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650503735028613121"
+    ],
+    "editableUntil": "2023-04-24T14:45:29.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "201"
+  ],
+  "favorite_count": "12",
+  "in_reply_to_status_id_str": "1650503732323315712",
+  "id_str": "1650503735028613121",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650503735028613121",
+  "in_reply_to_status_id": "1650503732323315712",
+  "created_at": "Mon Apr 24 14:15:29 +0000 2023",
+  "favorited": false,
+  "full_text": "It would be a PoA network: the Central Bank would basically issue licenses to run validator nodes, but it's open to issue those licenses to any bank, fintech and even other civil society organizations.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650505590744002569"
+    ],
+    "editableUntil": "2023-04-24T14:52:52.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "18",
+  "in_reply_to_status_id_str": "1650503735028613121",
+  "id_str": "1650505590744002569",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650505590744002569",
+  "in_reply_to_status_id": "1650503735028613121",
+  "created_at": "Mon Apr 24 14:22:52 +0000 2023",
+  "favorited": false,
+  "full_text": "It has a strong focus on privacy, but not like you expect: since banks are running it, they want to make sure their own transactions are shielded from other banks.\n\nIt means all transactions are private and if the government wants your data it must get it via a court order.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650505593184976903"
+    ],
+    "editableUntil": "2023-04-24T14:52:52.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "273"
+  ],
+  "favorite_count": "9",
+  "in_reply_to_status_id_str": "1650505590744002569",
+  "id_str": "1650505593184976903",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1650505593184976903",
+  "in_reply_to_status_id": "1650505590744002569",
+  "created_at": "Mon Apr 24 14:22:52 +0000 2023",
+  "favorited": false,
+  "full_text": "The goal is to replicate the same legal structure of the current system, just more efficiently. There is no \"government controlled button\" on the people's wallets – at least not any more than they have today.\n\nBut the interesting, is really how it enables NEW applications.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650505595449909249"
+    ],
+    "editableUntil": "2023-04-24T14:52:53.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/UDttZ5tplT",
+     "expanded_url": "https://www.bcb.gov.br/detalhenoticia/17632/nota",
+     "display_url": "bcb.gov.br/detalhenoticia…",
+     "indices": [
+      "248",
+      "271"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "29",
+  "in_reply_to_status_id_str": "1650505593184976903",
+  "id_str": "1650505595449909249",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1650505595449909249",
+  "in_reply_to_status_id": "1650505593184976903",
+  "possibly_sensitive": false,
+  "created_at": "Mon Apr 24 14:22:53 +0000 2023",
+  "favorited": false,
+  "full_text": "They're dead serious about it: besides working with Consensys' Besu they have selected Aave as one of their development partners. \n\nOne of their stated goal is to make this local network 100% compatible with the EVM ecosystem and to bridge to it.\n\nhttps://t.co/UDttZ5tplT",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650506191536095233"
+    ],
+    "editableUntil": "2023-04-24T14:55:15.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "23",
+  "in_reply_to_status_id_str": "1650505595449909249",
+  "id_str": "1650506191536095233",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1650506191536095233",
+  "in_reply_to_status_id": "1650505595449909249",
+  "created_at": "Mon Apr 24 14:25:15 +0000 2023",
+  "favorited": false,
+  "full_text": "A more long term goal is to adopt the Ethereum  standards to create standardized financial (and non financial) instruments: emit national bonds as tokens, to have official land registries using NFTs, to have public universities issuing NFT diplomas, all on the  national chain.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650506917322670082"
+    ],
+    "editableUntil": "2023-04-24T14:58:08.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "267"
+  ],
+  "favorite_count": "16",
+  "in_reply_to_status_id_str": "1650506191536095233",
+  "id_str": "1650506917322670082",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1650506917322670082",
+  "in_reply_to_status_id": "1650506191536095233",
+  "created_at": "Mon Apr 24 14:28:08 +0000 2023",
+  "favorited": false,
+  "full_text": "They are fans of DAOs, NFTs, AMMs and all the Ethereum ecosystem innovations, and want to bring them to the national government.\n\nOne national chain for everything, ran by multiple nongovernmental institutions. Not revolutionary, but quite evolutionary in my opinion.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1650509330561548289"
+    ],
+    "editableUntil": "2023-04-24T15:07:44.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "125"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1650506917322670082",
+  "id_str": "1650509330561548289",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1650509330561548289",
+  "in_reply_to_status_id": "1650506917322670082",
+  "created_at": "Mon Apr 24 14:37:44 +0000 2023",
+  "favorited": false,
+  "full_text": "(got a new keyboard and it keeps replacing Ethereum with Ethereal and Consensys with Consensus, so sorry for all these typos)",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

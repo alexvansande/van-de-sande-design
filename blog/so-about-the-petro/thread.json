@@ -1,0 +1,1055 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252705443418112"
+    ],
+    "editableUntil": "2018-02-07T15:57:58.846Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "21"
+  ],
+  "favorite_count": "185",
+  "id_str": "961252705443418112",
+  "truncated": false,
+  "retweet_count": "136",
+  "id": "961252705443418112",
+  "created_at": "Wed Feb 07 14:57:58 +0000 2018",
+  "favorited": false,
+  "full_text": "So, about the Petro..",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252711911051270"
+    ],
+    "editableUntil": "2018-02-07T15:58:00.388Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/2duEXuLICB",
+     "expanded_url": "http://www.elpetro.gob.ve/Whitepaper_Petro_en.pdf",
+     "display_url": "elpetro.gob.ve/Whitepaper_Pet…",
+     "indices": [
+      "35",
+      "58"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "79"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "961252705443418112",
+  "id_str": "961252711911051270",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "10",
+  "id": "961252711911051270",
+  "in_reply_to_status_id": "961252705443418112",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:00 +0000 2018",
+  "favorited": false,
+  "full_text": "Venezuela released a white paper.\n\nhttps://t.co/2duEXuLICB\n\nAnd it’s sooo good.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252731829805056"
+    ],
+    "editableUntil": "2018-02-07T15:58:05.137Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252731829805056/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/x4mKyn7U1c",
+     "media_url": "http://pbs.twimg.com/media/DVcOQRKWAAAl5K_.jpg",
+     "id_str": "961252718114373632",
+     "id": "961252718114373632",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOQRKWAAAl5K_.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "70",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "123",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "210",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/x4mKyn7U1c"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "41",
+  "in_reply_to_status_id_str": "961252711911051270",
+  "id_str": "961252731829805056",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "17",
+  "id": "961252731829805056",
+  "in_reply_to_status_id": "961252711911051270",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:05 +0000 2018",
+  "favorited": false,
+  "full_text": "First of all it was inspired by Chavez, the first person in history to think that currencies should be backed by things. Screw capitalist pig Satoshi, Chavez basically invented crypto. I mean really crypto: Diffie-Helman plagiarized him. He probably invented all currencies too. https://t.co/x4mKyn7U1c",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252731829805056/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/x4mKyn7U1c",
+     "media_url": "http://pbs.twimg.com/media/DVcOQRKWAAAl5K_.jpg",
+     "id_str": "961252718114373632",
+     "id": "961252718114373632",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOQRKWAAAl5K_.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "70",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "123",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "210",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/x4mKyn7U1c"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252753115963398"
+    ],
+    "editableUntil": "2018-02-07T15:58:10.212Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252753115963398/photo/1",
+     "indices": [
+      "211",
+      "234"
+     ],
+     "url": "https://t.co/Wl7FCeHklS",
+     "media_url": "http://pbs.twimg.com/media/DVcORS5XkAE8kac.jpg",
+     "id_str": "961252735759912961",
+     "id": "961252735759912961",
+     "media_url_https": "https://pbs.twimg.com/media/DVcORS5XkAE8kac.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "252",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "430",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "143",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Wl7FCeHklS"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "234"
+  ],
+  "favorite_count": "31",
+  "in_reply_to_status_id_str": "961252731829805056",
+  "id_str": "961252753115963398",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "10",
+  "id": "961252753115963398",
+  "in_reply_to_status_id": "961252731829805056",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:10 +0000 2018",
+  "favorited": false,
+  "full_text": "It’s super innovative. Can you imagine the consequences if the Venezuelan people had access to a currency that could be used for investment, savings or means of exchange? Why didn’t anyone think of this before? https://t.co/Wl7FCeHklS",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252753115963398/photo/1",
+     "indices": [
+      "211",
+      "234"
+     ],
+     "url": "https://t.co/Wl7FCeHklS",
+     "media_url": "http://pbs.twimg.com/media/DVcORS5XkAE8kac.jpg",
+     "id_str": "961252735759912961",
+     "id": "961252735759912961",
+     "media_url_https": "https://pbs.twimg.com/media/DVcORS5XkAE8kac.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "252",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "430",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "143",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Wl7FCeHklS"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252768051802112"
+    ],
+    "editableUntil": "2018-02-07T15:58:13.773Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252768051802112/photo/1",
+     "indices": [
+      "256",
+      "279"
+     ],
+     "url": "https://t.co/FO31WKdQDN",
+     "media_url": "http://pbs.twimg.com/media/DVcOSg2XcAEJ5g5.jpg",
+     "id_str": "961252756685287425",
+     "id": "961252756685287425",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOSg2XcAEJ5g5.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "183",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "312",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "104",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/FO31WKdQDN"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "279"
+  ],
+  "favorite_count": "32",
+  "in_reply_to_status_id_str": "961252753115963398",
+  "id_str": "961252768051802112",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "9",
+  "id": "961252768051802112",
+  "in_reply_to_status_id": "961252753115963398",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:13 +0000 2018",
+  "favorited": false,
+  "full_text": "‘The Venezuelan state will not be able to make new emissions”. Except the “superintendency of currency of Venezuela” reserves the right to activate new features, like PoS emission. Or maybe PoW. Which it doesn’t need.\n\nBut it’s totally not the government. https://t.co/FO31WKdQDN",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252768051802112/photo/1",
+     "indices": [
+      "256",
+      "279"
+     ],
+     "url": "https://t.co/FO31WKdQDN",
+     "media_url": "http://pbs.twimg.com/media/DVcOSg2XcAEJ5g5.jpg",
+     "id_str": "961252756685287425",
+     "id": "961252756685287425",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOSg2XcAEJ5g5.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "183",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "312",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "104",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/FO31WKdQDN"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252779892334594"
+    ],
+    "editableUntil": "2018-02-07T15:58:16.596Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252779892334594/photo/1",
+     "indices": [
+      "274",
+      "297"
+     ],
+     "url": "https://t.co/SuC8uPvATr",
+     "media_url": "http://pbs.twimg.com/media/DVcOTbZWAAMzu8W.jpg",
+     "id_str": "961252772401250307",
+     "id": "961252772401250307",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOTbZWAAMzu8W.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "83",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1647",
+       "h": "202",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "147",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/SuC8uPvATr"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "297"
+  ],
+  "favorite_count": "93",
+  "in_reply_to_status_id_str": "961252768051802112",
+  "id_str": "961252779892334594",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "37",
+  "id": "961252779892334594",
+  "in_reply_to_status_id": "961252768051802112",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:16 +0000 2018",
+  "favorited": false,
+  "full_text": "The supply is limited, the demand is market based, but the price will be somehow pegged to the price of oil. Because, thanks to socialism magic, price is not set by supply and demand, but by this incredible formula where both Petro and the Bolivar are divided by themselves https://t.co/SuC8uPvATr",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252779892334594/photo/1",
+     "indices": [
+      "274",
+      "297"
+     ],
+     "url": "https://t.co/SuC8uPvATr",
+     "media_url": "http://pbs.twimg.com/media/DVcOTbZWAAMzu8W.jpg",
+     "id_str": "961252772401250307",
+     "id": "961252772401250307",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOTbZWAAMzu8W.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "83",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1647",
+       "h": "202",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "147",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/SuC8uPvATr"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252791938441217"
+    ],
+    "editableUntil": "2018-02-07T15:58:19.468Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252791938441217/photo/1",
+     "indices": [
+      "199",
+      "222"
+     ],
+     "url": "https://t.co/P8XuZ2tBkj",
+     "media_url": "http://pbs.twimg.com/media/DVcOUDYWsAADxoz.jpg",
+     "id_str": "961252783134519296",
+     "id": "961252783134519296",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOUDYWsAADxoz.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "53",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "160",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "94",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/P8XuZ2tBkj"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "222"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "961252779892334594",
+  "id_str": "961252791938441217",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "7",
+  "id": "961252791938441217",
+  "in_reply_to_status_id": "961252779892334594",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:19 +0000 2018",
+  "favorited": false,
+  "full_text": "Notice that in the formula above, not only the “discount rate” DV is set by the government, but the price of Petro and Bolivar as well, as it’s calculated on “exchanges authorized by the government” https://t.co/P8XuZ2tBkj",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252791938441217/photo/1",
+     "indices": [
+      "199",
+      "222"
+     ],
+     "url": "https://t.co/P8XuZ2tBkj",
+     "media_url": "http://pbs.twimg.com/media/DVcOUDYWsAADxoz.jpg",
+     "id_str": "961252783134519296",
+     "id": "961252783134519296",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOUDYWsAADxoz.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "53",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "160",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "94",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/P8XuZ2tBkj"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252808648527872"
+    ],
+    "editableUntil": "2018-02-07T15:58:23.452Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252808648527872/photo/1",
+     "indices": [
+      "258",
+      "281"
+     ],
+     "url": "https://t.co/zrekrs2T5g",
+     "media_url": "http://pbs.twimg.com/media/DVcOU3ZXUAE7iVT.jpg",
+     "id_str": "961252797097398273",
+     "id": "961252797097398273",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOU3ZXUAE7iVT.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "653",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "370",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2009",
+       "h": "1093",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/zrekrs2T5g"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "281"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "961252791938441217",
+  "id_str": "961252808648527872",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "13",
+  "id": "961252808648527872",
+  "in_reply_to_status_id": "961252791938441217",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:23 +0000 2018",
+  "favorited": false,
+  "full_text": "The ICO will happen the day after the day after the pre-sale closes. And tokens on the ICO will be generated by burning the pre-sale tokens. For reasons. And both will have multiple phases. For reasons. \n\nAnd it doesn’t accept Bolivars. For obvious reasons. https://t.co/zrekrs2T5g",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252808648527872/photo/1",
+     "indices": [
+      "258",
+      "281"
+     ],
+     "url": "https://t.co/zrekrs2T5g",
+     "media_url": "http://pbs.twimg.com/media/DVcOU3ZXUAE7iVT.jpg",
+     "id_str": "961252797097398273",
+     "id": "961252797097398273",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOU3ZXUAE7iVT.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "653",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "370",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2009",
+       "h": "1093",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/zrekrs2T5g"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252813203562497"
+    ],
+    "editableUntil": "2018-02-07T15:58:24.538Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "961252808648527872",
+  "id_str": "961252813203562497",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "11",
+  "id": "961252813203562497",
+  "in_reply_to_status_id": "961252808648527872",
+  "created_at": "Wed Feb 07 14:58:24 +0000 2018",
+  "favorited": false,
+  "full_text": "It’s a token on ethereum, which doesn’t need mining. But it might also be mined anyway in proof of stake. Or maybe they reserve the right to make it proof of work. And miners will be paid in Petro, which is based on price of oil which has no correlation to miner or security cost.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252816093401088"
+    ],
+    "editableUntil": "2018-02-07T15:58:25.227Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "250"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "961252813203562497",
+  "id_str": "961252816093401088",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "9",
+  "id": "961252816093401088",
+  "in_reply_to_status_id": "961252813203562497",
+  "created_at": "Wed Feb 07 14:58:25 +0000 2018",
+  "favorited": false,
+  "full_text": "The government cannot create Petros (but it can) which in theory should make the market happy, but there’s no mechanism to issue or destroy the tokens, it’s basically impossible for it to do the one thing it’s supposed to do, follow the price of oil.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252818576465920"
+    ],
+    "editableUntil": "2018-02-07T15:58:25.819Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "275"
+  ],
+  "favorite_count": "39",
+  "in_reply_to_status_id_str": "961252816093401088",
+  "id_str": "961252818576465920",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "14",
+  "id": "961252818576465920",
+  "in_reply_to_status_id": "961252816093401088",
+  "created_at": "Wed Feb 07 14:58:25 +0000 2018",
+  "favorited": false,
+  "full_text": "So it’s “backed by Venezuelan oil” in the sense that Venezuela promises to buy it back at a discount rate (that they decide) on the price of exchanges (that they control).\n\nBut the strength of the Bolivar is a great proof on how much the people trust the government promises.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252832832876544"
+    ],
+    "editableUntil": "2018-02-07T15:58:29.218Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252832832876544/photo/1",
+     "indices": [
+      "276",
+      "299"
+     ],
+     "url": "https://t.co/ajrBfuk9OK",
+     "media_url": "http://pbs.twimg.com/media/DVcOWTgX0AAXXdB.jpg",
+     "id_str": "961252821822853120",
+     "id": "961252821822853120",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOWTgX0AAXXdB.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "208",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "122",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "69",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ajrBfuk9OK"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "299"
+  ],
+  "favorite_count": "64",
+  "in_reply_to_status_id_str": "961252818576465920",
+  "id_str": "961252832832876544",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "33",
+  "id": "961252832832876544",
+  "in_reply_to_status_id": "961252818576465920",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 07 14:58:29 +0000 2018",
+  "favorited": false,
+  "full_text": "I am not going to say that the Petro is a useless token intent to get ether and bitcoin out hands of dumb greedy people and in the hands of corrupt government officials, because it has a very clear use:\n\nTo circumvent the international sanctions put in the Venezuelan regime. https://t.co/ajrBfuk9OK",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/961252832832876544/photo/1",
+     "indices": [
+      "276",
+      "299"
+     ],
+     "url": "https://t.co/ajrBfuk9OK",
+     "media_url": "http://pbs.twimg.com/media/DVcOWTgX0AAXXdB.jpg",
+     "id_str": "961252821822853120",
+     "id": "961252821822853120",
+     "media_url_https": "https://pbs.twimg.com/media/DVcOWTgX0AAXXdB.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "208",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "122",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "69",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ajrBfuk9OK"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "961252836678959104"
+    ],
+    "editableUntil": "2018-02-07T15:58:30.135Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "217"
+  ],
+  "favorite_count": "137",
+  "in_reply_to_status_id_str": "961252832832876544",
+  "id_str": "961252836678959104",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "49",
+  "id": "961252836678959104",
+  "in_reply_to_status_id": "961252832832876544",
+  "created_at": "Wed Feb 07 14:58:30 +0000 2018",
+  "favorited": false,
+  "full_text": "So there you have it. If you were desperately looking to gamble some money while at the same time funding oppression and probably running amok of international finance laws, then I have just the perfect token for you.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

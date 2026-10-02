@@ -1,0 +1,554 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337929362952192"
+    ],
+    "editableUntil": "2019-02-01T15:10:13.095Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1091337929362952192/photo/1",
+     "indices": [
+      "257",
+      "280"
+     ],
+     "url": "https://t.co/Dok5gmOJor",
+     "media_url": "http://pbs.twimg.com/media/DyUeoEjWsAEJSHO.jpg",
+     "id_str": "1091312158472843265",
+     "id": "1091312158472843265",
+     "media_url_https": "https://pbs.twimg.com/media/DyUeoEjWsAEJSHO.jpg",
+     "sizes": {
+      "small": {
+       "w": "604",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1066",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1460",
+       "h": "1644",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Dok5gmOJor"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "68",
+  "id_str": "1091337929362952192",
+  "truncated": false,
+  "retweet_count": "12",
+  "id": "1091337929362952192",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 01 14:10:13 +0000 2019",
+  "favorited": false,
+  "full_text": "Today I was able to pay my whole team with a single click. Could have been none but the scheduler service failed. This little tool really shows how much ecosystem evolved that  we can solve simple real world problems today by connecting multiple contracts. https://t.co/Dok5gmOJor",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1091337929362952192/photo/1",
+     "indices": [
+      "257",
+      "280"
+     ],
+     "url": "https://t.co/Dok5gmOJor",
+     "media_url": "http://pbs.twimg.com/media/DyUeoEjWsAEJSHO.jpg",
+     "id_str": "1091312158472843265",
+     "id": "1091312158472843265",
+     "media_url_https": "https://pbs.twimg.com/media/DyUeoEjWsAEJSHO.jpg",
+     "sizes": {
+      "small": {
+       "w": "604",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1066",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1460",
+       "h": "1644",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Dok5gmOJor"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337932894597120"
+    ],
+    "editableUntil": "2019-02-01T15:10:13.937Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "47",
+  "in_reply_to_status_id_str": "1091337929362952192",
+  "id_str": "1091337932894597120",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "5",
+  "id": "1091337932894597120",
+  "in_reply_to_status_id": "1091337929362952192",
+  "created_at": "Fri Feb 01 14:10:13 +0000 2019",
+  "favorited": false,
+  "full_text": "I spent a half a day and was able to build a contract that keeps DAI in compound, but withdraws when it wants to make specific payments. I added yearly salaries of all team members and spent another half day in making a nice interface so they can request payment at anytime.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337934505164800"
+    ],
+    "editableUntil": "2019-02-01T15:10:14.321Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/0q6WXL69CF",
+     "expanded_url": "https://x.com/avsa/status/1087730019055616000",
+     "display_url": "x.com/avsa/status/10…",
+     "indices": [
+      "217",
+      "240"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "240"
+  ],
+  "favorite_count": "9",
+  "in_reply_to_status_id_str": "1091337932894597120",
+  "id_str": "1091337934505164800",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337934505164800",
+  "in_reply_to_status_id": "1091337932894597120",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 01 14:10:14 +0000 2019",
+  "favorited": false,
+  "full_text": "I recently posted how after being paid in BTC and ETH I was now receiving in DAI. But there's a lot more to the story. In fact my whole team has been receiving in ether for years but we had a lot of trouble doing so.\nhttps://t.co/0q6WXL69CF",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337936115777536"
+    ],
+    "editableUntil": "2019-02-01T15:10:14.705Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "279"
+  ],
+  "favorite_count": "9",
+  "in_reply_to_status_id_str": "1091337934505164800",
+  "id_str": "1091337936115777536",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337936115777536",
+  "in_reply_to_status_id": "1091337934505164800",
+  "created_at": "Fri Feb 01 14:10:14 +0000 2019",
+  "favorited": false,
+  "full_text": "First of all, it's actually quite hard – purposefully – to move funds. Some of the bigger wallets the foundation has have been an original multisig code, which is safe but only works with command line tools. At some point we had to wait for busy people like Vitalik to sign a tx.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337937718075392"
+    ],
+    "editableUntil": "2019-02-01T15:10:15.087Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "272"
+  ],
+  "favorite_count": "3",
+  "in_reply_to_status_id_str": "1091337936115777536",
+  "id_str": "1091337937718075392",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337937718075392",
+  "in_reply_to_status_id": "1091337936115777536",
+  "created_at": "Fri Feb 01 14:10:15 +0000 2019",
+  "favorited": false,
+  "full_text": "Also, payments in ether are complicated for accounting due to volatility. Do you use the exchange rate of the invoice or the day the tx is sent? People send invoices in different days, it takes some time for the person responsible to go through payments, it's not trivial.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337939035009025"
+    ],
+    "editableUntil": "2019-02-01T15:10:15.401Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "3",
+  "in_reply_to_status_id_str": "1091337937718075392",
+  "id_str": "1091337939035009025",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337939035009025",
+  "in_reply_to_status_id": "1091337937718075392",
+  "created_at": "Fri Feb 01 14:10:15 +0000 2019",
+  "favorited": false,
+  "full_text": "The result is that for a long time the decision was that the exchange rate used would always be either the 1st or 15th of the invoiced month, depending on when the invoice arrived. It simplified things for one side, but also created an inconvenience for those being paid.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337940268130307"
+    ],
+    "editableUntil": "2019-02-01T15:10:15.695Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "258"
+  ],
+  "favorite_count": "5",
+  "in_reply_to_status_id_str": "1091337939035009025",
+  "id_str": "1091337940268130307",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337940268130307",
+  "in_reply_to_status_id": "1091337939035009025",
+  "created_at": "Fri Feb 01 14:10:15 +0000 2019",
+  "favorited": false,
+  "full_text": "In highly volatile months you could receive 30% more or 50% less than you expected. While it can lead to some good surprises, people don't like to gamble their salary usually. So I proposed a solution for my own team: they would invoice to a buffer contract.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337941610311680"
+    ],
+    "editableUntil": "2019-02-01T15:10:16.015Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "267"
+  ],
+  "favorite_count": "5",
+  "in_reply_to_status_id_str": "1091337940268130307",
+  "id_str": "1091337941610311680",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337941610311680",
+  "in_reply_to_status_id": "1091337940268130307",
+  "created_at": "Fri Feb 01 14:10:16 +0000 2019",
+  "favorited": false,
+  "full_text": "The buffer would pay them immediately on the latest exchange rate and then at some point it would be paid back at whatever exchange it was sent to. It had other functions too, requiring secondary approval, listing individual invoices, even a place to put swarm files.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337943229304834"
+    ],
+    "editableUntil": "2019-02-01T15:10:16.401Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "5",
+  "in_reply_to_status_id_str": "1091337941610311680",
+  "id_str": "1091337943229304834",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1091337943229304834",
+  "in_reply_to_status_id": "1091337941610311680",
+  "created_at": "Fri Feb 01 14:10:16 +0000 2019",
+  "favorited": false,
+  "full_text": "But mostly it became just a way to make sure everyone got paid on time, while it reduced the overhead from HR people that now only had to make one transaction to pay many invoices, since everyone asked to the same address. But it did increase my overhead as I now had to manage it",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337944424681472"
+    ],
+    "editableUntil": "2019-02-01T15:10:16.686Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "242"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1091337943229304834",
+  "id_str": "1091337944424681472",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1091337944424681472",
+  "in_reply_to_status_id": "1091337943229304834",
+  "created_at": "Fri Feb 01 14:10:16 +0000 2019",
+  "favorited": false,
+  "full_text": "Since it required a 3 step process for paying (submit, approve, execute), it would meant to pay 4 people I would need to sign 12 transactions or more (I also had to manually add the day rate).  The move to DAI could help most of these points.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337946043686912"
+    ],
+    "editableUntil": "2019-02-01T15:10:17.072Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "13",
+  "in_reply_to_status_id_str": "1091337944424681472",
+  "id_str": "1091337946043686912",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1091337946043686912",
+  "in_reply_to_status_id": "1091337944424681472",
+  "created_at": "Fri Feb 01 14:10:17 +0000 2019",
+  "favorited": false,
+  "full_text": "At first I considered using Aragon's \"Payroll\" app, which inspired the idea of setting a yearly salary and allow you to be paid per block. But that app is under development and the buffer dai would stay locked on the contract, not generating interest. So I decided to build my own",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1091337947578880006"
+    ],
+    "editableUntil": "2019-02-01T15:10:17.438Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/hU23mJdXmw",
+     "expanded_url": "https://github.com/alexvandesande/payroll/blob/master/contract.sol",
+     "display_url": "github.com/alexvandesande…",
+     "indices": [
+      "255",
+      "278"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "278"
+  ],
+  "favorite_count": "34",
+  "in_reply_to_status_id_str": "1091337946043686912",
+  "id_str": "1091337947578880006",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1091337947578880006",
+  "in_reply_to_status_id": "1091337946043686912",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 01 14:10:17 +0000 2019",
+  "favorited": false,
+  "full_text": "As a final touch, I set the default function to pay all amounts due and be public, so it allows a service like ethereum alarm clock to schedule a call for a given day of the month. We recently tested today and it all worked like a charm. Here's the code:\nhttps://t.co/hU23mJdXmw",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

@@ -1,0 +1,33 @@
+<!-- https://www.reddit.com/r/ethereum/comments/4qo3f9/ (reddit) -->
+<p>I'm making a second round at this vote by locking thing, basing on a lot of the feedback I received from the last time. If you missed, here's the gist of it:</p>
+<ul>
+<li>
+<p>You vote by committing not to move your ether (or DAO tokens) for a given period of time IF a given fork is activated (or none is). The more ether you lock and the longer you are willing to hold it (last one is squared) the more weight your vote has.</p>
+</li>
+<li>
+<p>The fork which has the largest amount of people willing to lock is also, by definition, the one in which the least amount of people want to jump ship because they don't want to be involved in the project anymore and should be the more valuable chain long term, meaning miners and exchanges have the incentive to adopt it.</p>
+</li>
+</ul>
+<p>Since I last proposed this, I made some changes to it:</p>
+<ul>
+<li>
+<p>Each vote is a separate contract, which can only be operated by it's owner, this reduces the risk of a bug that affects everyone.</p>
+</li>
+<li>
+<p>You can also vote with DAO tokens (since this is the reason we are debating it) - or actually any other coin. How these are calculated is a different manner but for simplicity sake we can make 100 DAO : 1 ether or whatever was the price at the end of the crowdsale.</p>
+</li>
+<li>
+<p>The maximum period is set at 3 months, which is a long time in this space. There is no minimum time to hold, but since the vote weight as (lock date - fork date)² anyone holding for less than a day will have their vote weight drastically reduced. The 3 month limit also limits the chances of there being another vote coming up before that.</p>
+</li>
+<li>
+<p>You can support any number of fork proposals, with different lock dates.</p>
+</li>
+<li>
+<p>The lock is only activated if there is a large support from miners. They can start the lock at any point and they also have the power to unlock everyone's coin if something comes up.</p>
+</li>
+</ul>
+<p><a href="https://gist.github.com/alexvandesande/a1aae99267a79e82334b51f3e3448383">Here's the source code</a></p>
+<h3>Why?</h3>
+<p>I think pure coin votes are fundamentally unjust, as very few people have much larger power. I don't feel we should be building a system in which the wealthiest minority or an angry majority have unlimited power over everyone else's property and wealth - history has shown that neither of those create a nice society.</p>
+<p>If we are going to open a precedent to decide on either to fork or not and which fork to choose, then we should at least try to make some system that can be built right now and makes some sort of sense.</p>
+<p>PS. I am <a href="https://github.com/alexvandesande/stake-voice/blob/master/README.md">also working on a mist Ðapp that will be pure coin vote</a> but I don't feel it's really good for such an important decision.</p>

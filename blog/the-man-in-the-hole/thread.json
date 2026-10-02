@@ -1,0 +1,985 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282369120636930"
+    ],
+    "editableUntil": "2022-08-29T16:32:34.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282369120636930/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/ax00HGahIL",
+     "media_url": "http://pbs.twimg.com/media/FbVu4RrXkAEK0bT.jpg",
+     "id_str": "1564278358678147073",
+     "id": "1564278358678147073",
+     "media_url_https": "https://pbs.twimg.com/media/FbVu4RrXkAEK0bT.jpg",
+     "sizes": {
+      "large": {
+       "w": "1200",
+       "h": "762",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "432",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "762",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ax00HGahIL"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "213",
+  "id_str": "1564282369120636930",
+  "truncated": false,
+  "retweet_count": "35",
+  "id": "1564282369120636930",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:34 +0000 2022",
+  "favorited": false,
+  "full_text": "Over the weekend, the loneliest man in the world has been found dead inside his home.\n\nHe lived the last 30 years of his life under surveillance in a 80km wide, government enforced, exclusion zone, created specifically around him.\n\nThis is the true story of the Man in the Hole. https://t.co/ax00HGahIL",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282369120636930/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/ax00HGahIL",
+     "media_url": "http://pbs.twimg.com/media/FbVu4RrXkAEK0bT.jpg",
+     "id_str": "1564278358678147073",
+     "id": "1564278358678147073",
+     "media_url_https": "https://pbs.twimg.com/media/FbVu4RrXkAEK0bT.jpg",
+     "sizes": {
+      "large": {
+       "w": "1200",
+       "h": "762",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "432",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "762",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ax00HGahIL"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282372190879744"
+    ],
+    "editableUntil": "2022-08-29T16:32:35.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "273"
+  ],
+  "favorite_count": "17",
+  "in_reply_to_status_id_str": "1564282369120636930",
+  "id_str": "1564282372190879744",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282372190879744",
+  "in_reply_to_status_id": "1564282369120636930",
+  "created_at": "Mon Aug 29 16:02:35 +0000 2022",
+  "favorited": false,
+  "full_text": "This is not, of course, a story of some super powered dangerous hermit living in a fancy prison. There are terrible crimes, but he was the victim of.\n\nThe Man of the Hole was the last survivor or a tribe whose existence we were only made aware after they were all murdered.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282378197127169"
+    ],
+    "editableUntil": "2022-08-29T16:32:36.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282378197127169/photo/1",
+     "indices": [
+      "281",
+      "304"
+     ],
+     "url": "https://t.co/QdXSVyb4PQ",
+     "media_url": "http://pbs.twimg.com/media/FbVorlXX0AAKYF5.jpg",
+     "id_str": "1564271543554920448",
+     "id": "1564271543554920448",
+     "media_url_https": "https://pbs.twimg.com/media/FbVorlXX0AAKYF5.jpg",
+     "sizes": {
+      "large": {
+       "w": "800",
+       "h": "445",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "378",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "800",
+       "h": "445",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/QdXSVyb4PQ"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "304"
+  ],
+  "favorite_count": "15",
+  "in_reply_to_status_id_str": "1564282372190879744",
+  "id_str": "1564282378197127169",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1564282378197127169",
+  "in_reply_to_status_id": "1564282372190879744",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:36 +0000 2022",
+  "favorited": false,
+  "full_text": "In 1986, after multiple reports of genocide of uncontacted tribes, Santos, a representative of the Brazilian \"National Indian Foundation\" (FUNAI), went to the state of Rondonia to investigate and found a remains of a demolished village, where all the huts had 3m deep holes inside https://t.co/QdXSVyb4PQ",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282378197127169/photo/1",
+     "indices": [
+      "281",
+      "304"
+     ],
+     "url": "https://t.co/QdXSVyb4PQ",
+     "media_url": "http://pbs.twimg.com/media/FbVorlXX0AAKYF5.jpg",
+     "id_str": "1564271543554920448",
+     "id": "1564271543554920448",
+     "media_url_https": "https://pbs.twimg.com/media/FbVorlXX0AAKYF5.jpg",
+     "sizes": {
+      "large": {
+       "w": "800",
+       "h": "445",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "378",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "800",
+       "h": "445",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/QdXSVyb4PQ"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282380948488193"
+    ],
+    "editableUntil": "2022-08-29T16:32:37.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "16",
+  "in_reply_to_status_id_str": "1564282378197127169",
+  "id_str": "1564282380948488193",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1564282380948488193",
+  "in_reply_to_status_id": "1564282378197127169",
+  "created_at": "Mon Aug 29 16:02:37 +0000 2022",
+  "favorited": false,
+  "full_text": "The farmers accused him of creating a fake tribe to prevent the regional development, threatened his life and he eventually was forced to quit. The story would have been forgotten but 10 years later Santos returned as the head of Uncontacted Tribes section, looking for survivors.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282386728222724"
+    ],
+    "editableUntil": "2022-08-29T16:32:38.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282386728222724/photo/1",
+     "indices": [
+      "262",
+      "285"
+     ],
+     "url": "https://t.co/mrDCkluIaC",
+     "media_url": "http://pbs.twimg.com/media/FbVqy3bXwAUk-UL.jpg",
+     "id_str": "1564273867685871621",
+     "id": "1564273867685871621",
+     "media_url_https": "https://pbs.twimg.com/media/FbVqy3bXwAUk-UL.jpg",
+     "sizes": {
+      "medium": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/mrDCkluIaC"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "285"
+  ],
+  "favorite_count": "12",
+  "in_reply_to_status_id_str": "1564282380948488193",
+  "id_str": "1564282386728222724",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1564282386728222724",
+  "in_reply_to_status_id": "1564282380948488193",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:38 +0000 2022",
+  "favorited": false,
+  "full_text": "This time he brought journalists and found definitive proof of a lost tribe, which finally got front page news. \nSantos kept searching for any survivors and found evidence of a hut with recent occupation, along with tools and some gardens. Someone had survived! https://t.co/mrDCkluIaC",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282386728222724/photo/1",
+     "indices": [
+      "262",
+      "285"
+     ],
+     "url": "https://t.co/mrDCkluIaC",
+     "media_url": "http://pbs.twimg.com/media/FbVqy3bXwAUk-UL.jpg",
+     "id_str": "1564273867685871621",
+     "id": "1564273867685871621",
+     "media_url_https": "https://pbs.twimg.com/media/FbVqy3bXwAUk-UL.jpg",
+     "sizes": {
+      "medium": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "479",
+       "h": "533",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/mrDCkluIaC"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282389387427840"
+    ],
+    "editableUntil": "2022-08-29T16:32:39.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "264"
+  ],
+  "favorite_count": "12",
+  "in_reply_to_status_id_str": "1564282386728222724",
+  "id_str": "1564282389387427840",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282389387427840",
+  "in_reply_to_status_id": "1564282386728222724",
+  "created_at": "Mon Aug 29 16:02:39 +0000 2022",
+  "favorited": false,
+  "full_text": "From 1995 to 2006 Santos organized many expeditions to contact the sole survivor of the lost tribe. During one of these one of the expedition members was shot with arrows. After this they ceased any attempt of contact and created an 80km isolation area around him.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282397453074435"
+    ],
+    "editableUntil": "2022-08-29T16:32:41.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282397453074435/photo/1",
+     "indices": [
+      "241",
+      "264"
+     ],
+     "url": "https://t.co/wZcb86b4yT",
+     "media_url": "http://pbs.twimg.com/media/FbVpz60XEAIu3lb.jpg",
+     "id_str": "1564272786264231938",
+     "id": "1564272786264231938",
+     "media_url_https": "https://pbs.twimg.com/media/FbVpz60XEAIu3lb.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "423",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1927",
+       "h": "1198",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "746",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/wZcb86b4yT"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "264"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1564282389387427840",
+  "id_str": "1564282397453074435",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282397453074435",
+  "in_reply_to_status_id": "1564282389387427840",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:41 +0000 2022",
+  "favorited": false,
+  "full_text": "But he was surrounded. Farmers kept destroying all the forest around the exclusion area and threatening to kill the Man in the Hole. In 2009 the local Funai outpost was burned and they found evidence of gunshots on his hut. But he survived. https://t.co/wZcb86b4yT",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282397453074435/photo/1",
+     "indices": [
+      "241",
+      "264"
+     ],
+     "url": "https://t.co/wZcb86b4yT",
+     "media_url": "http://pbs.twimg.com/media/FbVpz60XEAIu3lb.jpg",
+     "id_str": "1564272786264231938",
+     "id": "1564272786264231938",
+     "media_url_https": "https://pbs.twimg.com/media/FbVpz60XEAIu3lb.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "423",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1927",
+       "h": "1198",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "746",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/wZcb86b4yT"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282401701986308"
+    ],
+    "editableUntil": "2022-08-29T16:32:42.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1564282397453074435",
+  "id_str": "1564282401701986308",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282401701986308",
+  "in_reply_to_status_id": "1564282397453074435",
+  "created_at": "Mon Aug 29 16:02:42 +0000 2022",
+  "favorited": false,
+  "full_text": "The Man, whose own name we never learned, was found dead in his tent this weekend. He was found in his hammock, with a special ceremonial paint, as if he knew his time was near. Exact cause of death is to be determined but it seems to be from natural causes. He was about 50yo.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282405103570945"
+    ],
+    "editableUntil": "2022-08-29T16:32:42.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "258"
+  ],
+  "favorite_count": "20",
+  "in_reply_to_status_id_str": "1564282401701986308",
+  "id_str": "1564282405103570945",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282405103570945",
+  "in_reply_to_status_id": "1564282401701986308",
+  "created_at": "Mon Aug 29 16:02:42 +0000 2022",
+  "favorited": false,
+  "full_text": "After the autopsy, his body is to be returned to his land to be buried.\n\nAlong with his name, we will never know what he called his tribe, language they spoke, what they believed about death or whatever burial ceremony they had, nor the purpose of the holes.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282408224129025"
+    ],
+    "editableUntil": "2022-08-29T16:32:43.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/QB4VpTrCQr",
+     "expanded_url": "https://www.youtube.com/watch?v=dUlh2_bUo60",
+     "display_url": "youtube.com/watch?v=dUlh2_…",
+     "indices": [
+      "257",
+      "280"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "26",
+  "in_reply_to_status_id_str": "1564282405103570945",
+  "id_str": "1564282408224129025",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1564282408224129025",
+  "in_reply_to_status_id": "1564282405103570945",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:43 +0000 2022",
+  "favorited": false,
+  "full_text": "His is not an isolated incident. During his (our) lifetime the state of Rondonia has transformed from a wild forest into a huge Cattle and Soy farm.\n\nBoth the indigenous people and the officials trying to protect them are under a constant threat of life. \n\nhttps://t.co/QB4VpTrCQr",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282412611280898"
+    ],
+    "editableUntil": "2022-08-29T16:32:44.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1564282408224129025",
+  "id_str": "1564282412611280898",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282412611280898",
+  "in_reply_to_status_id": "1564282408224129025",
+  "created_at": "Mon Aug 29 16:02:44 +0000 2022",
+  "favorited": false,
+  "full_text": "In 2019 Macxiel Santos (no relation), a FUNAI official was murdered in Amazonas, a crime that remain unsolved. Earlier this year another official Bruno Pereira and  British Journalist Dom Phillips were also murdered. Arrests were only made after intense international pressure.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282418047090688"
+    ],
+    "editableUntil": "2022-08-29T16:32:46.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/KgbqRxGnMT",
+     "expanded_url": "https://www.youtube.com/watch?v=1xkTN1Z1rTQ&t=1s",
+     "display_url": "youtube.com/watch?v=1xkTN1…",
+     "indices": [
+      "254",
+      "277"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282418047090688/photo/1",
+     "indices": [
+      "278",
+      "301"
+     ],
+     "url": "https://t.co/jXyoIr6oqt",
+     "media_url": "http://pbs.twimg.com/media/FbVv1A-X0AE5xVD.jpg",
+     "id_str": "1564279402166472705",
+     "id": "1564279402166472705",
+     "media_url_https": "https://pbs.twimg.com/media/FbVv1A-X0AE5xVD.jpg",
+     "sizes": {
+      "large": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/jXyoIr6oqt"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "301"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "1564282412611280898",
+  "id_str": "1564282418047090688",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1564282418047090688",
+  "in_reply_to_status_id": "1564282412611280898",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:46 +0000 2022",
+  "favorited": false,
+  "full_text": "Brazil has over over 67 uncontacted Tribes. These are neither a First Contact or Encino Man stories about some unspoiled people ready to see the wonders of modernity. Often these are single families who are aware and going to great lengths to avoid us. \nhttps://t.co/KgbqRxGnMT https://t.co/jXyoIr6oqt",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1564282418047090688/photo/1",
+     "indices": [
+      "278",
+      "301"
+     ],
+     "url": "https://t.co/jXyoIr6oqt",
+     "media_url": "http://pbs.twimg.com/media/FbVv1A-X0AE5xVD.jpg",
+     "id_str": "1564279402166472705",
+     "id": "1564279402166472705",
+     "media_url_https": "https://pbs.twimg.com/media/FbVv1A-X0AE5xVD.jpg",
+     "sizes": {
+      "large": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "425",
+       "h": "285",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/jXyoIr6oqt"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282422363045888"
+    ],
+    "editableUntil": "2022-08-29T16:32:47.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/TCMNK25yGT",
+     "expanded_url": "https://www.survivalbrasil.org",
+     "display_url": "survivalbrasil.org",
+     "indices": [
+      "42",
+      "65"
+     ]
+    },
+    {
+     "url": "https://t.co/h659ywITp7",
+     "expanded_url": "https://www.amazon.com/Last-Tribe-Epic-Quest-Amazon/dp/1416594744/ref=nodl_?dplnkId=2a314713-09d2-4795-a6db-ba7af70f5880",
+     "display_url": "amazon.com/Last-Tribe-Epi…",
+     "indices": [
+      "98",
+      "121"
+     ]
+    },
+    {
+     "url": "https://t.co/HqmtkUuD5b",
+     "expanded_url": "https://youtu.be/_j1RXDo2MXw",
+     "display_url": "youtu.be/_j1RXDo2MXw",
+     "indices": [
+      "165",
+      "188"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "188"
+  ],
+  "favorite_count": "17",
+  "in_reply_to_status_id_str": "1564282418047090688",
+  "id_str": "1564282422363045888",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1564282422363045888",
+  "in_reply_to_status_id": "1564282418047090688",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:47 +0000 2022",
+  "favorited": false,
+  "full_text": "To learn more about the isolated people: \nhttps://t.co/TCMNK25yGT\n\nA book on the Man in the Hole:\nhttps://t.co/h659ywITp7\n\nCorumbiara, a documentary about the case: https://t.co/HqmtkUuD5b",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1564282425815048196"
+    ],
+    "editableUntil": "2022-08-29T16:32:47.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/g5bFt12pt3",
+     "expanded_url": "https://x.com/avsa/status/1370193136086056961?s=21&t=q7-XTrOrwnMRS6a0PhUGDQ",
+     "display_url": "x.com/avsa/status/13…",
+     "indices": [
+      "180",
+      "203"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "203"
+  ],
+  "favorite_count": "33",
+  "in_reply_to_status_id_str": "1564282422363045888",
+  "id_str": "1564282425815048196",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1564282425815048196",
+  "in_reply_to_status_id": "1564282422363045888",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 29 16:02:47 +0000 2022",
+  "favorited": false,
+  "full_text": "If you want more random Brazil Trivia, definitely don't follow me.\n\nMost of my tweets are about random ethereum topics but I will occasionally post random bits on Brazil history.\n\nhttps://t.co/g5bFt12pt3",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

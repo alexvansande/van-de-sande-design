@@ -1,0 +1,60 @@
+---
+title: ".eth Registrar using only Deposits"
+date: "2016-08-09T13:44:29Z"
+original: "https://gist.github.com/alexvandesande/d5e3012ea85e5e79728cd677bc11ef00"
+original_site: "GitHub"
+---
+
+### .eth Registrar using only Deposits.md
+
+This is an attempt of setting up a name registrar that use deposits instead of burning or token contributions and tries to optimize name utility and reduce domain squatting. [Previous initiatives of charging a "rent" based on the market price with an yearly auction](https://github.com/ethereum/EIPs/issues/26) proved impopular with many developers as they believed the registrar wasn't delivering any value for the "tax" as well as worries that a sudden big auction could force someone unexpectedly to be forced to sell the name.
+
+In order to start doing that let's define the problem:
+
+_Name squatting_ is defined as buying a name and not adding any value to it, just holding it expecting that domains names will become more valuable in the future. Let's assume that all name buyers have the intention of acquiring a name and make it more valuable over time, either by working on it as a business and adding value to the "brand", or by working to increase the chances of finding a better suited buyer, all have variable success on these endeavours. It's natural to assume that the value of new names being acquired should keep in line with the market values expectation of how profitable they are to sell (either as a brand, a business or a placeholder domain) in the future.
+
+The solution here lies to require a deposit to own a name and periodically require the owner to update their deposit to what is assumed to be the market rate of the name of their current name. If names in general have increased in value but the owner is among the bottom half that hasn't done anything to increase the value of their own names, then all possible profit will be negated by the extra deposit. If names have decreased in value the owners can request to withdraw part of the deposit and the cost of the name will be the cost of opportunity of possibly having invested in something that would have a better return. At any point name holders can release and get the full deposit back.
+
+So the process is a nutshell:
+
+#### Process
+
+##### 1) Start Auction for available name
+
+Anyone can start an auction by sending an array of hashes that they want to bid for. Arrays are sent so that someone can open up an auction for X dummy hashes when they are only really interested in bidding for one. This will increase the cost for an attacker from simply bidding on all new auctions blindly. Dummy auctions that are open but not bid on are closed after a week.
+
+##### 2) One week auction for the desired hash
+
+Bids are sent by sending a message to the main contract with a hash and an amount. The hash contains information about the bid, including the bidded hash, the bid amount, and a random salt. Bids are not tied to any one auction until they are revealed. The value of the bid itself can be maskeraded by changing the required period or sending more than what you are bidding for. This is followed by a 24h reveal period. Bids revealed after this period will be burned and the ether unrecoverable. Since this is an auction, it is expected that most public names, like known domains and common dictionary words, will have multiple bidders pushing the price up. **The minimum bid will be set as the equivalent cost of sending 1000 bid transactions, to increase the cost of trying to spam the network with dummy domains**.
+
+##### 3) Winning bids are deposited
+
+The highest bid gets control of the name, by depositing the equivalent amount of the second highest bid. The funds will be held on new contract, controlled only by the owner which contains basic information like when the name was first registered, when it needs to be renewed, and the price paid for it. **The price paid is also saved on a moving average amount, calculated as `averagePrice = averagePrice * 0.999 + newPrice * 0.001`**. The averagePrice at the moment of purchase is also registered on the contract.
+
+The name registrar itself doesn't need to store any ether. Instead, each name could be itself a contract that is acessible only by the owner or the name registrar contract, reducing the attack vectors and making it impossible for someone to take more out than they originally had put in.
+
+##### 4) Renewals can be done at any moment by renewing the deposit
+
+In order to renew a name you need to calculate how much have average prices of names changed since you last bought it. If the average price names have increased, then you need to increase your deposit. If median prices have fallen down, then you have the right to withdraw part of the difference (1/2 after a year, 3/4 after 2 years, 7/8 after 3 years etc).
+
+```
+required deposit =  cost of name at purchase * latest median price of name / median price at auction or last renewal
+```
+
+This calculation assumes that market values of each particular name are fairly calculated by an open auction, and that the only variable are the demand for new names, the premise being that _if the same auction had happened today, this is the amount that you would have to pay for the name_. All other variables, like the market price of ether or the perceived demand for names, are thought to be included in each individual auction. Renewals can be done at any moment up to the expiry date.
+
+Once renewed, a new expiry date is set by adding the age of the domain to the current date. Therefore when registered a name needs to be renewed after a year, then after 2 years and then 4 years after that.
+
+Being able to withdraw only partly is made to disincentive users using name holding as proxy for ether holding. This means that liberating the full name is worth more than keeping the name - otherwise owning a 10 ether name would be functionally equivalent to owning 10 ether, with the added benefit of a small chance of reselling it as property later.
+
+##### 5) Names not renewed can be released at any time
+
+The real cost of holding a name is the opportunity cost of doing something better with your ether. If there are better opportunities, like staking it, lending it or investing in some other new venture, then holding names should be seen as an undesirable outcome and owners have an incentive to release them. Names can be sold at any moment, but the buyer will incur the same renewal cost/benefit analysis.
+
+#### Scenarios
+
+Alice buys alice.eth for her personal use. She bids 2 ether, which is about twice the average most people are paying for a name. One year later, ether is still trading at about the same price, but names became more popular, being bought now at an average of 2 ethers. It means that for her to renew her name, she needs to put an additional 2 ether on the deposit. She makes the calculation that her domain is worth the extra ether, so she is happy to do it.
+
+Bob decides to buy foo.eth because he believes that company Foo will want to buy from him. He imagines that there's a 10% chance of the company buying the name for 100,000. So he bids 10,000 ether and wins, which is way over the average and way over the second place that bid only 1,000 ether. Bob get's 9,000 ether back and keeps the name with the 1,000 deposit. One year later, Bob wasn't able to sell the name, ether now is trading at twice the price, but since demand for names hasn't gone up, they all now go for an average of 0.5 ether. This means that now Bob can withdraw 250 ether and keep the name for another year. But bob realizes that, in dollar averages he would value that name at 500 ether, yet he has 750 ether locked up on that contract. Since Bob hasn't found a better buyer, he decides to release that name, get his full 1,000 ether back and put it to use on something else.
+
+About the same time Bob buys foo.eth, Eve also buys foobar.eth for 100 ether. She believes she has a 10% chance of reselling it for 1,000 so she considers it a bargain. One year later she hasn't sold the name yet and can renew it by withdrawing 25 ether. She keeps 75 ether on the name, althought the deposit value is now worth 50% more than what she originally paid, she has since set up a name selling company and believes her chance of selling that name has also increased, so for her it is still a bargain. Alice keeps the name.

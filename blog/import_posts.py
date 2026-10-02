@@ -4,7 +4,9 @@
     python3 blog/import_posts.py [--only SLUG] [--force]
 
 The posts are listed in SOURCES below: the ones on Medium, on the Ethereum
-Foundation's blog and on the ENS forum. Each becomes blog/<slug>/ like the
+Foundation's blog, on the ENS forum (those it lost, from the Wayback
+Machine), on GitHub and on Reddit (from Pullpush's copy, as Reddit turns
+the importer away; Markdown is set by GitHub's renderer). Each becomes blog/<slug>/ like the
 posts from Paragraph: index.md, its pictures at full size (the one it opens
 with as cover.*, the rest 01.*, 02.* …), and source.html, the post's HTML as
 it was fetched, kept as the record. The header says where it first appeared
@@ -44,6 +46,11 @@ SOURCES = [
     ("ux-audit-dark-forest", "https://avsa.medium.com/a-dark-forest-ux-audit-6235c2fd04e", "medium", "2020-08-18"),
     ("ux-audit-status", "https://avsa.medium.com/ux-audit-status-b0fa0062c96f", "medium", "2020-11-19"),
     ("its-time-for-social-media-interoperability", "https://avsa.medium.com/its-time-for-social-media-interoperability-4cee38673fa3", "medium", "2021-08-06"),
+    ("blockchain-fears", "https://medium.com/@avsa/great-summary-of-the-largest-three-fears-here-are-how-i-see-them-32031ffd8e0", "medium", "2017-08-22"),
+    # Medium, the Universal Login team's publication
+    ("where-ethereum-is-going", "https://medium.com/universal-ethereum/where-ethereum-is-going-ef4dad35d748", "medium", "2019-08-09"),
+    ("turtles-all-the-way-down", "https://medium.com/universal-ethereum/turtles-all-the-way-down-multisigs-owning-multisigs-485a488d571e", "medium", "2020-04-27"),
+    ("out-of-gas", "https://medium.com/universal-ethereum/out-of-gas-were-shutting-down-unilogin-3b544838df1a", "medium", "2020-09-19"),
     # the Ethereum Foundation's blog
     ("how-to-build-your-own-cryptocurrency", "https://blog.ethereum.org/2015/12/03/how-to-build-your-own-cryptocurrency", "ef", None),
     ("how-to-build-a-better-democracy", "https://blog.ethereum.org/2015/12/04/ethereum-in-practice-part-2-how-to-build-a-better-democracy-in-under-a-100-lines-of-code", "ef", None),
@@ -53,8 +60,52 @@ SOURCES = [
     ("a-map-of-all-ens-contracts", "https://discuss.ens.domains/t/a-map-of-all-ens-contracts/10754", "discourse", None),
     ("visualization-of-money-flows-between-dao-wallets", "https://discuss.ens.domains/t/visualization-of-money-flows-between-dao-wallets/18010", "discourse", None),
     ("analysis-of-ranked-choice-voting-in-5-19", "https://discuss.ens.domains/t/analysis-of-ranked-choice-voting-in-5-19-governance-distribution-pilot/19797", "discourse", None),
+    # the forum before it started again: only the Wayback Machine has these
+    ("the-uniswap-model-for-domains", "https://discuss.ens.domains/t/have-we-considered-using-the-uniswap-model-for-domains-based-on-length-tranches/1216", "discourse", None),
+    ("ens-to-verify-nft-collections-in-avatars", "https://discuss.ens.domains/t/proposal-to-use-ens-to-verify-nft-collections-in-avatars/11537", "discourse", None),
+    # a reply of his in someone else's thread: the post's number after the topic's
+    ("ens-affiliate-program", "https://discuss.ens.domains/t/ens-affiliate-marketing-affiliate-program/11819/7", "discourse", None),
+    ("bulk-commits-and-reveals", "https://discuss.ens.domains/t/updates-to-ens-controller-should-we-do-bulk-commits-reveals/13941", "discourse", None),
+    ("my-votes-on-the-ens-streams", "https://discuss.ens.domains/t/ep4-9-voting-reports/18339/4", "discourse", None),
+    ("refunding-accidental-ens-transfers", "https://discuss.ens.domains/t/on-a-unified-policy-for-refunding-accidental-ens-transfers/18872", "discourse", None),
+    ("ens-governance-distribution-program", "https://discuss.ens.domains/t/temp-check-ens-governance-distribution-program/18940", "discourse", None),
+    ("reform-dao-governance-by-delegating-5m-ens", "https://discuss.ens.domains/t/draft-reform-dao-governance-by-delegating-5m-ens-tokens/22247", "discourse", None),
+    # GitHub: the first proposal for a name registrar, and two gists
+    ("default-mist-name-registrar", "https://github.com/ethereum/EIPs/issues/26", "github", None),
+    ("eth-registrar-using-only-deposits", "https://gist.github.com/alexvandesande/d5e3012ea85e5e79728cd677bc11ef00", "gist", None),
+    # the Ethereum forum of 2014, gone but for the Wayback Machine
+    ("so-i-designed-a-concept-ui-for-the-alethzero-client",
+     "http://forum.ethereum.org/discussion/751/so-i-designed-a-concept-ui-for-the-alephzero-client", "vanilla", None),
+    ("should-ether-contracts-have-guis",
+     "http://forum.ethereum.org/discussion/766/should-ether-contracts-have-guis-i-m-a-ui-designer-and-here-s-why-i-don-t-think-so", "vanilla", None),
+    # Reddit, his own posts (u/avsa)
+    ("starter-guide-to-ethereum", "https://www.reddit.com/r/ethereum/comments/3vxvlx/", "reddit", None),
+    ("if-you-are-coming-from-rbitcoin", "https://www.reddit.com/r/ethereum/comments/415kx8/", "reddit", None),
+    ("update-on-the-white-hat-attack", "https://www.reddit.com/r/ethereum/comments/4p7mhc/", "reddit", None),
+    ("fork-vote-by-ether-commitment", "https://www.reddit.com/r/ethereum/comments/4qo3f9/", "reddit", None),
+    ("eli5-byzantium-changes", "https://www.reddit.com/r/ethereum/comments/702t95/", "reddit", None),
+    ("everything-you-need-to-know-about-erc777", "https://www.reddit.com/r/ethereum/comments/7qjw6x/", "reddit", None),
+    ("an-ocean-centric-world-map", "https://www.reddit.com/r/MapPorn/comments/14jonc/", "reddit", None),
+    ("a-daenerys-childrens-book", "https://www.reddit.com/r/gameofthrones/comments/7giguf/", "reddit", None),
 ]
-SITE_NAME = {"medium": "Medium", "ef": "blog.ethereum.org", "discourse": "discuss.ens.domains"}
+SITE_NAME = {"medium": "Medium", "ef": "blog.ethereum.org", "discourse": "discuss.ens.domains",
+             "reddit": "Reddit", "github": "GitHub", "gist": "GitHub", "vanilla": "forum.ethereum.org"}
+# Its pictures were links to cl.ly, which kept none; he still had them. They
+# are in _archive/forum-ethereum/, put where the post had them: in place of a
+# link to the picture, or after the paragraph that names it.
+FORUM_PICTURES = {"751": [("link", "cl.ly/image/1v2G102r0T3S", "alephone-concept.png"),
+                          ("after", "Since using the AlephZero client", "alethzero.png")],
+                  # attached to the post, which the forum showed only as a thumbnail
+                  "766": [("after", "(see attached)", "simple-contract-browser.png")]}
+# Reddit's own pages turn the importer away; Pullpush keeps a copy of each post
+PULLPUSH = "https://api.pullpush.io/reddit/search/"
+# posts that are only a picture: the words are in his comment under it
+REDDIT_COMMENTS = {"14jonc": ["c7dns4o"], "7giguf": ["dqjcn4p"]}
+# a post whose pictures he put up again, better, in a later album: the book's
+# pages in English, all 34 of them, uploaded two days after the photos of
+# the printed one (posted as reddit.com/r/gameofthrones/comments/7gwmxd)
+REDDIT_ALBUMS = {"7giguf": "fSRYW"}
+IMGUR = "546c25a59c58ad7"      # the client id imgur.com's own pages use
 
 
 def get(url, tries=5):
@@ -470,7 +521,7 @@ def from_medium(url, feed_items):
     path = url.split("://")[1].split("/", 1)[1]
     slug = path.split("/")[-1]
     snap = None
-    for where in (f"medium.com/@avsa/{slug}", f"avsa.medium.com/{slug}"):
+    for where in (url.split("://")[1], f"medium.com/@avsa/{slug}", f"avsa.medium.com/{slug}"):
         avail = json.loads(get(WAYBACK + urllib.parse.quote(where, safe="/@") + "&timestamp=20200601"))
         snap = (avail.get("archived_snapshots") or {}).get("closest")
         if snap:
@@ -482,9 +533,12 @@ def from_medium(url, feed_items):
     doc = parse(raw)
     art = doc.find(lambda x: x.tag == "article")
     h1 = art.find(lambda x: x.tag == "h1")
-    title = h1.text().strip()
+    # a response to someone else's post has no title of its own: its first
+    # sentence stands for one
+    first = art.find(lambda x: x.tag == "p" and re.fullmatch(r"[0-9a-f]{4}", x.attrs.get("id", "")))
+    title = h1.text().strip() if h1 is not None else re.split(r"(?<=[.:!?])\s", first.text().strip())[0].rstrip(".:")
     body = Node("div")
-    started = False
+    started = h1 is None
     # the post is the elements Medium gave an id of four hex digits, and the
     # figures between them; the title and the byline come before
     for n in art.find_all(lambda x: (x.tag in ("p", "h1", "h2", "h3", "h4", "blockquote", "pre", "ul", "ol", "figure")
@@ -568,12 +622,131 @@ def from_ef(url):
 
 
 def from_discourse(url):
-    tid = re.search(r"/t/(?:[^/]+/)?(\d+)", url).group(1)
-    d = json.loads(get(f"https://discuss.ens.domains/t/{tid}.json"))
-    p = d["post_stream"]["posts"][0]
+    m = re.search(r"/t/(?:[^/]+/)?(\d+)(?:/(\d+))?", url)
+    tid, number = m.group(1), int(m.group(2) or 1)
+    try:
+        d = json.loads(get(f"https://discuss.ens.domains/t/{tid}.json"))
+    except urllib.error.HTTPError as e:
+        if e.code != 404:
+            raise
+        return discourse_archived(url)
+    if number == 1:
+        p = d["post_stream"]["posts"][0]
+    else:
+        p = json.loads(get(f"https://discuss.ens.domains/posts/by_number/{tid}/{number}.json"))
     # a picture there carries its file name and size under it, for the zoom
     cooked = re.sub(r'<div class="meta">.*?</div>', "", p["cooked"], flags=re.S)
     return d["title"], cooked, p["created_at"], p["username"]
+
+
+def discourse_archived(url):
+    """A topic the forum no longer has, from the page the Wayback Machine kept:
+    Discourse wrote each post into the page for search engines, its words in
+    an element marked itemprop="text" (or "articleBody")."""
+    avail = json.loads(get(WAYBACK + urllib.parse.quote(url.split("://")[1], safe="/")))
+    snap = (avail.get("archived_snapshots") or {}).get("closest")
+    if not snap:
+        raise RuntimeError("gone from the forum, and not in the Wayback Machine")
+    page = get(f"https://web.archive.org/web/{snap['timestamp']}id_/{url}").decode("utf-8", "replace")
+    doc = parse(page)
+    body = doc.find(lambda x: x.attrs.get("itemprop") in ("text", "articleBody"))
+    if body is None:
+        raise RuntimeError("the archived page has no post in it")
+    t = re.search(r"<title>(.*?)(?: - (?:ENS|Governance|General|Ideas|Discussion|Proposals)\b.*)?</title>", page, re.S)
+    when = re.search(r'<time[^>]*datetime=[\'"]([^\'"]+)', page) or re.search(r'itemprop=[\'"]datePublished[\'"][^>]*content=[\'"]([^\'"]+)', page)
+    author = re.search(r"itemprop=['\"]author['\"].*?<span itemprop=['\"]name['\"]>([^<]+)", page, re.S)
+    title = html.unescape(t.group(1)).strip() if t else url.rstrip("/").split("/")[-2]
+    return title, node_html(body), when.group(1) if when else None, author.group(1) if author else None
+
+
+# ---------------------------------------------------------------- Reddit and GitHub, in Markdown
+
+def markdown_html(md):
+    """Their Markdown as GitHub would show it, which is close enough to
+    Reddit's: the converter then reads it like any other page."""
+    req = urllib.request.Request("https://api.github.com/markdown", json.dumps({"text": md, "mode": "gfm"}).encode(),
+                                 headers={**UA, "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return r.read().decode("utf-8")
+
+
+def pullpush(kind, **q):
+    return json.loads(get(PULLPUSH + kind + "/?" + urllib.parse.urlencode(q)))["data"]
+
+
+def from_reddit(url):
+    pid = re.search(r"/comments/(\w+)", url).group(1)
+    p = pullpush("submission", ids=pid)[0]
+    title = html.unescape(p["title"])
+    title = re.sub(r"^\[S\d\]\s*|\s*\[\d+x\d+\]$", "", title).strip()
+    parts = []
+    # a post that is a picture, or an album of them, on Imgur or Wikimedia
+    link = p.get("url") or ""
+    album = re.match(r"https?://imgur\.com/(?:gallery|a)/(\w+)", link)
+    if album or pid in REDDIT_ALBUMS:
+        aid = REDDIT_ALBUMS.get(pid) or album.group(1)
+        try:        # a post to imgur's gallery
+            a = json.loads(get(f"https://api.imgur.com/post/v1/posts/{aid}?client_id={IMGUR}&include=media"))
+            urls = [m["url"] for m in a["media"]]
+        except urllib.error.HTTPError:      # an album that never was
+            req = urllib.request.Request(f"https://api.imgur.com/3/album/{aid}/images", headers={**UA, "Authorization": f"Client-ID {IMGUR}"})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                urls = [m["link"] for m in json.load(r)["data"]]
+        # one after the other with no line between: a carousel, as the book was
+        parts.append('<div class="album">' + "".join(f'<img src="{u}" alt="">' for u in urls) + "</div>")
+    elif re.search(r"\.(png|jpe?g|gif)$", link, re.I):
+        parts.append(f'<p><img src="{link}" alt=""></p>')
+    text = html.unescape(p.get("selftext") or "").strip()
+    if text and text not in ("[deleted]", "[removed]"):
+        parts.append(markdown_html(text))
+    for cid in REDDIT_COMMENTS.get(pid, []):
+        c = pullpush("comment", ids=cid)[0]
+        parts.append(markdown_html(html.unescape(c["body"])))
+    when = datetime.fromtimestamp(int(p["created_utc"]), timezone.utc).isoformat()
+    return title, "\n".join(parts), when, p["author"]
+
+
+def from_github(url):
+    m = re.search(r"github\.com/([^/]+/[^/]+)/issues/(\d+)", url)
+    d = json.loads(get(f"https://api.github.com/repos/{m.group(1)}/issues/{m.group(2)}"))
+    body = d["body"]
+    # the EIP header, a block of "Key: value" lines, is the record's, not the text's
+    body = re.sub(r"^\s*<pre>.*?</pre>\s*", "", body, flags=re.S)
+    return d["title"], markdown_html(body), d["created_at"], d["user"]["login"]
+
+
+def from_vanilla(url):
+    """His opening post in a discussion on the old forum (Vanilla), from the
+    Wayback Machine's first copy: the paragraphs were line breaks."""
+    did = re.search(r"/discussion/(\d+)", url).group(1)
+    # the copy nearest 2014 (the archive goes to it from any date)
+    page = get(f"https://web.archive.org/web/2014id_/{url}").decode("utf-8", "replace")
+    first = re.split(r'(?=<(?:div|li) [^>]*class="Item[^"]*ItemComment\b)', page)[0]
+    msg = re.search(r'class="Message(?: [^"]*)?"[^>]*>(.*?)</div>', first, re.S).group(1)     # not MessageList
+    title = html.unescape(re.sub(r"<[^>]+>", "", re.search(r"<h1[^>]*>(.*?)</h1>", page, re.S).group(1))).strip()
+    when = re.search(r'datetime="([^"]+)"', first).group(1)
+    # after each @name the forum had an invisible joiner, which the archive kept as "?"
+    msg = re.sub(r'(<a href="/profile/[^"]*">@[^<]*</a>)\?', r"\1", msg)
+    paras = [p.strip() for p in re.split(r"(?:<br\s*/?>\s*){2,}", msg) if p.strip()]
+    here = os.path.join(HERE, "_archive", "forum-ethereum")
+    for how, what, name in FORUM_PICTURES.get(did, []):
+        img = f'<img src="file://{urllib.parse.quote(os.path.join(here, name))}" alt="">'
+        for i, p in enumerate(paras):
+            if what in p:
+                if how == "link":
+                    paras[i] = img
+                else:
+                    paras.insert(i + 1, img)
+                break
+    return title, "".join(f"<p>{p}</p>" for p in paras), when, "avsa"
+
+
+def from_gist(url):
+    gid = url.rstrip("/").split("/")[-1]
+    d = json.loads(get(f"https://api.github.com/gists/{gid}"))
+    f = next(iter(d["files"].values()))
+    title = d["description"] or os.path.splitext(f["filename"])[0]
+    return title, markdown_html(f["content"]), d["created_at"], d["owner"]["login"]
 
 
 # ---------------------------------------------------------------- writing
@@ -616,13 +789,31 @@ def write(slug, url, kind, date, links, items, force):
         title, body_html, when, _ = from_ef(url)
         node, record, how = parse(body_html), body_html, "page"
         date = date or when
-    else:
+    elif kind == "discourse":
         title, body_html, when, _ = from_discourse(url)
         node, record, how = parse(body_html), body_html, "forum"
         conv.shift = 1        # the forum's sections are h1
         date = date or when
+    else:
+        title, body_html, when, _ = {"reddit": from_reddit, "github": from_github, "gist": from_gist,
+                                    "vanilla": from_vanilla}[kind](url)
+        node, record, how = parse(body_html), body_html, kind
+        conv.shift = 1        # their sections are h1
+        date = date or when
 
     blocks = [b for b in conv.blocks(node) if b and b.strip()]
+    if kind == "reddit":
+        # an album's pictures, one after another: a carousel, which the build
+        # takes from picture lines with no blank line between them
+        out = []
+        for b in blocks:
+            m = re.fullmatch(r'<figure>\n<img src="([^"]+)"[^>]*>\n</figure>', b)
+            if m and out and re.fullmatch(r"(!\[\]\([^)]+\)\n?)+|<figure>\n<img [^>]*>\n</figure>", out[-1]):
+                prev = re.search(r'src="([^"]+)"', out[-1])
+                out[-1] = (f"![]({prev.group(1)})" if prev else out[-1]) + f"\n![]({m.group(1)})"
+            else:
+                out.append(b)
+        blocks = out
     # Medium's feed starts with the title, and sometimes the subtitle, again
     subtitle = None
     while blocks and blocks[0].lstrip("# ").strip("*_ ").strip() == title.strip():
@@ -677,7 +868,7 @@ def main():
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
     # links between these posts go to the copies here
-    links = {link_key(u): f"https://blog.vandesande.design/{s}" for s, u, _, _ in SOURCES}
+    links = {link_key(u): f"https://blog.vandesande.design/{s}" for s, u, _, _ in SOURCES if link_key(u)}
     items = feed() if any(k == "medium" for _, _, k, _ in SOURCES) else []
     for slug, url, kind, date in SOURCES:
         if args.only and slug != args.only:

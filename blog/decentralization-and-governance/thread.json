@@ -1,0 +1,719 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786374248812549"
+    ],
+    "editableUntil": "2022-02-07T21:35:43.749Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "156",
+  "id_str": "1490786374248812549",
+  "truncated": false,
+  "retweet_count": "20",
+  "id": "1490786374248812549",
+  "created_at": "Mon Feb 07 20:35:43 +0000 2022",
+  "favorited": false,
+  "full_text": "ENS aims to be both a decentralized domain and identity system and as such needs to be built to be censorship resistant and neutral. But to get there it needs an including community of builders in which all are welcome.\n\nThat path is neither easy nor without its own conflicts.",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786376090062851"
+    ],
+    "editableUntil": "2022-02-07T21:35:44.188Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "269"
+  ],
+  "favorite_count": "33",
+  "in_reply_to_status_id_str": "1490786374248812549",
+  "id_str": "1490786376090062851",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490786376090062851",
+  "in_reply_to_status_id": "1490786374248812549",
+  "created_at": "Mon Feb 07 20:35:44 +0000 2022",
+  "favorited": false,
+  "full_text": "Long before Brantly joined ENS, there had been multiple other contributors, many of them queer, at least two were Trans. I only knew that the same way I found out about Brantly’s own deeply held beliefs: casual conversations over dinner in conferences around the world.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786377260314628"
+    ],
+    "editableUntil": "2022-02-07T21:35:44.467Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "278"
+  ],
+  "favorite_count": "42",
+  "in_reply_to_status_id_str": "1490786376090062851",
+  "id_str": "1490786377260314628",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1490786377260314628",
+  "in_reply_to_status_id": "1490786376090062851",
+  "created_at": "Mon Feb 07 20:35:44 +0000 2022",
+  "favorited": false,
+  "full_text": "As it should be: people’s work only judged by their own merit, independent of the contributors religion, skin tone, gender or country of origin. I think the acceptance of anonymity and respect for privacy in the industry creates an environment where people can be who they want.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786379500068868"
+    ],
+    "editableUntil": "2022-02-07T21:35:45.001Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "34",
+  "in_reply_to_status_id_str": "1490786377260314628",
+  "id_str": "1490786379500068868",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490786379500068868",
+  "in_reply_to_status_id": "1490786377260314628",
+  "created_at": "Mon Feb 07 20:35:45 +0000 2022",
+  "favorited": false,
+  "full_text": "I’ve known Brantly for years (he worked with me in Unilogin in 2018) and I’ve seen him do great work. I’ve reached to some of these other contributors and I did not hear a single instance where people felt they were treated differently by him. But he wasn’t just a dev hidden away",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786380854796294"
+    ],
+    "editableUntil": "2022-02-07T21:35:45.324Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "279"
+  ],
+  "favorite_count": "32",
+  "in_reply_to_status_id_str": "1490786379500068868",
+  "id_str": "1490786380854796294",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490786380854796294",
+  "in_reply_to_status_id": "1490786379500068868",
+  "created_at": "Mon Feb 07 20:35:45 +0000 2022",
+  "favorited": false,
+  "full_text": "Brantly was the de facto spokesperson for the project, the ones that journalists would reach out to hear a word, and maybe the project wouldn’t be where it is today without him. I admired his grit.\n\nIt’s hard to be the spokesperson of a community that doesn’t feel spoken by you.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786382087864320"
+    ],
+    "editableUntil": "2022-02-07T21:35:45.618Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "266"
+  ],
+  "favorite_count": "68",
+  "in_reply_to_status_id_str": "1490786380854796294",
+  "id_str": "1490786382087864320",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1490786382087864320",
+  "in_reply_to_status_id": "1490786380854796294",
+  "created_at": "Mon Feb 07 20:35:45 +0000 2022",
+  "favorited": false,
+  "full_text": "I would like to find a way for Brantly to still be a part of ENS, in a position where he didn’t needed to represent a community that didn’t share his values. Maybe there’s still a space for this, but I feel the rushed termination process might have been too drastic.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490786383350444037"
+    ],
+    "editableUntil": "2022-02-07T21:35:45.919Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "247"
+  ],
+  "favorite_count": "52",
+  "in_reply_to_status_id_str": "1490786382087864320",
+  "id_str": "1490786383350444037",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "1490786383350444037",
+  "in_reply_to_status_id": "1490786382087864320",
+  "created_at": "Mon Feb 07 20:35:45 +0000 2022",
+  "favorited": false,
+  "full_text": "This whole debate has raised a much more important question about decentralization and governance. What happens to your names if ENS is taken over by people who don’t share your values? What are the failures of our own governance that led to this?",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490787675854491652"
+    ],
+    "editableUntil": "2022-02-07T21:40:54.076Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "260"
+  ],
+  "favorite_count": "44",
+  "in_reply_to_status_id_str": "1490786383350444037",
+  "id_str": "1490787675854491652",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1490787675854491652",
+  "in_reply_to_status_id": "1490786383350444037",
+  "created_at": "Mon Feb 07 20:40:54 +0000 2022",
+  "favorited": false,
+  "full_text": "Brantly was terminated from True Names, as is the right of their directors as a private entity?\n\nBut why does a DAO depends so much on a single Singaporean entity?\n\nI believe it should not, and it would benefit for the community to be more legally distributed.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490787677272223746"
+    ],
+    "editableUntil": "2022-02-07T21:40:54.414Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "41",
+  "in_reply_to_status_id_str": "1490787675854491652",
+  "id_str": "1490787677272223746",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1490787677272223746",
+  "in_reply_to_status_id": "1490787675854491652",
+  "created_at": "Mon Feb 07 20:40:54 +0000 2022",
+  "favorited": false,
+  "full_text": "In the beginning of the year I was invited by Brantly to join the core team. It felt wrong then and it feels wronger now:\n\nGoing forward I intend that my ENS contributions will be made as a separate entity, with a different jurisdiction, that does not rely on ENS core team.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490789447528595457"
+    ],
+    "editableUntil": "2022-02-07T21:47:56.476Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "206"
+  ],
+  "favorite_count": "68",
+  "in_reply_to_status_id_str": "1490787677272223746",
+  "id_str": "1490789447528595457",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "7",
+  "id": "1490789447528595457",
+  "in_reply_to_status_id": "1490787677272223746",
+  "created_at": "Mon Feb 07 20:47:56 +0000 2022",
+  "favorited": false,
+  "full_text": "Secondly: Brantly is still the top delegate. Second is Coinbase, an entity who has a contract for “analytics”with the US homeland security and is, in my opinion, much more problematic than he could ever be.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490789449428525060"
+    ],
+    "editableUntil": "2022-02-07T21:47:56.929Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "269"
+  ],
+  "favorite_count": "27",
+  "in_reply_to_status_id_str": "1490789447528595457",
+  "id_str": "1490789449428525060",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490789449428525060",
+  "in_reply_to_status_id": "1490789447528595457",
+  "created_at": "Mon Feb 07 20:47:56 +0000 2022",
+  "favorited": false,
+  "full_text": "Most of the other top 10 delegates (including me) could probably be found in the same table at some random devcon a few years ago. Is that a good thing for diversity of opinions and experiences? It can also be very expensive to redelegate, which is not very democratic.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490789451563511823"
+    ],
+    "editableUntil": "2022-02-07T21:47:57.438Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "234"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "1490789449428525060",
+  "id_str": "1490789451563511823",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490789451563511823",
+  "in_reply_to_status_id": "1490789449428525060",
+  "created_at": "Mon Feb 07 20:47:57 +0000 2022",
+  "favorited": false,
+  "full_text": "I would like to see a website that helps people redelegate their votes, including some possible form of subsidy (within limits to avoid grieving attacks ofc), to allow a more liquid democracy. I will look into building/financing this.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791984709226498"
+    ],
+    "editableUntil": "2022-02-07T21:58:01.387Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "272"
+  ],
+  "favorite_count": "23",
+  "in_reply_to_status_id_str": "1490789451563511823",
+  "id_str": "1490791984709226498",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490791984709226498",
+  "in_reply_to_status_id": "1490789451563511823",
+  "created_at": "Mon Feb 07 20:58:01 +0000 2022",
+  "favorited": false,
+  "full_text": "Thirdly: Brantly is a director of the ENS foundation, a non profit incorporated in the Cayman Islands. I’m sure there are good tax reasons for it to exist, but it also creates another bottleneck for the DAO.\n\nWe could have a more public debate on the roles of that entity.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791986672119816"
+    ],
+    "editableUntil": "2022-02-07T21:58:01.855Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "237"
+  ],
+  "favorite_count": "21",
+  "in_reply_to_status_id_str": "1490791984709226498",
+  "id_str": "1490791986672119816",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490791986672119816",
+  "in_reply_to_status_id": "1490791984709226498",
+  "created_at": "Mon Feb 07 20:58:01 +0000 2022",
+  "favorited": false,
+  "full_text": "Four: what are the roles of the DAO in .eth names? What can be done to domains if top delegation is taken over by people who don’t share your values?\n\nNot much really. But some could, and we need to investigate and consider alternatives.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791988853157889"
+    ],
+    "editableUntil": "2022-02-07T21:58:02.375Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "227"
+  ],
+  "favorite_count": "20",
+  "in_reply_to_status_id_str": "1490791986672119816",
+  "id_str": "1490791988853157889",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490791988853157889",
+  "in_reply_to_status_id": "1490791986672119816",
+  "created_at": "Mon Feb 07 20:58:02 +0000 2022",
+  "favorited": false,
+  "full_text": "The .eth registrar is still under the control of the multisig, but we can expect it to be transferred to the DAO anytime. When it’s done we need to make sure that it maintains it’s locked state and maybe even lock it even more.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791990988054533"
+    ],
+    "editableUntil": "2022-02-07T21:58:02.884Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "1490791988853157889",
+  "id_str": "1490791990988054533",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490791990988054533",
+  "in_reply_to_status_id": "1490791988853157889",
+  "created_at": "Mon Feb 07 20:58:02 +0000 2022",
+  "favorited": false,
+  "full_text": "As it currently stands, the .eth registrar cannot take away any name that is registered, but it can change the rules on how renewals and new registrations happen. There are good reasons not to freeze that right now but we should try to see how we can limit those further.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791993131347971"
+    ],
+    "editableUntil": "2022-02-07T21:58:03.395Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "204"
+  ],
+  "favorite_count": "18",
+  "in_reply_to_status_id_str": "1490791990988054533",
+  "id_str": "1490791993131347971",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1490791993131347971",
+  "in_reply_to_status_id": "1490791990988054533",
+  "created_at": "Mon Feb 07 20:58:03 +0000 2022",
+  "favorited": false,
+  "full_text": "One example is the recent rule change for newly expired names, which could be bought by anyone at $2k, has been upgraded to a Dutch auction starting $100k and is being redeveloped as a non linear auction.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490791994993557511"
+    ],
+    "editableUntil": "2022-02-07T21:58:03.839Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "241"
+  ],
+  "favorite_count": "20",
+  "in_reply_to_status_id_str": "1490791993131347971",
+  "id_str": "1490791994993557511",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1490791994993557511",
+  "in_reply_to_status_id": "1490791993131347971",
+  "created_at": "Mon Feb 07 20:58:03 +0000 2022",
+  "favorited": false,
+  "full_text": "The ENS constitution has limits on how these can change, but the constitution can be changed (and it’s still quite easy to do so). Still, some things should be frozen in code so that it supersedes even the constitution changes in the future.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1490792435475177473"
+    ],
+    "editableUntil": "2022-02-07T21:59:48.858Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "221"
+  ],
+  "favorite_count": "65",
+  "in_reply_to_status_id_str": "1490791994993557511",
+  "id_str": "1490792435475177473",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "5",
+  "id": "1490792435475177473",
+  "in_reply_to_status_id": "1490791994993557511",
+  "created_at": "Mon Feb 07 20:59:48 +0000 2022",
+  "favorited": false,
+  "full_text": "End of thread. So my proposed next steps:\n👉 Decentralize development more so it doesn’t depend on a single person or entity\n👉 Make redelegation more liquid\n👉 Create even stronger property rights guarantees on domain names",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

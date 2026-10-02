@@ -1,0 +1,1220 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043101001924609"
+    ],
+    "editableUntil": "2018-02-09T20:18:43.832Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043101001924609/photo/1",
+     "indices": [
+      "31",
+      "54"
+     ],
+     "url": "https://t.co/E9qdHE4I7H",
+     "media_url": "http://pbs.twimg.com/media/DVnSdoFVQAAN0Ul.jpg",
+     "id_str": "962031401838133248",
+     "id": "962031401838133248",
+     "media_url_https": "https://pbs.twimg.com/media/DVnSdoFVQAAN0Ul.jpg",
+     "sizes": {
+      "large": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/E9qdHE4I7H"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "54"
+  ],
+  "favorite_count": "143",
+  "id_str": "962043101001924609",
+  "truncated": false,
+  "retweet_count": "34",
+  "id": "962043101001924609",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:43 +0000 2018",
+  "favorited": false,
+  "full_text": "So, about doge and ethereum... https://t.co/E9qdHE4I7H",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043101001924609/photo/1",
+     "indices": [
+      "31",
+      "54"
+     ],
+     "url": "https://t.co/E9qdHE4I7H",
+     "media_url": "http://pbs.twimg.com/media/DVnSdoFVQAAN0Ul.jpg",
+     "id_str": "962031401838133248",
+     "id": "962031401838133248",
+     "media_url_https": "https://pbs.twimg.com/media/DVnSdoFVQAAN0Ul.jpg",
+     "sizes": {
+      "large": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "518",
+       "h": "518",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/E9qdHE4I7H"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043103862407168"
+    ],
+    "editableUntil": "2018-02-09T20:18:44.514Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043103862407168/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/xNoELRboPt",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVnTFfmV4AEOQmi.jpg",
+     "id_str": "962032086755434497",
+     "id": "962032086755434497",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVnTFfmV4AEOQmi.jpg",
+     "sizes": {
+      "large": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/xNoELRboPt"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "962043101001924609",
+  "id_str": "962043103862407168",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "9",
+  "id": "962043103862407168",
+  "in_reply_to_status_id": "962043101001924609",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:44 +0000 2018",
+  "favorited": false,
+  "full_text": "Both coins share some long common friendship. When Ethereum was running its presale, doge was at the top of the game, sponsoring race cars and overall having a lot of fun. I think it was the first coin to really get that a community, not only tech, was the most important thing. https://t.co/xNoELRboPt",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043103862407168/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/xNoELRboPt",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVnTFfmV4AEOQmi.jpg",
+     "id_str": "962032086755434497",
+     "video_info": {
+      "aspect_ratio": [
+       "250",
+       "139"
+      ],
+      "variants": [
+       {
+        "bitrate": "0",
+        "content_type": "video/mp4",
+        "url": "https://video.twimg.com/tweet_video/DVnTFfmV4AEOQmi.mp4"
+       }
+      ]
+     },
+     "id": "962032086755434497",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVnTFfmV4AEOQmi.jpg",
+     "sizes": {
+      "large": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "500",
+       "h": "278",
+       "resize": "fit"
+      }
+     },
+     "type": "animated_gif",
+     "display_url": "pic.x.com/xNoELRboPt"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043108912328705"
+    ],
+    "editableUntil": "2018-02-09T20:18:45.718Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043108912328705/photo/1",
+     "indices": [
+      "251",
+      "274"
+     ],
+     "url": "https://t.co/EbFdEwe3oT",
+     "media_url": "http://pbs.twimg.com/media/DVnTdmWVoAAfHvl.jpg",
+     "id_str": "962032500884217856",
+     "id": "962032500884217856",
+     "media_url_https": "https://pbs.twimg.com/media/DVnTdmWVoAAfHvl.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "257",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "146",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1920",
+       "h": "411",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/EbFdEwe3oT"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "21",
+  "in_reply_to_status_id_str": "962043103862407168",
+  "id_str": "962043108912328705",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043108912328705",
+  "in_reply_to_status_id": "962043103862407168",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:45 +0000 2018",
+  "favorited": false,
+  "full_text": "The ethereum community was formed, in part from people that didn't like the bitterness that overtook Bitcoin, so we always tried to be light hearted and fun. Devcons accepted dogecoin. I mean, look at this guy, does he want you to take him seriously? https://t.co/EbFdEwe3oT",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043108912328705/photo/1",
+     "indices": [
+      "251",
+      "274"
+     ],
+     "url": "https://t.co/EbFdEwe3oT",
+     "media_url": "http://pbs.twimg.com/media/DVnTdmWVoAAfHvl.jpg",
+     "id_str": "962032500884217856",
+     "id": "962032500884217856",
+     "media_url_https": "https://pbs.twimg.com/media/DVnTdmWVoAAfHvl.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "257",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "146",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1920",
+       "h": "411",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/EbFdEwe3oT"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043112368427009"
+    ],
+    "editableUntil": "2018-02-09T20:18:46.542Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/73R3r3O9f7",
+     "expanded_url": "https://www.reddit.com/r/dogecoin/comments/3wxbc3/dogecoin_transfer_onto_ethereum/",
+     "display_url": "reddit.com/r/dogecoin/com…",
+     "indices": [
+      "117",
+      "140"
+     ]
+    },
+    {
+     "url": "https://t.co/nNmv9urThl",
+     "expanded_url": "https://www.reddit.com/r/dogecoin/comments/3xc0co/dogeethereum_twoway_peg_i_wrote_up_an/",
+     "display_url": "reddit.com/r/dogecoin/com…",
+     "indices": [
+      "232",
+      "255"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "255"
+  ],
+  "favorite_count": "18",
+  "in_reply_to_status_id_str": "962043108912328705",
+  "id_str": "962043112368427009",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043112368427009",
+  "in_reply_to_status_id": "962043108912328705",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:46 +0000 2018",
+  "favorited": false,
+  "full_text": "Doge was excited about ethereum too and they posted a thread asking if it was possible to be integrated in ethereum: https://t.co/73R3r3O9f7\n\nSo a few days later, \"some guy\" had implemented Scrypt (doge's native code) in Ethereum: \nhttps://t.co/nNmv9urThl",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043114633379840"
+    ],
+    "editableUntil": "2018-02-09T20:18:47.082Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/m7x3p4bKyn",
+     "expanded_url": "https://www.reddit.com/r/ethereum/comments/41ohhr/the_doge_connection_bounty_dao_is_live_and_working/",
+     "display_url": "reddit.com/r/ethereum/com…",
+     "indices": [
+      "247",
+      "270"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "270"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "962043112368427009",
+  "id_str": "962043114633379840",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "962043114633379840",
+  "in_reply_to_status_id": "962043112368427009",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:47 +0000 2018",
+  "favorited": false,
+  "full_text": "Caveat: it would cost about 370M gas just to do one single header verification. But maybe someone could find a solution to it, and some people they could do it, so I implemented a DAO that would hold a bounty for that purpose and asked donations.\nhttps://t.co/m7x3p4bKyn",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043116906663936"
+    ],
+    "editableUntil": "2018-02-09T20:18:47.624Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/giK2JEy3kq",
+     "expanded_url": "https://etherscan.io/address/0xdbf03b407c01e7cd3cbea99509d93f8dddc8c6fb",
+     "display_url": "etherscan.io/address/0xdbf0…",
+     "indices": [
+      "249",
+      "272"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "272"
+  ],
+  "favorite_count": "15",
+  "in_reply_to_status_id_str": "962043114633379840",
+  "id_str": "962043116906663936",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043116906663936",
+  "in_reply_to_status_id": "962043114633379840",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:47 +0000 2018",
+  "favorited": false,
+  "full_text": "Many donations came from both doge and ethereum community. Someone donated 5 thousand dollars, other people donated just a few cents. The bounty quickly grew to.. well mostly to a bit more than 5 thousand dollars. Yeah, mostly from that one donor. \nhttps://t.co/giK2JEy3kq",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043119159074818"
+    ],
+    "editableUntil": "2018-02-09T20:18:48.161Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Chris",
+     "screen_name": "ethchris",
+     "indices": [
+      "211",
+      "220"
+     ],
+     "id_str": "3171561497",
+     "id": "3171561497"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "17",
+  "in_reply_to_status_id_str": "962043116906663936",
+  "id_str": "962043119159074818",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "5",
+  "id": "962043119159074818",
+  "in_reply_to_status_id": "962043116906663936",
+  "created_at": "Fri Feb 09 19:18:48 +0000 2018",
+  "favorited": false,
+  "full_text": "The problem was, that verifying a single doge transaction would not fit in the amount of calculations afforded per block. They could be broken down in steps, but they would still be super expensive. That's when @ethchris (the father of solidity came up with a very clever idea:",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043121327460352"
+    ],
+    "editableUntil": "2018-02-09T20:18:48.678Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Truebit",
+     "screen_name": "Truebitprotocol",
+     "indices": [
+      "254",
+      "270"
+     ],
+     "id_str": "909503627861118976",
+     "id": "909503627861118976"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "20",
+  "in_reply_to_status_id_str": "962043119159074818",
+  "id_str": "962043121327460352",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043121327460352",
+  "in_reply_to_status_id": "962043119159074818",
+  "created_at": "Fri Feb 09 19:18:48 +0000 2018",
+  "favorited": false,
+  "full_text": "Going to court is expensive, but not all written contracts need lawyers and judges: but knowing that you can if needed, means both parties tend to behave. You can do the calculation off chain, put money on answer and only calculate if there's a dispute. @Truebitprotocol was born.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043125018476546"
+    ],
+    "editableUntil": "2018-02-09T20:18:49.558Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "275"
+  ],
+  "favorite_count": "11",
+  "in_reply_to_status_id_str": "962043121327460352",
+  "id_str": "962043125018476546",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043125018476546",
+  "in_reply_to_status_id": "962043121327460352",
+  "created_at": "Fri Feb 09 19:18:49 +0000 2018",
+  "favorited": false,
+  "full_text": "In the mean time, some developers have all approached the judges and said they wanted to work on it. Seemed like a quick and easy job. It wasn't. So the bounty stayed frozen, while ether price rose. The original big donor even asked for his money back, so we gave it to them.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043127358930945"
+    ],
+    "editableUntil": "2018-02-09T20:18:50.116Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Oscar",
+     "screen_name": "oscarguindzberg",
+     "indices": [
+      "109",
+      "125"
+     ],
+     "id_str": "14916901",
+     "id": "14916901"
+    },
+    {
+     "name": "CoinFabrik",
+     "screen_name": "coinfabrik",
+     "indices": [
+      "127",
+      "138"
+     ],
+     "id_str": "2767245799",
+     "id": "2767245799"
+    },
+    {
+     "name": "Truebit",
+     "screen_name": "Truebitprotocol",
+     "indices": [
+      "143",
+      "159"
+     ],
+     "id_str": "909503627861118976",
+     "id": "909503627861118976"
+    }
+   ],
+   "urls": [
+    {
+     "url": "https://t.co/cy203mk9Ix",
+     "expanded_url": "https://github.com/dogethereum/dogerelay/wiki/How-to-send-dogecoins-to-ethereum",
+     "display_url": "github.com/dogethereum/do…",
+     "indices": [
+      "248",
+      "271"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "962043125018476546",
+  "id_str": "962043127358930945",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043127358930945",
+  "in_reply_to_status_id": "962043125018476546",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:50 +0000 2018",
+  "favorited": false,
+  "full_text": "Still, at some point the bounty passed a million dollars. That should get some attention to it. And it got.\n\n@oscarguindzberg, @coinfabrik and @Truebitprotocol got together and worked for many months on it and finally had something to show for it: https://t.co/cy203mk9Ix",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043129753878534"
+    ],
+    "editableUntil": "2018-02-09T20:18:50.687Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "278"
+  ],
+  "favorite_count": "29",
+  "in_reply_to_status_id_str": "962043127358930945",
+  "id_str": "962043129753878534",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "6",
+  "id": "962043129753878534",
+  "in_reply_to_status_id": "962043127358930945",
+  "created_at": "Fri Feb 09 19:18:50 +0000 2018",
+  "favorited": false,
+  "full_text": "Now it's only one-way now, and it's not production ready but let me recap what these crazy people demonstrated us:\n\nThey built a DOGECOIN LIGHT CLIENT ON ETHEREUM. A contract that can check what is the latest dogecoin block, calculate proof of work, figure out chain splits, etc",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043132131995648"
+    ],
+    "editableUntil": "2018-02-09T20:18:51.254Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043132131995648/photo/1",
+     "indices": [
+      "265",
+      "288"
+     ],
+     "url": "https://t.co/kA2tbX7Lem",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVna5a9V4AMCOgl.jpg",
+     "id_str": "962040675444318211",
+     "id": "962040675444318211",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVna5a9V4AMCOgl.jpg",
+     "sizes": {
+      "medium": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/kA2tbX7Lem"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "288"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "962043129753878534",
+  "id_str": "962043132131995648",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043132131995648",
+  "in_reply_to_status_id": "962043129753878534",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:51 +0000 2018",
+  "favorited": false,
+  "full_text": "Right now it can verify that a transaction was sent in Dogecoins to a given address and generate the same amount of cute shiba inu puppy gifs in an ERC20 token. Still need some work to make it solid, then more work making sure they can come back as doge coins, etc https://t.co/kA2tbX7Lem",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043132131995648/photo/1",
+     "indices": [
+      "265",
+      "288"
+     ],
+     "url": "https://t.co/kA2tbX7Lem",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVna5a9V4AMCOgl.jpg",
+     "id_str": "962040675444318211",
+     "video_info": {
+      "aspect_ratio": [
+       "250",
+       "137"
+      ],
+      "variants": [
+       {
+        "bitrate": "0",
+        "content_type": "video/mp4",
+        "url": "https://video.twimg.com/tweet_video/DVna5a9V4AMCOgl.mp4"
+       }
+      ]
+     },
+     "id": "962040675444318211",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVna5a9V4AMCOgl.jpg",
+     "sizes": {
+      "medium": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "500",
+       "h": "274",
+       "resize": "fit"
+      }
+     },
+     "type": "animated_gif",
+     "display_url": "pic.x.com/kA2tbX7Lem"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043135411941376"
+    ],
+    "editableUntil": "2018-02-09T20:18:52.036Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/pytAlK9q6D",
+     "expanded_url": "https://etherscan.io/tx/0x0f0e475664792708a0be3cfabb59745c014e0d4224e506f50686fb6801ec1ebc",
+     "display_url": "etherscan.io/tx/0x0f0e47566…",
+     "indices": [
+      "164",
+      "187"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043135411941376/photo/1",
+     "indices": [
+      "188",
+      "211"
+     ],
+     "url": "https://t.co/fFOyGcL4LW",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVncU4pVAAAQA-o.jpg",
+     "id_str": "962042246781534208",
+     "id": "962042246781534208",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVncU4pVAAAQA-o.jpg",
+     "sizes": {
+      "medium": {
+       "w": "700",
+       "h": "418",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "406",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "700",
+       "h": "418",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/fFOyGcL4LW"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "211"
+  ],
+  "favorite_count": "15",
+  "in_reply_to_status_id_str": "962043132131995648",
+  "id_str": "962043135411941376",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043135411941376",
+  "in_reply_to_status_id": "962043132131995648",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:52 +0000 2018",
+  "favorited": false,
+  "full_text": "Still, as a judge I believe the work demonstrated merits 25% of the total bounty, which is 372 ether which is worth $350k.. wait $299k.. or maybe $310.. Whatever. \nhttps://t.co/pytAlK9q6D https://t.co/fFOyGcL4LW",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043135411941376/photo/1",
+     "indices": [
+      "188",
+      "211"
+     ],
+     "url": "https://t.co/fFOyGcL4LW",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVncU4pVAAAQA-o.jpg",
+     "id_str": "962042246781534208",
+     "video_info": {
+      "aspect_ratio": [
+       "350",
+       "209"
+      ],
+      "variants": [
+       {
+        "bitrate": "0",
+        "content_type": "video/mp4",
+        "url": "https://video.twimg.com/tweet_video/DVncU4pVAAAQA-o.mp4"
+       }
+      ]
+     },
+     "id": "962042246781534208",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVncU4pVAAAQA-o.jpg",
+     "sizes": {
+      "medium": {
+       "w": "700",
+       "h": "418",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "406",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "700",
+       "h": "418",
+       "resize": "fit"
+      }
+     },
+     "type": "animated_gif",
+     "display_url": "pic.x.com/fFOyGcL4LW"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043144878501888"
+    ],
+    "editableUntil": "2018-02-09T20:18:54.293Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/qRUA6gFJnV",
+     "expanded_url": "https://github.com/TrueBitFoundation/scrypt-interactive",
+     "display_url": "github.com/TrueBitFoundat…",
+     "indices": [
+      "109",
+      "132"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "15",
+  "in_reply_to_status_id_str": "962043135411941376",
+  "id_str": "962043144878501888",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "962043144878501888",
+  "in_reply_to_status_id": "962043135411941376",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:54 +0000 2018",
+  "favorited": false,
+  "full_text": "What can you do? You can check their work yourself by following the above links and also reading up on this: https://t.co/qRUA6gFJnV\n\nIf you have any concerns, opinions or suggestions about the first award, please let the judges know. They have a week to vote and debate.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "962043147256606720"
+    ],
+    "editableUntil": "2018-02-09T20:18:54.860Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043147256606720/photo/1",
+     "indices": [
+      "260",
+      "283"
+     ],
+     "url": "https://t.co/roV7zhykaT",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVna1LrUQAAJPdJ.jpg",
+     "id_str": "962040602622705664",
+     "id": "962040602622705664",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVna1LrUQAAJPdJ.jpg",
+     "sizes": {
+      "large": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/roV7zhykaT"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "283"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "962043144878501888",
+  "id_str": "962043147256606720",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "7",
+  "id": "962043147256606720",
+  "in_reply_to_status_id": "962043144878501888",
+  "possibly_sensitive": false,
+  "created_at": "Fri Feb 09 19:18:54 +0000 2018",
+  "favorited": false,
+  "full_text": "Also the remainder 75% of the bounty are still open. That team will still be working to make the app better, but our desire is to see an easy to use interface that anyone can build, so even if you are a simple web designer good at gifs, you can apply to help. https://t.co/roV7zhykaT",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/962043147256606720/photo/1",
+     "indices": [
+      "260",
+      "283"
+     ],
+     "url": "https://t.co/roV7zhykaT",
+     "media_url": "http://pbs.twimg.com/tweet_video_thumb/DVna1LrUQAAJPdJ.jpg",
+     "id_str": "962040602622705664",
+     "video_info": {
+      "aspect_ratio": [
+       "25",
+       "14"
+      ],
+      "variants": [
+       {
+        "bitrate": "0",
+        "content_type": "video/mp4",
+        "url": "https://video.twimg.com/tweet_video/DVna1LrUQAAJPdJ.mp4"
+       }
+      ]
+     },
+     "id": "962040602622705664",
+     "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DVna1LrUQAAJPdJ.jpg",
+     "sizes": {
+      "large": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "500",
+       "h": "280",
+       "resize": "fit"
+      }
+     },
+     "type": "animated_gif",
+     "display_url": "pic.x.com/roV7zhykaT"
+    }
+   ]
+  }
+ }
+]

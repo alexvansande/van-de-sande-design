@@ -1,0 +1,488 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072053903420461321"
+    ],
+    "editableUntil": "2026-06-30T21:25:22.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "85"
+  ],
+  "favorite_count": "109",
+  "id_str": "2072053903420461321",
+  "truncated": false,
+  "retweet_count": "9",
+  "id": "2072053903420461321",
+  "created_at": "Tue Jun 30 20:25:22 +0000 2026",
+  "favorited": false,
+  "full_text": "We built what we thought the world needed, not what it wanted. \nThat’s why we failed.",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072062783227670804"
+    ],
+    "editableUntil": "2026-06-30T22:00:39.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "264"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "2072053903420461321",
+  "id_str": "2072062783227670804",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "2072062783227670804",
+  "in_reply_to_status_id": "2072053903420461321",
+  "created_at": "Tue Jun 30 21:00:39 +0000 2026",
+  "favorited": false,
+  "full_text": "We wanted organizations that would live in the cloud and only follow hard rules. We built a property ledger that could be used by anyone to manage anything. We wanted an open backend for an open internet. We built a way for people to invest directly into anything.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072062785454829885"
+    ],
+    "editableUntil": "2026-06-30T22:00:39.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "105"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "2072062783227670804",
+  "id_str": "2072062785454829885",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "2072062785454829885",
+  "in_reply_to_status_id": "2072062783227670804",
+  "created_at": "Tue Jun 30 21:00:39 +0000 2026",
+  "favorited": false,
+  "full_text": "The world wanted penny stocks and ape pictures. They wanted quick money and cassinos that were open 24/7.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072062787631645097"
+    ],
+    "editableUntil": "2026-06-30T22:00:40.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "36",
+  "in_reply_to_status_id_str": "2072062785454829885",
+  "id_str": "2072062787631645097",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "2072062787631645097",
+  "in_reply_to_status_id": "2072062785454829885",
+  "created_at": "Tue Jun 30 21:00:40 +0000 2026",
+  "favorited": false,
+  "full_text": "The other day I was reading the docs to invest in a promising startup and realized my money was going to a fund, structured like an spv, who owned shares in a cayman corp, who had a deal with a Delaware llc who was three levels away from the actual cap table. It’s standard.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072062789720371202"
+    ],
+    "editableUntil": "2026-06-30T22:00:40.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "186"
+  ],
+  "favorite_count": "66",
+  "in_reply_to_status_id_str": "2072062787631645097",
+  "id_str": "2072062789720371202",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "5",
+  "id": "2072062789720371202",
+  "in_reply_to_status_id": "2072062787631645097",
+  "created_at": "Tue Jun 30 21:00:40 +0000 2026",
+  "favorited": false,
+  "full_text": "We built a better system in 2016. You could buy directly from founders, own directly in your wallet, liquid. \n\nThe world used it for pumping scams. Nobody else ever wanted to touch that.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072113765429252171"
+    ],
+    "editableUntil": "2026-07-01T01:23:14.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "281"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "2072062789720371202",
+  "id_str": "2072113765429252171",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "2072113765429252171",
+  "in_reply_to_status_id": "2072062789720371202",
+  "created_at": "Wed Jul 01 00:23:14 +0000 2026",
+  "favorited": false,
+  "full_text": "I pay my taxes. I don't see where they go. I vote. I can't track where the vote is counted. I can't build my own dashboard. We built a better system than that in 2015. I went to Brasilia and touted that we could \"build a better democracy with 100 lines of code\". That was probably…",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072114109823307911"
+    ],
+    "editableUntil": "2026-07-01T01:24:36.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "2072113765429252171",
+  "id_str": "2072114109823307911",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "2072114109823307911",
+  "in_reply_to_status_id": "2072113765429252171",
+  "created_at": "Wed Jul 01 00:24:36 +0000 2026",
+  "favorited": false,
+  "full_text": "I would say the ENS DAO was the model of how everything else should work: transparent, hard rules, uncorruptable. \n\nBut the problem is that people are hard to govern, even under the best rules. And we ended up reinventing a lot of existing governance structures to fix our own…",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "2072115439463739547"
+    ],
+    "editableUntil": "2026-07-01T01:29:53.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/2072115439463739547/photo/1",
+     "indices": [
+      "275",
+      "298"
+     ],
+     "url": "https://t.co/k3HkWIP9w9",
+     "media_url": "http://pbs.twimg.com/media/HMGhY7QXgAA20Kw.jpg",
+     "id_str": "2072114753162412032",
+     "id": "2072114753162412032",
+     "media_url_https": "https://pbs.twimg.com/media/HMGhY7QXgAA20Kw.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "413",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "728",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1243",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/k3HkWIP9w9"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "298"
+  ],
+  "favorite_count": "37",
+  "in_reply_to_status_id_str": "2072114109823307911",
+  "id_str": "2072115439463739547",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "2072115439463739547",
+  "in_reply_to_status_id": "2072114109823307911",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jul 01 00:29:53 +0000 2026",
+  "favorited": false,
+  "full_text": "This was the ethereum website in 2015. I was the one pushing these pixels and writing the texts. No one told me what to do, I don't even remember how I got assigned the task of building it – I just showed up.  Tokens, Crowdsales, DAOs, it was all there. It's quite naïve in… https://t.co/k3HkWIP9w9",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/2072115439463739547/photo/1",
+     "indices": [
+      "275",
+      "298"
+     ],
+     "url": "https://t.co/k3HkWIP9w9",
+     "media_url": "http://pbs.twimg.com/media/HMGhY7QXgAA20Kw.jpg",
+     "id_str": "2072114753162412032",
+     "id": "2072114753162412032",
+     "media_url_https": "https://pbs.twimg.com/media/HMGhY7QXgAA20Kw.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "413",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "728",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1243",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/k3HkWIP9w9"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/2072115439463739547/photo/1",
+     "indices": [
+      "275",
+      "298"
+     ],
+     "url": "https://t.co/k3HkWIP9w9",
+     "media_url": "http://pbs.twimg.com/media/HMGhaNBXkAA_Pzq.jpg",
+     "id_str": "2072114775111208960",
+     "id": "2072114775111208960",
+     "media_url_https": "https://pbs.twimg.com/media/HMGhaNBXkAA_Pzq.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "846",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "480",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1444",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/k3HkWIP9w9"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/2072115439463739547/photo/1",
+     "indices": [
+      "275",
+      "298"
+     ],
+     "url": "https://t.co/k3HkWIP9w9",
+     "media_url": "http://pbs.twimg.com/media/HMGhbGAXYAA9Qyr.jpg",
+     "id_str": "2072114790407823360",
+     "id": "2072114790407823360",
+     "media_url_https": "https://pbs.twimg.com/media/HMGhbGAXYAA9Qyr.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "966",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1649",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "548",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/k3HkWIP9w9"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/2072115439463739547/photo/1",
+     "indices": [
+      "275",
+      "298"
+     ],
+     "url": "https://t.co/k3HkWIP9w9",
+     "media_url": "http://pbs.twimg.com/media/HMGhezUW8AEuH_H.jpg",
+     "id_str": "2072114854110883841",
+     "id": "2072114854110883841",
+     "media_url_https": "https://pbs.twimg.com/media/HMGhezUW8AEuH_H.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "924",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "524",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1577",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/k3HkWIP9w9"
+    }
+   ]
+  }
+ }
+]

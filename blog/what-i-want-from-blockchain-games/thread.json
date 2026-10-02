@@ -1,0 +1,339 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400833664770050"
+    ],
+    "editableUntil": "2018-04-29T02:22:14.160Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "497",
+  "id_str": "990400833664770050",
+  "truncated": false,
+  "retweet_count": "114",
+  "id": "990400833664770050",
+  "created_at": "Sun Apr 29 01:22:14 +0000 2018",
+  "favorited": false,
+  "full_text": "What I want from blockchain games:\n\n1) be a good game first\n2) explore what makes blockchain unique\n3) design around the limitations\n4) persistent always on world \n5) players own the game, the items and experiences\n6) allow anyone to design and improve the game\n7) embrace bots",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400870016745472"
+    ],
+    "editableUntil": "2018-04-29T02:22:22.827Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "178"
+  ],
+  "favorite_count": "29",
+  "in_reply_to_status_id_str": "990400833664770050",
+  "id_str": "990400870016745472",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "990400870016745472",
+  "in_reply_to_status_id": "990400833664770050",
+  "created_at": "Sun Apr 29 01:22:22 +0000 2018",
+  "favorited": false,
+  "full_text": "1) be a good game first \nI see too often people just trying to make yet another skin for a cassino or trading card games. Reminds me of slot machine games, all uniquely identical",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400885426741248"
+    ],
+    "editableUntil": "2018-04-29T02:22:26.501Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "194"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "990400870016745472",
+  "id_str": "990400885426741248",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "990400885426741248",
+  "in_reply_to_status_id": "990400870016745472",
+  "created_at": "Sun Apr 29 01:22:26 +0000 2018",
+  "favorited": false,
+  "full_text": "2) embrace what makes blockchain unique \n\nDon’t try to make a shooter or something that requires speed. Think about what sort of experience you can create that you couldn’t in any other platform",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400891508477953"
+    ],
+    "editableUntil": "2018-04-29T02:22:27.951Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "28",
+  "in_reply_to_status_id_str": "990400885426741248",
+  "id_str": "990400891508477953",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "990400891508477953",
+  "in_reply_to_status_id": "990400885426741248",
+  "created_at": "Sun Apr 29 01:22:27 +0000 2018",
+  "favorited": false,
+  "full_text": "3) design around the limitations \n\nOnly have few moves per second? Then make it strategic turns. Can’t have secret information? Make a commit reveal scheme as part of the game. Moves are expensive? Figure out what actually needs consensus. Need unexplored regions? PoW maps.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400897384632320"
+    ],
+    "editableUntil": "2018-04-29T02:22:29.352Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "174"
+  ],
+  "favorite_count": "15",
+  "in_reply_to_status_id_str": "990400891508477953",
+  "id_str": "990400897384632320",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "990400897384632320",
+  "in_reply_to_status_id": "990400891508477953",
+  "created_at": "Sun Apr 29 01:22:29 +0000 2018",
+  "favorited": false,
+  "full_text": "4) persistent worlds \n\nYour game doesn’t have multiple servers and will still exist even after you stop developing it. Explore that. Make that communities live and grow on it",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400901159497728"
+    ],
+    "editableUntil": "2018-04-29T02:22:30.252Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "270"
+  ],
+  "favorite_count": "23",
+  "in_reply_to_status_id_str": "990400897384632320",
+  "id_str": "990400901159497728",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "990400901159497728",
+  "in_reply_to_status_id": "990400897384632320",
+  "created_at": "Sun Apr 29 01:22:30 +0000 2018",
+  "favorited": false,
+  "full_text": "5) players own the game \n\nDon’t make a game just so that the users buy stuff from you. Make it so that users own many aspects of the game. They own the land, they own the equipment they own the experience. At some point they should have as much or more control than you.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400904879800321"
+    ],
+    "editableUntil": "2018-04-29T02:22:31.139Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "231"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "990400901159497728",
+  "id_str": "990400904879800321",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "990400904879800321",
+  "in_reply_to_status_id": "990400901159497728",
+  "created_at": "Sun Apr 29 01:22:31 +0000 2018",
+  "favorited": false,
+  "full_text": "6) allow others to design \n\nYou don’t need to design everything, if you make a great platform others can expand it. Allow them to create new monsters or levels, leave room for someone to update the graphics or make a new expansion.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400908591861760"
+    ],
+    "editableUntil": "2018-04-29T02:22:32.024Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "196"
+  ],
+  "favorite_count": "20",
+  "in_reply_to_status_id_str": "990400904879800321",
+  "id_str": "990400908591861760",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "990400908591861760",
+  "in_reply_to_status_id": "990400904879800321",
+  "created_at": "Sun Apr 29 01:22:32 +0000 2018",
+  "favorited": false,
+  "full_text": "7) embrace bots \n\nAI is your friend not the enemy. Allow players to build bots, allow bots to be players under the same rules. Maybe coding bots and freeing them on the world might be the most fun",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "990400912379310081"
+    ],
+    "editableUntil": "2018-04-29T02:22:32.927Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "238"
+  ],
+  "favorite_count": "36",
+  "in_reply_to_status_id_str": "990400908591861760",
+  "id_str": "990400912379310081",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "990400912379310081",
+  "in_reply_to_status_id": "990400908591861760",
+  "created_at": "Sun Apr 29 01:22:32 +0000 2018",
+  "favorited": false,
+  "full_text": "And a final one: use money to reward. A good blockchain game, imho should be one that for most users costs a small price to play but rewards the top players or those who create the best content. But you play because it’s fun, most of all.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

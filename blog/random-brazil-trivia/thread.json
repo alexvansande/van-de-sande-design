@@ -1,0 +1,3479 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1271543260088074245"
+    ],
+    "editableUntil": "2020-06-12T21:41:51.993Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/9NmUQWdmVX",
+     "expanded_url": "https://x.com/sunnya97/status/1271313741812883457",
+     "display_url": "x.com/sunnya97/statu…",
+     "indices": [
+      "185",
+      "208"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "208"
+  ],
+  "favorite_count": "87",
+  "id_str": "1271543260088074245",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1271543260088074245",
+  "possibly_sensitive": false,
+  "created_at": "Fri Jun 12 20:41:51 +0000 2020",
+  "favorited": false,
+  "full_text": "Only capital of a country in Europe to be outside Europe. \n\nI’m actually considering doing a whole new thread like Sunny’s, just with Brazilian historical trivia. Hands up if I should. https://t.co/9NmUQWdmVX",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1272529283962081281"
+    ],
+    "editableUntil": "2020-06-15T14:59:58.404Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/GJArOxVrSv",
+     "expanded_url": "https://x.com/avsa/status/1271543260088074245",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "266",
+      "289"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1272529283962081281/photo/1",
+     "indices": [
+      "290",
+      "313"
+     ],
+     "url": "https://t.co/E0HpGABVAo",
+     "media_url": "http://pbs.twimg.com/media/EajuoOeXsAA2ykC.jpg",
+     "id_str": "1272529269579821056",
+     "id": "1272529269579821056",
+     "media_url_https": "https://pbs.twimg.com/media/EajuoOeXsAA2ykC.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1074",
+       "h": "818",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1074",
+       "h": "818",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "518",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/E0HpGABVAo"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "313"
+  ],
+  "favorite_count": "53",
+  "id_str": "1272529283962081281",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1272529283962081281",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jun 15 13:59:58 +0000 2020",
+  "favorited": false,
+  "full_text": "The Amazon is manmade. Its highly fertile soil is the result of purposefully mixing broken pottery, manure and fish bones for large scale agriculture. Many native species that were believed to be wild are now known to have been domesticated over thousands of years. https://t.co/GJArOxVrSv https://t.co/E0HpGABVAo",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1272529283962081281/photo/1",
+     "indices": [
+      "290",
+      "313"
+     ],
+     "url": "https://t.co/E0HpGABVAo",
+     "media_url": "http://pbs.twimg.com/media/EajuoOeXsAA2ykC.jpg",
+     "id_str": "1272529269579821056",
+     "id": "1272529269579821056",
+     "media_url_https": "https://pbs.twimg.com/media/EajuoOeXsAA2ykC.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1074",
+       "h": "818",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1074",
+       "h": "818",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "518",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/E0HpGABVAo"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1272535019739918336"
+    ],
+    "editableUntil": "2020-06-15T15:22:45.920Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/eh73ecxXo2",
+     "expanded_url": "https://en.wikipedia.org/wiki/Terra_preta",
+     "display_url": "en.wikipedia.org/wiki/Terra_pre…",
+     "indices": [
+      "26",
+      "49"
+     ]
+    },
+    {
+     "url": "https://t.co/fF4ZFeGFBM",
+     "expanded_url": "https://www.sciencemag.org/news/2017/03/hundreds-years-later-plants-domesticated-ancient-civilizations-still-dominate-amazon",
+     "display_url": "sciencemag.org/news/2017/03/h…",
+     "indices": [
+      "96",
+      "119"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "119"
+  ],
+  "favorite_count": "8",
+  "in_reply_to_status_id_str": "1272529283962081281",
+  "id_str": "1272535019739918336",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1272535019739918336",
+  "in_reply_to_status_id": "1272529283962081281",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jun 15 14:22:45 +0000 2020",
+  "favorited": false,
+  "full_text": "References: \nTerra Preta: https://t.co/eh73ecxXo2\nDomestication of plant species in the Amazon: https://t.co/fF4ZFeGFBM",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1272901424884723719"
+    ],
+    "editableUntil": "2020-06-16T15:38:43.714Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/vnrTCryjMN",
+     "expanded_url": "https://x.com/avsa/status/1272529283962081281",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "279",
+      "302"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/4mHX6qFmxm",
+     "media_url": "http://pbs.twimg.com/media/EapBFWlWoAUjaJE.jpg",
+     "id_str": "1272901404902989829",
+     "id": "1272901404902989829",
+     "media_url_https": "https://pbs.twimg.com/media/EapBFWlWoAUjaJE.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "803",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "455",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1500",
+       "h": "1004",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/4mHX6qFmxm"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "326"
+  ],
+  "favorite_count": "56",
+  "id_str": "1272901424884723719",
+  "truncated": false,
+  "retweet_count": "10",
+  "id": "1272901424884723719",
+  "possibly_sensitive": false,
+  "created_at": "Tue Jun 16 14:38:43 +0000 2020",
+  "favorited": false,
+  "full_text": "The first European on the Amazon reported it densely populated, which was later considered an exaggeration. Recent deforestation have uncovered hundreds of geometrical patterns now understood to be remains of wooden temples (the region lack stones) of yet unknown civilizations. https://t.co/vnrTCryjMN https://t.co/4mHX6qFmxm",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/4mHX6qFmxm",
+     "media_url": "http://pbs.twimg.com/media/EapBFWlWoAUjaJE.jpg",
+     "id_str": "1272901404902989829",
+     "id": "1272901404902989829",
+     "media_url_https": "https://pbs.twimg.com/media/EapBFWlWoAUjaJE.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "803",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "455",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1500",
+       "h": "1004",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/4mHX6qFmxm"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/4mHX6qFmxm",
+     "media_url": "http://pbs.twimg.com/media/EapBEu0WAAAlZ4S.jpg",
+     "id_str": "1272901394228445184",
+     "id": "1272901394228445184",
+     "media_url_https": "https://pbs.twimg.com/media/EapBEu0WAAAlZ4S.jpg",
+     "sizes": {
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "780",
+       "h": "522",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "780",
+       "h": "522",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "455",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/4mHX6qFmxm"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/4mHX6qFmxm",
+     "media_url": "http://pbs.twimg.com/media/EapBFjbWoAA58yd.jpg",
+     "id_str": "1272901408350707712",
+     "id": "1272901408350707712",
+     "media_url_https": "https://pbs.twimg.com/media/EapBFjbWoAA58yd.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "452",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1200",
+       "h": "797",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "797",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/4mHX6qFmxm"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/4mHX6qFmxm",
+     "media_url": "http://pbs.twimg.com/media/EapBE9rXkAUSHe2.jpg",
+     "id_str": "1272901398217330693",
+     "id": "1272901398217330693",
+     "media_url_https": "https://pbs.twimg.com/media/EapBE9rXkAUSHe2.jpg",
+     "sizes": {
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "512",
+       "h": "355",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "512",
+       "h": "355",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "512",
+       "h": "355",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/4mHX6qFmxm"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1273258071440195586"
+    ],
+    "editableUntil": "2020-06-17T15:15:54.879Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/jX77ZlBJLu",
+     "expanded_url": "https://x.com/avsa/status/1272901424884723719",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "262",
+      "285"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273258071440195586/photo/1",
+     "indices": [
+      "286",
+      "309"
+     ],
+     "url": "https://t.co/yJSALWzNiJ",
+     "media_url": "http://pbs.twimg.com/media/EauFdTlWkAAJ0dX.jpg",
+     "id_str": "1273258058181939200",
+     "id": "1273258058181939200",
+     "media_url_https": "https://pbs.twimg.com/media/EauFdTlWkAAJ0dX.jpg",
+     "sizes": {
+      "large": {
+       "w": "1640",
+       "h": "826",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "342",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "604",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/yJSALWzNiJ"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "309"
+  ],
+  "favorite_count": "17",
+  "id_str": "1273258071440195586",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1273258071440195586",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jun 17 14:15:54 +0000 2020",
+  "favorited": false,
+  "full_text": "All the tribe members had bows, and when they saw white men coming down their river in a weird boat, they welcomed them with arrows. The Spaniards barely made it home alive, but were so impressed about the mythical women warriors they called them the “Amazons”. https://t.co/jX77ZlBJLu https://t.co/yJSALWzNiJ",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273258071440195586/photo/1",
+     "indices": [
+      "286",
+      "309"
+     ],
+     "url": "https://t.co/yJSALWzNiJ",
+     "media_url": "http://pbs.twimg.com/media/EauFdTlWkAAJ0dX.jpg",
+     "id_str": "1273258058181939200",
+     "id": "1273258058181939200",
+     "media_url_https": "https://pbs.twimg.com/media/EauFdTlWkAAJ0dX.jpg",
+     "sizes": {
+      "large": {
+       "w": "1640",
+       "h": "826",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "342",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "604",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/yJSALWzNiJ"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1273609455188443141"
+    ],
+    "editableUntil": "2020-06-18T14:32:11.293Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/XrQPEvQQyu",
+     "expanded_url": "https://x.com/avsa/status/1273258071440195586",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "279",
+      "302"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/bMn8WNe3HY",
+     "media_url": "http://pbs.twimg.com/media/EazFCnQWAAILVVl.jpg",
+     "id_str": "1273609443326951426",
+     "id": "1273609443326951426",
+     "media_url_https": "https://pbs.twimg.com/media/EazFCnQWAAILVVl.jpg",
+     "sizes": {
+      "large": {
+       "w": "864",
+       "h": "1064",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "864",
+       "h": "1064",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "552",
+       "h": "680",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/bMn8WNe3HY"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "326"
+  ],
+  "favorite_count": "6",
+  "id_str": "1273609455188443141",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1273609455188443141",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jun 18 13:32:11 +0000 2020",
+  "favorited": false,
+  "full_text": "Uncharacteristically for nomadic tribes, some Amazon people (Kambeba, Marajoara) have a class based society, further evidence they descended from a more complex agrarian society. The Kambeba even did cranial mods to differentiate themselves from other inferior \"forest savages”. https://t.co/XrQPEvQQyu https://t.co/bMn8WNe3HY",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/bMn8WNe3HY",
+     "media_url": "http://pbs.twimg.com/media/EazFCnQWAAILVVl.jpg",
+     "id_str": "1273609443326951426",
+     "id": "1273609443326951426",
+     "media_url_https": "https://pbs.twimg.com/media/EazFCnQWAAILVVl.jpg",
+     "sizes": {
+      "large": {
+       "w": "864",
+       "h": "1064",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "864",
+       "h": "1064",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "552",
+       "h": "680",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/bMn8WNe3HY"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/bMn8WNe3HY",
+     "media_url": "http://pbs.twimg.com/media/EazFCnRXgAEsjfM.jpg",
+     "id_str": "1273609443331244033",
+     "id": "1273609443331244033",
+     "media_url_https": "https://pbs.twimg.com/media/EazFCnRXgAEsjfM.jpg",
+     "sizes": {
+      "small": {
+       "w": "522",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "712",
+       "h": "928",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "712",
+       "h": "928",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/bMn8WNe3HY"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/bMn8WNe3HY",
+     "media_url": "http://pbs.twimg.com/media/EazFCnQWAAMIKQY.jpg",
+     "id_str": "1273609443326951427",
+     "id": "1273609443326951427",
+     "media_url_https": "https://pbs.twimg.com/media/EazFCnQWAAMIKQY.jpg",
+     "sizes": {
+      "small": {
+       "w": "510",
+       "h": "680",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "792",
+       "h": "1056",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "792",
+       "h": "1056",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/bMn8WNe3HY"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1273612823822766081"
+    ],
+    "editableUntil": "2020-06-18T14:45:34.438Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/v0HMGlVUVw",
+     "expanded_url": "https://en.wikipedia.org/wiki/Francisco_de_Orellana",
+     "display_url": "en.wikipedia.org/wiki/Francisco…",
+     "indices": [
+      "204",
+      "227"
+     ]
+    },
+    {
+     "url": "https://t.co/9P13c41qW9",
+     "expanded_url": "https://en.wikipedia.org/wiki/Cambeba",
+     "display_url": "en.wikipedia.org/wiki/Cambeba",
+     "indices": [
+      "228",
+      "251"
+     ]
+    },
+    {
+     "url": "https://t.co/t6JqcEwHUw",
+     "expanded_url": "https://en.wikipedia.org/wiki/Marajoara_culture",
+     "display_url": "en.wikipedia.org/wiki/Marajoara…",
+     "indices": [
+      "252",
+      "275"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "275"
+  ],
+  "favorite_count": "3",
+  "in_reply_to_status_id_str": "1273609455188443141",
+  "id_str": "1273612823822766081",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1273612823822766081",
+  "in_reply_to_status_id": "1273609455188443141",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jun 18 13:45:34 +0000 2020",
+  "favorited": false,
+  "full_text": "I hope I have convinced you that the idea that the Amazon was a pristine and unocupied land is a myth. I swear tomorrow's trivia will be on a slightly different take. \n\nReading suggestions on that topic:\nhttps://t.co/v0HMGlVUVw\nhttps://t.co/9P13c41qW9\nhttps://t.co/t6JqcEwHUw",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1273962262907289600"
+    ],
+    "editableUntil": "2020-06-19T13:54:07.208Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/mzbe7SIVwy",
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "261",
+      "284"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273962262907289600/photo/1",
+     "indices": [
+      "285",
+      "308"
+     ],
+     "url": "https://t.co/v6qng9O7Ih",
+     "media_url": "http://pbs.twimg.com/media/Ea4F6VdWkAEn5pY.jpg",
+     "id_str": "1273962244343238657",
+     "id": "1273962244343238657",
+     "media_url_https": "https://pbs.twimg.com/media/Ea4F6VdWkAEn5pY.jpg",
+     "sizes": {
+      "large": {
+       "w": "1092",
+       "h": "890",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "554",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1092",
+       "h": "890",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/v6qng9O7Ih"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "308"
+  ],
+  "favorite_count": "11",
+  "id_str": "1273962262907289600",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1273962262907289600",
+  "possibly_sensitive": false,
+  "created_at": "Fri Jun 19 12:54:07 +0000 2020",
+  "favorited": false,
+  "full_text": "When the Pope proposed to divide the world between Portugal and Spain in 1493, King John II threatened war to push what was an arbitrary line in unknown sea 270 leagues to the west, later revealed to contain most of Brazil. This was probably not a coincidence. https://t.co/mzbe7SIVwy https://t.co/v6qng9O7Ih",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1273962262907289600/photo/1",
+     "indices": [
+      "285",
+      "308"
+     ],
+     "url": "https://t.co/v6qng9O7Ih",
+     "media_url": "http://pbs.twimg.com/media/Ea4F6VdWkAEn5pY.jpg",
+     "id_str": "1273962244343238657",
+     "id": "1273962244343238657",
+     "media_url_https": "https://pbs.twimg.com/media/Ea4F6VdWkAEn5pY.jpg",
+     "sizes": {
+      "large": {
+       "w": "1092",
+       "h": "890",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "554",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1092",
+       "h": "890",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/v6qng9O7Ih"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1274303032512176128"
+    ],
+    "editableUntil": "2020-06-20T12:28:13.013Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/lCI3iSsWgI",
+     "expanded_url": "https://x.com/avsa/status/1273962262907289600",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "278",
+      "301"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1274303032512176128/photo/1",
+     "indices": [
+      "302",
+      "325"
+     ],
+     "url": "https://t.co/AKd1Mv7dDI",
+     "media_url": "http://pbs.twimg.com/media/Ea871tuWAAApaDH.jpg",
+     "id_str": "1274303013562220544",
+     "id": "1274303013562220544",
+     "media_url_https": "https://pbs.twimg.com/media/Ea871tuWAAApaDH.jpg",
+     "sizes": {
+      "medium": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/AKd1Mv7dDI"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "325"
+  ],
+  "favorite_count": "7",
+  "id_str": "1274303032512176128",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1274303032512176128",
+  "possibly_sensitive": false,
+  "created_at": "Sat Jun 20 11:28:13 +0000 2020",
+  "favorited": false,
+  "full_text": "The first European to arrive on Brazil was a Spaniard. \nWhile there’s controversial evidence for some 1498 trips (and even earlier speculation) the first documented exploration of the Brazilian coast is of Vicente Pinzon, 2 months before the official Portuguese trip by Cabral. https://t.co/lCI3iSsWgI https://t.co/AKd1Mv7dDI",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1274303032512176128/photo/1",
+     "indices": [
+      "302",
+      "325"
+     ],
+     "url": "https://t.co/AKd1Mv7dDI",
+     "media_url": "http://pbs.twimg.com/media/Ea871tuWAAApaDH.jpg",
+     "id_str": "1274303013562220544",
+     "id": "1274303013562220544",
+     "media_url_https": "https://pbs.twimg.com/media/Ea871tuWAAApaDH.jpg",
+     "sizes": {
+      "medium": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "349",
+       "h": "500",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/AKd1Mv7dDI"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1274303032512176128/photo/1",
+     "indices": [
+      "302",
+      "325"
+     ],
+     "url": "https://t.co/AKd1Mv7dDI",
+     "media_url": "http://pbs.twimg.com/media/Ea871tvXgAAuENo.jpg",
+     "id_str": "1274303013566513152",
+     "id": "1274303013566513152",
+     "media_url_https": "https://pbs.twimg.com/media/Ea871tvXgAAuENo.jpg",
+     "sizes": {
+      "medium": {
+       "w": "249",
+       "h": "316",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "249",
+       "h": "316",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "249",
+       "h": "316",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/AKd1Mv7dDI"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1274692713565376516"
+    ],
+    "editableUntil": "2020-06-21T14:16:40.216Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/2dobEzDPmH",
+     "expanded_url": "https://x.com/avsa/status/1274303032512176128",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "277",
+      "300"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "300"
+  ],
+  "favorite_count": "2",
+  "id_str": "1274692713565376516",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1274692713565376516",
+  "possibly_sensitive": false,
+  "created_at": "Sun Jun 21 13:16:40 +0000 2020",
+  "favorited": false,
+  "full_text": "Cabral’s fleet to India, which claimed brazil for Portugal, was the largest ever assembled, 13 ships and 1500 men, more than Colombo, Pizarro, Vasco da Gama and Cortês expeditions combined. Yet it was given to a high noble with no sea experience as was the custom of the time. https://t.co/2dobEzDPmH",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1275075971163451392"
+    ],
+    "editableUntil": "2020-06-22T15:39:35.948Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/QWxnZR8Brk",
+     "expanded_url": "https://x.com/avsa/status/1274692713565376516",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "85",
+      "108"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1275075971163451392/photo/1",
+     "indices": [
+      "109",
+      "132"
+     ],
+     "url": "https://t.co/SpKPCwafCf",
+     "media_url": "http://pbs.twimg.com/media/EbH6dzgUMAIij20.png",
+     "id_str": "1275075559471460354",
+     "id": "1275075559471460354",
+     "media_url_https": "https://pbs.twimg.com/media/EbH6dzgUMAIij20.png",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "315",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1357",
+       "h": "628",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "555",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/SpKPCwafCf"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "132"
+  ],
+  "favorite_count": "8",
+  "id_str": "1275075971163451392",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1275075971163451392",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jun 22 14:39:35 +0000 2020",
+  "favorited": false,
+  "full_text": "Brazil, the netherlands and Italy shared the same King for 60 years. He was spanish. https://t.co/QWxnZR8Brk https://t.co/SpKPCwafCf",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1275075971163451392/photo/1",
+     "indices": [
+      "109",
+      "132"
+     ],
+     "url": "https://t.co/SpKPCwafCf",
+     "media_url": "http://pbs.twimg.com/media/EbH6dzgUMAIij20.png",
+     "id_str": "1275075559471460354",
+     "id": "1275075559471460354",
+     "media_url_https": "https://pbs.twimg.com/media/EbH6dzgUMAIij20.png",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "315",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1357",
+       "h": "628",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "555",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/SpKPCwafCf"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1275402178677608448"
+    ],
+    "editableUntil": "2020-06-23T13:15:49.880Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/aW73S6DxNg",
+     "expanded_url": "https://x.com/avsa/status/1275075971163451392",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "264",
+      "287"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "287"
+  ],
+  "favorite_count": "1",
+  "id_str": "1275402178677608448",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1275402178677608448",
+  "possibly_sensitive": false,
+  "created_at": "Tue Jun 23 12:15:49 +0000 2020",
+  "favorited": false,
+  "full_text": "Like many countries, Brazil celebrates Independence Day. But unlike others, it was actually encouraged by the Portuguese king to his son, who, seeing both colonies and kings were falling out of fashion, declared himself emperor of Brazil\nOnly his brother opposed. https://t.co/aW73S6DxNg",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1275774974184300549"
+    ],
+    "editableUntil": "2020-06-24T13:57:11.255Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/dIvZTLP34m",
+     "expanded_url": "https://x.com/avsa/status/1275402178677608448",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "281",
+      "304"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1275774974184300549/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/S6NVJ2epwV",
+     "media_url": "http://pbs.twimg.com/media/EbR2knBXgAArLj1.jpg",
+     "id_str": "1275774965774778368",
+     "id": "1275774965774778368",
+     "media_url_https": "https://pbs.twimg.com/media/EbR2knBXgAArLj1.jpg",
+     "sizes": {
+      "medium": {
+       "w": "714",
+       "h": "642",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "714",
+       "h": "642",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "611",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/S6NVJ2epwV"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "328"
+  ],
+  "favorite_count": "14",
+  "id_str": "1275774974184300549",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1275774974184300549",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jun 24 12:57:11 +0000 2020",
+  "favorited": false,
+  "full_text": "During one of the few battles in the \"indepence war”, the brazilian army was outnumbered and the commander ordered the bugle to call the withdrawal, but it played insted “cavalry, charge and kill”.\nThe Portuguese, fearing reinforcements had arrived, receded. There was no cavalry. https://t.co/dIvZTLP34m https://t.co/S6NVJ2epwV",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1275774974184300549/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/S6NVJ2epwV",
+     "media_url": "http://pbs.twimg.com/media/EbR2knBXgAArLj1.jpg",
+     "id_str": "1275774965774778368",
+     "id": "1275774965774778368",
+     "media_url_https": "https://pbs.twimg.com/media/EbR2knBXgAArLj1.jpg",
+     "sizes": {
+      "medium": {
+       "w": "714",
+       "h": "642",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "714",
+       "h": "642",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "611",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/S6NVJ2epwV"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1275777870498009089"
+    ],
+    "editableUntil": "2020-06-24T14:08:41.790Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/iEnbf0aJX3",
+     "expanded_url": "https://www.google.com/maps/place/O+Corneteiro/@-22.9839705,-43.2092109,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj%3Dw115-h86-k-no!7i2592!8i1936!4m5!3m4!1s0x9bd5f4627594af:0xb37554009e5574d9!8m2!3d-22.9839728!4d-43.2091708",
+     "display_url": "google.com/maps/place/O+C…",
+     "indices": [
+      "198",
+      "221"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "221"
+  ],
+  "favorite_count": "4",
+  "in_reply_to_status_id_str": "1275774974184300549",
+  "id_str": "1275777870498009089",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1275777870498009089",
+  "in_reply_to_status_id": "1275774974184300549",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jun 24 13:08:41 +0000 2020",
+  "favorited": false,
+  "full_text": "*independence\n\nThe trumpet player is commemorated on a comical statue in Ipanema on a street named after a big funder of the war, but unfortunately most people have  no idea of his hilarious story.\nhttps://t.co/iEnbf0aJX3",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1276113428453744640"
+    ],
+    "editableUntil": "2020-06-25T12:22:05.041Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/RXOlW0osPh",
+     "expanded_url": "https://x.com/avsa/status/1275774974184300549",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "276",
+      "299"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1276113428453744640/photo/1",
+     "indices": [
+      "300",
+      "323"
+     ],
+     "url": "https://t.co/5Xkw5Tmngn",
+     "media_url": "http://pbs.twimg.com/media/EbWqZbAXYAEwOfw.jpg",
+     "id_str": "1276113423152144385",
+     "id": "1276113423152144385",
+     "media_url_https": "https://pbs.twimg.com/media/EbWqZbAXYAEwOfw.jpg",
+     "sizes": {
+      "large": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/5Xkw5Tmngn"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "323"
+  ],
+  "favorite_count": "4",
+  "id_str": "1276113428453744640",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1276113428453744640",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jun 25 11:22:05 +0000 2020",
+  "favorited": false,
+  "full_text": "Shortly after the Independence the whole process was *accidentally* reversed. Due to his father death, Peter the first, emperor of Brazil, was also crowned Peter the fourth, king of Portugal. He abdicated the Portuguese throne for his daughter, the only Brazilian queen ever. https://t.co/RXOlW0osPh https://t.co/5Xkw5Tmngn",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1276113428453744640/photo/1",
+     "indices": [
+      "300",
+      "323"
+     ],
+     "url": "https://t.co/5Xkw5Tmngn",
+     "media_url": "http://pbs.twimg.com/media/EbWqZbAXYAEwOfw.jpg",
+     "id_str": "1276113423152144385",
+     "id": "1276113423152144385",
+     "media_url_https": "https://pbs.twimg.com/media/EbWqZbAXYAEwOfw.jpg",
+     "sizes": {
+      "large": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "150",
+       "h": "184",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/5Xkw5Tmngn"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1276113428453744640/photo/1",
+     "indices": [
+      "300",
+      "323"
+     ],
+     "url": "https://t.co/5Xkw5Tmngn",
+     "media_url": "http://pbs.twimg.com/media/EbWqZa_WkAE82h6.jpg",
+     "id_str": "1276113423147896833",
+     "id": "1276113423147896833",
+     "media_url_https": "https://pbs.twimg.com/media/EbWqZa_WkAE82h6.jpg",
+     "sizes": {
+      "large": {
+       "w": "220",
+       "h": "358",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "220",
+       "h": "358",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "220",
+       "h": "358",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/5Xkw5Tmngn"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1276505123779489793"
+    ],
+    "editableUntil": "2020-06-26T14:18:32.484Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/jaQAWHfZz6",
+     "expanded_url": "https://x.com/avsa/status/1276113428453744640",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "245",
+      "268"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1276505123779489793/photo/1",
+     "indices": [
+      "269",
+      "292"
+     ],
+     "url": "https://t.co/Qp2kCDDUuN",
+     "media_url": "http://pbs.twimg.com/media/EbcOo2dWsAAH1bT.jpg",
+     "id_str": "1276505114359017472",
+     "id": "1276505114359017472",
+     "media_url_https": "https://pbs.twimg.com/media/EbcOo2dWsAAH1bT.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "766",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "434",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1203",
+       "h": "768",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Qp2kCDDUuN"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "292"
+  ],
+  "favorite_count": "11",
+  "id_str": "1276505123779489793",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1276505123779489793",
+  "possibly_sensitive": false,
+  "created_at": "Fri Jun 26 13:18:32 +0000 2020",
+  "favorited": false,
+  "full_text": "Half of all victims of the atlantic human trafficking trade were brought to Brazil.   About 4-5 million enslaved africans were brought, 6x the total number of the United States. Brazil was also the last state in the Americas to abolish slavery. https://t.co/jaQAWHfZz6 https://t.co/Qp2kCDDUuN",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1276505123779489793/photo/1",
+     "indices": [
+      "269",
+      "292"
+     ],
+     "url": "https://t.co/Qp2kCDDUuN",
+     "media_url": "http://pbs.twimg.com/media/EbcOo2dWsAAH1bT.jpg",
+     "id_str": "1276505114359017472",
+     "id": "1276505114359017472",
+     "media_url_https": "https://pbs.twimg.com/media/EbcOo2dWsAAH1bT.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "766",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "434",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1203",
+       "h": "768",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/Qp2kCDDUuN"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1276897673669414912"
+    ],
+    "editableUntil": "2020-06-27T16:18:23.671Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/R5EnnkuS6H",
+     "expanded_url": "https://x.com/avsa/status/1276505123779489793",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "253",
+      "276"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "9",
+  "id_str": "1276897673669414912",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1276897673669414912",
+  "possibly_sensitive": false,
+  "created_at": "Sat Jun 27 15:18:23 +0000 2020",
+  "favorited": false,
+  "full_text": "After aboliton, all the files related to slavery were burned, theoretically to \"allow the formerly enslaved to have a blank slate\". Of course, quite conveniently for the former enslavers, this prevented any talk of reparations for their former victims. https://t.co/R5EnnkuS6H",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1276934366464217089"
+    ],
+    "editableUntil": "2020-06-27T18:44:11.915Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/aC8D8e4PQH",
+     "expanded_url": "http://m.acervo.estadao.com.br/noticias/acervo,a-destruicao-dos-documentos-sobre-a-escravidao-,11840,0.htm",
+     "display_url": "m.acervo.estadao.com.br/noticias/acerv…",
+     "indices": [
+      "33",
+      "56"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "56"
+  ],
+  "favorite_count": "1",
+  "in_reply_to_status_id_str": "1276897673669414912",
+  "id_str": "1276934366464217089",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1276934366464217089",
+  "in_reply_to_status_id": "1276897673669414912",
+  "possibly_sensitive": false,
+  "created_at": "Sat Jun 27 17:44:11 +0000 2020",
+  "favorited": false,
+  "full_text": "Link to a new story of the time: https://t.co/aC8D8e4PQH",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1277312061081563138"
+    ],
+    "editableUntil": "2020-06-28T19:45:01.329Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/YBEVxCkNJk",
+     "expanded_url": "https://x.com/avsa/status/1276897673669414912",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "281",
+      "304"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1277312061081563138/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/lvRN6GkaKF",
+     "media_url": "http://pbs.twimg.com/media/Ebnsi08WsAIBHBL.jpg",
+     "id_str": "1277312052407742466",
+     "id": "1277312052407742466",
+     "media_url_https": "https://pbs.twimg.com/media/Ebnsi08WsAIBHBL.jpg",
+     "sizes": {
+      "large": {
+       "w": "1200",
+       "h": "800",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "800",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "453",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/lvRN6GkaKF"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "328"
+  ],
+  "favorite_count": "10",
+  "id_str": "1277312061081563138",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1277312061081563138",
+  "possibly_sensitive": false,
+  "created_at": "Sun Jun 28 18:45:01 +0000 2020",
+  "favorited": false,
+  "full_text": "Brazil had its first “black” president in 1906. The country never had racial laws but racism manifested in society in other ways: his critics would call him a “mullato” but Nilo Peçanha’s family denied it and his photographs would be whitened. Only recently has this view changed. https://t.co/YBEVxCkNJk https://t.co/lvRN6GkaKF",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1277312061081563138/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/lvRN6GkaKF",
+     "media_url": "http://pbs.twimg.com/media/Ebnsi08WsAIBHBL.jpg",
+     "id_str": "1277312052407742466",
+     "id": "1277312052407742466",
+     "media_url_https": "https://pbs.twimg.com/media/Ebnsi08WsAIBHBL.jpg",
+     "sizes": {
+      "large": {
+       "w": "1200",
+       "h": "800",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "800",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "453",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/lvRN6GkaKF"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1277596022957576194"
+    ],
+    "editableUntil": "2020-06-29T14:33:23.116Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/JF3VEk8Xzf",
+     "expanded_url": "https://x.com/avsa/status/1277312061081563138",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "281",
+      "304"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "304"
+  ],
+  "favorite_count": "4",
+  "id_str": "1277596022957576194",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1277596022957576194",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jun 29 13:33:23 +0000 2020",
+  "favorited": false,
+  "full_text": "The emperor was still popular when the republic started, and monarchy still enjoys some occasional popularity. A 1993 referendum to reinstate got 13% of the vote. The current “heir” was elected a congressman in 2018 and was considered for a VP for the current far-right government https://t.co/JF3VEk8Xzf",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1277956896708796416"
+    ],
+    "editableUntil": "2020-06-30T14:27:22.123Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/13pTbF349R",
+     "expanded_url": "https://x.com/avsa/status/1277596022957576194",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "225",
+      "248"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "248"
+  ],
+  "favorite_count": "5",
+  "id_str": "1277956896708796416",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1277956896708796416",
+  "possibly_sensitive": false,
+  "created_at": "Tue Jun 30 13:27:22 +0000 2020",
+  "favorited": false,
+  "full_text": "There's currently a schism in the Brazilian “royal\" family, due to a \"scandalous” marriage of the Peter’s grandson with a commoner in 1908. As of 2020 there are two claimants for the non-existing throne of emperor of Brazil. https://t.co/13pTbF349R",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1277969323470934019"
+    ],
+    "editableUntil": "2020-06-30T15:16:44.894Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/3WeTtJgnfV",
+     "expanded_url": "https://en.wikipedia.org/wiki/Line_of_succession_to_the_former_Brazilian_throne",
+     "display_url": "en.wikipedia.org/wiki/Line_of_s…",
+     "indices": [
+      "255",
+      "278"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "278"
+  ],
+  "favorite_count": "0",
+  "in_reply_to_status_id_str": "1277956896708796416",
+  "id_str": "1277969323470934019",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1277969323470934019",
+  "in_reply_to_status_id": "1277956896708796416",
+  "possibly_sensitive": false,
+  "created_at": "Tue Jun 30 14:16:44 +0000 2020",
+  "favorited": false,
+  "full_text": "Whe wasn't even a \"commoner”, she was a countess noblewoman from the Bohemian kingdom, but she had no *shocked face* royalty claim. I find the whole article particularly funny, a series of detailed wiki articles about people who did nothing but be born.\n\nhttps://t.co/3WeTtJgnfV",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1278335559740596226"
+    ],
+    "editableUntil": "2020-07-01T15:32:02.425Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/0TQtkU8wGy",
+     "expanded_url": "https://x.com/avsa/status/1277956896708796416",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "169",
+      "192"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "192"
+  ],
+  "favorite_count": "3",
+  "id_str": "1278335559740596226",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1278335559740596226",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jul 01 14:32:02 +0000 2020",
+  "favorited": false,
+  "full_text": "Only once in the history of Brazil was a democratically elected* president both succeeded and preceded by another democratically elected president. It happened in 2016. https://t.co/0TQtkU8wGy",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1278335572025774081"
+    ],
+    "editableUntil": "2020-07-01T15:32:05.354Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "258"
+  ],
+  "favorite_count": "1",
+  "in_reply_to_status_id_str": "1278335559740596226",
+  "id_str": "1278335572025774081",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1278335572025774081",
+  "in_reply_to_status_id": "1278335559740596226",
+  "created_at": "Wed Jul 01 14:32:05 +0000 2020",
+  "favorited": false,
+  "full_text": "*This excludes the first republic in which neither woman or poor people could vote. But even if we include that one, it doesn't get much better: the longest sucessions of presidents without a death, impeachment, or coup d'etat was 4 sucessions, 1894 to 1909.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1278398578629718016"
+    ],
+    "editableUntil": "2020-07-01T19:42:27.299Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/QzNf6ajNBU",
+     "expanded_url": "https://x.com/interstar/status/1278391632308711424?s=21",
+     "display_url": "x.com/interstar/stat…",
+     "indices": [
+      "81",
+      "104"
+     ]
+    },
+    {
+     "url": "https://t.co/xeNEj7qqfi",
+     "expanded_url": "https://x.com/interstar/status/1278391632308711424",
+     "display_url": "x.com/interstar/stat…",
+     "indices": [
+      "105",
+      "128"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "128"
+  ],
+  "favorite_count": "0",
+  "in_reply_to_status_id_str": "1278335572025774081",
+  "id_str": "1278398578629718016",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1278398578629718016",
+  "in_reply_to_status_id": "1278335572025774081",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jul 01 18:42:27 +0000 2020",
+  "favorited": false,
+  "full_text": "It was actually 2010, 2016 is her impeachment. Had a brain short circuit there.. https://t.co/QzNf6ajNBU https://t.co/xeNEj7qqfi",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1278646497681301504"
+    ],
+    "editableUntil": "2020-07-02T12:07:35.807Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/CvcgtJ7SJC",
+     "expanded_url": "https://x.com/avsa/status/1278335559740596226",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "120",
+      "143"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "143"
+  ],
+  "favorite_count": "6",
+  "id_str": "1278646497681301504",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1278646497681301504",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jul 02 11:07:35 +0000 2020",
+  "favorited": false,
+  "full_text": "After Japan, the country with the second largest community of Japanese descendants is Brazil, about 1.5 million people. https://t.co/CvcgtJ7SJC",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1281209460128702467"
+    ],
+    "editableUntil": "2020-07-09T13:51:53.672Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/51V2poqSAO",
+     "expanded_url": "https://x.com/avsa/status/1278646497681301504",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "210",
+      "233"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "233"
+  ],
+  "favorite_count": "21",
+  "id_str": "1281209460128702467",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1281209460128702467",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jul 09 12:51:53 +0000 2020",
+  "favorited": false,
+  "full_text": "Brazil’s first war as an independent country was with also newly independent Argentina, over who would control a bordering province. Both countries lost and thus was created the independent country of Uruguay. https://t.co/51V2poqSAO",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1281667208180097035"
+    ],
+    "editableUntil": "2020-07-10T20:10:49.312Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/kqQI3FwfLm",
+     "expanded_url": "https://x.com/avsa/status/1281209460128702467",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "271",
+      "294"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1281667208180097035/photo/1",
+     "indices": [
+      "295",
+      "318"
+     ],
+     "url": "https://t.co/ftojwiq31B",
+     "media_url": "http://pbs.twimg.com/media/EcllhxsXkAIIh9L.jpg",
+     "id_str": "1281667199913136130",
+     "id": "1281667199913136130",
+     "media_url_https": "https://pbs.twimg.com/media/EcllhxsXkAIIh9L.jpg",
+     "sizes": {
+      "large": {
+       "w": "1024",
+       "h": "682",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "453",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1024",
+       "h": "682",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ftojwiq31B"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "318"
+  ],
+  "favorite_count": "7",
+  "id_str": "1281667208180097035",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1281667208180097035",
+  "possibly_sensitive": false,
+  "created_at": "Fri Jul 10 19:10:49 +0000 2020",
+  "favorited": false,
+  "full_text": "Brazil still has some territorial disputes with Uruguay. One of them is a river island which was until 2011 inhabited by a single, ninety year old, farmer. When a fire broke there in 2009, firefighters from both countries came to the rescue.  It’s currently uninhabited. https://t.co/kqQI3FwfLm https://t.co/ftojwiq31B",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1281667208180097035/photo/1",
+     "indices": [
+      "295",
+      "318"
+     ],
+     "url": "https://t.co/ftojwiq31B",
+     "media_url": "http://pbs.twimg.com/media/EcllhxsXkAIIh9L.jpg",
+     "id_str": "1281667199913136130",
+     "id": "1281667199913136130",
+     "media_url_https": "https://pbs.twimg.com/media/EcllhxsXkAIIh9L.jpg",
+     "sizes": {
+      "large": {
+       "w": "1024",
+       "h": "682",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "453",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1024",
+       "h": "682",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ftojwiq31B"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1281667210767892482"
+    ],
+    "editableUntil": "2020-07-10T20:10:49.929Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "1",
+  "in_reply_to_status_id_str": "1281667208180097035",
+  "id_str": "1281667210767892482",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1281667210767892482",
+  "in_reply_to_status_id": "1281667208180097035",
+  "created_at": "Fri Jul 10 19:10:49 +0000 2020",
+  "favorited": false,
+  "full_text": "When the first Brazilian president since redemocratization visited Uruguay, he was met with a congressional protest against the “occupation” of the island. He knew nothing about it. Locals said there was an old stone house built by “dirty mark”. It was an old boundary marker.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1282093144109191170"
+    ],
+    "editableUntil": "2020-07-12T00:23:20.351Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/nhA6hopJzB",
+     "expanded_url": "https://x.com/avsa/status/1281667208180097035",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "208",
+      "231"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1282093144109191170/photo/1",
+     "indices": [
+      "232",
+      "255"
+     ],
+     "url": "https://t.co/FZoM1AAdXi",
+     "media_url": "http://pbs.twimg.com/media/Ecro58IWkAANQpO.jpg",
+     "id_str": "1282093126031675392",
+     "id": "1282093126031675392",
+     "media_url_https": "https://pbs.twimg.com/media/Ecro58IWkAANQpO.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1039",
+       "h": "906",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "593",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1039",
+       "h": "906",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/FZoM1AAdXi"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "255"
+  ],
+  "favorite_count": "6",
+  "id_str": "1282093144109191170",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1282093144109191170",
+  "possibly_sensitive": false,
+  "created_at": "Sat Jul 11 23:23:20 +0000 2020",
+  "favorited": false,
+  "full_text": "France’s largest land border is with Brazil. It’s also Brazil’s second *smallest* border and the only part of Brazil visible on the euro note. \nThe border is serviced by a single two lanes bridge since 2017. https://t.co/nhA6hopJzB https://t.co/FZoM1AAdXi",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1282093144109191170/photo/1",
+     "indices": [
+      "232",
+      "255"
+     ],
+     "url": "https://t.co/FZoM1AAdXi",
+     "media_url": "http://pbs.twimg.com/media/Ecro58IWkAANQpO.jpg",
+     "id_str": "1282093126031675392",
+     "id": "1282093126031675392",
+     "media_url_https": "https://pbs.twimg.com/media/Ecro58IWkAANQpO.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1039",
+       "h": "906",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "593",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1039",
+       "h": "906",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/FZoM1AAdXi"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1282093147120644096"
+    ],
+    "editableUntil": "2020-07-12T00:23:21.069Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Oisín Moran",
+     "screen_name": "TheOisinMoran",
+     "indices": [
+      "7",
+      "21"
+     ],
+     "id_str": "39831970",
+     "id": "39831970"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "35"
+  ],
+  "favorite_count": "1",
+  "in_reply_to_status_id_str": "1282093144109191170",
+  "id_str": "1282093147120644096",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1282093147120644096",
+  "in_reply_to_status_id": "1282093144109191170",
+  "created_at": "Sat Jul 11 23:23:21 +0000 2020",
+  "favorited": false,
+  "full_text": "Thanks @TheOisinMoran for this one.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1285223685545222152"
+    ],
+    "editableUntil": "2020-07-20T15:42:59.592Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/bzjj42FESL",
+     "expanded_url": "https://x.com/avsa/status/1282093144109191170",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "281",
+      "304"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1285223685545222152/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/L9cOaEJoZc",
+     "media_url": "http://pbs.twimg.com/media/EdYIH-tWAAMZ5g3.jpg",
+     "id_str": "1285223676846145539",
+     "id": "1285223676846145539",
+     "media_url_https": "https://pbs.twimg.com/media/EdYIH-tWAAMZ5g3.jpg",
+     "sizes": {
+      "large": {
+       "w": "1019",
+       "h": "761",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "508",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1019",
+       "h": "761",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/L9cOaEJoZc"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "328"
+  ],
+  "favorite_count": "7",
+  "id_str": "1285223685545222152",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1285223685545222152",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jul 20 14:42:59 +0000 2020",
+  "favorited": false,
+  "full_text": "In 1997 Brazil signed a deal with NASA that would allow one astronaut on the ISS. It required the country to develop and build a metal rack to be mounted un space. Brazil never delivered. Instead in 2006 Brazil paid the Russians $11M for a ride. He’s the current science minister. https://t.co/bzjj42FESL https://t.co/L9cOaEJoZc",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1285223685545222152/photo/1",
+     "indices": [
+      "305",
+      "328"
+     ],
+     "url": "https://t.co/L9cOaEJoZc",
+     "media_url": "http://pbs.twimg.com/media/EdYIH-tWAAMZ5g3.jpg",
+     "id_str": "1285223676846145539",
+     "id": "1285223676846145539",
+     "media_url_https": "https://pbs.twimg.com/media/EdYIH-tWAAMZ5g3.jpg",
+     "sizes": {
+      "large": {
+       "w": "1019",
+       "h": "761",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "508",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1019",
+       "h": "761",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/L9cOaEJoZc"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1288456806327562243"
+    ],
+    "editableUntil": "2020-07-29T13:50:15.655Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/DcOfrauv9y",
+     "expanded_url": "https://x.com/avsa/status/1285223685545222152",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "226",
+      "249"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "249"
+  ],
+  "favorite_count": "2",
+  "id_str": "1288456806327562243",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1288456806327562243",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jul 29 12:50:15 +0000 2020",
+  "favorited": false,
+  "full_text": "Brazil has been ruled by 16 kings, 2 emperors, 38 presidents (20 actually elected) and 3 republican prime ministers. \n\nThe country has a brief parliamentary phase during one single controversial presidential term in the 60’s. https://t.co/DcOfrauv9y",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1295361624900022276"
+    ],
+    "editableUntil": "2020-08-17T15:07:32.688Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/g88Rujo1z0",
+     "expanded_url": "https://x.com/avsa/status/1288456806327562243",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "279",
+      "302"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "1",
+  "id_str": "1295361624900022276",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1295361624900022276",
+  "possibly_sensitive": false,
+  "created_at": "Mon Aug 17 14:07:32 +0000 2020",
+  "favorited": false,
+  "full_text": "While officially part of the Allies, the Brazilian Government during WWII was much more aligned with the Axis, having even deported Jewish Germans in brazil back to Nazi Germany. It only sent military forces by the end of 1944—less than 1000 brazilians died figthing in the war. https://t.co/g88Rujo1z0",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1349506691084267523"
+    ],
+    "editableUntil": "2021-01-14T01:00:42.433Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/JIU1eHs4oE",
+     "expanded_url": "https://x.com/avsa/status/1295361624900022276",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "281",
+      "304"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "304"
+  ],
+  "favorite_count": "4",
+  "id_str": "1349506691084267523",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1349506691084267523",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jan 14 00:00:42 +0000 2021",
+  "favorited": false,
+  "full_text": "The current Brazilian president had over 50 impeachment requests. If one goes through, it will mean that half of all presidents elected in Brazil since the last constitution would’ve been impeached.\nAll impeachments have led to removal from office. We never needed to do it twice. https://t.co/JIU1eHs4oE",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1349699954969882625"
+    ],
+    "editableUntil": "2021-01-14T13:48:40.134Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/3ES0u0u8dy",
+     "expanded_url": "https://x.com/avsa/status/1349506691084267523",
+     "display_url": "x.com/avsa/status/13…",
+     "indices": [
+      "280",
+      "303"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1349699954969882625/photo/1",
+     "indices": [
+      "304",
+      "327"
+     ],
+     "url": "https://t.co/WktEoVt76G",
+     "media_url": "http://pbs.twimg.com/media/ErsY9GBXAAEImNI.jpg",
+     "id_str": "1349699951194996737",
+     "id": "1349699951194996737",
+     "media_url_https": "https://pbs.twimg.com/media/ErsY9GBXAAEImNI.jpg",
+     "sizes": {
+      "small": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/WktEoVt76G"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "327"
+  ],
+  "favorite_count": "2",
+  "id_str": "1349699954969882625",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1349699954969882625",
+  "possibly_sensitive": false,
+  "created_at": "Thu Jan 14 12:48:40 +0000 2021",
+  "favorited": false,
+  "full_text": "In 2013, protesters invaded the national congress, a start of a movement that ultimately led to the president stepping down.\nWhile it still called a soft coup by some, it was never called insurgence, because protesters never openly planned to take hostages or murder politicians. https://t.co/3ES0u0u8dy https://t.co/WktEoVt76G",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1349699954969882625/photo/1",
+     "indices": [
+      "304",
+      "327"
+     ],
+     "url": "https://t.co/WktEoVt76G",
+     "media_url": "http://pbs.twimg.com/media/ErsY9GBXAAEImNI.jpg",
+     "id_str": "1349699951194996737",
+     "id": "1349699951194996737",
+     "media_url_https": "https://pbs.twimg.com/media/ErsY9GBXAAEImNI.jpg",
+     "sizes": {
+      "small": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "500",
+       "h": "324",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/WktEoVt76G"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1370193136086056961"
+    ],
+    "editableUntil": "2021-03-12T03:01:15.257Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/BCk5w3IsV8",
+     "expanded_url": "https://x.com/avsa/status/1349699954969882625",
+     "display_url": "x.com/avsa/status/13…",
+     "indices": [
+      "206",
+      "229"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "229"
+  ],
+  "favorite_count": "15",
+  "id_str": "1370193136086056961",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1370193136086056961",
+  "possibly_sensitive": false,
+  "created_at": "Fri Mar 12 02:01:15 +0000 2021",
+  "favorited": false,
+  "full_text": "When compared in area, Brazil is about 10 trillion times larger than Room 711 of the Louvre, where the Mona Lisa is displayed. \n\nYet this single room has, in a normal average year, 25% more tourist visits. https://t.co/BCk5w3IsV8",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1537073161803644928"
+    ],
+    "editableUntil": "2022-06-15T14:32:53.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/mzbe7SIVwy",
+     "expanded_url": "https://x.com/avsa/status/1273609455188443141",
+     "display_url": "x.com/avsa/status/12…",
+     "indices": [
+      "279",
+      "302"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1537059742446759937",
+  "id_str": "1537073161803644928",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1537073161803644928",
+  "in_reply_to_status_id": "1537059742446759937",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jun 15 14:02:53 +0000 2022",
+  "favorited": false,
+  "full_text": "Truthfully we only have indirect evidence of large settlements (see thread).\n\nBut I’ve always found curious that the earliest civilizations we know were building large stone temples in arid climates. Is that better for large cities or simply better for the archeological record? https://t.co/mzbe7SIVwy",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1567673117081833472"
+    ],
+    "editableUntil": "2022-09-08T01:06:11.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/g7upQfY0ju",
+     "expanded_url": "https://x.com/avsa/status/1564282425815048196",
+     "display_url": "x.com/avsa/status/15…",
+     "indices": [
+      "253",
+      "276"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "4",
+  "id_str": "1567673117081833472",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1567673117081833472",
+  "possibly_sensitive": false,
+  "created_at": "Thu Sep 08 00:36:11 +0000 2022",
+  "favorited": false,
+  "full_text": "Today marks the 200th anniversary of what was probably the most farcical “independence” war ever: after “winning” the “war” the country was ruled by the heir of the former king, who—plot twist—was the one who suggested it to his son in the first place. https://t.co/g7upQfY0ju",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1760290138641346815"
+    ],
+    "editableUntil": "2024-02-21T14:07:28.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/R5PsKX0ZJn",
+     "expanded_url": "https://x.com/avsa/status/1370193136086056961",
+     "display_url": "x.com/avsa/status/13…",
+     "indices": [
+      "279",
+      "302"
+     ]
+    }
+   ],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1760290138641346815/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/XFoXSEEtzJ",
+     "media_url": "http://pbs.twimg.com/media/GG3MhtvWoAE88-b.jpg",
+     "id_str": "1760287908957691905",
+     "id": "1760287908957691905",
+     "media_url_https": "https://pbs.twimg.com/media/GG3MhtvWoAE88-b.jpg",
+     "sizes": {
+      "small": {
+       "w": "591",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1043",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1538",
+       "h": "1770",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/XFoXSEEtzJ"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "326"
+  ],
+  "favorite_count": "20",
+  "id_str": "1760290138641346815",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1760290138641346815",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 21 13:07:28 +0000 2024",
+  "favorited": false,
+  "full_text": "Been a while since I've done one of these Trivias and it's not Brazil related but close enough. I just figured this  cool fact:\n\nChile is almost as wide as its tall. In fact it's as close to a perfect square  ratio (1.03)  as Egypt, often considered the \"squarest of countries\". https://t.co/R5PsKX0ZJn https://t.co/XFoXSEEtzJ",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1760290138641346815/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/XFoXSEEtzJ",
+     "media_url": "http://pbs.twimg.com/media/GG3MhtvWoAE88-b.jpg",
+     "id_str": "1760287908957691905",
+     "id": "1760287908957691905",
+     "media_url_https": "https://pbs.twimg.com/media/GG3MhtvWoAE88-b.jpg",
+     "sizes": {
+      "small": {
+       "w": "591",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1043",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1538",
+       "h": "1770",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/XFoXSEEtzJ"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1760290138641346815/photo/1",
+     "indices": [
+      "303",
+      "326"
+     ],
+     "url": "https://t.co/XFoXSEEtzJ",
+     "media_url": "http://pbs.twimg.com/media/GG3N72UXgAAa5xP.jpg",
+     "id_str": "1760289457448648704",
+     "id": "1760289457448648704",
+     "media_url_https": "https://pbs.twimg.com/media/GG3N72UXgAAa5xP.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "630",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1014",
+       "h": "940",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1014",
+       "h": "940",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/XFoXSEEtzJ"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1760324444042428715"
+    ],
+    "editableUntil": "2024-02-21T16:23:47.000Z",
+    "editsRemaining": "5",
+    "isEditEligible": false
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1760324444042428715/photo/1",
+     "indices": [
+      "265",
+      "288"
+     ],
+     "url": "https://t.co/ivTd6duqks",
+     "media_url": "http://pbs.twimg.com/media/GG3tnqpWsAkD2S-.jpg",
+     "id_str": "1760324295090155529",
+     "id": "1760324295090155529",
+     "media_url_https": "https://pbs.twimg.com/media/GG3tnqpWsAkD2S-.jpg",
+     "sizes": {
+      "small": {
+       "w": "592",
+       "h": "680",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1664",
+       "h": "1912",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1044",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ivTd6duqks"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "288"
+  ],
+  "favorite_count": "2",
+  "in_reply_to_status_id_str": "1760290138641346815",
+  "id_str": "1760324444042428715",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1760324444042428715",
+  "in_reply_to_status_id": "1760290138641346815",
+  "possibly_sensitive": false,
+  "created_at": "Wed Feb 21 15:23:47 +0000 2024",
+  "favorited": false,
+  "full_text": "Some friends questioned the calculation. There are many ways to say \"wide\" as there are no rectangles in a sphere. When measuring the great circle distance from westernmost point (Moto Nui) to easternmost point (Terra del Fuego), Chile is actually wider than tall! https://t.co/ivTd6duqks",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1760324444042428715/photo/1",
+     "indices": [
+      "265",
+      "288"
+     ],
+     "url": "https://t.co/ivTd6duqks",
+     "media_url": "http://pbs.twimg.com/media/GG3tnqpWsAkD2S-.jpg",
+     "id_str": "1760324295090155529",
+     "id": "1760324295090155529",
+     "media_url_https": "https://pbs.twimg.com/media/GG3tnqpWsAkD2S-.jpg",
+     "sizes": {
+      "small": {
+       "w": "592",
+       "h": "680",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1664",
+       "h": "1912",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1044",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/ivTd6duqks"
+    }
+   ]
+  }
+ }
+]

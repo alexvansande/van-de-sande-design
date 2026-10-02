@@ -1,0 +1,437 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851787649318913"
+    ],
+    "editableUntil": "2018-02-01T00:57:35.437Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/vKkmahTxtC",
+     "expanded_url": "https://x.com/ethereumproject/status/958771887840088064",
+     "display_url": "x.com/ethereumprojec…",
+     "indices": [
+      "271",
+      "294"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "294"
+  ],
+  "favorite_count": "220",
+  "id_str": "958851787649318913",
+  "truncated": false,
+  "retweet_count": "56",
+  "id": "958851787649318913",
+  "possibly_sensitive": false,
+  "created_at": "Wed Jan 31 23:57:35 +0000 2018",
+  "favorited": false,
+  "full_text": "When Ming took the job at the Foundation, she was told that we were a few months away from running out of funds. The situation was dire: there were 3-4 different entities, with different accounting and legal costs in 4 jurisdictions (🇨🇭🇩🇪 🇬🇧&amp;🇳🇱), and mgmt infighting https://t.co/vKkmahTxtC",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851797678022660"
+    ],
+    "editableUntil": "2018-02-01T00:57:37.828Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "235"
+  ],
+  "favorite_count": "32",
+  "in_reply_to_status_id_str": "958851787649318913",
+  "id_str": "958851797678022660",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "958851797678022660",
+  "in_reply_to_status_id": "958851787649318913",
+  "created_at": "Wed Jan 31 23:57:37 +0000 2018",
+  "favorited": false,
+  "full_text": "Bitcoin price fell from 600 to 300 just after the presale,  before we could touch most of it so right there half of the money we had raised was gone. The other half was spent developing the clients and launching the network, by August.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851802211979264"
+    ],
+    "editableUntil": "2018-02-01T00:57:38.909Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "30",
+  "in_reply_to_status_id_str": "958851797678022660",
+  "id_str": "958851802211979264",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851802211979264",
+  "in_reply_to_status_id": "958851797678022660",
+  "created_at": "Wed Jan 31 23:57:38 +0000 2018",
+  "favorited": false,
+  "full_text": "The network was live, but we still needed years of development and the money was running out. We had ether, but it was still under $1. They asked  Geth devs (and therefore Mist) to take a 10% haircut, mgmt took more.  CPP team was almost all cut out. Everyone was feeling down.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851806179807238"
+    ],
+    "editableUntil": "2018-02-01T00:57:39.855Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "189"
+  ],
+  "favorite_count": "41",
+  "in_reply_to_status_id_str": "958851802211979264",
+  "id_str": "958851806179807238",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "958851806179807238",
+  "in_reply_to_status_id": "958851802211979264",
+  "created_at": "Wed Jan 31 23:57:39 +0000 2018",
+  "favorited": false,
+  "full_text": "Back then, many still thought ethereum was a scam/vaporware and never going to launch. We proved them wrong. But as local saying, we had swimmed, swimmed and were about to die on the beach.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851815197560842"
+    ],
+    "editableUntil": "2018-02-01T00:57:42.005Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "264"
+  ],
+  "favorite_count": "35",
+  "in_reply_to_status_id_str": "958851806179807238",
+  "id_str": "958851815197560842",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851815197560842",
+  "in_reply_to_status_id": "958851806179807238",
+  "created_at": "Wed Jan 31 23:57:42 +0000 2018",
+  "favorited": false,
+  "full_text": "Then, by the end of 2015, things started turning around. The multiple entities were closed and our haircuts were buying us time. Ming spent most of her time cleaning up an excessive and expensive legal infrastructure and going through audits and hell of paperwork.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851819303849984"
+    ],
+    "editableUntil": "2018-02-01T00:57:42.984Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "213"
+  ],
+  "favorite_count": "30",
+  "in_reply_to_status_id_str": "958851815197560842",
+  "id_str": "958851819303849984",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851819303849984",
+  "in_reply_to_status_id": "958851815197560842",
+  "created_at": "Wed Jan 31 23:57:42 +0000 2018",
+  "favorited": false,
+  "full_text": "Then Devcon 1 came around (Devcon 0 was a internal developers only get together in Berlin), and Microsoft was a sponsor, Nick Szabo was giving a keynote, it was a clear message that the industry took us seriously.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851824664154112"
+    ],
+    "editableUntil": "2018-02-01T00:57:44.262Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "187"
+  ],
+  "favorite_count": "27",
+  "in_reply_to_status_id_str": "958851819303849984",
+  "id_str": "958851824664154112",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851824664154112",
+  "in_reply_to_status_id": "958851819303849984",
+  "created_at": "Wed Jan 31 23:57:44 +0000 2018",
+  "favorited": false,
+  "full_text": "This was followed by the price, which passed $10 and felt like crazy. Suddenly we had a longer runway and everyone could breathe again. There was and still is a lot of work ahead of us...",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851828350963713"
+    ],
+    "editableUntil": "2018-02-01T00:57:45.141Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Ming Chan",
+     "screen_name": "mingchan88",
+     "indices": [
+      "50",
+      "61"
+     ],
+     "id_str": "267034735",
+     "id": "267034735"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "280"
+  ],
+  "favorite_count": "67",
+  "in_reply_to_status_id_str": "958851824664154112",
+  "id_str": "958851828350963713",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "8",
+  "id": "958851828350963713",
+  "in_reply_to_status_id": "958851824664154112",
+  "created_at": "Wed Jan 31 23:57:45 +0000 2018",
+  "favorited": false,
+  "full_text": "But probably none of that would have happened had @mingchan88 not stepped in her role. She was never in the forefront, had no public face other than a few words before Devcon. But on the inside she was crucial, and she worked through multiple Christmas, Thanksgiving and New Years",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851831995781120"
+    ],
+    "editableUntil": "2018-02-01T00:57:46.010Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "269"
+  ],
+  "favorite_count": "46",
+  "in_reply_to_status_id_str": "958851828350963713",
+  "id_str": "958851831995781120",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851831995781120",
+  "in_reply_to_status_id": "958851828350963713",
+  "created_at": "Wed Jan 31 23:57:46 +0000 2018",
+  "favorited": false,
+  "full_text": "The Ethereum Foundation is far from perfect, of course. We can do a lot to be more open and transparent, and to act less like a raunchy startup but the leadership of a $200 bilion ecosystem. But to get here, a lot of people had to do big sacrifices that went unthanked.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851835779043328"
+    ],
+    "editableUntil": "2018-02-01T00:57:46.912Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "160"
+  ],
+  "favorite_count": "72",
+  "in_reply_to_status_id_str": "958851831995781120",
+  "id_str": "958851835779043328",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "5",
+  "id": "958851835779043328",
+  "in_reply_to_status_id": "958851831995781120",
+  "created_at": "Wed Jan 31 23:57:46 +0000 2018",
+  "favorited": false,
+  "full_text": "Not anymore. \n\nThanks Ming. I’ll miss our two hour skype calls about the history of China and your tales about Media Lab. You deserve some rest and family time.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "958851839981707264"
+    ],
+    "editableUntil": "2018-02-01T00:57:47.914Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "64"
+  ],
+  "favorite_count": "33",
+  "in_reply_to_status_id_str": "958851835779043328",
+  "id_str": "958851839981707264",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "958851839981707264",
+  "in_reply_to_status_id": "958851835779043328",
+  "created_at": "Wed Jan 31 23:57:47 +0000 2018",
+  "favorited": false,
+  "full_text": "(History from memory, dates and details might be slightly wrong)",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

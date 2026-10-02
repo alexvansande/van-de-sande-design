@@ -1,0 +1,388 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501144887463937"
+    ],
+    "editableUntil": "2018-06-18T01:06:24.643Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/GJurnb4ejP",
+     "expanded_url": "https://x.com/el33th4xor/status/1008417777663774720",
+     "display_url": "x.com/el33th4xor/sta…",
+     "indices": [
+      "145",
+      "168"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "168"
+  ],
+  "favorite_count": "60",
+  "id_str": "1008501144887463937",
+  "truncated": false,
+  "retweet_count": "16",
+  "id": "1008501144887463937",
+  "possibly_sensitive": false,
+  "created_at": "Mon Jun 18 00:06:24 +0000 2018",
+  "favorited": false,
+  "full_text": "Knowing everything I know today, I don’t think the hard fork was worth its many downsides. But I wouldn’t know most of that if not for the fork. https://t.co/GJurnb4ejP",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501147064262656"
+    ],
+    "editableUntil": "2018-06-18T01:06:25.162Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "277"
+  ],
+  "favorite_count": "7",
+  "in_reply_to_status_id_str": "1008501144887463937",
+  "id_str": "1008501147064262656",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1008501147064262656",
+  "in_reply_to_status_id": "1008501144887463937",
+  "created_at": "Mon Jun 18 00:06:25 +0000 2018",
+  "favorited": false,
+  "full_text": "Firstly, the White Hat hackers have shown to be extremely competent and I feel confident they would have been able to rescue at least 70%-90% of the funds back to dao token holders (as they did).\n\nThey knew it was a possibility then, but they didn’t want that pressure on them.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501149580824576"
+    ],
+    "editableUntil": "2018-06-18T01:06:25.762Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "279"
+  ],
+  "favorite_count": "9",
+  "in_reply_to_status_id_str": "1008501147064262656",
+  "id_str": "1008501149580824576",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1008501149580824576",
+  "in_reply_to_status_id": "1008501147064262656",
+  "created_at": "Mon Jun 18 00:06:25 +0000 2018",
+  "favorited": false,
+  "full_text": "Also a Fork was sold as the “clean” option, the one that would solve the problem quickly so that everyone could get back to work. Instead the fork created arguments that persist to this day. While ETH/ETC communities have been mostly at peace, that animosity is still brought up.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501151669673984"
+    ],
+    "editableUntil": "2018-06-18T01:06:26.260Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "235"
+  ],
+  "favorite_count": "8",
+  "in_reply_to_status_id_str": "1008501149580824576",
+  "id_str": "1008501151669673984",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1008501151669673984",
+  "in_reply_to_status_id": "1008501149580824576",
+  "created_at": "Mon Jun 18 00:06:26 +0000 2018",
+  "favorited": false,
+  "full_text": "The values back then felt gigantic and community-threatening. I don’t think they were. I remember a common recommendation post hack never to store more than a million dollars in a single smart contract. Those figures are laughable now.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501153754206209"
+    ],
+    "editableUntil": "2018-06-18T01:06:26.757Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "268"
+  ],
+  "favorite_count": "12",
+  "in_reply_to_status_id_str": "1008501151669673984",
+  "id_str": "1008501153754206209",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1008501153754206209",
+  "in_reply_to_status_id": "1008501151669673984",
+  "created_at": "Mon Jun 18 00:06:26 +0000 2018",
+  "favorited": false,
+  "full_text": "I’m also confident looking back that even if it had not the reentrancy bug or governance problems, the DAO was doomed. Think about the ICO craze that came later, but one in which people could vote (and buy votes!) to invest in them with other people’s money. Not good.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501156908273664"
+    ],
+    "editableUntil": "2018-06-18T01:06:27.509Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "265"
+  ],
+  "favorite_count": "7",
+  "in_reply_to_status_id_str": "1008501153754206209",
+  "id_str": "1008501156908273664",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1008501156908273664",
+  "in_reply_to_status_id": "1008501153754206209",
+  "created_at": "Mon Jun 18 00:06:27 +0000 2018",
+  "favorited": false,
+  "full_text": "But we have indeed learned a lot about forks. Before it, forking an existing blockchain was a theoretical possibility that most people believed would threaten the original chain on a “there can only be one” combat. I wonder if Bitcoin Cash/Gold would have happened.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501159018065921"
+    ],
+    "editableUntil": "2018-06-18T01:06:28.012Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "275"
+  ],
+  "favorite_count": "34",
+  "in_reply_to_status_id_str": "1008501156908273664",
+  "id_str": "1008501159018065921",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "16",
+  "id": "1008501159018065921",
+  "in_reply_to_status_id": "1008501156908273664",
+  "created_at": "Mon Jun 18 00:06:28 +0000 2018",
+  "favorited": false,
+  "full_text": "Most importantly, we learned how resilient blockchains are. Ethereum Classic is what happens when original developers and a whole community decide to leave an old chain to die in the side of the road. Instead it survived and came back with a vengeance. It’s inspiring really.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501161115217920"
+    ],
+    "editableUntil": "2018-06-18T01:06:28.512Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "245"
+  ],
+  "favorite_count": "22",
+  "in_reply_to_status_id_str": "1008501159018065921",
+  "id_str": "1008501161115217920",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "7",
+  "id": "1008501161115217920",
+  "in_reply_to_status_id": "1008501159018065921",
+  "created_at": "Mon Jun 18 00:06:28 +0000 2018",
+  "favorited": false,
+  "full_text": "But also, we learned that blockchains are replaceable by a community on top of it. Code is law, but we can always turn off the machines and decide to work on new code and a new law and that new code can become more valuable. Value is just faith.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501163040354309"
+    ],
+    "editableUntil": "2018-06-18T01:06:28.971Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "271"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1008501161115217920",
+  "id_str": "1008501163040354309",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "1008501163040354309",
+  "in_reply_to_status_id": "1008501161115217920",
+  "created_at": "Mon Jun 18 00:06:28 +0000 2018",
+  "favorited": false,
+  "full_text": "A fork has been proven as a valid Exit option for disenfranchised community members that feel they have no voice. But I don’t believe fork as governance is something to be cheered and seen as a reason not to work on tools that empower and give voice to your own community",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1008501165154283520"
+    ],
+    "editableUntil": "2018-06-18T01:06:29.475Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "228"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "1008501163040354309",
+  "id_str": "1008501165154283520",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1008501165154283520",
+  "in_reply_to_status_id": "1008501163040354309",
+  "created_at": "Mon Jun 18 00:06:29 +0000 2018",
+  "favorited": false,
+  "full_text": "Were these lessons valuable? Definitely. Could we have learned them by other ways? Probably. Was the stress, the distractions, the change in culture, the community split worth the cost of learning them? I don’t think so anymore.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

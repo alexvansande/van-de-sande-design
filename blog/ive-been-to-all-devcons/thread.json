@@ -1,0 +1,1067 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837812366229505"
+    ],
+    "editableUntil": "2018-11-03T22:46:21.380Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837812366229505/photo/1",
+     "indices": [
+      "277",
+      "300"
+     ],
+     "url": "https://t.co/VTV1EgOk5B",
+     "media_url": "http://pbs.twimg.com/media/DrG_XbbWsAUxwiO.jpg",
+     "id_str": "1058837796629164037",
+     "id": "1058837796629164037",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_XbbWsAUxwiO.jpg",
+     "sizes": {
+      "medium": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/VTV1EgOk5B"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "300"
+  ],
+  "favorite_count": "84",
+  "id_str": "1058837812366229505",
+  "truncated": false,
+  "retweet_count": "18",
+  "id": "1058837812366229505",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:21 +0000 2018",
+  "favorited": false,
+  "full_text": "I’ve been to all devcons (except Cancun) so here’s a perspective and pics.\n\nThe first devcon (obviously we start counting at 0) could barely be called a “conference” it was mostly a team retreat. About 50 people, many meeting together for the first time, presenting their work https://t.co/VTV1EgOk5B",
+  "lang": "en",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837812366229505/photo/1",
+     "indices": [
+      "277",
+      "300"
+     ],
+     "url": "https://t.co/VTV1EgOk5B",
+     "media_url": "http://pbs.twimg.com/media/DrG_XbbWsAUxwiO.jpg",
+     "id_str": "1058837796629164037",
+     "id": "1058837796629164037",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_XbbWsAUxwiO.jpg",
+     "sizes": {
+      "medium": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "600",
+       "h": "399",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/VTV1EgOk5B"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837829726429184"
+    ],
+    "editableUntil": "2018-11-03T22:46:25.519Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837829726429184/photo/1",
+     "indices": [
+      "284",
+      "307"
+     ],
+     "url": "https://t.co/IP1zG8PrbG",
+     "media_url": "http://pbs.twimg.com/media/DrG_YlEX0AAoZiB.jpg",
+     "id_str": "1058837816396992512",
+     "id": "1058837816396992512",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_YlEX0AAoZiB.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "485",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "275",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "828",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/IP1zG8PrbG"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "307"
+  ],
+  "favorite_count": "18",
+  "in_reply_to_status_id_str": "1058837812366229505",
+  "id_str": "1058837829726429184",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1058837829726429184",
+  "in_reply_to_status_id": "1058837812366229505",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:25 +0000 2018",
+  "favorited": false,
+  "full_text": "Devcon1 was in London, about 300 people. The whole conference would fit in the main hall at the National House Smíchov which had three more floors of rooms and hosted many satellite events (Cryptolife Hackaton,  Philosophers Salon, Magicians council, the ECF alumni show &amp; tell). https://t.co/IP1zG8PrbG",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837829726429184/photo/1",
+     "indices": [
+      "284",
+      "307"
+     ],
+     "url": "https://t.co/IP1zG8PrbG",
+     "media_url": "http://pbs.twimg.com/media/DrG_YlEX0AAoZiB.jpg",
+     "id_str": "1058837816396992512",
+     "id": "1058837816396992512",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_YlEX0AAoZiB.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "485",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "275",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "828",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/IP1zG8PrbG"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837829726429184/photo/1",
+     "indices": [
+      "284",
+      "307"
+     ],
+     "url": "https://t.co/IP1zG8PrbG",
+     "media_url": "http://pbs.twimg.com/media/DrG_YnlXQAAJUkQ.jpg",
+     "id_str": "1058837817072238592",
+     "id": "1058837817072238592",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_YnlXQAAJUkQ.jpg",
+     "sizes": {
+      "medium": {
+       "w": "850",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1451",
+       "h": "2048",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "482",
+       "h": "680",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/IP1zG8PrbG"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837853101322240"
+    ],
+    "editableUntil": "2018-11-03T22:46:31.092Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837853101322240/photo/1",
+     "indices": [
+      "152",
+      "175"
+     ],
+     "url": "https://t.co/lp0aGY4JRn",
+     "media_url": "http://pbs.twimg.com/media/DrG_Zw9W4AAMFVq.jpg",
+     "id_str": "1058837836768665600",
+     "id": "1058837836768665600",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_Zw9W4AAMFVq.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "470",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1415",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "829",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/lp0aGY4JRn"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "175"
+  ],
+  "favorite_count": "19",
+  "in_reply_to_status_id_str": "1058837829726429184",
+  "id_str": "1058837853101322240",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1058837853101322240",
+  "in_reply_to_status_id": "1058837829726429184",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:31 +0000 2018",
+  "favorited": false,
+  "full_text": "Devcon2 was in Shanghai and doubled in size to about 700 people. That’s the same headcount as the Prism sidestage, which ran on day 0 at full capacity. https://t.co/lp0aGY4JRn",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837853101322240/photo/1",
+     "indices": [
+      "152",
+      "175"
+     ],
+     "url": "https://t.co/lp0aGY4JRn",
+     "media_url": "http://pbs.twimg.com/media/DrG_Zw9W4AAMFVq.jpg",
+     "id_str": "1058837836768665600",
+     "id": "1058837836768665600",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_Zw9W4AAMFVq.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "470",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1415",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "829",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/lp0aGY4JRn"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837853101322240/photo/1",
+     "indices": [
+      "152",
+      "175"
+     ],
+     "url": "https://t.co/lp0aGY4JRn",
+     "media_url": "http://pbs.twimg.com/media/DrG_Zw2WkAYI0mj.jpg",
+     "id_str": "1058837836739284998",
+     "id": "1058837836739284998",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_Zw2WkAYI0mj.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "1536",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "510",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "900",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/lp0aGY4JRn"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837857572401152"
+    ],
+    "editableUntil": "2018-11-03T22:46:32.158Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "260"
+  ],
+  "favorite_count": "14",
+  "in_reply_to_status_id_str": "1058837853101322240",
+  "id_str": "1058837857572401152",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1058837857572401152",
+  "in_reply_to_status_id": "1058837853101322240",
+  "created_at": "Sat Nov 03 21:46:32 +0000 2018",
+  "favorited": false,
+  "full_text": "Devcon3, Cancun was more than twice the size of the year before, about 1500-2000 attendants, and for the first time had two parallel tracks. (I don’t have any picture of the room as I wasn’t there for personal reasons)\n\nThis years devcon had 8 parallel tracks!",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837869140344838"
+    ],
+    "editableUntil": "2018-11-03T22:46:34.916Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837869140344838/photo/1",
+     "indices": [
+      "266",
+      "289"
+     ],
+     "url": "https://t.co/o9YjVR9qVP",
+     "media_url": "http://pbs.twimg.com/media/DrG_bJUWkAETAID.jpg",
+     "id_str": "1058837860487434241",
+     "id": "1058837860487434241",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_bJUWkAETAID.jpg",
+     "sizes": {
+      "large": {
+       "w": "1536",
+       "h": "2048",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "510",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "900",
+       "h": "1200",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/o9YjVR9qVP"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "289"
+  ],
+  "favorite_count": "30",
+  "in_reply_to_status_id_str": "1058837857572401152",
+  "id_str": "1058837869140344838",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "6",
+  "id": "1058837869140344838",
+  "in_reply_to_status_id": "1058837857572401152",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:34 +0000 2018",
+  "favorited": false,
+  "full_text": "And also two rooms running person to person events and a series of rooms available for setting up ad hoc meetings. And of course, the Neptune room, where an artist was giving a constant performance of ambient sounds where people could go to relax and do quiet work. https://t.co/o9YjVR9qVP",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837869140344838/photo/1",
+     "indices": [
+      "266",
+      "289"
+     ],
+     "url": "https://t.co/o9YjVR9qVP",
+     "media_url": "http://pbs.twimg.com/media/DrG_bJUWkAETAID.jpg",
+     "id_str": "1058837860487434241",
+     "id": "1058837860487434241",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_bJUWkAETAID.jpg",
+     "sizes": {
+      "large": {
+       "w": "1536",
+       "h": "2048",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "510",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "900",
+       "h": "1200",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/o9YjVR9qVP"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837888497057792"
+    ],
+    "editableUntil": "2018-11-03T22:46:39.531Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837888497057792/photo/1",
+     "indices": [
+      "277",
+      "300"
+     ],
+     "url": "https://t.co/mOoIpYCWTu",
+     "media_url": "http://pbs.twimg.com/media/DrG_cBgWwAE8goX.jpg",
+     "id_str": "1058837875570163713",
+     "id": "1058837875570163713",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_cBgWwAE8goX.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "480",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "272",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "819",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/mOoIpYCWTu"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "300"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "1058837869140344838",
+  "id_str": "1058837888497057792",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1058837888497057792",
+  "in_reply_to_status_id": "1058837869140344838",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:39 +0000 2018",
+  "favorited": false,
+  "full_text": "Those ad-hoc, off-schedule meetings where crucial as they allowed teams that wanted to coordinate changes or discuss standards to do anytime. I’ve personally seen a Meta-transactions roundtable, news interviews and Amir Taaki giving a talk on the fall of western civilization. https://t.co/mOoIpYCWTu",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837888497057792/photo/1",
+     "indices": [
+      "277",
+      "300"
+     ],
+     "url": "https://t.co/mOoIpYCWTu",
+     "media_url": "http://pbs.twimg.com/media/DrG_cBgWwAE8goX.jpg",
+     "id_str": "1058837875570163713",
+     "id": "1058837875570163713",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_cBgWwAE8goX.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "480",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "272",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "819",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/mOoIpYCWTu"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837888497057792/photo/1",
+     "indices": [
+      "277",
+      "300"
+     ],
+     "url": "https://t.co/mOoIpYCWTu",
+     "media_url": "http://pbs.twimg.com/media/DrG_cBgXgAETHcs.jpg",
+     "id_str": "1058837875570212865",
+     "id": "1058837875570212865",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_cBgXgAETHcs.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "604",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "342",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "2048",
+       "h": "1031",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/mOoIpYCWTu"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837900060774400"
+    ],
+    "editableUntil": "2018-11-03T22:46:42.288Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837900060774400/photo/1",
+     "indices": [
+      "264",
+      "287"
+     ],
+     "url": "https://t.co/cYR6YMiQpB",
+     "media_url": "http://pbs.twimg.com/media/DrG_dDqWkAYMM-M.jpg",
+     "id_str": "1058837893328834566",
+     "id": "1058837893328834566",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_dDqWkAYMM-M.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "875",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "291",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "513",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/cYR6YMiQpB"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "287"
+  ],
+  "favorite_count": "24",
+  "in_reply_to_status_id_str": "1058837888497057792",
+  "id_str": "1058837900060774400",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "4",
+  "id": "1058837900060774400",
+  "in_reply_to_status_id": "1058837888497057792",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:42 +0000 2018",
+  "favorited": false,
+  "full_text": "Devcon4 has about 3000 badges printed. I personally hope it doesn’t double in size again, because a 6000 person conference sounds unmanageable - and because often the main stage was quite empty, with most people crowding in the smaller and more personal workshops https://t.co/cYR6YMiQpB",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837900060774400/photo/1",
+     "indices": [
+      "264",
+      "287"
+     ],
+     "url": "https://t.co/cYR6YMiQpB",
+     "media_url": "http://pbs.twimg.com/media/DrG_dDqWkAYMM-M.jpg",
+     "id_str": "1058837893328834566",
+     "id": "1058837893328834566",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_dDqWkAYMM-M.jpg",
+     "sizes": {
+      "large": {
+       "w": "2048",
+       "h": "875",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "291",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "513",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/cYR6YMiQpB"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837904292790272"
+    ],
+    "editableUntil": "2018-11-03T22:46:43.297Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "169"
+  ],
+  "favorite_count": "12",
+  "in_reply_to_status_id_str": "1058837900060774400",
+  "id_str": "1058837904292790272",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1058837904292790272",
+  "in_reply_to_status_id": "1058837900060774400",
+  "created_at": "Sat Nov 03 21:46:43 +0000 2018",
+  "favorited": false,
+  "full_text": "In those you had more  opportunities to interact with the presenters—some people skipped talks altogether and were just mainly networking around the (great) food tables.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837915063738368"
+    ],
+    "editableUntil": "2018-11-03T22:46:45.865Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837915063738368/photo/1",
+     "indices": [
+      "264",
+      "287"
+     ],
+     "url": "https://t.co/eG464Xxtqr",
+     "media_url": "http://pbs.twimg.com/media/DrG_d24XgAEod1_.jpg",
+     "id_str": "1058837907077824513",
+     "id": "1058837907077824513",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_d24XgAEod1_.jpg",
+     "sizes": {
+      "small": {
+       "w": "383",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "676",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1153",
+       "h": "2048",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/eG464Xxtqr"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "287"
+  ],
+  "favorite_count": "30",
+  "in_reply_to_status_id_str": "1058837904292790272",
+  "id_str": "1058837915063738368",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1058837915063738368",
+  "in_reply_to_status_id": "1058837904292790272",
+  "possibly_sensitive": false,
+  "created_at": "Sat Nov 03 21:46:45 +0000 2018",
+  "favorited": false,
+  "full_text": "If there’s demand, I hope it grows horizontally, with more independently organized events to take on the overflow of devcon attendees. Maybe we can come up with a system where the badges work more like passports that can be stamped and used as ID in other events. https://t.co/eG464Xxtqr",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1058837915063738368/photo/1",
+     "indices": [
+      "264",
+      "287"
+     ],
+     "url": "https://t.co/eG464Xxtqr",
+     "media_url": "http://pbs.twimg.com/media/DrG_d24XgAEod1_.jpg",
+     "id_str": "1058837907077824513",
+     "id": "1058837907077824513",
+     "media_url_https": "https://pbs.twimg.com/media/DrG_d24XgAEod1_.jpg",
+     "sizes": {
+      "small": {
+       "w": "383",
+       "h": "680",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "676",
+       "h": "1200",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1153",
+       "h": "2048",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/eG464Xxtqr"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1058837919069364224"
+    ],
+    "editableUntil": "2018-11-03T22:46:46.820Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+  "entities": {
+   "hashtags": [
+    {
+     "text": "DevCon5",
+     "indices": [
+      "263",
+      "271"
+     ]
+    }
+   ],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Mamie Rheingold",
+     "screen_name": "mames",
+     "indices": [
+      "220",
+      "226"
+     ],
+     "id_str": "17069929",
+     "id": "17069929"
+    },
+    {
+     "name": "mi_ayako",
+     "screen_name": "mi_ayako",
+     "indices": [
+      "231",
+      "240"
+     ],
+     "id_str": "1296590483628621826",
+     "id": "1296590483628621826"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "272"
+  ],
+  "favorite_count": "61",
+  "in_reply_to_status_id_str": "1058837915063738368",
+  "id_str": "1058837919069364224",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1058837919069364224",
+  "in_reply_to_status_id": "1058837915063738368",
+  "created_at": "Sat Nov 03 21:46:46 +0000 2018",
+  "favorited": false,
+  "full_text": "But as so many have said before me, the organization was fantastic. I felt it captured the intimate person to person work meetings of the early devcons, with space for the big messages from keynote speakers. Congrats to @mames and @mi_ayako \nSee you all again at #DevCon5!",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]

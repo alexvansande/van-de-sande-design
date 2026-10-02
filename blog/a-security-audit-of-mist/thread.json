@@ -1,0 +1,1061 @@
+[
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304483988497629184"
+    ],
+    "editableUntil": "2020-09-11T19:16:33.655Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Cure53",
+     "screen_name": "cure53berlin",
+     "indices": [
+      "41",
+      "54"
+     ],
+     "id_str": "2730156996",
+     "id": "2730156996"
+    }
+   ],
+   "urls": [
+    {
+     "url": "https://t.co/7mIs1sBCri",
+     "expanded_url": "https://drive.google.com/file/d/1LSsD9gzOejmQ2QipReyMXwr_M0Mg1GMH/view",
+     "display_url": "drive.google.com/file/d/1LSsD9g…",
+     "indices": [
+      "251",
+      "274"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "323",
+  "id_str": "1304483988497629184",
+  "truncated": false,
+  "retweet_count": "121",
+  "id": "1304483988497629184",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:16:33 +0000 2020",
+  "favorited": false,
+  "full_text": "In 2016-17 the Ethereum Foundation hired @cure53berlin for a security Audit of Mist. The process was eye opening and contributed to the discontinuation of the project. The report was never publicized but it might still be valuable for builders today: https://t.co/7mIs1sBCri",
+  "lang": "en"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304483990078881792"
+    ],
+    "editableUntil": "2020-09-11T19:16:34.032Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": [
+    {
+     "url": "https://t.co/OdOiWnLsuw",
+     "expanded_url": "https://www.youtube.com/watch?v=IgNjs_WaFSc&t=11s",
+     "display_url": "youtube.com/watch?v=IgNjs_…",
+     "indices": [
+      "256",
+      "279"
+     ]
+    }
+   ]
+  },
+  "display_text_range": [
+   "0",
+   "279"
+  ],
+  "favorite_count": "10",
+  "in_reply_to_status_id_str": "1304483988497629184",
+  "id_str": "1304483990078881792",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304483990078881792",
+  "in_reply_to_status_id": "1304483988497629184",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:16:34 +0000 2020",
+  "favorited": false,
+  "full_text": "Mist was a brainchild of Gavin and Jeff but I took the lead of it when I joined the foundation in 2014. We had grand plans for it being the realization of all web3 technologies we were building and it was planned as the main software release of Metropolis\nhttps://t.co/OdOiWnLsuw",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304483991903404034"
+    ],
+    "editableUntil": "2020-09-11T19:16:34.467Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1304483990078881792",
+  "id_str": "1304483991903404034",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304483991903404034",
+  "in_reply_to_status_id": "1304483990078881792",
+  "created_at": "Fri Sep 11 18:16:34 +0000 2020",
+  "favorited": false,
+  "full_text": "However the first 2 years I worked on Ethereum we were mostly focused on the Wallet app, so it started being released as a beta in 2016 and we started a security audit at the same time. The Foundation contacted Mario Heiderich from Cure53.\n\nIt was a great piece of humble pie.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304484002439614464"
+    ],
+    "editableUntil": "2020-09-11T19:16:36.979Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304484002439614464/photo/1",
+     "indices": [
+      "273",
+      "296"
+     ],
+     "url": "https://t.co/iWJgZEWCNx",
+     "media_url": "http://pbs.twimg.com/media/Ehp1SEuXYAEMg-K.jpg",
+     "id_str": "1304483995443486721",
+     "id": "1304483995443486721",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp1SEuXYAEMg-K.jpg",
+     "sizes": {
+      "large": {
+       "w": "1364",
+       "h": "1214",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1068",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "605",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/iWJgZEWCNx"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "296"
+  ],
+  "favorite_count": "4",
+  "in_reply_to_status_id_str": "1304483991903404034",
+  "id_str": "1304484002439614464",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304484002439614464",
+  "in_reply_to_status_id": "1304483991903404034",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:16:36 +0000 2020",
+  "favorited": false,
+  "full_text": "As a designer I had spent a lot of time working on small things that I was really proud of, for instance instead of the URL being a simple text field we wanted to show all the url elements in a proper hierarchical order. But turns out Meteor’s SafeString wasn’t that safe. https://t.co/iWJgZEWCNx",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304484002439614464/photo/1",
+     "indices": [
+      "273",
+      "296"
+     ],
+     "url": "https://t.co/iWJgZEWCNx",
+     "media_url": "http://pbs.twimg.com/media/Ehp1SEuXYAEMg-K.jpg",
+     "id_str": "1304483995443486721",
+     "id": "1304483995443486721",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp1SEuXYAEMg-K.jpg",
+     "sizes": {
+      "large": {
+       "w": "1364",
+       "h": "1214",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1068",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "605",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/iWJgZEWCNx"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304485464922034178"
+    ],
+    "editableUntil": "2020-09-11T19:22:25.662Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304485464922034178/photo/1",
+     "indices": [
+      "244",
+      "267"
+     ],
+     "url": "https://t.co/afnFKUxndH",
+     "media_url": "http://pbs.twimg.com/media/Ehp2nTgWsAUGr9v.jpg",
+     "id_str": "1304485459700133893",
+     "id": "1304485459700133893",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp2nTgWsAUGr9v.jpg",
+     "sizes": {
+      "large": {
+       "w": "1182",
+       "h": "506",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1182",
+       "h": "506",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "291",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/afnFKUxndH"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "267"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1304484002439614464",
+  "id_str": "1304485464922034178",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304485464922034178",
+  "in_reply_to_status_id": "1304484002439614464",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:22:25 +0000 2020",
+  "favorited": false,
+  "full_text": "We would then build our own sanitizers and then they would come back to us with “actually,  this isn’t enough, there’s a bug in Webkit using this particular character so we were able to execute javascript code by encoding it in a token’s name” https://t.co/afnFKUxndH",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304485464922034178/photo/1",
+     "indices": [
+      "244",
+      "267"
+     ],
+     "url": "https://t.co/afnFKUxndH",
+     "media_url": "http://pbs.twimg.com/media/Ehp2nTgWsAUGr9v.jpg",
+     "id_str": "1304485459700133893",
+     "id": "1304485459700133893",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp2nTgWsAUGr9v.jpg",
+     "sizes": {
+      "large": {
+       "w": "1182",
+       "h": "506",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1182",
+       "h": "506",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "291",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/afnFKUxndH"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304485475168784386"
+    ],
+    "editableUntil": "2020-09-11T19:22:28.105Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304485475168784386/photo/1",
+     "indices": [
+      "262",
+      "285"
+     ],
+     "url": "https://t.co/34GfqiaLTZ",
+     "media_url": "http://pbs.twimg.com/media/Ehp2nudWsAE572l.jpg",
+     "id_str": "1304485466935308289",
+     "id": "1304485466935308289",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp2nudWsAE572l.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "574",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1014",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1274",
+       "h": "1076",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/34GfqiaLTZ"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "285"
+  ],
+  "favorite_count": "7",
+  "in_reply_to_status_id_str": "1304485464922034178",
+  "id_str": "1304485475168784386",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304485475168784386",
+  "in_reply_to_status_id": "1304485464922034178",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:22:28 +0000 2020",
+  "favorited": false,
+  "full_text": "A lot of the exploits were abusing long strings to hide information that could be used to phish the user, or things that didn’t even cross our minds, like “we can actually make a draggable object from your site overtake elements from the UI”. We were impressed. https://t.co/34GfqiaLTZ",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304485475168784386/photo/1",
+     "indices": [
+      "262",
+      "285"
+     ],
+     "url": "https://t.co/34GfqiaLTZ",
+     "media_url": "http://pbs.twimg.com/media/Ehp2nudWsAE572l.jpg",
+     "id_str": "1304485466935308289",
+     "id": "1304485466935308289",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp2nudWsAE572l.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "574",
+       "resize": "fit"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "1014",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1274",
+       "h": "1076",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/34GfqiaLTZ"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1304485475168784386/photo/1",
+     "indices": [
+      "262",
+      "285"
+     ],
+     "url": "https://t.co/34GfqiaLTZ",
+     "media_url": "http://pbs.twimg.com/media/Ehp2nutXsAIgU9J.jpg",
+     "id_str": "1304485467002482690",
+     "id": "1304485467002482690",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp2nutXsAIgU9J.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "947",
+       "resize": "fit"
+      },
+      "small": {
+       "w": "680",
+       "h": "537",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "large": {
+       "w": "1206",
+       "h": "952",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/34GfqiaLTZ"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304488161347764224"
+    ],
+    "editableUntil": "2020-09-11T19:33:08.540Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1304485475168784386",
+  "id_str": "1304488161347764224",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "1",
+  "id": "1304488161347764224",
+  "in_reply_to_status_id": "1304485475168784386",
+  "created_at": "Fri Sep 11 18:33:08 +0000 2020",
+  "favorited": false,
+  "full_text": "At this point everything was fixable. But at some point they started going deeper into our tech stack: you could force an error in Node.js to reveal information about the user’s folder names. You could abuse our injected provider and override the native JSON parser functions.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304488171795816448"
+    ],
+    "editableUntil": "2020-09-11T19:33:11.031Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488171795816448/photo/1",
+     "indices": [
+      "280",
+      "303"
+     ],
+     "url": "https://t.co/cNYUh233lU",
+     "media_url": "http://pbs.twimg.com/media/Ehp5EwjWoAEFEk_.jpg",
+     "id_str": "1304488164736802817",
+     "id": "1304488164736802817",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5EwjWoAEFEk_.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "386",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "681",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1520",
+       "h": "862",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/cNYUh233lU"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "303"
+  ],
+  "favorite_count": "10",
+  "in_reply_to_status_id_str": "1304488161347764224",
+  "id_str": "1304488171795816448",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "3",
+  "id": "1304488171795816448",
+  "in_reply_to_status_id": "1304488161347764224",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:33:11 +0000 2020",
+  "favorited": false,
+  "full_text": "And then the really scary things started popping: the found out how to abuse electron to access privileged commands not even Mist should have access to. At some point a POC was able execute *any* app in the computer. This is scary for a normal app, but fatal for a crypto wallet. https://t.co/cNYUh233lU",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488171795816448/photo/1",
+     "indices": [
+      "280",
+      "303"
+     ],
+     "url": "https://t.co/cNYUh233lU",
+     "media_url": "http://pbs.twimg.com/media/Ehp5EwjWoAEFEk_.jpg",
+     "id_str": "1304488164736802817",
+     "id": "1304488164736802817",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5EwjWoAEFEk_.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "386",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "681",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1520",
+       "h": "862",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/cNYUh233lU"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304488180406800384"
+    ],
+    "editableUntil": "2020-09-11T19:33:13.084Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "user_mentions": [],
+   "urls": [],
+   "symbols": [],
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488180406800384/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/huZZtwSUjW",
+     "media_url": "http://pbs.twimg.com/media/Ehp5FUZWAAAaRcV.jpg",
+     "id_str": "1304488174358495232",
+     "id": "1304488174358495232",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5FUZWAAAaRcV.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "218",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "385",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1420",
+       "h": "456",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/huZZtwSUjW"
+    }
+   ],
+   "hashtags": []
+  },
+  "display_text_range": [
+   "0",
+   "302"
+  ],
+  "favorite_count": "7",
+  "in_reply_to_status_id_str": "1304488171795816448",
+  "id_str": "1304488180406800384",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1304488180406800384",
+  "in_reply_to_status_id": "1304488171795816448",
+  "possibly_sensitive": false,
+  "created_at": "Fri Sep 11 18:33:13 +0000 2020",
+  "favorited": false,
+  "full_text": "The whole process took over a year of back and forth, where they would find issues, we would fix and come back to them. At some point issues started escalating to Electron team, Chromium and Webkit. Cure53 itself said it was out of our hands and they couldn’t have predicted it. https://t.co/huZZtwSUjW",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157",
+  "extended_entities": {
+   "media": [
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488180406800384/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/huZZtwSUjW",
+     "media_url": "http://pbs.twimg.com/media/Ehp5FUZWAAAaRcV.jpg",
+     "id_str": "1304488174358495232",
+     "id": "1304488174358495232",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5FUZWAAAaRcV.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "218",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "385",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1420",
+       "h": "456",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/huZZtwSUjW"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488180406800384/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/huZZtwSUjW",
+     "media_url": "http://pbs.twimg.com/media/Ehp5FUxWsAI9RF_.jpg",
+     "id_str": "1304488174459203586",
+     "id": "1304488174459203586",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5FUxWsAI9RF_.jpg",
+     "sizes": {
+      "medium": {
+       "w": "1200",
+       "h": "321",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1398",
+       "h": "374",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "small": {
+       "w": "680",
+       "h": "182",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/huZZtwSUjW"
+    },
+    {
+     "expanded_url": "https://x.com/avsa/status/1304488180406800384/photo/1",
+     "indices": [
+      "279",
+      "302"
+     ],
+     "url": "https://t.co/huZZtwSUjW",
+     "media_url": "http://pbs.twimg.com/media/Ehp5FUxXYAMTOYq.jpg",
+     "id_str": "1304488174459248643",
+     "id": "1304488174459248643",
+     "media_url_https": "https://pbs.twimg.com/media/Ehp5FUxXYAMTOYq.jpg",
+     "sizes": {
+      "small": {
+       "w": "680",
+       "h": "199",
+       "resize": "fit"
+      },
+      "thumb": {
+       "w": "150",
+       "h": "150",
+       "resize": "crop"
+      },
+      "medium": {
+       "w": "1200",
+       "h": "351",
+       "resize": "fit"
+      },
+      "large": {
+       "w": "1560",
+       "h": "456",
+       "resize": "fit"
+      }
+     },
+     "type": "photo",
+     "display_url": "pic.x.com/huZZtwSUjW"
+    }
+   ]
+  }
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304490482039480320"
+    ],
+    "editableUntil": "2020-09-11T19:42:21.836Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "276"
+  ],
+  "favorite_count": "6",
+  "in_reply_to_status_id_str": "1304488180406800384",
+  "id_str": "1304490482039480320",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1304490482039480320",
+  "in_reply_to_status_id": "1304488180406800384",
+  "created_at": "Fri Sep 11 18:42:21 +0000 2020",
+  "favorited": false,
+  "full_text": "This was fundamentally the end of the project. We explored  different approaches, using other frameworks, building our own, starting from scratch on a completely different language. We saw Brave pop up and eventually abandon Electron too. In a year Mist would be discontinued.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304490483591393281"
+    ],
+    "editableUntil": "2020-09-11T19:42:22.206Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Jordan Coin",
+     "screen_name": "jordancoin",
+     "indices": [
+      "65",
+      "76"
+     ],
+     "id_str": "4508451253",
+     "id": "4508451253"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "274"
+  ],
+  "favorite_count": "16",
+  "in_reply_to_status_id_str": "1304490482039480320",
+  "id_str": "1304490483591393281",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "0",
+  "id": "1304490483591393281",
+  "in_reply_to_status_id": "1304490482039480320",
+  "created_at": "Fri Sep 11 18:42:22 +0000 2020",
+  "favorited": false,
+  "full_text": "I wouldn’t have thought about the report again, if it wasn’t for @Jordancoin pinging me about it, wanting to learn more what we learned ourselves and it made me realize these lessons could be applied to more people building desktop wallets in crypto.\n\nSo I’m sharing it now.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ },
+ {
+  "edit_info": {
+   "initial": {
+    "editTweetIds": [
+     "1304490485722091523"
+    ],
+    "editableUntil": "2020-09-11T19:42:22.714Z",
+    "editsRemaining": "5",
+    "isEditEligible": true
+   }
+  },
+  "retweeted": false,
+  "source": "<a href=\"http://itunes.apple.com/us/app/twitter/id409789998?mt=12\" rel=\"nofollow\">Twitter for Mac</a>",
+  "entities": {
+   "hashtags": [],
+   "symbols": [],
+   "user_mentions": [
+    {
+     "name": "Mario Heidrich",
+     "screen_name": "Silverhair72",
+     "indices": [
+      "78",
+      "91"
+     ],
+     "id_str": "54172287",
+     "id": "54172287"
+    },
+    {
+     "name": "Fabian Vogelsteller",
+     "screen_name": "feindura",
+     "indices": [
+      "152",
+      "161"
+     ],
+     "id_str": "161071669",
+     "id": "161071669"
+    },
+    {
+     "name": "Ev",
+     "screen_name": "evertonfraga",
+     "indices": [
+      "164",
+      "177"
+     ],
+     "id_str": "11113512",
+     "id": "11113512"
+    },
+    {
+     "name": "holiman",
+     "screen_name": "mhswende",
+     "indices": [
+      "180",
+      "189"
+     ],
+     "id_str": "193606262",
+     "id": "193606262"
+    },
+    {
+     "name": "philipplgh",
+     "screen_name": "philipplgh",
+     "indices": [
+      "203",
+      "214"
+     ],
+     "id_str": "714031120",
+     "id": "714031120"
+    },
+    {
+     "name": "marc | wolovim.eth",
+     "screen_name": "wolovim",
+     "indices": [
+      "216",
+      "224"
+     ],
+     "id_str": "424007918",
+     "id": "424007918"
+    }
+   ],
+   "urls": []
+  },
+  "display_text_range": [
+   "0",
+   "259"
+  ],
+  "favorite_count": "26",
+  "in_reply_to_status_id_str": "1304490483591393281",
+  "id_str": "1304490485722091523",
+  "in_reply_to_user_id": "10157",
+  "truncated": false,
+  "retweet_count": "2",
+  "id": "1304490485722091523",
+  "in_reply_to_status_id": "1304490483591393281",
+  "created_at": "Fri Sep 11 18:42:22 +0000 2020",
+  "favorited": false,
+  "full_text": "I hope this is useful for some people. Thanks Jordan for pinging me about it, @Silverhair72 for digging it out again and of course my former team mates @feindura , @evertonfraga , @mhswende, @MaiaVictr, @Philipplgh, @wolovim for working so hard to dig us out.",
+  "lang": "en",
+  "in_reply_to_screen_name": "avsa",
+  "in_reply_to_user_id_str": "10157"
+ }
+]
