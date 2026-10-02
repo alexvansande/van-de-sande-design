@@ -10,9 +10,7 @@ SEC, Anticrypto Army, while the US is waging war against crypto, Brazil Central 
 
 It's not China's CDBC, but rather a model I predict that will be copied all over the western world.
 
-First, a context: Brazil is fast to adopt new technologies. Everyone already has phones, social media accounts and WhatsApp. Also, Brazil is already a pioneer with digital payments, being the second largest market of digital transactions behind India:
-
-[oglobo.globo.com/economia/noticia/2023/04/com-pix-brasil-fica-em-segundo-lugar-em-ranking-de-paises-por-uso-de-pagamentos-instantaneos.ghtml](https://oglobo.globo.com/economia/noticia/2023/04/com-pix-brasil-fica-em-segundo-lugar-em-ranking-de-paises-por-uso-de-pagamentos-instantaneos.ghtml)
+First, a context: Brazil is fast to adopt new technologies. Everyone already has phones, social media accounts and WhatsApp. Also, Brazil is already a pioneer with digital payments, being [the second largest market of digital transactions behind India](https://oglobo.globo.com/economia/noticia/2023/04/com-pix-brasil-fica-em-segundo-lugar-em-ranking-de-paises-por-uso-de-pagamentos-instantaneos.ghtml).
 
 Pix, launched in 2020 was adopted much faster than digital payment platforms anywhere else in the world. You can go anywhere with just the phone and assume it will be accepted, even with informal beach vendors.\
 (sorry for the pic quality)
@@ -35,13 +33,11 @@ It means all transactions are private and if the government wants your data it m
 
 The goal is to replicate the same legal structure of the current system, just more efficiently. There is no "government controlled button" on the people's wallets – at least not any more than they have today.
 
-But the interesting, is really how it enables NEW applications.
+**But the interesting, is really how it enables NEW applications.**
 
 They're dead serious about it: besides working with Consensys' Besu they have selected Aave as one of their development partners.
 
-One of their stated goal is to make this local network 100% compatible with the EVM ecosystem and to bridge to it.
-
-[bcb.gov.br/detalhenoticia/17632/nota](https://www.bcb.gov.br/detalhenoticia/17632/nota)
+[One of their stated goal](https://www.bcb.gov.br/detalhenoticia/17632/nota) is to make this local network 100% compatible with the EVM ecosystem and to bridge to it.
 
 A more long term goal is to adopt the Ethereum  standards to create standardized financial (and non financial) instruments: emit national bonds as tokens, to have official land registries using NFTs, to have public universities issuing NFT diplomas, all on the  national chain.
 

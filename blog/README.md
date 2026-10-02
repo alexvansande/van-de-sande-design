@@ -101,6 +101,14 @@ a picture is the featured image). A link pasted over a selection links it.
   the link is where it starts. It is written as the other
   videos are, a `<figure class="youtube">` with the video in it, its title
   asked of YouTube, and its caption, if it has one, in the figure.
+- **Someone's tweet** comes from its link pasted on an empty line, or from
+  Enter at the end of a line that is only its link. It is a card, as the
+  blog shows it: its words, its pictures and who said it when, linking to
+  it, written as a `<figure class="tweet">` by `tweets.py`, which keeps its
+  pictures in the post's folder (`tweet-<id>.jpg`), so it stays when the
+  tweet goes and the page loads nothing from Twitter. `python3
+  blog/tweets.py` does the same to the posts already out: a link to a tweet
+  that reads as its own address becomes the card; one on words stays a link.
 - **Half the column, the text running round it**: ◧ and ◨ on a picture
   float it left or right at half the width, and again bring it back. It is
   written as the older posts have it, `<figure class="float-right"

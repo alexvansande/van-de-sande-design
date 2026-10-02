@@ -14,8 +14,14 @@ Today I was able to pay my whole team with a single click. Could have been none 
 
 I spent a half a day and was able to build a contract that keeps DAI in compound, but withdraws when it wants to make specific payments. I added yearly salaries of all team members and spent another half day in making a nice interface so they can request payment at anytime.
 
-I recently posted how after being paid in BTC and ETH I was now receiving in DAI. But there's a lot more to the story. In fact my whole team has been receiving in ether for years but we had a lot of trouble doing so.\
-[x.com/avsa/status/1087730019055616000](https://x.com/avsa/status/1087730019055616000)
+I recently posted how after being paid in BTC and ETH I was now receiving in DAI. But there's a lot more to the story. In fact my whole team has been receiving in ether for years but we had a lot of trouble doing so.
+
+<figure class="tweet">
+<blockquote cite="https://x.com/avsa/status/1087730019055616000">
+<p>When I started working at @ethereum I was paid fully in bitcoin. As soon as the option was available, in 2015/16 I started receiving fully in ether. Now I've had the honor to be the first person in the Foundation to be paid in DAI!<br>#DogFooding</p>
+<footer><a href="https://x.com/avsa/status/1087730019055616000">Alex Van de Sande (avsa.eth) (@avsa), 22 January 2019</a></footer>
+</blockquote>
+</figure>
 
 First of all, it's actually quite hard – purposefully – to move funds. Some of the bigger wallets the foundation has have been an original multisig code, which is safe but only works with command line tools. At some point we had to wait for busy people like Vitalik to sign a tx.
 
@@ -33,5 +39,4 @@ Since it required a 3 step process for paying (submit, approve, execute), it wou
 
 At first I considered using Aragon's "Payroll" app, which inspired the idea of setting a yearly salary and allow you to be paid per block. But that app is under development and the buffer dai would stay locked on the contract, not generating interest. So I decided to build my own
 
-As a final touch, I set the default function to pay all amounts due and be public, so it allows a service like ethereum alarm clock to schedule a call for a given day of the month. We recently tested today and it all worked like a charm. Here's the code:\
-[github.com/alexvandesande/payroll/blob/master/contract.sol](https://github.com/alexvandesande/payroll/blob/master/contract.sol)
+As a final touch, I set the default function to pay all amounts due and be public, so it allows a service like ethereum alarm clock to schedule a call for a given day of the month. We recently tested today and it all worked like a charm. [Here's the code](https://github.com/alexvandesande/payroll/blob/master/contract.sol).

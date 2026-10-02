@@ -41,6 +41,13 @@ a{color:inherit}
   font-size:1.15rem;letter-spacing:.01em;color:rgba(230,226,210,.85)}
 .top a,.bar a,.index>h1 a{text-decoration:none;text-underline-offset:.18em;text-decoration-thickness:1px}
 .top a:hover,.bar a:hover,.index>h1 a:hover{text-decoration:underline;color:var(--light)}
+/* on a post, a ← before the name: back to the index, at this post's card;
+   as quiet as the arrows beside the post, and lit the same way */
+.top .back,.bar .back{display:inline-block;margin-right:.55em;opacity:.6;transition:opacity .2s}
+.top .back:hover,.bar .back:hover{opacity:1;text-decoration:none}
+/* where there is room it hangs in the margin, so the name stays in line
+   with the text of the sheet under it */
+@media (min-width:40rem){.top .back,.bar .back{width:1.6em;margin-left:-1.6em;margin-right:0}}
 .foot{display:flex;gap:.7em;justify-content:center;padding:3rem 1rem 3.5rem;
   font-size:1rem;color:var(--light);opacity:.7}
 .foot a{text-decoration:none}
@@ -104,6 +111,7 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
     font-size:1.05rem;line-height:1.3;text-wrap:balance}
   .an-prev small::before{content:"↑ "}
   .an-next small::before{content:"↓ "}
+  .an-back small::before{content:"← "}
 }
 @media (prefers-reduced-motion:reduce){.aside-nav{transition:none}}
 
@@ -186,6 +194,18 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 
 .body figure.youtube{clear:both;margin:2rem 0}
 .body figure.youtube iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:6px;background:#000}
+/* Someone's tweet, quoted (tweets.py): a card laid on the paper, upright,
+   in the post's own type, who said it and when at its foot, linking to it.
+   It is a quotation but not one of his, so not the rule and italic of his. */
+.body figure.tweet{clear:both;margin:2rem 0}
+.body figure.tweet blockquote{margin:0;padding:1.1rem 1.3rem 1rem;font-style:normal;background:#fbf9f1;
+  border:1px solid var(--rule);border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.body figure.tweet blockquote::before{content:none}
+.body figure.tweet blockquote p{margin:0}
+.body figure.tweet blockquote p+p{margin-top:.6rem}
+.body figure.tweet img{display:block;width:100%;height:auto;margin:.9rem 0 0;border-radius:6px}
+.body figure.tweet footer{margin-top:.8rem;font-size:.9rem;color:var(--quiet)}
+.body figure.tweet footer a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 
 /* ---------- after the post: the next one, as a card ----------
    Scroll on past it and it opens where it is, and the one after it waits
@@ -274,7 +294,17 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
    the foot of the screen, a card rises out of the dark. blog.js places them
    (--dim is how far one has gone back, 0 to 1); without it the cards just
    scroll. The lift on hover would fight it, so there is none. */
+/* Side by side, the columns are staggered: each a part of a card lower than
+   the one to its left (half, in two), so the rows never stand level. Each
+   card spans as many rows of the grid as there are columns, and blog.js
+   places them and sizes the rows (--row). */
+.cards.stagger{grid-auto-rows:var(--row,auto)}
+.cards.stagger>.card{align-self:start}
 .piling .cards>.card{position:sticky;top:var(--line,0);align-self:start;transition:none;transform-origin:50% 0}
+/* Side by side there is no pile: two piles going back side by side drew
+   the eye more than the cards. The cards scroll, coming up out of the dark
+   at the foot of the screen and going into it at the top. */
+.piling .cards.stagger>.card{position:relative;top:auto}
 .piling .cards>.card:hover{transform:none}
 .piling .cards>.card::after{content:"";position:absolute;inset:0;background:var(--dark);
   opacity:var(--dim,0);pointer-events:none}
@@ -303,6 +333,10 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
     animation-timeline:view(),view();
     animation-range:entry 0% entry var(--rise,1px),
       contain calc(100% - var(--line,0px)) contain calc(100% - var(--line,0px) + var(--deep,1px))}
+  .pile-css .cards.stagger>.card.near{
+    animation:pile-rise ease-in-out none,pile-fade ease-in-out forwards;
+    animation-timeline:view(),view();
+    animation-range:entry 0% entry var(--rise,1px),exit 0% exit var(--rise,1px)}
 }
 /* the pile: held at the line, stepping back a little higher and smaller
    each row, darker, and gone by the third */
@@ -311,6 +345,9 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
   33.333%{filter:brightness(.72)}
   66.667%{filter:brightness(.5);opacity:1}
   to{transform:translate3d(0,var(--hold,0px),0) scale(.88);filter:brightness(.35);opacity:0}}
+/* half into the dark at the top, side by side, and then off the screen: held there (forwards),
+   or the card would come back as its last part leaves the screen */
+@keyframes pile-fade{from{opacity:1;filter:none}to{opacity:.5;filter:brightness(.6)}}
 /* up out of the dark */
 @keyframes pile-rise{from{opacity:.25;filter:brightness(.5)}to{opacity:1;filter:none}}
 /* arriving from the site part way down the posts, the years come down from
@@ -335,17 +372,46 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
 /* the picture keeps its proportions, cropped, as it goes from 2:1 to the cover's */
 ::view-transition-old(*.cover),::view-transition-new(*.cover){height:100%;object-fit:cover}
 ::view-transition-image-pair(*.cover){overflow:hidden}
-/* the words do not stretch: the old ones go at once, the new come up in place */
-/* (only for the card that opens: the other cards on the index just fade) */
-::view-transition-group(*.words){animation:none}
-::view-transition-old(*.words):not(:only-child){display:none}
+/* The words are never stretched: each is drawn at its own size, from the
+   top left of the box going from the card's to the sheet's. The card's
+   (its subtitle, its first lines, its date) go quickly, and the post's come
+   up once the paper is there. (Only for the card that opens: the other
+   cards on the index just fade.) A rule for one of a pair is written for
+   both, and the one alone (:only-child) put back after it: Chrome does not
+   match :not(:only-child) here, and the pairs' rules were never applied.
+   The one alone fades as the browser would fade it (vt-out, vt-in). */
+::view-transition-old(*.words),::view-transition-new(*.words){width:auto;height:auto}
+::view-transition-old(*.words){animation:words-out .12s linear both}
+::view-transition-old(*.words):only-child{animation:vt-out .6s both}
 ::view-transition-new(*.words){animation:words-in .45s .3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes words-out{to{opacity:0}}
+@keyframes vt-out{from{opacity:1}to{opacity:0}}
+@keyframes vt-in{from{opacity:0}to{opacity:1}}
 @keyframes words-in{from{opacity:0;transform:translateY(.6rem)}to{opacity:1;transform:none}}
+/* The title goes from the card's to the sheet's, and grows as it goes, as
+   type rather than a picture of it blown up: each is drawn at its own size
+   and scaled by as much as the sheet's is larger than the card's (--title-k,
+   from blog.js, or the head of the page it arrives on), so the two are the
+   same size all the way and only cross over from one to the other. Their
+   lines may break in different places, so the crossing is quick, early,
+   and the two are hardly ever there at once. Back to the index, it is the
+   same the other way round. */
+::view-transition-old(*.title),::view-transition-new(*.title){width:auto;height:auto;transform-origin:0 0}
+::view-transition-old(*.title){animation:title-old .6s cubic-bezier(.2,.75,.15,1) both,title-out .6s linear both}
+::view-transition-new(*.title){animation:title-new .6s cubic-bezier(.2,.75,.15,1) both,title-in .6s linear both}
+::view-transition-old(*.title):only-child{animation:vt-out .6s both}
+::view-transition-new(*.title):only-child{animation:vt-in .6s both}
+@keyframes title-old{to{transform:scale(var(--title-k,1))}}
+@keyframes title-new{from{transform:scale(calc(1 / var(--title-k,1)))}}
+@keyframes title-out{0%,10%{opacity:1}30%,100%{opacity:0}}
+@keyframes title-in{0%,18%{opacity:0}40%,100%{opacity:1}}
 /* the paper is one sheet the whole way: no fading between two of them,
    which would let the dark through half way */
 ::view-transition-old(*.paper),::view-transition-new(*.paper){height:100%}
-::view-transition-old(*.paper):not(:only-child){animation:none;opacity:0}
-::view-transition-new(*.paper):not(:only-child){animation:none}
+::view-transition-old(*.paper){animation:none;opacity:0}
+::view-transition-new(*.paper){animation:none}
+::view-transition-old(*.paper):only-child{animation:vt-out .6s both}
+::view-transition-new(*.paper):only-child{animation:vt-in .6s both}
 
 @media (prefers-reduced-motion:reduce){
   .card{transition:none}.card:hover{transform:none}

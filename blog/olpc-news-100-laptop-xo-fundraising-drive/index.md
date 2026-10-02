@@ -1,0 +1,65 @@
+---
+title: "OLPC News 100 Laptop XO Fundraising Drive"
+date: "2007-11-14T12:00:00Z"
+original: "http://www.olpcnews.com/laptops/xo1/olpc_news_100_laptop_fundraising_drive.html"
+original_site: "OLPC News"
+---
+
+I believe that if you pick up some of the most pressing world problems, like poverty, corruption, tyranny, most solutions will need some of the same basic needs: easy and free access to communication, information, collaboration, education and by giving power to anyone to record present facts, remember their history and broadcast their own voice.
+
+Let me [explain with a video](http://www.youtube.com/watch?v=VSoKqqCheU4):
+
+<figure class="youtube">
+<iframe src="https://www.youtube-nocookie.com/embed/VSoKqqCheU4" title="YouTube video" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</figure>
+
+Technology is one tool that can help do that. That’s why I have always been a believer in the power of giving access to computing power and to the internet to the more vast array of people possible, and that’s the main reason I support the One Laptop Per Child program. Now that OLPC has made the Give Many program easier to participate in, I have an idea that Wayan Vota and I want to share with you.
+
+We are proud to start a fundraising to achieve the modest goal of equip one of the local initiatives we’ve been reporting for over two years. We present to you:
+
+> **[OLPC News 100 Laptop Fundraising Drive](https://www.fundable.com/groupactions/groupaction.2007-11-14.8598198702/)**
+>
+> Let's raise $20,000 in donations for one hundred XO-1 laptops to be sent to the best locally-organized OLPC learning club!
+>
+> **Donors**
+>
+> 1. Pledge at least $100 on the [OLPC News Fundraising Drive site](https://www.fundable.com/groupactions/groupaction.2007-11-14.8598198702/)
+> 2. If/when we reach $20,000, vote for the best program to get 60-100 laptops
+> 3. If we don't reach $20,000, then everyone's pledge is nullified and we just watch others Give Many.
+>
+> **Local Programs**
+>
+> 1. Organize a local OLPC learning club in your community
+> 2. Send us a post on how you'd use 60 laptops to enhance education
+> 3. If you win, pass out laptops with a smile
+>
+> Now don't think we'll be passing out laptops to just anyone. Each local initiative will be debated on OLPC News based on what are the concrete realities and how well established is the curriculum implementation, power grid and internet access on each pilot.
+>
+> After the vote by the donors, the winning group will get our 60 directed laptops, and we will ask OLPC to direct their 40 laptops to the second place group.
+>
+> **Everyone**
+>
+> If you can't donate you can help our cause by spreading the word around, from [re-blogging the video](http://www.vimeo.com/385757) to [Digg ing it](http://digg.com/submit?phase=2&url=http%3A%2F%2Fwww.olpcnews.com%2Flaptops%2Fxo1%2Folpc_news_100_laptop_fundraising_drive.html&title=OLPC%20News%20100%20Laptop%20XO%20Fundraising%20Drive&bodytext=%3Cdiv%20style%3D%22float%3A%20right%3B%20margin-left%3A%2010px%3B%20margin-bottom%3A%2010px%3B%22%3E%3Ca%20href%3D%22http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fdcmetroblogger%2F1888133087%2F%22%3E%3Cimg%20src%3D%22http%3A%2F%2Fwww.olpcnews.com%2Fimages%2Folpc-laptop.jpg%22%20alt%3D%22olpc%20for%20everyone%22%20style%3D%22border%3A%202px%20solid%20rgb%280%2C%200%2C%200%29%3B%22%3E%3C%2Fa%3E%3Cbr%3E%20%3Cspan%20style%3D%22font-size%3A%200.9em%3B%20margin-top%3A%202px%3B%22%3EOne%20Laptop%20Per%20Child%20XO-1%3C%2Fspan%3E%3C%2Fdiv%3E%0A%0AI%20believe%20that%20if%20you%20pick%20up%20some%20of%20the%20most%20pressing%20world%20problems%2C%20like%20poverty%2C%20corruption%2C%20tyranny%2C%20most%20solutions%20will%20need%20some%20of%20the%20same%20basic%20needs%3A%20easy%20and%20free%20access%20to%20communication%2C%20information%2C%20collaboration%20and%20education.%20Give%20power%20to%20anyone%20to%20record%20present%20facts%2C%20remember%20their%20history%20and%20broadcast%20their%20own%20voice.%0A%3Cbr%3E%3Cbr%3E%0ATechnology%20is%20one%20tool%20that%20can%20help%20do%20that.%20That%E2%80%99s%20why%20I%20have%20always%20been%20a%20believer%20in%20the%20power%20of%20giving%20access%20to%20computing%20power%20and%20to%20the%20internet%20to%20the%20more%20vast%20array%20of%20people%20possible%2C%20and%20that%E2%80%99s%20the%20main%20reason%20I%20support%20the%20One%20Laptop%20Per%20Child%20program.%20%20Now%20that%20OLPC%20has%20made%20the%20Give%20Many%20program%20easier%20to%20participate%20in%2C%20I%20have%20an%20idea%20that%20Wayan%20Vota%20and%20I%20want%20to%20share%20with%20you.%20%0A%3Cbr%3E%3Cbr%3E%0AWe%20are%20proud%20to%20start%20a%20fundraising%20to%20achieve%20the%20modest%20goal%20of%20equip%20one%20of%20the%20local%20initiatives%20we%E2%80%99ve%20been%20reporting%20for%20over%20two%20years.%20%20We%20present%20to%20you%3A%0A%3Cbr%3E%3Cbr%3E%0A%3Cb%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.fundable.com%2Fgroupactions%2Fgroupaction.2007-11-14.8598198702%2F%22%3EOLPC%20News%20100%20Laptop%20Fundraising%20Drive%3C%2Fa%3E%3C%2Fb%3E%0ALet%27s%20raise%20%2420%2C000%20in%20donations%20for%20one%20hundred%20XO-1%20laptops%20to%20be%20sent%20to%20the%20best%20locally-organized%20OLPC%20learning%20club%21%20%3Cb%3EDonors%3C%2Fb%3E%3Col%3E%3Cli%3EPledge%20at%20least%20%24100%20on%20the%20%3Ca%20href%3D%22https%3A%2F%2Fwww.fundable.com%2Fgroupactions%2Fgroupaction.2007-11-14.8598198702%2F%22%3EOLPC%20News%20Fundraising%20Drive%20site%3C%2Fa%3E%3C%2Fli%3E%3Cli%3EIf%2Fwhen%20we%20reach%20%2420%2C000%2C%20vote%20for%20the%20best%20program%20to%20get%20laptops%3C%2Fli%3E%3Cli%3EIf%20we%20don%27t%20reach%20%2420%2C000%2C%20then%20everyone%27s%20pledge%20is%20nullified%20and%20we%20just%20watch%20others%20Give%20Many.%3C%2Fli%3E%3C%2Fol%3E%3Cb%3ELocal%20Programs%3C%2Fb%3E%3Col%3E%3Cli%3EOrganize%20a%20local%20OLPC%20learning%20club%20in%20your%20community%3C%2Fli%3E%3Cli%3ESend%20us%20a%20post%20on%20how%20you%27d%20use%2060%20laptops%20to%20enhance%20education%3C%2Fli%3E%3Cli%3EIf%20you%20win%2C%20pass%20out%20laptops%20with%20a%20smile%3C%2Fli%3E%3C%2Fol%3ENow%20don%27t%20think%20we%27ll%20be%20passing%20out%20laptops%20to%20just%20anyone.%20%20Each%20local%20initiative%20will%20be%20debated%20on%20OLPC%20News%20based%20on%20what%20are%20the%20concrete%20realities%20and%20how%20well%20established%20is%20the%20curriculum%20implementation%2C%20power%20grid%20and%20internet%20access%20on%20each%20pilot.%20%0A%3Cbr%3E%3Cbr%3E%0AAfter%20the%20vote%20by%20the%20donors%2C%20the%20winning%20group%20will%20get%20our%2060%20directed%20laptops%2C%20and%20we%20will%20ask%20OLPC%20to%20direct%20their%2040%20laptops%20to%20the%20second%20place%20group.&topic=), to adding it to  [del.ico.us](http://del.icio.us/post?v=4&url=http%3A%2F%2Fwww.olpcnews.com%2Flaptops%2Fxo1%2Folpc_news_100_laptop_fundraising_drive.html&title=OLPC%20News%20100%20Laptop%20XO%20Fundraising%20Drive),  [Stumble On](http://www.stumbleupon.com/submit?url=http://www.olpcnews.com/laptops/xo1/olpc_news_100_laptop_fundraising_drive.html&title=OLPC%20News%20100%20Laptop%20XO%20Fundraising%20Drive), [Slashdotting it](javascript:location.href='http://slashdot.org/bookmark.pl?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title)), to posting this page on [Facebook](http://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.fundable.com%2Fgroupactions%2Fgroupaction.2007-11-14.8598198702&t=The+OLPC+News+100+Laptop+Fundraising+Drive)
+
+**About the XO laptop:**
+
+<figure class="float-right" style="width:50%">
+<img src="01.jpg" width="200" height="167" alt="olpc for everyone">
+<figcaption>One Laptop Per Child XO-1</figcaption>
+</figure>
+
+First presented by M.I.T. Media Lab founder Nicholas Negroponte in 2005, the once called US$100 laptop is a fresh start in computing. This is the electric car in a world of SUVs: instead of trying the biggest faster laptop around it's the one that does more with less.
+
+It can connect to other similar laptops without a connection to the internet. If it finds a hotspot it can stretch it to other computers without being turned on.
+
+It allows you to read a book or a site on the screen without consuming any power (while being virtually a sleep). It runs for less energy, cost fewer dollars, [immune to computer viruses](http://www.olpcnews.com/software/operating_system/bitfrost_security_platform.html) and lasts longer even in the hands of children.
+
+Did we mentioned that it's also water and dust proof, can be readable on sunlight and has a [revolutionary but easy to use](http://www.olpcnews.com/software/operating_system/aquatic_sugar_childrens_interface.html) interface?
+
+Also it's not about doing spreadsheets: it comes with free software for music making drawing, blogging, filming, taking photos, making interactive games, doing stop motion animation, a full encyclopedia, a ebook reader and lots of games, including [SimCity, the original](http://www.olpcnews.com/content/games/simcity_on_the_olpc_xo.html).
+
+**About OLPC NEWS**
+
+Started by Wayan Vota in 2006 [OLPC News](http://www.olpcnews.com) prides itself on being an independent news source for all things related to One Laptop Per Child. OLPC News is now a community of more than a dozen regular contributors writing daily about OLPC and its impact on education and technology.
+
+OLPC News is so informative and influential, it's referenced in international media, including [an appearance on CBS News' 60 Minutes](http://www.olpcnews.com/commentary/press/olpc_60_minutes.html). OLPC News is not affiliated with the One Laptop Per Child organization.

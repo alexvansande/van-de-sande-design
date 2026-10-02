@@ -89,6 +89,13 @@ SOURCES = [
     ("everything-you-need-to-know-about-erc777", "https://www.reddit.com/r/ethereum/comments/7qjw6x/", "reddit", None),
     ("an-ocean-centric-world-map", "https://www.reddit.com/r/MapPorn/comments/14jonc/", "reddit", None),
     ("a-daenerys-childrens-book", "https://www.reddit.com/r/gameofthrones/comments/7giguf/", "reddit", None),
+    # 2013, on Bitcoin, the year before Ethereum
+    ("a-tip-for-bitcoiners-with-brazilian-friends", "https://www.reddit.com/r/Bitcoin/comments/1axsml/", "reddit", None),
+    ("the-largest-bitcoin-exchange-in-brazil-gets-hacked", "https://www.reddit.com/r/Bitcoin/comments/1b8mtn/", "reddit", None),
+    ("its-not-the-price-its-the-code-stupid", "https://www.reddit.com/r/Bitcoin/comments/1bbo23/", "reddit", None),
+    ("colored-coins-could-allow-p2p-exchanges", "https://www.reddit.com/r/Bitcoin/comments/1clrk3/", "reddit", None),
+    ("who-decides-the-block-reward-halving", "https://www.reddit.com/r/Bitcoin/comments/1f548u/", "reddit", None),
+    ("what-micronesian-stone-coins-can-teach-us-about-bitcoin", "https://www.reddit.com/r/Bitcoin/comments/1pm18z/", "reddit", None),
 ]
 SITE_NAME = {"medium": "Medium", "ef": "blog.ethereum.org", "discourse": "discuss.ens.domains",
              "reddit": "Reddit", "github": "GitHub", "gist": "GitHub", "vanilla": "forum.ethereum.org"}
@@ -103,10 +110,14 @@ FORUM_PICTURES = {"751": [("link", "cl.ly/image/1v2G102r0T3S", "alephone-concept
 PULLPUSH = "https://api.pullpush.io/reddit/search/"
 # posts that are only a picture: the words are in his comment under it
 REDDIT_COMMENTS = {"14jonc": ["c7dns4o"], "7giguf": ["dqjcn4p"]}
-# a post whose pictures he put up again, better, in a later album: the book's
-# pages in English, all 34 of them, uploaded two days after the photos of
-# the printed one (posted as reddit.com/r/gameofthrones/comments/7gwmxd)
+# a post whose pictures he put up again in a later album, shown after its
+# own: the book's pages in English, all 34 of them, uploaded two days after
+# the photos of the printed one, in Portuguese (posted as
+# reddit.com/r/gameofthrones/comments/7gwmxd)
 REDDIT_ALBUMS = {"7giguf": "fSRYW"}
+# how many pictures each album of the post being written had, so each is a
+# carousel of its own
+_album_sizes = []
 IMGUR = "546c25a59c58ad7"      # the client id imgur.com's own pages use
 
 
@@ -507,6 +518,10 @@ def link_key(u):
     m = re.match(r"/t/(?:[^/]+/)?(\d+)", path)
     if host == "discuss.ens.domains" and m:
         return "ens:" + m.group(1)
+    # a post, not a comment under it (/comments/<post>/<slug>/<comment>)
+    m = re.match(r"/r/\w+/comments/(\w+)(?:/[^/]*)?$", path)
+    if host.endswith("reddit.com") and m:
+        return "reddit:" + m.group(1)
     return None
 
 
@@ -685,8 +700,8 @@ def from_reddit(url):
     # a post that is a picture, or an album of them, on Imgur or Wikimedia
     link = p.get("url") or ""
     album = re.match(r"https?://imgur\.com/(?:gallery|a)/(\w+)", link)
-    if album or pid in REDDIT_ALBUMS:
-        aid = REDDIT_ALBUMS.get(pid) or album.group(1)
+    _album_sizes.clear()
+    for aid in ([album.group(1)] if album else []) + ([REDDIT_ALBUMS[pid]] if pid in REDDIT_ALBUMS else []):
         try:        # a post to imgur's gallery
             a = json.loads(get(f"https://api.imgur.com/post/v1/posts/{aid}?client_id={IMGUR}&include=media"))
             urls = [m["url"] for m in a["media"]]
@@ -696,7 +711,8 @@ def from_reddit(url):
                 urls = [m["link"] for m in json.load(r)["data"]]
         # one after the other with no line between: a carousel, as the book was
         parts.append('<div class="album">' + "".join(f'<img src="{u}" alt="">' for u in urls) + "</div>")
-    elif re.search(r"\.(png|jpe?g|gif)$", link, re.I):
+        _album_sizes.append(len(urls))
+    if not _album_sizes and re.search(r"\.(png|jpe?g|gif)$", link, re.I):
         parts.append(f'<p><img src="{link}" alt=""></p>')
     text = html.unescape(p.get("selftext") or "").strip()
     if text and text not in ("[deleted]", "[removed]"):
@@ -812,10 +828,16 @@ def write(slug, url, kind, date, links, items, force):
     if kind == "reddit":
         # an album's pictures, one after another: a carousel, which the build
         # takes from picture lines with no blank line between them
-        out = []
+        out, left = [], list(_album_sizes)
+        run = 0             # pictures in the carousel being made
         for b in blocks:
             m = re.fullmatch(r'<figure>\n<img src="([^"]+)"[^>]*>\n</figure>', b)
-            if m and out and re.fullmatch(r"(!\[\]\([^)]+\)\n?)+|<figure>\n<img [^>]*>\n</figure>", out[-1]):
+            # one album's carousel ends with its last picture
+            if m and left and run == left[0]:
+                left.pop(0)
+                run = 0
+            run = run + 1 if m else 0
+            if m and run > 1 and out and re.fullmatch(r"(!\[\]\([^)]+\)\n?)+|<figure>\n<img [^>]*>\n</figure>", out[-1]):
                 prev = re.search(r'src="([^"]+)"', out[-1])
                 out[-1] = (f"![]({prev.group(1)})" if prev else out[-1]) + f"\n![]({m.group(1)})"
             else:

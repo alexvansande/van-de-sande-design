@@ -18,7 +18,8 @@ breaks kept; its pictures follow it. A t.co link becomes a link to where it
 went, the one pointing at the tweet's own pictures goes, and &amp; is &. A
 tweet longer than 280 characters is cut short in tweets.js ("…"); the whole
 of it is in note-tweet.js, matched by the second it was posted. A YouTube
-link is the video, set after the tweet; a link to a tweet that is in a post
+link is the video, set after the tweet, and a tweet of someone else's is the
+tweet (tweets.py); a link to a tweet that is in a post
 here goes to that post. A chain (CHAINS) is tweets that each quote the one
 before: one post, in the order they were posted, a rule between them.
 
@@ -29,6 +30,8 @@ import argparse, glob, hashlib, html, json, os, re, shutil, sys, urllib.parse, u
 from datetime import datetime, timezone
 
 from PIL import Image
+
+import tweets as cards       # "tweets" is the thread, in write()
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ARCHIVE = os.path.expanduser("~/Downloads/twitter-2026-10-01-354bc0b4d7bd578f09c8547ef2dcc0570c14c92e651955e7eab572da7e53c99f/data")
@@ -342,6 +345,8 @@ def write(arc, root, slug, title, categories, use_cover, force, groups=None):
         head += [fm("cover", cover), fm("cover_size", cover_size)]
     head += [fm("original", f"https://x.com/{arc_user(arc)}/status/{root}"), fm("original_site", "Twitter"), "---", ""]
     text = "\n".join(head) + "\n" + "\n\n".join(blocks).rstrip() + "\n"
+    # a tweet of someone else's he pointed to is the tweet (tweets.py)
+    text = cards.embed_in(text, folder, problems)
     with open(md_path, "w") as f:
         f.write(text)
     with open(stamp, "w") as f:

@@ -8,9 +8,7 @@ original_site: "Twitter"
 
 So, about the Petro..
 
-Venezuela released a white paper.
-
-[elpetro.gob.ve/Whitepaper\_Petro\_en.pdf](http://www.elpetro.gob.ve/Whitepaper_Petro_en.pdf)
+Venezuela released [a white paper](http://www.elpetro.gob.ve/Whitepaper_Petro_en.pdf).
 
 And it’s sooo good.
 
@@ -64,7 +62,7 @@ But the strength of the Bolivar is a great proof on how much the people trust th
 
 I am not going to say that the Petro is a useless token intent to get ether and bitcoin out hands of dumb greedy people and in the hands of corrupt government officials, because it has a very clear use:
 
-To circumvent the international sanctions put in the Venezuelan regime.
+**To circumvent the international sanctions put in the Venezuelan regime.**
 
 <figure>
 <img src="07.jpg" width="1200" height="122" alt="">

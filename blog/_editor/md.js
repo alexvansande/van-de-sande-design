@@ -8,7 +8,7 @@
 // are, but not, say, HTML in the middle of a sentence).
 //
 // Three things the blog writes as HTML are read into the editor's own pieces
-// and written back as the same HTML: a YouTube video, a picture at half the
+// and written back as the same HTML: a YouTube video, someone's tweet, a picture at half the
 // column with the text running round it, and their captions.
 
 const HTML_BLOCK = /^<(?:\/?(?:figure|p|div|iframe|table|section|details|video|blockquote|ul|ol|h[1-6]|hr|pre|math)\b|!--)/i
@@ -52,7 +52,7 @@ function blocks(md, state) {
       let j = i
       while (j < lines.length && lines[j].trim()) j++
       const html = lines.slice(i, j).join('\n')
-      out.push(youtube(html, state) || floated(html, state) || { type: 'rawHtml', content: [{ type: 'text', text: html }] })
+      out.push(youtube(html, state) || tweet(html) || floated(html, state) || { type: 'rawHtml', content: [{ type: 'text', text: html }] })
       i = j
       continue
     }
@@ -266,6 +266,11 @@ function youtubeHtml(n) {
     (cap ? `<figcaption>${cap}</figcaption>\n` : '') + '</figure>'
 }
 
+// someone's tweet, as tweets.py writes it: kept as it is, shown as the card
+function tweet(html) {
+  return /^<figure class="tweet">\n[\s\S]*\n<\/figure>$/.test(html) ? { type: 'tweet', attrs: { html } } : null
+}
+
 // a picture written as HTML: at part of the column's width, the text
 // running round it, or the whole width, as the older posts have them
 const FLOAT = /^<figure(?: class="float-(right|left)" style="width:\s*(\d+%)")?>\n<img ([^>]*?)\s*\/?>(?:\n<figcaption>(.*)<\/figcaption>)?\n<\/figure>$/
@@ -339,6 +344,8 @@ function block(n) {
       return (n.attrs.float || n.attrs.html) && !isVideo(n.attrs.src) ? floatHtml(n) : picture(n)
     case 'youtube':
       return youtubeHtml(n)
+    case 'tweet':
+      return n.attrs.html
     case 'carousel':
       return kids.length ? kids.map(picture).join('\n') : null
     case 'rawHtml':

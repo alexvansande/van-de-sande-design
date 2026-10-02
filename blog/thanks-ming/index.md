@@ -6,7 +6,14 @@ original: "https://x.com/avsa/status/958851787649318913"
 original_site: "Twitter"
 ---
 
-When Ming took the job at the Foundation, she was told that we were a few months away from running out of funds. The situation was dire: there were 3-4 different entities, with different accounting and legal costs in 4 jurisdictions (🇨🇭🇩🇪 🇬🇧&🇳🇱), and mgmt infighting [x.com/ethereumproject/status/958771887840088064](https://x.com/ethereumproject/status/958771887840088064)
+When Ming took the job at the Foundation, she was told that we were a few months away from running out of funds. The situation was dire: there were 3-4 different entities, with different accounting and legal costs in 4 jurisdictions (🇨🇭🇩🇪 🇬🇧&🇳🇱), and mgmt infighting
+
+<figure class="tweet">
+<blockquote cite="https://x.com/ethereum/status/958771887840088064">
+<p>[Blog] To Infinity and Beyond! <a href="https://blog.ethereum.org/2018/01/31/to-infinity-and-beyond/">blog.ethereum.org/2018/01/31/to-…</a></p>
+<footer><a href="https://x.com/ethereum/status/958771887840088064">Ethereum (@ethereum), 31 January 2018</a></footer>
+</blockquote>
+</figure>
 
 Bitcoin price fell from 600 to 300 just after the presale,  before we could touch most of it so right there half of the money we had raised was gone. The other half was spent developing the clients and launching the network, by August.
 
@@ -24,7 +31,7 @@ But probably none of that would have happened had @mingchan88 not stepped in her
 
 The Ethereum Foundation is far from perfect, of course. We can do a lot to be more open and transparent, and to act less like a raunchy startup but the leadership of a $200 bilion ecosystem. But to get here, a lot of people had to do big sacrifices that went unthanked.
 
-Not anymore.
+**Not anymore.**
 
 Thanks Ming. I’ll miss our two hour skype calls about the history of China and your tales about Media Lab. You deserve some rest and family time.
 

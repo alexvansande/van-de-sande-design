@@ -14,7 +14,8 @@ The collections:
   monks           "Computer for Monks", the thesis blog on wanderingabout.com, 2006
   wanderingabout  the 2007 portfolio on wanderingabout.com, and Laser Chess's own site
   paris           the Paris diary on wanderingabout.com/paris, 2005–2006 (Portuguese)
-  olpcnews        the article on OLPC News, 2007
+  wanderingblog   "I, Wander", the blog on blog.wanderingabout.com, 2007–2008 (Portuguese)
+  olpcnews        the articles on OLPC News, 2007–2008
   flickr          the two essays written as Flickr captions, 2005
 
 The Wayback Machine answers slowly and turns away anyone in a hurry, so every
@@ -142,6 +143,36 @@ class Conv(ip.Convert):
         return super().block(n)
 
 
+    def embed(self, ifr):
+        # a Vimeo video, shown as the YouTube ones are
+        m = re.search(r"player\.vimeo\.com/video/(\d+)", ifr.attrs.get("src") or "")
+        if m:
+            return (f'<figure class="youtube">\n<iframe src="https://player.vimeo.com/video/{m.group(1)}" title="Vimeo video" '
+                    f'loading="lazy" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>\n</figure>')
+        return super().embed(ifr)
+
+
+def old_html(page):
+    """Mend what the blogs of 2007 did to their own markup before it is read:
+    Flash players become the videos they played, and a paragraph left open
+    before a list, a quote, a floated picture or the next paragraph is
+    closed there (a browser does that, the converter does not)."""
+    page = re.sub(r'<a href="<a href="([^"]+)">">', r'<a href="\1">', page)      # a link pasted into a link
+    def player(m):
+        y = re.search(r"youtube\.com/v/([\w-]{11})", m.group(0))
+        v = re.search(r"vimeo\.com/moogaloop\.swf\?clip_id=(\d+)", m.group(0))
+        if y:
+            return f'<iframe src="https://www.youtube.com/embed/{y.group(1)}"></iframe>'
+        if v:
+            return f'<iframe src="https://player.vimeo.com/video/{v.group(1)}"></iframe>'
+        return m.group(0)               # a player whose video is gone: left to fall away
+    page = re.sub(r"<object.*?</object>|<embed[^>]*>", player, page, flags=re.S)
+    page = re.sub(r"(<p[^>]*>)(\s*<iframe[^>]*></iframe>)", r"\2\1", page)    # a video ahead of its paragraph
+    page = re.sub(r"<blockquote>\s*(<iframe[^>]*></iframe>)\s*</blockquote>", r"\1", page)   # and not quoted
+    return re.sub(r"(<p[ >](?:(?!</p>|<p[ >]).)*?)\s*(?=<(?:p|div|ol|ul|blockquote|iframe|table|h[1-6])[ >])",
+                  r"\1</p>", page, flags=re.S)
+
+
 def node_with(page, cls, tag="div"):
     """The first element with this class, as the converter's tree."""
     root = ip.parse(page)
@@ -164,13 +195,13 @@ def visible(line):
     return len(re.sub(r"[*_]", "", re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", line)).strip())
 
 
-def tidy(md, hardwrapped=False):
+def tidy(md, hardwrapped=False, headings=True):
     """Undo what the old pages did to their text. Text that was written by
     email or in a caption box came hard-wrapped at seventy-odd characters,
     each line its own line (and on Blogger, its own <br><br>): the lines are
     joined again, a paragraph ending where a line ends short or runs long.
     A question in bold on a line of its own, as FAQs had them, becomes a
-    heading. Lone <br>s go."""
+    heading (unless headings is False). Lone <br>s go."""
     # Flickr's "blog this" put the photo's title and "Originally uploaded by …"
     # over the text; the photo is there already
     md = re.sub(r"(?m)^\s*\[[^\]]*\]\(https?://(?:www\.)?flickr\.com/photos/[^)]*\)\s*(?:<br>)?\s*$", "", md)
@@ -197,13 +228,13 @@ def tidy(md, hardwrapped=False):
         for l in lines:
             if not l:
                 continue
-            if re.fullmatch(r"\*\*[^*]+\*\*:?", l):          # a question, or a little heading
+            if headings and re.fullmatch(r"\*\*[^*]+\*\*:?", l):          # a question, or a little heading
                 if para:
                     paras.append(" ".join(para)); para = []
                 paras.append("#### " + l.strip("*: "))
                 continue
             q = re.match(r"(.*?)\s+(\*\*[^*]+\?\*\*)$", l)  # an answer, then the next question
-            if q and para is not None:
+            if headings and q and para is not None:
                 para.append(q.group(1)); paras.append(" ".join(para)); para = []
                 paras.append("#### " + q.group(2).strip("* "))
                 continue
@@ -259,7 +290,7 @@ def write_post(collection, slug, title, date, body_html, original, site, when, l
     for k, v in (extra or {}).items():
         head.append(ip.fm(k, v))
     head += ["---", ""]
-    body = tidy("\n\n".join(blocks).strip(), hardwrapped=collection in HARDWRAPPED)
+    body = tidy("\n\n".join(blocks).strip(), hardwrapped=collection in HARDWRAPPED, headings=collection not in NO_HEADINGS)
     with open(md_path, "w") as f:
         f.write("\n".join(head) + "\n" + body + "\n")
     with open(os.path.join(folder, "source.html"), "w") as f:
@@ -591,22 +622,97 @@ OLPCNEWS = [
      "http://www.olpcnews.com/countries/brazil/david_cavallo_olpc_brazil.html"),
     ("aquatic-sugar-the-childrens-interface-translated-for-adults",
      "http://www.olpcnews.com/software/operating_system/aquatic_sugar_childrens_interface.html"),
+    # posted by "Guest Writer", but it opens "Hello I am Alexandre Van de Sande"
+    ("10-reasons-why-negroponte-should-change-olpc-distribution",
+     "http://www.olpcnews.com/sales_talk/countries/negroponte_change_olpc_distribution_.html"),
+    ("jesuits-and-olpc-laptops-its-education-first-religion-second",
+     "http://www.olpcnews.com/use_cases/community/jesuits_olpc_laptop_education.html"),
+    ("brazilian-olpc-game-jam-results-pong-still-rules",
+     "http://www.olpcnews.com/content/games/brazilian_olpc_game_jam.html"),
+    ("olpc-news-100-laptop-xo-fundraising-drive",
+     "http://www.olpcnews.com/laptops/xo1/olpc_news_100_laptop_fundraising_drive.html"),
+    ("brazil-requests-150-000-um-computador-por-aluno-laptops",
+     "http://www.olpcnews.com/countries/brazil/brazil_requests_laptop_proposals.html"),
+    ("um-computador-por-aluno-laptop-auction-begins-in-brazil",
+     "http://www.olpcnews.com/countries/brazil/um_computador_por_alno.html"),
+    ("uca-brazil-auction-for-classmate-pc-canceled",
+     "http://www.olpcnews.com/countries/brazil/uca_brazil_auction_canceled.html"),
+    ("the-apple-ultrathin-whos-driving-the-innovation-now",
+     "http://www.olpcnews.com/sales_talk/competition/apple_ultrathin_innovation.html"),
+    ("going-xo-laptop-green-is-better-and-cheaper",
+     "http://www.olpcnews.com/hardware/power_supply/going_xo_laptop_green.html"),
+    ("the-impact-of-riots-in-haiti-on-one-laptop-per-child",
+     "http://www.olpcnews.com/countries/haiti/impact_of_riots_one_laptop_per_child.html"),
 ]
 
 
 def olpcnews(force):
     for slug, url in OLPCNEWS:
-        page = text(wayback(url, "2008"))
+        page = old_html(text(wayback(url, "2008")))
         t = re.search(r'<h2>\s*<a class="permalink"[^>]*>(.*?)</a>', page, re.S) or re.search(r"<title>(.*?)(?: - One Laptop Per Child News)?</title>", page, re.S)
         title = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))).replace("OLPC News: ", "").strip()
         d = re.search(r"Posted (?:on|by .{0,300}? on) (\w+ \d{1,2}, \d{4})", page, re.S)
         date = datetime.strptime(d.group(1), "%B %d, %Y").strftime("%Y-%m-%dT12:00:00Z") if d else None
         node = node_with(page, "entry-content")
-        for junk in list(node.find_all(lambda n: n.tag in ("script", "noscript") or (n.tag == "p" and "entry-footer" in (n.attrs.get("class") or "")))):
+        for junk in list(node.find_all(lambda n: n.tag in ("script", "noscript") or (n.tag == "p" and {"entry-footer", "tags"} & set((n.attrs.get("class") or "").split())))):
             junk.parent.kids.remove(junk)
         node.kids = [k for k in node.kids if not (isinstance(k, str) and "ch_client" in k)]
         how = write_post("olpcnews", slug, title, date, "", url, "OLPC News", "2008", force=force, node=node, record=ip.node_html(node))
         say("olpcnews", slug, how)
+
+
+WANDERINGBLOG = "blog.wanderingabout.com"
+
+
+def wanderingblog(force):
+    """"I, Wander", the WordPress blog on blog.wanderingabout.com, November
+    2007 to April 2008: one page per post, its words in div.entry-content,
+    the comments after it left behind. The archive's first copies of some
+    posts lost their paragraphs, and by 2011 the theme was stuffed with
+    spam: each post is taken from the copy before 2010 with the most
+    paragraphs, the latest of those."""
+    rows = cdx(f"url={WANDERINGBLOG}/&matchType=prefix&output=txt&fl=timestamp,original,statuscode,mimetype&limit=5000")
+    posts = {}
+    for r in rows:
+        if len(r) == 4 and r[2] == "200" and "html" in r[3] and r[0] < "2010":
+            m = re.search(r"/(\d{4}/\d\d/\d\d/[^/]+)/?$", r[1])
+            if m:
+                posts.setdefault(m.group(1), set()).add(r[0])
+    used = set()
+    for path, stamps in sorted(posts.items()):
+        url = f"http://{WANDERINGBLOG}/{path}/"
+        best = None
+        for ts in sorted(stamps):
+            try:
+                page = text(get(f"https://web.archive.org/web/{ts}id_/{url}"))
+            except Exception:
+                continue
+            m = re.search(r'<div class="entry-content">(.*?)<div class="customfields', page, re.S)
+            if not m or "_wp_footer" in page:
+                continue
+            score = m.group(1).count("<p")         # the most paragraphs kept, then the latest
+            if best is None or score >= best[0]:
+                best = (score, ts, page)
+        if best is None:
+            say("wanderingblog", path, "FAILED: no good copy")
+            continue
+        _, ts, page = best
+        # a stray "<" in the text ("<iPhone e seu Multitouch."), which a
+        # browser takes for a tag, hiding the paragraph: kept, as text
+        page = re.sub(r"<(?=[a-z]*[A-Z]\w* )", "&lt;", page)
+        page = old_html(page)
+        t = re.search(r'<h2 class="storytitle[^"]*"\s*>\s*<a [^>]*>(.*?)</a>', page, re.S)
+        title = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", "", t.group(1)))).strip() if t else path.split("/")[-1]
+        d = re.search(r'<abbr class="published" title="(\d{4}-\d\d-\d\d)', page)
+        date = f"{d.group(1)}T12:00:00Z" if d else f"{path[:4]}-{path[5:7]}-{path[8:10]}T12:00:00Z"
+        node = node_with(page, "entry-content")
+        slug = slugify(title)
+        if slug in used:          # two posts of the same name: the address's own
+            slug = path.split("/")[-1]
+        used.add(slug)
+        how = write_post("wanderingblog", slug, title, date, "", url, WANDERINGBLOG, ts, lang="pt", force=force, node=node,
+                         record=ip.node_html(node))
+        say("wanderingblog", slug, how)
 
 
 FLICKR = [("38981234", "ipod-video"), ("38981085", "iphone")]
@@ -629,9 +735,10 @@ def flickr(force):
 
 
 HARDWRAPPED = {"paris", "flickr", "posterous"}
+NO_HEADINGS = {"wanderingblog", "olpcnews"}     # a line in bold there is a line in bold, not a heading
 
 COLLECTIONS = {"portfolio2011": portfolio2011, "posterous": posterous, "monks": monks, "wanderingabout": wanderingabout, "paris": paris,
-               "olpcnews": olpcnews, "flickr": flickr}
+               "wanderingblog": wanderingblog, "olpcnews": olpcnews, "flickr": flickr}
 
 
 def main():

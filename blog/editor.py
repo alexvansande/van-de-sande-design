@@ -29,6 +29,7 @@ sys.path.insert(0, HERE)
 import build  # noqa: E402  (its TeX, so maths shows here as the blog will set it)
 import review  # noqa: E402  (the proofreader: grammar here, facts online)
 import crosspost  # noqa: E402  (the post on Bluesky, as a Standard.site document)
+import tweets  # noqa: E402  (a tweet pasted in, set as the blog sets one: a card)
 
 try:
     from PIL import Image, ImageOps
@@ -435,6 +436,20 @@ def youtube_title(vid):
         return {"title": ""}
 
 
+def tweet(slug, url):
+    """A tweet pasted on a line of its own, as the card the blog shows, its
+    pictures saved into the post's folder beside the others."""
+    m = tweets.STATUS.match((url or "").strip())
+    if not m:
+        raise Bad("not a link to a tweet")
+    folder = folder_of(slug)
+    os.makedirs(folder, exist_ok=True)
+    try:
+        return {"html": tweets.card(m.group(2), folder)}
+    except (OSError, ValueError, KeyError, RuntimeError) as e:
+        raise Bad(f"Twitter did not give the tweet ({e}).")
+
+
 # ---------------------------------------------------------------- his own pages, for the fact check to link to
 
 def own_pages(slug, n=10):
@@ -589,6 +604,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             if url.path == "/api/bluesky":
                 folder_of(post.get("slug", ""))
                 return self.reply(200, crosspost.announce(post["slug"], post.get("text")))
+            if url.path == "/api/tweet":
+                return self.reply(200, tweet(post.get("slug", ""), post.get("url", "")))
             if url.path == "/api/discard":
                 return self.reply(200, trash(post.get("slug", "")))
             if url.path == "/api/trash/restore":

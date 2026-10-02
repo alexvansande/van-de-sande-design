@@ -1,0 +1,33 @@
+---
+title: "Papervision 3d: a web moderna como em 1998"
+date: "2007-11-22T12:00:00Z"
+lang: "pt"
+original: "http://blog.wanderingabout.com/2007/11/22/papervision-3d-a-web-moderna-como-em-1998/"
+original_site: "blog.wanderingabout.com"
+---
+
+Uma das tecnologias mais interessantes e menos faladas que tenho visto é Papervision, uma biblioteca open source que dá capacidade tridimensionais a qualquer objeto flash em um site, sem a necessidade do usuário instalar qualquer outro plugin.
+
+A comunidade em torno do Papervision é tão ativa que quase não recomendo a ninguém assinar a mailing. No fundo a promessa, interatividade 3d, leve e acessível em todos os browsers, atrai o olho de muita gente.A tecnologia não é fácil de instalar ou aprender, pra começar você tem de instalar um SVN, depois alterar class path nos settings do ActionScript 3.0 e todo os códigos devem ser postos em um arquivo .as externo. Além disso toda a programação e animação no Papervision é feita por código? Pense em 3dMax, Maya ou blender com a interface do Notepad. Nem parece aquele programinha simples pra fazer animações que eu conheci.
+
+Mas talvez isso mude, imagine que por exemplo a Adobe decide integrar isso na próxima interface do Flash.
+
+Quando isso acontecer prevejo uma internet moderna como em 1998: uma febre onde a web será reinfestada de caquinhas de sites comerciais totalmente inacessíveis, animações desnecessárias e navegações incompreensíveis. Sem contar que, simulando 3d através de triângulos e sem acesso a aceleradpres do próprio sistema operacional, a qualidade gráfica está mais para o XWings do que para um videogame mais moderno.
+
+Mas eu tenho esperança: o Youtube pôde surgir por que soube usar o flash para algo que ele faz muito bem, um pequeno objeto que sabe brincar com o resto da internet. Imagine uma amazon com objetos rotacionáveis, um flickr com fotos panorâmica 360, uma wikipedia com objetos manuseáveis. Na internet é importante cada vez mais pensar pequeno.
+
+• Um uso desnecessário: [Sony bravia](http://bravia.sony.eu/). Você adora os comerciais mas já chegou no site alguma vez? Eis por que não.
+
+• Um uso interessante: [Everyscape](http://www.everyscape.com) (veja tb [EarthMine](http://www.unitzeroone.com/blog/earthmine/earthmine_papervision3d_indexi.html#comments))
+
+•
+
+Um uso bom, mas cru: [Poly earth](http://freeearth.poly9.com/)
+
+• Um uso lindo: Pan[orama Ultrarealístico de uma biblioteca](http://www.papervision3d.org/demos/panorama/)
+
+• Demonstrações da tecnologia: [Coverflow](http://labs.blitzagency.com/?p=314), [Globo de metal](http://www.unitzeroone.com/papervision/paperPlanet/Main.html), [Cavalo Marinho](http://www.papervision3d.org/demos/seahorse/)
+
+• Jogos: [X-Wings](http://www.paperworld3d.com/demos/obstaclecourse/ObstacleCourse.html) e [Quake](http://www.suite75.net/blog/dev/paperquake2.html)
+
+• Quer tentar? Então [baixe](http://blog.papervision3d.org/2007/07/07/papervision3d-public-beta/), [instale](http://wiki.papervision3d.org/index.php?title=Getting_Started_FAQ), [pegue demos](http://blog.papervision3d.org) e [discuta](http://osflash.org/mailman/listinfo/papervision3d_osflash.org).

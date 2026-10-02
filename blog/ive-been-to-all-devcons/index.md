@@ -10,19 +10,19 @@ original_site: "Twitter"
 
 I’ve been to all devcons (except Cancun) so here’s a perspective and pics.
 
-The first devcon (obviously we start counting at 0) could barely be called a “conference” it was mostly a team retreat. About 50 people, many meeting together for the first time, presenting their work
+**The first devcon** (obviously we start counting at 0) could barely be called a “conference” it was mostly a team retreat. About 50 people, many meeting together for the first time, presenting their work
 
-Devcon1 was in London, about 300 people. The whole conference would fit in the main hall at the National House Smíchov which had three more floors of rooms and hosted many satellite events (Cryptolife Hackaton,  Philosophers Salon, Magicians council, the ECF alumni show & tell).
+**Devcon1** was in London, about 300 people. The whole conference would fit in the main hall at the National House Smíchov which had three more floors of rooms and hosted many satellite events (Cryptolife Hackaton,  Philosophers Salon, Magicians council, the ECF alumni show & tell).
 
 ![](01.jpg)
 ![](02.jpg)
 
-Devcon2 was in Shanghai and doubled in size to about 700 people. That’s the same headcount as the Prism sidestage, which ran on day 0 at full capacity.
+**Devcon2** was in Shanghai and doubled in size to about 700 people. That’s the same headcount as the Prism sidestage, which ran on day 0 at full capacity.
 
 ![](03.jpg)
 ![](04.jpg)
 
-Devcon3, Cancun was more than twice the size of the year before, about 1500-2000 attendants, and for the first time had two parallel tracks. (I don’t have any picture of the room as I wasn’t there for personal reasons)
+**Devcon3**, Cancun was more than twice the size of the year before, about 1500-2000 attendants, and for the first time had two parallel tracks. (I don’t have any picture of the room as I wasn’t there for personal reasons)
 
 This years devcon had 8 parallel tracks!
 
@@ -37,7 +37,7 @@ Those ad-hoc, off-schedule meetings where crucial as they allowed teams that wan
 ![](06.jpg)
 ![](07.jpg)
 
-Devcon4 has about 3000 badges printed. I personally hope it doesn’t double in size again, because a 6000 person conference sounds unmanageable - and because often the main stage was quite empty, with most people crowding in the smaller and more personal workshops
+**Devcon4** has about 3000 badges printed. I personally hope it doesn’t double in size again, because a 6000 person conference sounds unmanageable - and because often the main stage was quite empty, with most people crowding in the smaller and more personal workshops
 
 <figure>
 <img src="08.jpg" width="1200" height="513" alt="">

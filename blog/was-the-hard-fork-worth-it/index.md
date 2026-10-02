@@ -6,7 +6,14 @@ original: "https://x.com/avsa/status/1008501144887463937"
 original_site: "Twitter"
 ---
 
-Knowing everything I know today, I don’t think the hard fork was worth its many downsides. But I wouldn’t know most of that if not for the fork. [x.com/el33th4xor/status/1008417777663774720](https://x.com/el33th4xor/status/1008417777663774720)
+Knowing everything I know today, I don’t think the hard fork was worth its many downsides. But I wouldn’t know most of that if not for the fork.
+
+<figure class="tweet">
+<blockquote cite="https://x.com/el33th4xor/status/1008417777663774720">
+<p>The DAO hack was the best thing that happened to Ethereum and to crypto. <a href="https://x.com/VladZamfir/status/1008390451873894400">x.com/VladZamfir/sta…</a></p>
+<footer><a href="https://x.com/el33th4xor/status/1008417777663774720">Emin Gün Sirer🔺⚔️ (@el33th4xor), 17 June 2018</a></footer>
+</blockquote>
+</figure>
 
 Firstly, the White Hat hackers have shown to be extremely competent and I feel confident they would have been able to rescue at least 70%-90% of the funds back to dao token holders (as they did).
 
@@ -22,7 +29,7 @@ But we have indeed learned a lot about forks. Before it, forking an existing blo
 
 Most importantly, we learned how resilient blockchains are. Ethereum Classic is what happens when original developers and a whole community decide to leave an old chain to die in the side of the road. Instead it survived and came back with a vengeance. It’s inspiring really.
 
-But also, we learned that blockchains are replaceable by a community on top of it. Code is law, but we can always turn off the machines and decide to work on new code and a new law and that new code can become more valuable. Value is just faith.
+But also, we learned that blockchains are replaceable by a community on top of it. Code is law, but we can always turn off the machines and decide to work on new code and a new law and that new code can become more valuable. **Value is just faith.**
 
 A fork has been proven as a valid Exit option for disenfranchised community members that feel they have no voice. But I don’t believe fork as governance is something to be cheered and seen as a reason not to work on tools that empower and give voice to your own community
 

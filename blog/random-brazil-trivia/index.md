@@ -7,7 +7,14 @@ original_site: "Twitter"
 
 Only capital of a country in Europe to be outside Europe.
 
-I’m actually considering doing a whole new thread like Sunny’s, just with Brazilian historical trivia. Hands up if I should. [x.com/sunnya97/status/1271313741812883457](https://x.com/sunnya97/status/1271313741812883457)
+I’m actually considering doing a whole new thread like Sunny’s, just with Brazilian historical trivia. Hands up if I should.
+
+<figure class="tweet">
+<blockquote cite="https://x.com/sunnya97/status/1271313741812883457">
+<p>Rio de Janeiro in Brazil used to be the capital of Portugal.</p>
+<footer><a href="https://x.com/sunnya97/status/1271313741812883457">Sunny Aggarwal (@sunnya97), 12 June 2020</a></footer>
+</blockquote>
+</figure>
 
 ---
 
@@ -18,8 +25,8 @@ The Amazon is manmade. Its highly fertile soil is the result of purposefully mix
 </figure>
 
 References:\
-Terra Preta: [en.wikipedia.org/wiki/Terra\_preta](https://en.wikipedia.org/wiki/Terra_preta)\
-Domestication of plant species in the Amazon: [sciencemag.org/news/2017/03/hundreds-years-later-plants-domesticated-ancient-civilizations-still-dominate-amazon](https://www.sciencemag.org/news/2017/03/hundreds-years-later-plants-domesticated-ancient-civilizations-still-dominate-amazon)
+[Terra Preta](https://en.wikipedia.org/wiki/Terra_preta)\
+[Domestication of plant species in the Amazon](https://www.sciencemag.org/news/2017/03/hundreds-years-later-plants-domesticated-ancient-civilizations-still-dominate-amazon)
 
 ---
 
@@ -97,8 +104,7 @@ The Portuguese, fearing reinforcements had arrived, receded. There was no cavalr
 
 \*independence
 
-The trumpet player is commemorated on a comical statue in Ipanema on a street named after a big funder of the war, but unfortunately most people have  no idea of his hilarious story.\
-[google.com/maps/place/O+Corneteiro/@-22.9839705,-43.2092109,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj%3Dw115-h86-k-no!7i2592!8i1936!4m5!3m4!1s0x9bd5f4627594af:0xb37554009e5574d9!8m2!3d-22.9839728!4d-43.2091708](https://www.google.com/maps/place/O+Corneteiro/@-22.9839705,-43.2092109,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj%3Dw115-h86-k-no!7i2592!8i1936!4m5!3m4!1s0x9bd5f4627594af:0xb37554009e5574d9!8m2!3d-22.9839728!4d-43.2091708)
+The trumpet player is commemorated on [a comical statue in Ipanema](https://www.google.com/maps/place/O+Corneteiro/@-22.9839705,-43.2092109,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPym1flWfV8usEl-HPbK9r58J4AlL5tUryXeyLj%3Dw115-h86-k-no!7i2592!8i1936!4m5!3m4!1s0x9bd5f4627594af:0xb37554009e5574d9!8m2!3d-22.9839728!4d-43.2091708) on a street named after a big funder of the war, but unfortunately most people have  no idea of his hilarious story.
 
 ---
 
@@ -119,7 +125,7 @@ Half of all victims of the atlantic human trafficking trade were brought to Braz
 
 After aboliton, all the files related to slavery were burned, theoretically to "allow the formerly enslaved to have a blank slate". Of course, quite conveniently for the former enslavers, this prevented any talk of reparations for their former victims.
 
-Link to a new story of the time: [m.acervo.estadao.com.br/noticias/acervo,a-destruicao-dos-documentos-sobre-a-escravidao-,11840,0.htm](http://m.acervo.estadao.com.br/noticias/acervo,a-destruicao-dos-documentos-sobre-a-escravidao-,11840,0.htm)
+Link to [a new story of the time](http://m.acervo.estadao.com.br/noticias/acervo,a-destruicao-dos-documentos-sobre-a-escravidao-,11840,0.htm).
 
 ---
 
@@ -137,9 +143,7 @@ The emperor was still popular when the republic started, and monarchy still enjo
 
 There's currently a schism in the Brazilian “royal" family, due to a "scandalous” marriage of the Peter’s grandson with a commoner in 1908. As of 2020 there are two claimants for the non-existing throne of emperor of Brazil.
 
-Whe wasn't even a "commoner”, she was a countess noblewoman from the Bohemian kingdom, but she had no *shocked face* royalty claim. I find the whole article particularly funny, a series of detailed wiki articles about people who did nothing but be born.
-
-[en.wikipedia.org/wiki/Line\_of\_succession\_to\_the\_former\_Brazilian\_throne](https://en.wikipedia.org/wiki/Line_of_succession_to_the_former_Brazilian_throne)
+Whe wasn't even a "commoner”, she was a countess noblewoman from the Bohemian kingdom, but she had no *shocked face* royalty claim. I find [the whole article](https://en.wikipedia.org/wiki/Line_of_succession_to_the_former_Brazilian_throne) particularly funny, a series of detailed wiki articles about people who did nothing but be born.
 
 ---
 
@@ -147,7 +151,14 @@ Only once in the history of Brazil was a democratically elected* president both 
 
 \*This excludes the first republic in which neither woman or poor people could vote. But even if we include that one, it doesn't get much better: the longest sucessions of presidents without a death, impeachment, or coup d'etat was 4 sucessions, 1894 to 1909.
 
-It was actually 2010, 2016 is her impeachment. Had a brain short circuit there.. [x.com/interstar/status/1278391632308711424](https://x.com/interstar/status/1278391632308711424) [x.com/interstar/status/1278391632308711424](https://x.com/interstar/status/1278391632308711424)
+It was actually 2010, 2016 is her impeachment. Had a brain short circuit there..
+
+<figure class="tweet">
+<blockquote cite="https://x.com/interstar/status/1278391632308711424">
+<p>@avsa What about Lula in 2002?</p>
+<footer><a href="https://x.com/interstar/status/1278391632308711424">phil jones (he/him - ele) @interstar@artoot.xyz (@interstar), 1 July 2020</a></footer>
+</blockquote>
+</figure>
 
 ---
 
@@ -224,7 +235,7 @@ But I’ve always found curious that the earliest civilizations we know were bui
 
 ---
 
-Today marks the 200th anniversary of what was probably the most farcical “independence” war ever: after “winning” the “war” the country was ruled by the heir of the former king, who—plot twist—was the one who suggested it to his son in the first place. [blog.vandesande.design/the-man-in-the-hole](https://blog.vandesande.design/the-man-in-the-hole)
+Today marks the 200th anniversary of what was probably the most farcical “independence” war ever: after “winning” the “war” the country was ruled by the heir of the former king, who—plot twist—was the one who suggested it to his son in the first place.
 
 ---
 

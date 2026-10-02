@@ -509,6 +509,8 @@ def asset_v(name):
 
 def plain(html_text, n=None):
     t = re.sub(r"\s+", " ", html.unescape(re.sub(r"<math.*?</math>|<figure.*?</figure>|<[^>]+>", " ", html_text, flags=re.S))).strip()
+    # the space a tag left before the full stop after it, as after a link
+    t = re.sub(r" ([.,;:!?)])", r"\1", t)
     if n and len(t) > n:
         t = t[:n].rsplit(" ", 1)[0] + "…"
     return t
@@ -520,6 +522,38 @@ def named(base, tab=True):
     t = "" if tab else ' tabindex="-1"'
     return (f'<a class="home" href="{esc(HOME)}"{t}>{esc(AUTHOR)}</a>&rsquo;s '
             f'<a class="blog" href="{base}"{t}>wandering about</a>')
+
+
+# Going from a card to its post, or back, the title grows (or shrinks) from
+# one size to the other. The page it comes from notes which post it is and
+# how large its title was (blog.js), and the page it goes to, as it is
+# revealed, works out by how much (--title-k, in blog.css). That post's
+# paper, picture and words are also drawn over the other cards fading on
+# the index, which would otherwise show through it. It is here, in the
+# head, rather than in blog.js, because it has to be listening before the
+# page is first drawn, and a long post is drawn before the end of it has
+# been read.
+TITLE_JS = """<script>addEventListener("pagereveal", e => {
+  if (!e.viewTransition) return;
+  let t = null;
+  try { t = JSON.parse(sessionStorage.getItem("title-size") || "null"); sessionStorage.removeItem("title-size"); } catch (_) {}
+  if (!t || !t.px || Date.now() - t.at > 10000) return;
+  const root = document.documentElement, over = document.createElement("style");
+  over.textContent = ["paper", "cover", "words", "title"].map(k => `::view-transition-group(${k}-${t.name})`).join() + "{z-index:1}";
+  document.head.append(over);
+  const el = document.querySelector(`[style*="view-transition-name:title-${t.name};"]`);
+  const px = el && parseFloat(getComputedStyle(el).fontSize);
+  if (px) root.style.setProperty("--title-k", (px / t.px).toFixed(4));
+  e.viewTransition.finished.finally(() => { root.style.removeProperty("--title-k"); over.remove(); });
+});</script>"""
+
+
+def back_arrow(base, tab=True):
+    """At the head of a post, before the blog's name: back to the index, to
+    where this post's card is (blog.js takes it there; without the script it
+    is the index's top)."""
+    t = "" if tab else ' tabindex="-1"'
+    return f'<a class="back" href="{base}" aria-label="Back to all the posts"{t}>&larr;</a>'
 
 
 def page(base, title, body, *, description="", canonical="", image="", kind="website", extra_head="", cls="", head=True):
@@ -546,10 +580,11 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
 <link rel="alternate" type="application/rss+xml" title="{esc(TITLE)}" href="{base}rss.xml">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23333331'/%3E%3Crect x='9' y='6' width='14' height='20' rx='1' fill='%23f4f1e4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="{base}assets/blog.css?v={asset_v('blog.css')}">
+{TITLE_JS}
 {extra_head}
 </head>
 <body class="{cls}">
-{f'<header class="top">{named(base)}</header>' if head else ""}{f'{chr(10)}<div class="bar" aria-hidden="true"><p>{named(base, tab=False)}</p></div>' if cls == "post" else ""}
+{f'<header class="top">{back_arrow(base) if cls == "post" else ""}<span class="name">{named(base)}</span></header>' if head else ""}{f'{chr(10)}<div class="bar" aria-hidden="true"><p>{back_arrow(base, tab=False)}<span class="name">{named(base, tab=False)}</span></p></div>' if cls == "post" else ""}
 {body}
 <footer class="foot">
   <a href="{base}rss.xml">RSS</a>
@@ -599,7 +634,7 @@ def card(p, base, pics, eager=False, named=True):
     lead = plain(p["html"], 700) if p.get("html") else ""
     lead = f'<p class="lines">{esc(lead)}</p>' if lead else ""
     return f"""<a class="card" href="{base}{p['slug']}" data-slug="{p['slug']}"><span class="paper" {name("paper")}></span>{cover}
-  <div class="words" {name("words")}><h2>{esc(p['title'])}</h2>{sub}{lead}<p class="when">{when(p)}{tags}</p></div>
+  <div class="words" {name("words")}><h2 {name("title")}>{esc(p['title'])}</h2>{sub}{lead}<p class="when">{when(p)}{tags}</p></div>
 </a>"""
 
 
@@ -660,7 +695,7 @@ def build(out, base, clean=False, drafts=False):
 <span class="paper" {vt("paper", p["slug"])}></span>
 {cover_img}
 <div class="text" {vt("words", p["slug"])}>
-<h1>{esc(p['title'])}</h1>
+<h1 {vt("title", p["slug"])}>{esc(p['title'])}</h1>
 {sub}
 <p class="when"><time datetime="{p['date_dt'].date().isoformat()}">{nice_date(p['date_dt'])}</time>{cats}</p>
 <div class="body">

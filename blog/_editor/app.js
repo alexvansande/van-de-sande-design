@@ -387,6 +387,88 @@ const Youtube = Node.create({
   },
 })
 
+// Someone's tweet, as the blog shows it: a card, made by editor.py
+// (tweets.py) and kept as the HTML it wrote, its pictures in the folder.
+const Tweet = Node.create({
+  name: 'tweet',
+  // before the paragraph's own Enter, which would split the line
+  priority: 1000,
+  group: 'block',
+  atom: true,
+  selectable: true,
+  draggable: true,
+  addAttributes() { return { html: { default: '' } } },
+  parseHTML() { return [{ tag: 'div[data-tweet]', getAttrs: e => ({ html: e.getAttribute('data-tweet') }) }] },
+  renderHTML({ node }) { return ['div', { 'data-tweet': node.attrs.html }] },
+  addNodeView() {
+    return ({ node, getPos }) => {
+      const dom = el('div', 'ed-tweet')
+      dom.contentEditable = 'false'
+      const draw = () => {
+        const card = new DOMParser().parseFromString(node.attrs.html, 'text/html').body.firstElementChild
+        if (!card) return dom.replaceChildren(el('p', '', 'A tweet'))
+        // its pictures are in the post's folder
+        card.querySelectorAll('img').forEach(i => { i.src = mediaUrl(i.getAttribute('src')) })
+        card.querySelectorAll('a').forEach(a => { a.target = '_blank' })
+        const tools = el('div', 'ed-tools')
+        const x = el('button', '', '×')
+        x.type = 'button'
+        x.title = 'Take it out'
+        x.onclick = e => {
+          e.preventDefault()
+          const pos = getPos()
+          editor.view.dispatch(editor.state.tr.delete(pos, pos + editor.state.doc.nodeAt(pos).nodeSize))
+        }
+        tools.append(x)
+        dom.replaceChildren(card, tools)
+      }
+      draw()
+      return {
+        dom,
+        update(n) {
+          if (n.type.name !== 'tweet') return false
+          if (n.attrs.html !== node.attrs.html) { node = n; draw() }
+          return true
+        },
+        ignoreMutation: () => true,
+        stopEvent: e => e.type !== 'dragstart' && dom.contains(e.target),
+      }
+    }
+  },
+  addKeyboardShortcuts() {
+    return {
+      // a line that is only the address of a tweet, on Enter, is the tweet
+      Enter: () => {
+        const { $from, empty } = this.editor.state.selection
+        const p = $from.parent
+        if (!empty || $from.depth !== 1 || p.type.name !== 'paragraph' || $from.parentOffset !== p.content.size) return false
+        const link = tweetLink(p.textContent)
+        if (!link) return false
+        insertTweet(link, { from: $from.before(1), to: $from.after(1) })
+        return true
+      },
+    }
+  },
+})
+
+// x.com/…/status/…, twitter.com/…, mobile.twitter.com/…
+function tweetLink(s) {
+  const m = (s || '').trim().match(/^(?:https?:\/\/)?(?:www\.|mobile\.)?(?:x|twitter)\.com\/\w+\/status(?:es)?\/\d+\S*$/)
+  return m ? (m[0].startsWith('http') ? m[0] : 'https://' + m[0]) : null
+}
+
+// asked of editor.py, which makes the card and keeps its pictures; until
+// it comes, and if it does not, the link stays where it was
+async function insertTweet(url, at) {
+  try {
+    const { html } = await call('/api/tweet', { slug: post.slug, url })
+    placeBlock({ type: 'tweet', attrs: { html } }, at)
+    changed()
+  } catch (e) {
+    toast(e.message, true)
+  }
+}
+
 // a pasted link: one word, http(s):, mailto: or www.
 function asUrl(text) {
   if (/\s/.test(text)) return null
@@ -810,6 +892,13 @@ function makeEditor(doc) {
           editor.chain().focus().setLink({ href: url }).run()
           return true
         }
+        // a tweet's link on an empty line is the tweet
+        const tw = tweetLink(text)
+        if (tw && selection.empty && selection.$from.depth === 1 && selection.$from.parent.type.name === 'paragraph'
+            && !selection.$from.parent.content.size) {
+          insertTweet(tw)
+          return true
+        }
         // a YouTube link, or YouTube's embed code, is the video, where the caret is
         const video = youtubeLink(text)
         if (video && selection.empty && selection.$from.depth === 1 && selection.$from.parent.type.name === 'paragraph') {
@@ -829,6 +918,7 @@ function makeEditor(doc) {
       HeadingId,
       MathNode,
       Youtube,
+      Tweet,
       Figure,
       Carousel,
       RawHtml,

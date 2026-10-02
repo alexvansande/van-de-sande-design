@@ -119,6 +119,12 @@ body.editor{min-height:100vh}
 .ed-math.unknown{text-decoration:underline wavy #b0603c;text-underline-offset:.2em}
 .body .ed-math math{font-size:1.08em;font-family:"STIX Two Math","Cambria Math","Latin Modern Math",math}
 
+/* someone's tweet: the card as the blog shows it (blog.css), and × over it */
+.body .ed-tweet{position:relative}
+.ed-tweet>.ed-tools{top:2.6rem;right:.8rem}
+.ed-tweet:hover>.ed-tools,.ed-tweet.ProseMirror-selectednode>.ed-tools{opacity:1}
+.ed-tweet.ProseMirror-selectednode figure.tweet blockquote{outline:2px solid #6c8fd6;outline-offset:2px}
+
 /* a YouTube video: its picture here, the video on the blog */
 .body .ed-yt{clear:both;margin:2rem 0}
 .ed-yt-frame{position:relative;display:block;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#111;color:#fff;text-decoration:none}

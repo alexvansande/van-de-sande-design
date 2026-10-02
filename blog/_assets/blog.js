@@ -226,6 +226,25 @@ const leaveForSite = (site, back) => {
   setTimeout(() => { location.href = site.split("#")[0] + (back ? "#read=" + back : ""); }, reduce ? 0 : 380);
 };
 
+/* The title grows from a card into the head of its post, and shrinks back
+   into it (blog.css), by as much as one is larger than the other. The page
+   it goes to cannot see how large it was on this one, so it is noted on
+   the way out, for the script in the head of that page (build.py). */
+const noteTitle = (el, slug) => {
+  if (!el || !slug) return;
+  try {
+    sessionStorage.setItem("title-size", JSON.stringify({
+      name: slug.replace(/\//g, "--"), px: parseFloat(getComputedStyle(el).fontSize), at: Date.now() }));
+  } catch (_) {}
+};
+// a card opening its post, on the index or a category; the one under a
+// post opens in place, and says so by keeping the page from going
+document.addEventListener("click", e => {
+  const c = e.target.closest && e.target.closest("a.card[data-slug]");
+  if (!c || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+  noteTitle(c.querySelector("h2"), c.dataset.slug);
+});
+
 /* A card's first lines, cut at the last whole line that fits: it is a sheet
    of a fixed size, like a page of the poster on the site. */
 const fitCard = card => {
@@ -265,7 +284,7 @@ const Pile = (() => {
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const years = document.querySelector(".years");
   const PILE_UP = .045, PILE_SHRINK = .04, PILE_DIM = .3, DEEP = 3, RISE = .45;
-  let H = 1, pitch = 1, line = 0, ticking = false;
+  let H = 1, pitch = 1, line = 0, cols = 1, ticking = false;
   const docTop = el => { let t = 0; for (; el; el = el.offsetParent) t += el.offsetTop; return t; };
   const clamp01 = v => Math.min(1, Math.max(0, v));
 
@@ -279,7 +298,18 @@ const Pile = (() => {
       const top = c._top - y;
       let ty = 0, s = 1, dim = 0, op = 1;
       const d = (line - top) / pitch;
-      if (d > 0) {
+      if (cols > 1) {
+        // side by side there is no pile: going out at the top, into the dark
+        const e = clamp01(-top / (H * RISE)), f = e * e * (3 - 2 * e);
+        if (top > vh - H * RISE) {
+          const g = clamp01((vh - top) / (H * RISE));
+          op = g * g * (3 - 2 * g);
+          dim = (1 - op) * .6;
+        } else if (f > 0) {
+          dim = f * .6;
+          op = 1 - f * .5;
+        }
+      } else if (d > 0) {
         // held at the line, and pushed back by the ones come up after it
         ty = -PILE_UP * H * Math.min(d, DEEP);
         s = 1 - PILE_SHRINK * Math.min(d, DEEP);
@@ -303,11 +333,22 @@ const Pile = (() => {
   const measure = () => {
     H = cards[0].offsetHeight || 1;
     const cs = getComputedStyle(box);
-    pitch = H + (parseFloat(cs.rowGap) || 0);
+    const gap = parseFloat(cs.rowGap) || 0;
+    pitch = H + gap;
+    cols = Math.max(1, cs.gridTemplateColumns.split(" ").filter(Boolean).length);
+    /* Side by side, each column a part of a card lower than the one before
+       (blog.css): a card spans as many rows as there are columns, so one
+       row is that part of a card, less the gaps between them. */
+    box.classList.toggle("stagger", cols > 1);
+    box.style.setProperty("--row", cols > 1 ? ((H - (cols - 1) * gap) / cols).toFixed(2) + "px" : "auto");
+    cards.forEach((c, i) => {
+      const col = i % cols;
+      c.style.gridColumn = cols > 1 ? String(col + 1) : "";
+      c.style.gridRow = cols > 1 ? `${Math.floor(i / cols) * cols + col + 1} / span ${cols}` : "";
+    });
     // where each lies in the grid, sticking or not
-    const cols = Math.max(1, cs.gridTemplateColumns.split(" ").filter(Boolean).length);
     const top0 = docTop(box);
-    cards.forEach((c, i) => { c._top = top0 + Math.floor(i / cols) * pitch; });
+    cards.forEach((c, i) => { c._top = top0 + Math.floor(i / cols) * pitch + (i % cols) * pitch / cols; });
     // under the years where they run along the top (a phone), with room
     // above for the pile to step back into
     const ys = years && getComputedStyle(years);
@@ -559,7 +600,7 @@ const Pile = (() => {
   const urlOf = slug => new URL(slug, home).href;
 
   // the names that tie a card to its sheet, given only for the moment it opens
-  const KINDS = [["paper", ".paper"], ["cover", ".thumb"], ["words", ".words"]];
+  const KINDS = [["paper", ".paper"], ["cover", ".thumb"], ["words", ".words"], ["title", "h2"]];
   const name = (card, slug) => {
     for (const [kind, sel] of KINDS) {
       const el = card.querySelector(sel);
@@ -641,8 +682,16 @@ const Pile = (() => {
     if (document.startViewTransition && !reduce) {
       const restore = quiet();
       name(card, slug);
-      const t = document.startViewTransition(swap);
+      // the title grows by as much as the sheet's is larger than the card's
+      const h2 = card.querySelector("h2"), was = h2 ? parseFloat(getComputedStyle(h2).fontSize) : 0;
+      const root = document.documentElement;
+      const t = document.startViewTransition(() => {
+        swap();
+        const h1 = article.querySelector(".text > h1");
+        if (was && h1) root.style.setProperty("--title-k", (parseFloat(getComputedStyle(h1).fontSize) / was).toFixed(4));
+      });
       await t.finished.catch(() => {});
+      root.style.removeProperty("--title-k");
       restore();
     } else {
       swap();
@@ -703,18 +752,58 @@ const Pile = (() => {
   };
 
   /* ---------- to the index, the name growing into its title ---------- */
-  function toIndex(from) {
+  let unquiet = null, grown = null;
+  function toIndex(from, howBack) {
     if (leaving) return;
     leaving = true;
     // only the post being read shrinks into its card; the name becomes the title
     const a = current();
-    quiet(a);
-    from.style.viewTransitionName = "site-title";
-    // and the index opens with its card at the front
-    location.href = home + (a ? "#at=" + a.dataset.slug : "");
+    unquiet = quiet(a);
+    if (from) { grown = from; from.style.viewTransitionName = "site-title"; }
+    if (a) noteTitle(a.querySelector(".text > h1"), a.dataset.slug);
+    // back the way it came, or the index opened with its card at the front
+    if (howBack) history.back();
+    else location.href = home + (a ? "#at=" + a.dataset.slug : "");
+  }
+  /* Kept whole by the browser and come back to, with the forward button,
+     the post is as it was before it was left, and can be left again. */
+  addEventListener("pageshow", e => {
+    if (!e.persisted || !leaving) return;
+    leaving = false;
+    if (unquiet) unquiet();
+    if (grown) grown.style.viewTransitionName = "";
+    unquiet = grown = null;
+  });
+  /* Left any other way, the browser's back button say, the post being read
+     still notes its title, so that it shrinks into its card all the same. */
+  addEventListener("pageswap", e => {
+    const a = e.viewTransition && current();
+    if (a) noteTitle(a.querySelector(".text > h1"), a.dataset.slug);
+  });
+  /* The ← at the head of the post, in the bar and beside it, is the way
+     back to the index, at this post's card. Come from that card, the
+     browser's own way back is the best one, as it puts the index back
+     exactly as it was left; come any other way, or read on into another
+     post since, the index is opened at this one's card instead. */
+  const indexAt = bare(new URL(home).pathname);
+  const backToIndex = from => {
+    const a = current();
+    let opened = null;
+    try { opened = JSON.parse(sessionStorage.getItem("index-opened") || "null"); } catch (_) {}
+    const cameThat = !!a && !!opened && opened.slug === a.dataset.slug && history.length > 1
+      && (cameFrom === indexAt || cameFrom === indexAt + "/index");
+    toIndex(from, cameThat);
+  };
+  for (const arrow of document.querySelectorAll(".top a.back, .bar a.back")) {
+    arrow.addEventListener("click", e => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+      e.preventDefault();
+      // the name beside it grows into the index's title, as when it is clicked
+      backToIndex(arrow.parentNode.querySelector(".name"));
+    });
   }
   // the wandering about goes to the index; his name, to the site, is a plain link
-  for (const [link, name] of [[topLink, topLink.parentNode], [bar && bar.querySelector("a.blog"), bar && bar.firstElementChild]]) {
+  for (const [link, name] of [[topLink, topLink.parentNode], [bar && bar.querySelector("a.blog"), bar && bar.querySelector(".name")]]) {
     if (link) link.addEventListener("click", e => {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
       e.preventDefault();
@@ -747,8 +836,13 @@ const Pile = (() => {
   side.className = "aside-nav";
   side.setAttribute("aria-label", "This post");
   side.innerHTML = `<p class="an-year"></p><p class="an-title"></p>
-    <nav><a class="an-prev"><small>Previous</small><span></span></a><a class="an-next"><small>Next</small><span></span></a></nav>`;
+    <nav><a class="an-back" href="${home}"><small>Back</small></a><a class="an-prev"><small>Previous</small><span></span></a><a class="an-next"><small>Next</small><span></span></a></nav>`;
   document.body.append(side);
+  side.querySelector(".an-back").addEventListener("click", e => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    e.preventDefault();
+    backToIndex(null);
+  });
   const sideEls = {
     year: side.querySelector(".an-year"), title: side.querySelector(".an-title"),
     prev: side.querySelector(".an-prev"), next: side.querySelector(".an-next"),

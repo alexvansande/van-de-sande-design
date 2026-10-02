@@ -34,17 +34,17 @@ In the beginning of the year I was invited by Brantly to join the core team. It 
 
 Going forward I intend that my ENS contributions will be made as a separate entity, with a different jurisdiction, that does not rely on ENS core team.
 
-Secondly: Brantly is still the top delegate. Second is Coinbase, an entity who has a contract for “analytics”with the US homeland security and is, in my opinion, much more problematic than he could ever be.
+**Secondly:** Brantly is still the top delegate. Second is Coinbase, an entity who has a contract for “analytics”with the US homeland security and is, in my opinion, much more problematic than he could ever be.
 
 Most of the other top 10 delegates (including me) could probably be found in the same table at some random devcon a few years ago. Is that a good thing for diversity of opinions and experiences? It can also be very expensive to redelegate, which is not very democratic.
 
 I would like to see a website that helps people redelegate their votes, including some possible form of subsidy (within limits to avoid grieving attacks ofc), to allow a more liquid democracy. I will look into building/financing this.
 
-Thirdly: Brantly is a director of the ENS foundation, a non profit incorporated in the Cayman Islands. I’m sure there are good tax reasons for it to exist, but it also creates another bottleneck for the DAO.
+**Thirdly:** Brantly is a director of the ENS foundation, a non profit incorporated in the Cayman Islands. I’m sure there are good tax reasons for it to exist, but it also creates another bottleneck for the DAO.
 
 We could have a more public debate on the roles of that entity.
 
-Four: what are the roles of the DAO in .eth names? What can be done to domains if top delegation is taken over by people who don’t share your values?
+**Four:** what are the roles of the DAO in .eth names? What can be done to domains if top delegation is taken over by people who don’t share your values?
 
 Not much really. But some could, and we need to investigate and consider alternatives.
 
@@ -56,7 +56,8 @@ One example is the recent rule change for newly expired names, which could be bo
 
 The ENS constitution has limits on how these can change, but the constitution can be changed (and it’s still quite easy to do so). Still, some things should be frozen in code so that it supersedes even the constitution changes in the future.
 
-End of thread. So my proposed next steps:\
-👉 Decentralize development more so it doesn’t depend on a single person or entity\
-👉 Make redelegation more liquid\
-👉 Create even stronger property rights guarantees on domain names
+End of thread. So my proposed next steps:
+
+- Decentralize development more so it doesn’t depend on a single person or entity
+- Make redelegation more liquid
+- Create even stronger property rights guarantees on domain names

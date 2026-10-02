@@ -1,0 +1,22 @@
+---
+title: "It's not the price, it's the code, stupid!"
+date: "2013-03-30T21:52:41Z"
+original: "https://www.reddit.com/r/Bitcoin/comments/1bbo23/"
+original_site: "Reddit"
+---
+
+You've heard it before: the dollar exchange to bitcoin is just a side show, it really doesn't matter. I would like to expand on that:
+
+When people ask you about bitcoin, avoid talking about the current price or how it exploded, because then you'll be talking about bubbles, pyramid schemes and the inherent value of things, and all that is irrelevant to bitcoin. Yes, I have a few and I love seeing my money grow when the price goes up and buying it cheaper when it goes down. But that's just a gamble: here's what made me stick to bitcoins.
+
+**Bitcoin is a money API.** It's a technology that allows computers to move wealth around in a more efficient manner, allows contracts to be abided by programming not lawyers. Bitcoin has the potential to change society as much as the internet and Peer to peer has before it. Right now bitcoin is just trying to be a better paypal, but, just like the web started as a better way to store electronic documents, bitcoins can be a lot more than that.
+
+Take a look around and think about how many institutions exists, how many people are employed, energy spent, how much space is devoted to **the simple act of moving wealth around**, to guarantee money will exchange hands and go to the right person: all of those can be made more efficient and sometimes completely redundant with bitcoins.
+
+And if history taught us anything is that _geeks with efficient systems tend to win over traditional unmoving inefficient ones_.
+
+I have a friend that once visited a company whose job was to guarantee electronic transfers between banks. It was a highly complicated, very expensive, ultra regulated operation. He explained to me that the reason that electronic transfers between banks in brazil costs $5 and are limited to a minimum of $3000 is merely computing power – if they lowered those numbers they couldn't cope with the excess information. Inefficiency.
+
+Banks aren't the only institutions that exists solely to regulate transfer of money: so are **insurance companies**. An insurance is nothing more than a reverse lottery, where everyone pays every month and if something happens you get back a prize. A small group of developers could develop an insurance company that could be much more efficient than regular companies: the whole part of handling money, collecting it, figuring out who paid and who didn't, the covered conditions could be programmed in the system from the start. All that is needed is a way to check if the subscriber needs to be paid or not: but that's now an engineering problem, not an administrative one. You could check nasa for weather and tornado information, google maps, use flying drones, pay agents, check hospital records, crawl newspapers for crime and obituaries news. The more you think about them the more institutions could be perfectly replaces by one automated script that moves money around.
+
+**Bitcoin is codified money.** If you believe that then enjoy the ride up. If you're into it just as a get rich quick scam, then throw it all on satoshi dice.

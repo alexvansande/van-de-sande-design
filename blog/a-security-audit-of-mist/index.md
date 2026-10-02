@@ -6,7 +6,7 @@ original: "https://x.com/avsa/status/1304483988497629184"
 original_site: "Twitter"
 ---
 
-In 2016-17 the Ethereum Foundation hired @cure53berlin for a security Audit of Mist. The process was eye opening and contributed to the discontinuation of the project. The report was never publicized but it might still be valuable for builders today: [drive.google.com/file/d/1LSsD9gzOejmQ2QipReyMXwr\_M0Mg1GMH/view](https://drive.google.com/file/d/1LSsD9gzOejmQ2QipReyMXwr_M0Mg1GMH/view)
+In 2016-17 the Ethereum Foundation hired @cure53berlin for a security Audit of Mist. The process was eye opening and contributed to the discontinuation of the project. [The report](https://drive.google.com/file/d/1LSsD9gzOejmQ2QipReyMXwr_M0Mg1GMH/view) was never publicized but it might still be valuable for builders today.
 
 Mist was a brainchild of Gavin and Jeff but I took the lead of it when I joined the foundation in 2014. We had grand plans for it being the realization of all web3 technologies we were building and it was planned as the main software release of Metropolis
 
@@ -16,7 +16,7 @@ Mist was a brainchild of Gavin and Jeff but I took the lead of it when I joined 
 
 However the first 2 years I worked on Ethereum we were mostly focused on the Wallet app, so it started being released as a beta in 2016 and we started a security audit at the same time. The Foundation contacted Mario Heiderich from Cure53.
 
-It was a great piece of humble pie.
+**It was a great piece of humble pie.**
 
 As a designer I had spent a lot of time working on small things that I was really proud of, for instance instead of the URL being a simple text field we wanted to show all the url elements in a proper hierarchical order. But turns out Meteor’s SafeString wasn’t that safe.
 
@@ -49,7 +49,7 @@ The whole process took over a year of back and forth, where they would find issu
 ![](07.jpg)
 ![](08.jpg)
 
-This was fundamentally the end of the project. We explored  different approaches, using other frameworks, building our own, starting from scratch on a completely different language. We saw Brave pop up and eventually abandon Electron too. In a year Mist would be discontinued.
+**This was fundamentally the end of the project.** We explored  different approaches, using other frameworks, building our own, starting from scratch on a completely different language. We saw Brave pop up and eventually abandon Electron too. In a year Mist would be discontinued.
 
 I wouldn’t have thought about the report again, if it wasn’t for @Jordancoin pinging me about it, wanting to learn more what we learned ourselves and it made me realize these lessons could be applied to more people building desktop wallets in crypto.
 

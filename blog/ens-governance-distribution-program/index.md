@@ -1,5 +1,5 @@
 ---
-title: "[temp check] ENS Governance Distribution Program"
+title: "ENS Governance Distribution Program"
 date: "2024-03-15T18:14:27Z"
 original: "https://discuss.ens.domains/t/temp-check-ens-governance-distribution-program/18940"
 original_site: "discuss.ens.domains"

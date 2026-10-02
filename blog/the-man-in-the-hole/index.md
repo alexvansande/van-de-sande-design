@@ -66,11 +66,9 @@ Brazil has over over 67 uncontacted Tribes. These are neither a First Contact or
 <img src="04.jpg" width="425" height="285" alt="">
 </figure>
 
-To learn more about the isolated people:\
-[survivalbrasil.org](https://www.survivalbrasil.org)
+To learn more about [the isolated people](https://www.survivalbrasil.org).
 
-A book on the Man in the Hole:\
-[amazon.com/Last-Tribe-Epic-Quest-Amazon/dp/1416594744/ref=nodl\_](https://www.amazon.com/Last-Tribe-Epic-Quest-Amazon/dp/1416594744/ref=nodl_?dplnkId=2a314713-09d2-4795-a6db-ba7af70f5880)
+[A book on the Man in the Hole](https://www.amazon.com/Last-Tribe-Epic-Quest-Amazon/dp/1416594744/ref=nodl_?dplnkId=2a314713-09d2-4795-a6db-ba7af70f5880).
 
 Corumbiara, a documentary about the case:
 
@@ -78,8 +76,6 @@ Corumbiara, a documentary about the case:
 <iframe src="https://www.youtube-nocookie.com/embed/_j1RXDo2MXw" title="Corumbiara - Trailer" loading="lazy" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 </figure>
 
-If you want more random Brazil Trivia, definitely don't follow me.
+If you want more [random Brazil Trivia](https://blog.vandesande.design/random-brazil-trivia), definitely don't follow me.
 
 Most of my tweets are about random ethereum topics but I will occasionally post random bits on Brazil history.
-
-[blog.vandesande.design/random-brazil-trivia](https://blog.vandesande.design/random-brazil-trivia)

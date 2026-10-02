@@ -16,6 +16,7 @@ original_site: "Reddit"
 ![](09.jpg)
 ![](10.jpg)
 ![](11.jpg)
+
 ![](12.jpg)
 ![](13.jpg)
 ![](14.jpg)
@@ -39,6 +40,17 @@ original_site: "Reddit"
 ![](32.jpg)
 ![](33.jpg)
 ![](34.jpg)
+![](35.jpg)
+![](36.jpg)
+![](37.jpg)
+![](38.jpg)
+![](39.jpg)
+![](40.jpg)
+![](41.jpg)
+![](42.jpg)
+![](43.jpg)
+![](44.jpg)
+![](45.jpg)
 
 So I planned my paternity leave to coincide with our 39th week but my daughter only came at 41 weeks and 3 days, giving us plenty of unplanned free time, so I tried to make a page per day during that period.
 
