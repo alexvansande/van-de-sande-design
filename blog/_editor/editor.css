@@ -154,6 +154,9 @@ body.editor{min-height:100vh}
 .review-head.links::before{background:#7ab8ff}
 .review-why{margin:.3rem 0 .5rem}
 .review-thread p{margin:0 0 .4rem;padding-left:.6rem;border-left:2px solid rgba(244,241,228,.3);font-size:.95rem;font-style:italic;opacity:.85}
+.review-thread p.them{font-style:normal;border-left-color:rgba(244,241,228,.12);opacity:.95}
+.review-thread p.them b{font-weight:500;opacity:.7}
+.review-thread p.waiting{opacity:.55;font-style:italic}
 .review-reply{display:block;width:100%;box-sizing:border-box;margin:0 0 .55rem;padding:.3rem .5rem;border:0;border-radius:6px;outline:none;
   font:inherit;font-size:.95rem;background:rgba(244,241,228,.1);color:#f4f1e4}
 .review-reply::placeholder{color:rgba(244,241,228,.45)}

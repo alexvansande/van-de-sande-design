@@ -112,12 +112,8 @@ def message(blocks, dismissed, comments=(), pages=()):
     parts = ["Dismissed (never raise these again):"]
     parts += ["- [%s] %s" % (d.get("category"), q(d.get("span"))) for d in dismissed] or ["(none)"]
     if comments:
-        parts.append("\nThe author's answers to earlier suggestions:")
-        for c in comments:
-            was = " -> %s" % q(c["replacement"]) if c.get("replacement") else ""
-            who = "Claude" if c.get("by") == "claude" else "the local model" if c.get("by") == "local" else "a reviewer"
-            parts.append("- %s flagged [%s] %s%s (%s)\n  the author: %s" % (who, c.get("category"), q(c.get("span")), was,
-                                                                         c.get("why", ""), q(c.get("comment"))))
+        parts.append("\nConversations with the author about earlier suggestions:")
+        parts += [line for c in comments for line in said(c)]
     if pages:
         parts.append("\nThe author's own pages (for \"related\" links only):")
         parts += ["- %s <%s>%s" % (p["title"], p["url"], ": " + p["about"] if p.get("about") else "") for p in pages]
@@ -129,6 +125,20 @@ def message(blocks, dismissed, comments=(), pages=()):
         for f in b.get("flagged") or []:
             parts.append("  already flagged: [%s] %s" % (f.get("category"), q(f.get("span"))))
     return "\n".join(parts)
+
+
+WHO = {"claude": "Claude", "local": "the local model"}
+
+
+def said(c):
+    """One turn of a conversation about a suggestion, as the models read it."""
+    q = lambda s: json.dumps(s, ensure_ascii=False)
+    if c.get("from") in WHO:
+        return ["  %s replied: %s%s" % (WHO[c["from"]], q(c.get("comment")), " (and withdrew it)" if c.get("withdrew") else "")]
+    was = " -> %s" % q(c["replacement"]) if c.get("replacement") else ""
+    return ["- %s flagged [%s] %s%s (%s)" % (WHO.get(c.get("by"), "a reviewer"), c.get("category"), q(c.get("span")), was,
+                                           c.get("why", "")),
+            "  the author: %s" % q(c.get("comment"))]
 
 
 def schema():
@@ -182,16 +192,19 @@ def context(model):
 
 
 def ask_local(blocks, dismissed, comments=(), gone=lambda: False, pages=()):
+    return loads(local_chat(prompt("local"), message(blocks, dismissed, comments, pages), schema(), gone))
+
+
+def local_chat(system, user, shape, gone=lambda: False):
     model = local_model()
     body = json.dumps({
         "model": model,
         "stream": False,
         "think": True,              # slower (half a minute on a long paragraph), but without it it misses most errors
-        "format": schema(),
+        "format": shape,
         "options": {"temperature": 0, "num_ctx": context(model)},
         "keep_alive": "30m",        # loaded while he writes: loading it takes a minute
-        "messages": [{"role": "system", "content": prompt("local")},
-                     {"role": "user", "content": message(blocks, dismissed, comments, pages)}],
+        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
     }).encode()
     req = urllib.request.Request(OLLAMA + "/api/chat", data=body, headers={"Content-Type": "application/json"})
     with local_lock:
@@ -202,14 +215,20 @@ def ask_local(blocks, dismissed, comments=(), gone=lambda: False, pages=()):
                 reply = json.load(r)
         except OSError as e:
             raise Unavailable("The local model did not answer: %s" % e)
-    return loads(reply.get("message", {}).get("content", ""))
+    return reply.get("message", {}).get("content", "")
 
 
 def ask_online(blocks, dismissed, comments=(), gone=lambda: False, pages=()):
+    out = online_chat(prompt("claude"), message(blocks, dismissed, comments, pages), schema())
+    return out.get("issues") if isinstance(out, dict) else out
+
+
+def online_chat(system, user, shape):
+    """Claude's structured answer, as a dict (or what could be read of it)."""
     if not CLAUDE:
         raise Unavailable("The claude command is not installed, so there is no fact check.")
-    args = [CLAUDE, "-p", message(blocks, dismissed, comments, pages), "--output-format", "json",
-            "--system-prompt", prompt("claude"), "--json-schema", json.dumps(schema()),
+    args = [CLAUDE, "-p", user, "--output-format", "json",
+            "--system-prompt", system, "--json-schema", json.dumps(shape),
             # it may look things up, and nothing else: no files, no shell
             "--tools", "WebSearch,WebFetch", "--allowedTools", "WebSearch,WebFetch",
             "--setting-sources", "", "--no-session-persistence"]
@@ -231,8 +250,12 @@ def ask_online(blocks, dismissed, comments=(), gone=lambda: False, pages=()):
             msg += ". Run claude auth login in a terminal, then try again."
         raise Unavailable("The fact check failed: " + msg)
     if isinstance(out.get("structured_output"), dict):
-        return out["structured_output"].get("issues")
-    return loads(out.get("result", ""))
+        return out["structured_output"]
+    m = re.search(r"\{.*\}", out.get("result", "") or "", re.S)
+    try:
+        return json.loads(m.group(0)) if m else {}
+    except ValueError:
+        return {}
 
 
 def loads(text):
@@ -383,23 +406,81 @@ def stamp():
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def comment(folder, issue, text):
-    """His answer to a suggestion: kept, and read by the model from then on."""
+REPLY = """You are one of two reviewers of a blog post (a small model on the author's machine, and Claude, online). You made a suggestion on the post, and the author has answered it. Answer him.
+
+Reply in one or two plain sentences, as a colleague would: no flattery, no apology. If he is right, or you are no longer sure, say so and withdraw the suggestion. If you still think the text is wrong, say why, briefly, with what you know; you may revise your correction, which replaces exactly the quoted words. You flag; you never rewrite more than those words, and you never comment on style, tone or opinions.
+
+Answer with JSON: {"reply": "...", "withdraw": true or false, "replacement": the corrected text for the quoted words, or null to keep your correction as it was}."""
+
+REPLY_LOCAL = " You cannot look anything up: answer from what you know."
+REPLY_ONLINE = " Look things up if it helps you answer."
+
+
+def reply_shape():
+    return {"type": "object", "properties": {"reply": {"type": "string"}, "withdraw": {"type": "boolean"},
+                                             "replacement": {"type": ["string", "null"]}},
+            "required": ["reply", "withdraw", "replacement"]}
+
+
+def comment(folder, issue, text, paragraph=""):
+    """His answer to a suggestion, and the answer of the reviewer that made it.
+    Both are kept, and read by both reviewers from then on. Withdrawn, the
+    suggestion goes and is not raised again; otherwise it stays, its
+    correction perhaps revised."""
     text = (text or "").strip()
     if not text:
         raise ValueError("an empty comment")
+    k = key(issue["category"], issue["span"])
     data = sidecar(folder)
-    c = {"key": key(issue["category"], issue["span"]), "kind": issue.get("kind"), "by": issue.get("by"),
-         "category": issue["category"],
+    c = {"key": k, "kind": issue.get("kind"), "by": issue.get("by"), "category": issue["category"],
          "span": issue["span"], "why": issue.get("why", ""), "replacement": issue.get("replacement"),
          "comment": text[:1000], "at": stamp()}
     data["comments"].append(c)
-    if data.get("facts"):
-        # answered: it is not shown again from Claude's saved reading
-        data["facts"]["issues"] = [i for i in data["facts"]["issues"]
-                                   if not (i.get("key") == c["key"] and i.get("block") == issue.get("block"))]
     write(folder, data)
-    return c
+
+    agent = issue.get("by") if issue.get("by") in AGENTS else "local"
+    thread = [t for t in data["comments"] if t.get("key") == k]
+    ask = "\n".join(["The paragraph:", paragraph or "(not given)", "",
+                     "Your suggestion: [%s] %s -> %s" % (issue["category"], json.dumps(issue["span"], ensure_ascii=False),
+                                                        json.dumps(issue.get("replacement"), ensure_ascii=False)),
+                     "Why you said so: " + issue.get("why", ""), "", "The conversation so far:"]
+                    + [line for t in thread for line in said(t)])
+    if agent == "local":
+        out = loads_obj(local_chat(REPLY + REPLY_LOCAL, ask, reply_shape()))
+    else:
+        out = online_chat(REPLY + REPLY_ONLINE, ask, reply_shape())
+    answer = str(out.get("reply") or "").strip() or "(no answer)"
+    withdrew = bool(out.get("withdraw"))
+    rep = out.get("replacement")
+    if isinstance(rep, str) and rep.strip() and rep != issue["span"] and not withdrew:
+        issue = {**issue, "replacement": rep.strip()}
+    r = {"key": k, "from": agent, "comment": answer[:1000], "withdrew": withdrew, "at": stamp()}
+
+    data = sidecar(folder)
+    data["comments"].append(r)
+    if withdrew and not any(d.get("key") == k for d in data["dismissed"]):
+        data["dismissed"].append({"key": k, "kind": issue.get("kind"), "category": issue["category"], "span": issue["span"],
+                                  "why": "withdrawn after the author answered", "at": stamp()})
+    if data.get("facts"):
+        kept = []
+        for i in data["facts"]["issues"]:
+            if i.get("key") == k and i.get("block") == issue.get("block"):
+                if withdrew:
+                    continue
+                i = {**i, "replacement": issue.get("replacement")}
+            kept.append(i)
+        data["facts"]["issues"] = kept
+    write(folder, data)
+    issue = {**issue, "thread": [t for t in data["comments"] if t.get("key") == k]}
+    return {"withdrew": withdrew, "issue": issue}
+
+
+def loads_obj(text):
+    m = re.search(r"\{.*\}", text or "", re.S)
+    try:
+        return json.loads(m.group(0)) if m else {}
+    except ValueError:
+        return {}
 
 
 def dismiss(folder, issue):

@@ -149,9 +149,10 @@ page in `_editor/`, which is not published):
   not repeat it. When Claude has read every paragraph as it now stands and
   nothing it raised is left, the button says Fact checked ✔. A click on a
   highlight gives why, who said it, Replace (over exactly the quoted words),
-  Fix the link, Link it, Ignore, and a line to reply: replies are kept in
-  `index.review.json` beside the post and read by both from then on, and the
-  paragraph is read again with the reply. Ignored suggestions are kept there
+  Fix the link, Link it, Ignore, and a line to reply. The reviewer that made
+  the suggestion answers in the box: it withdraws it (and it is not raised
+  again), or says why not and may change its correction. The conversation is
+  kept in `index.review.json` beside the post and read by both from then on. Ignored suggestions are kept there
   too, by category and exact words, and Claude's last reading, so a reload
   shows it again. A suggestion is tied to its paragraph's text: edit the
   paragraph and it goes until the paragraph is read again. The bar says where
