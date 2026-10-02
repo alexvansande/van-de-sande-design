@@ -1,9 +1,8 @@
 ---
 title: "Essas marquinhas táteis no chão de metro são para guiar os cegos, mas tb são ótimas para usuários de smartphone q não olham onde andam q"
-date: "2013-01-07T12:00:00Z"
+date: "2011-01-07T04:34:25Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/essas-marquinhas-tateis-no-chao-de-metro-sao"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

@@ -1,9 +1,8 @@
 ---
 title: "Margens de cadernos"
-date: "2012-10-07T12:00:00Z"
+date: "2008-10-07T19:19:57Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/margens-de-cadernos"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

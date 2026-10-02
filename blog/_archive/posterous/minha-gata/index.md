@@ -1,9 +1,8 @@
 ---
 title: "minha gata"
-date: "2012-10-19T12:00:00Z"
+date: "2008-10-19T19:31:36Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/minha-gata"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

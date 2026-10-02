@@ -1,9 +1,8 @@
 ---
 title: "The Onion distribuído como um jornal mesmo."
-date: "2012-12-19T12:00:00Z"
+date: "2010-12-19T06:33:00Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/the-onion-distribuido-como-um-jornal-mesmo"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 Taken at Brooklyn

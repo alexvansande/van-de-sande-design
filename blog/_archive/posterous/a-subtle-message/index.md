@@ -1,9 +1,8 @@
 ---
 title: "a subtle message"
-date: "2012-05-29T12:00:00Z"
+date: "2011-05-29T17:44:39Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/a-subtle-message"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

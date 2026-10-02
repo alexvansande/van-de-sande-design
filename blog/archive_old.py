@@ -18,11 +18,17 @@ The collections:
   olpcnews        the articles on OLPC News, 2007–2008
   flickr          the two essays written as Flickr captions, 2005
 
+From the archive Flickr gives for download (FLICKR_DATA, FLICKR_PHOTOS):
+
+  posterous-dates the Posterous posts dated by the day their pictures went up
+  surpresa        "A surpresa", 2008–2009, as one post on the blog, every page
+  cartoons        the drawings of autumn 2008, each a post on the blog
+
 The Wayback Machine answers slowly and turns away anyone in a hurry, so every
 request waits its turn and every answer is kept in blog/_archive/.cache
 (not in git), so a second run does not ask again.
 """
-import argparse, hashlib, html, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
+import argparse, hashlib, html, json, os, re, shutil, sys, time, urllib.error, urllib.parse, urllib.request
 from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -734,11 +740,171 @@ def flickr(force):
         say("flickr", slug, how)
 
 
+# ---------------------------------------------------------------- the Flickr archive
+
+# What Flickr gives for download (Settings → Your Flickr Data): a folder of
+# each photo's data (photo_<id>.json: its title, when it was uploaded) and
+# one of the photos themselves (<title>_<id>_o.jpg), at full size.
+FLICKR_DATA = os.environ.get("FLICKR_DATA", os.path.expanduser("~/Downloads/72157725868069730_a9bf7cba1bd6_part1"))
+FLICKR_PHOTOS = os.environ.get("FLICKR_PHOTOS", os.path.expanduser("~/Downloads/data-download-1"))
+
+
+def flickr_export():
+    """Every photo in the download: its data, and the file, by id."""
+    files = {}
+    for f in os.listdir(FLICKR_PHOTOS):
+        m = re.search(r"_(\d+)_o\.\w+$", f)
+        if m:
+            files[m.group(1)] = os.path.join(FLICKR_PHOTOS, f)
+    photos = []
+    for f in os.listdir(FLICKR_DATA):
+        if f.startswith("photo_") and f.endswith(".json"):
+            d = json.load(open(os.path.join(FLICKR_DATA, f)))
+            d["file"] = files.get(d["id"])
+            photos.append(d)
+    return photos
+
+
+def same_title(a, b):
+    """The same post, though Posterous's address cut the title short."""
+    a, b = norm_title(a), norm_title(b)
+    return a == b or len(min(a, b, key=len)) >= 8 and (a.startswith(b) or b.startswith(a))
+
+
+def posterous_dates(force):
+    """Posterous put every post's pictures on Flickr as it was published, so
+    the day a post's picture was uploaded is the day of the post: better
+    than the year the archive guessed from when it kept a copy."""
+    photos = flickr_export()
+    for slug in sorted(os.listdir(os.path.join(OUT, "posterous"))):
+        path = os.path.join(OUT, "posterous", slug, "index.md")
+        if not os.path.exists(path):
+            continue
+        src = open(path).read()
+        if "date_approximate:" not in src and not force:
+            continue
+        title = json.loads(re.search(r'^title: (".*")$', src, re.M).group(1))
+        when = sorted(p["date_imported"] for p in photos if same_title(p["name"], title))
+        if not when:
+            say("posterous", slug, "not on Flickr; date left as it was")
+            continue
+        date = when[0].replace(" ", "T") + "Z"
+        src = re.sub(r'^date: ".*"$', ip.fm("date", date), src, count=1, flags=re.M)
+        src = re.sub(r'^date_approximate: .*\n', "", src, flags=re.M)
+        open(path, "w").write(src)
+        say("posterous", slug, f"{date[:10]}, from Flickr")
+
+
+# "A surpresa", the story of how he asked Fernanda to marry him, drawn and
+# posted in parts from November 2008 and finished in August 2009 (its
+# eleventh part is "O anel", which has no number). One post here, its parts in order, each with all its
+# pages from Flickr: the archived Posterous copies kept only the first.
+SURPRESA = ["oque-andei-aprontando-secretam", "a-surpresa-parte-ii-tentativa", "a-surpresa-parte-iii-porque-ai",
+            "a-surpresa-parte-iv-domingo-de", "a-surpresa-parte-5-sobremesa", "a-surpresa-parte-6-como-fazer",
+            "a-surpresa-parte-7-na-praia", "a-surpresa-parte-8-finalmente", "a-surpresa-9-quatro-fatos-sobr",
+            "a-surpresa-parte-10-enquanto-i", "o-anel", "a-surpresa-12-aterrisando", "a-surpresa-13-indo-pro-brejo", "a-surpresa-final"]
+
+
+def surpresa(force):
+    folder = os.path.join(HERE, "a-surpresa")
+    md_path = os.path.join(folder, "index.md")
+    if os.path.exists(md_path) and not force:
+        say("surpresa", "a-surpresa", "kept")
+        return
+    os.makedirs(folder, exist_ok=True)
+    for f in os.listdir(folder):
+        if re.fullmatch(r"(\d\d|cover)\.\w+", f):
+            os.remove(os.path.join(folder, f))
+    photos = flickr_export()
+    blocks, n, last = [], 0, None
+    for slug in SURPRESA:
+        src = open(os.path.join(OUT, "posterous", slug, "index.md")).read()
+        title = json.loads(re.search(r'^title: (".*")$', src, re.M).group(1))
+        body = re.match(r"---\n.*?\n---\n(.*)", src, re.S).group(1)
+        # his words, without the archive's pictures (Flickr's follow) and the
+        # zip Posterous offered of the last part's pages
+        words = [b.strip() for b in re.split(r"\n\s*\n", body) if b.strip() and not b.lstrip().startswith("<figure")]
+        words = [re.sub(r"\s*Click here to download:.*$", "", w, flags=re.S) for w in words
+                 if not re.match(r"tags?:", w, re.I)         # Posterous's tags, not his words
+                 and re.search(r"\w", w)]                    # nor a line of invisible marks
+        pages = sorted((p for p in photos if p["file"] and same_title(p["name"], title)),
+                       key=lambda p: (p["date_taken"], p["id"]))
+        names = []
+        for p in pages:
+            n += 1
+            name = f"{n:02d}{os.path.splitext(p['file'])[1].lower()}"
+            shutil.copy2(p["file"], os.path.join(folder, name))
+            names.append(name)
+            last = max(last or p["date_imported"], p["date_imported"])
+        blocks.append("### " + title.rstrip(":").strip())
+        blocks += [w for w in words if w]
+        # a part's pages, one after another: a carousel
+        if names:
+            blocks.append("\n".join(f"![]({x})" for x in names))
+        say("surpresa", slug, f"{len(names)} pages")
+    head = ["---", ip.fm("title", "A surpresa"), ip.fm("date", last.replace(" ", "T") + "Z"), ip.fm("lang", "pt"),
+            ip.fm("original", f"http://{POSTEROUS}/{SURPRESA[0]}"), ip.fm("original_site", "Posterous"), "---", ""]
+    with open(md_path, "w") as f:
+        f.write("\n".join(head) + "\n" + "\n\n".join(blocks) + "\n")
+    say("surpresa", "a-surpresa", f"{n} pages in all")
+
+
+# The drawings he posted on Posterous in the autumn of 2008, before the
+# story above: each a post of its own on the blog, under an address made
+# from its title, on the day it was posted, its picture Flickr's original.
+CARTOONS = ["projetos-que-eu-provavelmente-1", "ironia-1", "por-que-eu-deveria-ouvir-mais", "anatomia-de-uma-reuniao-inutil",
+            "margens-de-cadernos", "saber-sorrir", "minha-gata", "lugares-onde-estive-hoje-e-me",
+            "comic-review-ghost-map-ou-seri", "o-dia-onde-tive-uma-das-conver"]
+def cartoons(force):
+    photos = flickr_export()
+    for old in CARTOONS:
+        src = open(os.path.join(OUT, "posterous", old, "index.md")).read()
+        head, body = re.match(r"---\n(.*?)\n---\n(.*)", src, re.S).groups()
+        title = json.loads(re.search(r'^title: (".*")$', head, re.M).group(1))
+        slug = slugify(title)       # the archive's copy stays, as the record
+        folder = os.path.join(HERE, slug)
+        if os.path.exists(os.path.join(folder, "index.md")) and not force:
+            say("cartoons", slug, "kept")
+            continue
+        os.makedirs(folder, exist_ok=True)
+        for f in os.listdir(folder):
+            if re.fullmatch(r"(\d\d|cover)\.\w+", f):
+                os.remove(os.path.join(folder, f))
+        pages = [p for p in sorted(photos, key=lambda p: (p["date_taken"], p["id"]))
+                 if p["file"] and same_title(p["name"], title)]
+        names = []
+        for n, p in enumerate(pages, 1):
+            name = f"{n:02d}{os.path.splitext(p['file'])[1].lower()}"
+            shutil.copy2(p["file"], os.path.join(folder, name))
+            with Image.open(p["file"]) as im:
+                names.append((name, im.size))
+        # his words as they were, each archived picture swapped for the
+        # original, in turn; any the archive did not have, after the last
+        blocks, left = [], list(names)
+        for b in (x.strip() for x in re.split(r"\n\s*\n", body)):
+            if not b:
+                continue
+            if b.startswith("<figure"):
+                if left:
+                    name, (w, h) = left.pop(0)
+                    blocks.append(f'<figure>\n<img src="{name}" width="{w}" height="{h}" alt="">\n</figure>')
+                continue
+            blocks.append(re.sub(r"(<br>)+$", "", b).rstrip())
+        blocks += [f'<figure>\n<img src="{name}" width="{w}" height="{h}" alt="">\n</figure>' for name, (w, h) in left]
+        if "\nlang:" not in "\n" + head:          # Posterous's were all in Portuguese
+            head = re.sub(r'^(date: .*)$', lambda m: m.group(1) + "\n" + ip.fm("lang", "pt"), head, count=1, flags=re.M)
+        with open(os.path.join(folder, "index.md"), "w") as f:
+            f.write("---\n" + head + "\n---\n\n" + "\n\n".join(b for b in blocks if b) + "\n")
+        say("cartoons", slug, f"{len(names)} pictures, from {old}")
+
+
 HARDWRAPPED = {"paris", "flickr", "posterous"}
 NO_HEADINGS = {"wanderingblog", "olpcnews"}     # a line in bold there is a line in bold, not a heading
 
 COLLECTIONS = {"portfolio2011": portfolio2011, "posterous": posterous, "monks": monks, "wanderingabout": wanderingabout, "paris": paris,
                "wanderingblog": wanderingblog, "olpcnews": olpcnews, "flickr": flickr}
+# from the Flickr download, not the web: run by name
+FROM_EXPORT = {"posterous-dates": posterous_dates, "surpresa": surpresa, "cartoons": cartoons}
 
 
 def main():
@@ -755,7 +921,7 @@ def main():
     for c in args.collections or list(COLLECTIONS):
         print(c, flush=True)
         try:
-            COLLECTIONS[c](args.force)
+            {**COLLECTIONS, **FROM_EXPORT}[c](args.force)
         except Exception as e:
             print(f"  {c}: FAILED {e}", flush=True)
 

@@ -1,9 +1,8 @@
 ---
 title: "Aquecedor solar"
-date: "2012-12-20T12:00:00Z"
+date: "2010-12-20T11:39:42Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/aquecedor-solar"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 Taken at Cooper-Hewitt National Design Museum

@@ -1,9 +1,8 @@
 ---
 title: "hdr no iphone fotos lindas com uma camera mai"
-date: "2009-12-26T12:00:00Z"
+date: "2009-12-26T14:48:17Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/hdr-no-iphone-fotos-lindas-com-uma-camera-mai"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 ### [HDR no iPhone: fotos lindas com uma camera mais ou menos](http://mylifeisnotveryinteresting.posterous.com/hdr-no-iphone-fotos-lindas-com-uma-camera-mai)

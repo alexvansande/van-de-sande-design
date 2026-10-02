@@ -1,9 +1,8 @@
 ---
 title: "sapic dormindo no meu colo com colar elizabet"
-date: "2010-02-01T12:00:00Z"
+date: "2010-02-01T18:21:14Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/sapic-dormindo-no-meu-colo-com-colar-elizabet"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 ### [Sapic dormindo no meu colo com colar elizabetano](http://mylifeisnotveryinteresting.posterous.com/sapic-dormindo-no-meu-colo-com-colar-elizabet)

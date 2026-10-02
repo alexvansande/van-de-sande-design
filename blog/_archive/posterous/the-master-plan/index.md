@@ -1,9 +1,8 @@
 ---
 title: "The master plan"
-date: "2012-04-23T12:00:00Z"
+date: "2012-04-23T17:23:32Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/the-master-plan"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

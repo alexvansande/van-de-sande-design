@@ -1,9 +1,8 @@
 ---
 title: "lugares onde estive hoje e me senti sozinho"
-date: "2012-10-22T12:00:00Z"
+date: "2008-10-22T19:32:29Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/lugares-onde-estive-hoje-e-me"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

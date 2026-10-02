@@ -1,9 +1,8 @@
 ---
 title: "Belo monte: tem outro jeito?"
-date: "2013-04-10T12:00:00Z"
+date: "2011-04-10T20:21:14Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/belo-monte-tem-outro-jeito"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

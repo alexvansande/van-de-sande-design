@@ -1,9 +1,8 @@
 ---
 title: "Comic review: Ghost map (ou seria crítica em quadrinhos?)"
-date: "2012-10-28T12:00:00Z"
+date: "2008-10-28T18:44:22Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/comic-review-ghost-map-ou-seri"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>

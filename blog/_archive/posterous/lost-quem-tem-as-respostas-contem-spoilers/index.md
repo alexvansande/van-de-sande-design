@@ -1,9 +1,8 @@
 ---
 title: "lost quem tem as respostas contem spoilers"
-date: "2010-05-30T12:00:00Z"
+date: "2010-05-30T20:13:42Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/lost-quem-tem-as-respostas-contem-spoilers"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 ### [Lost - quem tem as respostas? Contem Spoilers](http://mylifeisnotveryinteresting.posterous.com/lost-quem-tem-as-respostas-contem-spoilers)

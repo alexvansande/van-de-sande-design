@@ -1,9 +1,8 @@
 ---
 title: "Einstein and the iceberg"
-date: "2011-03-05T12:00:00Z"
+date: "2011-03-05T18:32:07Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/einstein-and-the-iceberg"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 Our universe is very counterintuitive. Take Relativity, for example: we know for a fact, that nothing can travel faster than the speed of light, and that it doesn't matter how fast we are travelling the speed of light is always the same, but how can that be?

@@ -1,9 +1,8 @@
 ---
 title: "Lies, Damn lies and statistics"
-date: "2011-02-18T12:00:00Z"
+date: "2011-02-18T05:22:54Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/lies-damn-lies-and-statistics"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 Business insider [published this chart today,](http://www.businessinsider.com/chart-of-the-day-music-industry-sales-2011-2) labeling it as a visualization of the collapse of the music industry, and how digital sales aren't doing enough to offset it.

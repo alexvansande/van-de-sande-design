@@ -1,9 +1,8 @@
 ---
 title: "The Law of Truly Large Numbers"
-date: "2011-03-13T12:00:00Z"
+date: "2011-03-13T19:55:39Z"
 original: "http://mylifeisnotveryinteresting.posterous.com/the-law-of-truly-large-numbers"
 original_site: "Posterous"
-date_approximate: "year inferred from when it was archived"
 ---
 
 <figure>
