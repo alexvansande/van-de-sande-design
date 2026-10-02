@@ -160,7 +160,6 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
   // ---------------------------------------------------------- grammar, on a pause
 
   let timer = null, running = false, again = false, typed = 0, failed = null
-  let first = null               // a paragraph to read before the rest: one he has just answered about
 
   // where the proofreading is, for the bar: so he can tell it is working
   function say() {
@@ -194,7 +193,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
         // the paragraph being written first, then outwards from it
         const caret = editor.state.selection.from
         const todo = paragraphs(editor.state.doc).filter(p => !grammar.has(p.id) && !remembered[p.id])
-          .sort((a, b) => (b.id === first) - (a.id === first) || Math.abs(a.pos - caret) - Math.abs(b.pos - caret))
+          .sort((a, b) => Math.abs(a.pos - caret) - Math.abs(b.pos - caret))
         const seen = new Set()
         const batch = todo.filter(p => !seen.has(p.id) && seen.add(p.id)).slice(0, AT_ONCE)
         if (!batch.length) break
@@ -304,7 +303,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     const parts = [head, why]
     // what he has said before about these words, and a line to say more
     const said = el('div', 'review-thread')
-    for (const c of issue.thread || []) said.append(el('p', '', c.comment))
+    for (const c of issue.thread || []) said.append(turn(c))
     const reply = el('input', 'review-reply')
     reply.placeholder = 'Reply, so it learns (Enter)'
     reply.spellcheck = true
@@ -327,26 +326,44 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     redraw()
   }
 
-  // His answer is kept beside the post and read with every paragraph from
-  // now on; the paragraph it is about is read again at once, with it.
+  // one turn of the conversation: his, or the reviewer's
+  function turn(c) {
+    if (!c.from) return el('p', '', c.comment)
+    const p = el('p', 'them')
+    p.append(el('b', '', (c.from === 'claude' ? 'Claude' : 'Local model') + ': '), c.comment)
+    return p
+  }
+
+  // His answer is kept beside the post, read by both reviewers from now on,
+  // and answered by the one that made the suggestion: it withdraws it, or
+  // says why not (and may change its correction).
   async function answer(issue, text, said, input) {
     input.disabled = true
+    input.value = ''
+    said.append(el('p', '', text))
+    const wait = el('p', 'them waiting', (issue.by === 'claude' ? 'Claude' : 'Local model') + ' is answering…')
+    said.append(wait)
+    const p = paragraphs(editor.state.doc).find(p => p.id === issue.block)
     try {
-      const c = await call('/api/review/comment', { slug: slug(), issue, comment: text })
-      issue.thread = [...(issue.thread || []), c]
-      said.append(el('p', '', text))
-      input.value = ''
-      // answered: it goes, and the paragraph is read again here with the answer
-      // (Claude reads it too, at the next fact check)
-      if (facts.has(issue.block)) facts.set(issue.block, facts.get(issue.block).filter(i => i.key !== issue.key))
-      grammar.delete(issue.block)
-      forget(issue.block)
-      first = issue.block
-      closeBox()
-      clearTimeout(timer)
-      checkGrammar()
-      toast('Noted. Reading the paragraph again with it…')
+      const r = await call('/api/review/comment', { slug: slug(), issue, comment: text, paragraph: p?.text || '' })
+      wait.replaceWith(turn(r.issue.thread[r.issue.thread.length - 1]))
+      const list = issue.by === 'claude' ? facts : grammar
+      const now = list.get(issue.block) || (issue.by === 'claude' ? [] : remembered[issue.block] || [])
+      if (!r.withdrew) Object.assign(issue, r.issue)         // the same suggestion, so its box stays open
+      const next = r.withdrew ? now.filter(i => i.key !== issue.key) : now.map(i => i.key === issue.key ? issue : i)
+      list.set(issue.block, next)
+      if (issue.by !== 'claude') remember(issue.block, next)
+      if (r.withdrew) {
+        dismissed.add(issue.key)
+        setTimeout(() => { if (open?.issue === issue) closeBox(); redraw() }, 2500)
+      } else {
+        // the box again, with the answer and any new correction in it
+        const s = shown.find(s => s.issue === issue)
+        if (s && open?.issue === issue) openBox(s)
+        redraw()
+      }
     } catch (e) {
+      wait.remove()
       toast('Could not keep that: ' + e.message, true)
     } finally {
       input.disabled = false

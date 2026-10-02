@@ -582,7 +582,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return self.reply(200, review.review(folder_of(slug), post.get("kind"), post.get("blocks") or [],
                                                      self.gone, own_pages(slug)))
             if url.path == "/api/review/comment":
-                return self.reply(200, review.comment(folder_of(post.get("slug", "")), post["issue"], post.get("comment")))
+                return self.reply(200, review.comment(folder_of(post.get("slug", "")), post["issue"], post.get("comment"),
+                                                      str(post.get("paragraph") or "")))
             if url.path == "/api/review/dismiss":
                 return self.reply(200, review.dismiss(folder_of(post.get("slug", "")), post["issue"]))
             if url.path == "/api/bluesky":
