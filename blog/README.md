@@ -120,6 +120,10 @@ page in `_editor/`, which is not published):
   otherwise show it sideways) and made no wider than 2400 pixels. A `.mov`
   becomes an `.mp4`, and a `.webm` is made beside every `.mp4`, if ffmpeg
   is installed.
+- **The trash**: Move to trash (a draft) and Discard changes (a published
+  post's draft) never delete. The draft goes to `blog/_trash/`, with its
+  pictures, and is listed at the foot of the list of posts with Restore, until
+  Empty the trash. `_trash` is not built and not committed.
 - **Preview** builds the blog with the drafts in it (`build.py --drafts
   --quick` into `blog/_preview`: the pictures are linked as they are, not
   resized, so it takes a second) and opens the post.
@@ -130,11 +134,36 @@ page in `_editor/`, which is not published):
   it. If the push fails (another machine pushed first, say) it pulls,
   replays the commit on top, and tries once more; otherwise it says what git
   said, and the commit is there to push by hand.
+- **The proofreader** (`review.py`, `_editor/review.js`) flags and never
+  rewrites. Two reviewers, each able to make any suggestion: proofreading
+  (yellow highlighter), facts (green), and links to his own pages, the main
+  site and the 10 newest posts (blue). The model in Ollama on this machine
+  (the first it has, or `REVIEW_MODEL`) reads each paragraph it has not
+  read: when a post is opened, when the typing pauses, and at once on Enter,
+  one at a time, the one being written first. It cannot look things up, so
+  it leaves all but plainly false facts alone. **Fact check** sends the post
+  to Claude (`claude -p --model fable`, the best model the installed CLI has,
+  or `REVIEW_ONLINE_MODEL`; it may only search and fetch the web), a few
+  paragraphs to a call, in parallel; it looks facts up and gives the source.
+  Each is told what the other has already flagged in a paragraph and does
+  not repeat it. When Claude has read every paragraph as it now stands and
+  nothing it raised is left, the button says Fact checked ✔. A click on a
+  highlight gives why, who said it, Replace (over exactly the quoted words),
+  Fix the link, Link it, Ignore, and a line to reply: replies are kept in
+  `index.review.json` beside the post and read by both from then on, and the
+  paragraph is read again with the reply. Ignored suggestions are kept there
+  too, by category and exact words, and Claude's last reading, so a reload
+  shows it again. A suggestion is tied to its paragraph's text: edit the
+  paragraph and it goes until the paragraph is read again. The bar says where
+  the reading is ("Proofreading…", "Proofread · no suggestions", "Proofreader
+  off"). Anything not quoted from the paragraph, rewriting more than it flags,
+  or below 0.6 confidence (0.8 for a fact from the local model) is dropped
+  before it is shown, and logged in the editor's output.
 
 A post that is out is edited the same way: saving writes `index.draft.md`
 beside its `index.md`, and the post on the blog stays as it was until
 Publish changes (which adds `updated` to its header, for `dateModified`).
-Discard changes throws the draft away. 51 of the 53 posts brought from
+Discard changes moves the draft to the trash. 51 of the 53 posts brought from
 Paragraph open in it too. Their pictures written as HTML (`<figure><img>`),
 YouTube videos and floated pictures are shown as such and written back as
 the same HTML; any other HTML block is shown as it is written, and kept.

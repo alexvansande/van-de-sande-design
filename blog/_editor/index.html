@@ -19,6 +19,7 @@
   <p class="ed-warn" id="warn" hidden></p>
   <div id="drafts"></div>
   <div id="live"></div>
+  <div id="trash"></div>
 </section>
 
 <!-- one post, as the blog will set it -->
@@ -26,8 +27,10 @@
   <div class="ed-bar">
     <a href="#/" class="back">← All posts</a>
     <span class="status" id="status"></span>
+    <span class="review-status" id="review-status"></span>
     <span class="spacer"></span>
     <button class="btn quiet" data-act="discard" id="discard"></button>
+    <button class="btn" data-act="facts" id="facts" title="Claude, online: facts looked up, links to your own pages, and proofreading the local model missed">Fact check</button>
     <button class="btn" data-act="share" id="share" title="Post it on Bluesky">Share</button>
     <button class="btn" data-act="preview">Preview</button>
     <button class="btn" data-act="save">Save draft</button>
@@ -41,8 +44,7 @@
       <div class="text">
         <h1 class="ed-title" id="title" contenteditable="plaintext-only" spellcheck="true" data-ph="Title"></h1>
         <p class="sub ed-sub" id="subtitle" contenteditable="plaintext-only" spellcheck="true" data-ph="Subtitle (optional)"></p>
-        <p class="when"><time id="when">Draft</time><span id="cats"></span><input id="cat-add" class="cat-add" list="cat-list" placeholder="+ category" autocomplete="off"></p>
-        <datalist id="cat-list"></datalist>
+        <p class="when"><time id="when">Draft</time><span id="cats"></span><span class="cat-pick"><input id="cat-add" class="cat-add" placeholder="+ category" autocomplete="off" spellcheck="false"><span class="cat-menu" id="cat-menu" hidden></span></span></p>
         <div id="body"></div>
       </div>
     </article>
