@@ -83,9 +83,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
     def send_error(self, code, message=None, explain=None):
-        # the blog's own "not here" page, as Pages would show it
-        nf = os.path.join(ROOT, "blog", "404.html")
-        if code == 404 and self.path.startswith("/blog/") and os.path.exists(nf):
+        # the site's own "not here" page, as Pages would show it
+        nf = os.path.join(ROOT, "404.html")
+        if code == 404 and os.path.exists(nf):
             body = open(nf, "rb").read()
             self.send_response(404)
             self.send_header("Content-Type", "text/html; charset=utf-8")

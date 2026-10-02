@@ -217,9 +217,10 @@ function spinnable(a, n, shown){
    going that comes up as you pull at it. Pull hard enough and it is the
    post, loaded for real, from there on the blog's own.
    It is on the stage, under the rail, so the rail's zoom does not reach it. */
-/* Where the blog is. Here, under this site; once it has a domain of its own,
-   its address, e.g. 'https://blog.vandesande.design/'. */
-const BLOG = 'blog/';
+/* Where the blog is: on a domain of its own, from the blog repo. GitHub
+   Pages lets any site fetch from it, so latest.json and the posts' heads
+   come across. */
+const BLOG = 'https://blog.vandesande.design/';
 /* The blog's poster: its newest posts, each a page of its own, filled in
    from the blog by fillLatest(). */
 const POST_FACE = '<div class="face postcard"></div>';

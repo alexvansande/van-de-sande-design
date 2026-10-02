@@ -30,6 +30,12 @@ is loaded before you get there. Nothing on the first screen is a picture.
     the index · My ethereum story · Blockchain design work
     The Mist browser · Victor and HVM
     Some experiments with maps · The whole universe in one image
+    the blog · where else to find him
+
+The last is the index's answer at the other end: a line, ranged left so
+its start is what shows from the blog's poster, with his Bluesky, X,
+avsa.eth and an address to write to. Its links are the first a Tab
+reaches, and tabbing to one takes the rail there.
 
 **My ethereum story** is three pages from books that mention him — page 190
 of Camila Russo's *The Infinite Machine*, page 79 of Laura Shin's *The
@@ -192,17 +198,14 @@ keys move along the rail and turn pages.
 ## Run it locally
 
 ```bash
-python3 blog/build.py --out site/blog --base /blog/ --home /
 python3 serve.py
 ```
 
-The blog is only built on deploy, so build it into the site first: the
-posts at the end of the maps and the triangle, the blog's poster and the
-blog itself all come from it. `serve.py` serves `site/` the way Pages does:
-`/blog/some-post` is `blog/some-post.html` (the plain `python3 -m
-http.server` has no such rule, so every link to a post is a 404 with it),
-and nothing is kept by the browser, so an edited script is always the one
-that runs.
+The posts at the end of the maps and the triangle and the blog's poster
+come from the live blog at blog.vandesande.design (`BLOG` in `app.js`).
+`serve.py` serves `site/` the way Pages does: `/products/poster` is
+`products/poster.html`, a missing address gets `404.html`, and nothing is
+kept by the browser, so an edited script is always the one that runs.
 
 Then open http://localhost:8765. In Claude Code, `.claude/launch.json`
 starts the same server under the name `site`.
@@ -217,10 +220,16 @@ page with the old script.
 
 ## The blog
 
-`blog/` holds the posts from blog.vandesande.design, brought over from
-Paragraph: a folder per post, named after its address, with its Markdown and
-its pictures, and `blog/build.py`, which makes the blog from them. The deploy
-builds it into `site/blog/` for now. See `blog/README.md`.
+The blog is its own repo, [alexvansande/blog](https://github.com/alexvansande/blog),
+published at blog.vandesande.design. It was built here, under `/blog/`,
+until it had its own domain.
+
+## Addresses kept from the shop
+
+vandesande.design was a Shopify shop until October 2026. The shop is
+closed; `/products/poster` and `/products/the-impossible-map` go on to the
+posters' own sites, triangleofeverything.com and hexagonal.earth, and any
+other old address gets `404.html`, which points to the same places.
 
 ## What is not in this repo
 

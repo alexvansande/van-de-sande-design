@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://vandesande.design/sitemap.xml
+Sitemap: https://blog.vandesande.design/sitemap.xml

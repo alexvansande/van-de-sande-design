@@ -29,26 +29,6 @@ jobs:
       # script. The script's address changes with every deploy instead.
       - name: Stamp the script with this commit
         run: sed -i "s|src=\"app.js\"|src=\"app.js?v=${GITHUB_SHA::8}\"|" site/index.html
-      # The blog, from the Markdown in blog/, under /blog/ for now. Its own
-      # domain comes later: then it is built with --base / on its own.
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      # Resizing every picture takes minutes. What the last deploy made is
-      # kept, for as long as not one picture in blog/ has changed.
-      - id: media
-        uses: actions/cache@v4
-        with:
-          path: site/blog/media
-          key: blog-media-${{ hashFiles('blog/**/*.png', 'blog/**/*.jpg', 'blog/**/*.jpeg', 'blog/**/*.gif', 'blog/**/*.webp') }}
-      - name: Build the blog
-        env:
-          BLOG_MEDIA_CACHED: ${{ steps.media.outputs.cache-hit }}
-        run: |
-          pip install pillow
-          # under whatever path Pages serves the site from: on github.io
-          # that is /van-de-sande-design, on a custom domain nothing
-          python3 blog/build.py --out site/blog --base "${{ steps.pages.outputs.base_path }}/blog/" --home "${{ steps.pages.outputs.base_path }}/"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

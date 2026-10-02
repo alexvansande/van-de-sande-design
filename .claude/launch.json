@@ -9,16 +9,6 @@
         "8765"
       ],
       "port": 8765
-    },
-    {
-      "name": "blog",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": [
-        "blog/build.py",
-        "--serve",
-        "8766"
-      ],
-      "port": 8766
     }
   ]
 }
