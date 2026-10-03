@@ -133,6 +133,8 @@ WHO = {"claude": "Claude", "local": "the local model"}
 def said(c):
     """One turn of a conversation about a suggestion, as the models read it."""
     q = lambda s: json.dumps(s, ensure_ascii=False)
+    if c.get("kind") == "ask" and not c.get("from"):
+        return ["- the author asked Claude about %s: %s" % (q(c.get("span")), q(c.get("comment")))]
     if c.get("from") in WHO:
         return ["  %s replied: %s%s" % (WHO[c["from"]], q(c.get("comment")), " (and withdrew it)" if c.get("withdrew") else "")]
     was = " -> %s" % q(c["replacement"]) if c.get("replacement") else ""
@@ -417,6 +419,7 @@ def sidecar(folder):
         data = {}
     data.setdefault("dismissed", [])
     data.setdefault("comments", [])
+    data.setdefault("asks", [])
     return data
 
 
@@ -447,6 +450,60 @@ def reply_shape():
             "required": ["reply", "withdraw", "replacement"]}
 
 
+ASK = """You help the author of a blog post. He has selected some words in it and asks you something about them: this is his request, not a suggestion of yours.
+
+Do what he asks, and only that. The words are his: never rewrite, expand, polish or add to them unless he asks for exactly that. If he asks for a link, find the right page (look it up; never guess an address) and give it as "href", leaving the words as they are. If he asks for different words, give them as "replacement": the text that takes the place of exactly the selected words. If he asks a question, answer it.
+
+Reply in one to three plain sentences, saying where an address or a fact comes from. Give "href" only for a page you found and are sure of, else null; "replacement" only when he asked for the words to change, else null. If you cannot do it, say so and give neither."""
+
+
+def ask_shape():
+    return {"type": "object", "properties": {"reply": {"type": "string"}, "href": {"type": ["string", "null"]},
+                                             "replacement": {"type": ["string", "null"]}},
+            "required": ["reply", "href", "replacement"]}
+
+
+def request(folder, issue, text, paragraph=""):
+    """The 🪄: words he selected and something he asks about them. A
+    suggestion like Claude's others, highlighted and with the same box, but
+    started by him: Claude answers, and may offer a link (href) or other
+    words (replacement) for exactly those words. Kept in "asks" beside the
+    post, the conversation in "comments" with the rest."""
+    k = key("request", issue["span"])
+    issue = {**issue, "key": k, "kind": "ask", "category": "request", "by": "claude"}
+    data = sidecar(folder)
+    data["comments"].append({"key": k, "kind": "ask", "span": issue["span"], "comment": text[:1000], "at": stamp()})
+    write(folder, data)
+    thread = [t for t in data["comments"] if t.get("key") == k]
+    q = json.dumps(issue["span"], ensure_ascii=False)
+    lines = ["The paragraph:", paragraph or "(not given)", "", "The words he selected: " + q, "", "The conversation so far:"]
+    lines += [("Claude: " if t.get("from") else "The author: ") + str(t.get("comment", "")) for t in thread]
+    out = {}
+    for _ in range(2):              # an empty answer is asked for again, once
+        out = online_chat(ASK, "\n".join(lines), ask_shape())
+        if str(out.get("reply") or "").strip():
+            break
+    answer = str(out.get("reply") or "").strip() or "(it did not answer)"
+    href = out.get("href")
+    href = href.strip() if isinstance(href, str) and href.strip().startswith(("http://", "https://", "mailto:")) else None
+    rep = out.get("replacement")
+    rep = rep if isinstance(rep, str) and rep.strip() and rep != issue["span"] else None
+    issue.update(href=href, replacement=rep, why=thread[0]["comment"] if thread else text)
+
+    data = sidecar(folder)
+    data["comments"].append({"key": k, "from": "claude", "comment": answer[:1500], "withdrew": False, "at": stamp()})
+    kept = {f: issue.get(f) for f in ("key", "block", "span", "kind", "category", "by", "why", "href", "replacement")}
+    data["asks"] = [a for a in data["asks"] if not (a.get("key") == k and a.get("block") == issue.get("block"))] + [kept]
+    write(folder, data)
+    return {"withdrew": False, "issue": {**kept, "thread": [t for t in data["comments"] if t.get("key") == k]}}
+
+
+def asks(folder):
+    """The 🪄 conversations still open, each with its thread."""
+    data = sidecar(folder)
+    return [{**a, "thread": [t for t in data["comments"] if t.get("key") == a.get("key")]} for a in data["asks"]]
+
+
 def comment(folder, issue, text, paragraph=""):
     """His answer to a suggestion, and the answer of the reviewer that made it.
     Both are kept, and read by both reviewers from then on. Withdrawn, the
@@ -455,6 +512,8 @@ def comment(folder, issue, text, paragraph=""):
     text = (text or "").strip()
     if not text:
         raise ValueError("an empty comment")
+    if issue.get("kind") == "ask":
+        return request(folder, issue, text, paragraph)
     k = key(issue["category"], issue["span"])
     data = sidecar(folder)
     c = {"key": k, "kind": issue.get("kind"), "by": issue.get("by"), "category": issue["category"],
@@ -513,6 +572,12 @@ def loads_obj(text):
 
 def dismiss(folder, issue):
     data = sidecar(folder)
+    if issue.get("kind") == "ask":
+        # a request of his, closed: it goes, and the same words may be asked about again
+        k = key("request", issue["span"])
+        data["asks"] = [a for a in data["asks"] if a.get("key") != k]
+        write(folder, data)
+        return {"key": k}
     k = key(issue["category"], issue["span"])
     if not any(d.get("key") == k for d in data["dismissed"]):
         data["dismissed"].append({"key": k, "kind": issue.get("kind"), "category": issue["category"],

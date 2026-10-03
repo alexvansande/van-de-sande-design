@@ -170,6 +170,14 @@ page in `_editor/`, which is not published):
   or below 0.6 confidence (0.8 for a fact from the local model) is dropped
   before it is shown, and logged in the editor's output.
 
+**🪄** in the bar over a selection starts a conversation of his own with
+Claude about those words, in the same box and the same way: ask for the
+right link, a date checked, a word, and Claude answers (looking things up),
+offering Link it or Replace with for exactly those words, which only happen
+when pressed. The words are lit in violet while the conversation is open; it
+is kept in `index.review.json` (`asks`, with the rest of the `comments`) and
+closed with Done, or by taking what it offered (`review.request()`).
+
 A post that is out is edited the same way: saving writes `index.draft.md`
 beside its `index.md`, and the post on the blog stays as it was until
 Publish changes (which adds `updated` to its header, for `dateModified`).

@@ -992,6 +992,7 @@ bubble.addEventListener('click', e => {
   if (cmd === 'quote') c.toggleBlockquote().run()
   if (cmd === 'link') startLink()
   if (cmd === 'math') insertMath()
+  if (cmd === 'ask') review?.ask()
 })
 
 function startLink() {

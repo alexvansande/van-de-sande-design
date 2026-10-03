@@ -558,7 +558,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 return self.reply(200, youtube_title(q.get("id", "")))
             if url.path == "/api/review":
                 data = review.sidecar(folder_of(q.get("slug", "")))
-                return self.reply(200, {"dismissed": data["dismissed"], "facts": data.get("facts")})
+                return self.reply(200, {"dismissed": data["dismissed"], "facts": data.get("facts"),
+                                        "asks": review.asks(folder_of(q.get("slug", "")))})
             if url.path == "/api/bluesky":
                 folder_of(q.get("slug", ""))
                 return self.reply(200, crosspost.status(q["slug"]))

@@ -105,6 +105,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
   // each paragraph as it is written; Claude reads the post on Fact check.
   const grammar = new Map()      // paragraph id -> the local model's issues, this visit
   const facts = new Map()        // paragraph id -> Claude's issues, from the last fact check
+  const asks = new Map()         // paragraph id -> what he asked Claude about, with the 🪄
   let checked = null             // {ids}: the paragraphs the last fact check read
   let dismissed = new Set()
   let shown = []                 // [{issue, from, to, range}] on the page now
@@ -113,6 +114,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
 
   call('/api/review?slug=' + encodeURIComponent(slug())).then(r => {
     dismissed = new Set(r.dismissed.map(d => d.key))
+    for (const i of r.asks || []) asks.set(i.block, [...(asks.get(i.block) || []), i])
     // the last fact check, on whichever paragraphs still read as they did
     if (r.facts && !facts.size) {
       for (const i of r.facts.issues) facts.set(i.block, [...(facts.get(i.block) || []), i])
@@ -133,9 +135,9 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
   function draw() {
     shown = []
     for (const p of paragraphs(editor.state.doc)) {
-      const found = [...(grammar.get(p.id) || remembered[p.id] || []), ...(facts.get(p.id) || [])]
+      const found = [...(grammar.get(p.id) || remembered[p.id] || []), ...(facts.get(p.id) || []), ...(asks.get(p.id) || [])]
       for (const issue of found) {
-        if (dismissed.has(issue.key)) continue
+        if (issue.kind !== 'ask' && dismissed.has(issue.key)) continue
         const at = anchor(p, issue.span)
         if (!at) continue
         const range = document.createRange()
@@ -154,7 +156,8 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     mark('review-grammar', shown.filter(s => s.issue.kind === 'grammar'))
     mark('review-facts', shown.filter(s => s.issue.kind === 'facts'))
     mark('review-links', shown.filter(s => s.issue.kind === 'links'))
-    for (const kind of ['grammar', 'facts', 'links']) mark('review-open-' + kind, shown.filter(s => open && s.issue === open.issue && s.issue.kind === kind))
+    mark('review-ask', shown.filter(s => s.issue.kind === 'ask'))
+    for (const kind of ['grammar', 'facts', 'links', 'ask']) mark('review-open-' + kind, shown.filter(s => open && s.issue === open.issue && s.issue.kind === kind))
   }
 
   // ---------------------------------------------------------- grammar, on a pause
@@ -166,7 +169,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`
     const all = paragraphs(editor.state.doc)
     // Fact checked ✔ while every paragraph is one Claude has read, and nothing it raised is left
-    if (!checking) factState(checked && all.every(p => checked.ids.has(p.id)) && !shown.some(s => s.issue.by === 'claude')
+    if (!checking) factState(checked && all.every(p => checked.ids.has(p.id)) && !shown.some(s => s.issue.by === 'claude' && s.issue.kind !== 'ask')
       ? 'done' : 'idle')
     if (failed) return report('Proofreader off', failed)
     if (running) return report('Proofreading…', 'Being read by the model on this machine')
@@ -261,7 +264,13 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
 
   function closeBox() {
     if (!open) return
+    const { issue } = open
     open = null
+    // a 🪄 closed before anything was asked leaves nothing behind
+    if (issue.kind === 'ask' && !issue.thread?.length) {
+      const left = (asks.get(issue.block) || []).filter(i => i !== issue)
+      if (left.length) asks.set(issue.block, left); else asks.delete(issue.block)
+    }
     box.hidden = true
     redraw()
   }
@@ -269,11 +278,12 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
   function openBox(s) {
     open = s
     const { issue } = s
-    const what = issue.kind === 'links' ? 'A link to your own page' : issue.kind === 'facts' ? `Fact · ${issue.category}`
-      : `Proofread · ${issue.category}`
+    const what = issue.kind === 'ask' ? '🪄 Your request' : issue.kind === 'links' ? 'A link to your own page'
+      : issue.kind === 'facts' ? `Fact · ${issue.category}` : `Proofread · ${issue.category}`
     const head = el('div', 'review-head', `${what} · ${issue.by === 'claude' ? 'Claude' : 'local model'}`)
     head.classList.add(issue.kind)
-    const why = el('p', 'review-why', issue.why)
+    // his request is the first line of the conversation under it
+    const why = el('p', 'review-why', issue.kind === 'ask' ? '' : issue.why)
     const row = el('div', 'review-row')
     if (issue.kind === 'links') {
       const b = el('button', 'fix', 'Link it')
@@ -284,7 +294,7 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
       const b = el('button', 'fix')
       b.type = 'button'
       b.title = issue.href
-      b.append('Fix the link: ', el('b', '', issue.href.replace(/^mailto:/, '✉ ').replace(/^https?:\/\/(www\.)?/, '').slice(0, 40)))
+      b.append(issue.kind === 'ask' ? 'Link it: ' : 'Fix the link: ', el('b', '', issue.href.replace(/^mailto:/, '✉ ').replace(/^https?:\/\/(www\.)?/, '').slice(0, 40)))
       b.onclick = () => relink(issue)
       row.append(b)
     }
@@ -295,17 +305,18 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
       b.onclick = () => replace(issue)
       row.append(b)
     }
-    const no = el('button', '', 'Ignore')
+    const no = el('button', '', issue.kind === 'ask' ? 'Done' : 'Ignore')
     no.type = 'button'
-    no.title = 'Never raise this again for these words'
+    no.title = issue.kind === 'ask' ? 'Close this conversation' : 'Never raise this again for these words'
     no.onclick = () => ignore(issue)
     row.append(no)
-    const parts = [head, why]
+    const parts = issue.kind === 'ask' ? [head] : [head, why]
     // what he has said before about these words, and a line to say more
     const said = el('div', 'review-thread')
     for (const c of issue.thread || []) said.append(turn(c))
     const reply = el('input', 'review-reply')
-    reply.placeholder = 'Reply, so it learns (Enter)'
+    reply.placeholder = issue.kind !== 'ask' ? 'Reply, so it learns (Enter)'
+      : issue.thread?.length ? 'Reply (Enter)' : 'What should Claude do with these words? (Enter)'
     reply.spellcheck = true
     reply.onkeydown = e => {
       if (e.key === 'Enter' && reply.value.trim()) { e.preventDefault(); answer(issue, reply.value.trim(), said, reply) }
@@ -347,10 +358,10 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     try {
       const r = await call('/api/review/comment', { slug: slug(), issue, comment: text, paragraph: p?.text || '' })
       wait.replaceWith(turn(r.issue.thread[r.issue.thread.length - 1]))
-      const list = issue.by === 'claude' ? facts : grammar
+      const list = issue.kind === 'ask' ? asks : issue.by === 'claude' ? facts : grammar
       const now = list.get(issue.block) || (issue.by === 'claude' ? [] : remembered[issue.block] || [])
       if (!r.withdrew) Object.assign(issue, r.issue)         // the same suggestion, so its box stays open
-      const next = r.withdrew ? now.filter(i => i.key !== issue.key) : now.map(i => i.key === issue.key ? issue : i)
+      const next = r.withdrew ? now.filter(i => i.key !== issue.key) : now.map(i => i === issue || i.key === issue.key ? issue : i)
       list.set(issue.block, next)
       if (issue.by !== 'claude') remember(issue.block, next)
       if (r.withdrew) {
@@ -400,9 +411,11 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     if (!found) tr.addMark(at.from, at.to, link.create({ href: issue.href }))
     view.dispatch(tr)
     view.focus()
+    if (issue.kind === 'ask') done(issue)
   }
 
   function replace(issue) {
+    if (issue.kind === 'ask') done(issue)
     // found again now, in case the text moved since the box opened
     const p = paragraphs(editor.state.doc).find(p => p.id === issue.block)
     const at = p && anchor(p, issue.span)
@@ -426,7 +439,16 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     view.focus()
   }
 
+  // a request of his, finished: it goes, and the same words can be asked about again
+  function done(issue) {
+    const left = (asks.get(issue.block) || []).filter(i => i !== issue)
+    if (left.length) asks.set(issue.block, left); else asks.delete(issue.block)
+    if (issue.key) call('/api/review/dismiss', { slug: slug(), issue }).catch(() => {})
+    redraw()
+  }
+
   async function ignore(issue) {
+    if (issue.kind === 'ask') { closeBox(); return done(issue) }
     dismissed.add(issue.key)
     closeBox()
     try {
@@ -467,11 +489,29 @@ export function reviewer(editor, { slug, call, toast, factState = () => {}, repo
     document.removeEventListener('mousedown', onDown)
     document.removeEventListener('keydown', onKey)
     box.remove()
-    for (const name of ['review-grammar', 'review-facts', 'review-links', 'review-open-grammar', 'review-open-facts', 'review-open-links']) window.CSS?.highlights?.delete(name)
+    for (const name of ['review-grammar', 'review-facts', 'review-links', 'review-ask', 'review-open-grammar', 'review-open-facts',
+      'review-open-links', 'review-open-ask']) window.CSS?.highlights?.delete(name)
   }
   editor.on('destroy', destroy)
 
+  // The 🪄 on a selection: a conversation with Claude about those words,
+  // started by him, in the same box as its suggestions. Within one paragraph.
+  function ask() {
+    const { from, to } = editor.state.selection
+    const p = paragraphs(editor.state.doc).find(p => from > p.pos && to <= p.pos + 1 + editor.state.doc.nodeAt(p.pos).content.size)
+    const span = editor.state.doc.textBetween(from, to, ' ')
+    if (!p || !span.trim() || !anchor(p, span)) return toast('Select some words within one paragraph', true)
+    const issue = { block: p.id, span, kind: 'ask', category: 'request', by: 'claude', why: '', thread: [] }
+    asks.set(p.id, [...(asks.get(p.id) || []), issue])
+    editor.commands.setTextSelection(to)        // the toolbar goes, the words stay lit
+    draw()
+    const s = shown.find(s => s.issue === issue)
+    if (!s) return
+    openBox(s)
+    box.querySelector('.review-reply')?.focus()
+  }
+
   redraw()
   timer = setTimeout(checkGrammar, PAUSE)
-  return { edited, checkFacts, destroy }
+  return { edited, checkFacts, destroy, ask }
 }

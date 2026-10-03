@@ -151,6 +151,10 @@ body.editor{min-height:100vh}
 ::highlight(review-open-grammar){background-color:rgba(255,200,0,.75)}
 ::highlight(review-open-facts){background-color:rgba(80,190,70,.6)}
 ::highlight(review-open-links){background-color:rgba(70,150,245,.55)}
+/* violet: what he asked Claude about, with the 🪄 */
+::highlight(review-ask){background-color:rgba(185,140,255,.38)}
+::highlight(review-open-ask){background-color:rgba(160,105,250,.6)}
+.review-head.ask{font-variant:normal;letter-spacing:0}
 .ed-bar .review-status{margin-left:.6rem;font-size:.9rem;font-style:italic;opacity:.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .review-box{position:absolute;z-index:72;width:max-content;max-width:min(24rem,calc(100vw - 16px));padding:.65rem .8rem .7rem;
   border-radius:9px;background:#262420;color:#f4f1e4;box-shadow:0 6px 24px rgba(0,0,0,.35);font-size:1rem;line-height:1.4}
