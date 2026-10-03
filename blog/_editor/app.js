@@ -1396,7 +1396,11 @@ async function publishDialog() {
 function published(r) {
   dialog(d => {
     const out = []
-    if (r.pushed) {
+    if (r.pushed && r.carried === false) {
+      out.push(el('h2', '', 'Pushed, but not on the blog yet'))
+      out.push(el('p', '', 'It is committed and pushed here, but it could not be carried over to the blog\'s own repo (alexvansande/blog), which is what deploys it. Publishing again tries again.'))
+      if (r.carry_log) out.push(el('pre', '', r.carry_log))
+    } else if (r.pushed) {
       out.push(el('h2', '', 'It is out'))
       out.push(el('p', '', r.branch === 'main'
         ? 'Committed and pushed. The blog deploys in a minute or two.'
@@ -1417,7 +1421,7 @@ function published(r) {
       location.hash = to
       return new Promise(ok => window.addEventListener('hashchange', () => setTimeout(ok, 300), { once: true }))
     }
-    if (r.pushed && r.branch === 'main') {
+    if (r.pushed && r.branch === 'main' && r.carried !== false) {
       const share = el('button', 'btn', 'Share on Bluesky…')
       share.onclick = async () => { d.close(); await back(); shareDialog() }
       row.append(share)

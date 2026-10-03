@@ -199,6 +199,8 @@ def publish(post):
     old = os.path.relpath(folder, REPO)
     out = {"slug": new, "removed": removed, **commit_and_push(rel, old if new != slug else None,
                                                               ("New post: " if first else "Edited: ") + meta["title"])}
+    if out.get("pushed") and out.get("branch") == "main":
+        out.update(carry_over())
     # its record on Bluesky follows it, once the blog is set up there
     if crosspost.account() and crosspost.publication():
         try:
@@ -303,6 +305,45 @@ def commit_and_push(rel, old, message):
             code, out = git("push", "-u", "origin", branch)
             log.append(out)
     return {"committed": True, "pushed": code == 0, "branch": branch, "log": "\n".join(log)}
+
+
+BLOG_REPO = "https://github.com/alexvansande/blog.git"
+
+
+def carry_over():
+    """The blog is built from its own repo, alexvansande/blog, so what is
+    under blog/ here goes there too, merged into its main: that is what
+    deploys it. Done here, with this machine's own git login."""
+    def run(*args):
+        r = subprocess.run(["git", *args], cwd=REPO, capture_output=True, text=True)
+        return r.returncode, r.stdout.strip(), r.stderr.strip()
+
+    code, split, err = run("subtree", "split", "--prefix=blog", "HEAD")
+    if code:
+        return {"carried": False, "carry_log": err}
+    for _ in range(2):     # once more if someone pushed there in between
+        code, _, err = run("fetch", "-q", BLOG_REPO, "+main:refs/blog/main")
+        if code:
+            return {"carried": False, "carry_log": err}
+        theirs = run("rev-parse", "refs/blog/main")[1]
+        if not run("merge-base", "--is-ancestor", split, theirs)[0]:
+            return {"carried": True}       # it is there already
+        if not run("merge-base", "--is-ancestor", theirs, split)[0]:
+            tip = split
+        else:
+            code, tree, err = run("merge-tree", "--write-tree", theirs, split)
+            if code:
+                return {"carried": False, "carry_log": tree + "\n" + err}
+            code, tip, err = run("commit-tree", tree.splitlines()[0], "-p", theirs, "-p", split,
+                                 "-m", "Merge blog/ from van-de-sande-design")
+            if code:
+                return {"carried": False, "carry_log": err}
+        code, _, err = run("push", "-q", BLOG_REPO, tip + ":refs/heads/main")
+        if not code:
+            return {"carried": True}
+        if "rejected" not in err:
+            break
+    return {"carried": False, "carry_log": err}
 
 
 # ---------------------------------------------------------------- pictures and videos
