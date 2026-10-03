@@ -1,7 +1,7 @@
 ---
 title: "Taking back control of my own writing."
-subtitle: "Having fun with webdesigning in the AI age."
 date: "2026-10-03T02:18:47Z"
+updated: "2026-10-03T17:27:38Z"
 categories: ["Programming"]
 cover: "cover.png"
 cover_size: [1024, 1024]
