@@ -82,18 +82,27 @@ Blog:
 
 ## Open jobs, in order
 
+Live since 2 October 2026: vandesande.design (and www) and
+blog.vandesande.design, both on HTTPS. Each certificate only came once its
+Pages settings page was opened on github.com; saving the domain through the
+API never started one. Re-adding the site's domain there is what brought
+www into its certificate. `blog/` is still in this repo, where the editor
+and the importers write: until they move to `alexvansande/blog`, what
+lands here under `blog/` is carried over to it (`git subtree split
+--prefix=blog`, merged into the blog repo's main).
+
 ### Before the switch
 
-1. [ ] **Create `alexvansande/blog`** on github.com: public, empty, no
+1. [x] **Create `alexvansande/blog`** on github.com: public, empty, no
    README. Give the Claude GitHub app access to it if it is limited to
    selected repos. *(Alex — Claude cannot create repos.)*
-2. [ ] **Move the blog into it** with its history, with a workflow that
+2. [x] **Move the blog into it** with its history, with a workflow that
    publishes at the root (`--base /`). Then take `blog/` out of this repo.
    *(Claude, once the repo exists.)* Anyone working on the blog — the
    editor's agent included — carries on in the new repo from then on.
-3. [ ] In `alexvansande/blog`: Settings → Pages → Source **GitHub
+3. [x] In `alexvansande/blog`: Settings → Pages → Source **GitHub
    Actions**; custom domain **blog.vandesande.design**. *(Alex)*
-4. [ ] In this repo: Settings → Pages → custom domain **vandesande.design**,
+4. [x] In this repo: Settings → Pages → custom domain **vandesande.design**,
    then run the deploy again. *(Alex)*
 5. [ ] Verify the domain for Pages on the GitHub account (Settings → Pages
    → Add a domain, a TXT record `_github-pages-challenge-alexvansande`), so
@@ -110,20 +119,20 @@ Blog:
 The site's blog poster reads from blog.vandesande.design, so switch both
 at once.
 
-9. [ ] Apex `@`: delete the A record `23.227.38.65`; add A records
+9. [x] Apex `@`: delete the A record `23.227.38.65`; add A records
    `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
    `185.199.111.153`. Optionally AAAA `2606:50c0:8000::153`,
    `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`.
-10. [ ] `www`: CNAME `alexvansande.github.io`.
-11. [ ] `blog`: CNAME `alexvansande.github.io`.
-12. [ ] Touch nothing else (see the records to keep, above).
+10. [x] `www`: CNAME `alexvansande.github.io`.
+11. [x] `blog`: CNAME `alexvansande.github.io`.
+12. [x] Touch nothing else (see the records to keep, above).
 
 ### After
 
-13. [ ] Wait for the HTTPS certificates (from minutes to about an hour;
+13. [x] Wait for the HTTPS certificates (from minutes to about an hour;
     until then the browser may warn). Then tick **Enforce HTTPS** in both
     repos.
-14. [ ] Check:
+14. [x] Check (2 October, all pass):
     - [ ] https://vandesande.design and https://www.vandesande.design
     - [ ] the rail to its end: the blog's poster has the three newest posts,
       the socials links work
