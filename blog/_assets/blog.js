@@ -989,3 +989,348 @@ const Pile = (() => {
   new MutationObserver(soon).observe(document.documentElement, { childList: true, subtree: true });
   soon();
 })();
+
+/* ---------- a picture, full screen ----------
+   Clicking a picture in a post opens it over the dark, as large as the
+   screen holds it and no larger than it was made, from the largest copy the
+   build made of it (the widest in its srcset). Only the pictures with more
+   to show than the page gives them open: more pixels than they are drawn
+   with, and room on the screen to show more of them (on a phone the pixels
+   are enough, since full screen is also where the fingers can zoom into
+   one); a carousel's pages and the cropped picture at the head of a post
+   always. Those, and only those, have the magnifying cursor.
+   It grows out of where it was and goes back into it. A click anywhere, Esc,
+   the back button or a finger pulling it down closes it: it is a step in the
+   history of its own, with the same address, so the way back closes it
+   rather than leaving the post. In a carousel the arrow keys, and a finger
+   or a trackpad going sideways, step through its pages, and the carousel
+   under it follows, so that it closes into the page being looked at.
+   While it is open it takes the gestures meant for the page: no pull at the
+   top, and a pinch in closes it rather than going to the index. */
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const coarse = matchMedia("(pointer: coarse)");
+  // the arrows beside a carousel's pages show only with a mouse (blog.css)
+  const mouse = matchMedia("(hover: hover) and (pointer: fine)");
+  const PICS = ".sheet .body img, .sheet .cover img";
+  const EASE = "cubic-bezier(.2,.7,.2,1)";
+
+  // the largest copy there is, and how many pixels wide it is
+  const best = img => {
+    let url = null, w = 0;
+    for (const part of (img.getAttribute("srcset") || "").split(",")) {
+      const m = part.trim().match(/^(\S+)\s+(\d+)w$/);
+      if (m && +m[2] > w) { w = +m[2]; url = new URL(m[1], document.baseURI).href; }
+    }
+    // a GIF, an SVG or a WebP is not resized: it is only ever the one file
+    return url ? { url, w } : { url: img.currentSrc || img.src, w: img.naturalWidth || +img.getAttribute("width") || 0 };
+  };
+  const ratio = img => img.naturalWidth ? img.naturalHeight / img.naturalWidth
+    : (+img.getAttribute("height") / +img.getAttribute("width")) || (img.offsetHeight / img.offsetWidth) || 1;
+  const pad = () => innerWidth < 600 ? 0 : 24;
+  // the picture at its head is cut to a strip (object-fit), so there is always more of it
+  const cropped = img => getComputedStyle(img).objectFit === "cover";
+
+  const worth = img => {
+    const r = img.getBoundingClientRect();
+    if (!r.width || img.closest("a, figure.youtube")) return false;
+    const { w } = best(img), k = ratio(img);
+    if (cropped(img) && Math.abs(r.height / r.width - k) > .02) return true;
+    // how wide it would be, full screen
+    const W = Math.min(w, innerWidth - 2 * pad(), (innerHeight - 2 * pad()) / k);
+    if (img.closest(".carousel")) return W > r.width * 1.05 || coarse.matches;
+    return w > r.width * 1.15 && (W > r.width * 1.1 || coarse.matches);
+  };
+
+  /* Which ones are worth it is known once they are laid out, and again when
+     the window changes, a picture arrives or a post is fetched into the page. */
+  let all = true, queued = false;
+  const some = new Set();
+  const look = () => {
+    queued = false;
+    const imgs = all ? document.querySelectorAll(PICS) : [...some];
+    all = false;
+    some.clear();
+    for (const img of imgs) if (img.matches(PICS)) img.classList.toggle("zooms", worth(img));
+  };
+  const soon = img => {
+    if (img) some.add(img); else all = true;
+    if (!queued) { queued = true; requestAnimationFrame(look); }
+  };
+  document.addEventListener("load", e => { if (e.target.tagName === "IMG") soon(e.target); }, true);
+  addEventListener("resize", () => soon());
+  coarse.addEventListener && coarse.addEventListener("change", () => soon());
+  new MutationObserver(ms => {
+    if (ms.some(m => m.addedNodes.length && !box.contains(m.target))) soon();
+  }).observe(document.body, { childList: true, subtree: true });
+
+  const box = document.createElement("div");
+  box.className = "lightbox";
+  box.hidden = true;
+  box.tabIndex = -1;
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "Picture");
+  box.innerHTML = `<div class="lb-ground"></div><img alt="" decoding="async"><p class="lb-cap"></p>`
+    + `<button type="button" class="lb-prev" aria-label="Previous">‹</button>`
+    + `<button type="button" class="lb-next" aria-label="Next">›</button>`;
+  document.body.append(box);
+  const ground = box.querySelector(".lb-ground"), view = box.querySelector("img"), cap = box.querySelector(".lb-cap");
+  const prevB = box.querySelector(".lb-prev"), nextB = box.querySelector(".lb-next");
+  soon();
+
+  let on = null, to = null, focusWas = null, popWait = 0;
+
+  // where it goes: in the middle of the screen, over its caption
+  const place = () => {
+    const img = on.list[on.i], k = ratio(img), { w } = best(img), p = pad();
+    const capH = cap.textContent.trim() ? cap.offsetHeight : 0;
+    const side = on.list.length > 1 && mouse.matches ? 128 : 0;
+    const roomW = innerWidth - 2 * p - side, roomH = innerHeight - 2 * p - capH;
+    const W = Math.max(1, Math.min(w || roomW, roomW, roomH / k)), H = W * k;
+    const y = Math.max(p, Math.min((innerHeight - H) / 2, innerHeight - capH - p - H));
+    to = { x: (innerWidth - W) / 2, y, w: W, h: H };
+    Object.assign(view.style, { left: to.x + "px", top: y + "px", width: W + "px", height: H + "px" });
+  };
+  const fill = () => {
+    const img = on.list[on.i], { url } = best(img);
+    // what is already on the page shows at once; the largest takes its place once it is here
+    view.src = img.complete && img.currentSrc ? img.currentSrc : url;
+    view.alt = img.alt;
+    if (view.src !== url) {
+      const big = new Image(), was = on;
+      big.src = url;
+      big.decode().then(() => { if (on === was && on.list[on.i] === img) view.src = url; }).catch(() => {});
+    }
+    const fc = img.closest(".slide") ? img.closest(".slide").querySelector("figcaption")
+      : img.closest("figure") && img.closest("figure").querySelector(":scope > figcaption");
+    cap.innerHTML = fc ? fc.innerHTML : "";
+    prevB.disabled = on.i <= 0;
+    nextB.disabled = on.i >= on.list.length - 1;
+    place();
+  };
+
+  // where it was on the page, and, for the strip at the head, the part of it the strip showed
+  const from = img => {
+    const r = img.getBoundingClientRect(), radius = parseFloat(getComputedStyle(img).borderTopLeftRadius) || 0;
+    if (!cropped(img)) return { x: r.left, y: r.top, w: r.width, h: r.height, clip: [0, 0, 0, 0], radius };
+    const k = ratio(img), w = Math.max(r.width, r.height / k), h = w * k;
+    const x = r.left + (r.width - w) / 2, y = r.top + (r.height - h) / 2;
+    return { x, y, w, h, radius, clip: [(r.top - y) / h, (x + w - r.right) / w, (y + h - r.bottom) / h, (r.left - x) / w] };
+  };
+  const there = f => {
+    const sx = f.w / to.w, sy = f.h / to.h;
+    return {
+      transform: `translate(${(f.x - to.x).toFixed(1)}px,${(f.y - to.y).toFixed(1)}px) scale(${sx.toFixed(4)},${sy.toFixed(4)})`,
+      clipPath: `inset(${f.clip.map(v => (v * 100).toFixed(2) + "%").join(" ")} round ${(f.radius / sx).toFixed(1)}px)`,
+    };
+  };
+  const HERE = { transform: "none", clipPath: "inset(0% 0% 0% 0% round 0px)" };
+  /* Each ends where its own style has it, so that a finger can move it from
+     there; only the way out holds its last frame, until it is hidden. */
+  const run = (el, frames, ms, hold) => {
+    el.getAnimations().forEach(a => a.cancel());
+    return el.animate(frames, { duration: reduce ? 0 : ms, easing: EASE, fill: hold ? "forwards" : "none" });
+  };
+
+  function open(img) {
+    if (on || popWait > performance.now()) return;
+    const carousel = img.closest(".carousel");
+    const list = carousel ? [...carousel.querySelectorAll(".slides > .slide > img")] : [img];
+    on = { list, i: Math.max(0, list.indexOf(img)), carousel };
+    box.classList.toggle("many", list.length > 1);
+    box.hidden = false;
+    fill();
+    const f = from(img);
+    img.style.visibility = "hidden";
+    run(view, [there(f), HERE], 340);
+    run(ground, [{ opacity: 0 }, { opacity: 1 }], 300);
+    run(cap, [{ opacity: 0 }, { opacity: 0, offset: .5 }, { opacity: getComputedStyle(cap).opacity }], 340);
+    history.pushState({ lightbox: true }, "", location.href);
+    focusWas = document.activeElement;
+    box.focus({ preventScroll: true });
+  }
+
+  function close(byHistory) {
+    if (!on || on.closing) return;
+    on.closing = true;
+    box.classList.add("closing");
+    if (!byHistory && history.state && history.state.lightbox) {
+      // until the step back has been taken, opening another would be undone by it
+      popWait = performance.now() + 600;
+      history.back();
+    }
+    const img = on.list[on.i], r = img.getBoundingClientRect();
+    const seen = r.width > 0 && r.bottom > 0 && r.top < innerHeight;
+    const now = { transform: view.style.transform || "none", clipPath: HERE.clipPath };
+    view.style.transform = "";
+    const done = () => {
+      box.hidden = true;
+      box.classList.remove("closing");
+      on.list.forEach(i => { i.style.visibility = ""; });
+      [view, ground, cap].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+      ground.style.opacity = "";
+      view.removeAttribute("src");
+      on = null;
+      if (focusWas && focusWas.focus && document.contains(focusWas)) focusWas.focus({ preventScroll: true });
+    };
+    run(cap, [{ opacity: getComputedStyle(cap).opacity }, { opacity: 0 }], 120, true);
+    run(ground, [{ opacity: getComputedStyle(ground).opacity }, { opacity: 0 }], 280, true);
+    // gone off the screen meanwhile, it fades rather than flying off to it
+    (seen ? run(view, [now, there(from(img))], 280, true) : run(view, [{ opacity: 1 }, { opacity: 0 }], 200, true)).finished.then(done, done);
+  }
+
+  function step(d) {
+    if (!on || on.closing) return;
+    const j = on.i + d;
+    if (j < 0 || j >= on.list.length) { settle(); return; }
+    on.list[on.i].style.visibility = "";
+    on.i = j;
+    const img = on.list[j];
+    img.style.visibility = "hidden";
+    // the carousel under it turns to the same page, so it closes into it
+    const slides = on.carousel.querySelector(".slides"), slide = img.closest(".slide");
+    slides.scrollTo({ left: [...slides.children].indexOf(slide) * slides.clientWidth, behavior: "instant" });
+    view.style.transform = "";
+    ground.style.opacity = "";
+    fill();
+    run(view, [{ transform: `translateX(${d * 48}px)`, opacity: 0 }, { transform: "none", opacity: 1 }], 240);
+  }
+
+  // let go part way through a drag: back to where it was
+  function settle() {
+    if (!on) return;
+    const now = view.style.transform;
+    view.style.transform = "";
+    if (now) run(view, [{ transform: now }, HERE], 220);
+    const o = ground.style.opacity;
+    ground.style.opacity = "";
+    if (o) run(ground, [{ opacity: o }, { opacity: 1 }], 220);
+  }
+
+  document.addEventListener("click", e => {
+    // weighed now if it has not been yet (the page only just there, say)
+    const img = e.target.closest && e.target.closest("img");
+    if (!img || !img.matches(PICS) || !(img.classList.contains("zooms") || worth(img))) return;
+    if (on || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+    e.preventDefault();
+    open(img);
+  });
+  let swiped = 0;
+  box.addEventListener("click", e => {
+    if (e.target.closest("a")) return;          // a link in the caption goes where it goes
+    const b = e.target.closest("button");
+    if (b) { step(b === nextB ? 1 : -1); return; }
+    // the end of a swipe is not a click
+    if (performance.now() - swiped > 350) close();
+  });
+  addEventListener("popstate", () => { popWait = 0; if (on && !on.closing) close(true); });
+  // kept whole by the browser and come back to: closed, as the history now is
+  addEventListener("pageshow", e => { if (e.persisted && on && !(history.state && history.state.lightbox)) close(true); });
+  addEventListener("resize", () => { if (on && !on.closing) place(); });
+
+  document.addEventListener("keydown", e => {
+    if (!on) {
+      // Enter on a carousel opens the page it is on
+      const slides = e.key === "Enter" && e.target.closest && e.target.closest(".carousel .slides");
+      const slide = slides && slides.children[Math.round(slides.scrollLeft / slides.clientWidth)];
+      const img = slide && slide.querySelector(":scope > img");
+      if (img) { e.preventDefault(); open(img); }
+      return;
+    }
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft" || e.key === "ArrowRight") step(e.key === "ArrowRight" ? 1 : -1);
+    else if ((e.key === "Enter" || e.key === " ") && e.target.closest("button, a")) return;
+    else if (e.key === "Tab") {
+      // the focus stays in it: its buttons, if it has them, or the picture
+      const stops = [...box.querySelectorAll("a, button:not(:disabled)")].filter(el => el.offsetParent);
+      if (stops.length) {
+        const i = stops.indexOf(document.activeElement), d = e.shiftKey ? -1 : 1;
+        stops[i < 0 ? (d > 0 ? 0 : stops.length - 1) : (i + d + stops.length) % stops.length].focus();
+      }
+    } else if (e.key === "Enter" || e.key === " ") close();
+    // the page under it does not scroll
+    else if (!["PageUp", "PageDown", "Home", "End", "ArrowUp", "ArrowDown"].includes(e.key)) return;
+    e.preventDefault();
+  });
+
+  /* A finger: pulled down it goes, sideways (in a carousel) it steps. Kept
+     from the page under it, whose pull at the top and pinches listen on the
+     window. Two fingers, or a page zoomed in, are the browser's, to look
+     closer and around. */
+  let t0 = null;
+  const zoomed = () => !!self.visualViewport && visualViewport.scale > 1.02;
+  box.addEventListener("touchstart", e => {
+    e.stopPropagation();
+    t0 = e.touches.length === 1 && on && !on.closing && !zoomed()
+      ? { x: e.touches[0].clientX, y: e.touches[0].clientY, t: performance.now(), axis: null, dx: 0, dy: 0 } : null;
+  }, { passive: true });
+  box.addEventListener("touchmove", e => {
+    e.stopPropagation();
+    if (!t0 || e.touches.length !== 1) { if (t0) { t0 = null; settle(); } return; }
+    e.preventDefault();
+    const dx = e.touches[0].clientX - t0.x, dy = e.touches[0].clientY - t0.y;
+    t0.dx = dx; t0.dy = dy;
+    if (!t0.axis) {
+      if (Math.hypot(dx, dy) < 8) return;
+      t0.axis = Math.abs(dx) > Math.abs(dy) ? (on.list.length > 1 ? "x" : "") : (dy > 0 ? "y" : "");
+    }
+    if (t0.axis === "y") {
+      const k = Math.max(0, dy) / innerHeight;
+      view.style.transform = `translateY(${Math.max(0, dy).toFixed(1)}px) scale(${(1 - Math.min(.3, k * .6)).toFixed(4)})`;
+      ground.style.opacity = (1 - Math.min(.9, k * 1.6)).toFixed(3);
+    } else if (t0.axis === "x") {
+      // at either end it gives, but less
+      const end = (dx > 0 && on.i === 0) || (dx < 0 && on.i === on.list.length - 1);
+      view.style.transform = `translateX(${(end ? dx * .3 : dx).toFixed(1)}px)`;
+    }
+  }, { passive: false });
+  const lift = e => {
+    e.stopPropagation();
+    if (!t0) return;
+    const { axis, dx, dy, t } = t0, ms = Math.max(1, performance.now() - t);
+    t0 = null;
+    if (!axis) return;
+    swiped = performance.now();
+    if (e.type === "touchcancel") settle();
+    else if (axis === "y") { if (dy > 110 || (dy > 30 && dy / ms > .5)) close(); else settle(); }
+    else {
+      const d = dx < -60 || (dx < -20 && dx / ms < -.4) ? 1 : dx > 60 || (dx > 20 && dx / ms > .4) ? -1 : 0;
+      if (d) step(d); else settle();
+    }
+  };
+  box.addEventListener("touchend", lift, { passive: true });
+  box.addEventListener("touchcancel", lift, { passive: true });
+
+  /* The wheel does not scroll the page under it. A trackpad going sideways
+     steps through a carousel, a page for each push. A pinch on the trackpad
+     (the wheel, with ctrl) goes on to the pinches, below. */
+  let wx = 0, wy = 0, wT = 0, armed = true;
+  box.addEventListener("wheel", e => {
+    if (e.ctrlKey) return;
+    e.preventDefault();
+    e.stopPropagation();
+    clearTimeout(wT);
+    wT = setTimeout(() => { wx = wy = 0; armed = true; }, 200);
+    if (!on || on.closing || on.list.length < 2 || !armed) return;
+    wx += e.deltaX; wy += e.deltaY;
+    if (Math.abs(wx) > 50 && Math.abs(wx) > Math.abs(wy)) { armed = false; step(wx > 0 ? 1 : -1); }
+  }, { passive: false });
+
+  // pinched in, it goes back into the page; spread, it is the browser's zoom
+  pinchers.unshift(dir => {
+    if (!on) return null;
+    if (dir !== "in" || zoomed()) return on.closing ? { move() {}, end() {} } : null;
+    let k = 1;
+    return {
+      // drawn in about its middle (it is scaled from its corner, for the flight)
+      move: v => {
+        k = v;
+        const s = Math.min(1, Math.max(.5, v));
+        view.style.transform = `translate(${((1 - s) * to.w / 2).toFixed(1)}px,${((1 - s) * to.h / 2).toFixed(1)}px) scale(${s.toFixed(4)})`;
+      },
+      end: () => { if (k < .85) close(); else settle(); },
+    };
+  });
+})();
