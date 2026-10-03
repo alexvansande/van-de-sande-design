@@ -29,23 +29,6 @@ jobs:
       # script. The script's address changes with every deploy instead.
       - name: Stamp the script with this commit
         run: sed -i "s|src=\"app.js\"|src=\"app.js?v=${GITHUB_SHA::8}\"|" site/index.html
-      # For now the blog is built under /blog/ here too, until
-      # blog.vandesande.design has its certificate: the site reads it from
-      # there meanwhile (BLOG in app.js).
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - id: media
-        uses: actions/cache@v4
-        with:
-          path: site/blog/media
-          key: blog-media-${{ hashFiles('blog/**/*.png', 'blog/**/*.jpg', 'blog/**/*.jpeg', 'blog/**/*.gif', 'blog/**/*.webp') }}
-      - name: Build the blog
-        env:
-          BLOG_MEDIA_CACHED: ${{ steps.media.outputs.cache-hit }}
-        run: |
-          pip install pillow
-          python3 blog/build.py --out site/blog --base /blog/ --home /
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
