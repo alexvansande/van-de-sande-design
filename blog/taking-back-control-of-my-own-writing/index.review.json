@@ -1,0 +1,68 @@
+{
+ "dismissed": [],
+ "comments": [
+  {
+   "key": "54707fbdfca11f59",
+   "kind": "ask",
+   "span": "five websites sharing screenshots of the other four",
+   "comment": "link to the thing",
+   "at": "2026-10-03T02:15:29Z"
+  },
+  {
+   "key": "54707fbdfca11f59",
+   "from": "claude",
+   "comment": "The line paraphrases Tom Eastman's December 2018 tweet (\"I'm old enough to remember when the Internet wasn't a group of five websites, each consisting of screenshots of text from the other four\"); the tweet URL comes from Simon Willison's quote page, which links to it directly.",
+   "withdrew": false,
+   "at": "2026-10-03T02:15:47Z"
+  }
+ ],
+ "facts": {
+  "at": "2026-10-03T02:17:14Z",
+  "issues": [
+   {
+    "kind": "links",
+    "by": "claude",
+    "key": "fbc82ddc8299f63f",
+    "block": "p8555687lzmtl",
+    "span": "written about my maps extensively",
+    "category": "related",
+    "why": "The Gosper World post is the author's main write-up of his hexagonal map project.",
+    "replacement": null,
+    "source": "https://blog.vandesande.design/gosper-world-a-novel-world-map-made-of-hexagonal-like-fractals-or-how-i-made-matt-parkers-impossible-ball",
+    "href": null,
+    "confidence": 0.7,
+    "thread": []
+   },
+   {
+    "kind": "links",
+    "by": "claude",
+    "key": "6e9becf0367e39e9",
+    "block": "pi99c03o9k6h",
+    "span": "The poster version",
+    "category": "related",
+    "why": "The Triangle of Everything blog post presents the original poster that this paragraph refers to.",
+    "replacement": null,
+    "source": "https://blog.vandesande.design/the-triangle-of-everything",
+    "href": null,
+    "confidence": 0.7,
+    "thread": []
+   }
+  ],
+  "blocks": [
+   "p5ayeebgfcri",
+   "p1urfkiu1m3bvnr",
+   "p14ttt8q1wvecqf",
+   "p1v2lim215p6r0j",
+   "pwq1042w1vsxp",
+   "p12xcgw51yoat4e",
+   "p10hxoqk1ejt39r",
+   "p8555687lzmtl",
+   "pmvlpoutl0phi",
+   "pi99c03o9k6h",
+   "p1p3q5xof6amyb",
+   "p1ysrq8nfhdfm8",
+   "pldkeb81np7uk9"
+  ]
+ },
+ "asks": []
+}
