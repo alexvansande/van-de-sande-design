@@ -268,8 +268,8 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
    is the same page at any size. */
 .card{position:relative;isolation:isolate;display:flex;flex-direction:column;color:var(--ink);text-decoration:none;
   aspect-ratio:1 / 1.41;min-height:0;container-type:inline-size;
-  transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-.card .paper{box-shadow:0 1px 2px rgba(0,0,0,.25),0 14px 36px -12px rgba(0,0,0,.6);transition:box-shadow .35s}
+  transition:transform .9s cubic-bezier(.25,.6,.25,1)}
+.card .paper{box-shadow:0 1px 2px rgba(0,0,0,.25),0 14px 36px -12px rgba(0,0,0,.6);transition:box-shadow .9s cubic-bezier(.25,.6,.25,1)}
 .card:hover{transform:translateY(-4px) rotate(-.25deg)}
 .card:hover .paper{box-shadow:0 1px 2px rgba(0,0,0,.25),0 24px 46px -14px rgba(0,0,0,.7)}
 .card .thumb{flex:none;aspect-ratio:2/1;overflow:hidden;background:#dcd7c6}
@@ -326,6 +326,9 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
      its own; kept on every card, the whole page (three layers a card) was
      over a gigabyte of pictures on a phone, and Safari closed it. */
   .pile-css .cards>.card{transition:none;transform-origin:50% 0}
+  /* side by side the scroll moves nothing but the light, so the lift on
+     hover can still be slow */
+  .pile-css .cards.stagger>.card{transition:transform .9s cubic-bezier(.25,.6,.25,1)}
   /* only the cards on or near the screen (blog.js marks them): a card with
      one of these on it is a layer of its own even while it waits */
   .pile-css .cards>.card.near{
@@ -336,20 +339,22 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
   .pile-css .cards.stagger>.card.near{
     animation:pile-rise ease-in-out none,pile-fade ease-in-out forwards;
     animation-timeline:view(),view();
-    animation-range:entry 0% entry var(--rise,1px),exit 0% exit var(--rise,1px)}
+    animation-range:entry 0% entry var(--rise,1px),exit 50% exit 100%}
 }
 /* the pile: held at the line, stepping back a little higher and smaller
-   each row, darker, and gone by the third */
+   each row, fainter, and gone by the third. Only opacity darkens a card,
+   letting the dark page through: with brightness() as well, Safari drew
+   the cards black for a moment as they scrolled. */
 @keyframes pile-back{
-  from{transform:none;filter:none;opacity:1}
-  33.333%{filter:brightness(.72)}
-  66.667%{filter:brightness(.5);opacity:1}
-  to{transform:translate3d(0,var(--hold,0px),0) scale(.88);filter:brightness(.35);opacity:0}}
-/* half into the dark at the top, side by side, and then off the screen: held there (forwards),
+  from{transform:none;opacity:1}
+  66.667%{opacity:.6}
+  to{transform:translate3d(0,var(--hold,0px),0) scale(.88);opacity:0}}
+/* side by side, going off the top: whole until its middle reaches the top
+   of the screen, and gone by the time its foot does. Held there (forwards),
    or the card would come back as its last part leaves the screen */
-@keyframes pile-fade{from{opacity:1;filter:none}to{opacity:.5;filter:brightness(.6)}}
+@keyframes pile-fade{from{opacity:1}to{opacity:0}}
 /* up out of the dark */
-@keyframes pile-rise{from{opacity:.25;filter:brightness(.5)}to{opacity:1;filter:none}}
+@keyframes pile-rise{from{opacity:.15}to{opacity:1}}
 /* arriving from the site part way down the posts, the years come down from
    the top once the page is there */
 .arrive .years{animation:years-down .7s .2s cubic-bezier(.2,.7,.2,1) both}

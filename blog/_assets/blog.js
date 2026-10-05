@@ -299,15 +299,14 @@ const Pile = (() => {
       let ty = 0, s = 1, dim = 0, op = 1;
       const d = (line - top) / pitch;
       if (cols > 1) {
-        // side by side there is no pile: going out at the top, into the dark
-        const e = clamp01(-top / (H * RISE)), f = e * e * (3 - 2 * e);
+        // side by side there is no pile: going out at the top, whole until
+        // its middle reaches it and gone when its foot does (as blog.css)
+        const e = clamp01((-top - H / 2) / (H / 2)), f = e * e * (3 - 2 * e);
         if (top > vh - H * RISE) {
           const g = clamp01((vh - top) / (H * RISE));
           op = g * g * (3 - 2 * g);
-          dim = (1 - op) * .6;
         } else if (f > 0) {
-          dim = f * .6;
-          op = 1 - f * .5;
+          op = 1 - f;
         }
       } else if (d > 0) {
         // held at the line, and pushed back by the ones come up after it
