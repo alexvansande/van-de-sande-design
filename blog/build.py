@@ -34,6 +34,9 @@ SITE_URL = "https://blog.vandesande.design"
 TITLE = "Alex Van de Sande's wandering about"
 AUTHOR = "Alex Van de Sande"
 HOME = "https://vandesande.design"
+# what a link to the blog shows when the page has no cover of its own: a
+# picture of the index, taken by og_images.py at the top of the folder
+SHARE = SITE_URL + "/assets/share.jpg"
 COLUMN = 704                  # the text column, in CSS pixels: what Paragraph had
 WIDTHS = (480, 704, 1056, 1408, 2112)
 VIDEOS = (".mp4", ".webm")    # copied as they are, beside the pictures
@@ -564,8 +567,9 @@ def page(base, title, body, *, description="", canonical="", image="", kind="web
         og.append(f'<meta property="og:description" content="{esc(description)}">')
     if canonical:
         og.append(f'<meta property="og:url" content="{esc(canonical)}">')
-    if image:
-        og += [f'<meta property="og:image" content="{esc(image)}">', '<meta name="twitter:card" content="summary_large_image">']
+    og += [f'<meta property="og:image" content="{esc(image or SHARE)}">', '<meta name="twitter:card" content="summary_large_image">']
+    if not image:
+        og += ['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">']
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
