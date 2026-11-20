@@ -2,6 +2,8 @@
 title: "Every \"one shot\" is slop."
 subtitle: "The myth of \"single prompt\" AI projects – or how did I build my Isometric World Map"
 date: "2026-11-20T00:47:00Z"
+updated: "2026-11-20T01:23:46Z"
+categories: ["Maps", "AI", "Art", "Isometric"]
 cover: "cover.png"
 cover_size: [1646, 918]
 ---
@@ -22,6 +24,7 @@ Around 2005, wikipedia was my favorite social website. It's where I would go to 
 
 ![](03.png)
 ![](04.jpg)
+![](null)
 
 But that's when my love for hexagon based maps started. I always wanted to explore that idea more, but despite doing small work in javascript programming that was beyond my capabilities.
 
@@ -127,7 +130,7 @@ I love some of more illustrated looks these have but I hit a wall that went back
 
 ![](65.png "I spent hours living in this kingdom")
 
-I remember a great game I used to play, with an innovative spell casting gameplay: four crystals of trazere. They also had this gorgeous map. Could I do something similar? So I decided a different direction. Take the average height of each hex, and then as you zoom in, we add another hex level and add that point. It's how Perlin noise works, by adding vertices in a square grid. The map would then distribute the previously generated art in the map. It became less illustrated and more realistic. Maybe too realistic: it looked like a cheap videogame. 
+I remember a great game I used to play, with an innovative spell casting gameplay: four crystals of trazere. They also had this gorgeous map. Could I do something similar? So I decided a different direction. Take the average height of each hex, and then as you zoom in, we add another hex level and add that point. It's how Perlin noise works, by adding vertices in a square grid. The map would then distribute the previously generated art in the map. It became less illustrated and more realistic. Maybe too realistic: it looked like a cheap videogame.
 
 ![](104.png)
 ![](66.jpg)
@@ -141,7 +144,7 @@ I remember a great game I used to play, with an innovative spell casting gamepla
 ![](75.jpg)
 ![](76.jpg)
 
-So another idea: what if I used the now 3d landscape, took tiles and asked chatgpt to re-render it as tiles, and then smooth them over? The resulting hexagonal tiles had a somewhat quaint feeling, but again, the geometry was all over the place. ChatGPT is simply not very good at understanding geometry. I then tried Opus to generate these scenarios, the same way it generated the splats, however using the objects in the catalog instead of pixels. It did a pretty decent job I would say, comparing each part side by side. 
+So another idea: what if I used the now 3d landscape, took tiles and asked chatgpt to re-render it as tiles, and then smooth them over? The resulting hexagonal tiles had a somewhat quaint feeling, but again, the geometry was all over the place. ChatGPT is simply not very good at understanding geometry. I then tried Opus to generate these scenarios, the same way it generated the splats, however using the objects in the catalog instead of pixels. It did a pretty decent job I would say, comparing each part side by side.
 
 ![](77.png)
 ![](83.png)
@@ -149,25 +152,25 @@ So another idea: what if I used the now 3d landscape, took tiles and asked chatg
 ![](85.webp)
 ![](87.png)
 
-I did the whole of the Italian peninsula this way and as I liked the result I asked it to start going over the world. I created different styles, and started a process of constant feedback: the rivers aren't right, the beaches are too pointy here, we have a bug over there, and the more I gave the feedback the more we found a set of universal rules for placing more tiles.  
+I did the whole of the Italian peninsula this way and as I liked the result I asked it to start going over the world. I created different styles, and started a process of constant feedback: the rivers aren't right, the beaches are too pointy here, we have a bug over there, and the more I gave the feedback the more we found a set of universal rules for placing more tiles.
 
 ![](88.png)
 ![](89.png)
 ![](90.jpg)
 ![](91.jpg)
 
-At this point I also realized a big problem and decided to regenerate the whole grid. There are many ways you can split a hexagon into smaller identical ones, and since the beginning of the project in 2023 I had picked a 1:7 format because every child is a direct descendant of the parent. This however created an issue that it means that every new level is √7 of the next one in terms of size, while I wanted to keep integer pixels. So I made the decision to change the whole grid to a 1:4 arrangement, which allows the pixel doubling to match the hexagonal doubling. Now the app changes the image everytime the user zooms to half the original size, but it only changes the actual scene at every two doublings. So each tile you see in a view will turn into 16 tiles in the next. 
+At this point I also realized a big problem and decided to regenerate the whole grid. There are many ways you can split a hexagon into smaller identical ones, and since the beginning of the project in 2023 I had picked a 1:7 format because every child is a direct descendant of the parent. This however created an issue that it means that every new level is √7 of the next one in terms of size, while I wanted to keep integer pixels. So I made the decision to change the whole grid to a 1:4 arrangement, which allows the pixel doubling to match the hexagonal doubling. Now the app changes the image everytime the user zooms to half the original size, but it only changes the actual scene at every two doublings. So each tile you see in a view will turn into 16 tiles in the next.
 
 ![](106.png)
 
-But seeing the tiles over and over again made me realize how flat it all looked. The problem is that so far we were generating flat images from 3d data and then placing them in the map. My hope was that I could just save a data about the placement of each element and the browser could place them on the map while you dragged. But while the file sizes were indeed smaller, it also meant the browser had to place thousands of individual sprites on the fly, which was a bad experience, so I needed to generate the static images anyway. And since we are using 3d data, why not do it directly: use the 3d splat pixel to make a whole scene and then generate the scene as a single image? The results were stunning and it's the first time I felt that I had something I could actually share. 
+But seeing the tiles over and over again made me realize how flat it all looked. The problem is that so far we were generating flat images from 3d data and then placing them in the map. My hope was that I could just save a data about the placement of each element and the browser could place them on the map while you dragged. But while the file sizes were indeed smaller, it also meant the browser had to place thousands of individual sprites on the fly, which was a bad experience, so I needed to generate the static images anyway. And since we are using 3d data, why not do it directly: use the 3d splat pixel to make a whole scene and then generate the scene as a single image? The results were stunning and it's the first time I felt that I had something I could actually share.
 
 ![](92.jpg)
 ![](94.png)
 ![](96.png)
 ![](98.jpg)
 
-But with the more realistic lighting, I had lost the original painted feeling. And mountains had lost a lot of their personality. So I spent a lot of time refining how the mountains look. A real mountain is not only its relief, but most important its river systems. It's what carves deep valleys and makes them greener. Fable created me a tool specifically to set the 
+But with the more realistic lighting, I had lost the original painted feeling. And mountains had lost a lot of their personality. So I spent a lot of time refining how the mountains look. A real mountain is not only its relief, but most important its river systems. It's what carves deep valleys and makes them greener. Fable created me a tool specifically to set the
 
 ![](99.jpg)
 ![](100.jpg)
@@ -186,7 +189,7 @@ This is the version that ultimately went live. But it also went through multiple
 
 So return you the first question: is it slop or not? It's up to you. I hope that by showing the process I have convinced you that a project like this is not at all a single prompt in chatGPT saying "make me a pixel art map of italy". Maybe that can work, but it's not what I intended to build. It's not a "low effort" content: I did not code the website, but I typed over 39 thousand words (well some I dictated) in just the past two weeks, not counting all the work done previously to get the non-isometric version up in the first place. I did not directly paint any of the 30 thousand tiles in the website, but I discussed it, directed it and spent over 75 hours just getting to this point. Is it worth it? Well, I am a believer that a time you enjoy wasting is no wasted time, and I enjoyed a lot seeing this come to life. If it's worth to anyone else it's an open question.
 
-I could've told a different story. There are lots of one shots I could take that many people would feel they were good enough. But weren't "mine". 
+I could've told a different story. There are lots of one shots I could take that many people would feel they were good enough. But weren't "mine".
 
 ## What's next?
 
@@ -200,3 +203,7 @@ As I said, the number one complaint I got was about the data.  I spent a long ti
 ![](114.jpg)
 
 I will probably be working on that for the next weeks so expect more refined data, with road and rail network and better labeling. Don't expect to use this for directions though.
+
+To finalize, here's a picture of Greece, a preview on how I expect the new tiles to look like, for a good friend.
+
+![](117.png)
