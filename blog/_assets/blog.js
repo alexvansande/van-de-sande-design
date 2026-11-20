@@ -935,19 +935,32 @@ const Pile = (() => {
    works the same as the one it opened on. */
 (() => {
   document.documentElement.classList.add("steered");
-  const at = slides => Math.round(slides.scrollLeft / slides.clientWidth);
+  // the slides are as wide as their pictures: the one showing is the one
+  // nearest the left edge, or the last once the strip is scrolled to its end
+  const at = slides => {
+    const left = slides.scrollLeft, kids = [...slides.children], o = kids[0].offsetLeft;
+    if (left >= slides.scrollWidth - slides.clientWidth - 2) return kids.length - 1;
+    let best = 0;
+    kids.forEach((k, i) => { if (Math.abs(k.offsetLeft - o - left) < Math.abs(kids[best].offsetLeft - o - left)) best = i; });
+    return best;
+  };
   const mark = fig => {
     const slides = fig.querySelector(".slides"), n = slides.children.length, i = at(slides);
     fig.querySelector(".count").textContent = `${i + 1} / ${n}`;
     fig.querySelector(".prev").disabled = i <= 0;
     fig.querySelector(".next").disabled = i >= n - 1;
   };
+  window.carouselTo = (slides, i, behavior) => {
+    const kids = slides.children;
+    slides.scrollTo({ left: kids[i].offsetLeft - kids[0].offsetLeft, behavior });
+  };
+  window.carouselAt = at;
   document.addEventListener("click", e => {
     const b = e.target.closest(".carousel .steer button");
     if (!b) return;
     const slides = b.closest(".carousel").querySelector(".slides");
-    const i = at(slides) + (b.classList.contains("next") ? 1 : -1);
-    slides.scrollTo({ left: i * slides.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    const i = Math.max(0, Math.min(slides.children.length - 1, at(slides) + (b.classList.contains("next") ? 1 : -1)));
+    carouselTo(slides, i, matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth");
   });
   document.addEventListener("scroll", e => {
     const fig = e.target.closest && e.target.closest(".carousel");
@@ -1189,7 +1202,7 @@ const Pile = (() => {
     img.style.visibility = "hidden";
     // the carousel under it turns to the same page, so it closes into it
     const slides = on.carousel.querySelector(".slides"), slide = img.closest(".slide");
-    slides.scrollTo({ left: [...slides.children].indexOf(slide) * slides.clientWidth, behavior: "instant" });
+    carouselTo(slides, [...slides.children].indexOf(slide), "instant");
     view.style.transform = "";
     ground.style.opacity = "";
     fill();
@@ -1232,7 +1245,7 @@ const Pile = (() => {
     if (!on) {
       // Enter on a carousel opens the page it is on
       const slides = e.key === "Enter" && e.target.closest && e.target.closest(".carousel .slides");
-      const slide = slides && slides.children[Math.round(slides.scrollLeft / slides.clientWidth)];
+      const slide = slides && slides.children[carouselAt(slides)];
       const img = slide && slide.querySelector(":scope > img");
       if (img) { e.preventDefault(); open(img); }
       return;

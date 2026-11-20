@@ -452,10 +452,18 @@ html:has(>body.post),body.post,html:has(>body.front),body.front{overscroll-behav
    time and swiped (or stepped with the arrows) from side to side. Without
    the script it still scrolls sideways; the arrows need it. */
 .body figure.carousel{margin:1.25rem 0}
-.carousel .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;align-items:center;outline:none}
+/* A strip: each picture as wide as it is drawn, lined up with the column,
+   and the strip runs on into the margins on both sides, where the pictures
+   before and after show, fading out towards the edge of the paper. */
+.carousel .slides{display:flex;gap:.8rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;align-items:center;outline:none;
+  container-type:inline-size;margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);
+  -webkit-mask-image:linear-gradient(to right,transparent,#000 var(--gutter),#000 calc(100% - var(--gutter)),transparent);
+  mask-image:linear-gradient(to right,transparent,#000 var(--gutter),#000 calc(100% - var(--gutter)),transparent)}
 .carousel .slides::-webkit-scrollbar{display:none}
-.carousel .slide{flex:0 0 100%;scroll-snap-align:center;scroll-snap-stop:always;display:flex;flex-direction:column;align-items:center}
-.body .carousel .slide img,.body .carousel .slide video{margin:0 auto;width:auto;max-width:100%;height:auto;max-height:min(78vh,44rem)}
+.carousel .slide{flex:0 0 auto;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;align-items:center}
+.carousel .slide:last-child{scroll-snap-align:end}
+.carousel .slide figcaption{contain:inline-size;align-self:stretch}
+.body .carousel .slide img,.body .carousel .slide video{margin:0;width:auto;max-width:min(100cqw,calc(100cqw + var(--gutter) - 4.3rem));height:auto;max-height:min(78vh,44rem)}
 .carousel .steer{display:none;justify-content:center;align-items:center;gap:1.1rem;margin-top:.6rem;color:var(--quiet);font-size:.95rem;font-variant-numeric:tabular-nums}
 html.steered .carousel .steer{display:flex}
 .carousel .steer button{font:inherit;font-size:1.6rem;line-height:1;width:2.2rem;height:2.2rem;border:1px solid var(--rule);border-radius:50%;background:none;color:var(--ink);cursor:pointer;padding:0 0 .15em}
