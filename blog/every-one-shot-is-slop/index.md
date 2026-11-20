@@ -22,7 +22,6 @@ Around 2005, wikipedia was my favorite social website. It's where I would go to 
 
 ![](03.png)
 ![](04.jpg)
-![](null)
 
 But that's when my love for hexagon based maps started. I always wanted to explore that idea more, but despite doing small work in javascript programming that was beyond my capabilities.
 
