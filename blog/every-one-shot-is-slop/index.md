@@ -1,8 +1,8 @@
 ---
-title: "Every \"one shot\" is slop."
-subtitle: "The myth of \"single prompt\" AI projects – or how did I build my Isometric World Map"
+title: "The myth of the \"One Shot\""
+subtitle: "or how did I build my Isometric World Map"
 date: "2026-11-20T00:47:00Z"
-updated: "2026-11-20T01:23:46Z"
+updated: "2026-11-20T08:37:56Z"
 categories: ["Maps", "AI", "Art", "Isometric"]
 cover: "cover.png"
 cover_size: [1646, 918]
